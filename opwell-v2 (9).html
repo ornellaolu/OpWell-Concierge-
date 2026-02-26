@@ -1,0 +1,2788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpWell Concierge™ — Anesthesiologist-Led Perioperative Care</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #2D5A3D;
+      --gold-light: #4A7A5A;
+      --charcoal: #1C1C1C;
+      --deep: #111111;
+      --ivory: #FAF0E8;
+      --warm-white: #F5E4D4;
+      --slate: #5A5A5A;
+      --sage: #2D5A3D;
+      --terracotta: #C8845A;
+      --terracotta-light: #E8B48A;
+      --sage-mid: #7AA07A;
+      --sage-light: #A8C4A8;
+      --border: rgba(45,90,61,0.2);
+      --border-light: rgba(45,90,61,0.1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--ivory);
+      color: var(--charcoal);
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    /* ── PAGES ── */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(240,246,240,0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 2px solid rgba(200,132,90,0.35);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      height: 72px;
+      gap: 2rem;
+      overflow: visible;
+    }
+
+    .nav-logo-wrap {
+      cursor: pointer;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-mark {
+      height: 200px;
+      width: auto;
+      transition: opacity 0.2s;
+      position: relative;
+      z-index: 101;
+    }
+
+    .nav-mark:hover { opacity: 0.65; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.8rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      flex: 1;
+      justify-content: center;
+      flex-wrap: nowrap;
+    }
+
+    .nav-links a {
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+      text-transform: none;
+      color: #0A0A0A;
+      font-weight: 800;
+      cursor: pointer;
+      transition: color 0.2s;
+      text-decoration: none;
+      white-space: nowrap;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .nav-links a:hover, .nav-links a.active { color: var(--terracotta); }
+
+    .nav-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--charcoal);
+      letter-spacing: 0.05em;
+      cursor: pointer;
+    }
+
+    .nav-brand span { color: var(--terracotta); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      flex-wrap: nowrap;
+      white-space: nowrap;
+    }
+
+    .nav-links a {
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--slate);
+      font-weight: 300;
+      cursor: pointer;
+      transition: color 0.2s;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .nav-links a:hover, .nav-links a.active { color: var(--terracotta); }
+
+    .nav-cta {
+      background: var(--terracotta);
+      box-shadow: 0 2px 12px rgba(200,132,90,0.25);
+      color: var(--ivory) !important;
+      padding: 0.5rem 1.2rem;
+      font-size: 0.7rem !important;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s !important;
+    }
+
+    .nav-cta:hover { background: #1A2E22 !important; color: #FDFCF8 !important; }
+
+    /* ── BUTTONS ── */
+    .btn-primary {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--ivory);
+      padding: 1rem 2.5rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary:hover { background: var(--charcoal); }
+
+    .btn-secondary {
+      display: inline-block;
+      background: transparent;
+      color: var(--charcoal);
+      padding: 1rem 2.5rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid var(--charcoal);
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .btn-secondary:hover { background: var(--charcoal); color: var(--ivory); }
+    .btn-meet-dr:hover { background: var(--terracotta) !important; color: var(--ivory) !important; border-color: var(--terracotta) !important; }
+
+    .btn-gold {
+      display: inline-block;
+      background: var(--terracotta);
+      color: var(--ivory);
+      padding: 1rem 2.5rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-gold:hover { background: #1E3A28; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 8rem 3rem 5rem;
+      position: relative;
+      overflow: hidden;
+      background: var(--ivory);
+    }
+
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 80% 30%, rgba(45,90,61,0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 70% at 10% 80%, rgba(196,104,74,0.04) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-content { max-width: 680px; position: relative; z-index: 1; }
+
+    .hero-tag {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .hero-tag::before {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 2px;
+      background: var(--terracotta);
+    }
+
+    .hero-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 5vw, 4.2rem);
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--charcoal);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-headline em { font-style: italic; color: var(--gold); }
+
+    .hero-sub {
+      font-size: 0.95rem;
+      color: var(--slate);
+      line-height: 1.85;
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+      font-weight: 200;
+    }
+
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+
+    .hero-trust {
+      margin-top: 3rem;
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: nowrap;
+      align-items: center;
+      white-space: nowrap;
+    }
+
+    .trust-item {
+      font-size: 0.63rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--slate);
+      font-weight: 300;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .trust-dot {
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--terracotta);
+    }
+
+    /* ── STAT STRIP ── */
+    .stat-strip {
+      background: #1E3A28;
+      padding: 4.5rem 5rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0;
+      border-top: 4px solid var(--terracotta);
+    }
+
+    .stat {
+      text-align: center;
+      padding: 1rem 2rem;
+      border-right: 1px solid rgba(122,160,122,0.25);
+    }
+
+    .stat:last-child { border-right: none; }
+
+
+    .stat-num {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      font-weight: 300;
+      color: var(--terracotta);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(253,252,248,0.85);
+      line-height: 1.6;
+    }
+
+    /* ── PATHS SECTION ── */
+    .paths-section {
+      padding: 7rem 4rem;
+      background: #FDFAF6;
+    }
+
+    .section-tag {
+      font-size: 0.62rem;
+      font-weight: 300;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.9rem, 3vw, 2.8rem);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--charcoal);
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    .gold-divider {
+      width: 40px;
+      height: 1px;
+      background: var(--terracotta);
+      margin: 2rem 0;
+    }
+
+    .paths-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .path-card {
+      flex: 0 0 calc(33.333% - 1rem);
+      min-width: 240px;
+      background: var(--ivory);
+      border: 1px solid rgba(200,132,90,0.15);
+      padding: 3rem;
+      cursor: pointer;
+      transition: all 0.35s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .path-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--terracotta);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+
+    .path-card:hover { border-color: #5A8C5A; background: #FAF0E8; transform: translateY(-3px); box-shadow: 0 8px 32px rgba(45,90,61,0.12); }
+    .path-card:hover::before { transform: scaleX(1); }
+
+    .path-icon {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .path-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: var(--charcoal);
+      margin-bottom: 0.5rem;
+    }
+
+    .path-desc {
+      font-size: 0.82rem;
+      color: var(--slate);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .path-link {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+    }
+
+    /* ── PROBLEM STRIP ── */
+    .problem-strip {
+      background: #E0B896;
+      padding: 7rem 4rem;
+    }
+
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .problem-card {
+      border: 1px solid rgba(100,50,20,0.15);
+      border-left: 3px solid #7A3A20;
+      padding: 2rem;
+      background: rgba(255,255,255,0.45);
+    }
+
+    .problem-q {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-style: italic;
+      color: #1E1008;
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
+
+    .problem-a {
+      font-size: 0.82rem;
+      color: #3D2010;
+      line-height: 1.65;
+    }
+
+    .team-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 400;
+      color: var(--terracotta);
+      letter-spacing: -0.01em;
+      margin-bottom: 0.25rem;
+    }
+
+    .team-role {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.15rem;
+      font-weight: 300;
+      color: var(--charcoal);
+      letter-spacing: 0.02em;
+      margin-bottom: 1.5rem;
+      line-height: 1.3;
+    }
+
+    /* ── EVIDENCE SECTION ── */
+    .evidence-section {
+      padding: 7rem 4rem;
+      background: #1E3A28;
+      text-align: center;
+    }
+
+    .evidence-section .section-tag { color: var(--terracotta); }
+    .evidence-section .section-title { color: var(--ivory); }
+    .evidence-section .gold-divider { background: var(--terracotta); margin: 0 auto 3rem; }
+
+    .evidence-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+      text-align: left;
+    }
+
+    .evidence-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(200,132,90,0.2);
+      border-top: 3px solid var(--terracotta);
+      padding: 2.5rem;
+      transition: all 0.35s ease;
+    }
+
+    .evidence-card:hover {
+      background: rgba(255,255,255,0.08);
+    }
+
+    .evidence-stat {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 400;
+      color: var(--terracotta);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .evidence-label {
+      font-size: 0.75rem;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(253,251,248,0.5);
+      margin-bottom: 1.25rem;
+      line-height: 1.5;
+    }
+
+    .evidence-desc {
+      font-size: 0.84rem;
+      color: rgba(253,251,248,0.75);
+      line-height: 1.85;
+      margin: 0 0 1.25rem;
+    }
+
+    .evidence-source {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      opacity: 0.8;
+    }
+
+    /* ── END EVIDENCE SECTION ── */
+    .provider-section {
+      padding: 7rem 4rem;
+      background: #E0B896;
+    }
+
+    .provider-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+      max-width: 1100px;
+    }
+
+    .provider-section .section-tag { color: #7A3A20; }
+    .provider-section .section-title { color: #1E1008; }
+    .provider-section .gold-divider { background: #7A3A20; }
+    .provider-section .section-subtitle { color: #3D2010; }
+
+    .provider-card {
+      border: 1px solid rgba(100,50,20,0.15);
+      padding: 2.5rem;
+      background: rgba(255,255,255,0.5);
+      transition: all 0.35s ease;
+    }
+
+    .provider-card:hover {
+      background: rgba(255,255,255,0.75);
+      border-color: rgba(100,50,20,0.3);
+    }
+
+    .provider-card .section-tag { color: var(--terracotta); }
+
+    .provider-feature-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #2D1F14;
+      margin-bottom: 0.4rem;
+    }
+
+    .provider-feature-desc {
+      font-size: 0.82rem;
+      color: #5A4A3A;
+      line-height: 1.75;
+    }
+
+    .provider-icon {
+      font-size: 1.4rem;
+      color: var(--terracotta);
+      margin-bottom: 1rem;
+    }
+
+    .provider-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: #1E1008;
+      margin-bottom: 0.75rem;
+      line-height: 1.3;
+    }
+
+    .provider-card-desc {
+      font-size: 0.84rem;
+      color: #3D2010;
+      line-height: 1.8;
+      margin: 0;
+    }
+
+    .provider-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+      max-width: 800px;
+    }
+    .hiw-section {
+      padding: 7rem 4rem;
+      background: #FAF0E8;
+    }
+
+    .hiw-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .hiw-step { position: relative; }
+
+    .step-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      font-weight: 300;
+      color: rgba(196,104,74,0.25);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .step-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--charcoal);
+      margin-bottom: 0.5rem;
+    }
+
+    .step-desc {
+      font-size: 0.82rem;
+      color: var(--slate);
+      line-height: 1.65;
+    }
+
+    /* ── ABOUT PREVIEW ── */
+    .about-preview {
+      padding: 7rem 4rem;
+      background: #FDFAF6;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .about-image {
+      background: var(--charcoal);
+      aspect-ratio: 3/4;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      color: rgba(253,251,248,0.4);
+      font-family: 'Playfair Display', serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      padding-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-image::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.4) 100%);
+    }
+
+    .about-image span { position: relative; z-index: 1; }
+
+    .specialist-image {
+      background: var(--charcoal);
+      aspect-ratio: 3/4;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      color: rgba(253,251,248,0.4);
+      font-family: 'Playfair Display', serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      padding-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+      max-width: 320px;
+    }
+
+    .specialist-image::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.4) 100%);
+    }
+
+    .specialist-image span { position: relative; z-index: 1; }
+
+    .about-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-style: italic;
+      color: var(--charcoal);
+      line-height: 1.5;
+      margin: 1.5rem 0;
+      padding-left: 1.5rem;
+      border-left: 3px solid var(--terracotta);
+    }
+
+    .about-body {
+      font-size: 0.9rem;
+      color: var(--slate);
+      line-height: 1.75;
+      margin-bottom: 1rem;
+    }
+
+    .italic_gold, .about-tagline {
+      font-size: 0.85rem;
+      font-style: italic;
+      color: var(--terracotta);
+      margin: 1rem 0;
+    }
+
+    .creds-list {
+      list-style: none;
+      margin: 1.5rem 0;
+    }
+
+    .creds-list li {
+      font-size: 0.78rem;
+      color: var(--slate);
+      padding: 0.4rem 0;
+      border-bottom: 1px solid rgba(122,160,122,0.2);
+      letter-spacing: 0.03em;
+    }
+
+    /* ── FINAL CTA ── */
+    .final-cta {
+      background: #1E3A28;
+      padding: 7rem 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .final-cta::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(200,132,90,0.08) 0%, transparent 70%);
+    }
+
+    .final-cta .section-title { color: var(--ivory); max-width: 640px; margin: 0 auto 1rem; position: relative; z-index: 1; }
+    .final-cta .section-subtitle { color: rgba(253,251,248,0.6); font-size: 0.85rem; margin-bottom: 2rem; position: relative; z-index: 1; }
+    .final-cta .btn-gold { position: relative; z-index: 1; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #1A2820;
+      padding: 3rem;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+    }
+
+    .footer-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: var(--ivory);
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-brand span { color: var(--terracotta); }
+
+    .footer-tagline {
+      font-size: 0.75rem;
+      color: rgba(253,251,248,0.4);
+      line-height: 1.6;
+      max-width: 260px;
+    }
+
+    .footer-col-title {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 0.5rem; }
+    .footer-links a {
+      font-size: 0.78rem;
+      color: rgba(253,251,248,0.5);
+      cursor: pointer;
+      transition: color 0.2s;
+      text-decoration: none;
+    }
+    .footer-links a:hover { color: var(--terracotta); }
+
+    .footer-bottom {
+      background: #1A2820;
+      padding: 1rem 3rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-legal {
+      font-size: 0.68rem;
+      color: rgba(253,251,248,0.3);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── PAGE HERO (inner pages) ── */
+    .lp-hero {
+      padding: 8rem 3rem 5rem;
+      position: relative;
+      overflow: hidden;
+      background: var(--ivory);
+    }
+
+    .lp-hero-bg {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 80% 40%, rgba(200,132,90,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .lp-breadcrumb {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      cursor: pointer;
+      margin-bottom: 2rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .lp-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--charcoal);
+      max-width: 720px;
+      margin-bottom: 1.5rem;
+    }
+
+    .lp-headline em { font-style: italic; color: var(--gold); }
+
+    .lp-sub {
+      font-size: 0.95rem;
+      color: var(--slate);
+      line-height: 1.75;
+      max-width: 580px;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── CONTENT SECTIONS ── */
+    .content-section {
+      padding: 4rem 3rem;
+      background: var(--ivory);
+    }
+
+    .content-section.alt { background: var(--warm-white); }
+
+    .content-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      margin-top: 2rem;
+    }
+
+    .body-text {
+      font-size: 0.9rem;
+      color: var(--slate);
+      line-height: 1.85;
+      font-weight: 300;
+    }
+
+    .body-text + .body-text { margin-top: 1rem; }
+
+    /* ── RISK CALLOUT ── */
+    .risk-callout {
+      background: var(--warm-white);
+      border-left: 4px solid var(--terracotta);
+      padding: 1.25rem 1.5rem;
+      position: relative;
+    }
+
+    .content-section.alt .risk-callout { background: var(--ivory); }
+
+    .risk-callout p { font-size: 0.85rem; color: var(--slate); line-height: 1.65; }
+    .risk-callout strong { color: var(--charcoal); }
+
+    /* ── HIGHLIGHT BOX ── */
+    .highlight-box {
+      background: #1E3A28;
+      padding: 2rem;
+      color: var(--ivory);
+    }
+
+    .highlight-box .section-title {
+      font-size: 1.2rem;
+      color: var(--ivory);
+      margin-bottom: 0.5rem;
+    }
+
+    .highlight-box .gold-divider { background: var(--gold-light); }
+
+    .highlight-box p {
+      font-size: 0.85rem;
+      color: rgba(253,251,248,0.75);
+      line-height: 1.65;
+    }
+
+    /* ── STAT CALLOUT ── */
+    .stat-callout {
+      padding: 1.25rem;
+      background: rgba(200,132,90,0.1);
+      border-left: 3px solid var(--gold);
+      margin: 1.25rem 0;
+    }
+
+    .content-section.alt .stat-callout { background: var(--warm-white); }
+
+    .stat-callout-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      color: var(--terracotta);
+      font-weight: 300;
+      line-height: 1;
+    }
+
+    .stat-callout-text {
+      font-size: 0.82rem;
+      color: var(--charcoal);
+      line-height: 1.5;
+      margin-top: 0.25rem;
+    }
+
+    /* ── SERVICES LIST ── */
+    .services-list {
+      list-style: none;
+      margin-top: 1.5rem;
+    }
+
+    .services-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(122,160,122,0.2);
+      font-size: 0.83rem;
+      color: var(--slate);
+      font-weight: 300;
+    }
+
+    .service-check {
+      width: 18px; height: 18px;
+      border: 1.5px solid #5A8C5A;
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.65rem;
+      color: #5A8C5A;
+      margin-top: 1px;
+    }
+
+    /* ── CONDITIONS / TAGS ── */
+    .conditions-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .condition-tag {
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.85rem;
+      border: 1px solid rgba(122,160,122,0.4);
+      color: var(--slate);
+    }
+
+    /* ── SPECIALTY GRID ── */
+    .specialty-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .specialty-card {
+      background: var(--ivory);
+      border: 1px solid rgba(122,160,122,0.25);
+      padding: 1.25rem;
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--charcoal);
+      letter-spacing: 0.05em;
+      transition: all 0.2s;
+    }
+
+    .content-section.alt .specialty-card { background: var(--warm-white); }
+    .specialty-card:hover { border-color: var(--gold); color: var(--gold); background: rgba(200,132,90,0.1); }
+
+    .specialty-more {
+      font-size: 0.75rem;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      padding: 1.25rem;
+      border: 1px dashed var(--border);
+      text-align: center;
+      font-style: italic;
+    }
+
+    /* ── GLP-1 BLOCK ── */
+    .glp1-block {
+      background: var(--deep);
+      padding: 3rem;
+      margin: 0;
+    }
+
+    .glp1-block .section-title { color: var(--ivory); }
+    .glp1-block .section-title em { color: var(--terracotta); font-style: italic; }
+    .glp1-block .gold-divider { }
+    .glp1-block .body-text { color: rgba(253,251,248,0.7); }
+    .glp1-block .risk-callout { background: rgba(255,255,255,0.05); border-color: var(--gold-light); }
+    .glp1-block .risk-callout p { color: rgba(253,251,248,0.7); }
+    .glp1-block .risk-callout strong { color: var(--gold-light); }
+
+    /* ── PACKAGES ── */
+    .package-section {
+      padding: 4rem 3rem;
+      background: var(--warm-white);
+    }
+
+    .section-subtitle {
+      font-size: 0.85rem;
+      color: var(--slate);
+      margin-top: 0.5rem;
+      margin-bottom: 0;
+      line-height: 1.6;
+    }
+
+    .packages-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .package-card {
+      background: var(--ivory);
+      border: 1px solid rgba(200,132,90,0.15);
+      padding: 3rem;
+      position: relative;
+    }
+
+    .package-card.featured {
+      background: var(--ivory);
+      border: 2px solid var(--terracotta);
+      box-shadow: 0 8px 32px rgba(200,132,90,0.12);
+    }
+
+    .package-badge {
+      position: absolute; top: -1px; right: 2rem;
+      background: var(--terracotta);
+      color: #FDFCF8;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.8rem;
+    }
+
+    .package-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: var(--charcoal);
+      margin-bottom: 0.5rem;
+    }
+
+    .package-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: var(--gold);
+      margin: 0.75rem 0;
+    }
+
+    .package-desc {
+      font-size: 0.85rem;
+      color: var(--slate);
+      line-height: 1.75;
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+    }
+
+    .package-savings {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: #fff;
+      background: var(--terracotta);
+      display: inline-block;
+      padding: 0.3rem 0.8rem;
+      border-radius: 2px;
+      margin-bottom: 1rem;
+    }
+
+    /* ── GIFT OF CARE SECTION ── */
+    .gift-section {
+      padding: 7rem 4rem;
+      background: var(--near-white);
+      text-align: center;
+    }
+
+    .gift-header {
+      margin-bottom: 3.5rem;
+    }
+
+    .gift-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto 3rem;
+      text-align: left;
+    }
+
+    .gift-card {
+      background: #fff;
+      border: 1px solid rgba(180,140,110,0.2);
+      border-top: 3px solid rgba(180,140,110,0.3);
+      padding: 2rem 1.75rem;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .gift-card:hover {
+      border-top-color: var(--terracotta);
+      box-shadow: 0 8px 30px rgba(180,100,60,0.08);
+      transform: translateY(-2px);
+    }
+
+    .gift-card-featured {
+      background: var(--ivory);
+      border-top: 3px solid var(--terracotta);
+    }
+
+    .gift-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--charcoal);
+      margin-bottom: 0.5rem;
+    }
+
+    .gift-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.9rem;
+      font-weight: 300;
+      color: var(--terracotta);
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .gift-desc {
+      font-size: 0.83rem;
+      color: var(--slate);
+      line-height: 1.8;
+      flex-grow: 1;
+      margin: 0;
+    }
+
+    .gift-note {
+      font-size: 0.78rem;
+      color: var(--slate);
+      opacity: 0.7;
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.8;
+      font-style: italic;
+    }
+
+    @media (max-width: 900px) {
+      .gift-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 560px) {
+      .gift-grid { grid-template-columns: 1fr; }
+    }
+    .mh-personalized-callout {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.25rem;
+      background: var(--ivory);
+      border-left: 3px solid var(--terracotta);
+      padding: 1.5rem 2rem;
+      margin: 1.5rem auto 2.5rem;
+      max-width: 860px;
+      font-size: 0.88rem;
+      color: var(--charcoal);
+      line-height: 1.85;
+    }
+
+    .mh-personalized-icon {
+      color: var(--terracotta);
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      padding-top: 0.1rem;
+    }
+
+    /* ── END GIFT SECTION ── */
+
+    /* ── FAQ ── */
+    .faq-section {
+      padding: 4rem 3rem;
+      background: var(--ivory);
+      max-width: 800px;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid rgba(122,160,122,0.2);
+    }
+
+    .faq-q {
+      padding: 1.25rem 0;
+      font-size: 0.88rem;
+      color: var(--charcoal);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      transition: color 0.2s;
+    }
+
+    .faq-q:hover { color: var(--terracotta); }
+    .faq-icon { color: var(--terracotta); font-size: 1.2rem; flex-shrink: 0; }
+
+    .faq-a {
+      display: none;
+      padding: 0 0 1.25rem;
+      font-size: 0.83rem;
+      color: var(--slate);
+      line-height: 1.7;
+    }
+
+    .faq-item.open .faq-a { display: block; }
+
+    /* ── OBSTETRIC CARDS ── */
+    .ob-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    /* ── MENTAL HEALTH SECTION ── */
+    .mh-who-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .mh-who-card {
+      background: var(--ivory);
+      border: 1px solid rgba(122,160,122,0.2);
+      padding: 1.5rem;
+    }
+
+    .content-section.alt .mh-who-card { background: var(--warm-white); }
+
+    .mh-who-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--charcoal);
+      margin-bottom: 0.4rem;
+    }
+
+    .mh-who-desc {
+      font-size: 0.78rem;
+      color: var(--slate);
+      line-height: 1.55;
+    }
+
+    /* ── PRODUCTS ── */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .product-category {
+      background: var(--ivory);
+      border: 1px solid rgba(122,160,122,0.2);
+      padding: 2rem;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .content-section.alt .product-category { background: var(--warm-white); }
+    .product-category:hover { border-color: var(--gold); }
+
+    .product-cat-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+
+    .product-cat-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--charcoal);
+      margin-bottom: 0.4rem;
+    }
+
+    .product-cat-desc {
+      font-size: 0.78rem;
+      color: var(--slate);
+      line-height: 1.55;
+    }
+
+
+    /* ── LOGO ── */
+    .nav-logo {
+      height: 44px;
+      width: auto;
+      filter: invert(24%) sepia(50%) saturate(600%) hue-rotate(115deg) brightness(35%) contrast(95%);
+      cursor: pointer;
+    }
+
+    .hero-logo {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 52%;
+      max-width: 680px;
+      height: auto;
+      filter: invert(24%) sepia(50%) saturate(600%) hue-rotate(115deg) brightness(32%) contrast(95%);
+      opacity: 0.09;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── SURGERY PREP TABS ── */
+    .tabs-nav {
+      background: #F5E4D4;
+      border-bottom: 1px solid rgba(122,160,122,0.2);
+      padding: 0 3rem;
+      display: flex;
+      gap: 0;
+      position: sticky;
+      top: 64px;
+      z-index: 50;
+    }
+
+    .tab-btn {
+      padding: 1.1rem 1.75rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--slate);
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .tab-btn:hover { color: #3D7A3D; }
+    .tab-btn.active { color: var(--gold); border-bottom-color: var(--terracotta); }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+  
+    @media (max-width: 768px) {
+      nav { padding: 0 1.5rem; }
+      .nav-links { display: none; }
+      .hero { padding: 6rem 1.5rem 3rem; }
+      .paths-section, .problem-strip, .hiw-section, .content-section, .package-section, .faq-section { padding: 3rem 1.5rem; }
+      .about-preview { grid-template-columns: 1fr; padding: 3rem 1.5rem; gap: 2rem; }
+      .content-2col { grid-template-columns: 1fr; gap: 2rem; }
+      .ob-cards { grid-template-columns: 1fr; }
+      footer { grid-template-columns: 1fr 1fr; padding: 2rem 1.5rem; }
+      .lp-hero { padding: 6rem 1.5rem 3rem; }
+      .stat-strip { padding: 2rem 1.5rem; }
+      .glp1-block { padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- NAVIGATION -->
+<!-- ══════════════════════════════════════════════════════ -->
+<nav>
+  <div class="nav-logo-wrap" onclick="showPage('home')">
+    <img src="data:image/png;base64,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AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAoIv/A4L2JfSzwwvTAAAAAElFTkSuQmCC" class="nav-mark" alt="OpWell Concierge">
+  </div>
+
+  <ul class="nav-links">
+    <li><a onclick="showPage('surgery-prep')">Surgery Preparation</a></li>
+    <li><a onclick="showPage('recovery')">Post-Op Recovery</a></li>
+    <li><a onclick="showPage('mental-health')">Mental Wellness</a></li>
+    <li><a onclick="showPage('obstetric')">Labor & Delivery Prep</a></li>
+    <li><a onclick="showPage('medical-tourism')">Medical Tourism</a></li>
+    <li><a onclick="showPage('products')">Products</a></li>
+    <li><a onclick="showPage('about')">Our Story</a></li>
+    <li><a>Patient Portal</a></li>
+  </ul>
+
+  <a class="nav-cta">Book Now</a>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- HOME PAGE -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div id="page-home" class="page active">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <img src="data:image/png;base64,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AKEEkAACEpysoKvJygAsIQIoAAAEoqSKACKACSE+ICpKwkigAgAAAAAAAAELwCEHCwAAACcgoHIBwnJEgpISCEACovKCgAgELIqACEErBIqAR4iKACBIAKSCAQCoqSKACKSAqEAIoEioAIoQSAJysAAAAAAAAAAAHmSnmCpKnAqAR4iKAKkkAIoQAAkyChAAeaLAokqkgEBAKAAAIASCSR4gCgCkiScgoACSsyggAAsIQCgABMnIAApwcAASEoIAqKkqSCAAAAAACeYCgAsCQoAAAAEosoByAAAAAAAAAAAAAKACKEAIsAAAARAAEkJIoAIsSknBIoAIoAqSKgHJMgAAIcgAEACiHkKACLyIQCyQAAICykCwAABKQsoCgCpMCz4IChHgkgcgCCykLAqLAQIEgKiwhAKAISkKcCiSqSIAAoQCkoqCEHIAAAEkL5AgAKTKQAAAonIKTJyALygAACLAkKCTAsoAAABIJ5qnmoAAEeKpCgByAAAIsoBwKSKgAgSQsioAIASAABBIChACKEAAixIAAAAEJKpPiKACLCSQsiosIQCgCAACKkigAgAAABwvBBIqACKSQCosIQIoAEgQAAAAAAAcAKASCACEKQCkkJIIoQCosIsCAAAABIAgSAoAoABBMACBIIsEhIqLwhyCpJyCAAAAoAIAAAAAAAAAAEgAAAAAAAQAKEEghAApISCAAQsoCkgCEBCioLwcCAAqSEgLBKQsggAigSCAAcgAAAsEooqACKJCi4HKTICygAACAAAAKcpAKACKi9UFABFgCQRYQBQAAAAAAACQBAkA5AAAAAFCAgFAEAAAAJAAAFhKQspAKABKLKCAAAAAAAAELJAKgAgAAAAAAAAAACT4goAAAAAAALBJBIIQEeIKAKi8IvIBJyCoB5iLEAAACAckyKgALAQACTKxIgSAIEgAAAALAR4AqEEkApISCEAIoApKLKCAAoAIsEkEioAIoAEwkKgKSAIQAKAAAAAAAAABKLygAvBMAgKAkqkihHiEeIKAIBIAAAAABIpIgCwJCzIEygCAAAAAAAECqSEggAihBIIAAAAAAAAk+KpPiCgAAAAAAAAAAAsygCgAgAAACwICrKAIAAAAHICgAihBIIAALwgAAKSQkigAipIAAApMoCgAgEHAoAIpKc9AUAEUAAAAAEFlAAADkAXk5QAIAF5QAAAU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" class="hero-logo" alt="">
+    <div class="hero-content">
+      <div class="hero-tag">OpWell Concierge™</div>
+      <h1 class="hero-headline">Anesthesiologist-led.<br>Patient-centered.<br><em>Built for your surgical journey.</em></h1>
+      <p class="hero-sub">From preparation to recovery — an anesthesiologist in your corner. OpWell Concierge is an anesthesiologist-led telehealth service that makes sure your body is ready for surgery, protects you from preventable complications, and supports your recovery — on your timeline, from anywhere.</p>
+      <div class="hero-actions">
+        <a class="btn-primary" onclick="document.getElementById('paths-section').scrollIntoView({behavior:'smooth'})">Find Your Program →</a>
+        <a class="btn-secondary btn-meet-dr" onclick="showPage('about')">Meet Dr. Oluwole</a>
+      </div>
+      <div class="hero-trust">
+        <span class="trust-item"><span class="trust-dot"></span>Board-Certified Anesthesiologist</span>
+        <span class="trust-item"><span class="trust-dot"></span>Cash-Pay · HSA & FSA Accepted</span>
+        <span class="trust-item"><span class="trust-dot"></span>GA · OH · VA · Expanding</span>
+        <span class="trust-item"><span class="trust-dot"></span>No Referral Required</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- STAT STRIP -->
+  <div class="stat-strip">
+    <div class="stat">
+      <span class="stat-num">Up to 80%</span>
+      <span class="stat-label">of surgical patients experience significant preoperative anxiety — yet most will never be asked about it</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">49%</span>
+      <span class="stat-label">of preventable surgical readmissions are linked to lack of post-discharge follow-up</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num" style="font-size:1.6rem; line-height:1.2;">Minutes<br>Before</span>
+      <span class="stat-label">Most patients speak to an anesthesiologist for the first time minutes before surgery</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">GA · OH · VA</span>
+      <span class="stat-label">Currently licensed — with more states coming soon</span>
+    </div>
+  </div>
+
+  <!-- PATHS SECTION -->
+  <section class="paths-section" id="paths-section">
+    <div class="section-tag">Where Do You Start?</div>
+    <h2 class="section-title">Every surgical journey<br>is different. Find yours.</h2>
+    <div class="gold-divider"></div>
+    <div class="paths-grid">
+      <div class="path-card" onclick="showPage('surgery-prep')">
+        <div class="path-icon">🩺</div>
+        <div class="path-title">I need to prepare for surgery</div>
+        <div class="path-desc">Cosmetic, bariatric, or general surgery — OpWell ensures you arrive at your procedure optimized, informed, and genuinely ready.</div>
+        <div class="path-link">Surgery Preparation →</div>
+      </div>
+      <div class="path-card" onclick="showPage('recovery')">
+        <div class="path-icon">🏠</div>
+        <div class="path-title">I already had surgery</div>
+        <div class="path-desc">Home after your procedure and want physician support through recovery? OpWell's post-op program covers the critical windows.</div>
+        <div class="path-link">Post-Op Recovery →</div>
+      </div>
+      <div class="path-card" onclick="showPage('mental-health')">
+        <div class="path-icon">🧠</div>
+        <div class="path-title">I need mental health support</div>
+        <div class="path-desc">Surgical anxiety, psychological clearance for bariatric surgery, perinatal mental health, or post-operative emotional support — available to all OpWell patients.</div>
+        <div class="path-link">Mental Health Services →</div>
+      </div>
+      <div class="path-card" onclick="showPage('obstetric')">
+        <div class="path-icon">🤰</div>
+        <div class="path-title">I'm planning or expecting a baby</div>
+        <div class="path-desc">Know your anesthesia options before labor begins. OpWell's Labor & Delivery Prep consultation means you won't meet your anesthesiologist for the first time during active labor.</div>
+        <div class="path-link">Labor & Delivery Prep →</div>
+      </div>
+      <div class="path-card" onclick="showPage('medical-tourism')">
+        <div class="path-icon">✈️</div>
+        <div class="path-title">I'm having surgery abroad</div>
+        <div class="path-desc">Planning a procedure internationally, already scheduled, or just returned home — OpWell provides the medical support your international surgical journey is missing.</div>
+        <div class="path-link">Medical Tourism →</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM STRIP -->
+  <section class="problem-strip">
+    <div style="width:48px;height:2px;background:var(--terracotta);margin-bottom:1.2rem;"></div>
+    <div class="section-tag" style="color:var(--terracotta);">The Surgical Journey Today</div>
+    <h2 class="section-title" style="color:#7A3A20; max-width:600px;">What most surgical patients experience — and what OpWell changes.</h2>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="problem-q">"Nobody told me what recovery would actually look like."</div>
+        <div class="problem-a">Most patients receive a discharge packet and a phone number for emergencies. OpWell delivers a real recovery plan, 72-hour and 2-week physician check-ins, and a clear answer to: what's normal, and what requires action.</div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-q">"I was terrified going into surgery and nobody asked."</div>
+        <div class="problem-a">Studies show up to 80% of surgical patients experience significant preoperative anxiety — yet it is almost never proactively addressed. OpWell includes a licensed mental health specialist who works directly with you before surgery, as part of your care team.</div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-q">"I take Ozempic. Nobody told me what that means for surgery."</div>
+        <div class="problem-a">GLP-1 medications like Ozempic, Wegovy, and Mounjaro delay gastric emptying and require specific fasting and medication protocols before surgery. This is a genuine patient safety issue — and OpWell is here to navigate it with you.</div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-q">"I came home and had no idea who to call."</div>
+        <div class="problem-a">Research shows 49% of preventable surgical readmissions are linked to inadequate post-discharge follow-up. The most common factor: patients not knowing who to contact. OpWell is that contact — available through the windows when it matters most.</div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-q">"I need psych clearance for bariatric surgery and can't find anyone."</div>
+        <div class="problem-a">Psychological clearance is required by most bariatric programs — but finding a qualified provider who understands the perioperative context is harder than it should be. OpWell handles it in-house, with no separate referral needed.</div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-q">"I traveled for my procedure. My follow-up care didn't travel with me."</div>
+        <div class="problem-a">Medical tourism patients return to a healthcare system that wasn't part of their journey. OpWell is the domestic medical home — before you leave, and when you return.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="hiw-section">
+    <div class="section-tag">How It Works</div>
+    <h2 class="section-title">Simple. Personal.<br>Anesthesiologist-led.</h2>
+    <div class="gold-divider"></div>
+    <div class="hiw-grid">
+      <div class="hiw-step">
+        <div class="step-num">01</div>
+        <div class="step-title">Book Your Consultation</div>
+        <div class="step-desc">No referral required. Select your program and schedule directly. Telehealth available in GA, OH & VA — more states coming soon. <strong>HSA & FSA accepted.</strong></div>
+      </div>
+      <div class="hiw-step">
+        <div class="step-num">02</div>
+        <div class="step-title">Meet Your Anesthesiologist</div>
+        <div class="step-desc">A dedicated telehealth consultation with a board-certified anesthesiologist who reviews your history, your medications, your procedure, and your goals — everything that matters for your surgical journey.</div>
+      </div>
+      <div class="hiw-step">
+        <div class="step-num">03</div>
+        <div class="step-title">Receive Your Protocol</div>
+        <div class="step-desc">A personalized preparation or recovery plan — what to do, when to do it, and what to watch for. Yours to keep and share with your surgical team.</div>
+      </div>
+      <div class="hiw-step">
+        <div class="step-num">04</div>
+        <div class="step-title">Supported Through Recovery</div>
+        <div class="step-desc">Post-op check-ins, async physician messaging, and mental health specialist access — through the critical windows when patients need support most.</div>
+      </div>
+    </div>
+    <div style="margin-top:2.5rem; padding:1.5rem 2rem; background:rgba(200,132,90,0.08); border-left:3px solid var(--terracotta); max-width:640px;">
+      <div style="font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--terracotta); font-weight:500; margin-bottom:0.5rem;">HSA & FSA Accepted</div>
+      <p style="font-size:0.85rem; color:var(--slate); line-height:1.7; margin:0;">OpWell is a cash-pay service. We do not bill insurance directly — but your HSA or FSA funds are accepted. OpWell consultations qualify as an eligible medical expense, and we provide itemized documentation for your records.</p>
+    </div>
+  </section>
+
+  <!-- ABOUT PREVIEW -->
+  <section class="about-preview">
+    <div class="about-image"><span>Photo — Dr. Oluwole</span></div>
+    <div>
+      <div class="section-tag">Meet Dr. Oluwole</div>
+      <h2 class="section-title">Founder & Board-Certified<br>Anesthesiologist</h2>
+      <div class="gold-divider"></div>
+      <div class="about-quote">"Surgery day is not the beginning of your care. Every patient deserves an anesthesiologist in their corner long before they reach the OR — prepared, informed, and confident every step of the way."</div>
+      <br>
+      <a class="btn-primary btn-meet-dr" onclick="showPage('about')" style="cursor:pointer;">Meet Dr. Oluwole →</a>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <!-- PROVIDER PARTNERSHIP SECTION -->
+  <section class="provider-section">
+    <div class="provider-inner">
+      <div class="provider-text">
+        <div class="section-tag">For Providers</div>
+        <h2 class="section-title">Send your patients<br>to OpWell.</h2>
+        <div class="gold-divider"></div>
+        <p class="body-text">OpWell works alongside surgeons, OBs, bariatric programs, and proceduralists to support your patients before and after surgery — handling the perioperative preparation and recovery follow-up so you stay focused on your clinical role.</p>
+        <p class="body-text" style="margin-top:1rem;">Refer a patient in minutes. No coordination burden, no scheduling overlap. And if you're interested in a deeper practice partnership, we'd love to connect.</p>
+        <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-top:2.5rem;">
+          <a class="btn-primary" style="cursor:pointer;">Refer a Patient →</a>
+          <a class="btn-secondary btn-meet-dr" style="cursor:pointer;">Explore Partnership →</a>
+        </div>
+      </div>
+      <div class="provider-card">
+        <div class="section-tag">What Your Patients Receive</div>
+        <div style="margin-top:1.5rem; display:flex; flex-direction:column; gap:1.2rem;">
+          <div class="provider-feature">
+            <div class="provider-feature-title">Board-certified anesthesiologist consultation</div>
+            <div class="provider-feature-desc">50-minute telehealth session covering risk assessment, medication review, prehabilitation protocol, and recovery planning.</div>
+          </div>
+          <div style="width:100%; height:1px; background:rgba(200,132,90,0.15);"></div>
+          <div class="provider-feature">
+            <div class="provider-feature-title">Mental health specialist access</div>
+            <div class="provider-feature-desc">Licensed mental health support integrated into every program — available standalone or bundled at a discounted rate.</div>
+          </div>
+          <div style="width:100%; height:1px; background:rgba(200,132,90,0.15);"></div>
+          <div class="provider-feature">
+            <div class="provider-feature-title">Post-op recovery follow-up</div>
+            <div class="provider-feature-desc">72-hour and 2-week check-ins, async physician messaging, and a clear protocol for what's normal versus what needs attention.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROVIDER PARTNERSHIP SECTION -->
+  <section class="provider-section">
+    <div class="section-tag">For Surgeons & Providers</div>
+    <h2 class="section-title">Elevating outcomes, together.</h2>
+    <div class="gold-divider"></div>
+    <p class="section-subtitle" style="max-width:640px;">OpWell partners with surgeons and proceduralists who want their patients arriving optimized — nutritionally, medically, and mentally. We handle the preparation gap so you can focus on the procedure.</p>
+    <div class="provider-grid">
+      <div class="provider-card">
+        <div class="provider-icon">⟶</div>
+        <div class="provider-card-title">Surgeons & Proceduralists</div>
+        <p class="provider-card-desc">Refer patients for prehabilitation, medication optimization, GLP-1 management, and recovery education — the work that improves outcomes but rarely fits inside a surgical practice.</p>
+      </div>
+      <div class="provider-card">
+        <div class="provider-icon">⟶</div>
+        <div class="provider-card-title">Simple Referral, No Burden</div>
+        <p class="provider-card-desc">Refer in under a minute. No coordination required from your office. OpWell handles intake, consultation, and follow-through — and you remain a trusted part of your patient's care team.</p>
+      </div>
+    </div>
+    <div style="margin-top:3rem;">
+      <a class="btn-secondary" style="cursor:pointer;">Partner With OpWell →</a>
+    </div>
+  </section>
+
+  <!-- GIFT OF CARE SECTION -->
+  <section class="gift-section">
+    <div class="gift-header">
+      <div class="section-tag" style="color:var(--terracotta);">Give the Gift of Care</div>
+      <h2 class="section-title">Someone you love is having surgery.<br>Give them the preparation they deserve.</h2>
+      <div class="gold-divider" style="margin:0 auto 1.5rem;"></div>
+      <p class="section-subtitle" style="max-width:640px; margin:0 auto 3rem;">Purchase an OpWell consultation as a gift. Your recipient will receive everything they need to book their own appointment — on their schedule, before their procedure.</p>
+    </div>
+    <div class="gift-grid">
+      <div class="gift-card">
+        <div class="gift-name">Surgery Preparation</div>
+        <p class="gift-desc">A comprehensive pre-operative consultation covering medications, prehabilitation, risk assessment, and recovery education. Ideal for anyone facing elective surgery.</p>
+        <a class="btn-secondary" onclick="showPage('surgery-prep')" style="cursor:pointer; margin-top:1.5rem; display:inline-block;">Learn More & Gift →</a>
+      </div>
+      <div class="gift-card gift-card-featured">
+        <div class="package-badge">Most Gifted</div>
+        <div class="gift-name">Preparation + Recovery</div>
+        <p class="gift-desc">Full perioperative support from pre-op through recovery. The most complete gift of care — for someone who deserves to be supported at every step.</p>
+        <a class="btn-primary" onclick="showPage('surgery-prep')" style="cursor:pointer; margin-top:1.5rem; display:inline-block;">Learn More & Gift →</a>
+      </div>
+      <div class="gift-card">
+        <div class="gift-name">Post-Op Recovery</div>
+        <p class="gift-desc">Anesthesiologist-led support through the most vulnerable window after discharge — pain guidance, warning sign education, and check-ins when they matter most.</p>
+        <a class="btn-secondary" onclick="showPage('recovery')" style="cursor:pointer; margin-top:1.5rem; display:inline-block;">Learn More & Gift →</a>
+      </div>
+      <div class="gift-card">
+        <div class="gift-name">Labor & Delivery Prep</div>
+        <p class="gift-desc">For an expectant mother navigating labor, anesthesia, and childbirth. An honest, clinical conversation — before the moment she needs it most.</p>
+        <a class="btn-secondary" onclick="showPage('labor')" style="cursor:pointer; margin-top:1.5rem; display:inline-block;">Learn More & Gift →</a>
+      </div>
+    </div>
+    <p class="gift-note">After purchase, your recipient will receive a personalized gift confirmation with instructions to book their consultation directly with OpWell — at their convenience, before their procedure.</p>
+  </section>
+
+  <section class="final-cta">
+    <div class="section-tag" style="color:var(--gold-light); text-align:center; margin-bottom:1rem;">Ready?</div>
+    <h2 class="section-title">Go into surgery prepared,<br>protected, and confident.</h2>
+    <p class="section-subtitle">No referral required. HSA & FSA accepted. Telehealth available in Georgia, Ohio & Virginia — more states coming soon.</p>
+    <a class="btn-gold">Book Your Consultation →</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>
+      <div class="footer-brand">OpWell Concierge<span>™</span></div>
+      <p class="footer-tagline">Anesthesiologist-led perioperative optimization. Telehealth. HSA/FSA Accepted. No referral needed.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Programs</div>
+      <ul class="footer-links">
+        <li><a onclick="showPage('surgery-prep')">Surgery Preparation</a></li>
+        <li><a onclick="showPage('recovery')">Post-Op Recovery</a></li>
+        <li><a onclick="showPage('mental-health')">Mental Wellness</a></li>
+        <li><a onclick="showPage('obstetric')">Labor & Delivery Prep</a></li>
+        <li><a onclick="showPage('medical-tourism')">Medical Tourism</a></li>
+        <li><a onclick="showPage('products')">Products</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Company</div>
+      <ul class="footer-links">
+        <li><a onclick="showPage('about')">Our Story</a></li>
+        <li><a>Blog</a></li>
+        <li><a>Patient Portal</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Legal</div>
+      <ul class="footer-links">
+        <li><a>Privacy Policy</a></li>
+        <li><a>Terms of Service</a></li>
+        <li><a>Affiliate Disclosure</a></li>
+      </ul>
+    </div>
+  </footer>
+  <div class="footer-bottom">
+    <span class="footer-legal">© 2026 OluwoleMD & Associates LLC · OpWell Concierge™</span>
+    <span class="footer-legal">Not a substitute for emergency medical care.</span>
+  </div>
+
+</div><!-- end home -->
+
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- SURGERY PREPARATION PAGE -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div id="page-surgery-prep" class="page">
+  <div class="lp-hero">
+    <div class="lp-hero-bg"></div>
+    <div class="lp-breadcrumb" onclick="showPage('home')">← OpWell Home</div>
+    <h1 class="lp-headline">Preparation is the one part<br>of surgery <em>you control.</em></h1>
+    <p class="lp-sub">OpWell's Surgery Preparation program ensures you arrive at your procedure optimized, informed, and genuinely ready — whether you're having cosmetic surgery, bariatric surgery, or any elective procedure.</p>
+    <a class="btn-primary" style="cursor:pointer;">Book Your Consultation →</a>
+  </div>
+
+  <!-- TABS NAV -->
+  <div class="tabs-nav">
+    <button class="tab-btn active" onclick="showTab('cosmetic')">Cosmetic Surgery</button>
+    <button class="tab-btn" onclick="showTab('bariatric')">Bariatric Surgery</button>
+    <button class="tab-btn" onclick="showTab('general')">General Surgery</button>
+    <button class="tab-btn" onclick="showTab('glp1')">GLP-1 Medications</button>
+  </div>
+
+  <!-- TAB: COSMETIC -->
+  <div class="tab-panel active" id="tab-cosmetic">
+    <div class="content-section alt">
+      <div class="section-tag">Cosmetic Surgery</div>
+      <h2 class="section-title">Before the transformation —<br>the preparation.</h2>
+      <div class="gold-divider"></div>
+      <p style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-style:italic; color:var(--gold); margin-bottom:1.5rem;">Because looking your best starts with being your healthiest.</p>
+      <div class="content-2col">
+        <div>
+          <p class="body-text">Cosmetic surgery patients are among the most invested surgical patients — financially, emotionally, and physically. You've researched your surgeon, saved for this procedure, and thought about this decision for months. And then your pre-operative preparation consisted of a 10-minute phone call from a nurse and a packet of instructions.</p>
+          <p class="body-text">The consequences are real. Preventable complications. Prolonged swelling from suboptimal nutrition. Anesthesia reactions a thorough history would have anticipated. Anxiety that makes recovery harder. None of this is your fault — the system simply wasn't built to support you the way you deserve.</p>
+          <p class="body-text">OpWell's Cosmetic Surgery Preparation is built around one principle: the best outcomes begin long before the operating room. What you do in the weeks before your procedure — and the support you have after — determines your results as much as any surgical technique.</p>
+          <ul class="services-list">
+            <li><div class="service-check">✓</div>50-minute pre-op consultation</li>
+            <li><div class="service-check">✓</div>Anesthesia & aspiration risk assessment</li>
+            <li><div class="service-check">✓</div>Personalized prehabilitation protocol</li>
+            <li><div class="service-check">✓</div>Medication & supplement safety review</li>
+            <li><div class="service-check">✓</div>Mental wellness specialist access</li>
+            <li><div class="service-check">✓</div>Realistic recovery timeline & expectation-setting</li>
+            <li><div class="service-check">✓</div>VTE blood clot risk assessment</li>
+          </ul>
+        </div>
+        <div>
+          <div class="highlight-box">
+            <div class="section-title">What OpWell gives you that no one else does</div>
+            <div class="gold-divider"></div>
+            <p>An anesthesiologist who reviews your complete picture before you ever set foot in a surgical center — your history, your medications, your anxiety, your healing baseline — and gives you a personalized plan to make the most of every week between now and your procedure.</p>
+          </div>
+          <div class="risk-callout" style="margin-top:1rem;">
+            <p><strong>Invest in your outcome.</strong> Many surgical complications — poor wound healing, medication interactions, prolonged recovery, preventable anxiety — are rooted in what happens before you ever reach the OR. Nutrition, medications, mental preparation, and realistic expectations all shape your results. That's the gap OpWell was built to close.</p>
+          </div>
+          <div class="section-tag" style="margin-top:1.5rem;">Procedures</div>
+          <div class="conditions-wrap">
+            <span class="condition-tag">BBL</span>
+            <span class="condition-tag">Mommy Makeover</span>
+            <span class="condition-tag">Liposuction</span>
+            <span class="condition-tag">Facelift</span>
+            <span class="condition-tag">Rhinoplasty</span>
+            <span class="condition-tag">Breast Augmentation</span>
+            <span class="condition-tag">Tummy Tuck</span>
+            <span class="condition-tag">Blepharoplasty</span>
+            <span class="condition-tag">Body Contouring</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: BARIATRIC -->
+  <div class="tab-panel" id="tab-bariatric">
+    <div class="content-section">
+      <div class="section-tag">Bariatric Surgery</div>
+      <h2 class="section-title">The most complex perioperative journey<br>in elective surgery.</h2>
+      <div class="gold-divider"></div>
+      <div class="content-2col">
+        <div>
+          <p class="body-text">Bariatric patients face a distinct set of perioperative challenges that require specific preparation — not just surgical clearance. Respiratory complications including hypoxia, apnea, and respiratory failure occur at markedly higher rates in this population. Obstructive sleep apnea, metabolic syndrome, and cardiovascular disease require identification and optimization before surgery, not after.</p>
+          <p class="body-text">Airway management requires specific assessment. Aspiration risk is elevated — delayed gastric emptying, hiatal hernia, and GERD create an anesthesia risk profile that must be documented and communicated to your surgical team. If you take a GLP-1 medication, fasting guidelines require specific modification.</p>
+          <p class="body-text">OpWell brings anesthesiologist-level perioperative oversight to every one of these dimensions — before your surgery and through your recovery.</p>
+          <ul class="services-list">
+            <li><div class="service-check">✓</div>Comprehensive bariatric-specific pre-op risk assessment</li>
+            <li><div class="service-check">✓</div>Comorbidity optimization — OSA, diabetes, hypertension</li>
+            <li><div class="service-check">✓</div>Airway and aspiration risk evaluation</li>
+            <li><div class="service-check">✓</div>Evidence-based prehabilitation — breathing exercises, CPAP guidance, carbohydrate loading</li>
+            <li><div class="service-check">✓</div>Medication review — GLP-1 protocols, what to hold, what to adjust</li>
+            <li><div class="service-check">✓</div><strong>Psychological clearance & diagnostic assessment — in-house, no referral needed</strong></li>
+            <li><div class="service-check">✓</div>ERABS pathway education — what recovery looks like day by day</li>
+            <li><div class="service-check">✓</div>72-hour and 2-week post-discharge check-ins</li>
+          </ul>
+        </div>
+        <div>
+          <div class="risk-callout">
+            <p><strong>Psychological clearance — in-house.</strong> Most bariatric programs require formal psychological clearance before approving surgery. OpWell's licensed mental wellness specialist conducts the full diagnostic assessment and provides the clearance letter — no separate referral, no coordination hassle, no delay.</p>
+          </div>
+          <div class="risk-callout" style="margin-top:1rem;">
+            <p><strong>Prehabilitation is evidence-based for bariatric patients.</strong> Guidelines from the American Association of Clinical Endocrinologists recommend deep breathing exercises, CPAP initiation when appropriate, incentive spirometry, and carbohydrate loading. OpWell builds and delivers this protocol for you.</p>
+          </div>
+          <div class="risk-callout" style="margin-top:1rem;">
+            <p><strong>Psychological readiness predicts long-term success.</strong> Mental wellness support before bariatric surgery is among the strongest predictors of sustained weight loss and quality of life. OpWell's specialist works directly with you as part of your care team.</p>
+          </div>
+          <div class="section-tag" style="margin-top:1.5rem;">Procedures</div>
+          <div class="conditions-wrap">
+            <span class="condition-tag">Gastric Bypass (RYGB)</span>
+            <span class="condition-tag">Sleeve Gastrectomy</span>
+            <span class="condition-tag">Duodenal Switch</span>
+            <span class="condition-tag">Gastric Band Revision</span>
+            <span class="condition-tag">Revisional Bariatric Surgery</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: GENERAL -->
+  <div class="tab-panel" id="tab-general">
+    <div class="content-section alt">
+      <div class="section-tag">General Surgery</div>
+      <h2 class="section-title">Every elective procedure deserves<br>anesthesiologist-level preparation.</h2>
+      <div class="gold-divider"></div>
+      <div class="content-2col">
+        <div>
+          <p class="body-text">Informed consent in American medicine has become a procedural formality. A document, a brief explanation, a signature. The legal requirement is met. Your actual understanding is rarely assessed.</p>
+          <p class="body-text">OpWell's Surgery Preparation consultation is built around the belief that you deserve to genuinely understand — not just legally consent to — what you're about to go through. And that genuine understanding, combined with an optimized body, produces meaningfully better outcomes.</p>
+          <p class="body-text">We review your anesthesia risk profile, build your prehabilitation protocol, walk through your recovery timeline in real detail, and make sure you know exactly what symptoms warrant concern after you're home.</p>
+          <ul class="services-list">
+            <li><div class="service-check">✓</div>Full pre-operative medical history and anesthesia risk assessment</li>
+            <li><div class="service-check">✓</div>Personalized prehabilitation protocol</li>
+            <li><div class="service-check">✓</div>Medication and supplement safety review</li>
+            <li><div class="service-check">✓</div>Realistic recovery timeline and expectation-setting</li>
+            <li><div class="service-check">✓</div>Warning sign education — normal vs. concerning symptoms</li>
+            <li><div class="service-check">✓</div>Mental wellness specialist access</li>
+            <li><div class="service-check">✓</div>All questions answered — no rush, no agenda</li>
+          </ul>
+        </div>
+        <div>
+          <div class="highlight-box">
+            <div class="section-title">Prehabilitation works. It's just never offered.</div>
+            <div class="gold-divider"></div>
+            <p>"Prehab" — targeted optimization of nutrition, physical conditioning, and mental readiness before elective surgery — is supported by strong evidence for improving outcomes and shortening recovery times. Despite this, it is almost never offered in standard surgical care. OpWell builds your personalized prehabilitation protocol as a core component of every consultation.</p>
+          </div>
+          <div class="section-tag" style="margin-top:1.5rem;">Specialties Served</div>
+          <div class="specialty-grid">
+            <div class="specialty-card">Orthopedic & Spine</div>
+            <div class="specialty-card">Abdominal & Digestive</div>
+            <div class="specialty-card">Gynecologic</div>
+            <div class="specialty-card">Urologic</div>
+            <div class="specialty-card">ENT</div>
+            <div class="specialty-card">Oncologic</div>
+            <div class="specialty-card">Endocrine & Thyroid</div>
+            <div class="specialty-card">Plastic & Reconstructive</div>
+            <div class="specialty-card">Ophthalmologic</div>
+            <div class="specialty-more">& more</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: GLP-1 -->
+  <div class="tab-panel" id="tab-glp1">
+    <div class="glp1-block" style="padding: 4rem 3rem;">
+      <div class="content-2col" style="max-width:1100px; margin:0 auto;">
+        <div>
+          <div class="section-tag" style="color:var(--gold);">For All Surgery Types</div>
+          <h2 class="section-title">Taking Ozempic, Wegovy,<br>or Mounjaro?</h2>
+          <div class="gold-divider"></div>
+          <p class="body-text">GLP-1 medications are now among the most commonly prescribed drugs in the country — and most patients heading into surgery don't know that they require specific perioperative management.</p>
+          <p class="body-text">These medications slow gastric emptying, which means food and liquid stay in your stomach longer than normal. Standard fasting guidelines may not be sufficient. The risk: aspiration — stomach contents entering the lungs during anesthesia. This is a serious, preventable complication.</p>
+          <p class="body-text">OpWell reviews your GLP-1 medication as part of every Surgery Preparation consultation — regardless of the type of surgery you're having — and ensures your surgical team has the information they need.</p>
+        </div>
+        <div>
+          <div class="risk-callout">
+            <p><strong>This applies to every surgery type.</strong> Whether you're having cosmetic surgery, bariatric surgery, or a general procedure, GLP-1 medications change your anesthesia risk profile. Your surgical team needs to know — and OpWell makes sure they do.</p>
+          </div>
+          <div class="risk-callout" style="margin-top:1rem;">
+            <p><strong>What OpWell does:</strong> Reviews your specific medication and dose, determines whether and when to hold it before surgery, coordinates the protocol with your surgical team, and ensures you restart safely after your procedure.</p>
+          </div>
+          <div class="risk-callout" style="margin-top:1rem;">
+            <p><strong>Medications covered:</strong> Ozempic · Wegovy · Mounjaro · Zepbound · Saxenda · Victoza · Rybelsus · Trulicity — and any other GLP-1 or GLP-1/GIP medication.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PACKAGES -->
+  <div class="package-section">
+    <div class="section-tag">Investment</div>
+    <h2 class="section-title">Choose your level of support.</h2>
+    <p class="section-subtitle">Surgery Preparation and Post-Op Recovery are available as standalone services. Bundle both with Preparation + Recovery and save. HSA & FSA accepted.</p>
+    <div class="packages-grid">
+      <div class="package-card">
+        <div class="package-name">Surgery Preparation</div>
+        <div class="package-price">$490</div>
+        <div class="package-desc">A comprehensive pre-operative consultation — risk assessment, prehabilitation protocol, recovery education, and mental health screening + specialist access at a discounted rate.</div>
+        <ul class="services-list">
+          <li><div class="service-check">✓</div>50-minute pre-op consultation</li>
+          <li><div class="service-check">✓</div>Anesthesia risk assessment</li>
+          <li><div class="service-check">✓</div>Personalized prehab protocol</li>
+          <li><div class="service-check">✓</div>Medication & supplement review</li>
+          <li><div class="service-check">✓</div>Mental health specialist access (discounted rate)</li>
+          <li><div class="service-check">✓</div>HSA & FSA accepted</li>
+        </ul>
+        <br><a class="btn-secondary" style="cursor:pointer; display:inline-block;">Book Your Consultation →</a>
+      </div>
+      <div class="package-card">
+        <div class="package-name">Post-Op Recovery</div>
+        <div class="package-price">$490</div>
+        <div class="package-desc">Standalone anesthesiologist-led post-discharge support. Available before or after your procedure.</div>
+        <ul class="services-list">
+          <li><div class="service-check">✓</div>72-hour post-discharge check-in</li>
+          <li><div class="service-check">✓</div>2-week recovery follow-up</li>
+          <li><div class="service-check">✓</div>Async physician messaging</li>
+          <li><div class="service-check">✓</div>Mental health specialist access (discounted rate)</li>
+          <li><div class="service-check">✓</div>HSA & FSA accepted</li>
+        </ul>
+        <br><a class="btn-secondary" style="cursor:pointer; display:inline-block;">Book Your Consultation →</a>
+      </div>
+      <div class="package-card featured">
+        <div class="package-badge">Most Popular</div>
+        <div class="package-name">Preparation + Recovery</div>
+        <div class="package-price">$850</div>
+        <div class="package-savings">Save $130 — valued at $980 separately</div>
+        <div class="package-desc">Complete perioperative support — comprehensive pre-op preparation plus anesthesiologist-led post-discharge recovery through your critical windows.</div>
+        <ul class="services-list">
+          <li><div class="service-check">✓</div>Everything in Surgery Preparation</li>
+          <li><div class="service-check">✓</div>Everything in Post-Op Recovery</li>
+          <li><div class="service-check">✓</div>Continuity of care across your journey</li>
+          <li><div class="service-check">✓</div>HSA & FSA accepted</li>
+        </ul>
+        <br><a class="btn-primary" style="cursor:pointer; display:inline-block;">Book Your Consultation →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="faq-section">
+    <div class="section-tag">Common Questions</div>
+    <h2 class="section-title">What patients ask us most.</h2>
+    <div class="gold-divider"></div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Do I need a referral from my surgeon? <span class="faq-icon">+</span></div>
+      <div class="faq-a">No referral is needed. OpWell operates independently of your surgical team. You can book directly at any time — before you've even chosen a surgeon, or the week before your procedure.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">How far in advance should I book? <span class="faq-icon">+</span></div>
+      <div class="faq-a">Ideally 4–6 weeks before your procedure — this gives us enough time to implement the prehabilitation protocol effectively. However, we can provide meaningful support even 1–2 weeks before surgery.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Is this covered by insurance? <span class="faq-icon">+</span></div>
+      <div class="faq-a">OpWell is a cash-pay service and does not bill insurance directly. <strong>HSA and FSA funds are accepted</strong> — OpWell consultations are an eligible medical expense and we provide itemized documentation for your records.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Can I use my HSA or FSA card to pay? <span class="faq-icon">+</span></div>
+      <div class="faq-a">Yes. OpWell consultations qualify as an eligible medical expense under IRS guidelines, making them payable with HSA (Health Savings Account) or FSA (Flexible Spending Account) funds. We provide itemized receipts and documentation so you can submit to your plan administrator with ease. If you're unsure whether your specific plan covers telehealth consultations, we recommend confirming with your HSA/FSA provider.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">What states is OpWell available in? <span class="faq-icon">+</span></div>
+      <div class="faq-a">OpWell currently provides telehealth consultations in Georgia, Ohio, and Virginia — with more states coming soon.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">My bariatric program already includes pre-op clearances. Why do I need OpWell? <span class="faq-icon">+</span></div>
+      <div class="faq-a">Standard pre-operative clearances check whether you're medically safe to proceed — they don't optimize you for the best possible outcome. OpWell goes beyond clearance: we build your prehabilitation protocol, address your mental health readiness, provide psychological clearance in-house, and stay with you through recovery.</div>
+    </div>
+  </div>
+
+  <section class="final-cta">
+    <h2 class="section-title">You deserve<br>a full support system.</h2>
+    <p class="section-subtitle">No referral required. HSA & FSA accepted. Telehealth available in GA, OH & VA — more states coming soon.</p>
+    <a class="btn-gold" style="cursor:pointer;">Book Your Consultation →</a>
+  </section>
+  <footer>
+    <div><div class="footer-brand">OpWell Concierge<span>™</span></div><p class="footer-tagline">Anesthesiologist-led perioperative care.</p></div>
+    <div><div class="footer-col-title">Navigation</div><ul class="footer-links"><li><a onclick="showPage('home')">← Home</a></li></ul></div>
+    <div><div class="footer-col-title">Book</div><ul class="footer-links"><li><a>Schedule Consultation</a></li></ul></div>
+    <div><div class="footer-col-title">Legal</div><ul class="footer-links"><li><a>Privacy Policy</a></li></ul></div>
+  </footer>
+  <div class="footer-bottom"><span class="footer-legal">© 2026 OluwoleMD & Associates LLC · OpWell Concierge™</span></div>
+</div><!-- end surgery prep -->
+
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- POST-OP RECOVERY PAGE -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div id="page-recovery" class="page">
+  <div class="lp-hero">
+    <div class="lp-hero-bg"></div>
+    <div class="lp-breadcrumb" onclick="showPage('home')">← OpWell Home</div>
+    <h1 class="lp-headline">Surgery ends in the OR.<br><em>Recovery happens at home.</em></h1>
+    <p class="lp-sub">Most surgical patients are discharged with a pamphlet and a follow-up appointment weeks away. OpWell provides anesthesiologist-led support through the critical windows — 72 hours, 2 weeks — when complications arise and questions go unanswered.</p>
+    <a class="btn-primary" style="cursor:pointer;">Book Your Consultation →</a>
+  </div>
+
+  <div class="content-section alt">
+    <div class="content-2col">
+      <div>
+        <div class="section-tag">Why Recovery Deserves More Attention</div>
+        <h2 class="section-title">The discharge pamphlet<br>isn't enough.</h2>
+        <div class="gold-divider"></div>
+        <div class="stat-callout">
+          <div class="stat-callout-num">49%</div>
+          <div class="stat-callout-text">of preventable surgical readmissions are linked to inadequate post-discharge follow-up — the most common factor being patients not knowing who to contact.</div>
+        </div>
+        <p class="body-text" style="margin-top:1.25rem;">The most dangerous period of your surgical recovery isn't in the hospital. It's the 72 hours after you get home — when complications begin to emerge, when pain management becomes a guessing game, and when knowing who to call — and what to say — isn't always clear.</p>
+        <div class="stat-callout">
+          <div class="stat-callout-num">42%</div>
+          <div class="stat-callout-text">of surgical readmissions could be managed in an outpatient setting — if patients had a physician to call.</div>
+        </div>
+        <p class="body-text" style="margin-top:1.25rem;">OpWell is that physician. Available through the windows that matter most, with the clinical expertise to tell you what's normal, what warrants watchful waiting, and what requires a visit to urgent care or the emergency room.</p>
+      </div>
+      <div>
+        <div class="highlight-box">
+          <div class="section-title">What OpWell covers in recovery</div>
+          <div class="gold-divider"></div>
+          <p>Pain management and wound healing guidance. Warning sign education — what's expected vs. what's concerning. Readmission prevention. Medication review and guidance — understanding what you've been prescribed, how to take it safely, and what to watch for. Mental health support for post-operative depression and emotional recovery. All of it delivered by telehealth, on your schedule, by an anesthesiologist who knows your full picture.</p>
+        </div>
+        <div class="risk-callout" style="margin-top:1rem;">
+          <p><strong>Mental health is part of recovery too.</strong> Post-operative depression, body image concerns, and emotional processing of surgery are real — and common. OpWell's licensed mental health specialist is available as part of your recovery support, not a separate referral.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="section-tag">What OpWell Covers</div>
+    <h2 class="section-title">Your recovery deserves the same<br>attention as your surgery.</h2>
+    <div class="gold-divider"></div>
+    <div class="content-2col">
+      <div>
+        <ul class="services-list">
+          <li><div class="service-check">✓</div>72-hour post-discharge telehealth check-in</li>
+          <li><div class="service-check">✓</div>2-week recovery follow-up consultation</li>
+          <li><div class="service-check">✓</div>Async physician messaging throughout recovery</li>
+          <li><div class="service-check">✓</div>Pain management & wound healing guidance</li>
+          <li><div class="service-check">✓</div>Warning sign education — normal vs. concerning</li>
+          <li><div class="service-check">✓</div>Readmission prevention support</li>
+          <li><div class="service-check">✓</div>Medication review and continuation guidance</li>
+          <li><div class="service-check">✓</div>Clear escalation plan — when and where to seek urgent care</li>
+          <li><div class="service-check">✓</div>Mental health specialist access (discounted rate)</li>
+          <li><div class="service-check">✓</div>HSA & FSA accepted</li>
+        </ul>
+      </div>
+      <div>
+        <div class="risk-callout">
+          <p><strong>Post-op depression is more common than most patients expect.</strong> Up to 1 in 3 surgical patients experience mood changes in the weeks following surgery — driven by anesthesia, pain medications, hormonal shifts, and the emotional weight of the procedure itself. At OpWell, your emotional recovery matters as much as your physical one.</p>
+        </div>
+        <div class="risk-callout" style="margin-top:1rem;">
+          <p><strong>Available as standalone or bundled.</strong> Post-Op Recovery is available on its own or as part of the Preparation + Recovery bundle ($850).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="package-section">
+    <div class="section-tag">Investment</div>
+    <h2 class="section-title">Recovery deserves<br>an anesthesiologist.</h2>
+    <p class="section-subtitle">Post-Op Recovery is available as a standalone service or bundled with Surgery Preparation. HSA & FSA accepted.</p>
+    <div class="packages-grid">
+      <div class="package-card featured">
+
+        <div class="package-name">Post-Op Recovery</div>
+        <div class="package-price">$490</div>
+        <div class="package-desc">Anesthesiologist-led post-discharge support covering every critical window of your recovery.</div>
+        <ul class="services-list">
+          <li><div class="service-check">✓</div>72-hour post-discharge telehealth check-in</li>
+          <li><div class="service-check">✓</div>2-week recovery follow-up consultation</li>
+          <li><div class="service-check">✓</div>Async physician messaging throughout recovery</li>
+          <li><div class="service-check">✓</div>Pain management & wound healing guidance</li>
+          <li><div class="service-check">✓</div>Warning sign education</li>
+          <li><div class="service-check">✓</div>Mental health specialist access (discounted rate)</li>
+          <li><div class="service-check">✓</div>HSA & FSA accepted</li>
+        </ul>
+        <br><a class="btn-primary" style="cursor:pointer; display:inline-block;">Book Your Consultation →</a>
+      </div>
+      <div class="package-card">
+        <div class="package-badge" style="background:var(--charcoal);">Complete</div>
+        <div class="package-name">Preparation + Recovery</div>
+        <div class="package-price">$850</div>
+        <div class="package-savings">Save $130 — valued at $980 separately</div>
+        <div class="package-desc">Full perioperative support — comprehensive pre-op preparation plus anesthesiologist-led post-discharge recovery through your most critical windows.</div>
+        <ul class="services-list">
+          <li><div class="service-check">✓</div>Everything in Post-Op Recovery</li>
+          <li><div class="service-check">✓</div>Pre-op consultation & risk assessment</li>
+          <li><div class="service-check">✓</div>Personalized prehab protocol</li>
+          <li><div class="service-check">✓</div>Continuity of care across your journey</li>
+        </ul>
+        <br><a class="btn-secondary" style="cursor:pointer; display:inline-block;">Book Your Consultation →</a>
+      </div>
+    </div>
+  </div>
+
+  <section class="final-cta">
+    <h2 class="section-title">Recovery deserves<br>an anesthesiologist. Not a pamphlet.</h2>
+    <p class="section-subtitle">$490. Everything included. HSA & FSA accepted. No referral required.</p>
+    <a class="btn-gold" style="cursor:pointer;">Book Your Consultation →</a>
+  </section>
+  <footer><div><div class="footer-brand">OpWell Concierge<span>™</span></div><p class="footer-tagline">Anesthesiologist-led perioperative care.</p></div><div><div class="footer-col-title">Navigation</div><ul class="footer-links"><li><a onclick="showPage('home')">← Home</a></li></ul></div><div><div class="footer-col-title">Book</div><ul class="footer-links"><li><a>Schedule Consultation</a></li></ul></div><div><div class="footer-col-title">Legal</div><ul class="footer-links"><li><a>Privacy Policy</a></li></ul></div></footer>
+  <div class="footer-bottom"><span class="footer-legal">© 2026 OluwoleMD & Associates LLC · OpWell Concierge™</span></div>
+</div><!-- end recovery -->
+
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- MENTAL HEALTH PAGE -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div id="page-mental-health" class="page">
+  <div class="lp-hero">
+    <div class="lp-hero-bg"></div>
+    <div class="lp-breadcrumb" onclick="showPage('home')">← OpWell Home</div>
+    <h1 class="lp-headline">Your emotional health is part of<br>your surgical outcome.<br><em>OpWell supports both.</em></h1>
+    <p class="lp-sub">From surgical anxiety before your procedure to emotional recovery after — OpWell's licensed mental health specialist works directly with you as part of your care team. Every session is personalized to your individual needs, informed by your medical and surgical history, and coordinated with Dr. Oluwole so nothing is overlooked.</p>
+    <a class="btn-primary" style="cursor:pointer;">Book Your Consultation →</a>
+  </div>
+
+  <div class="content-section alt">
+    <div class="section-tag">Who This Is For</div>
+    <h2 class="section-title">Every OpWell patient.<br>At any stage.</h2>
+    <div class="gold-divider"></div>
+    <div class="mh-who-grid">
+      <div class="mh-who-card">
+        <div class="mh-who-title">Preparing for Surgery</div>
+        <div class="mh-who-desc">Surgical anxiety, fear of anesthesia, stress about outcomes — addressed before you ever set foot in the OR.</div>
+      </div>
+      <div class="mh-who-card">
+        <div class="mh-who-title">Bariatric Surgery</div>
+        <div class="mh-who-desc">Psychological clearance and diagnostic assessment — required by most bariatric programs, handled in-house with no separate referral.</div>
+      </div>
+      <div class="mh-who-card">
+        <div class="mh-who-title">Expecting or Planning a Baby</div>
+        <div class="mh-who-desc">Perinatal anxiety, fears about labor and anesthesia, emotional preparation for birth — supported by a specialist who understands the labor & delivery context.</div>
+      </div>
+      <div class="mh-who-card">
+        <div class="mh-who-title">Recovering from Surgery</div>
+        <div class="mh-who-desc">Post-operative depression, body image concerns, emotional processing — common after surgery and directly addressed as part of your recovery plan.</div>
+      </div>
+      <div class="mh-who-card">
+        <div class="mh-who-title">Medical Tourism</div>
+        <div class="mh-who-desc">Navigating an international surgical journey alone creates unique anxiety. Mental health support available pre-departure and post-return.</div>
+      </div>
+      <div class="mh-who-card">
+        <div class="mh-who-title">Anyone on a Medical Journey</div>
+        <div class="mh-who-desc">You don't need a specific diagnosis. If you're navigating surgery and your mental health is part of the picture — OpWell is here.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="section-tag">What We Offer</div>
+    <h2 class="section-title">Integrated. In-house.<br>No referral needed.</h2>
+    <div class="gold-divider"></div>
+    <div class="content-2col">
+      <div>
+        <p class="body-text">OpWell's mental health specialist works directly within your OpWell care team — not as a separate provider you have to find, coordinate with, and re-explain your situation to. They have your full picture from day one.</p>
+        <p class="body-text">Mental health support is available as a standalone service or integrated into any OpWell program — Surgery Preparation, Post-Op Recovery, Labor & Delivery Prep, or Medical Tourism.</p>
+        <ul class="services-list">
+          <li><div class="service-check">✓</div>Surgical anxiety assessment and support</li>
+          <li><div class="service-check">✓</div>Psychological clearance for bariatric surgery</li>
+          <li><div class="service-check">✓</div>Diagnostic assessment</li>
+          <li><div class="service-check">✓</div>Perinatal mental health support</li>
+          <li><div class="service-check">✓</div>Post-operative depression screening and support</li>
+          <li><div class="service-check">✓</div>Body image and recovery emotional support</li>
+          <li><div class="service-check">✓</div>Ongoing mental health support</li>
+          <li><div class="service-check">✓</div>Crisis support referral when needed</li>
+        </ul>
+      </div>
+      <div>
+        <div class="risk-callout">
+          <p><strong>Psychological clearance for bariatric surgery — in-house.</strong> Most bariatric programs require a formal psychological clearance letter before approving surgery. Our licensed mental health specialist conducts the full diagnostic assessment and provides that letter — no external referral, no delay, no coordination burden on you.</p>
+        </div>
+        <div class="risk-callout" style="margin-top:1rem;">
+          <p><strong>Up to 80% of surgical patients experience significant anxiety</strong> before their procedure — yet almost none are proactively asked about it. OpWell asks. And OpWell addresses it.</p>
+        </div>
+        <div class="risk-callout" style="margin-top:1rem;">
+          <p><strong>Mental readiness affects physical outcomes.</strong> How you show up mentally affects how you heal. Anxiety elevates cortisol, impairs immune function, and disrupts sleep — all of which slow recovery. Addressing it before surgery isn't optional; it's clinical.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="package-section">
+    <div class="section-tag">Investment</div>
+    <h2 class="section-title">Mental health support,<br>built into your care.</h2>
+    <div class="mh-personalized-callout">
+      <div class="mh-personalized-icon">✦</div>
+      <div>
+        <strong>Every session is personalized — not generic.</strong> Stacey reviews your medical and surgical history before your session so she can meet you exactly where you are. Your diagnosis, your procedure, your recovery timeline, your concerns — all of it shapes the conversation. You'll never have to start from scratch or re-explain your situation.
+      </div>
+    </div>
+    <p class="section-subtitle">Available as a standalone session, bundled with any OpWell program, or as a 3-session package spanning your full perioperative journey. HSA & FSA accepted. No referral required.</p>
+    <div class="packages-grid">
+      <div class="package-card">
+        <div class="package-name">Single Session</div>
+        <div class="package-price">$250</div>
+        <div class="package-desc">A standalone 50-minute session with Stacey — fully personalized to your needs and informed by your medical and surgical history. For psychological clearance, surgical anxiety, diagnostic assessment, or perinatal mental health.</div>
+        <ul class="services-list">
+          <li><div class="service-check">✓</div>50-minute session tailored to your specific concerns</li>
+          <li><div class="service-check">✓</div>Surgical anxiety — addressed at your level, on your terms</li>
+          <li><div class="service-check">✓</div>Psychological clearance for bariatric surgery</li>
+          <li><div class="service-check">✓</div>Diagnostic assessment informed by your medical history</li>
+          <li><div class="service-check">✓</div>Perinatal mental health — personalized to your birth plan and concerns</li>
+          <li><div class="service-check">✓</div>Post-operative depression screening & emotional recovery support</li>
+          <li><div class="service-check">✓</div>Body image concerns addressed within your surgical context</li>
+          <li><div class="service-check">✓</div>HSA & FSA accepted</li>
+        </ul>
+        <br><a class="btn-secondary" style="cursor:pointer; display:inline-block;">Book Your Session →</a>
+      </div>
+      <div class="package-card">
+        <div class="package-badge">Best Value</div>
+        <div class="package-name">Bundled with Any Program</div>
+        <div class="package-price">$215</div>
+        <div class="package-savings">Save $35 vs. standalone</div>
+        <div class="package-desc">Add a personalized mental health session to any OpWell program at a discounted rate. Stacey works directly with your medical and surgical history — seamlessly integrated into your care, no separate coordination needed.</div>
+        <ul class="services-list">
+          <li><div class="service-check">✓</div>Save $35 vs. standalone</li>
+          <li><div class="service-check">✓</div>Part of your OpWell care team</li>
+          <li><div class="service-check">✓</div>Coordinated with Dr. Oluwole</li>
+          <li><div class="service-check">✓</div>No separate referral or scheduling</li>
+          <li><div class="service-check">✓</div>HSA & FSA accepted</li>
+        </ul>
+        <br><a class="btn-secondary" style="cursor:pointer; display:inline-block;">Add to My Program →</a>
+      </div>
+      <div class="package-card featured">
+        <div class="package-badge" style="background:var(--charcoal);">Complete Support</div>
+        <div class="package-name">3-Session Package</div>
+        <div class="package-price">$600</div>
+        <div class="package-savings">Save $150 vs. individual sessions</div>
+        <div class="package-desc">Three dedicated sessions with Stacey — each personalized to where you are in your surgical journey and informed by your complete medical and surgical history. Use them before surgery, around the time of your procedure, and during recovery, for consistent, informed mental health support from someone who knows your full picture.</div>
+        <ul class="services-list">
+          <li><div class="service-check">✓</div>3 × 50-minute sessions</li>
+          <li><div class="service-check">✓</div>Flexible — use before and/or after surgery</li>
+          <li><div class="service-check">✓</div>Continuity of care with same provider</li>
+          <li><div class="service-check">✓</div>Coordinated with your medical care plan</li>
+          <li><div class="service-check">✓</div>HSA & FSA accepted</li>
+        </ul>
+        <br><a class="btn-primary" style="cursor:pointer; display:inline-block;">Book Your Package →</a>
+      </div>
+    </div>
+  </div>
+
+  <section class="final-cta">
+    <h2 class="section-title">Your mental health<br>is part of your surgical journey.</h2>
+    <p class="section-subtitle">No referral required. HSA & FSA accepted. Telehealth available in GA, OH & VA.</p>
+    <a class="btn-gold" style="cursor:pointer;">Book Your Consultation →</a>
+  </section>
+  <footer><div><div class="footer-brand">OpWell Concierge<span>™</span></div><p class="footer-tagline">Anesthesiologist-led perioperative care.</p></div><div><div class="footer-col-title">Navigation</div><ul class="footer-links"><li><a onclick="showPage('home')">← Home</a></li></ul></div><div><div class="footer-col-title">Book</div><ul class="footer-links"><li><a>Schedule Consultation</a></li></ul></div><div><div class="footer-col-title">Legal</div><ul class="footer-links"><li><a>Privacy Policy</a></li></ul></div></footer>
+  <div class="footer-bottom"><span class="footer-legal">© 2026 OluwoleMD & Associates LLC · OpWell Concierge™</span></div>
+</div><!-- end mental health -->
+
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- OBSTETRIC PAGE -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div id="page-obstetric" class="page">
+  <div class="lp-hero" style="background: linear-gradient(160deg, var(--warm-white) 60%, rgba(212,168,154,0.08) 100%);">
+    <div class="lp-hero-bg"></div>
+    <div class="lp-breadcrumb" onclick="showPage('home')">← OpWell Home</div>
+    <h1 class="lp-headline">You'll meet an anesthesiologist<br>for the first time <em>during active labor.</em><br>It doesn't have to be that way.</h1>
+    <p class="lp-sub">For most pregnant women, the epidural or C-section is the most anxiety-producing part of childbirth — and the anesthesiologist is a complete stranger who arrives when everything is already overwhelming. OpWell changes this entirely — whether you're planning a pregnancy, currently expecting, or postpartum.</p>
+    <a class="btn-primary" style="cursor:pointer;">Book Your Consultation →</a>
+  </div>
+
+  <div class="content-section alt">
+    <div class="content-2col">
+      <div>
+        <div class="section-tag">Who This Is For</div>
+        <h2 class="section-title">Planning, expecting,<br>or postpartum.</h2>
+        <div class="gold-divider"></div>
+        <p class="body-text">OpWell's Labor & Delivery Prep Anesthesia consultation is designed for women at any stage of their pregnancy journey — not just those actively in labor.</p>
+        <div class="conditions-wrap" style="margin-top:1rem;">
+          <span class="condition-tag">Planning a pregnancy</span>
+          <span class="condition-tag">Currently pregnant</span>
+          <span class="condition-tag">High-risk pregnancy</span>
+          <span class="condition-tag">VBAC planning</span>
+          <span class="condition-tag">Postpartum questions</span>
+          <span class="condition-tag">Subsequent pregnancy</span>
+        </div>
+        <p class="body-text" style="margin-top:1.5rem;">Research consistently shows that up to 80% of expectant mothers experience significant anxiety about labor anesthesia — epidurals, spinals, and C-sections. Most have never had a real conversation with an anesthesiologist about their specific concerns, history, or options before the day of delivery.</p>
+        <p class="body-text">OpWell's Labor & Delivery Prep consultation gives you that conversation — on your schedule, before labor begins, with a board-certified anesthesiologist who has time to answer every question.</p>
+      </div>
+      <div>
+        <div class="highlight-box">
+          <div class="section-title">What most patients don't know about labor & delivery prep</div>
+          <div class="gold-divider"></div>
+          <p>Your anesthesia risk profile changes significantly during pregnancy — blood volume, airway anatomy, aspiration risk, and medication responses all shift. Certain medical conditions, spine histories, and medication regimens require specific planning. OpWell identifies these factors ahead of time, so nothing is a surprise on delivery day.</p>
+        </div>
+        <div class="risk-callout" style="margin-top:1rem;">
+          <p><strong>Perinatal mental health is part of your care.</strong> Anxiety about labor and anesthesia is real and common — and for many mothers, the emotional challenges don't end at delivery. Postpartum depression and emotional recovery after childbirth are equally important. OpWell's licensed mental health specialist, Stacey J. Floyd, MA, LPC, is available before delivery and into the postpartum period to provide dedicated support every step of the way.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="package-section">
+    <div class="section-tag">Investment</div>
+    <h2 class="section-title">Know your options before<br>labor begins.</h2>
+    <div class="ob-cards">
+      <div class="package-card" style="background:var(--ivory); border:2px solid var(--gold); box-shadow: 0 8px 32px rgba(200,132,90,0.12);">
+        <div class="package-badge">First Visit</div>
+        <div class="package-name">Labor & Delivery Prep</div>
+        <div class="package-price">$400</div>
+        <div class="package-desc">A comprehensive first-time prenatal anesthesia consultation — complete obstetric risk profile, birth plan review, all questions answered, and mental health specialist access when needed.</div>
+        <ul class="services-list">
+          <li><div class="service-check">✓</div>50-minute dedicated consultation</li>
+          <li><div class="service-check">✓</div>Complete labor & delivery prep risk review</li>
+          <li><div class="service-check">✓</div>Epidural, spinal & C-section education</li>
+          <li><div class="service-check">✓</div>Birth plan review & anesthesiologist input</li>
+          <li><div class="service-check">✓</div>Perinatal anxiety screening + specialist access</li>
+          <li><div class="service-check">✓</div>Postpartum anesthesiologist follow-up available</li>
+        </ul>
+        <br><a class="btn-primary" style="cursor:pointer; display:inline-block;">Book Your Consultation →</a>
+      </div>
+      <div class="package-card">
+        <div class="package-badge" style="background:var(--sage);">Returning Patient</div>
+        <div class="package-name">Follow-Up Consultation</div>
+        <div class="package-price">$250</div>
+        <div class="package-desc">For returning OpWell expectant mothers — a focused follow-up for a subsequent pregnancy or postpartum anesthesia questions.</div>
+        <ul class="services-list">
+          <li><div class="service-check">✓</div>50-minute focused consultation</li>
+          <li><div class="service-check">✓</div>Updated risk profile review</li>
+          <li><div class="service-check">✓</div>Birth plan updates & new questions</li>
+          <li><div class="service-check">✓</div>Mental health specialist access (discounted rate)</li>
+        </ul>
+        <br><a class="btn-secondary" style="cursor:pointer; display:inline-block;">Book Your Consultation →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="faq-section">
+    <div class="section-tag">Questions</div>
+    <h2 class="section-title">What expectant mothers ask us.</h2>
+    <div class="gold-divider"></div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">When should I book my Labor & Delivery Prep consultation? <span class="faq-icon">+</span></div>
+      <div class="faq-a">Anytime during pregnancy — though earlier is better. Many patients book in the second trimester, which gives time to address any concerns, adjust medications if needed, and arrive at delivery prepared and confident. We can also accommodate consultations in the third trimester.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">I had a bad experience with an epidural before. Is this relevant? <span class="faq-icon">+</span></div>
+      <div class="faq-a">Absolutely — this is exactly the kind of history OpWell is designed to address. Previous difficult placements, patchy epidurals, or post-dural puncture headaches all have clinical context that should be reviewed and planned for before your next delivery. Your OpWell consultation will document this history and provide guidance for your care team.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">I'm planning a natural birth. Why would I need an anesthesia consultation? <span class="faq-icon">+</span></div>
+      <div class="faq-a">Even patients planning unmedicated births benefit from understanding their anesthesia options — because labor doesn't always go as planned. Knowing your risk profile, your options, and your preferences in advance means that if circumstances change, you and your care team are already prepared. OpWell also addresses the full obstetric risk picture beyond epidurals alone.</div>
+    </div>
+  </div>
+
+  <section class="final-cta">
+    <h2 class="section-title">Know before labor begins.<br>Not during it.</h2>
+    <p class="section-subtitle">No referral required. HSA & FSA accepted. Telehealth available in GA, OH & VA — more states coming soon.</p>
+    <a class="btn-gold" style="cursor:pointer;">Book Your Consultation →</a>
+  </section>
+  <footer><div><div class="footer-brand">OpWell Concierge<span>™</span></div><p class="footer-tagline">Anesthesiologist-led perioperative care.</p></div><div><div class="footer-col-title">Navigation</div><ul class="footer-links"><li><a onclick="showPage('home')">← Home</a></li></ul></div><div><div class="footer-col-title">Book</div><ul class="footer-links"><li><a>Schedule Consultation</a></li></ul></div><div><div class="footer-col-title">Legal</div><ul class="footer-links"><li><a>Privacy Policy</a></li></ul></div></footer>
+  <div class="footer-bottom"><span class="footer-legal">© 2026 OluwoleMD & Associates LLC · OpWell Concierge™</span></div>
+</div><!-- end obstetric -->
+
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- MEDICAL TOURISM PAGE -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div id="page-medical-tourism" class="page">
+  <div class="lp-hero">
+    <div class="lp-hero-bg"></div>
+    <div class="lp-breadcrumb" onclick="showPage('home')">← OpWell Home</div>
+    <h1 class="lp-headline">Planning surgery abroad.<br>Already scheduled.<br><em>Or just returned home.</em><br>OpWell is with you at every stage.</h1>
+    <p class="lp-sub">Whether you're preparing for an international procedure or recovering from one, OpWell provides the anesthesiologist-led medical support that international surgery rarely includes — before you travel, and when you return home.</p>
+    <a class="btn-primary" style="cursor:pointer;">Book Your Consultation →</a>
+  </div>
+
+  <div class="content-section alt">
+    <div class="content-2col">
+      <div>
+        <div class="section-tag">Who OpWell Serves</div>
+        <h2 class="section-title">Here to support you before and after<br>your international surgery.</h2>
+        <div class="gold-divider"></div>
+        <p class="body-text">Thousands of Americans travel abroad every year for procedures like cosmetic surgery, weight loss surgery, and orthopedic procedures — and for good reason. The surgical quality is often excellent, and the cost is a fraction of what you'd pay in the US.</p>
+        <p class="body-text">What most patients don't have is a doctor on their side before they leave — and a doctor they can call when they get home. That's the gap OpWell fills, wherever you are in your journey.</p>
+        <div class="conditions-wrap" style="margin-top:1.5rem;">
+          <span class="condition-tag">Still planning your procedure</span>
+          <span class="condition-tag">Surgery already scheduled</span>
+          <span class="condition-tag">Recently returned home</span>
+        </div>
+      </div>
+      <div>
+        <div class="highlight-box">
+          <div class="section-title">The risk most patients don't know about</div>
+          <div class="gold-divider"></div>
+          <p>Flying home after surgery is more risky than most people realize. Surgery temporarily makes your blood more prone to clotting — and so does sitting on a long flight. Together, they significantly raise your risk of a dangerous blood clot in your leg or lungs. OpWell makes sure you have the right plan in place before you board that flight home.</p>
+        </div>
+        <div style="margin-top:1rem;" class="risk-callout">
+          <p><strong>Get your paperwork before you leave.</strong> When you return home, your US doctors will need your surgical notes, records, and details about what was done. Most patients don't think to ask for this until it's too late. OpWell helps you know exactly what to request — and how to use it when you're home.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="section-tag">The OpWell Medical Tourism Program</div>
+    <h2 class="section-title">Your medical support,<br>before and after.</h2>
+    <div class="gold-divider"></div>
+    <div class="content-2col">
+      <div>
+        <p class="body-text"><strong style="color:var(--charcoal);">If you're preparing for surgery abroad</strong> — OpWell sits down with you before you travel. We review your full health history, make sure your body is ready for surgery, check that all your medications are safe around the time of your procedure, and assess your personal risk for complications like blood clots.</p>
+        <div class="stat-callout">
+          <div class="stat-callout-num">1 in 3</div>
+          <div class="stat-callout-text">cosmetic surgery patients have unexpected bloodwork results that change their care plan — even patients who feel completely healthy.</div>
+        </div>
+        <p class="body-text" style="margin-top:1.25rem;">We put together a clear summary you can bring to your international surgical team — so they have your full picture from day one. And we set up your post-return care plan before you ever leave home, so there's no scrambling when you land.</p>
+        <p class="body-text" style="margin-top:1rem;"><strong style="color:var(--charcoal);">If you've already come home</strong> — OpWell reviews what was done, checks how your recovery is going, and gives you a straightforward plan: what's normal, what to watch for, and exactly when to see a US doctor.</p>
+        <div class="stat-callout">
+          <div class="stat-callout-num">5 days</div>
+          <div class="stat-callout-text">Patients who flew home within 5 days of surgery had dramatically higher rates of emergency hospital care when complications arose. Having a physician available changes that outcome.</div>
+        </div>
+      </div>
+      <div>
+        <div class="risk-callout">
+          <p><strong>Blood clot risk is real — and preventable.</strong> We assess your personal clot risk and make sure you have the right prevention plan before you travel. This is especially important for longer flights after cosmetic or abdominal surgery.</p>
+        </div>
+        <div class="risk-callout" style="margin-top:1rem;">
+          <p><strong>Your medications matter more than you think.</strong> Blood thinners, birth control, diabetes medications, and weight loss injections like Ozempic all need to be managed carefully around surgery. OpWell reviews everything you take and creates a clear plan — what to stop, when, and when to restart.</p>
+        </div>
+        <div class="risk-callout" style="margin-top:1rem;">
+          <p><strong>Coming home early raises your risk.</strong> Flying home within 5 days of surgery significantly increases your chances of a serious complication. Knowing the warning signs — and having a physician to contact — can prevent an ER visit or worse.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-section alt">
+    <div class="section-tag">What OpWell Covers</div>
+    <h2 class="section-title">Everything your international<br>surgical journey needs.</h2>
+    <div class="gold-divider"></div>
+    <div class="content-2col">
+      <div>
+        <ul class="services-list">
+          <li><div class="service-check">✓</div>Full health review to make sure you're ready for surgery</li>
+          <li><div class="service-check">✓</div>Blood clot risk assessment with prevention plan for your trip home</li>
+          <li><div class="service-check">✓</div>Complete medication review — what to stop, when, and when to restart</li>
+          <li><div class="service-check">✓</div>Pre-surgery preparation plan to get your body in its best condition</li>
+          <li><div class="service-check">✓</div>Summary document to share with your international surgical team</li>
+          <li><div class="service-check">✓</div>Review of your surgical records when you return home</li>
+          <li><div class="service-check">✓</div>Wound and healing guidance — what normal looks like</li>
+          <li><div class="service-check">✓</div>Clear plan for when to seek US medical care</li>
+          <li><div class="service-check">✓</div>72-hour and 2-week check-ins after you return home</li>
+          <li><div class="service-check">✓</div>Messaging access to your anesthesiologist through recovery</li>
+          <li><div class="service-check">✓</div>Mental health specialist access (discounted rate)</li>
+        </ul>
+      </div>
+      <div>
+        <div class="section-tag">Popular Destinations</div>
+        <div class="conditions-wrap">
+          <span class="condition-tag">Colombia</span>
+          <span class="condition-tag">Mexico</span>
+          <span class="condition-tag">Turkey</span>
+          <span class="condition-tag">Thailand</span>
+          <span class="condition-tag">Costa Rica</span>
+          <span class="condition-tag">Dominican Republic</span>
+          <span class="condition-tag">Brazil</span>
+          <span class="condition-tag">South Korea</span>
+        </div>
+        <div style="margin-top:1.5rem;">
+          <div class="section-tag">Common Procedures</div>
+          <div class="conditions-wrap">
+            <span class="condition-tag">BBL</span>
+            <span class="condition-tag">Bariatric Surgery</span>
+            <span class="condition-tag">Mommy Makeover</span>
+            <span class="condition-tag">Dental Work</span>
+            <span class="condition-tag">Orthopedic Surgery</span>
+            <span class="condition-tag">Hair Transplant</span>
+            <span class="condition-tag">Rhinoplasty</span>
+            <span class="condition-tag">Facelift</span>
+            <span class="condition-tag">Liposuction</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="package-section">
+    <div class="section-tag">Investment</div>
+    <h2 class="section-title">Before you travel, after you return,<br>or both.</h2>
+    <p class="section-subtitle">Surgery Preparation and Post-Op Recovery are available as standalone services. Bundle both together with Preparation + Recovery and save. HSA & FSA accepted.</p>
+    <div class="packages-grid">
+      <div class="package-card">
+        <div class="package-name">Surgery Preparation</div>
+        <div class="package-price">$490</div>
+        <div class="package-desc">For patients planning or scheduled for surgery abroad — full pre-departure anesthesia consultation, prehabilitation protocol, medication review, and documentation for your international surgical team.</div>
+        <ul class="services-list">
+          <li><div class="service-check">✓</div>50-minute pre-op consultation</li>
+          <li><div class="service-check">✓</div>Anesthesia & blood clot risk assessment</li>
+          <li><div class="service-check">✓</div>Medication review including GLP-1 protocols</li>
+          <li><div class="service-check">✓</div>Documentation for your international surgical team</li>
+          <li><div class="service-check">✓</div>Post-return care plan established before you leave</li>
+        </ul>
+        <br><a class="btn-secondary" style="cursor:pointer; display:inline-block;">Book Your Consultation →</a>
+      </div>
+      <div class="package-card">
+        <div class="package-name">Post-Op Recovery</div>
+        <div class="package-price">$490</div>
+        <div class="package-desc">For patients who have returned home — surgical record review, complication screening, domestic follow-up plan, and ongoing telehealth support through recovery.</div>
+        <ul class="services-list">
+          <li><div class="service-check">✓</div>Surgical record review & procedure assessment</li>
+          <li><div class="service-check">✓</div>Complication screening & wound healing guidance</li>
+          <li><div class="service-check">✓</div>72-hour and 2-week check-ins</li>
+          <li><div class="service-check">✓</div>Clear escalation plan — when to seek US care</li>
+          <li><div class="service-check">✓</div>Mental health specialist access (discounted rate)</li>
+        </ul>
+        <br><a class="btn-secondary" style="cursor:pointer; display:inline-block;">Book Your Consultation →</a>
+      </div>
+      <div class="package-card featured">
+        <div class="package-badge">Best Value</div>
+        <div class="package-name">Preparation + Recovery</div>
+        <div class="package-price">$850</div>
+        <div class="package-desc">Complete medical tourism support — full pre-departure preparation before you travel and anesthesiologist-led follow-up when you return home.</div>
+        <ul class="services-list">
+          <li><div class="service-check">✓</div>Everything in Surgery Preparation</li>
+          <li><div class="service-check">✓</div>Everything in Post-Op Recovery</li>
+          <li><div class="service-check">✓</div>Continuity of care across your full journey</li>
+        </ul>
+        <br><a class="btn-primary" style="cursor:pointer; display:inline-block;">Book Your Consultation →</a>
+      </div>
+    </div>
+  </div>
+
+  <section class="final-cta">
+    <h2 class="section-title">Wherever you are in your journey —<br>OpWell is your medical home.</h2>
+    <p class="section-subtitle">No referral required. HSA & FSA accepted. Telehealth available in GA, OH & VA — more states coming soon.</p>
+    <a class="btn-gold" style="cursor:pointer;">Book Your Consultation →</a>
+  </section>
+  <footer><div><div class="footer-brand">OpWell Concierge<span>™</span></div><p class="footer-tagline">Anesthesiologist-led perioperative care.</p></div><div><div class="footer-col-title">Navigation</div><ul class="footer-links"><li><a onclick="showPage('home')">← Home</a></li></ul></div><div><div class="footer-col-title">Book</div><ul class="footer-links"><li><a>Schedule Consultation</a></li></ul></div><div><div class="footer-col-title">Legal</div><ul class="footer-links"><li><a>Privacy Policy</a></li></ul></div></footer>
+  <div class="footer-bottom"><span class="footer-legal">© 2026 OluwoleMD & Associates LLC · OpWell Concierge™</span></div>
+</div><!-- end medical tourism -->
+
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- PRODUCTS PAGE -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div id="page-products" class="page">
+  <div class="lp-hero">
+    <div class="lp-hero-bg"></div>
+    <div class="lp-breadcrumb" onclick="showPage('home')">← OpWell Home</div>
+    <h1 class="lp-headline">Recovery tools<br><em>Dr. Oluwole actually recommends.</em></h1>
+    <p class="lp-sub">Every product on this page has been reviewed and recommended by Dr. Oluwole based on clinical evidence and patient outcomes — not paid placement. These are the tools that support real surgical recovery.</p>
+  </div>
+
+  <div class="content-section alt">
+    <div class="section-tag">Shop by Category</div>
+    <h2 class="section-title">Recovery products,<br>organized by what you need.</h2>
+    <div class="gold-divider"></div>
+    <div class="products-grid">
+      <div class="product-category">
+        <div class="product-cat-icon">🩹</div>
+        <div class="product-cat-title">Post-Surgery Comfort & Support</div>
+        <div class="product-cat-desc">Compression garments, positioning pillows, recovery aids for the first days after surgery.</div>
+      </div>
+      <div class="product-category">
+        <div class="product-cat-icon">💊</div>
+        <div class="product-cat-title">Nutrition & Supplements</div>
+        <div class="product-cat-desc">Protein supplementation, wound-healing nutrients, micronutrient support for bariatric patients.</div>
+      </div>
+      <div class="product-category">
+        <div class="product-cat-icon">🩺</div>
+        <div class="product-cat-title">Wound Care & Healing</div>
+        <div class="product-cat-desc">Scar treatment, wound care essentials, healing support for surgical incisions.</div>
+      </div>
+      <div class="product-category">
+        <div class="product-cat-icon">🚶</div>
+        <div class="product-cat-title">Mobility & Compression</div>
+        <div class="product-cat-desc">Compression socks for blood clot prevention, mobility aids, early ambulation support.</div>
+      </div>
+      <div class="product-category">
+        <div class="product-cat-icon">🧘</div>
+        <div class="product-cat-title">Mental Wellness & Sleep</div>
+        <div class="product-cat-desc">Sleep support, anxiety management tools, and relaxation aids for the recovery period.</div>
+      </div>
+      <div class="product-category">
+        <div class="product-cat-icon">⚖️</div>
+        <div class="product-cat-title">Bariatric Recovery</div>
+        <div class="product-cat-desc">Specific nutritional support, supplement protocols, and recovery tools for bariatric patients.</div>
+      </div>
+      <div class="product-category">
+        <div class="product-cat-icon">🤱</div>
+        <div class="product-cat-title">Postpartum Recovery</div>
+        <div class="product-cat-desc">Support products for recovery after C-section or vaginal delivery.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="section-tag">Coming Soon</div>
+    <h2 class="section-title">OpWell Recovery Kits™</h2>
+    <div class="gold-divider"></div>
+    <p class="body-text" style="max-width:600px;">Curated recovery bundles — everything you need for the first two weeks after surgery, organized by procedure type. Cosmetic recovery kit. Bariatric recovery kit. OB recovery kit. Designed by Dr. Oluwole, delivered to your door.</p>
+    <br>
+    <a class="btn-secondary" style="cursor:pointer; display:inline-block;">Join the Waitlist →</a>
+  </div>
+
+  <div class="content-section alt" style="font-size:0.78rem; color:var(--slate); padding: 2rem 3rem;">
+    <p><strong>Affiliate Disclosure:</strong> Some links on this page are affiliate links. OpWell may earn a small commission when you purchase through these links at no additional cost to you. All products are independently selected and clinically reviewed by Dr. Oluwole. OpWell does not accept payment for product placement.</p>
+  </div>
+
+  <footer><div><div class="footer-brand">OpWell Concierge<span>™</span></div><p class="footer-tagline">Anesthesiologist-led perioperative care.</p></div><div><div class="footer-col-title">Navigation</div><ul class="footer-links"><li><a onclick="showPage('home')">← Home</a></li></ul></div><div><div class="footer-col-title">Programs</div><ul class="footer-links"><li><a onclick="showPage('surgery-prep')">Surgery Preparation</a></li><li><a onclick="showPage('recovery')">Post-Op Recovery</a></li></ul></div><div><div class="footer-col-title">Legal</div><ul class="footer-links"><li><a>Privacy Policy</a></li><li><a>Affiliate Disclosure</a></li></ul></div></footer>
+  <div class="footer-bottom"><span class="footer-legal">© 2026 OluwoleMD & Associates LLC · OpWell Concierge™</span></div>
+</div><!-- end products -->
+
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- ABOUT PAGE -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div id="page-about" class="page">
+  <div class="lp-hero" style="min-height:50vh;">
+    <div class="lp-hero-bg"></div>
+    <div class="lp-breadcrumb" onclick="showPage('home')">← OpWell Home</div>
+    <h1 class="lp-headline">Meet Your Team</h1>
+    <p class="lp-sub">The clinicians behind your perioperative journey.</p>
+  </div>
+
+  <section class="about-preview" style="align-items:start;">
+    <div class="about-image"><span>Photo — Dr. Oluwole</span></div>
+    <div>
+      <div class="team-name">Ornella Oluwole, MD, D.ABA</div>
+      <div class="team-role">Founder & Board-Certified Anesthesiologist</div>
+      <div class="gold-divider"></div>
+      <div class="about-quote">"Every surgical patient deserves a board-certified anesthesiologist in their corner — not just on surgery day, but throughout their entire perioperative journey."</div>
+      <p class="about-body">Ornella Oluwole, MD, D.ABA is a board-certified anesthesiologist and the founder of OpWell Concierge™, with experience caring for patients from infancy through old age across Level 1 trauma centers, academic medical centers, rural hospitals, and ambulatory surgery centers.</p>
+      <p class="about-body">Her path to medicine began in the classroom — teaching Anatomy & Physiology to high school students and discovering early a genuine passion for making the complex understandable. That instinct followed her into medical school, where she simultaneously spent three years as an Anesthesia Technician at Augusta University Health, learning the perioperative world from the inside out. As a senior medical student she received the Zachariah W. Gramling Award for exceptional promise in anesthesiology, and during residency at MUSC was nominated for the Golden Apple Award for excellence in teaching.</p>
+      <p class="about-body">At the bedside, a pattern became impossible to ignore: patients would arrive on surgery day anxious, uncertain, and unclear about what their body was about to face — not because they hadn't tried, but because no one had taken the time to explain it. Instructions had been given, but without context. Medications had been listed, but without explanation. And when patients don't understand the why behind what they're being asked to do, preparation suffers — and so do outcomes. That is the gap OpWell was created to fill.</p>
+      <p class="about-body">Through <strong>Surgery Preparation</strong>, <strong>Post-Operative Recovery</strong>, <strong>Bariatric Optimization</strong>, and <strong>Labor & Delivery Preparation</strong>, Dr. Oluwole works with patients one-on-one in the weeks that matter most — before and after surgery, not just on the day of. An integrated <strong>Mental Wellness</strong> offering connects patients with a licensed specialist for surgical anxiety, psychological clearance, or perinatal support, coordinated directly alongside their medical care.</p>
+      <p class="about-body">The evidence is clear: patients who understand what is happening to their body — and why — have shorter hospital stays, less postoperative pain, lower anxiety, and better outcomes. A 2025 meta-analysis of 40 randomized controlled trials found that preoperative education improved outcomes across every surgical specialty studied. OpWell was built on that evidence — and every consultation reflects it.</p>
+
+      <div class="section-tag" style="margin-top:2.5rem;">Education & Credentials</div>
+      <ul class="creds-list" style="margin-top:1rem;">
+        <li>MD — Medical College of Georgia at Augusta University</li>
+        <li>Residency — Anesthesiology, Medical University of South Carolina</li>
+        <li>Board Certified — American Board of Anesthesiology (D.ABA)</li>
+        <li>Licensed in Georgia, Ohio & Virginia</li>
+        <li>Member — American Society of Anesthesiologists (ASA)</li>
+        <li>Member — Society for Perioperative Assessment and Quality Improvement (SPAQI)</li>
+      </ul>
+
+      <br>
+      <a class="btn-gold" onclick="showPage('home')" style="cursor:pointer;">Book Your Consultation →</a>
+    </div>
+  </section>
+
+  <!-- EVIDENCE STATS BLOCK -->
+  <section class="evidence-section">
+    <div class="section-tag">The Evidence</div>
+    <h2 class="section-title">Preparation changes outcomes.<br>The research is unambiguous.</h2>
+    <div class="gold-divider"></div>
+    <div class="evidence-grid">
+      <div class="evidence-card">
+        <div class="evidence-stat">4,113</div>
+        <div class="evidence-label">patients across 40 randomized controlled trials</div>
+        <p class="evidence-desc">Preoperative education was associated with improvements in postoperative pain, anxiety, length of stay, analgesic use, quality of life, and patient satisfaction — across every surgical specialty studied.</p>
+        <div class="evidence-source">2025 Systematic Review & Meta-Analysis</div>
+      </div>
+      <div class="evidence-card">
+        <div class="evidence-stat">↑ complications</div>
+        <div class="evidence-label">when patients receive less information than expected</div>
+        <p class="evidence-desc">Patients who understood the rationale behind their instructions had significantly better pain control, lower anxiety, and higher satisfaction — across orthopedic, general, and urological surgery.</p>
+        <div class="evidence-source">Prospective Study, 258 Surgical Patients</div>
+      </div>
+      <div class="evidence-card">
+        <div class="evidence-stat">Better outcomes</div>
+        <div class="evidence-label">across every domain with shared decision-making</div>
+        <p class="evidence-desc">Patients who experienced optimal shared decision-making reported significantly better outcomes across all domains — with the strongest effects on mental health and pain. Understanding what is happening to your body changes how your body responds to it.</p>
+        <div class="evidence-source">Patient-Reported Outcomes Research</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="content-section alt">
+    <div class="content-2col" style="align-items:start;">
+      <div>
+        <div class="team-name">Stacey J. Floyd, MA, LPC</div>
+        <div class="team-role">Licensed Professional Counselor</div>
+        <div class="gold-divider"></div>
+        <p class="body-text">Stacey J. Floyd, MA, LPC is a licensed professional counselor with 25 years of experience supporting individuals through complex life challenges. She brings deep clinical expertise to OpWell Concierge™ — providing comprehensive mental health support for surgical patients and expectant mothers navigating the emotional and psychological dimensions of their healthcare journey.</p>
+        <p class="body-text">At OpWell, Stacey provides specialized psychological assessments and bariatric surgery clearances, anxiety management for all surgical patients, and dedicated perinatal mental health support for expectant mothers facing uncertainty about labor, delivery, and anesthesia. She also supports mothers through postpartum depression and emotional recovery after childbirth — a critical and often overlooked part of the maternal care journey. Her approach is warm, affirming, and culturally responsive — creating a space where each patient's individual strengths are honored and their path to emotional resilience is supported.</p>
+        <p class="body-text">Drawing from a broad range of evidence-based modalities including CBT, DBT, EMDR, ACT, and Trauma-Focused Therapy, Stacey works in close coordination with Dr. Oluwole to ensure mental health is treated not as a separate concern — but as an integral part of every patient's perioperative plan.</p>
+
+        <div class="section-tag" style="margin-top:2rem;">Education & Credentials</div>
+        <ul class="creds-list" style="margin-top:1rem;">
+          <li>MA — Counseling</li>
+          <li>BA — Behavioral Science</li>
+          <li>Licensed Professional Counselor (LPC) — South Carolina & Georgia</li>
+          <li>25 Years Clinical Experience</li>
+          <li>Modalities — CBT, DBT, EMDR, ACT, Trauma-Focused Therapy, Mindfulness, Motivational Interviewing</li>
+        </ul>
+      </div>
+      <div class="specialist-image"><span>Photo — Stacey J. Floyd</span></div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="section-tag">Philosophy of Care</div>
+    <h2 class="section-title">What we believe about<br>the patients we serve.</h2>
+    <div class="gold-divider"></div>
+    <p class="body-text" style="max-width:760px; margin:0 auto; text-align:center; line-height:2.1; font-size:1rem; font-family:'Playfair Display', serif; font-style:italic; font-weight:400; color:#5A3A28;">At OpWell, care begins long before a procedure and extends well past the moment it ends. Whether you are preparing for elective surgery, navigating a weight loss procedure, or expecting a baby, we believe preparation is as consequential as the procedure itself — that the body, mind, and lifestyle each patient brings to their experience are shaped by the preparation that took place in the weeks before. Every patient deserves real conversations — a clinician who explains not just what to do, but why it matters. Mental and emotional readiness are not soft concerns; they are clinical variables with measurable effects on healing and recovery. And care doesn't end at the hospital door. That is what we show up to do — every consultation, every patient, every time.</p>
+  </div>
+
+  <section class="final-cta">
+    <h2 class="section-title">Ready to work with OpWell?</h2>
+    <p class="section-subtitle">No referral required. HSA & FSA accepted. Telehealth available in GA, OH & VA — more states coming soon.</p>
+    <a class="btn-gold" style="cursor:pointer;">Book Your Consultation →</a>
+  </section>
+  <footer><div><div class="footer-brand">OpWell Concierge<span>™</span></div><p class="footer-tagline">Anesthesiologist-led perioperative care.</p></div><div><div class="footer-col-title">Navigation</div><ul class="footer-links"><li><a onclick="showPage('home')">← Home</a></li></ul></div><div><div class="footer-col-title">Programs</div><ul class="footer-links"><li><a onclick="showPage('surgery-prep')">Surgery Preparation</a></li><li><a onclick="showPage('recovery')">Post-Op Recovery</a></li><li><a onclick="showPage('mental-health')">Mental Wellness</a></li></ul></div><div><div class="footer-col-title">Legal</div><ul class="footer-links"><li><a>Privacy Policy</a></li><li><a>Terms of Service</a></li></ul></div></footer>
+  <div class="footer-bottom"><span class="footer-legal">© 2026 OluwoleMD & Associates LLC · OpWell Concierge™</span></div>
+</div><!-- end about -->
+
+
+<script>
+  function showTab(tabId) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('tab-' + tabId).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  function showPage(pageId) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    const page = document.getElementById('page-' + pageId);
+    if (page) {
+      page.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  function toggleFaq(el) {
+    const item = el.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+</script>
+
+</body>
+</html>
