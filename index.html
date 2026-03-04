@@ -1763,7 +1763,7 @@
     <li><a onclick="showPage('medical-tourism')">Medical Tourism</a></li>
     <li><a onclick="showPage('products')">Products</a></li>
     <li><a onclick="showPage('about')">Our Story</a></li>
-    <li><a>Patient Portal</a></li>
+    <li><a onclick="showPage('schedule')">Schedule / Portal</a></li>
   </ul>
 
   <a href="https://book.stripe.com/test_4gM7sL0LtdqW1x86svbo400" target="_blank" rel="noopener" class="nav-cta">Book Now</a>
@@ -2113,7 +2113,7 @@
       <ul class="footer-links">
         <li><a onclick="showPage('about')">Our Story</a></li>
         <li><a>Blog</a></li>
-        <li><a>Patient Portal</a></li>
+        <li><a onclick="showPage('schedule')">Schedule / Portal</a></li>
         <li><a>Privacy Policy</a></li>
         <li><a>Terms of Service</a></li>
       </ul>
@@ -2572,7 +2572,7 @@
         <li><a onclick="showPage('home')">Home</a></li>
         <li><a onclick="showPage('about')">Our Story</a></li>
         <li><a>Blog</a></li>
-        <li><a>Patient Portal</a></li>
+        <li><a onclick="showPage('schedule')">Schedule / Portal</a></li>
         <li><a>Privacy Policy</a></li>
         <li><a>Terms of Service</a></li>
       </ul>
@@ -2772,7 +2772,7 @@
         <li><a onclick="showPage('home')">Home</a></li>
         <li><a onclick="showPage('about')">Our Story</a></li>
         <li><a>Blog</a></li>
-        <li><a>Patient Portal</a></li>
+        <li><a onclick="showPage('schedule')">Schedule / Portal</a></li>
         <li><a>Privacy Policy</a></li>
         <li><a>Terms of Service</a></li>
       </ul>
@@ -2931,7 +2931,7 @@
         <li><a onclick="showPage('home')">Home</a></li>
         <li><a onclick="showPage('about')">Our Story</a></li>
         <li><a>Blog</a></li>
-        <li><a>Patient Portal</a></li>
+        <li><a onclick="showPage('schedule')">Schedule / Portal</a></li>
         <li><a>Privacy Policy</a></li>
         <li><a>Terms of Service</a></li>
       </ul>
@@ -3161,7 +3161,7 @@
         <li><a onclick="showPage('home')">Home</a></li>
         <li><a onclick="showPage('about')">Our Story</a></li>
         <li><a>Blog</a></li>
-        <li><a>Patient Portal</a></li>
+        <li><a onclick="showPage('schedule')">Schedule / Portal</a></li>
         <li><a>Privacy Policy</a></li>
         <li><a>Terms of Service</a></li>
       </ul>
@@ -3386,6 +3386,41 @@
   <footer><div class="footer-watermark"><div class="footer-watermark-circle"></div></div><div><div class="footer-brand">OpWell Concierge<span>™</span></div><p class="footer-tagline">Anesthesiologist-led perioperative care.</p></div><div><div class="footer-col-title">Navigation</div><ul class="footer-links"><li><a onclick="showPage('home')">← Home</a></li></ul></div><div><div class="footer-col-title">Programs</div><ul class="footer-links"><li><a onclick="showPage('surgery-prep')">Surgery Preparation</a></li><li><a onclick="showPage('recovery')">Post-Op Recovery</a></li><li><a onclick="showPage('mental-health')">Mental Wellness</a></li></ul></div><div><div class="footer-col-title">Legal</div><ul class="footer-links"><li><a>Privacy Policy</a></li><li><a>Terms of Service</a></li></ul></div></footer>
   <div class="footer-bottom"><span class="footer-legal">© 2025–2026 OluwoleMD & Associates LLC · OpWell Concierge™</span><span class="footer-legal">A patient-physician relationship is not established until a formal consultation is completed.</span></div>
 </div><!-- end about -->
+
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- SCHEDULE PAGE -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div id="page-schedule" class="page">
+  <div class="lp-hero" style="min-height:35vh; background: linear-gradient(to right, rgba(17,17,17,0.88) 0%, rgba(17,17,17,0.60) 50%, rgba(45,90,61,0.25) 100%), url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1920&q=85') center center / cover no-repeat;">
+    <div class="lp-hero-bg"></div>
+    <div class="lp-breadcrumb" onclick="showPage('home')" style="color:rgba(255,255,255,0.7);">← OpWell Home</div>
+    <h1 class="lp-headline" style="color:#FAF0E8;">Schedule Your Consultation</h1>
+    <p class="lp-sub" style="color:rgba(250,240,232,0.85);">Select your preferred date and time below. Please complete payment before scheduling your appointment.</p>
+  </div>
+
+  <div class="content-section alt" style="text-align:center; padding: 2rem 3rem 1rem;">
+    <div class="section-tag">Step 2 of 2</div>
+    <h2 class="section-title" style="font-size:1.6rem;">Choose your appointment time</h2>
+    <p class="section-subtitle">Haven't completed payment yet? <a href="https://book.stripe.com/test_4gM7sL0LtdqW1x86svbo400" target="_blank" rel="noopener" style="color:var(--terracotta); text-decoration:underline;">Book your service first →</a></p>
+  </div>
+
+  <div style="max-width:1100px; margin:0 auto; padding: 0 2rem 4rem;">
+    <iframe width="100%" height="1000" src="https://ehr.charmtracker.com/publicCal.sas?method=getCal&digest=0cd9567856d76b6d44d4ae182ca2ac271e884e9400e94daf4ac283ba3ccfd4f65385f436ad42bc02b0c09ac7ca574d4b1fd5a498e982bdad" style="overflow:hidden; border-radius:12px; border: 1px solid var(--border);" frameborder="0"></iframe>
+  </div>
+
+  <footer>
+    <div class="footer-watermark"><div class="footer-watermark-circle"></div></div>
+    <div>
+      <div class="footer-brand">OpWell Concierge<span>™</span></div>
+      <p class="footer-tagline">Anesthesiologist-led perioperative care.</p>
+    </div>
+    <div><div class="footer-col-title">Navigation</div><ul class="footer-links"><li><a onclick="showPage('home')">← Home</a></li></ul></div>
+    <div><div class="footer-col-title">Programs</div><ul class="footer-links"><li><a onclick="showPage('surgery-prep')">Surgery Preparation</a></li><li><a onclick="showPage('recovery')">Post-Op Recovery</a></li><li><a onclick="showPage('mental-health')">Mental Wellness</a></li></ul></div>
+    <div><div class="footer-col-title">Legal</div><ul class="footer-links"><li><a>Privacy Policy</a></li><li><a>Terms of Service</a></li></ul></div>
+  </footer>
+  <div class="footer-bottom"><span class="footer-legal">© 2025–2026 OluwoleMD & Associates LLC · OpWell Concierge™</span><span class="footer-legal">A patient-physician relationship is not established until a formal consultation is completed.</span></div>
+</div><!-- end schedule -->
 
 
 <script>
