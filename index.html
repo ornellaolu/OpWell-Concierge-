@@ -3392,22 +3392,205 @@
 <!-- SCHEDULE PAGE -->
 <!-- ══════════════════════════════════════════════════════ -->
 <div id="page-schedule" class="page">
-  <div class="lp-hero" style="min-height:35vh; background: linear-gradient(to right, rgba(17,17,17,0.88) 0%, rgba(17,17,17,0.60) 50%, rgba(45,90,61,0.25) 100%), url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1920&q=85') center center / cover no-repeat;">
+  <style>
+    .sched-wrap { max-width: 720px; margin: 0 auto; padding: 3rem 2rem 5rem; }
+    .sched-steps { display: flex; align-items: center; margin-bottom: 2.5rem; }
+    .sched-step { display: flex; align-items: center; gap: 0.5rem; font-family: 'DM Sans', sans-serif; font-size: 0.72rem; font-weight: 600; color: var(--slate); letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap; }
+    .sched-step.active { color: var(--gold); }
+    .sched-step.done { color: var(--sage); }
+    .sched-step-num { width: 26px; height: 26px; border-radius: 50%; background: var(--border); color: var(--slate); display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 700; flex-shrink: 0; }
+    .sched-step.active .sched-step-num { background: var(--gold); color: #fff; }
+    .sched-step.done .sched-step-num { background: var(--sage); color: #fff; }
+    .sched-step-divider { flex: 1; height: 1px; background: var(--border); margin: 0 0.5rem; }
+    .sched-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 2.5rem; box-shadow: 0 4px 32px rgba(28,28,28,0.07); }
+    .sched-card h2 { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--charcoal); margin-bottom: 0.4rem; }
+    .sched-card p.sched-desc { font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--slate); margin-bottom: 1.75rem; }
+    .sched-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 0; }
+    .sched-field { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
+    .sched-field label { font-family: 'DM Sans', sans-serif; font-size: 0.75rem; font-weight: 600; color: var(--charcoal); letter-spacing: 0.04em; text-transform: uppercase; }
+    .sched-field input, .sched-field select, .sched-field textarea { font-family: 'DM Sans', sans-serif; font-size: 0.95rem; color: var(--charcoal); border: 1.5px solid var(--border); border-radius: 8px; padding: 0.75rem 1rem; background: var(--warm-white); outline: none; transition: border-color 0.2s; width: 100%; box-sizing: border-box; }
+    .sched-field input:focus, .sched-field select:focus, .sched-field textarea:focus { border-color: var(--gold); }
+    .sched-field input.error, .sched-field select.error { border-color: var(--terracotta); }
+    .sched-field textarea { resize: vertical; min-height: 90px; }
+    .sched-btn-row { display: flex; justify-content: space-between; align-items: center; margin-top: 1.75rem; }
+    .sched-btn-back { font-family: 'DM Sans', sans-serif; font-size: 0.88rem; color: var(--slate); cursor: pointer; background: none; border: none; padding: 0; text-decoration: underline; }
+    .sched-btn-next { font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 600; background: var(--gold); color: #fff; border: none; border-radius: 8px; padding: 0.85rem 2rem; cursor: pointer; transition: background 0.2s; }
+    .sched-btn-next:hover { background: var(--charcoal); }
+    .sched-pay-box { background: var(--warm-white); border: 1.5px solid var(--gold); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
+    .sched-pay-service { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--charcoal); margin-bottom: 0.25rem; }
+    .sched-pay-price { font-family: 'DM Sans', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--gold); margin-bottom: 0.5rem; }
+    .sched-pay-detail { font-family: 'DM Sans', sans-serif; font-size: 0.82rem; color: var(--slate); line-height: 1.6; }
+    .sched-pay-btn { display: block; width: 100%; text-align: center; font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 700; background: var(--charcoal); color: #fff; border: none; border-radius: 10px; padding: 1rem; margin-top: 1.25rem; text-decoration: none; cursor: pointer; transition: background 0.2s; }
+    .sched-pay-btn:hover { background: var(--gold); }
+    .sched-paid-btn { display: block; width: 100%; text-align: center; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 600; background: var(--sage); color: #fff; border: none; border-radius: 10px; padding: 0.9rem; margin-top: 0.75rem; cursor: pointer; transition: background 0.2s; }
+    .sched-paid-btn:hover { background: #1A3D28; }
+    .sched-summary-box { background: var(--warm-white); border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.25rem; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; color: var(--slate); line-height: 1.9; margin-bottom: 1.5rem; }
+    .sched-calendar-wrap iframe { border-radius: 12px; border: 1px solid var(--border); }
+    @media (max-width: 600px) { .sched-row { grid-template-columns: 1fr; } .sched-card { padding: 1.5rem; } .sched-step span { display: none; } }
+  </style>
+
+  <div class="lp-hero" style="min-height:32vh; background: linear-gradient(to right, rgba(17,17,17,0.88) 0%, rgba(17,17,17,0.60) 50%, rgba(45,90,61,0.25) 100%), url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1920&q=85') center center / cover no-repeat;">
     <div class="lp-hero-bg"></div>
     <div class="lp-breadcrumb" onclick="showPage('home')" style="color:rgba(255,255,255,0.7);">← OpWell Home</div>
-    <h1 class="lp-headline" style="color:#FAF0E8;">Schedule Your Consultation</h1>
-    <p class="lp-sub" style="color:rgba(250,240,232,0.85);">Select your preferred date and time below. Please complete payment before scheduling your appointment.</p>
+    <h1 class="lp-headline" style="color:#FAF0E8;">Book Your Consultation</h1>
+    <p class="lp-sub" style="color:rgba(250,240,232,0.85);">Tell us about yourself, choose your service, complete payment, then pick your time. HSA &amp; FSA accepted.</p>
   </div>
 
-  <div class="content-section alt" style="text-align:center; padding: 2rem 3rem 1rem;">
-    <div class="section-tag">Step 2 of 2</div>
-    <h2 class="section-title" style="font-size:1.6rem;">Choose your appointment time</h2>
-    <p class="section-subtitle">Haven't completed payment yet? <a href="https://book.stripe.com/test_4gM7sL0LtdqW1x86svbo400" target="_blank" rel="noopener" style="color:var(--terracotta); text-decoration:underline;">Book your service first →</a></p>
-  </div>
+  <div class="sched-wrap">
 
-  <div style="max-width:1100px; margin:0 auto; padding: 0 2rem 4rem;">
-    <iframe width="100%" height="1000" src="https://ehr.charmtracker.com/publicCal.sas?method=getCal&digest=0cd9567856d76b6d44d4ae182ca2ac271e884e9400e94daf4ac283ba3ccfd4f65385f436ad42bc02b0c09ac7ca574d4b1fd5a498e982bdad" style="overflow:hidden; border-radius:12px; border: 1px solid var(--border);" frameborder="0"></iframe>
-  </div>
+    <!-- STEP INDICATORS -->
+    <div class="sched-steps">
+      <div class="sched-step active" id="sched-ind-1"><div class="sched-step-num">1</div><span>Your Info</span></div>
+      <div class="sched-step-divider"></div>
+      <div class="sched-step" id="sched-ind-2"><div class="sched-step-num">2</div><span>Appointment</span></div>
+      <div class="sched-step-divider"></div>
+      <div class="sched-step" id="sched-ind-3"><div class="sched-step-num">3</div><span>Payment</span></div>
+      <div class="sched-step-divider"></div>
+      <div class="sched-step" id="sched-ind-4"><div class="sched-step-num">4</div><span>Choose Time</span></div>
+    </div>
+
+    <!-- STEP 1: PERSONAL INFO -->
+    <div id="sched-step1" class="sched-card">
+      <h2>Your Information</h2>
+      <p class="sched-desc">Enter your details to get started. No payment required yet.</p>
+      <div class="sched-row">
+        <div class="sched-field"><label>First Name *</label><input type="text" id="s1-fname" placeholder="First name"></div>
+        <div class="sched-field"><label>Last Name *</label><input type="text" id="s1-lname" placeholder="Last name"></div>
+      </div>
+      <div class="sched-field"><label>Email Address *</label><input type="email" id="s1-email" placeholder="your@email.com"></div>
+      <div class="sched-row">
+        <div class="sched-field"><label>Phone Number *</label><input type="tel" id="s1-phone" placeholder="(000) 000-0000"></div>
+        <div class="sched-field"><label>Date of Birth *</label><input type="date" id="s1-dob"></div>
+      </div>
+      <div class="sched-field">
+        <label>Type of Procedure / Service *</label>
+        <select id="s1-procedure">
+          <option value="">Select procedure or service...</option>
+          <optgroup label="Surgical">
+            <option>Cosmetic Surgery (BBL, Tummy Tuck, Breast Aug, Rhinoplasty, etc.)</option>
+            <option>Bariatric Surgery (Gastric Bypass, Sleeve Gastrectomy, etc.)</option>
+            <option>General / Elective Surgery</option>
+            <option>Orthopedic / Spine Surgery</option>
+            <option>Gynecologic Surgery</option>
+            <option>ENT / Head & Neck Surgery</option>
+            <option>Oncologic Surgery</option>
+            <option>Other Surgical Procedure</option>
+          </optgroup>
+          <optgroup label="Obstetric">
+            <option>Labor & Delivery Preparation</option>
+            <option>C-Section Preparation</option>
+            <option>Postpartum Follow-Up</option>
+          </optgroup>
+          <optgroup label="Medical Tourism">
+            <option>Medical Tourism — Planning Surgery Abroad</option>
+            <option>Medical Tourism — Returned from Surgery Abroad</option>
+          </optgroup>
+          <optgroup label="Mental Wellness">
+            <option>Pre-Surgical Anxiety / Mental Wellness</option>
+            <option>Post-Surgical Emotional Recovery</option>
+            <option>Bariatric Psychological Clearance</option>
+            <option>Perinatal Mental Health</option>
+          </optgroup>
+        </select>
+      </div>
+      <div class="sched-field">
+        <label>Who would you like to see? *</label>
+        <select id="s1-consultant" onchange="updateServices()">
+          <option value="">Select provider...</option>
+          <option value="anesthesiologist">Dr. Ornella Oluwole — Anesthesiologist</option>
+          <option value="therapist">Stacey J. Floyd, MA, LPC — Mental Wellness Specialist</option>
+        </select>
+      </div>
+      <div class="sched-btn-row"><span></span><button class="sched-btn-next" onclick="schedStep1Next()">Continue →</button></div>
+    </div>
+
+    <!-- STEP 2: APPOINTMENT DETAILS -->
+    <div id="sched-step2" class="sched-card" style="display:none;">
+      <h2>Appointment Details</h2>
+      <p class="sched-desc">Select your service and preferred appointment time.</p>
+      <div class="sched-field">
+        <label>Service *</label>
+        <select id="s2-service">
+          <option value="">Select service...</option>
+        </select>
+      </div>
+      <div class="sched-row">
+        <div class="sched-field"><label>Preferred Date *</label><input type="date" id="s2-date"></div>
+        <div class="sched-field">
+          <label>Preferred Time *</label>
+          <select id="s2-time">
+            <option value="">Select time...</option>
+            <option>9:00 AM</option><option>10:00 AM</option><option>11:00 AM</option>
+            <option>12:00 PM</option><option>1:00 PM</option><option>2:00 PM</option>
+            <option>3:00 PM</option><option>4:00 PM</option>
+          </select>
+        </div>
+      </div>
+      <div class="sched-field"><label>Reason for Visit / Notes (optional)</label><textarea id="s2-reason" placeholder="Share anything that will help us prepare for your consultation..."></textarea></div>
+
+      <!-- MENTAL WELLNESS ADD-ON (only shows for Dr. Oluwole patients) -->
+      <div id="s2-addon-wrap" style="display:none; background:var(--warm-white); border:1.5px solid var(--border); border-radius:12px; padding:1.1rem 1.25rem; margin-bottom:1rem;">
+        <label style="display:flex; align-items:flex-start; gap:0.75rem; cursor:pointer; font-family:'DM Sans',sans-serif; font-size:0.9rem; color:var(--charcoal); font-weight:400; text-transform:none; letter-spacing:0;">
+          <input type="checkbox" id="s2-addon-mh" style="width:18px; height:18px; flex-shrink:0; margin-top:2px; accent-color:var(--gold);">
+          <span>
+            <strong>Add a Mental Wellness session with Stacey J. Floyd, MA, LPC</strong><br>
+            <span style="font-size:0.82rem; color:var(--slate);">$215 (save $35 with BUNDLE code) · Supports surgical anxiety, emotional recovery & bariatric clearance</span>
+          </span>
+        </label>
+      </div>
+
+      <div class="sched-btn-row">
+        <button class="sched-btn-back" onclick="schedGoBack(1)">← Back</button>
+        <button class="sched-btn-next" onclick="schedStep2Next()">Continue to Payment →</button>
+      </div>
+    </div>
+
+    <!-- STEP 3: REVIEW & PAY -->
+    <div id="sched-step3" class="sched-card" style="display:none;">
+      <h2>Review &amp; Pay</h2>
+      <p class="sched-desc">Review your order below and complete payment in one step.</p>
+
+      <!-- ORDER ITEMS -->
+      <div id="s3-order-items" style="display:grid; gap:0.5rem; margin-bottom:1rem;"></div>
+
+      <!-- TOTAL -->
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:0.85rem 0; border-top:2px solid var(--border); border-bottom:1px solid var(--border); margin-bottom:1.5rem;">
+        <span style="font-family:'DM Sans',sans-serif; font-size:0.85rem; font-weight:700; color:var(--charcoal); text-transform:uppercase; letter-spacing:0.04em;">Total</span>
+        <span id="s3-total-amount" style="font-family:'DM Sans',sans-serif; font-size:1.4rem; font-weight:700; color:var(--gold);"></span>
+      </div>
+
+      <!-- APPOINTMENT DETAIL -->
+      <div id="s3-appt-detail" class="sched-summary-box" style="margin-bottom:1.5rem;"></div>
+
+      <!-- PAY BUTTON -->
+      <button id="s3-pay-btn" class="sched-pay-btn" onclick="payWithStripe()" style="border:none; cursor:pointer; font-size:1.05rem; width:100%;">Pay Now →</button>
+      <div style="font-family:'DM Sans',sans-serif; font-size:0.75rem; color:var(--slate); text-align:center; margin-top:0.75rem;">
+        HSA &amp; FSA accepted · Secure checkout via Stripe · Apple Pay &amp; Google Pay supported<br>
+        Promotion codes accepted at checkout
+      </div>
+
+      <div class="sched-btn-row" style="margin-top:1.25rem;">
+        <button class="sched-btn-back" onclick="schedGoBack(2)">← Edit Details</button>
+        <span></span>
+      </div>
+    </div>
+
+    <!-- STEP 4: CHARM HEALTH CALENDAR -->
+    <div id="sched-step4" style="display:none;">
+      <div class="sched-card" style="margin-bottom:1.5rem;">
+        <h2>Choose Your Time Slot</h2>
+        <p class="sched-desc">Payment confirmed. Select your appointment time below — Dr. Oluwole will be prepared for your visit.</p>
+        <div class="sched-summary-box" id="sched-summary"></div>
+      </div>
+      <div class="sched-calendar-wrap">
+        <iframe width="100%" height="1000" src="https://ehr.charmtracker.com/publicCal.sas?method=getCal&digest=0cd9567856d76b6d44d4ae182ca2ac271e884e9400e94daf4ac283ba3ccfd4f65385f436ad42bc02b0c09ac7ca574d4b1fd5a498e982bdad" style="overflow:hidden;" frameborder="0"></iframe>
+      </div>
+      <div style="text-align:center; margin-top:1.5rem;">
+        <button class="sched-btn-back" onclick="schedGoBack(3)">← Back to Payment</button>
+      </div>
+    </div>
+
+  </div><!-- end sched-wrap -->
 
   <footer>
     <div class="footer-watermark"><div class="footer-watermark-circle"></div></div>
@@ -3443,6 +3626,205 @@
     document.getElementById('tab-' + tabId).classList.add('active');
     event.target.classList.add('active');
   }
+
+  // ── SCHEDULE FORM ──
+  var schedServices = {
+    anesthesiologist: [
+      'Surgery Preparation ($490)',
+      'Post-Op Recovery ($490)',
+      'Surgery Prep + Recovery Package ($850)',
+      'Labor & Delivery Prep — New Patient ($400)',
+      'Labor & Delivery Prep — Return Patient ($250)',
+      'Medical Tourism — Surgery Prep ($490)',
+      'Medical Tourism — Post-Op Recovery ($490)',
+      'Medical Tourism — Prep + Recovery Package ($850)'
+    ],
+    therapist: [
+      'Mental Wellness — Single Session ($250)',
+      'Mental Wellness — 3-Session Package ($600)'
+    ]
+  };
+
+  var schedStripeLinks = {
+    'Surgery Preparation ($490)':                      { link: 'https://book.stripe.com/test_4gM7sL0LtdqW1x86svbo400', price: '$490' },
+    'Post-Op Recovery ($490)':                         { link: 'https://book.stripe.com/test_3cI9ATbq71Iegs2aILbo401', price: '$490' },
+    'Surgery Prep + Recovery Package ($850)':          { link: 'https://book.stripe.com/test_cNibJ18dVdqWgs27wzbo402', price: '$850' },
+    'Labor & Delivery Prep — New Patient ($400)':      { link: 'https://book.stripe.com/test_00w9AT51JaeKgs2cQTbo403', price: '$400' },
+    'Labor & Delivery Prep — Return Patient ($250)':   { link: 'https://book.stripe.com/test_3cIcN53XFfz48ZA5orbo404', price: '$250' },
+    'Medical Tourism — Surgery Prep ($490)':           { link: 'https://book.stripe.com/test_4gM7sL0LtdqW1x86svbo400', price: '$490' },
+    'Medical Tourism — Post-Op Recovery ($490)':       { link: 'https://book.stripe.com/test_3cI9ATbq71Iegs2aILbo401', price: '$490' },
+    'Medical Tourism — Prep + Recovery Package ($850)':{ link: 'https://book.stripe.com/test_cNibJ18dVdqWgs27wzbo402', price: '$850' },
+    'Mental Wellness — Single Session ($250)':         { link: 'https://book.stripe.com/test_7sY3cvdyf4Uq3FgdUXbo405', price: '$250' },
+    'Mental Wellness — 3-Session Package ($600)':      { link: 'https://book.stripe.com/test_cNi6oHgKrev0dfQdUXbo406', price: '$600' }
+  };
+
+  function updateServices() {
+    var consultant = document.getElementById('s1-consultant').value;
+    var sel = document.getElementById('s2-service');
+    sel.innerHTML = '<option value="">Select service...</option>';
+    if (consultant && schedServices[consultant]) {
+      schedServices[consultant].forEach(function(s) {
+        var opt = document.createElement('option');
+        opt.value = s; opt.textContent = s;
+        sel.appendChild(opt);
+      });
+    }
+    // Show Mental Wellness add-on only for Dr. Oluwole patients
+    var addonWrap = document.getElementById('s2-addon-wrap');
+    if (addonWrap) addonWrap.style.display = (consultant === 'anesthesiologist') ? '' : 'none';
+    var addonCb = document.getElementById('s2-addon-mh');
+    if (addonCb && consultant !== 'anesthesiologist') addonCb.checked = false;
+  }
+
+  function schedSetStep(n) {
+    ['sched-ind-1','sched-ind-2','sched-ind-3','sched-ind-4'].forEach(function(id, i) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      el.classList.remove('active','done');
+      if (i + 1 < n) el.classList.add('done');
+      else if (i + 1 === n) el.classList.add('active');
+    });
+    ['sched-step1','sched-step2','sched-step3','sched-step4'].forEach(function(id, i) {
+      var el = document.getElementById(id);
+      if (el) el.style.display = (i + 1 === n) ? '' : 'none';
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function schedStep1Next() {
+    var fields = ['s1-fname','s1-lname','s1-email','s1-phone','s1-dob','s1-procedure','s1-consultant'];
+    var valid = true;
+    fields.forEach(function(id) {
+      var el = document.getElementById(id);
+      if (!el.value.trim()) { el.classList.add('error'); valid = false; }
+      else el.classList.remove('error');
+    });
+    if (!valid) return;
+    updateServices();
+    schedSetStep(2);
+  }
+
+  var SCHED_PRICES = {
+    'Surgery Preparation': 490,
+    'Post-Op Recovery': 490,
+    'Surgery Prep + Recovery Package': 850,
+    'Labor & Delivery Prep — New Patient': 400,
+    'Labor & Delivery Prep — Return Patient': 250,
+    'Mental Wellness — Single Session': 250,
+    'Mental Wellness — Bundle Add-On': 215,
+    'Mental Wellness — 3-Session Package': 600,
+    'Medical Tourism — Surgery Prep': 490,
+    'Medical Tourism — Post-Op Recovery': 490,
+    'Medical Tourism — Prep + Recovery Package': 850,
+  };
+
+  function schedStep2Next() {
+    var fields = ['s2-service','s2-date','s2-time'];
+    var valid = true;
+    fields.forEach(function(id) {
+      var el = document.getElementById(id);
+      if (!el.value.trim()) { el.classList.add('error'); valid = false; }
+      else el.classList.remove('error');
+    });
+    if (!valid) return;
+
+    var service = document.getElementById('s2-service').value;
+    var serviceName = service.replace(/\s*\(\$[\d]+\)/, '');
+    var addOn = document.getElementById('s2-addon-mh') && document.getElementById('s2-addon-mh').checked;
+    var fname = document.getElementById('s1-fname').value;
+    var lname = document.getElementById('s1-lname').value;
+    var date = document.getElementById('s2-date').value;
+    var time = document.getElementById('s2-time').value;
+
+    // Build order items
+    var items = [{ name: serviceName, price: SCHED_PRICES[serviceName] || 0 }];
+    if (addOn) items.push({ name: 'Mental Wellness — Bundle Add-On', price: 215 });
+
+    var total = items.reduce(function(sum, i) { return sum + i.price; }, 0);
+
+    // Render order items
+    var itemsHtml = items.map(function(item) {
+      return '<div style="display:flex; justify-content:space-between; align-items:center; background:var(--warm-white); border:1px solid var(--border); border-radius:8px; padding:0.65rem 1rem; font-family:\'DM Sans\',sans-serif; font-size:0.88rem; color:var(--charcoal);">' +
+        '<span>' + item.name + '</span>' +
+        '<span style="font-weight:700; color:var(--gold);">$' + item.price + '</span>' +
+        '</div>';
+    }).join('');
+    document.getElementById('s3-order-items').innerHTML = itemsHtml;
+    document.getElementById('s3-total-amount').textContent = '$' + total;
+    document.getElementById('s3-appt-detail').innerHTML =
+      '<strong>Patient:</strong> ' + fname + ' ' + lname + '<br>' +
+      '<strong>Procedure:</strong> ' + document.getElementById('s1-procedure').value + '<br>' +
+      '<strong>Preferred:</strong> ' + date + ' at ' + time;
+
+    // Save to sessionStorage for post-payment restore
+    sessionStorage.setItem('opwell_booking', JSON.stringify({
+      fname: fname, lname: lname,
+      email: document.getElementById('s1-email').value,
+      procedure: document.getElementById('s1-procedure').value,
+      service: service, date: date, time: time,
+      items: items.map(function(i) { return i.name; })
+    }));
+
+    schedSetStep(3);
+  }
+
+  async function payWithStripe() {
+    var btn = document.getElementById('s3-pay-btn');
+    btn.disabled = true;
+    btn.textContent = 'Processing...';
+
+    var saved = JSON.parse(sessionStorage.getItem('opwell_booking') || '{}');
+    if (!saved.items || !saved.items.length) {
+      alert('No services selected. Please go back and select a service.');
+      btn.disabled = false; btn.textContent = 'Pay Now →'; return;
+    }
+
+    try {
+      var res = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          items: saved.items,
+          email: saved.email,
+          patientName: saved.fname + ' ' + saved.lname
+        })
+      });
+      var data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        alert('Payment error: ' + (data.error || 'Unknown error. Please try again.'));
+        btn.disabled = false; btn.textContent = 'Pay Now →';
+      }
+    } catch (err) {
+      alert('Connection error. Please try again.');
+      btn.disabled = false; btn.textContent = 'Pay Now →';
+    }
+  }
+
+  function schedGoBack(toStep) { schedSetStep(toStep); }
+
+  // Detect return from Stripe payment
+  (function() {
+    if (window.location.search.indexOf('paid=1') !== -1) {
+      var saved = sessionStorage.getItem('opwell_booking');
+      if (saved) {
+        try {
+          var data = JSON.parse(saved);
+          showPage('schedule');
+          document.getElementById('sched-summary').innerHTML =
+            '<strong>Name:</strong> ' + data.fname + ' ' + data.lname + '<br>' +
+            '<strong>Procedure:</strong> ' + (data.procedure || '') + '<br>' +
+            '<strong>Service:</strong> ' + data.service + '<br>' +
+            '<strong>Preferred:</strong> ' + data.date + ' at ' + data.time;
+          schedSetStep(4);
+          sessionStorage.removeItem('opwell_booking');
+          history.replaceState({}, '', window.location.pathname);
+        } catch(e) {}
+      }
+    }
+  })();
+  // ── END SCHEDULE FORM ──
 
   function showPage(pageId) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
