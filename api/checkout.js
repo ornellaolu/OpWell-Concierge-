@@ -1,5 +1,3 @@
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-
 const PRICES = {
   'Surgery Preparation':                        49000,
   'Post-Op Recovery':                           49000,
@@ -20,6 +18,7 @@ module.exports = async function handler(req, res) {
   }
 
   try {
+    const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
     const { items, email, patientName } = req.body;
 
     if (!items || !items.length) {
