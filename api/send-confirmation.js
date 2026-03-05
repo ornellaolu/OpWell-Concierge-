@@ -14,6 +14,7 @@ module.exports = async function handler(req, res) {
     const patientName = `${fname || ''} ${lname || ''}`.trim() || 'Patient';
     const serviceList = Array.isArray(service) ? service.join(', ') : (service || 'Consultation');
 
+    // Send patient confirmation
     await resend.emails.send({
       from: 'OpWell Concierge <onboarding@resend.dev>',
       to: email,
@@ -51,6 +52,34 @@ module.exports = async function handler(req, res) {
 
           <div style="background: #3b2a1a; padding: 20px 40px; text-align: center;">
             <p style="color: rgba(232,201,122,0.6); font-size: 0.8rem; margin: 0;">OpWell Concierge™ · Telehealth · GA, OH & VA · (678) 235-5822</p>
+          </div>
+        </div>
+      `,
+    });
+
+    // Send doctor notification
+    await resend.emails.send({
+      from: 'OpWell Bookings <onboarding@resend.dev>',
+      to: 'dr.oluwole@opwellconcierge.com',
+      subject: `New Booking: ${patientName} — ${serviceList}`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #2c2c2c;">
+          <div style="background: #3b2a1a; padding: 24px 32px;">
+            <h2 style="color: #e8c97a; margin: 0; font-size: 1.2rem;">New Patient Booking — OpWell Concierge</h2>
+          </div>
+          <div style="padding: 32px; background: #fdf8f4;">
+            <table style="width:100%; border-collapse:collapse; font-size:0.95rem;">
+              <tr><td style="padding:8px 0; color:#888; width:140px;">Patient</td><td style="padding:8px 0; font-weight:600;">${patientName}</td></tr>
+              <tr><td style="padding:8px 0; color:#888;">Email</td><td style="padding:8px 0;"><a href="mailto:${email}">${email}</a></td></tr>
+              <tr><td style="padding:8px 0; color:#888;">Service</td><td style="padding:8px 0;">${serviceList}</td></tr>
+              ${procedure ? `<tr><td style="padding:8px 0; color:#888;">Procedure</td><td style="padding:8px 0;">${procedure}</td></tr>` : ''}
+              ${date ? `<tr><td style="padding:8px 0; color:#888;">Preferred Date</td><td style="padding:8px 0; font-weight:600; color:#b85c2b;">${date}</td></tr>` : ''}
+              ${time ? `<tr><td style="padding:8px 0; color:#888;">Preferred Time</td><td style="padding:8px 0; font-weight:600; color:#b85c2b;">${time}</td></tr>` : ''}
+              <tr><td style="padding:8px 0; color:#888;">Feedback Consent</td><td style="padding:8px 0;">${feedbackConsent ? 'Yes ✓' : 'No'}</td></tr>
+            </table>
+            <div style="margin-top:24px; padding:16px; background:#fff; border:1px solid #e8d9c8; border-radius:8px;">
+              <p style="margin:0; font-size:0.9rem; color:#555;">Reply to this email or contact the patient directly to confirm their preferred time slot.</p>
+            </div>
           </div>
         </div>
       `,
