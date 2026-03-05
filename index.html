@@ -3466,31 +3466,13 @@
         <label>Type of Procedure / Service *</label>
         <select id="s1-procedure">
           <option value="">Select procedure or service...</option>
-          <optgroup label="Surgical">
-            <option>Cosmetic Surgery (BBL, Tummy Tuck, Breast Aug, Rhinoplasty, etc.)</option>
-            <option>Bariatric Surgery (Gastric Bypass, Sleeve Gastrectomy, etc.)</option>
-            <option>General / Elective Surgery</option>
-            <option>Orthopedic / Spine Surgery</option>
-            <option>Gynecologic Surgery</option>
-            <option>ENT / Head & Neck Surgery</option>
-            <option>Oncologic Surgery</option>
-            <option>Other Surgical Procedure</option>
-          </optgroup>
-          <optgroup label="Obstetric">
-            <option>Labor & Delivery Preparation</option>
-            <option>C-Section Preparation</option>
-            <option>Postpartum Follow-Up</option>
-          </optgroup>
-          <optgroup label="Medical Tourism">
-            <option>Medical Tourism — Planning Surgery Abroad</option>
-            <option>Medical Tourism — Returned from Surgery Abroad</option>
-          </optgroup>
-          <optgroup label="Mental Wellness">
-            <option>Pre-Surgical Anxiety / Mental Wellness</option>
-            <option>Post-Surgical Emotional Recovery</option>
-            <option>Bariatric Psychological Clearance</option>
-            <option>Perinatal Mental Health</option>
-          </optgroup>
+          <option>Cosmetic Surgery</option>
+          <option>Bariatric Surgery</option>
+          <option>General Surgery</option>
+          <option>Specialty Surgery</option>
+          <option>Labor & Delivery / Obstetric</option>
+          <option>Medical Tourism</option>
+          <option>Mental Wellness</option>
         </select>
       </div>
       <div class="sched-field">
@@ -3500,6 +3482,12 @@
           <option value="anesthesiologist">Dr. Ornella Oluwole — Anesthesiologist</option>
           <option value="therapist">Stacey J. Floyd, MA, LPC — Mental Wellness Specialist</option>
         </select>
+      </div>
+      <div class="sched-field" style="margin-top:1rem;">
+        <label style="display:flex; align-items:flex-start; gap:0.6rem; font-weight:400; cursor:pointer;">
+          <input type="checkbox" id="s1-feedback-consent" style="margin-top:3px; flex-shrink:0;">
+          <span style="font-size:0.92rem; color:#555;">I agree to be contacted for a brief, optional feedback survey after my consultation to help improve patient care. (Optional)</span>
+        </label>
       </div>
       <div class="sched-btn-row"><span></span><button class="sched-btn-next" onclick="schedStep1Next()">Continue →</button></div>
     </div>
@@ -3634,10 +3622,7 @@
       'Post-Op Recovery ($490)',
       'Surgery Prep + Recovery Package ($850)',
       'Labor & Delivery Prep — New Patient ($400)',
-      'Labor & Delivery Prep — Return Patient ($250)',
-      'Medical Tourism — Surgery Prep ($490)',
-      'Medical Tourism — Post-Op Recovery ($490)',
-      'Medical Tourism — Prep + Recovery Package ($850)'
+      'Labor & Delivery Prep — Return Patient ($250)'
     ],
     therapist: [
       'Mental Wellness — Single Session ($250)',
@@ -3701,9 +3686,6 @@
     'Mental Wellness — Single Session': 250,
     'Mental Wellness — Bundle Add-On': 215,
     'Mental Wellness — 3-Session Package': 600,
-    'Medical Tourism — Surgery Prep': 490,
-    'Medical Tourism — Post-Op Recovery': 490,
-    'Medical Tourism — Prep + Recovery Package': 850,
   };
 
   function schedStep2Next() {
@@ -3750,7 +3732,8 @@
       email: document.getElementById('s1-email').value,
       procedure: document.getElementById('s1-procedure').value,
       service: service, date: date, time: time,
-      items: items.map(function(i) { return i.name; })
+      items: items.map(function(i) { return i.name; }),
+      feedbackConsent: document.getElementById('s1-feedback-consent').checked
     }));
 
     schedSetStep(3);
@@ -3806,6 +3789,21 @@
             '<strong>Service:</strong> ' + data.service + '<br>' +
             '<strong>Preferred:</strong> ' + data.date + ' at ' + data.time;
           schedSetStep(4);
+          // Send confirmation email
+          fetch('/api/send-confirmation', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              email: data.email,
+              fname: data.fname,
+              lname: data.lname,
+              service: data.items,
+              procedure: data.procedure,
+              date: data.date,
+              time: data.time,
+              feedbackConsent: data.feedbackConsent
+            })
+          }).catch(function() {});
           sessionStorage.removeItem('opwell_booking');
           history.replaceState({}, '', window.location.pathname);
         } catch(e) {}

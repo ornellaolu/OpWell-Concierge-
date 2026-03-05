@@ -7,9 +7,6 @@ const PRICES = {
   'Mental Wellness — Single Session':           25000,
   'Mental Wellness — Bundle Add-On':            21500,
   'Mental Wellness — 3-Session Package':        60000,
-  'Medical Tourism — Surgery Prep':             49000,
-  'Medical Tourism — Post-Op Recovery':         49000,
-  'Medical Tourism — Prep + Recovery Package':  85000,
 };
 
 module.exports = async function handler(req, res) {
