@@ -18,6 +18,7 @@ module.exports = async function handler(req, res) {
   }
 
   try {
+    console.log('KEY CHECK:', process.env.STRIPE_SECRET_KEY ? process.env.STRIPE_SECRET_KEY.substring(0, 12) : 'MISSING');
     const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
     const { items, email, patientName } = req.body;
 
