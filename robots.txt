@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Block booking confirmation and API routes from indexing
+Disallow: /api/
+Disallow: /?paid=1
+Disallow: /?cancelled=1
+
+# Sitemap location
+Sitemap: https://opwellconcierge.com/sitemap.xml

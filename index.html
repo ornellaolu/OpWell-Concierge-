@@ -2119,6 +2119,123 @@
     }
 
   </style>
+  <!-- ═══════════════════════════════════════════════════════════
+       STRUCTURED DATA — JSON-LD
+       MedicalBusiness + Physician + Service + FAQPage
+  ═══════════════════════════════════════════════════════════ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "MedicalBusiness",
+        "@id": "https://opwellconcierge.com/#practice",
+        "name": "OpWell Concierge™",
+        "alternateName": "OpWell Concierge",
+        "url": "https://opwellconcierge.com",
+        "telephone": "+16782355822",
+        "email": "info@opwellconcierge.com",
+        "description": "OpWell Concierge™ is an anesthesiologist-led telehealth practice offering pre-surgical consultations, post-operative care, labor & delivery preparation, and integrated mental wellness support. Board-certified physician. No referral required.",
+        "medicalSpecialty": "Anesthesiology",
+        "availableService": [
+          { "@type": "MedicalTherapy", "name": "Pre-Surgical Consultation", "url": "https://opwellconcierge.com/surgery-prep" },
+          { "@type": "MedicalTherapy", "name": "Post-Operative Care", "url": "https://opwellconcierge.com/recovery" },
+          { "@type": "MedicalTherapy", "name": "Labor & Delivery Prep", "url": "https://opwellconcierge.com/obstetric" },
+          { "@type": "MedicalTherapy", "name": "Surgical Mental Wellness", "url": "https://opwellconcierge.com/mental-health" },
+          { "@type": "MedicalTherapy", "name": "Medical Tourism Support", "url": "https://opwellconcierge.com/medical-tourism" }
+        ],
+        "areaServed": [
+          { "@type": "State", "name": "Georgia" },
+          { "@type": "State", "name": "Ohio" },
+          { "@type": "State", "name": "Virginia" }
+        ],
+        "priceRange": "$250–$1350",
+        "paymentAccepted": "Cash, Credit Card, HSA, FSA, Klarna, Afterpay",
+        "sameAs": [
+          "https://www.instagram.com/opwellconcierge"
+        ],
+        "employee": {
+          "@type": "Physician",
+          "@id": "https://opwellconcierge.com/#dr-oluwole",
+          "name": "Ornella Oluwole",
+          "honorificPrefix": "Dr.",
+          "honorificSuffix": "MD, D.ABA",
+          "jobTitle": "Board-Certified Anesthesiologist & Founder",
+          "medicalSpecialty": "Anesthesiology",
+          "worksFor": { "@id": "https://opwellconcierge.com/#practice" }
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://opwellconcierge.com/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Do I need a referral from my surgeon?",
+            "acceptedAnswer": { "@type": "Answer", "text": "No referral is required — you can book directly at any time. Surgeon referrals are always welcomed and we love collaborating with surgical teams to provide seamless, coordinated care." }
+          },
+          {
+            "@type": "Question",
+            "name": "How far in advance should I book?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Ideally 4–6 weeks before your procedure — this gives enough time to implement the prehabilitation protocol effectively. However, we can provide meaningful support even 1–2 weeks before surgery." }
+          },
+          {
+            "@type": "Question",
+            "name": "Is OpWell covered by insurance?",
+            "acceptedAnswer": { "@type": "Answer", "text": "OpWell is a cash-pay service and does not bill insurance directly. HSA and FSA funds are accepted — OpWell consultations are an eligible medical expense." }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I use my HSA or FSA card to pay?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes. OpWell consultations qualify as an eligible medical expense under IRS guidelines, making them payable with HSA or FSA funds. We provide itemized receipts and documentation." }
+          },
+          {
+            "@type": "Question",
+            "name": "What states is OpWell available in?",
+            "acceptedAnswer": { "@type": "Answer", "text": "OpWell currently provides telehealth consultations in Georgia, Ohio, and Virginia." }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I pay in installments?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes — OpWell accepts Klarna and Afterpay at checkout. Klarna offers flexible monthly installment options. Afterpay splits your payment into 4 interest-free payments over 6 weeks. HSA and FSA cards are also accepted." }
+          },
+          {
+            "@type": "Question",
+            "name": "What is prehabilitation and why does it matter?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Prehabilitation — or prehab — is the process of optimizing your physical, nutritional, and mental health before surgery. Evidence consistently shows that patients who arrive at surgery in better condition recover faster, experience fewer complications, and have better outcomes." }
+          },
+          {
+            "@type": "Question",
+            "name": "Will OpWell communicate directly with my surgeon?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes — with your written authorization, Dr. Oluwole can send your Surgical Clearance Letter and clinical summary directly to your surgeon or surgical team." }
+          },
+          {
+            "@type": "Question",
+            "name": "When should I book my Labor & Delivery Prep consultation?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Anytime during pregnancy — though earlier is better. Many patients book in the second trimester, which gives time to address any concerns and arrive at delivery prepared and confident." }
+          },
+          {
+            "@type": "Question",
+            "name": "I'm planning a natural birth. Why would I need an anesthesia consultation?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Even patients planning unmedicated births benefit from understanding their anesthesia options — because labor doesn’t always go as planned. OpWell also addresses the full obstetric risk picture beyond epidurals alone." }
+          },
+          {
+            "@type": "Question",
+            "name": "Do I need to be an OpWell medical patient to see the mental wellness therapist?",
+            "acceptedAnswer": { "@type": "Answer", "text": "No — mental wellness sessions with Stacey Floyd are available as a standalone service. You do not need to have booked a Pre-Surgical Consultation first." }
+          },
+          {
+            "@type": "Question",
+            "name": "What countries does OpWell support for medical tourism?",
+            "acceptedAnswer": { "@type": "Answer", "text": "OpWell supports patients traveling to or returning from any country for surgery. Common destinations include Mexico, Colombia, Turkey, Dominican Republic, Thailand, and others." }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+
 </head>
 <body>
 
