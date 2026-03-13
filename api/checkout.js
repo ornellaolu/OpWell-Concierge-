@@ -1,15 +1,13 @@
 const PRICES = {
-  'Surgery Preparation':                        49000,
-  'Post-Op Recovery':                           49000,
-  'Surgery Prep + Recovery Package':            85000,
-  'Labor & Delivery Prep — New Patient':        40000,
-  'Labor & Delivery Prep — Return Patient':     25000,
-  'Mental Wellness — Single Session':           25000,
-  'Mental Wellness — Bundle Add-On':            21500,
-  'Mental Wellness — 3-Session Package':        60000,
-  'Medical Tourism — Surgery Prep':             49000,
-  'Medical Tourism — Post-Op Recovery':         49000,
-  'Medical Tourism — Prep + Recovery Package':  85000,
+  'Pre-Surgical Consultation':                             49000,
+  'Post-Operative Care':                                   49000,
+  'Complete Surgical Care Package':                        85000,
+  'Executive Package — Complete Concierge Program':       135000,
+  'Labor & Delivery Prep — New Patient':                   40000,
+  'Labor & Delivery Prep — Return Patient':                25000,
+  'Mental Wellness — Single Session':                      25000,
+  'Mental Wellness — Bundle Add-On':                       21500,
+  'Mental Wellness — 3-Session Package':                   60000,
 };
 
 module.exports = async function handler(req, res) {
@@ -18,7 +16,6 @@ module.exports = async function handler(req, res) {
   }
 
   try {
-    console.log('KEY CHECK:', process.env.STRIPE_SECRET_KEY ? process.env.STRIPE_SECRET_KEY.substring(0, 12) : 'MISSING');
     const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
     const { items, email, patientName } = req.body;
 
