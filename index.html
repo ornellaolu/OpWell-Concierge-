@@ -11997,6 +11997,21 @@
       else el.classList.remove('error');
     });
     if (!valid) return;
+    // Capture email for abandoned cart recovery
+    var cartEmail = document.getElementById('s1-email').value.trim();
+    if (cartEmail) {
+      fetch('/api/abandoned-cart', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'capture',
+          email: cartEmail,
+          fname: document.getElementById('s1-fname').value.trim(),
+          lname: document.getElementById('s1-lname').value.trim(),
+          service: document.getElementById('s1-consultant').value
+        })
+      }).catch(function() {});
+    }
     updateServices();
     schedSetStep(2);
   }

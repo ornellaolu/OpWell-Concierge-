@@ -67,6 +67,47 @@ module.exports = async function handler(req, res) {
         `,
       });
 
+      // Auto-send thank-you to referring provider
+      await resend.emails.send({
+        from: 'OpWell Concierge <info@opwellconcierge.com>',
+        to: providerEmail,
+        subject: `Thank You for Your Referral — OpWell Concierge`,
+        html: `
+          <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; color: #2c2c2c;">
+            <div style="background: #3b2a1a; padding: 32px 40px; text-align: center;">
+              <h1 style="color: #e8c97a; font-size: 1.6rem; margin: 0; letter-spacing: 0.05em;">OpWell Concierge\u2122</h1>
+              <p style="color: rgba(232,201,122,0.75); margin: 6px 0 0; font-size: 0.85rem; letter-spacing: 0.08em;">ANESTHESIOLOGIST-LED TELEHEALTH</p>
+            </div>
+
+            <div style="background: #fdf8f4; padding: 40px;">
+              <h2 style="color: #3b2a1a; font-size: 1.3rem; margin-top: 0;">Thank You for Your Referral</h2>
+              <p style="color: #555; line-height: 1.7;">Dear ${esc(providerName)},</p>
+              <p style="color: #555; line-height: 1.7;">Thank you for referring <strong>${esc(patientName)}</strong> to OpWell Concierge. We truly value your trust in our practice and are committed to providing exceptional care.</p>
+
+              <div style="background: #fff; border: 1px solid #e8d9c8; border-radius: 8px; padding: 24px; margin: 24px 0;">
+                <h3 style="color: #3b2a1a; margin-top: 0; font-size: 1rem;">Referral Summary</h3>
+                <p style="margin: 6px 0; color: #555;"><strong>Patient:</strong> ${esc(patientName)}</p>
+                <p style="margin: 6px 0; color: #555;"><strong>Service:</strong> ${esc(service)}</p>
+                ${procedure ? `<p style="margin: 6px 0; color: #555;"><strong>Procedure:</strong> ${esc(procedure)}</p>` : ''}
+              </div>
+
+              <p style="color: #555; line-height: 1.7;">We will reach out to your patient promptly and keep you informed of their care journey. If you have any questions, please don\u2019t hesitate to contact us.</p>
+
+              <div style="background: rgba(45,90,61,0.06); border-radius: 8px; padding: 20px 24px; margin: 24px 0;">
+                <h3 style="color: #2d5a3d; margin-top: 0; font-size: 1rem;">Partner with OpWell</h3>
+                <p style="color: #555; font-size: 0.9rem; line-height: 1.6;">Interested in a formal partnership? Visit our <a href="https://opwellconcierge.com?page=providers" style="color: #b85c2b; font-weight: 600;">Provider Portal</a> to learn more about our referral program.</p>
+              </div>
+
+              <p style="color: #555; line-height: 1.7;">Warmly,<br><strong>Dr. Ornella Oluwole</strong><br>OpWell Concierge\u2122</p>
+            </div>
+
+            <div style="background: #3b2a1a; padding: 20px 40px; text-align: center;">
+              <p style="color: rgba(232,201,122,0.6); font-size: 0.8rem; margin: 0;">OpWell Concierge\u2122 \u00b7 Telehealth \u00b7 GA, OH & VA \u00b7 (678) 235-5822</p>
+            </div>
+          </div>
+        `,
+      });
+
     } else if (type === 'partnership') {
       const { providerName, title, practice, providerEmail, providerPhone, state, specialty, message } = req.body;
 
