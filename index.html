@@ -11951,8 +11951,17 @@
   function checkUpsell() {
     var sel = document.getElementById('s2-service');
     var upsell = document.getElementById('s2-upsell-wrap');
-    if (!upsell) return;
-    upsell.style.display = (sel && sel.value === 'Pre-Surgical Consultation ($490)') ? '' : 'none';
+    if (upsell) upsell.style.display = (sel && sel.value === 'Pre-Surgical Consultation ($490)') ? '' : 'none';
+    // Hide Mental Wellness add-on for packages that already include it
+    var addonWrap = document.getElementById('s2-addon-wrap');
+    var addonCb = document.getElementById('s2-addon-mh');
+    var consultant = document.getElementById('s1-consultant').value;
+    if (addonWrap && sel && consultant === 'anesthesiologist') {
+      var v = sel.value;
+      var hideAddon = v.indexOf('Executive Package') !== -1 || v.indexOf('Complete Surgical Care Package') !== -1;
+      addonWrap.style.display = hideAddon ? 'none' : '';
+      if (hideAddon && addonCb) addonCb.checked = false;
+    }
   }
 
   function upgradeToPackage() {
@@ -12015,7 +12024,7 @@
     if (!valid) return;
 
     var service = document.getElementById('s2-service').value;
-    var serviceName = service.replace(/\s*\(\$[\d]+\)/, '');
+    var serviceName = service.replace(/\s*\(\$[\d,]+\)/, '');
     var addOn = document.getElementById('s2-addon-mh') && document.getElementById('s2-addon-mh').checked;
     var fname = document.getElementById('s1-fname').value;
     var lname = document.getElementById('s1-lname').value;
