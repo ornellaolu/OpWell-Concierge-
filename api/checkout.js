@@ -60,7 +60,11 @@ module.exports = async function handler(req, res) {
       customer_email: email || undefined,
       allow_promotion_codes: !hasExecutive,
       billing_address_collection: 'auto',
-      metadata: { patient_name: patientName || '' },
+      metadata: {
+        patient_name: patientName || '',
+        patient_email: email || '',
+        services: items.join(', '),
+      },
     });
 
     return res.status(200).json({ url: session.url });
