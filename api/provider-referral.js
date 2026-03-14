@@ -21,7 +21,7 @@ module.exports = async function handler(req, res) {
       }
 
       await resend.emails.send({
-        from: 'OpWell Concierge <onboarding@resend.dev>',
+        from: 'OpWell Concierge <info@opwellconcierge.com>',
         to: 'dr.oluwole@opwellconcierge.com',
         replyTo: providerEmail,
         subject: `New Referral: ${esc(patientName)} — ${esc(service)} (from ${esc(providerName)})`,
@@ -75,7 +75,7 @@ module.exports = async function handler(req, res) {
       }
 
       await resend.emails.send({
-        from: 'OpWell Concierge <onboarding@resend.dev>',
+        from: 'OpWell Concierge <info@opwellconcierge.com>',
         to: 'dr.oluwole@opwellconcierge.com',
         replyTo: providerEmail,
         subject: `Partnership Inquiry: ${esc(providerName)} — ${esc(practice)} (${esc(specialty)})`,

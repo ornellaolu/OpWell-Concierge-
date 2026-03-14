@@ -23,7 +23,7 @@ module.exports = async function handler(req, res) {
 
     // Send patient confirmation
     await resend.emails.send({
-      from: 'OpWell Concierge <onboarding@resend.dev>',
+      from: 'OpWell Concierge <info@opwellconcierge.com>',
       to: email,
       subject: 'Your OpWell Concierge Booking is Confirmed',
       html: `
@@ -72,7 +72,7 @@ module.exports = async function handler(req, res) {
 
     // Send doctor notification
     await resend.emails.send({
-      from: 'OpWell Bookings <onboarding@resend.dev>',
+      from: 'OpWell Bookings <info@opwellconcierge.com>',
       to: 'dr.oluwole@opwellconcierge.com',
       subject: `New Booking: ${esc(patientName)} — ${esc(serviceList)}`,
       html: `

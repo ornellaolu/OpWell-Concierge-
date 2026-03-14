@@ -23,7 +23,7 @@ module.exports = async function handler(req, res) {
 
     // Send notification to OpWell
     await resend.emails.send({
-      from: 'OpWell Concierge <onboarding@resend.dev>',
+      from: 'OpWell Concierge <info@opwellconcierge.com>',
       to: 'dr.oluwole@opwellconcierge.com',
       replyTo: email,
       subject: `New Contact Request: ${esc(patientName)} — ${esc(stateLabel)}`,
