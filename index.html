@@ -739,16 +739,21 @@
     .hiw-section {
       padding: 8.5rem 4rem;
       background: #FAF0E8;
+      text-align: center;
     }
 
     .hiw-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2.5rem;
       margin-top: 3rem;
     }
 
-    .hiw-step { position: relative; }
+    .hiw-step {
+      position: relative;
+      text-align: center;
+      padding: 2rem 1.5rem;
+    }
 
     .step-num {
       font-family: 'Playfair Display', serif;
@@ -756,21 +761,21 @@
       font-weight: 300;
       color: rgba(196,104,74,0.25);
       line-height: 1;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.75rem;
     }
 
     .step-title {
       font-family: 'Playfair Display', serif;
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       font-weight: 500;
       color: var(--charcoal);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.75rem;
     }
 
     .step-desc {
       font-size: 0.82rem;
       color: var(--slate);
-      line-height: 1.65;
+      line-height: 1.7;
     }
 
     /* ── ABOUT PREVIEW ── */
@@ -1316,12 +1321,17 @@
     }
 
     .gift-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 1.5rem;
-      max-width: 1200px;
+      max-width: 1100px;
       margin: 0 auto 3rem;
       text-align: left;
+    }
+
+    .gift-grid .gift-card {
+      flex: 0 1 320px;
     }
 
     .gift-card {
@@ -1381,12 +1391,8 @@
       font-style: italic;
     }
 
-    @media (max-width: 900px) {
-      .gift-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
     @media (max-width: 560px) {
-      .gift-grid { grid-template-columns: 1fr; }
+      .gift-grid .gift-card { flex: 1 1 100%; }
     }
     .mh-personalized-callout {
       display: flex;
@@ -1674,6 +1680,12 @@
       .stat-strip { padding: 2rem 1.5rem; }
       .glp1-block { padding: 2rem 1.5rem; }
       .page-footnotes { padding: 0.75rem 1.5rem; }
+      .hiw-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+      .hiw-step { padding: 1.5rem 1rem; }
+    }
+
+    @media (max-width: 480px) {
+      .hiw-grid { grid-template-columns: 1fr; }
     }
 
     /* ── PAGE FOOTNOTES ── */
@@ -2492,7 +2504,7 @@
         <div class="step-desc">Post-op check-ins, async physician messaging, and mental health specialist access — through the critical windows when patients need support most.</div>
       </div>
     </div>
-    <div style="margin-top:2.5rem; padding:1.5rem 2rem; background:rgba(200,132,90,0.08); border-left:3px solid var(--terracotta); max-width:640px;">
+    <div style="margin-top:3rem; padding:1.5rem 2rem; background:rgba(200,132,90,0.08); border-left:3px solid var(--terracotta); max-width:640px; margin-left:auto; margin-right:auto; text-align:left;">
       <div style="font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--terracotta); font-weight:500; margin-bottom:0.5rem;">HSA & FSA Accepted</div>
       <p style="font-size:0.85rem; color:var(--slate); line-height:1.7; margin:0;">OpWell is a cash-pay service. We do not bill insurance directly — but your HSA or FSA funds are accepted. OpWell consultations qualify as an eligible medical expense, and we provide itemized documentation for your records.</p>
     </div>
@@ -2583,31 +2595,41 @@
   <section class="gift-section">
     <div class="gift-header">
       <div class="section-tag" style="color:var(--terracotta);">Give the Gift of Care</div>
-      <h2 class="section-title">Someone you love is having surgery.<br>Give them the preparation they deserve.</h2>
+      <h2 class="section-title">Someone you love is facing a medical journey.<br>Give them the preparation they deserve.</h2>
       <div class="gold-divider" style="margin:0 auto 1.5rem;"></div>
       <p class="section-subtitle" style="max-width:640px; margin:0 auto 3rem;">Purchase an OpWell consultation as a gift. Your recipient will receive everything they need to book their own appointment — on their schedule, before their procedure.</p>
     </div>
     <div class="gift-grid">
       <div class="gift-card">
         <div class="gift-name">Pre-Surgical Consultation</div>
+        <div class="gift-price">$490</div>
         <p class="gift-desc">A comprehensive pre-operative consultation covering medications, prehabilitation, risk assessment, and recovery education. Ideal for anyone facing elective surgery.</p>
-        <a class="btn-secondary" onclick="showPage('surgery-prep')" style="cursor:pointer; margin-top:1.5rem; display:inline-block;">Learn More & Gift →</a>
+        <a class="btn-secondary" onclick="giftService('anesthesiologist','Pre-Surgical Consultation ($490)')" style="cursor:pointer; margin-top:1.5rem; display:inline-block;">Gift This Consultation — $490 →</a>
       </div>
       <div class="gift-card gift-card-featured">
         <div class="package-badge">Most Gifted</div>
         <div class="gift-name">Complete Surgical Care Package</div>
+        <div class="gift-price">$850</div>
         <p class="gift-desc">Full perioperative support from pre-op through recovery. The most complete gift of care — for someone who deserves to be supported at every step.</p>
-        <a class="btn-primary" onclick="showPage('surgery-prep')" style="cursor:pointer; margin-top:1.5rem; display:inline-block;">Learn More & Gift →</a>
+        <a class="btn-primary" onclick="giftService('anesthesiologist','Complete Surgical Care Package ($850)')" style="cursor:pointer; margin-top:1.5rem; display:inline-block;">Gift This Package — $850 →</a>
       </div>
       <div class="gift-card">
         <div class="gift-name">Post-Operative Care</div>
+        <div class="gift-price">$490</div>
         <p class="gift-desc">Anesthesiologist-led support through the most vulnerable window after discharge — pain guidance, warning sign education, and check-ins when they matter most.</p>
-        <a class="btn-secondary" onclick="showPage('recovery')" style="cursor:pointer; margin-top:1.5rem; display:inline-block;">Learn More & Gift →</a>
+        <a class="btn-secondary" onclick="giftService('anesthesiologist','Post-Operative Care ($490)')" style="cursor:pointer; margin-top:1.5rem; display:inline-block;">Gift This Consultation — $490 →</a>
       </div>
       <div class="gift-card">
         <div class="gift-name">Labor & Delivery Consultation</div>
+        <div class="gift-price">$400</div>
         <p class="gift-desc">For an expectant mother navigating labor, anesthesia, and childbirth. An honest, clinical conversation — before the moment she needs it most.</p>
-        <a class="btn-secondary" onclick="showPage('obstetric')" style="cursor:pointer; margin-top:1.5rem; display:inline-block;">Learn More & Gift →</a>
+        <a class="btn-secondary" onclick="giftService('anesthesiologist','Labor & Delivery Consultation — New Patient ($400)')" style="cursor:pointer; margin-top:1.5rem; display:inline-block;">Gift This Consultation — $400 →</a>
+      </div>
+      <div class="gift-card">
+        <div class="gift-name">Mental Wellness — 3-Session Package</div>
+        <div class="gift-price">$600</div>
+        <p class="gift-desc">Three sessions with a licensed therapist specializing in surgical anxiety, emotional recovery, and perioperative mental health — a powerful gift for someone facing the emotional side of surgery.</p>
+        <a class="btn-secondary" onclick="giftService('therapist','Mental Wellness — 3-Session Package ($600)')" style="cursor:pointer; margin-top:1.5rem; display:inline-block;">Gift This Package — $600 →</a>
       </div>
     </div>
     <p class="gift-note">After purchase, your recipient will receive a personalized gift confirmation with instructions to book their consultation directly with OpWell — at their convenience, before their procedure.</p>
@@ -12247,6 +12269,19 @@
       const page = document.getElementById('page-' + pageId);
       if (page) { page.classList.add('active'); window.scrollTo({ top: 0 }); initFadeIns(); updatePageMeta(pageId); }
     }
+  }
+
+  // ── GIFT SERVICE PRE-SELECT ──
+  function giftService(consultant, serviceName) {
+    showPage('schedule');
+    setTimeout(function() {
+      var cons = document.getElementById('s1-consultant');
+      if (cons) { cons.value = consultant; updateServices(); }
+      setTimeout(function() {
+        var sel = document.getElementById('s2-service');
+        if (sel) sel.value = serviceName;
+      }, 100);
+    }, 300);
   }
 
   // ── HERO STORY SLIDER ──

@@ -1,5 +1,12 @@
 const { Resend } = require('resend');
 
+// Keep in sync with BLOG_ACCESS_CODE in index.html
+const BLOG_ACCESS_CODE = 'OPWELL2026';
+
+function esc(str) {
+  return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -28,15 +35,21 @@ module.exports = async function handler(req, res) {
 
           <div style="background: #fdf8f4; padding: 40px;">
             <h2 style="color: #3b2a1a; font-size: 1.3rem; margin-top: 0;">Your Booking is Confirmed</h2>
-            <p style="color: #555; line-height: 1.7;">Dear ${patientName},</p>
+            <p style="color: #555; line-height: 1.7;">Dear ${esc(patientName)},</p>
             <p style="color: #555; line-height: 1.7;">Thank you for booking with OpWell Concierge. Your payment has been received and your appointment is confirmed.</p>
 
             <div style="background: #fff; border: 1px solid #e8d9c8; border-radius: 8px; padding: 24px; margin: 24px 0;">
               <h3 style="color: #3b2a1a; margin-top: 0; font-size: 1rem;">Booking Summary</h3>
-              <p style="margin: 6px 0; color: #555;"><strong>Service:</strong> ${serviceList}</p>
-              ${procedure ? `<p style="margin: 6px 0; color: #555;"><strong>Procedure Type:</strong> ${procedure}</p>` : ''}
-              ${date ? `<p style="margin: 6px 0; color: #555;"><strong>Preferred Date:</strong> ${date}</p>` : ''}
-              ${time ? `<p style="margin: 6px 0; color: #555;"><strong>Preferred Time:</strong> ${time}</p>` : ''}
+              <p style="margin: 6px 0; color: #555;"><strong>Service:</strong> ${esc(serviceList)}</p>
+              ${procedure ? `<p style="margin: 6px 0; color: #555;"><strong>Procedure Type:</strong> ${esc(procedure)}</p>` : ''}
+              ${date ? `<p style="margin: 6px 0; color: #555;"><strong>Preferred Date:</strong> ${esc(date)}</p>` : ''}
+              ${time ? `<p style="margin: 6px 0; color: #555;"><strong>Preferred Time:</strong> ${esc(time)}</p>` : ''}
+            </div>
+
+            <div style="background: #f0f7f2; border: 1px solid #b8d9c4; border-radius: 8px; padding: 20px 24px; margin: 24px 0; text-align: center;">
+              <p style="margin: 0 0 6px; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #2d5a3d;">Your Clinical Library Access Code</p>
+              <p style="margin: 0 0 10px; font-size: 2rem; font-weight: 700; letter-spacing: 0.18em; color: #2d5a3d; font-family: monospace;">${BLOG_ACCESS_CODE}</p>
+              <p style="margin: 0; font-size: 0.82rem; color: #555; line-height: 1.5;">Use this code on the <strong>OpWell Blog</strong> to unlock patient-only clinical articles on surgery preparation, recovery, and more.</p>
             </div>
 
             <h3 style="color: #3b2a1a; font-size: 1rem;">What Happens Next</h3>
@@ -61,7 +74,7 @@ module.exports = async function handler(req, res) {
     await resend.emails.send({
       from: 'OpWell Bookings <onboarding@resend.dev>',
       to: 'dr.oluwole@opwellconcierge.com',
-      subject: `New Booking: ${patientName} — ${serviceList}`,
+      subject: `New Booking: ${esc(patientName)} — ${esc(serviceList)}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #2c2c2c;">
           <div style="background: #3b2a1a; padding: 24px 32px;">
@@ -69,12 +82,12 @@ module.exports = async function handler(req, res) {
           </div>
           <div style="padding: 32px; background: #fdf8f4;">
             <table style="width:100%; border-collapse:collapse; font-size:0.95rem;">
-              <tr><td style="padding:8px 0; color:#888; width:140px;">Patient</td><td style="padding:8px 0; font-weight:600;">${patientName}</td></tr>
-              <tr><td style="padding:8px 0; color:#888;">Email</td><td style="padding:8px 0;"><a href="mailto:${email}">${email}</a></td></tr>
-              <tr><td style="padding:8px 0; color:#888;">Service</td><td style="padding:8px 0;">${serviceList}</td></tr>
-              ${procedure ? `<tr><td style="padding:8px 0; color:#888;">Procedure</td><td style="padding:8px 0;">${procedure}</td></tr>` : ''}
-              ${date ? `<tr><td style="padding:8px 0; color:#888;">Preferred Date</td><td style="padding:8px 0; font-weight:600; color:#b85c2b;">${date}</td></tr>` : ''}
-              ${time ? `<tr><td style="padding:8px 0; color:#888;">Preferred Time</td><td style="padding:8px 0; font-weight:600; color:#b85c2b;">${time}</td></tr>` : ''}
+              <tr><td style="padding:8px 0; color:#888; width:140px;">Patient</td><td style="padding:8px 0; font-weight:600;">${esc(patientName)}</td></tr>
+              <tr><td style="padding:8px 0; color:#888;">Email</td><td style="padding:8px 0;"><a href="mailto:${esc(email)}">${esc(email)}</a></td></tr>
+              <tr><td style="padding:8px 0; color:#888;">Service</td><td style="padding:8px 0;">${esc(serviceList)}</td></tr>
+              ${procedure ? `<tr><td style="padding:8px 0; color:#888;">Procedure</td><td style="padding:8px 0;">${esc(procedure)}</td></tr>` : ''}
+              ${date ? `<tr><td style="padding:8px 0; color:#888;">Preferred Date</td><td style="padding:8px 0; font-weight:600; color:#b85c2b;">${esc(date)}</td></tr>` : ''}
+              ${time ? `<tr><td style="padding:8px 0; color:#888;">Preferred Time</td><td style="padding:8px 0; font-weight:600; color:#b85c2b;">${esc(time)}</td></tr>` : ''}
               <tr><td style="padding:8px 0; color:#888;">Feedback Consent</td><td style="padding:8px 0;">${feedbackConsent ? 'Yes ✓' : 'No'}</td></tr>
             </table>
             <div style="margin-top:24px; padding:16px; background:#fff; border:1px solid #e8d9c8; border-radius:8px;">
@@ -88,6 +101,6 @@ module.exports = async function handler(req, res) {
     return res.status(200).json({ success: true });
   } catch (err) {
     console.error('Email error:', err);
-    return res.status(500).json({ error: err.message });
+    return res.status(500).json({ error: 'An internal error occurred. Please try again.' });
   }
 };

@@ -10,6 +10,12 @@ const PRICES = {
   'Mental Wellness — 3-Session Package':                   60000,
 };
 
+const ALLOWED_ORIGINS = [
+  'https://opwellconcierge.com',
+  'https://www.opwellconcierge.com',
+  'https://op-well-concierge.vercel.app',
+];
+
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -39,9 +45,8 @@ module.exports = async function handler(req, res) {
       };
     });
 
-    const origin = req.headers.referer
-      ? new URL(req.headers.referer).origin
-      : (process.env.BASE_URL || 'https://opwellconcierge.com');
+    const refOrigin = req.headers.referer ? new URL(req.headers.referer).origin : null;
+    const origin = ALLOWED_ORIGINS.includes(refOrigin) ? refOrigin : ALLOWED_ORIGINS[0];
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -58,6 +63,6 @@ module.exports = async function handler(req, res) {
     return res.status(200).json({ url: session.url });
   } catch (err) {
     console.error('Stripe checkout error:', err);
-    return res.status(500).json({ error: err.message });
+    return res.status(500).json({ error: 'An internal error occurred. Please try again.' });
   }
 };
