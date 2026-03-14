@@ -48,6 +48,9 @@ module.exports = async function handler(req, res) {
     const refOrigin = req.headers.referer ? new URL(req.headers.referer).origin : null;
     const origin = ALLOWED_ORIGINS.includes(refOrigin) ? refOrigin : ALLOWED_ORIGINS[0];
 
+    // Disable promo codes for Executive Package (already deeply discounted)
+    const hasExecutive = items.some(n => n.startsWith('Executive Package'));
+
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: lineItems,
@@ -55,7 +58,7 @@ module.exports = async function handler(req, res) {
       success_url: `${origin}?paid=1`,
       cancel_url:  `${origin}?cancelled=1`,
       customer_email: email || undefined,
-      allow_promotion_codes: true,
+      allow_promotion_codes: !hasExecutive,
       billing_address_collection: 'auto',
       metadata: { patient_name: patientName || '' },
     });
