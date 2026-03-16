@@ -12364,7 +12364,7 @@
     var consultant = document.getElementById('s1-consultant').value;
     if (addonWrap && sel && consultant === 'anesthesiologist') {
       var v = sel.value;
-      var hideAddon = v.indexOf('Executive Package') !== -1 || v.indexOf('Complete Surgical Care Package') !== -1;
+      var hideAddon = v.indexOf('Executive Package') !== -1;
       addonWrap.style.display = hideAddon ? 'none' : '';
       if (hideAddon && addonCb) addonCb.checked = false;
     }
