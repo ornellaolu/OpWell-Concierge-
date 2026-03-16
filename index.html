@@ -1839,6 +1839,35 @@
       .glp1-block { padding: 2rem 1rem !important; }
       .glp1-block .content-2col { gap: 1.5rem; }
       .stat-callout-num { font-size: 1.8rem; }
+      /* Provider section */
+      .provider-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .provider-card { padding: 1.5rem 1rem; }
+      /* Final CTA */
+      .final-cta { padding: 3rem 1rem; }
+      .final-cta .section-title { font-size: clamp(1.3rem, 5vw, 1.8rem); }
+      /* Gift section */
+      .gift-section { padding: 3rem 1rem; }
+      .gift-grid { flex-direction: column; }
+      .gift-grid .gift-card { flex: 1 1 100%; }
+      .gift-card { padding: 1.5rem 1rem; }
+      /* Distinction section */
+      .distinction-section { padding: 3rem 1rem; }
+      /* Blog grids */
+      .blog-grid { grid-template-columns: 1fr; }
+      .blog-stat-strip { grid-template-columns: 1fr 1fr; }
+      /* Large font sizes */
+      .step-num { font-size: 2.5rem; }
+      .package-price { font-size: 2rem; }
+      .blog-eras-stat .eras-num { font-size: 2rem; }
+      .bt-big-no { font-size: 2.5rem; }
+      .cs-big-num { font-size: 2.2rem; }
+      .br-zero-num { font-size: 2rem; }
+      /* Blog post inline grid fix */
+      .bb-rf-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+      .br-risk-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+      .qr-key-grid { grid-template-columns: 1fr; }
+      /* Packages grid */
+      .packages-grid { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 480px) {
@@ -1852,6 +1881,15 @@
       .stat-strip { grid-template-columns: 1fr 1fr; }
       .stat { border-right: none; border-bottom: 1px solid rgba(122,160,122,0.25); }
       .lp-hero { padding: 3.5rem 0.85rem 1.5rem; }
+      /* Force inline 3-col grids in blog posts to stack */
+      [id^="page-blog-"] [style*="grid-template-columns"] {
+        grid-template-columns: 1fr !important;
+      }
+      .final-cta { padding: 2.5rem 0.85rem; }
+      .gift-section { padding: 2.5rem 0.85rem; }
+      .provider-section { padding: 2.5rem 0.85rem; }
+      .distinction-section { padding: 2.5rem 0.85rem; }
+      .package-card { padding: 1.5rem 1rem; }
     }
 
     /* ── PAGE FOOTNOTES ── */
@@ -2438,6 +2476,7 @@
       </ul>
     </li>
     <li><a onclick="showPage('about')">Our Story</a></li>
+    <li><a onclick="showPage('pricing')">Pricing</a></li>
     <li><a onclick="showPage('products')">Products</a></li>
     <li><a onclick="showPage('blog')">Blog</a></li>
     <li><a onclick="showPage('contact')">Contact</a></li>
@@ -2463,6 +2502,7 @@
     <a onclick="mobileNavTo('medical-tourism')">Medical Tourism</a>
   </div>
   <a onclick="mobileNavTo('about')">Our Story</a>
+  <a onclick="mobileNavTo('pricing')">Pricing</a>
   <a onclick="mobileNavTo('products')">Products</a>
   <a onclick="mobileNavTo('blog')">Blog</a>
   <a onclick="mobileNavTo('contact')">Contact</a>
@@ -3350,7 +3390,23 @@
         </ul>
         <br><a onclick="showPage('schedule')" class="btn-secondary" style="cursor:pointer; display:inline-block;">Book Your Consultation →</a>
       </div>
+      <div class="package-card" style="background:#1E3A28; border-color:rgba(200,132,90,0.3);">
+        <div class="package-badge" style="background:var(--terracotta);">Executive Package</div>
+        <div class="package-name" style="color:#fdf8f4;">Complete Concierge Program</div>
+        <div class="package-price" style="color:#e8b48a;">$1,350</div>
+        <div class="package-savings" style="color:rgba(232,180,138,0.85);">Save $230 — valued at $1,580 separately</div>
+        <div class="package-desc" style="color:rgba(253,248,244,0.85);">OpWell's most comprehensive program — physician-led surgical preparation, post-operative care, and three dedicated mental wellness sessions. Full-spectrum perioperative support, from consultation to recovery.</div>
+        <ul class="services-list">
+          <li style="color:rgba(253,248,244,0.9);"><div class="service-check" style="color:#e8b48a;">✓</div>Everything in Post-Operative Care</li>
+          <li style="color:rgba(253,248,244,0.9);"><div class="service-check" style="color:#e8b48a;">✓</div>Everything in Pre-Surgical Consultation</li>
+          <li style="color:rgba(253,248,244,0.9);"><div class="service-check" style="color:#e8b48a;">✓</div>3 Mental Wellness sessions ($600 value)</li>
+          <li style="color:rgba(253,248,244,0.9);"><div class="service-check" style="color:#e8b48a;">✓</div>Coordinated care — medical + mental health in one team</li>
+          <li style="color:rgba(253,248,244,0.9);"><div class="service-check" style="color:#e8b48a;">✓</div>Priority scheduling &amp; extended messaging access</li>
+        </ul>
+        <br><a onclick="showPage('schedule')" class="btn-gold" style="cursor:pointer; display:inline-block;">Book Executive Package →</a>
+      </div>
     </div>
+    <p class="section-subtitle" style="margin-top:1.5rem;"><a onclick="showPage('pricing')" style="color:var(--terracotta); cursor:pointer; text-decoration:underline;">Compare all care plans & packages →</a></p>
   </div>
 
   <div class="faq-section">
@@ -4014,6 +4070,7 @@
         <div class="package-badge">Best Value</div>
         <div class="package-name">Complete Surgical Care Package</div>
         <div class="package-price">$850</div>
+        <div class="package-savings">Save $130 vs. booking separately</div>
         <div class="package-desc">Complete medical tourism support — full pre-departure preparation before you travel and anesthesiologist-led follow-up when you return home.</div>
         <ul class="services-list">
           <li><div class="service-check">✓</div>Everything in Pre-Surgical Consultation</li>
@@ -4022,7 +4079,23 @@
         </ul>
         <br><a onclick="showPage('schedule')" class="btn-primary" style="cursor:pointer; display:inline-block;">Book Your Consultation →</a>
       </div>
+      <div class="package-card" style="background:#1E3A28; border-color:rgba(200,132,90,0.3);">
+        <div class="package-badge" style="background:var(--terracotta);">Executive Package</div>
+        <div class="package-name" style="color:#fdf8f4;">Complete Concierge Program</div>
+        <div class="package-price" style="color:#e8b48a;">$1,350</div>
+        <div class="package-savings" style="color:rgba(232,180,138,0.85);">Save $230 — valued at $1,580 separately</div>
+        <div class="package-desc" style="color:rgba(253,248,244,0.85);">OpWell's most comprehensive program — physician-led surgical preparation, post-operative care, and three dedicated mental wellness sessions. Full-spectrum perioperative support for medical tourism patients, from consultation to recovery.</div>
+        <ul class="services-list">
+          <li style="color:rgba(253,248,244,0.9);"><div class="service-check" style="color:#e8b48a;">✓</div>Everything in Pre-Surgical Consultation</li>
+          <li style="color:rgba(253,248,244,0.9);"><div class="service-check" style="color:#e8b48a;">✓</div>Everything in Post-Operative Care</li>
+          <li style="color:rgba(253,248,244,0.9);"><div class="service-check" style="color:#e8b48a;">✓</div>3 Mental Wellness sessions ($600 value)</li>
+          <li style="color:rgba(253,248,244,0.9);"><div class="service-check" style="color:#e8b48a;">✓</div>Coordinated care — medical + mental health in one team</li>
+          <li style="color:rgba(253,248,244,0.9);"><div class="service-check" style="color:#e8b48a;">✓</div>Priority scheduling &amp; extended messaging access</li>
+        </ul>
+        <br><a onclick="showPage('schedule')" class="btn-gold" style="cursor:pointer; display:inline-block;">Book Executive Package →</a>
+      </div>
     </div>
+    <p class="section-subtitle" style="margin-top:1.5rem;"><a onclick="showPage('pricing')" style="color:var(--terracotta); cursor:pointer; text-decoration:underline;">Compare all care plans & packages →</a></p>
   </div>
 
   <div class="faq-section">
@@ -5629,7 +5702,7 @@
       <h2>The OpWell Approach: Mind and Body Together</h2>
       <p>OpWell is one of the few pre- and post-surgical concierge practices in the country that treats mental health as a clinical priority alongside physical preparation — not as an afterthought.</p>
       <p>Our partnership with licensed therapist <strong>Stacey Floyd, MA, LPC</strong> gives patients access to specialized pre-surgical psychological support that works in direct coordination with our anesthesiology team. Stacey specializes in surgical anxiety, bariatric clearances, and perinatal mental health — drawing from evidence-based modalities including CBT, DBT, EMDR, and Trauma-Focused Therapy.</p>
-      <p>You don't have to white-knuckle your way through this. Support — real, clinical, coordinated support — is available.</p>
+      <p>You don't have to go through this alone. Real, clinical, coordinated support is available — and it can start before your surgery date.</p>
 
       <div class="blog-author-box">
         <div class="blog-author-icon">🩺</div>
@@ -11851,6 +11924,131 @@
 </div><!-- end blog-30 -->
 
 <!-- ══════════════════════════════════════════════════════ -->
+<!-- PRICING PAGE -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div id="page-pricing" class="page">
+  <div class="lp-hero" style="min-height:40vh; background:linear-gradient(135deg,#1C2B22,#2D5A3D);">
+    <div class="lp-hero-bg"></div>
+    <div class="lp-breadcrumb" onclick="showPage('home')" style="color:rgba(255,255,255,0.7);">← OpWell Home</div>
+    <h1 class="lp-headline" style="color:#FAF0E8;">Care Plans & Pricing</h1>
+    <p class="lp-sub" style="color:rgba(250,240,232,0.85);">Transparent pricing. No hidden fees. HSA & FSA accepted. No referral required.</p>
+  </div>
+
+  <div class="package-section" style="padding-top:4rem;">
+    <div class="section-tag">Medical Consultations</div>
+    <h2 class="section-title">Choose the level of support<br>that fits your journey.</h2>
+    <div class="gold-divider"></div>
+    <p class="section-subtitle">Every plan includes direct physician access, personalized documentation, and coordinated care. Pay over time with Klarna or Afterpay.</p>
+
+    <div class="packages-grid">
+
+      <div class="package-card">
+        <div class="package-name">Pre-Surgical Consultation</div>
+        <div class="package-price">$490</div>
+        <div class="package-desc">A comprehensive pre-operative consultation — risk assessment, prehabilitation protocol, medication review, and recovery education.</div>
+        <ul class="services-list">
+          <li><div class="service-check">✓</div>50-minute consultation with Dr. Oluwole</li>
+          <li><div class="service-check">✓</div>Anesthesia & aspiration risk assessment</li>
+          <li><div class="service-check">✓</div>Personalized prehabilitation protocol</li>
+          <li><div class="service-check">✓</div>Medication & supplement safety review</li>
+          <li><div class="service-check">✓</div>Mental health screening + specialist access</li>
+        </ul>
+        <br><a onclick="showPage('schedule')" class="btn-secondary" style="cursor:pointer; display:inline-block;">Book Consultation →</a>
+      </div>
+
+      <div class="package-card">
+        <div class="package-name">Post-Operative Care</div>
+        <div class="package-price">$490</div>
+        <div class="package-desc">Physician-led post-discharge support through the critical recovery windows after your procedure.</div>
+        <ul class="services-list">
+          <li><div class="service-check">✓</div>72-hour post-discharge check-in</li>
+          <li><div class="service-check">✓</div>Weekly check-ins — up to 30 days post-op</li>
+          <li><div class="service-check">✓</div>Async physician messaging throughout recovery</li>
+          <li><div class="service-check">✓</div>Pain management & wound healing guidance</li>
+          <li><div class="service-check">✓</div>Warning sign education & readmission prevention</li>
+        </ul>
+        <br><a onclick="showPage('schedule')" class="btn-secondary" style="cursor:pointer; display:inline-block;">Book Consultation →</a>
+      </div>
+
+      <div class="package-card featured">
+        <div class="package-badge">Most Popular</div>
+        <div class="package-name">Complete Surgical Care Package</div>
+        <div class="package-price">$850</div>
+        <div class="package-savings">Save $130 — valued at $980 separately</div>
+        <div class="package-desc">Full perioperative support — pre-surgical preparation plus post-operative care through your most critical recovery windows.</div>
+        <ul class="services-list">
+          <li><div class="service-check">✓</div>Everything in Pre-Surgical Consultation</li>
+          <li><div class="service-check">✓</div>Everything in Post-Operative Care</li>
+          <li><div class="service-check">✓</div>Continuity of care across your full journey</li>
+          <li><div class="service-check">✓</div>All documentation included</li>
+        </ul>
+        <br><a onclick="showPage('schedule')" class="btn-primary" style="cursor:pointer; display:inline-block;">Book Complete Care →</a>
+      </div>
+
+      <div class="package-card" style="background:#1E3A28; border-color:rgba(200,132,90,0.3);">
+        <div class="package-badge" style="background:var(--terracotta);">Executive Package</div>
+        <div class="package-name" style="color:#fdf8f4;">Complete Concierge Program</div>
+        <div class="package-price" style="color:#e8b48a;">$1,350</div>
+        <div class="package-savings" style="color:rgba(232,180,138,0.85);">Save $230 — valued at $1,580 separately</div>
+        <div class="package-desc" style="color:rgba(253,248,244,0.85);">OpWell's most comprehensive program — physician-led surgical preparation, post-operative care, and three dedicated mental wellness sessions. Full-spectrum perioperative support.</div>
+        <ul class="services-list">
+          <li style="color:rgba(253,248,244,0.9);"><div class="service-check" style="color:#e8b48a;">✓</div>Everything in Pre-Surgical Consultation</li>
+          <li style="color:rgba(253,248,244,0.9);"><div class="service-check" style="color:#e8b48a;">✓</div>Everything in Post-Operative Care</li>
+          <li style="color:rgba(253,248,244,0.9);"><div class="service-check" style="color:#e8b48a;">✓</div>3 Mental Wellness sessions ($600 value)</li>
+          <li style="color:rgba(253,248,244,0.9);"><div class="service-check" style="color:#e8b48a;">✓</div>Coordinated care — medical + mental health in one team</li>
+          <li style="color:rgba(253,248,244,0.9);"><div class="service-check" style="color:#e8b48a;">✓</div>Priority scheduling &amp; extended messaging access</li>
+        </ul>
+        <br><a onclick="showPage('schedule')" class="btn-gold" style="cursor:pointer; display:inline-block;">Book Executive Package →</a>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="package-section" style="padding-top:2rem;">
+    <div class="section-tag">Labor & Delivery</div>
+    <div class="packages-grid" style="max-width:700px; margin:1.5rem auto 0;">
+      <div class="package-card">
+        <div class="package-name">L&D Consultation — New Patient</div>
+        <div class="package-price">$400</div>
+        <div class="package-desc">Meet your anesthesiologist before labor. Covers epidurals, C-section anesthesia, pain management options, birth plan review, and anesthesia risk assessment.</div>
+        <br><a onclick="showPage('schedule')" class="btn-secondary" style="cursor:pointer; display:inline-block;">Book Consultation →</a>
+      </div>
+      <div class="package-card">
+        <div class="package-name">L&D Consultation — Return Patient</div>
+        <div class="package-price">$250</div>
+        <div class="package-desc">Follow-up for returning patients — updated birth plan review, new concerns, and preparation for your upcoming delivery.</div>
+        <br><a onclick="showPage('schedule')" class="btn-secondary" style="cursor:pointer; display:inline-block;">Book Consultation →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="package-section" style="padding-top:2rem;">
+    <div class="section-tag">Mental Wellness</div>
+    <div class="packages-grid" style="max-width:700px; margin:1.5rem auto 0;">
+      <div class="package-card">
+        <div class="package-name">Single Session</div>
+        <div class="package-price">$250</div>
+        <div class="package-desc">A standalone 50-minute session — surgical anxiety, psychological clearance, diagnostic assessment, or perinatal mental health.</div>
+        <br><a onclick="showPage('schedule')" class="btn-secondary" style="cursor:pointer; display:inline-block;">Book Session →</a>
+      </div>
+      <div class="package-card">
+        <div class="package-name">3-Session Package</div>
+        <div class="package-price">$600</div>
+        <div class="package-savings">Save $150 vs. individual sessions</div>
+        <div class="package-desc">Three dedicated sessions — before, during, and after your surgical journey. Consistent, informed mental health support.</div>
+        <br><a onclick="showPage('schedule')" class="btn-secondary" style="cursor:pointer; display:inline-block;">Book Package →</a>
+      </div>
+    </div>
+  </div>
+
+  <section class="final-cta">
+    <h2 class="section-title">Not sure which plan is right for you?</h2>
+    <p class="section-subtitle">Book any consultation and Dr. Oluwole will help you determine the best level of support for your procedure and needs.</p>
+    <a onclick="showPage('schedule')" class="btn-gold" style="cursor:pointer;">Book Your Consultation →</a>
+  </section>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
 <!-- SCHEDULE PAGE -->
 <!-- ══════════════════════════════════════════════════════ -->
 <div id="page-schedule" class="page">
@@ -12440,6 +12638,7 @@
     'medical-tourism': { title: 'Medical Tourism Support | Pre-Travel Clearance & Post-Return Care | OpWell Concierge™', desc: 'Planning surgery abroad or just returned home? OpWell provides US physician oversight before you travel and anesthesiologist-led follow-up when you return.' },
     'about':           { title: 'About Dr. Ornella Oluwole, MD | Board-Certified Anesthesiologist | OpWell Concierge™', desc: 'Dr. Ornella Oluwole, MD, D.ABA is a board-certified anesthesiologist and founder of OpWell Concierge™. Learn about her training and why she built this practice.' },
     'blog':            { title: 'Patient Education Blog | Anesthesiologist-Written Guides | OpWell Concierge™', desc: 'Evidence-based surgery preparation, recovery, and anesthesia guides written by a board-certified anesthesiologist. Free and premium articles for surgical patients.' },
+    'pricing':         { title: 'Care Plans & Pricing | OpWell Concierge™', desc: 'Transparent pricing for all OpWell Concierge™ services. Pre-surgical consultation, post-operative care, mental wellness, and bundled packages. HSA & FSA accepted. No referral required.' },
     'schedule':        { title: 'Book a Consultation | OpWell Concierge™', desc: 'Book your pre-surgical consultation, post-operative care, or mental wellness session with OpWell Concierge™. Secure checkout. HSA & FSA accepted.' },
     'contact':         { title: 'Contact OpWell Concierge™ | Request a State or Ask a Question', desc: 'Get in touch with OpWell Concierge™. Request services in your state, ask a question, or make a special request. We’ll respond within 24 hours.' },
     'provider':        { title: 'Provider Referrals & Partnerships | OpWell Concierge™', desc: 'Refer a patient to OpWell Concierge™ or explore a practice partnership. Board-certified anesthesiologist-led perioperative telehealth for your patients.' },

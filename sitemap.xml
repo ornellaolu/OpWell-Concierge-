@@ -35,6 +35,13 @@
     <priority>0.9</priority>
   </url>
 
+  <!-- Pricing -->
+  <url>
+    <loc>https://opwellconcierge.com/pricing</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
   <!-- Products -->
   <url>
     <loc>https://opwellconcierge.com/products</loc>
