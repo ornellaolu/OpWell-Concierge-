@@ -35,6 +35,13 @@
     <priority>0.9</priority>
   </url>
 
+  <!-- Products -->
+  <url>
+    <loc>https://opwellconcierge.com/products</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <!-- About -->
   <url>
     <loc>https://opwellconcierge.com/about</loc>
@@ -50,63 +57,184 @@
   </url>
 
   <!-- Blog Posts — Free (publicly indexable) -->
+  <!-- blog-1: How to Prepare for Surgery: A Complete Checklist -->
   <url>
-    <loc>https://opwellconcierge.com/blog/how-to-prepare-for-surgery-checklist</loc>
+    <loc>https://opwellconcierge.com/blog-1</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <!-- blog-2: What Happens Under General Anesthesia -->
   <url>
-    <loc>https://opwellconcierge.com/blog/what-happens-under-general-anesthesia</loc>
+    <loc>https://opwellconcierge.com/blog-2</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <!-- blog-11: The 3 Biggest Fears Before Cosmetic Surgery -->
   <url>
-    <loc>https://opwellconcierge.com/blog/biggest-fears-before-cosmetic-surgery</loc>
+    <loc>https://opwellconcierge.com/blog-11</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <!-- blog-13: Do Fajas Work After a Tummy Tuck? -->
   <url>
-    <loc>https://opwellconcierge.com/blog/do-fajas-work-after-tummy-tuck</loc>
+    <loc>https://opwellconcierge.com/blog-13</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <!-- blog-19: 5 Popular Cosmetic Surgeries: Safety Stats -->
   <url>
-    <loc>https://opwellconcierge.com/blog/5-popular-cosmetic-surgeries-safety-stats</loc>
+    <loc>https://opwellconcierge.com/blog-19</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <!-- blog-25: Post-Op Nutrition Quick Reference -->
   <url>
-    <loc>https://opwellconcierge.com/blog/surgery-abroad-safety-guide</loc>
+    <loc>https://opwellconcierge.com/blog-25</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <!-- blog-26: Why Is the BBL Considered Higher-Risk? -->
   <url>
-    <loc>https://opwellconcierge.com/blog/post-op-nutrition-quick-reference</loc>
+    <loc>https://opwellconcierge.com/blog-26</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <!-- blog-27: BBL Red Flags Checklist -->
   <url>
-    <loc>https://opwellconcierge.com/blog/bbl-higher-risk-procedure</loc>
+    <loc>https://opwellconcierge.com/blog-27</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <!-- blog-28: BBL Complications: Who Is Most at Risk? -->
   <url>
-    <loc>https://opwellconcierge.com/blog/bbl-red-flags-checklist</loc>
+    <loc>https://opwellconcierge.com/blog-28</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <!-- blog-29: Why Your Anesthesiologist May Be the Most Important Doctor -->
   <url>
-    <loc>https://opwellconcierge.com/blog/bbl-risk-factors</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://opwellconcierge.com/blog/anesthesiologist-most-important-doctor</loc>
+    <loc>https://opwellconcierge.com/blog-29</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
-  <!-- Contact & Booking -->
+  <!-- Blog Posts — Premium (still indexable for SEO, gated behind access code) -->
+  <!-- blog-3: The First 72 Hours After Surgery -->
+  <url>
+    <loc>https://opwellconcierge.com/blog-3</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- blog-4: Mental Health Before Surgery -->
+  <url>
+    <loc>https://opwellconcierge.com/blog-4</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- blog-5: Medical Tourism: 7 Things Before Surgery Abroad -->
+  <url>
+    <loc>https://opwellconcierge.com/blog-5</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- blog-6: Dumping Syndrome After Bariatric Surgery -->
+  <url>
+    <loc>https://opwellconcierge.com/blog-6</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- blog-7: Vitamin & Supplement Schedule After Bariatric Surgery -->
+  <url>
+    <loc>https://opwellconcierge.com/blog-7</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- blog-9: Evidence-Based Surgery Preparation -->
+  <url>
+    <loc>https://opwellconcierge.com/blog-9</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- blog-10: Managing Blood Thinners Around Surgery -->
+  <url>
+    <loc>https://opwellconcierge.com/blog-10</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- blog-12: Complete Cosmetic Surgery Guide -->
+  <url>
+    <loc>https://opwellconcierge.com/blog-12</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- blog-14: BBL Complete Patient Guide -->
+  <url>
+    <loc>https://opwellconcierge.com/blog-14</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- blog-15: Tummy Tuck Complete Patient Guide -->
+  <url>
+    <loc>https://opwellconcierge.com/blog-15</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- blog-16: Rhinoplasty Complete Patient Guide -->
+  <url>
+    <loc>https://opwellconcierge.com/blog-16</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- blog-17: Liposuction Complete Patient Guide -->
+  <url>
+    <loc>https://opwellconcierge.com/blog-17</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- blog-18: Breast Augmentation Complete Patient Guide -->
+  <url>
+    <loc>https://opwellconcierge.com/blog-18</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- blog-20: Epidurals & Birth Pain Guide -->
+  <url>
+    <loc>https://opwellconcierge.com/blog-20</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- blog-21: Surgery Abroad Safety Guide -->
+  <url>
+    <loc>https://opwellconcierge.com/blog-21</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- blog-22: Cosmetic Surgery & Anesthesia -->
+  <url>
+    <loc>https://opwellconcierge.com/blog-22</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- blog-23: GLP-1 Medications Before Surgery -->
+  <url>
+    <loc>https://opwellconcierge.com/blog-23</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- blog-24: Post-Op Nutrition & Wound Healing -->
+  <url>
+    <loc>https://opwellconcierge.com/blog-24</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- blog-30: Anesthesiologist's Guide to Bariatric Surgery -->
+  <url>
+    <loc>https://opwellconcierge.com/blog-30</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Contact, Booking, Provider -->
   <url>
     <loc>https://opwellconcierge.com/contact</loc>
     <changefreq>monthly</changefreq>
@@ -116,6 +244,21 @@
     <loc>https://opwellconcierge.com/schedule</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://opwellconcierge.com/provider</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://opwellconcierge.com/privacy</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://opwellconcierge.com/terms</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
   </url>
 
 </urlset>

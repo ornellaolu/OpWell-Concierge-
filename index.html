@@ -48,12 +48,18 @@
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
+    html {
+      overflow-x: hidden;
+    }
+
     body {
       font-family: 'DM Sans', sans-serif;
       background: var(--ivory);
       color: var(--charcoal);
       font-weight: 300;
       line-height: 1.7;
+      overflow-x: hidden;
+      width: 100%;
     }
 
     /* ── PAGES ── */
@@ -384,9 +390,8 @@
       margin-top: 3rem;
       display: flex;
       gap: 1.5rem;
-      flex-wrap: nowrap;
+      flex-wrap: wrap;
       align-items: center;
-      white-space: nowrap;
     }
 
     .trust-item {
@@ -1664,28 +1669,147 @@
     .tab-panel.active { display: block; }
 
   
+    /* ── HAMBURGER MENU ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 28px;
+      height: 28px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      margin-left: auto;
+      z-index: 201;
+      flex-shrink: 0;
+    }
+    .hamburger span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: var(--charcoal);
+      border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 60px;
+      left: 0; right: 0; bottom: 0;
+      background: rgba(240,246,240,0.98);
+      backdrop-filter: blur(12px);
+      z-index: 199;
+      padding: 2rem 1.5rem;
+      overflow-y: auto;
+      flex-direction: column;
+      gap: 0;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      display: block;
+      padding: 1rem 0;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      font-weight: 300;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(45,90,61,0.08);
+      cursor: pointer;
+    }
+    .mobile-nav a:hover, .mobile-nav a:active { color: var(--terracotta); }
+    .mobile-nav .mobile-nav-sub {
+      padding-left: 1.25rem;
+    }
+    .mobile-nav .mobile-nav-sub a {
+      font-size: 0.78rem;
+      color: var(--slate);
+      padding: 0.75rem 0;
+    }
+    .mobile-nav .mobile-nav-cta {
+      display: inline-block;
+      margin-top: 1.5rem;
+      background: var(--terracotta);
+      color: var(--ivory);
+      padding: 0.85rem 2rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-align: center;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+    }
+
     @media (max-width: 768px) {
-      nav { padding: 0 1.5rem; }
-      .nav-links { display: none; }
-      .hero { padding: 6rem 1.5rem 3rem; }
-      .hero-slider-dots, .hero-slide-label { left: 1.5rem; right: 1.5rem; }
-      .paths-section, .problem-strip, .hiw-section, .content-section, .package-section, .faq-section { padding: 3rem 1.5rem; }
+      .hamburger { display: flex; }
+      nav { padding: 0 0.75rem; height: 60px; }
+      .nav-links { display: none !important; }
+      .nav-cta { display: none; }
+      .nav-mark { height: 100px; }
+      .banner-scroll { margin-top: 60px; }
+      .hero { padding: 4rem 1rem 2rem; min-height: 80vh; }
+      .hero-content { max-width: 100%; word-wrap: break-word; overflow-wrap: break-word; }
+      .hero-headline { font-size: clamp(1.6rem, 6vw, 2.4rem); word-wrap: break-word; overflow-wrap: break-word; }
+      .hero-sub { font-size: 0.85rem; max-width: 100%; }
+      .hero-tag { font-size: 0.6rem; padding: 0.3rem 0.8rem; }
+      .hero-actions { flex-direction: column; align-items: stretch; gap: 0.75rem; }
+      .hero-actions .btn-primary,
+      .hero-actions .btn-secondary { text-align: center; padding: 0.85rem 1.5rem; width: 100%; display: block; }
+      .hero-trust { flex-wrap: wrap; gap: 0.75rem; white-space: normal; margin-top: 1.5rem; }
+      .trust-item { font-size: 0.55rem; white-space: normal; }
+      .hero-slider-dots, .hero-slide-label { left: 1rem; right: 1rem; }
+      .hero-slider-dots { bottom: 1.2rem; }
+      .hero-slide-label { bottom: 1.4rem; font-size: 0.5rem; }
+      .stat-strip { padding: 2rem 1rem; }
+      .stat { padding: 0.75rem 0.75rem; }
+      .stat-num { font-size: 1.8rem; }
+      .stat-label { font-size: 0.6rem; }
+      .paths-section, .problem-strip, .hiw-section, .content-section, .package-section, .faq-section { padding: 2.5rem 1rem; }
+      .path-card { flex: 1 1 100%; min-width: 0; padding: 1.5rem 1rem; }
+      .problem-strip { padding: 3rem 1rem; }
+      .problem-card { padding: 1.25rem; }
+      .problem-q { font-size: 1rem; }
       .problem-grid { grid-template-columns: 1fr; }
       .problem-grid .problem-card:last-child:nth-child(3n + 1) { grid-column: 1; }
-      .about-preview { grid-template-columns: 1fr; padding: 3rem 1.5rem; gap: 2rem; }
-      .content-2col { grid-template-columns: 1fr; gap: 2rem; }
+      .about-preview { grid-template-columns: 1fr; padding: 2.5rem 1rem; gap: 1.5rem; }
+      .content-2col { grid-template-columns: 1fr; gap: 1.5rem; }
       .ob-cards { grid-template-columns: 1fr; }
-      footer { grid-template-columns: 1fr 1fr; padding: 2rem 1.5rem; }
-      .lp-hero { padding: 6rem 1.5rem 3rem; }
-      .stat-strip { padding: 2rem 1.5rem; }
-      .glp1-block { padding: 2rem 1.5rem; }
-      .page-footnotes { padding: 0.75rem 1.5rem; }
-      .hiw-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
-      .hiw-step { padding: 1.5rem 1rem; }
+      footer { grid-template-columns: 1fr; padding: 2rem 1rem; gap: 1.5rem; }
+      .footer-bottom { padding: 1rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+      .lp-hero { padding: 4rem 1rem 2rem; }
+      .glp1-block { padding: 2rem 1rem; }
+      .page-footnotes { padding: 0.75rem 1rem; }
+      .hiw-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+      .hiw-step { padding: 1rem 0.75rem; }
+      .section-title { font-size: clamp(1.4rem, 5vw, 2rem); }
+      .section-tag { font-size: 0.58rem; }
+      .btn-primary, .btn-secondary, .btn-gold { padding: 0.8rem 1.25rem; font-size: 0.65rem; }
+      .stat-footnote { padding: 0.6rem 1rem 1rem; }
+      .banner-scroll-item { padding: 0 1.25rem; font-size: 0.68rem; }
+      .package-card { padding: 2rem 1.25rem; }
+      .faq-q { font-size: 0.85rem; padding: 1rem; }
+      .faq-a { padding: 0 1rem 1rem; font-size: 0.82rem; }
     }
 
     @media (max-width: 480px) {
       .hiw-grid { grid-template-columns: 1fr; }
+      .hero { padding: 3.5rem 0.85rem 1.5rem; }
+      .hero-headline { font-size: clamp(1.4rem, 5.5vw, 2rem); }
+      .hero-sub { font-size: 0.8rem; }
+      .nav-mark { height: 80px; }
+      .paths-section, .problem-strip, .hiw-section, .content-section, .package-section, .faq-section { padding: 2rem 0.85rem; }
+      footer { grid-template-columns: 1fr; padding: 1.5rem 0.85rem; }
+      .stat-strip { grid-template-columns: 1fr 1fr; }
+      .stat { border-right: none; border-bottom: 1px solid rgba(122,160,122,0.25); }
+      .lp-hero { padding: 3.5rem 0.85rem 1.5rem; }
     }
 
     /* ── PAGE FOOTNOTES ── */
@@ -2279,7 +2403,29 @@
   </ul>
 
   <a onclick="showPage('schedule')" style="cursor:pointer;" class="nav-cta">Book Now</a>
+
+  <button class="hamburger" onclick="toggleMobileNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- MOBILE NAV OVERLAY -->
+<div class="mobile-nav" id="mobile-nav">
+  <a onclick="mobileNavTo('home')">Home</a>
+  <a style="font-weight:500; color:var(--terracotta); border-bottom:none; padding-bottom:0.25rem;">Services</a>
+  <div class="mobile-nav-sub">
+    <a onclick="mobileNavTo('surgery-prep')">Pre-Surgical Consultation</a>
+    <a onclick="mobileNavTo('recovery')">Post-Operative Care</a>
+    <a onclick="mobileNavTo('mental-health')">Mental Wellness</a>
+    <a onclick="mobileNavTo('obstetric')">Labor &amp; Delivery</a>
+    <a onclick="mobileNavTo('medical-tourism')">Medical Tourism</a>
+  </div>
+  <a onclick="mobileNavTo('about')">Our Story</a>
+  <a onclick="mobileNavTo('products')">Products</a>
+  <a onclick="mobileNavTo('blog')">Blog</a>
+  <a onclick="mobileNavTo('contact')">Contact</a>
+  <a class="mobile-nav-cta" onclick="mobileNavTo('schedule')">Book Your Consultation</a>
+</div>
 
 <!-- ══════════════════════════════════════════════════════ -->
 <!-- HOME PAGE -->
@@ -12274,7 +12420,7 @@
     if (canonical) canonical.setAttribute('href', 'https://opwellconcierge.com/' + (pageId === 'home' ? '' : pageId));
   }
 
-  function showPage(pageId) {
+  function showPage(pageId, skipPush) {
     const current = document.querySelector('.page.active');
     if (current) {
       current.style.opacity = '0';
@@ -12293,6 +12439,46 @@
       const page = document.getElementById('page-' + pageId);
       if (page) { page.classList.add('active'); window.scrollTo({ top: 0 }); initFadeIns(); updatePageMeta(pageId); }
     }
+    // Update URL for SEO and shareable links
+    if (!skipPush) {
+      var path = pageId === 'home' ? '/' : '/' + pageId;
+      history.pushState({ page: pageId }, '', path);
+    }
+  }
+
+  // Handle browser back/forward buttons
+  window.addEventListener('popstate', function(e) {
+    if (e.state && e.state.page) {
+      showPage(e.state.page, true);
+    } else {
+      var path = window.location.pathname.replace(/^\//, '') || 'home';
+      showPage(path, true);
+    }
+  });
+
+  // On page load, check URL path and show correct page
+  (function() {
+    var path = window.location.pathname.replace(/^\//, '');
+    if (path && path !== '' && document.getElementById('page-' + path)) {
+      showPage(path, true);
+    }
+  })();
+
+  // ── MOBILE NAV ──
+  function toggleMobileNav() {
+    var nav = document.getElementById('mobile-nav');
+    var btn = document.querySelector('.hamburger');
+    nav.classList.toggle('open');
+    btn.classList.toggle('active');
+    document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
+  }
+  function mobileNavTo(pageId) {
+    var nav = document.getElementById('mobile-nav');
+    var btn = document.querySelector('.hamburger');
+    nav.classList.remove('open');
+    btn.classList.remove('active');
+    document.body.style.overflow = '';
+    showPage(pageId);
   }
 
   // ── GIFT SERVICE PRE-SELECT ──
