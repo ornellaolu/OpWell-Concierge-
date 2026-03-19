@@ -21,6 +21,11 @@ module.exports = async function handler(req, res) {
     const patientName = `${fname || ''} ${lname || ''}`.trim() || 'Patient';
     const serviceList = Array.isArray(service) ? service.join(', ') : (service || 'Consultation');
 
+    // Check if booking includes post-op recovery
+    const RECOVERY_SERVICES = ['Post-Operative Care', 'Complete Surgical Care Package', 'Executive Package — Complete Concierge Program'];
+    const services = Array.isArray(service) ? service : [service || ''];
+    const includesRecovery = services.some(s => RECOVERY_SERVICES.some(rs => s.includes(rs)));
+
     // Send patient confirmation
     await resend.emails.send({
       from: 'OpWell Concierge <info@opwellconcierge.com>',
@@ -51,6 +56,17 @@ module.exports = async function handler(req, res) {
               <p style="margin: 0 0 10px; font-size: 2rem; font-weight: 700; letter-spacing: 0.18em; color: #2d5a3d; font-family: monospace;">${BLOG_ACCESS_CODE}</p>
               <p style="margin: 0; font-size: 0.82rem; color: #555; line-height: 1.5;">Use this code on the <strong>OpWell Blog</strong> to unlock patient-only clinical articles on surgery preparation, recovery, and more.</p>
             </div>
+
+            ${includesRecovery ? `
+            <div style="background: #fdf8f4; border: 1px solid #e8d9c8; border-left: 4px solid #2d5a3d; border-radius: 8px; padding: 20px 24px; margin: 24px 0;">
+              <p style="margin: 0 0 8px; font-size: 1rem; font-weight: 700; color: #3b2a1a;">Your Recovery Check-In Tool</p>
+              <p style="margin: 0 0 14px; font-size: 0.88rem; color: #555; line-height: 1.6;">As part of your post-operative care, you'll use our mobile recovery check-in tool between follow-up calls. It takes about 3 minutes and helps Dr. Oluwole monitor your healing.</p>
+              <p style="margin: 0 0 6px; font-size: 0.82rem; color: #888;">Use your access code <strong style="color: #2d5a3d; font-family: monospace; letter-spacing: 0.1em;">${BLOG_ACCESS_CODE}</strong> to log in.</p>
+              <div style="text-align: center; margin-top: 16px;">
+                <a href="https://opwellconcierge.com/patient-recovery-checkin.html" style="display: inline-block; padding: 12px 28px; background: #2d5a3d; color: #fff; border-radius: 8px; font-family: Arial, sans-serif; font-size: 0.92rem; font-weight: 600; text-decoration: none;">Open Recovery Check-In →</a>
+              </div>
+            </div>
+            ` : ''}
 
             <h3 style="color: #3b2a1a; font-size: 1rem;">What Happens Next</h3>
             <ol style="color: #555; line-height: 2;">

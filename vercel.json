@@ -1,5 +1,7 @@
 {
   "rewrites": [
+    { "source": "/patient-recovery-checkin.html", "destination": "/patient-recovery-checkin.html" },
+    { "source": "/postop-recovery-checkin.html", "destination": "/postop-recovery-checkin.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }

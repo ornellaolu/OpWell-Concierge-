@@ -1,0 +1,1824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Recovery Check-In — OpWell Concierge™</title>
+<meta name="description" content="Complete your post-operative recovery check-in. Takes about 3 minutes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sage: #2D5A3D;
+  --sage-dark: #1C2B22;
+  --sage-mid: #7AA07A;
+  --sage-light: #A8C4A8;
+  --terracotta: #C8845A;
+  --terracotta-light: #E8B48A;
+  --ivory: #FAF0E8;
+  --warm-white: #FDF8F4;
+  --charcoal: #1C1C1C;
+  --slate: #5A5A5A;
+  --green: #16A34A;
+  --green-bg: #DCFCE7;
+  --yellow: #CA8A04;
+  --yellow-bg: #FEF9C3;
+  --orange: #D97706;
+  --orange-bg: #FFF7ED;
+  --red: #DC2626;
+  --red-bg: #FEE2E2;
+  --radius: 12px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--ivory);
+  color: var(--charcoal);
+  min-height: 100vh;
+  padding-bottom: 90px;
+  overflow-x: hidden;
+}
+
+/* ── Header ── */
+.header {
+  background: var(--sage-dark);
+  padding: 16px 20px;
+  text-align: center;
+  position: sticky; top: 0; z-index: 100;
+}
+.header-brand {
+  font-family: 'Playfair Display', serif;
+  color: var(--terracotta-light);
+  font-size: 1.1rem; font-weight: 700;
+  letter-spacing: 0.03em;
+}
+.header-sub {
+  color: rgba(250,240,232,0.5);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+/* ── Progress ── */
+.progress-wrap {
+  background: #fff;
+  padding: 12px 20px 8px;
+  border-bottom: 1px solid rgba(45,90,61,0.1);
+  position: sticky; top: 56px; z-index: 99;
+}
+.progress-bar {
+  height: 4px;
+  background: rgba(45,90,61,0.12);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: var(--sage);
+  border-radius: 4px;
+  transition: width 0.4s ease;
+}
+.progress-label {
+  font-size: 0.72rem;
+  color: var(--slate);
+  margin-top: 6px;
+  text-align: center;
+}
+
+/* ── Wizard ── */
+.wizard {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 0 16px;
+  position: relative;
+}
+.step {
+  display: none;
+  padding: 24px 0;
+  animation: fadeIn 0.3s ease;
+}
+.step.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+.step-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--charcoal);
+  margin-bottom: 6px;
+}
+.step-subtitle {
+  font-size: 0.88rem;
+  color: var(--slate);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+.step-icon {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+/* ── Form Elements ── */
+.field-group {
+  margin-bottom: 28px;
+}
+.field-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--charcoal);
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+.field-hint {
+  font-size: 0.8rem;
+  color: var(--slate);
+  margin-top: 4px;
+  line-height: 1.4;
+}
+input[type="text"], input[type="date"], input[type="email"], select {
+  width: 100%;
+  padding: 14px 16px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+  border: 2px solid rgba(45,90,61,0.2);
+  border-radius: var(--radius);
+  background: #fff;
+  color: var(--charcoal);
+  -webkit-appearance: none;
+  appearance: none;
+}
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--sage);
+  box-shadow: 0 0 0 3px rgba(45,90,61,0.1);
+}
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235A5A5A' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+}
+textarea {
+  width: 100%;
+  padding: 14px 16px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  border: 2px solid rgba(45,90,61,0.2);
+  border-radius: var(--radius);
+  background: #fff;
+  color: var(--charcoal);
+  resize: vertical;
+  min-height: 80px;
+}
+textarea:focus {
+  outline: none;
+  border-color: var(--sage);
+  box-shadow: 0 0 0 3px rgba(45,90,61,0.1);
+}
+
+/* ── Slider ── */
+.slider-wrap {
+  padding: 8px 0;
+}
+.emoji-scale {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 4px;
+  margin-bottom: 4px;
+  font-size: 1.3rem;
+}
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 12px;
+  background: linear-gradient(to right, var(--green-bg), var(--yellow-bg), var(--red-bg));
+  border-radius: 6px;
+  outline: none;
+  cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--sage);
+  border: 3px solid #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+input[type="range"]::-moz-range-thumb {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--sage);
+  border: 3px solid #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+.slider-val {
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 700;
+  font-family: 'Playfair Display', serif;
+  margin-top: 6px;
+  transition: color 0.2s;
+}
+.slider-val.untouched { color: var(--slate); opacity: 0.4; font-size: 1.4rem; }
+.slider-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  color: var(--slate);
+  margin-top: 2px;
+}
+.slider-inactive { opacity: 0.35; }
+
+/* ── Option Cards (radio) ── */
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.option-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: #fff;
+  border: 2px solid rgba(45,90,61,0.15);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.2s;
+  min-height: 52px;
+  -webkit-tap-highlight-color: transparent;
+}
+.option-card:active { transform: scale(0.98); }
+.option-card.selected {
+  border-color: var(--sage);
+  background: rgba(45,90,61,0.04);
+}
+.option-card.selected-yellow {
+  border-color: var(--yellow);
+  background: var(--yellow-bg);
+}
+.option-card.selected-orange {
+  border-color: var(--orange);
+  background: var(--orange-bg);
+}
+.option-card.selected-red {
+  border-color: var(--red);
+  background: var(--red-bg);
+}
+.option-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.option-dot.green { background: var(--green); }
+.option-dot.yellow { background: var(--yellow); }
+.option-dot.orange { background: var(--orange); }
+.option-dot.red { background: var(--red); }
+.option-text {
+  font-size: 0.95rem;
+  color: var(--charcoal);
+  line-height: 1.4;
+}
+.option-emoji {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+/* ── Flag Cards (checkbox) ── */
+.flag-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: #fff;
+  border: 2px solid rgba(45,90,61,0.12);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.2s;
+  min-height: 52px;
+  margin-bottom: 8px;
+  -webkit-tap-highlight-color: transparent;
+}
+.flag-card:active { transform: scale(0.98); }
+.flag-card.checked {
+  border-color: var(--orange);
+  background: var(--orange-bg);
+}
+.flag-card.checked.emergency {
+  border-color: var(--red);
+  background: var(--red-bg);
+}
+.flag-check {
+  width: 24px; height: 24px;
+  border: 2px solid rgba(45,90,61,0.3);
+  border-radius: 6px;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+.flag-card.checked .flag-check {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: #fff;
+}
+.flag-card.checked.emergency .flag-check {
+  background: var(--red);
+  border-color: var(--red);
+}
+.flag-text { font-size: 0.92rem; line-height: 1.4; }
+.flag-badge {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 20px;
+  background: var(--red);
+  color: #fff;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+.surgery-flags { display: none; }
+.surgery-flags.show { display: block; }
+.surgery-flags-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  margin: 20px 0 10px;
+}
+
+/* ── Feedback messages ── */
+.feedback {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-top: 10px;
+  display: none;
+}
+.feedback.show { display: block; animation: fadeIn 0.3s ease; }
+.feedback.good { background: var(--green-bg); color: #166534; }
+.feedback.moderate { background: var(--yellow-bg); color: #854D0E; }
+.feedback.concern { background: var(--red-bg); color: #991B1B; }
+
+/* ── POD Badge ── */
+.pod-badge {
+  display: inline-block;
+  background: var(--sage);
+  color: #fff;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+/* ── Review Summary ── */
+.review-section {
+  background: #fff;
+  border: 1px solid rgba(45,90,61,0.12);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 16px;
+}
+.review-section h3 {
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin-bottom: 10px;
+}
+.review-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+  font-size: 0.9rem;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+}
+.review-row:last-child { border-bottom: none; }
+.review-label { color: var(--slate); }
+.review-value { font-weight: 600; text-align: right; }
+
+/* ── Score Display ── */
+.score-display {
+  text-align: center;
+  padding: 24px;
+  margin: 16px 0;
+  border-radius: var(--radius);
+}
+.score-number {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1;
+}
+.score-label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  margin-top: 4px;
+}
+.score-out-of {
+  font-size: 1.2rem;
+  font-weight: 400;
+  opacity: 0.7;
+}
+
+/* ── Domain Bars ── */
+.domain-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.domain-bar-label {
+  font-size: 0.82rem;
+  color: var(--slate);
+  width: 55px;
+  flex-shrink: 0;
+}
+.domain-bar-track {
+  flex: 1;
+  height: 10px;
+  background: rgba(0,0,0,0.06);
+  border-radius: 5px;
+  overflow: hidden;
+}
+.domain-bar-fill {
+  height: 100%;
+  border-radius: 5px;
+  transition: width 0.6s ease;
+}
+.domain-bar-val {
+  font-size: 0.82rem;
+  font-weight: 700;
+  width: 30px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* ── Navigation ── */
+.wizard-nav {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: #fff;
+  border-top: 1px solid rgba(45,90,61,0.1);
+  padding: 12px 16px;
+  display: flex;
+  gap: 12px;
+  z-index: 100;
+  max-width: 520px;
+  margin: 0 auto;
+}
+.nav-btn {
+  flex: 1;
+  padding: 16px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: var(--radius);
+  border: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: all 0.2s;
+}
+.nav-btn:active { transform: scale(0.97); }
+.nav-btn.back {
+  background: rgba(45,90,61,0.08);
+  color: var(--sage);
+  flex: 0.4;
+}
+.nav-btn.next {
+  background: var(--sage);
+  color: #fff;
+}
+.nav-btn.submit {
+  background: var(--sage);
+  color: #fff;
+}
+.nav-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Error Message ── */
+.inline-error {
+  background: var(--red-bg);
+  color: var(--red);
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  margin-bottom: 16px;
+  display: none;
+  animation: fadeIn 0.3s;
+}
+.inline-error.show { display: block; }
+
+/* ── Emergency Modal ── */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.modal-overlay.show { display: flex; }
+.modal-card {
+  background: #fff;
+  border: 3px solid var(--red);
+  border-radius: 16px;
+  padding: 32px 24px;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+.modal-icon { font-size: 3rem; margin-bottom: 12px; }
+.modal-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--red);
+  margin-bottom: 12px;
+}
+.modal-text {
+  font-size: 0.92rem;
+  color: var(--slate);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+.modal-911 {
+  display: inline-block;
+  background: var(--red);
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding: 14px 36px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  margin-bottom: 16px;
+}
+.modal-dismiss {
+  display: block;
+  background: none;
+  border: 2px solid rgba(45,90,61,0.2);
+  color: var(--slate);
+  padding: 12px;
+  border-radius: var(--radius);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* ── Thank You ── */
+.thankyou-check {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  background: var(--green);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 20px;
+  font-size: 2.5rem;
+  color: #fff;
+  animation: popIn 0.4s ease;
+}
+@keyframes popIn { from { transform: scale(0); } 70% { transform: scale(1.15); } to { transform: scale(1); } }
+
+/* ── Checkbox toggle ── */
+.check-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+.check-row input[type="checkbox"] {
+  width: 22px; height: 22px;
+  accent-color: var(--sage);
+}
+.check-row label {
+  font-size: 0.9rem;
+  color: var(--slate);
+}
+
+/* ── Responsive ── */
+@media (min-width: 600px) {
+  .wizard { padding: 0 24px; }
+  .step { padding: 32px 0; }
+  .wizard-nav { padding: 14px 24px; }
+}
+
+/* ── Access Gate ── */
+.gate-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: var(--ivory);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.gate-overlay.unlocked { display: none; }
+.gate-card {
+  background: #fff;
+  border: 1px solid rgba(45,90,61,0.15);
+  border-radius: 16px;
+  padding: 40px 28px;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+}
+.gate-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--sage-dark);
+  margin-bottom: 4px;
+}
+.gate-sub {
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  margin-bottom: 24px;
+}
+.gate-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  color: var(--charcoal);
+  margin-bottom: 8px;
+}
+.gate-text {
+  font-size: 0.88rem;
+  color: var(--slate);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+.gate-input {
+  width: 100%;
+  padding: 14px 16px;
+  font-family: monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-align: center;
+  text-transform: uppercase;
+  border: 2px solid rgba(45,90,61,0.2);
+  border-radius: var(--radius);
+  background: #fff;
+  color: var(--charcoal);
+  -webkit-appearance: none;
+}
+.gate-input:focus {
+  outline: none;
+  border-color: var(--sage);
+  box-shadow: 0 0 0 3px rgba(45,90,61,0.1);
+}
+.gate-btn {
+  width: 100%;
+  padding: 14px;
+  margin-top: 12px;
+  background: var(--sage);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.gate-btn:active { transform: scale(0.98); }
+.gate-error {
+  color: var(--red);
+  font-size: 0.85rem;
+  margin-top: 10px;
+  display: none;
+}
+.gate-error.show { display: block; }
+.gate-help {
+  font-size: 0.78rem;
+  color: var(--slate);
+  margin-top: 16px;
+  line-height: 1.5;
+}
+</style>
+</head>
+<body>
+
+<!-- ── Access Code Gate ── -->
+<div class="gate-overlay" id="accessGate">
+  <div class="gate-card">
+    <div class="gate-brand">OpWell Concierge™</div>
+    <div class="gate-sub">Recovery Check-In</div>
+    <div class="gate-title">Patient Access Required</div>
+    <div class="gate-text">This tool is available to OpWell patients. Please enter the access code from your booking confirmation email.</div>
+    <input type="text" class="gate-input" id="gateInput" placeholder="ACCESS CODE" maxlength="20" autocomplete="off">
+    <button class="gate-btn" onclick="submitGateCode()">Enter</button>
+    <div class="gate-error" id="gateError">Incorrect code. Check your confirmation email or call (678) 235-5822.</div>
+    <div class="gate-help">Don't have a code? Call <a href="tel:6782355822" style="color:var(--sage); font-weight:600;">(678) 235-5822</a></div>
+  </div>
+</div>
+
+<!-- ── Header ── -->
+<div class="header">
+  <div class="header-brand">OpWell Concierge™</div>
+  <div class="header-sub">Recovery Check-In</div>
+</div>
+
+<!-- ── Progress ── -->
+<div class="progress-wrap">
+  <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+  <div class="progress-label" id="progressLabel">Step 1 of 7</div>
+</div>
+
+<!-- ── Wizard ── -->
+<div class="wizard" id="wizard">
+  <div id="inlineError" class="inline-error"></div>
+
+  <!-- ═══ STEP 0: WELCOME ═══ -->
+  <div class="step active" id="step-0">
+    <div class="step-icon">👋</div>
+    <div class="step-title">Welcome to your<br>recovery check-in.</div>
+    <div class="step-subtitle">This takes about 3 minutes. Your answers help Dr. Oluwole monitor your healing between visits.</div>
+
+    <div class="field-group">
+      <div class="field-label">First name</div>
+      <input type="text" id="firstName" placeholder="First name" autocomplete="given-name">
+    </div>
+    <div class="field-group">
+      <div class="field-label">Last name</div>
+      <input type="text" id="lastName" placeholder="Last name" autocomplete="family-name">
+    </div>
+    <div class="field-group">
+      <div class="field-label">What surgery did you have?</div>
+      <select id="surgeryType">
+        <option value="">Select your surgery type</option>
+        <optgroup label="Cosmetic">
+          <option value="cosmetic-bbl">BBL (Brazilian Butt Lift)</option>
+          <option value="cosmetic-tummy">Tummy Tuck</option>
+          <option value="cosmetic-other">Other Cosmetic Surgery</option>
+        </optgroup>
+        <optgroup label="Abdominal">
+          <option value="bariatric">Bariatric / Weight Loss Surgery</option>
+          <option value="major-abdominal">Major Abdominal Surgery</option>
+          <option value="hysterectomy">Hysterectomy</option>
+          <option value="laparoscopic">Laparoscopic Surgery</option>
+        </optgroup>
+        <optgroup label="Other">
+          <option value="cesarean">C-Section</option>
+          <option value="joint-replacement">Joint Replacement</option>
+          <option value="cancer">Cancer Surgery</option>
+          <option value="thoracic">Chest / Thoracic Surgery</option>
+          <option value="vascular">Vascular Surgery</option>
+          <option value="outpatient">Outpatient / Minor Procedure</option>
+          <option value="moderate-other">Other Moderate Surgery</option>
+          <option value="low-risk-other">Other Low-Risk Surgery</option>
+        </optgroup>
+      </select>
+    </div>
+    <div class="field-group">
+      <div class="field-label">When was your surgery?</div>
+      <input type="date" id="surgeryDate">
+      <div id="podDisplay" style="margin-top:8px;"></div>
+    </div>
+  </div>
+
+  <!-- ═══ STEP 1: PAIN ═══ -->
+  <div class="step" id="step-1">
+    <div class="step-icon">💊</div>
+    <div class="step-title">Let's talk about pain.</div>
+    <div class="step-subtitle">Move the sliders to show your pain level. There are no wrong answers.</div>
+
+    <div class="field-group">
+      <div class="field-label">How much pain right now, while resting?</div>
+      <div class="slider-wrap">
+        <div class="emoji-scale"><span>😊</span><span>🙂</span><span>😐</span><span>😣</span><span>😰</span></div>
+        <input type="range" id="painRest" min="0" max="10" value="5" class="slider-inactive">
+        <div class="slider-labels"><span>No pain</span><span>Worst pain</span></div>
+      </div>
+      <div class="slider-val untouched" id="painRestVal">—</div>
+      <div class="feedback" id="painRestFeedback"></div>
+    </div>
+
+    <div class="field-group">
+      <div class="field-label">How much pain when you move or get up?</div>
+      <div class="slider-wrap">
+        <div class="emoji-scale"><span>😊</span><span>🙂</span><span>😐</span><span>😣</span><span>😰</span></div>
+        <input type="range" id="painActivity" min="0" max="10" value="5" class="slider-inactive">
+        <div class="slider-labels"><span>No pain</span><span>Worst pain</span></div>
+      </div>
+      <div class="slider-val untouched" id="painActivityVal">—</div>
+      <div class="feedback" id="painActivityFeedback"></div>
+    </div>
+
+    <div class="field-group">
+      <div class="field-label">Is your pain medication helping?</div>
+      <div class="options" id="painManagedOpts">
+        <div class="option-card" data-value="yes" onclick="selectOption('painManaged','yes',this)">
+          <div class="option-dot green"></div>
+          <div class="option-text">Yes, it's helping</div>
+        </div>
+        <div class="option-card" data-value="somewhat" onclick="selectOption('painManaged','somewhat',this)">
+          <div class="option-dot yellow"></div>
+          <div class="option-text">Somewhat — not fully</div>
+        </div>
+        <div class="option-card" data-value="no" onclick="selectOption('painManaged','no',this)">
+          <div class="option-dot red"></div>
+          <div class="option-text">Not really</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ STEP 2: WOUND ═══ -->
+  <div class="step" id="step-2">
+    <div class="step-icon">🩹</div>
+    <div class="step-title">How does your wound look?</div>
+    <div class="step-subtitle">If you have multiple incisions, answer about the one that concerns you most.</div>
+
+    <div class="field-group">
+      <div class="field-label">Is there any fluid coming from your wound?</div>
+      <div class="options" id="drainageOpts">
+        <div class="option-card" data-value="none" onclick="selectOption('drainage','none',this)">
+          <div class="option-dot green"></div><div class="option-text">No drainage</div>
+        </div>
+        <div class="option-card" data-value="minimal-clear" onclick="selectOption('drainage','minimal-clear',this)">
+          <div class="option-dot green"></div><div class="option-text">A little bit, clear or light colored</div>
+        </div>
+        <div class="option-card" data-value="moderate" onclick="selectOption('drainage','moderate',this)">
+          <div class="option-dot yellow"></div><div class="option-text">A moderate amount</div>
+        </div>
+        <div class="option-card" data-value="heavy" onclick="selectOption('drainage','heavy',this)">
+          <div class="option-dot orange"></div><div class="option-text">Heavy drainage</div>
+        </div>
+        <div class="option-card" data-value="bloody" onclick="selectOption('drainage','bloody',this)">
+          <div class="option-dot red"></div><div class="option-text">Bloody drainage</div>
+        </div>
+        <div class="option-card" data-value="foul" onclick="selectOption('drainage','foul',this)">
+          <div class="option-dot red"></div><div class="option-text">Bad-smelling drainage</div>
+        </div>
+      </div>
+      <div class="feedback" id="drainageFeedback"></div>
+    </div>
+
+    <div class="field-group">
+      <div class="field-label">Is your wound opening up at all?</div>
+      <div class="options" id="openingOpts">
+        <div class="option-card" data-value="no" onclick="selectOption('opening','no',this)">
+          <div class="option-dot green"></div><div class="option-text">No, it looks closed</div>
+        </div>
+        <div class="option-card" data-value="slight" onclick="selectOption('opening','slight',this)">
+          <div class="option-dot yellow"></div><div class="option-text">A little bit at the edges</div>
+        </div>
+        <div class="option-card" data-value="significant" onclick="selectOption('opening','significant',this)">
+          <div class="option-dot red"></div><div class="option-text">Yes, it's opening significantly</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <div class="field-label">Is there redness around your wound?</div>
+      <div class="options" id="rednessOpts">
+        <div class="option-card" data-value="none" onclick="selectOption('redness','none',this)">
+          <div class="option-dot green"></div><div class="option-text">No redness</div>
+        </div>
+        <div class="option-card" data-value="mild" onclick="selectOption('redness','mild',this)">
+          <div class="option-dot yellow"></div><div class="option-text">A little redness right at the edges</div>
+        </div>
+        <div class="option-card" data-value="spreading" onclick="selectOption('redness','spreading',this)">
+          <div class="option-dot red"></div><div class="option-text">Redness is spreading beyond the wound</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ STEP 3: STOMACH ═══ -->
+  <div class="step" id="step-3">
+    <div class="step-icon">🍽️</div>
+    <div class="step-title">How's your stomach?</div>
+    <div class="step-subtitle">Nausea and appetite changes are common after surgery. Let us know how you're doing.</div>
+
+    <div class="field-group">
+      <div class="field-label">Are you feeling nauseous?</div>
+      <div class="options">
+        <div class="option-card" data-value="none" onclick="selectOption('nausea','none',this)">
+          <div class="option-dot green"></div><div class="option-text">Not at all</div>
+        </div>
+        <div class="option-card" data-value="mild" onclick="selectOption('nausea','mild',this)">
+          <div class="option-dot yellow"></div><div class="option-text">A little</div>
+        </div>
+        <div class="option-card" data-value="moderate" onclick="selectOption('nausea','moderate',this)">
+          <div class="option-dot orange"></div><div class="option-text">Quite a bit</div>
+        </div>
+        <div class="option-card" data-value="severe" onclick="selectOption('nausea','severe',this)">
+          <div class="option-dot red"></div><div class="option-text">Very nauseous</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <div class="field-label">Have you been vomiting?</div>
+      <div class="options">
+        <div class="option-card" data-value="none" onclick="selectOption('vomiting','none',this)">
+          <div class="option-dot green"></div><div class="option-text">No</div>
+        </div>
+        <div class="option-card" data-value="once" onclick="selectOption('vomiting','once',this)">
+          <div class="option-dot yellow"></div><div class="option-text">Once</div>
+        </div>
+        <div class="option-card" data-value="multiple" onclick="selectOption('vomiting','multiple',this)">
+          <div class="option-dot red"></div><div class="option-text">More than once</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <div class="field-label">How is your eating and drinking?</div>
+      <div class="options">
+        <div class="option-card" data-value="normal" onclick="selectOption('intake','normal',this)">
+          <div class="option-dot green"></div><div class="option-text">Normal — eating and drinking fine</div>
+        </div>
+        <div class="option-card" data-value="reduced" onclick="selectOption('intake','reduced',this)">
+          <div class="option-dot yellow"></div><div class="option-text">Less than usual</div>
+        </div>
+        <div class="option-card" data-value="minimal" onclick="selectOption('intake','minimal',this)">
+          <div class="option-dot orange"></div><div class="option-text">Only small sips</div>
+        </div>
+        <div class="option-card" data-value="none" onclick="selectOption('intake','none',this)">
+          <div class="option-dot red"></div><div class="option-text">Can't eat or drink anything</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ STEP 4: HOW YOU'RE FEELING ═══ -->
+  <div class="step" id="step-4">
+    <div class="step-icon">🧠</div>
+    <div class="step-title">How are you feeling<br>emotionally?</div>
+    <div class="step-subtitle">Recovery can be emotionally challenging — that's completely normal. Your honest answer helps us support you better.</div>
+
+    <div class="field-group">
+      <div class="field-label">How anxious or worried are you feeling?</div>
+      <div class="options">
+        <div class="option-card" data-value="none" onclick="selectOption('anxiety','none',this)">
+          <div class="option-emoji">😌</div><div class="option-text">Calm and relaxed</div>
+        </div>
+        <div class="option-card" data-value="mild" onclick="selectOption('anxiety','mild',this)">
+          <div class="option-emoji">😐</div><div class="option-text">A little worried</div>
+        </div>
+        <div class="option-card" data-value="moderate" onclick="selectOption('anxiety','moderate',this)">
+          <div class="option-emoji">😟</div><div class="option-text">Pretty anxious</div>
+        </div>
+        <div class="option-card" data-value="severe" onclick="selectOption('anxiety','severe',this)">
+          <div class="option-emoji">😰</div><div class="option-text">Very anxious or panicky</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <div class="field-label">How would you describe your mood?</div>
+      <div class="options">
+        <div class="option-card" data-value="positive" onclick="selectOption('mood','positive',this)">
+          <div class="option-emoji">😊</div><div class="option-text">Good / Positive</div>
+        </div>
+        <div class="option-card" data-value="neutral" onclick="selectOption('mood','neutral',this)">
+          <div class="option-emoji">😐</div><div class="option-text">Okay / Neutral</div>
+        </div>
+        <div class="option-card" data-value="low" onclick="selectOption('mood','low',this)">
+          <div class="option-emoji">😔</div><div class="option-text">Down / Low</div>
+        </div>
+        <div class="option-card" data-value="very-low" onclick="selectOption('mood','very-low',this)">
+          <div class="option-emoji">😢</div><div class="option-text">Very down / Struggling</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:rgba(45,90,61,0.05); border-radius:var(--radius); padding:14px; margin-top:8px;">
+      <p style="font-size:0.85rem; color:var(--sage); line-height:1.6; margin:0;">If you're struggling emotionally, you're not alone. OpWell's care team includes a licensed mental health specialist — available as part of your recovery support.</p>
+    </div>
+  </div>
+
+  <!-- ═══ STEP 5: WARNING SIGNS ═══ -->
+  <div class="step" id="step-5">
+    <div class="step-icon">⚠️</div>
+    <div class="step-title">Any warning signs?</div>
+    <div class="step-subtitle">Tap any that apply. If none apply, just tap Next. <strong>If you're having a medical emergency, call 911 now.</strong></div>
+
+    <div id="flagsContainer">
+      <div class="flag-card" data-flag="0" onclick="toggleFlag(this,0)">
+        <div class="flag-check"></div>
+        <div class="flag-text">My wound is draining more, opening, or getting redder</div>
+      </div>
+      <div class="flag-card" data-flag="1" onclick="toggleFlag(this,1)">
+        <div class="flag-check"></div>
+        <div class="flag-text">I haven't had a bowel movement in over 24 hours</div>
+      </div>
+      <div class="flag-card" data-flag="2" onclick="toggleFlag(this,2)">
+        <div class="flag-check"></div>
+        <div class="flag-text">My pain is getting worse, not better</div>
+      </div>
+      <div class="flag-card" data-flag="3" onclick="toggleFlag(this,3)">
+        <div class="flag-check"></div>
+        <div class="flag-text">I've been throwing up</div>
+      </div>
+      <div class="flag-card" data-flag="4" onclick="toggleFlag(this,4)">
+        <div class="flag-check"></div>
+        <div class="flag-text">My stomach feels swollen or bloated</div>
+      </div>
+      <div class="flag-card" data-flag="5" onclick="toggleFlag(this,5)">
+        <div class="flag-check"></div>
+        <div class="flag-text">My urine is very dark or I'm barely urinating</div>
+      </div>
+      <div class="flag-card" data-flag="6" onclick="toggleFlag(this,6)">
+        <div class="flag-check"></div>
+        <div class="flag-text">I have a fever (temperature over 101.5°F)</div>
+      </div>
+      <div class="flag-card" data-flag="7" onclick="toggleFlag(this,7)">
+        <div class="flag-check"></div>
+        <div class="flag-text">I can't eat or drink anything</div>
+      </div>
+
+      <!-- Emergency flags -->
+      <div class="flag-card" data-flag="8" data-emergency="true" onclick="toggleFlag(this,8)">
+        <div class="flag-check"></div>
+        <div class="flag-text">I'm having trouble breathing or feel short of breath</div>
+        <div class="flag-badge">Emergency</div>
+      </div>
+      <div class="flag-card" data-flag="9" data-emergency="true" onclick="toggleFlag(this,9)">
+        <div class="flag-check"></div>
+        <div class="flag-text">I have chest pain</div>
+        <div class="flag-badge">Emergency</div>
+      </div>
+      <div class="flag-card" data-flag="10" data-emergency="true" onclick="toggleFlag(this,10)">
+        <div class="flag-check"></div>
+        <div class="flag-text">One of my legs is swollen or my calf hurts</div>
+        <div class="flag-badge">Emergency</div>
+      </div>
+      <div class="flag-card" data-flag="11" onclick="toggleFlag(this,11)">
+        <div class="flag-check"></div>
+        <div class="flag-text">I feel confused or not like myself</div>
+      </div>
+
+      <!-- Surgery-specific: BBL -->
+      <div class="surgery-flags" id="flags-bbl">
+        <div class="surgery-flags-title">BBL-Specific Warning Signs</div>
+        <div class="flag-card" data-surg="bbl" data-si="0" onclick="toggleSurgFlag(this,'bbl',0)">
+          <div class="flag-check"></div>
+          <div class="flag-text">One of my legs is swollen or my calf hurts (DVT/PE risk)</div>
+          <div class="flag-badge">Emergency</div>
+        </div>
+        <div class="flag-card" data-surg="bbl" data-si="1" data-emergency="true" onclick="toggleSurgFlag(this,'bbl',1)">
+          <div class="flag-check"></div>
+          <div class="flag-text">My buttocks hurt and my heart is racing</div>
+          <div class="flag-badge">Emergency</div>
+        </div>
+        <div class="flag-card" data-surg="bbl" data-si="2" onclick="toggleSurgFlag(this,'bbl',2)">
+          <div class="flag-check"></div>
+          <div class="flag-text">Uneven swelling or hardness at the surgery site</div>
+        </div>
+      </div>
+
+      <!-- Surgery-specific: Bariatric -->
+      <div class="surgery-flags" id="flags-bariatric">
+        <div class="surgery-flags-title">Bariatric-Specific Warning Signs</div>
+        <div class="flag-card" data-surg="bariatric" data-si="0" data-emergency="true" onclick="toggleSurgFlag(this,'bariatric',0)">
+          <div class="flag-check"></div>
+          <div class="flag-text">My left shoulder hurts and my heart is racing</div>
+          <div class="flag-badge">Emergency</div>
+        </div>
+        <div class="flag-card" data-surg="bariatric" data-si="1" onclick="toggleSurgFlag(this,'bariatric',1)">
+          <div class="flag-check"></div>
+          <div class="flag-text">Cramping, diarrhea, or dizziness after eating</div>
+        </div>
+        <div class="flag-card" data-surg="bariatric" data-si="2" onclick="toggleSurgFlag(this,'bariatric',2)">
+          <div class="flag-check"></div>
+          <div class="flag-text">Shakiness, sweating, or confusion (blood sugar)</div>
+        </div>
+      </div>
+
+      <!-- Surgery-specific: C-Section -->
+      <div class="surgery-flags" id="flags-cesarean">
+        <div class="surgery-flags-title">C-Section Warning Signs</div>
+        <div class="flag-card" data-surg="cesarean" data-si="0" onclick="toggleSurgFlag(this,'cesarean',0)">
+          <div class="flag-check"></div>
+          <div class="flag-text">Very heavy bleeding (soaking more than 1 pad per hour)</div>
+        </div>
+        <div class="flag-card" data-surg="cesarean" data-si="1" onclick="toggleSurgFlag(this,'cesarean',1)">
+          <div class="flag-check"></div>
+          <div class="flag-text">I feel disconnected from my baby or I'm having scary thoughts</div>
+        </div>
+        <div class="flag-card" data-surg="cesarean" data-si="2" onclick="toggleSurgFlag(this,'cesarean',2)">
+          <div class="flag-check"></div>
+          <div class="flag-text">Bad-smelling vaginal discharge</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ STEP 6: REVIEW & SUBMIT ═══ -->
+  <div class="step" id="step-6">
+    <div class="step-icon">📋</div>
+    <div class="step-title">Review & send.</div>
+    <div class="step-subtitle">Here's a summary of your check-in. When ready, send it to Dr. Oluwole.</div>
+
+    <div id="scoreDisplay" class="score-display"></div>
+
+    <div id="domainBars" style="margin-bottom:20px;"></div>
+
+    <div id="reviewFlags" class="review-section" style="display:none;"></div>
+
+    <div id="reviewPain" class="review-section"></div>
+    <div id="reviewWound" class="review-section"></div>
+    <div id="reviewGI" class="review-section"></div>
+    <div id="reviewMental" class="review-section"></div>
+
+    <div class="field-group" style="margin-top:24px;">
+      <div class="field-label">Anything else you'd like Dr. Oluwole to know?</div>
+      <textarea id="notes" placeholder="Optional — type any additional notes here" maxlength="500" oninput="state.notes=this.value; saveProgress()"></textarea>
+    </div>
+
+    <div class="field-group">
+      <div class="field-label">Want a copy of this check-in?</div>
+      <input type="email" id="patientEmail" placeholder="Your email (optional)" autocomplete="email" oninput="state.patientEmail=this.value; saveProgress()">
+      <div class="field-hint">We'll send you a summary. Your email is only used for this purpose.</div>
+    </div>
+  </div>
+
+  <!-- ═══ STEP 7: THANK YOU ═══ -->
+  <div class="step" id="step-7">
+    <div style="text-align:center; padding-top:20px;">
+      <div class="thankyou-check">✓</div>
+      <div class="step-title">Check-in sent!</div>
+      <div class="step-subtitle" id="thankyouMsg" style="margin-top:12px;">Your check-in has been sent to Dr. Oluwole. She will review it before your next call.</div>
+
+      <div id="thankyouRedFlag" style="display:none; background:var(--yellow-bg); border:1px solid #FDE68A; border-radius:var(--radius); padding:16px; margin:20px 0; text-align:left;">
+        <p style="font-size:0.9rem; color:#92400E; line-height:1.6; margin:0;"><strong>Because you reported warning signs,</strong> Dr. Oluwole has been flagged to review your check-in as a priority.</p>
+      </div>
+
+      <div id="thankyouEmail" style="display:none; background:var(--green-bg); border-radius:var(--radius); padding:14px; margin:16px 0;">
+        <p style="font-size:0.88rem; color:#166534; margin:0;">A copy has been sent to your email.</p>
+      </div>
+
+      <div style="background:rgba(45,90,61,0.05); border-radius:var(--radius); padding:20px; margin:24px 0;">
+        <p style="font-size:0.9rem; color:var(--charcoal); line-height:1.6; margin:0 0 8px;">If you experience an emergency, <strong>call 911 immediately.</strong></p>
+        <p style="font-size:0.9rem; color:var(--slate); line-height:1.6; margin:0;">Need to reach us? Call <a href="tel:6782355822" style="color:var(--sage); font-weight:600;">(678) 235-5822</a></p>
+      </div>
+
+      <a href="https://opwellconcierge.com" style="display:inline-block; margin-top:16px; padding:14px 28px; background:var(--sage); color:#fff; border-radius:var(--radius); text-decoration:none; font-weight:600; font-size:0.95rem;">Return to OpWell Concierge</a>
+    </div>
+  </div>
+</div>
+
+<!-- ── Navigation ── -->
+<div class="wizard-nav" id="wizardNav">
+  <button class="nav-btn back" id="btnBack" onclick="prevStep()" style="display:none;">Back</button>
+  <button class="nav-btn next" id="btnNext" onclick="nextStep()">Next</button>
+</div>
+
+<!-- ── Emergency Modal ── -->
+<div class="modal-overlay" id="emergencyModal">
+  <div class="modal-card">
+    <div class="modal-icon">🚨</div>
+    <div class="modal-title">Emergency Symptoms</div>
+    <div class="modal-text">The symptom you selected may indicate a serious complication. If you are experiencing this right now, please call 911 immediately.</div>
+    <a href="tel:911" class="modal-911">Call 911</a>
+    <button class="modal-dismiss" onclick="dismissModal()">I understand — Continue check-in</button>
+  </div>
+</div>
+
+<script>
+/* ══════════════════════════════════════════ */
+/*             ACCESS GATE                   */
+/* ══════════════════════════════════════════ */
+
+const ACCESS_CODE = 'OPWELL2026';
+const GATE_KEY = 'opwell_checkin_access';
+
+function submitGateCode() {
+  const input = document.getElementById('gateInput');
+  const error = document.getElementById('gateError');
+  const code = (input.value || '').trim().toUpperCase();
+  if (code === ACCESS_CODE) {
+    sessionStorage.setItem(GATE_KEY, 'granted');
+    document.getElementById('accessGate').classList.add('unlocked');
+    error.classList.remove('show');
+  } else {
+    error.classList.add('show');
+    input.value = '';
+    input.focus();
+  }
+}
+
+function checkGateAccess() {
+  if (sessionStorage.getItem(GATE_KEY) === 'granted') {
+    document.getElementById('accessGate').classList.add('unlocked');
+  }
+}
+
+// Enter key on gate input
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' && document.activeElement && document.activeElement.id === 'gateInput') {
+    e.preventDefault();
+    submitGateCode();
+  }
+});
+
+/* ══════════════════════════════════════════ */
+/*            STATE MANAGEMENT               */
+/* ══════════════════════════════════════════ */
+
+const TOTAL_STEPS = 7; // 0-6 are input steps, 7 is thank-you
+
+const state = {
+  firstName: '', lastName: '', surgeryType: '', surgeryDate: '',
+  painRest: null, painActivity: null, painRestTouched: false, painActivityTouched: false,
+  painManaged: null,
+  drainage: null, opening: null, redness: null,
+  nausea: null, vomiting: null, intake: null,
+  anxiety: null, mood: null,
+  flags: new Array(12).fill(false),
+  surgeryFlags: { bbl: [false,false,false], bariatric: [false,false,false], cesarean: [false,false,false] },
+  patientEmail: '', notes: '',
+  currentStep: 0
+};
+
+function saveProgress() {
+  try { sessionStorage.setItem('opwell_patient_checkin', JSON.stringify(state)); } catch(e) {}
+}
+
+function loadProgress() {
+  try {
+    const saved = sessionStorage.getItem('opwell_patient_checkin');
+    if (saved) {
+      const s = JSON.parse(saved);
+      Object.assign(state, s);
+      restoreUI();
+    }
+  } catch(e) {}
+}
+
+function restoreUI() {
+  document.getElementById('firstName').value = state.firstName;
+  document.getElementById('lastName').value = state.lastName;
+  document.getElementById('surgeryType').value = state.surgeryType;
+  document.getElementById('surgeryDate').value = state.surgeryDate;
+  if (state.surgeryDate) updatePOD();
+  updateSurgeryFlags();
+
+  // Sliders
+  if (state.painRestTouched) {
+    const s = document.getElementById('painRest');
+    s.value = state.painRest; s.classList.remove('slider-inactive');
+    document.getElementById('painRestVal').textContent = state.painRest;
+    document.getElementById('painRestVal').classList.remove('untouched');
+    colorSliderVal('painRestVal', state.painRest);
+  }
+  if (state.painActivityTouched) {
+    const s = document.getElementById('painActivity');
+    s.value = state.painActivity; s.classList.remove('slider-inactive');
+    document.getElementById('painActivityVal').textContent = state.painActivity;
+    document.getElementById('painActivityVal').classList.remove('untouched');
+    colorSliderVal('painActivityVal', state.painActivity);
+  }
+
+  // Radio options
+  const radioFields = ['painManaged','drainage','opening','redness','nausea','vomiting','intake','anxiety','mood'];
+  radioFields.forEach(f => {
+    if (state[f] !== null) {
+      const cards = document.querySelectorAll(`.option-card[data-value="${state[f]}"]`);
+      cards.forEach(c => {
+        const parent = c.closest('.field-group') || c.parentElement;
+        // Find the matching one
+        const fieldCards = parent.querySelectorAll('.option-card');
+        let isMatch = false;
+        fieldCards.forEach(fc => {
+          if (fc.dataset.value === state[f]) isMatch = true;
+        });
+        if (isMatch) {
+          parent.querySelectorAll('.option-card').forEach(oc => oc.className = 'option-card');
+          const severity = getSeverityClass(f, state[f]);
+          c.classList.add(severity);
+        }
+      });
+    }
+  });
+
+  // Flags
+  state.flags.forEach((f, i) => {
+    if (f) {
+      const card = document.querySelector(`.flag-card[data-flag="${i}"]`);
+      if (card) { card.classList.add('checked'); if (card.dataset.emergency) card.classList.add('emergency'); card.querySelector('.flag-check').textContent = '✓'; }
+    }
+  });
+  for (const key of Object.keys(state.surgeryFlags)) {
+    state.surgeryFlags[key].forEach((f, i) => {
+      if (f) {
+        const card = document.querySelector(`.flag-card[data-surg="${key}"][data-si="${i}"]`);
+        if (card) { card.classList.add('checked'); if (card.dataset.emergency) card.classList.add('emergency'); card.querySelector('.flag-check').textContent = '✓'; }
+      }
+    });
+  }
+
+  // Other fields
+  document.getElementById('patientEmail').value = state.patientEmail || '';
+  document.getElementById('notes').value = state.notes || '';
+
+  goToStep(state.currentStep, true);
+}
+
+/* ══════════════════════════════════════════ */
+/*               NAVIGATION                  */
+/* ══════════════════════════════════════════ */
+
+function goToStep(n, skipSave) {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  const step = document.getElementById('step-' + n);
+  if (step) step.classList.add('active');
+
+  state.currentStep = n;
+  updateProgressBar();
+  updateNavButtons();
+  hideError();
+  if (!skipSave) saveProgress();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // Build review on step 6
+  if (n === 6) buildReview();
+  // Auto-detect flags on step 5
+  if (n === 5) autoDetectFlags();
+}
+
+function nextStep() {
+  if (!validateStep(state.currentStep)) return;
+  if (state.currentStep === 6) { submitCheckin(); return; }
+  goToStep(state.currentStep + 1);
+}
+
+function prevStep() {
+  if (state.currentStep > 0) goToStep(state.currentStep - 1);
+}
+
+function updateProgressBar() {
+  const pct = state.currentStep >= 7 ? 100 : Math.round((state.currentStep / (TOTAL_STEPS)) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  if (state.currentStep >= 7) {
+    document.getElementById('progressLabel').textContent = 'Complete!';
+  } else {
+    document.getElementById('progressLabel').textContent = `Step ${state.currentStep + 1} of ${TOTAL_STEPS}`;
+  }
+}
+
+function updateNavButtons() {
+  const back = document.getElementById('btnBack');
+  const next = document.getElementById('btnNext');
+  const nav = document.getElementById('wizardNav');
+
+  if (state.currentStep >= 7) {
+    nav.style.display = 'none'; return;
+  }
+  nav.style.display = 'flex';
+  back.style.display = state.currentStep > 0 ? 'block' : 'none';
+
+  if (state.currentStep === 6) {
+    next.textContent = 'Send to Dr. Oluwole';
+    next.classList.remove('next');
+    next.classList.add('submit');
+  } else {
+    next.textContent = 'Next';
+    next.classList.remove('submit');
+    next.classList.add('next');
+  }
+  next.disabled = false;
+}
+
+/* ══════════════════════════════════════════ */
+/*              VALIDATION                   */
+/* ══════════════════════════════════════════ */
+
+function validateStep(step) {
+  switch(step) {
+    case 0:
+      if (!state.firstName.trim() || !state.lastName.trim()) { showError('Please enter your first and last name.'); return false; }
+      if (!state.surgeryType) { showError('Please select your surgery type.'); return false; }
+      if (!state.surgeryDate) { showError('Please enter your surgery date.'); return false; }
+      return true;
+    case 1:
+      if (!state.painRestTouched && !state.painActivityTouched) { showError('Please move at least one pain slider.'); return false; }
+      return true;
+    case 2:
+      if (state.drainage === null && state.opening === null && state.redness === null) { showError('Please answer at least one wound question.'); return false; }
+      return true;
+    case 3:
+      if (state.nausea === null && state.vomiting === null && state.intake === null) { showError('Please answer at least one question.'); return false; }
+      return true;
+    case 4:
+      if (state.anxiety === null && state.mood === null) { showError('Please answer at least one question.'); return false; }
+      return true;
+    default: return true;
+  }
+}
+
+function showError(msg) {
+  const el = document.getElementById('inlineError');
+  el.textContent = msg;
+  el.classList.add('show');
+  el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+function hideError() {
+  document.getElementById('inlineError').classList.remove('show');
+}
+
+/* ══════════════════════════════════════════ */
+/*              FORM HANDLERS                */
+/* ══════════════════════════════════════════ */
+
+// Text inputs
+document.getElementById('firstName').addEventListener('input', function() { state.firstName = this.value; saveProgress(); });
+document.getElementById('lastName').addEventListener('input', function() { state.lastName = this.value; saveProgress(); });
+document.getElementById('surgeryType').addEventListener('change', function() {
+  state.surgeryType = this.value;
+  updateSurgeryFlags();
+  saveProgress();
+});
+document.getElementById('surgeryDate').addEventListener('change', function() {
+  state.surgeryDate = this.value;
+  updatePOD();
+  saveProgress();
+});
+
+function updatePOD() {
+  const d = state.surgeryDate;
+  if (!d) { document.getElementById('podDisplay').innerHTML = ''; return; }
+  const diff = Math.floor((new Date() - new Date(d)) / 86400000);
+  if (diff < 0) { document.getElementById('podDisplay').innerHTML = '<span class="pod-badge" style="background:var(--slate);">Surgery is in the future</span>'; return; }
+  document.getElementById('podDisplay').innerHTML = `<span class="pod-badge">Day ${diff} after surgery</span>`;
+}
+
+function updateSurgeryFlags() {
+  document.querySelectorAll('.surgery-flags').forEach(el => el.classList.remove('show'));
+  const t = state.surgeryType;
+  if (t === 'cosmetic-bbl') document.getElementById('flags-bbl').classList.add('show');
+  if (t === 'bariatric') document.getElementById('flags-bariatric').classList.add('show');
+  if (t === 'cesarean') document.getElementById('flags-cesarean').classList.add('show');
+}
+
+function computePOD() {
+  if (!state.surgeryDate) return null;
+  return Math.max(0, Math.floor((new Date() - new Date(state.surgeryDate)) / 86400000));
+}
+
+// Sliders
+document.getElementById('painRest').addEventListener('input', function() {
+  state.painRest = parseInt(this.value);
+  state.painRestTouched = true;
+  this.classList.remove('slider-inactive');
+  const valEl = document.getElementById('painRestVal');
+  valEl.textContent = state.painRest;
+  valEl.classList.remove('untouched');
+  colorSliderVal('painRestVal', state.painRest);
+  showPainFeedback('painRestFeedback', state.painRest);
+  saveProgress();
+});
+document.getElementById('painActivity').addEventListener('input', function() {
+  state.painActivity = parseInt(this.value);
+  state.painActivityTouched = true;
+  this.classList.remove('slider-inactive');
+  const valEl = document.getElementById('painActivityVal');
+  valEl.textContent = state.painActivity;
+  valEl.classList.remove('untouched');
+  colorSliderVal('painActivityVal', state.painActivity);
+  showPainFeedback('painActivityFeedback', state.painActivity);
+  saveProgress();
+});
+
+function colorSliderVal(id, val) {
+  const el = document.getElementById(id);
+  if (val <= 3) el.style.color = 'var(--green)';
+  else if (val <= 6) el.style.color = 'var(--yellow)';
+  else el.style.color = 'var(--red)';
+}
+
+function showPainFeedback(id, val) {
+  const el = document.getElementById(id);
+  el.classList.add('show');
+  if (val <= 3) { el.className = 'feedback show good'; el.textContent = "That's great — your pain sounds manageable."; }
+  else if (val <= 6) { el.className = 'feedback show moderate'; el.textContent = "Moderate pain is common in recovery. We'll let Dr. Oluwole know."; }
+  else { el.className = 'feedback show concern'; el.textContent = "We want to make sure Dr. Oluwole sees this right away."; }
+}
+
+// Option cards (radio behavior)
+function selectOption(field, value, el) {
+  state[field] = value;
+  const parent = el.parentElement;
+  parent.querySelectorAll('.option-card').forEach(c => c.className = 'option-card');
+  const severity = getSeverityClass(field, value);
+  el.classList.add(severity);
+
+  // Wound feedback
+  if (field === 'drainage') showWoundFeedback(value);
+
+  saveProgress();
+}
+
+function getSeverityClass(field, value) {
+  const greenVals = { painManaged: ['yes'], drainage: ['none','minimal-clear'], opening: ['no'], redness: ['none'], nausea: ['none'], vomiting: ['none'], intake: ['normal'], anxiety: ['none'], mood: ['positive'] };
+  const yellowVals = { painManaged: ['somewhat'], drainage: ['moderate'], opening: ['slight'], redness: ['mild'], nausea: ['mild'], vomiting: ['once'], intake: ['reduced'], anxiety: ['mild'], mood: ['neutral'] };
+  const orangeVals = { drainage: ['heavy'], nausea: ['moderate'], intake: ['minimal'], anxiety: ['moderate'] };
+
+  if (greenVals[field] && greenVals[field].includes(value)) return 'selected';
+  if (yellowVals[field] && yellowVals[field].includes(value)) return 'selected-yellow';
+  if (orangeVals[field] && orangeVals[field].includes(value)) return 'selected-orange';
+  return 'selected-red';
+}
+
+function showWoundFeedback(val) {
+  const el = document.getElementById('drainageFeedback');
+  el.classList.add('show');
+  if (val === 'none' || val === 'minimal-clear') { el.className = 'feedback show good'; el.textContent = "Your wound sounds like it's healing well!"; }
+  else if (val === 'moderate') { el.className = 'feedback show moderate'; el.textContent = "We'll make sure Dr. Oluwole knows about this."; }
+  else { el.className = 'feedback show concern'; el.textContent = "Dr. Oluwole will want to review this. Please also mention it if you call."; }
+}
+
+// Flags
+function toggleFlag(el, idx) {
+  state.flags[idx] = !state.flags[idx];
+  el.classList.toggle('checked');
+  if (el.dataset.emergency) el.classList.toggle('emergency', state.flags[idx]);
+  el.querySelector('.flag-check').textContent = state.flags[idx] ? '✓' : '';
+
+  // Emergency modal for indices 8, 9, 10
+  if (state.flags[idx] && (idx === 8 || idx === 9 || idx === 10)) {
+    showEmergencyModal();
+  }
+  saveProgress();
+}
+
+function toggleSurgFlag(el, type, idx) {
+  state.surgeryFlags[type][idx] = !state.surgeryFlags[type][idx];
+  el.classList.toggle('checked');
+  if (el.dataset.emergency) el.classList.toggle('emergency', state.surgeryFlags[type][idx]);
+  el.querySelector('.flag-check').textContent = state.surgeryFlags[type][idx] ? '✓' : '';
+
+  // Emergency modal for BBL fat embolism (bbl[1]) and bariatric leak (bariatric[0])
+  if (state.surgeryFlags[type][idx] && ((type === 'bbl' && idx === 1) || (type === 'bariatric' && idx === 0))) {
+    showEmergencyModal();
+  }
+  saveProgress();
+}
+
+function autoDetectFlags() {
+  // Auto-check flags based on earlier answers
+  const auto = [
+    { idx: 0, cond: () => state.drainage === 'foul' || state.drainage === 'bloody' || state.opening === 'significant' || state.redness === 'spreading' },
+    { idx: 3, cond: () => state.vomiting === 'multiple' },
+    { idx: 7, cond: () => state.intake === 'none' }
+  ];
+  auto.forEach(a => {
+    if (a.cond() && !state.flags[a.idx]) {
+      state.flags[a.idx] = true;
+      const card = document.querySelector(`.flag-card[data-flag="${a.idx}"]`);
+      if (card) { card.classList.add('checked'); card.querySelector('.flag-check').textContent = '✓'; }
+    }
+  });
+  saveProgress();
+}
+
+function showEmergencyModal() {
+  document.getElementById('emergencyModal').classList.add('show');
+}
+function dismissModal() {
+  document.getElementById('emergencyModal').classList.remove('show');
+}
+
+/* ══════════════════════════════════════════ */
+/*               SCORING                     */
+/* ══════════════════════════════════════════ */
+
+function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
+
+function scorePain() {
+  if (!state.painRestTouched && !state.painActivityTouched) return null;
+  const rest = state.painRest !== null ? state.painRest : 0;
+  const act = state.painActivity !== null ? state.painActivity : 0;
+  let raw = 100 - (rest * 10 * 0.6 + act * 7 * 0.4) / 10;
+  const mod = { yes: 0, somewhat: -10, no: -25 };
+  if (state.painManaged) raw += (mod[state.painManaged] || 0);
+  return clamp(Math.round(raw), 0, 100);
+}
+
+function scoreWound() {
+  const p = { drainage: { none:0,'minimal-clear':5,moderate:20,heavy:35,bloody:40,foul:50 }, opening: { no:0,slight:15,significant:35 }, redness: { none:0,mild:10,spreading:30 } };
+  let penalty = 0, count = 0;
+  for (const k of Object.keys(p)) { if (state[k] !== null) { count++; penalty += (p[k][state[k]] || 0); } }
+  return count === 0 ? null : clamp(Math.round(100 - penalty), 0, 100);
+}
+
+function scoreGI() {
+  const p = { nausea: { none:0,mild:8,moderate:20,severe:35 }, vomiting: { none:0,once:15,multiple:35 }, intake: { normal:0,reduced:10,minimal:25,none:45 } };
+  let penalty = 0, count = 0;
+  for (const k of Object.keys(p)) { if (state[k] !== null) { count++; penalty += (p[k][state[k]] || 0); } }
+  return count === 0 ? null : clamp(Math.round(100 - penalty), 0, 100);
+}
+
+function scoreMental() {
+  const p = { anxiety: { none:0,mild:10,moderate:25,severe:45 }, mood: { positive:0,neutral:5,low:25,'very-low':45 } };
+  let penalty = 0, count = 0;
+  for (const k of Object.keys(p)) { if (state[k] !== null) { count++; penalty += (p[k][state[k]] || 0); } }
+  return count === 0 ? null : clamp(Math.round(100 - (penalty / Math.max(count, 1))), 0, 100);
+}
+
+function scoreRedFlags() {
+  let flagCount = state.flags.filter(Boolean).length;
+  let surgEmergency = false;
+  for (const key of Object.keys(state.surgeryFlags)) {
+    state.surgeryFlags[key].forEach((f, i) => { if (f) { flagCount++; if ((key === 'bbl' && i === 1) || (key === 'bariatric' && i === 0)) surgEmergency = true; } });
+  }
+  if (state.flags[8] || state.flags[9] || state.flags[10] || surgEmergency) return 0;
+  if (flagCount >= 4) return 10;
+  if (flagCount === 3) return 25;
+  if (flagCount === 2) return 40;
+  if (flagCount === 1) return 60;
+  return 100;
+}
+
+function calculateComposite() {
+  const weights = { pain: 0.15, wound: 0.20, gi: 0.15, mental: 0.15, redflags: 0.35 };
+  const scores = { pain: scorePain(), wound: scoreWound(), gi: scoreGI(), mental: scoreMental(), redflags: scoreRedFlags() };
+  let totalWeight = 0, weightedSum = 0;
+  for (const [k, v] of Object.entries(scores)) { if (v !== null) { totalWeight += weights[k]; weightedSum += v * weights[k]; } }
+  if (totalWeight === 0) return { composite: null, scores, risk: null };
+  let composite = Math.round(weightedSum / totalWeight);
+  if (state.flags[8] || state.flags[9]) composite = Math.min(composite, 25);
+  return { composite, scores, risk: classifyRisk(composite) };
+}
+
+function classifyRisk(score) {
+  if (score === null) return null;
+  if (score >= 80) return { level: 'low', label: 'Low Risk', color: '#16A34A', bg: 'var(--green-bg)' };
+  if (score >= 60) return { level: 'moderate', label: 'Moderate', color: '#CA8A04', bg: 'var(--yellow-bg)' };
+  if (score >= 40) return { level: 'high', label: 'Needs Attention', color: '#D97706', bg: 'var(--orange-bg)' };
+  return { level: 'critical', label: 'Urgent', color: '#DC2626', bg: 'var(--red-bg)' };
+}
+
+/* ══════════════════════════════════════════ */
+/*             REVIEW & SUBMIT               */
+/* ══════════════════════════════════════════ */
+
+const LABELS = {
+  painManaged: { yes:'Yes', somewhat:'Somewhat', no:'Not really' },
+  drainage: { none:'No drainage', 'minimal-clear':'A little, clear', moderate:'Moderate', heavy:'Heavy', bloody:'Bloody', foul:'Bad-smelling' },
+  opening: { no:'No', slight:'A little at edges', significant:'Opening significantly' },
+  redness: { none:'No redness', mild:'A little at edges', spreading:'Spreading' },
+  nausea: { none:'Not at all', mild:'A little', moderate:'Quite a bit', severe:'Very nauseous' },
+  vomiting: { none:'No', once:'Once', multiple:'More than once' },
+  intake: { normal:'Normal', reduced:'Less than usual', minimal:'Small sips only', none:"Can't eat or drink" },
+  anxiety: { none:'Calm', mild:'A little worried', moderate:'Pretty anxious', severe:'Very anxious' },
+  mood: { positive:'Good', neutral:'Okay', low:'Down', 'very-low':'Very down' }
+};
+
+function lbl(field, val) { return val !== null && LABELS[field] ? (LABELS[field][val] || val) : '—'; }
+
+function buildReview() {
+  const { composite, scores, risk } = calculateComposite();
+
+  // Score display
+  const sd = document.getElementById('scoreDisplay');
+  if (composite !== null && risk) {
+    sd.style.background = risk.bg;
+    sd.innerHTML = `<div class="score-number" style="color:${risk.color}">${composite}<span class="score-out-of">/100</span></div><div class="score-label" style="color:${risk.color}">${risk.label}</div>`;
+  } else {
+    sd.style.background = 'rgba(0,0,0,0.03)';
+    sd.innerHTML = '<div class="score-number" style="color:var(--slate)">—</div><div class="score-label" style="color:var(--slate)">Incomplete</div>';
+  }
+
+  // Domain bars
+  const db = document.getElementById('domainBars');
+  function bar(label, score) {
+    const c = score === null ? '#888' : score >= 80 ? '#16A34A' : score >= 60 ? '#CA8A04' : score >= 40 ? '#D97706' : '#DC2626';
+    return `<div class="domain-bar"><div class="domain-bar-label">${label}</div><div class="domain-bar-track"><div class="domain-bar-fill" style="width:${score !== null ? score : 0}%; background:${c}"></div></div><div class="domain-bar-val" style="color:${c}">${score !== null ? score : '—'}</div></div>`;
+  }
+  db.innerHTML = bar('Pain', scores.pain) + bar('Wound', scores.wound) + bar('GI', scores.gi) + bar('Mental', scores.mental) + bar('Flags', scores.redflags);
+
+  // Red flags
+  const rf = document.getElementById('reviewFlags');
+  const triggered = [];
+  const FLAG_TEXT = ['Wound drainage/opening/redness','No BM >24hrs','Worsening pain','Vomiting','Abdominal swelling','Dark/no urine','Fever >101.5°F',"Can't eat or drink",'Trouble breathing','Chest pain','Leg swelling/calf pain','Confusion'];
+  state.flags.forEach((f, i) => { if (f) triggered.push(FLAG_TEXT[i]); });
+  const SURG_TEXT = { bbl: ['Leg swelling (DVT/PE)','Buttock pain + racing heart','Uneven swelling'], bariatric: ['Left shoulder pain + racing heart','Dumping symptoms','Blood sugar issues'], cesarean: ['Heavy bleeding','Disconnection/scary thoughts','Bad-smelling discharge'] };
+  for (const key of Object.keys(state.surgeryFlags)) {
+    state.surgeryFlags[key].forEach((f, i) => { if (f && SURG_TEXT[key]) triggered.push(SURG_TEXT[key][i]); });
+  }
+  if (triggered.length > 0) {
+    rf.style.display = 'block';
+    rf.innerHTML = `<h3 style="color:var(--red);">Warning Signs Reported</h3>${triggered.map(t => `<div style="padding:4px 0; font-size:0.9rem; color:#991B1B;">⚠ ${t}</div>`).join('')}`;
+  } else {
+    rf.style.display = 'none';
+  }
+
+  // Domain summaries
+  document.getElementById('reviewPain').innerHTML = `<h3>Pain</h3>
+    <div class="review-row"><span class="review-label">At rest</span><span class="review-value">${state.painRestTouched ? state.painRest + '/10' : '—'}</span></div>
+    <div class="review-row"><span class="review-label">With activity</span><span class="review-value">${state.painActivityTouched ? state.painActivity + '/10' : '—'}</span></div>
+    <div class="review-row"><span class="review-label">Medication helping?</span><span class="review-value">${lbl('painManaged', state.painManaged)}</span></div>`;
+
+  document.getElementById('reviewWound').innerHTML = `<h3>Wound</h3>
+    <div class="review-row"><span class="review-label">Drainage</span><span class="review-value">${lbl('drainage', state.drainage)}</span></div>
+    <div class="review-row"><span class="review-label">Opening</span><span class="review-value">${lbl('opening', state.opening)}</span></div>
+    <div class="review-row"><span class="review-label">Redness</span><span class="review-value">${lbl('redness', state.redness)}</span></div>`;
+
+  document.getElementById('reviewGI').innerHTML = `<h3>Stomach</h3>
+    <div class="review-row"><span class="review-label">Nausea</span><span class="review-value">${lbl('nausea', state.nausea)}</span></div>
+    <div class="review-row"><span class="review-label">Vomiting</span><span class="review-value">${lbl('vomiting', state.vomiting)}</span></div>
+    <div class="review-row"><span class="review-label">Eating/drinking</span><span class="review-value">${lbl('intake', state.intake)}</span></div>`;
+
+  document.getElementById('reviewMental').innerHTML = `<h3>How You're Feeling</h3>
+    <div class="review-row"><span class="review-label">Anxiety</span><span class="review-value">${lbl('anxiety', state.anxiety)}</span></div>
+    <div class="review-row"><span class="review-label">Mood</span><span class="review-value">${lbl('mood', state.mood)}</span></div>`;
+}
+
+async function submitCheckin() {
+  const btn = document.getElementById('btnNext');
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+
+  const { composite, scores, risk } = calculateComposite();
+  const pod = computePOD();
+  const hasRedFlags = state.flags.some(Boolean) || Object.values(state.surgeryFlags).some(arr => arr.some(Boolean));
+
+  const payload = {
+    firstName: state.firstName,
+    lastName: state.lastName,
+    surgeryType: state.surgeryType,
+    surgeryDate: state.surgeryDate,
+    pod: pod,
+    responses: {
+      painRest: state.painRestTouched ? state.painRest : null,
+      painActivity: state.painActivityTouched ? state.painActivity : null,
+      painManaged: state.painManaged,
+      drainage: state.drainage,
+      opening: state.opening,
+      redness: state.redness,
+      nausea: state.nausea,
+      vomiting: state.vomiting,
+      intake: state.intake,
+      anxiety: state.anxiety,
+      mood: state.mood
+    },
+    flags: state.flags,
+    surgeryFlags: state.surgeryFlags,
+    scores, composite,
+    riskLevel: risk ? risk.level : null,
+    patientEmail: state.patientEmail || null,
+    notes: state.notes || '',
+    timestamp: new Date().toISOString()
+  };
+
+  try {
+    const res = await fetch('/api/recovery-checkin', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (data.success) {
+      sessionStorage.removeItem('opwell_patient_checkin');
+      // Update thank-you page
+      if (hasRedFlags) document.getElementById('thankyouRedFlag').style.display = 'block';
+      if (state.patientEmail) document.getElementById('thankyouEmail').style.display = 'block';
+      goToStep(7);
+    } else {
+      showError('Something went wrong. Please try again or call (678) 235-5822.');
+      btn.disabled = false;
+      btn.textContent = 'Send to Dr. Oluwole';
+    }
+  } catch (err) {
+    showError('Connection error. Please check your internet and try again.');
+    btn.disabled = false;
+    btn.textContent = 'Send to Dr. Oluwole';
+  }
+}
+
+/* ══════════════════════════════════════════ */
+/*                  INIT                     */
+/* ══════════════════════════════════════════ */
+
+document.addEventListener('DOMContentLoaded', function() {
+  checkGateAccess();
+  loadProgress();
+  updateProgressBar();
+  updateNavButtons();
+});
+</script>
+</body>
+</html>
