@@ -1,0 +1,1618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Post-Op Recovery Check-In — OpWell Concierge™</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sage: #2D5A3D;
+  --sage-dark: #1C2B22;
+  --sage-mid: #7AA07A;
+  --sage-light: #A8C4A8;
+  --terracotta: #C8845A;
+  --terracotta-light: #E8B48A;
+  --ivory: #FAF0E8;
+  --warm-white: #F5E4D4;
+  --charcoal: #1C1C1C;
+  --slate: #5A5A5A;
+  --status-green: #16A34A;
+  --status-green-bg: #DCFCE7;
+  --status-yellow: #CA8A04;
+  --status-yellow-bg: #FEF9C3;
+  --status-orange: #D97706;
+  --status-orange-bg: #FFF7ED;
+  --status-red: #DC2626;
+  --status-red-bg: #FEE2E2;
+  --border: rgba(45,90,61,0.2);
+  --border-light: rgba(45,90,61,0.1);
+  --radius: 12px;
+  --max-width: 920px;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'DM Sans',sans-serif; background:var(--ivory); color:var(--charcoal); font-size:15px; line-height:1.55; min-height:100vh; padding-bottom:80px; }
+
+/* ── HEADER ── */
+.site-header { background:linear-gradient(135deg,#1C2B22 0%,#2D5A3D 60%,#4A7A5A 100%); color:#fff; padding:22px 24px 18px; }
+.header-inner { max-width:var(--max-width); margin:0 auto; display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap; }
+.header-brand h1 { font-family:'Playfair Display',serif; font-size:1.55rem; font-weight:700; letter-spacing:-0.02em; line-height:1.2; }
+.header-brand .tagline { font-size:0.82rem; opacity:0.7; margin-top:4px; letter-spacing:0.04em; }
+.header-right { text-align:right; font-size:0.78rem; opacity:0.65; line-height:1.7; }
+.header-right a { color:#fff; text-decoration:none; }
+
+/* ── PATIENT INFO BAR ── */
+.patient-bar { background:#fff; border-bottom:1px solid var(--border); padding:16px 24px; position:sticky; top:0; z-index:100; }
+.patient-bar-inner { max-width:var(--max-width); margin:0 auto; display:flex; gap:12px; align-items:flex-end; flex-wrap:wrap; }
+.pf { display:flex; flex-direction:column; gap:3px; }
+.pf label { font-size:0.72rem; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; color:var(--slate); }
+.pf input, .pf select { font-family:'DM Sans',sans-serif; font-size:0.92rem; padding:7px 10px; border:1px solid var(--border); border-radius:8px; background:#fff; outline:none; transition:border 0.2s; }
+.pf input:focus, .pf select:focus { border-color:var(--sage); }
+.pf input[type="text"] { width:180px; }
+.pf input[type="date"] { width:155px; }
+.pf select { width:200px; }
+.pod-badge { display:inline-flex; align-items:center; gap:5px; background:var(--sage); color:#fff; font-weight:700; font-size:0.88rem; padding:8px 16px; border-radius:20px; white-space:nowrap; height:38px; }
+.pod-badge .pod-label { font-weight:400; opacity:0.8; font-size:0.75rem; }
+.intensity-badge { font-size:0.72rem; padding:5px 12px; border-radius:12px; font-weight:600; white-space:nowrap; height:28px; display:inline-flex; align-items:center; }
+.intensity-intensive { background:var(--status-red-bg); color:var(--status-red); }
+.intensity-enhanced { background:var(--status-yellow-bg); color:var(--status-yellow); }
+.intensity-standard { background:var(--status-green-bg); color:var(--status-green); }
+
+/* ── TAB NAVIGATION ── */
+.tab-bar { background:#fff; border-bottom:2px solid var(--border-light); position:sticky; top:72px; z-index:99; overflow-x:auto; -webkit-overflow-scrolling:touch; }
+.tab-bar::-webkit-scrollbar { display:none; }
+.tab-bar-inner { max-width:var(--max-width); margin:0 auto; display:flex; padding:0 16px; }
+.tab-btn { font-family:'DM Sans',sans-serif; font-size:0.82rem; font-weight:600; padding:12px 16px; border:none; background:none; cursor:pointer; color:var(--slate); white-space:nowrap; position:relative; transition:color 0.2s; display:flex; align-items:center; gap:6px; }
+.tab-btn:hover { color:var(--charcoal); }
+.tab-btn.active { color:var(--sage); }
+.tab-btn.active::after { content:''; position:absolute; bottom:-2px; left:8px; right:8px; height:3px; background:var(--sage); border-radius:3px 3px 0 0; }
+.tab-btn.summary-tab { color:var(--terracotta); font-weight:700; }
+.tab-btn.summary-tab.active { color:var(--terracotta); }
+.tab-btn.summary-tab.active::after { background:var(--terracotta); }
+.tab-dot { width:8px; height:8px; border-radius:50%; background:#ccc; flex-shrink:0; }
+.tab-dot.green { background:var(--status-green); }
+.tab-dot.yellow { background:var(--status-yellow); }
+.tab-dot.red { background:var(--status-red); }
+
+/* ── PANELS ── */
+.panel { display:none; max-width:var(--max-width); margin:0 auto; padding:24px; }
+.panel.active { display:block; }
+.panel-header { margin-bottom:20px; }
+.panel-header h2 { font-family:'Playfair Display',serif; font-size:1.35rem; font-weight:600; color:var(--charcoal); margin-bottom:6px; }
+.panel-header p { font-size:0.88rem; color:var(--slate); line-height:1.5; }
+
+/* ── FORM COMPONENTS ── */
+.q-group { background:#fff; border:1px solid var(--border-light); border-radius:var(--radius); padding:18px 20px; margin-bottom:14px; transition:border-color 0.3s, box-shadow 0.3s; }
+.q-group.alert-yellow { border-color:var(--status-yellow); box-shadow:0 0 0 3px rgba(202,138,4,0.1); }
+.q-group.alert-red { border-color:var(--status-red); box-shadow:0 0 0 3px rgba(220,38,38,0.1); }
+.q-group.alert-green { border-color:var(--status-green); }
+.q-label { font-weight:600; font-size:0.92rem; margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+.q-label .alert-tag { font-size:0.68rem; padding:2px 8px; border-radius:8px; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; }
+.alert-tag.red { background:var(--status-red-bg); color:var(--status-red); }
+.alert-tag.yellow { background:var(--status-yellow-bg); color:var(--status-yellow); }
+.alert-tag.green { background:var(--status-green-bg); color:var(--status-green); }
+
+/* Radio Groups */
+.radio-group { display:flex; flex-direction:column; gap:8px; }
+.radio-group.horizontal { flex-direction:row; flex-wrap:wrap; gap:10px; }
+.radio-opt { display:flex; align-items:center; gap:8px; cursor:pointer; padding:8px 12px; border:1px solid var(--border-light); border-radius:8px; transition:all 0.2s; font-size:0.88rem; }
+.radio-opt:hover { border-color:var(--sage-mid); background:rgba(45,90,61,0.03); }
+.radio-opt input[type="radio"] { accent-color:var(--sage); width:16px; height:16px; }
+.radio-opt.selected { border-color:var(--sage); background:rgba(45,90,61,0.06); }
+.radio-opt.selected-yellow { border-color:var(--status-yellow); background:var(--status-yellow-bg); }
+.radio-opt.selected-red { border-color:var(--status-red); background:var(--status-red-bg); }
+
+/* Sliders */
+.slider-wrap { display:flex; align-items:center; gap:14px; }
+.slider-wrap input[type="range"] { flex:1; accent-color:var(--sage); height:6px; }
+.slider-val { font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:700; min-width:36px; text-align:center; }
+.slider-val.green { color:var(--status-green); }
+.slider-val.yellow { color:var(--status-yellow); }
+.slider-val.red { color:var(--status-red); }
+.slider-labels { display:flex; justify-content:space-between; font-size:0.72rem; color:var(--slate); margin-top:2px; }
+
+/* Number Inputs */
+.vital-input-wrap { display:flex; align-items:center; gap:8px; }
+.vital-input { font-family:'DM Sans',sans-serif; font-size:1.05rem; font-weight:600; width:90px; padding:8px 10px; border:2px solid var(--border); border-radius:8px; text-align:center; outline:none; transition:border-color 0.2s; }
+.vital-input.normal { border-color:var(--status-green); background:var(--status-green-bg); }
+.vital-input.caution { border-color:var(--status-yellow); background:var(--status-yellow-bg); }
+.vital-input.danger { border-color:var(--status-red); background:var(--status-red-bg); }
+.vital-unit { font-size:0.82rem; color:var(--slate); }
+.vital-status { font-size:0.75rem; font-weight:600; padding:2px 8px; border-radius:6px; }
+
+/* Textarea */
+.q-textarea { width:100%; font-family:'DM Sans',sans-serif; font-size:0.9rem; padding:10px 12px; border:1px solid var(--border); border-radius:8px; resize:vertical; min-height:70px; outline:none; transition:border-color 0.2s; }
+.q-textarea:focus { border-color:var(--sage); }
+
+/* Checkboxes (Red Flags) */
+.flag-group { display:flex; flex-direction:column; gap:10px; }
+.flag-item { display:flex; align-items:center; gap:10px; padding:12px 14px; border:1px solid var(--border-light); border-left:4px solid var(--status-yellow); border-radius:8px; cursor:pointer; transition:all 0.2s; font-size:0.9rem; }
+.flag-item.emergency { border-left-color:var(--status-red); background:rgba(220,38,38,0.03); }
+.flag-item input[type="checkbox"] { accent-color:var(--status-red); width:18px; height:18px; }
+.flag-item.checked { background:var(--status-red-bg); border-color:var(--status-red); }
+.flag-item .emergency-badge { font-size:0.65rem; font-weight:700; background:var(--status-red); color:#fff; padding:2px 7px; border-radius:4px; text-transform:uppercase; letter-spacing:0.05em; }
+
+/* Domain Score */
+.domain-score-bar { margin-top:18px; padding-top:14px; border-top:1px solid var(--border-light); display:flex; justify-content:space-between; align-items:center; }
+.domain-score-label { font-size:0.82rem; color:var(--slate); }
+.domain-score-val { font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:700; }
+.next-btn { font-family:'DM Sans',sans-serif; font-size:0.88rem; font-weight:600; padding:10px 22px; background:var(--sage); color:#fff; border:none; border-radius:8px; cursor:pointer; transition:background 0.2s; }
+.next-btn:hover { background:var(--sage-dark); }
+
+/* ── SUMMARY PANEL ── */
+.summary-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+.summary-card { background:#fff; border:1px solid var(--border-light); border-radius:var(--radius); padding:20px; }
+.summary-card h3 { font-family:'Playfair Display',serif; font-size:1.05rem; font-weight:600; margin-bottom:14px; color:var(--charcoal); }
+.gauge-wrap { display:flex; flex-direction:column; align-items:center; padding:10px 0; }
+.risk-badge { display:inline-block; font-size:0.82rem; font-weight:700; padding:6px 18px; border-radius:20px; text-transform:uppercase; letter-spacing:0.06em; margin-top:8px; }
+.risk-action { font-size:0.82rem; color:var(--slate); margin-top:6px; text-align:center; }
+
+/* Domain Bars */
+.domain-bar-row { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+.domain-bar-label { font-size:0.78rem; font-weight:600; width:90px; text-align:right; flex-shrink:0; }
+.domain-bar-track { flex:1; height:14px; background:#eee; border-radius:7px; overflow:hidden; }
+.domain-bar-fill { height:100%; border-radius:7px; transition:width 0.6s ease; }
+.domain-bar-score { font-size:0.78rem; font-weight:700; width:36px; text-align:right; }
+
+/* Alerts List */
+.alert-item { display:flex; align-items:flex-start; gap:8px; padding:8px 12px; border-radius:8px; margin-bottom:6px; font-size:0.85rem; }
+.alert-item.red-alert { background:var(--status-red-bg); color:var(--status-red); }
+.alert-item.yellow-alert { background:var(--status-yellow-bg); color:var(--status-yellow); }
+.alert-item.green-msg { background:var(--status-green-bg); color:var(--status-green); }
+.alert-icon { font-weight:700; flex-shrink:0; }
+
+/* Trend Chart */
+.trend-container { position:relative; }
+.trend-empty { text-align:center; padding:30px; color:var(--slate); font-size:0.88rem; }
+
+/* ── ACTION BAR ── */
+.action-bar { position:fixed; bottom:0; left:0; right:0; background:#fff; border-top:1px solid var(--border); padding:12px 24px; z-index:100; }
+.action-bar-inner { max-width:var(--max-width); margin:0 auto; display:flex; gap:10px; flex-wrap:wrap; justify-content:center; }
+.action-btn { font-family:'DM Sans',sans-serif; font-size:0.85rem; font-weight:600; padding:10px 20px; border-radius:8px; cursor:pointer; transition:all 0.2s; border:none; }
+.btn-copy { background:var(--sage); color:#fff; }
+.btn-copy:hover { background:var(--sage-dark); }
+.btn-print { background:#fff; color:var(--sage); border:1.5px solid var(--sage); }
+.btn-print:hover { background:rgba(45,90,61,0.05); }
+.btn-save { background:var(--terracotta); color:#fff; }
+.btn-save:hover { background:#b3724a; }
+.btn-clear { background:#fff; color:var(--slate); border:1.5px solid var(--border); }
+.btn-clear:hover { background:#f5f5f5; }
+
+/* ── TOAST ── */
+.toast { position:fixed; bottom:80px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--charcoal); color:#fff; padding:12px 24px; border-radius:10px; font-size:0.88rem; font-weight:500; opacity:0; transition:opacity 0.3s, transform 0.3s; pointer-events:none; z-index:200; white-space:nowrap; }
+.toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+
+/* ── EMERGENCY MODAL ── */
+.modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:300; justify-content:center; align-items:center; padding:20px; }
+.modal-overlay.show { display:flex; }
+.modal-card { background:#fff; border:3px solid var(--status-red); border-radius:16px; max-width:480px; width:100%; padding:28px; text-align:center; }
+.modal-card h2 { font-family:'Playfair Display',serif; color:var(--status-red); font-size:1.4rem; margin-bottom:12px; }
+.modal-card .emergency-icon { font-size:3rem; margin-bottom:10px; }
+.modal-card p { font-size:0.92rem; color:var(--charcoal); margin-bottom:10px; line-height:1.5; }
+.modal-card .call-911 { font-size:1.1rem; font-weight:700; color:var(--status-red); margin:14px 0; }
+.modal-card .flag-list { text-align:left; margin:14px 0; padding:12px; background:var(--status-red-bg); border-radius:8px; }
+.modal-card .flag-list li { font-size:0.88rem; margin-bottom:4px; color:var(--status-red); }
+.modal-dismiss { font-family:'DM Sans',sans-serif; font-size:0.92rem; font-weight:600; padding:12px 28px; background:var(--status-red); color:#fff; border:none; border-radius:8px; cursor:pointer; margin-top:10px; }
+.modal-dismiss:hover { background:#b91c1c; }
+
+/* ── ABBREVIATED MODE TOGGLE ── */
+.mode-toggle-bar { max-width:var(--max-width); margin:0 auto; padding:8px 24px; display:flex; align-items:center; gap:10px; }
+.mode-toggle { display:flex; align-items:center; gap:6px; font-size:0.82rem; color:var(--slate); cursor:pointer; }
+.mode-toggle input[type="checkbox"] { accent-color:var(--sage); }
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px) {
+  .header-right { display:none; }
+  .patient-bar-inner { flex-direction:column; align-items:stretch; }
+  .pf input[type="text"], .pf select, .pf input[type="date"] { width:100%; }
+  .pod-badge { align-self:flex-start; }
+  .tab-btn { font-size:0.75rem; padding:10px 10px; }
+  .summary-grid { grid-template-columns:1fr; }
+  .action-bar-inner { flex-direction:column; }
+  .action-btn { width:100%; text-align:center; }
+  .panel { padding:16px; }
+  .radio-group.horizontal { flex-direction:column; }
+}
+@media(max-width:480px) {
+  .site-header { padding:16px; }
+  .header-brand h1 { font-size:1.25rem; }
+  .tab-btn span.tab-text { display:none; }
+  .tab-btn { padding:10px 8px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════ HEADER ═══════════════════ -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-brand">
+      <h1>Post-Op Recovery Check-In</h1>
+      <div class="tagline">OpWell Concierge™ — Physician-Led Recovery Assessment</div>
+    </div>
+    <div class="header-right">
+      Dr. Ornella Oluwole, MD<br>
+      <a href="tel:6782355822">(678) 235-5822</a><br>
+      opwellconcierge.com
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════ PATIENT INFO BAR ═══════════════════ -->
+<div class="patient-bar">
+  <div class="patient-bar-inner">
+    <div class="pf">
+      <label>Patient Name</label>
+      <input type="text" id="patientName" placeholder="Last, First">
+    </div>
+    <div class="pf">
+      <label>Surgery Type</label>
+      <select id="surgeryType" onchange="updateIntensity()">
+        <option value="">— Select —</option>
+        <optgroup label="Intensive Monitoring">
+          <option value="major-abdominal">Major Abdominal Surgery</option>
+          <option value="bariatric">Bariatric Surgery</option>
+          <option value="cancer">Cancer Surgery</option>
+          <option value="thoracic">Thoracic Surgery</option>
+          <option value="vascular">Vascular Surgery</option>
+        </optgroup>
+        <optgroup label="Enhanced Monitoring">
+          <option value="cosmetic-bbl">Cosmetic — BBL</option>
+          <option value="cosmetic-tummy">Cosmetic — Tummy Tuck</option>
+          <option value="cosmetic-other">Cosmetic — Other</option>
+          <option value="joint-replacement">Joint Replacement</option>
+          <option value="hysterectomy">Hysterectomy</option>
+          <option value="cesarean">Cesarean Section</option>
+          <option value="moderate-other">Other Moderate-Risk</option>
+        </optgroup>
+        <optgroup label="Standard Monitoring">
+          <option value="laparoscopic">Laparoscopic / Minimally Invasive</option>
+          <option value="outpatient">Outpatient / Same-Day</option>
+          <option value="low-risk-other">Other Low-Risk Elective</option>
+        </optgroup>
+      </select>
+    </div>
+    <div class="pf">
+      <label>Surgery Date</label>
+      <input type="date" id="surgeryDate" onchange="updatePOD()">
+    </div>
+    <div class="pod-badge" id="podBadge">
+      <span class="pod-label">POD</span> <span id="podNum">—</span>
+    </div>
+    <span class="intensity-badge" id="intensityBadge" style="display:none;"></span>
+  </div>
+</div>
+
+<!-- ═══════════════════ ABBREVIATED MODE ═══════════════════ -->
+<div class="mode-toggle-bar">
+  <label class="mode-toggle">
+    <input type="checkbox" id="abbreviatedMode" onchange="toggleAbbreviated()">
+    <span>Abbreviated assessment (Pain, Vitals, Wound, Red Flags only)</span>
+  </label>
+</div>
+
+<!-- ═══════════════════ TAB NAVIGATION ═══════════════════ -->
+<nav class="tab-bar">
+  <div class="tab-bar-inner">
+    <button class="tab-btn active" onclick="switchTab('pain')" data-tab="pain"><span class="tab-dot" id="dot-pain"></span><span class="tab-text">Pain</span></button>
+    <button class="tab-btn" onclick="switchTab('vitals')" data-tab="vitals"><span class="tab-dot" id="dot-vitals"></span><span class="tab-text">Vitals</span></button>
+    <button class="tab-btn" onclick="switchTab('wound')" data-tab="wound"><span class="tab-dot" id="dot-wound"></span><span class="tab-text">Wound</span></button>
+    <button class="tab-btn" onclick="switchTab('gi')" data-tab="gi"><span class="tab-dot" id="dot-gi"></span><span class="tab-text">GI</span></button>
+    <button class="tab-btn" onclick="switchTab('functional')" data-tab="functional"><span class="tab-dot" id="dot-functional"></span><span class="tab-text">Function</span></button>
+    <button class="tab-btn" onclick="switchTab('mental')" data-tab="mental"><span class="tab-dot" id="dot-mental"></span><span class="tab-text">Mental</span></button>
+    <button class="tab-btn" onclick="switchTab('redflags')" data-tab="redflags"><span class="tab-dot" id="dot-redflags"></span><span class="tab-text">Red Flags</span></button>
+    <button class="tab-btn summary-tab" onclick="switchTab('summary')" data-tab="summary">Summary</button>
+  </div>
+</nav>
+
+<!-- ═══════════════════ PANEL: PAIN ═══════════════════ -->
+<div class="panel active" id="panel-pain">
+  <div class="panel-header">
+    <h2>Pain Assessment</h2>
+    <p>Rate current pain levels using the Numeric Rating Scale. 0 = no pain, 10 = worst pain imaginable.</p>
+  </div>
+
+  <div class="q-group" id="qg-pain-rest">
+    <div class="q-label">Pain at rest (0–10)</div>
+    <div class="slider-wrap">
+      <input type="range" min="0" max="10" value="0" id="painRest" oninput="handleSlider('painRest',this.value)">
+      <span class="slider-val green" id="painRestVal">0</span>
+    </div>
+    <div class="slider-labels"><span>No pain</span><span>Worst imaginable</span></div>
+  </div>
+
+  <div class="q-group" id="qg-pain-activity">
+    <div class="q-label">Pain with activity (0–10)</div>
+    <div class="slider-wrap">
+      <input type="range" min="0" max="10" value="0" id="painActivity" oninput="handleSlider('painActivity',this.value)">
+      <span class="slider-val green" id="painActivityVal">0</span>
+    </div>
+    <div class="slider-labels"><span>No pain</span><span>Worst imaginable</span></div>
+  </div>
+
+  <div class="q-group">
+    <div class="q-label">Primary pain location</div>
+    <input type="text" class="q-textarea" id="painLocation" placeholder="e.g., surgical site, lower abdomen, back" style="min-height:auto;height:38px;resize:none;">
+  </div>
+
+  <div class="q-group" id="qg-pain-managed">
+    <div class="q-label">Is pain adequately managed?</div>
+    <div class="radio-group horizontal" id="rg-painManaged">
+      <label class="radio-opt"><input type="radio" name="painManaged" value="yes" onchange="handleRadio('painManaged',this.value)"> Yes</label>
+      <label class="radio-opt"><input type="radio" name="painManaged" value="somewhat" onchange="handleRadio('painManaged',this.value)"> Somewhat</label>
+      <label class="radio-opt"><input type="radio" name="painManaged" value="no" onchange="handleRadio('painManaged',this.value)"> No</label>
+    </div>
+  </div>
+
+  <div class="q-group" id="qg-pain-meds">
+    <div class="q-label">Is current pain medication effective?</div>
+    <div class="radio-group horizontal" id="rg-painMeds">
+      <label class="radio-opt"><input type="radio" name="painMeds" value="yes" onchange="handleRadio('painMeds',this.value)"> Yes</label>
+      <label class="radio-opt"><input type="radio" name="painMeds" value="partial" onchange="handleRadio('painMeds',this.value)"> Partially</label>
+      <label class="radio-opt"><input type="radio" name="painMeds" value="no" onchange="handleRadio('painMeds',this.value)"> No</label>
+      <label class="radio-opt"><input type="radio" name="painMeds" value="not-taking" onchange="handleRadio('painMeds',this.value)"> Not taking</label>
+    </div>
+  </div>
+
+  <div class="domain-score-bar">
+    <span class="domain-score-label">Pain Score: <span class="domain-score-val" id="score-pain">—</span>/100</span>
+    <button class="next-btn" onclick="switchTab('vitals')">Next: Vitals →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════ PANEL: VITALS ═══════════════════ -->
+<div class="panel" id="panel-vitals">
+  <div class="panel-header">
+    <h2>Vital Signs</h2>
+    <p>Record current vital signs. Values outside normal range will be flagged automatically.</p>
+  </div>
+
+  <div class="q-group" id="qg-hr">
+    <div class="q-label">Heart Rate <span class="alert-tag" id="tag-hr" style="display:none;"></span></div>
+    <div class="vital-input-wrap">
+      <input type="number" class="vital-input" id="vitalHR" placeholder="—" oninput="handleVital('hr',this.value)">
+      <span class="vital-unit">bpm</span>
+    </div>
+  </div>
+
+  <div class="q-group" id="qg-bp">
+    <div class="q-label">Blood Pressure <span class="alert-tag" id="tag-bp" style="display:none;"></span></div>
+    <div class="vital-input-wrap">
+      <input type="number" class="vital-input" id="vitalSBP" placeholder="SBP" oninput="handleVital('sbp',this.value)" style="width:75px;">
+      <span class="vital-unit">/</span>
+      <input type="number" class="vital-input" id="vitalDBP" placeholder="DBP" oninput="handleVital('dbp',this.value)" style="width:75px;">
+      <span class="vital-unit">mmHg</span>
+    </div>
+  </div>
+
+  <div class="q-group" id="qg-temp">
+    <div class="q-label">Temperature <span class="alert-tag" id="tag-temp" style="display:none;"></span></div>
+    <div class="vital-input-wrap">
+      <input type="number" step="0.1" class="vital-input" id="vitalTemp" placeholder="—" oninput="handleVital('temp',this.value)" style="width:85px;">
+      <span class="vital-unit">°F</span>
+    </div>
+  </div>
+
+  <div class="q-group" id="qg-rr">
+    <div class="q-label">Respiratory Rate <span class="alert-tag" id="tag-rr" style="display:none;"></span></div>
+    <div class="vital-input-wrap">
+      <input type="number" class="vital-input" id="vitalRR" placeholder="—" oninput="handleVital('rr',this.value)">
+      <span class="vital-unit">breaths/min</span>
+    </div>
+  </div>
+
+  <div class="q-group" id="qg-spo2">
+    <div class="q-label">Oxygen Saturation (SpO₂) <span class="alert-tag" id="tag-spo2" style="display:none;"></span></div>
+    <div class="vital-input-wrap">
+      <input type="number" class="vital-input" id="vitalSpO2" placeholder="—" oninput="handleVital('spo2',this.value)" style="width:75px;">
+      <span class="vital-unit">%</span>
+    </div>
+  </div>
+
+  <div class="domain-score-bar">
+    <span class="domain-score-label">Vitals Score: <span class="domain-score-val" id="score-vitals">—</span>/100</span>
+    <button class="next-btn" onclick="switchTab('wound')">Next: Wound →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════ PANEL: WOUND ═══════════════════ -->
+<div class="panel" id="panel-wound">
+  <div class="panel-header">
+    <h2>Wound Assessment</h2>
+    <p>Assess the surgical wound site. If multiple wounds, assess the most concerning.</p>
+  </div>
+
+  <div class="q-group" id="qg-drainage">
+    <div class="q-label">Wound drainage</div>
+    <div class="radio-group" id="rg-drainage">
+      <label class="radio-opt"><input type="radio" name="drainage" value="none" onchange="handleRadio('drainage',this.value)"> None</label>
+      <label class="radio-opt"><input type="radio" name="drainage" value="minimal-clear" onchange="handleRadio('drainage',this.value)"> Minimal, clear or light</label>
+      <label class="radio-opt"><input type="radio" name="drainage" value="moderate" onchange="handleRadio('drainage',this.value)"> Moderate amount</label>
+      <label class="radio-opt"><input type="radio" name="drainage" value="heavy" onchange="handleRadio('drainage',this.value)"> Heavy drainage</label>
+      <label class="radio-opt"><input type="radio" name="drainage" value="bloody" onchange="handleRadio('drainage',this.value)"> Bloody drainage</label>
+      <label class="radio-opt"><input type="radio" name="drainage" value="foul" onchange="handleRadio('drainage',this.value)"> Foul-smelling drainage</label>
+    </div>
+  </div>
+
+  <div class="q-group" id="qg-opening">
+    <div class="q-label">Is the wound opening or separating?</div>
+    <div class="radio-group" id="rg-opening">
+      <label class="radio-opt"><input type="radio" name="opening" value="no" onchange="handleRadio('opening',this.value)"> No</label>
+      <label class="radio-opt"><input type="radio" name="opening" value="slight" onchange="handleRadio('opening',this.value)"> Slight separation at edges</label>
+      <label class="radio-opt"><input type="radio" name="opening" value="significant" onchange="handleRadio('opening',this.value)"> Significant opening</label>
+    </div>
+  </div>
+
+  <div class="q-group" id="qg-redness">
+    <div class="q-label">Redness around wound site</div>
+    <div class="radio-group" id="rg-redness">
+      <label class="radio-opt"><input type="radio" name="redness" value="none" onchange="handleRadio('redness',this.value)"> None</label>
+      <label class="radio-opt"><input type="radio" name="redness" value="mild" onchange="handleRadio('redness',this.value)"> Mild (limited to incision edges)</label>
+      <label class="radio-opt"><input type="radio" name="redness" value="spreading" onchange="handleRadio('redness',this.value)"> Spreading beyond incision</label>
+    </div>
+  </div>
+
+  <div class="q-group" id="qg-warmth">
+    <div class="q-label">Is the wound warm to touch?</div>
+    <div class="radio-group horizontal" id="rg-warmth">
+      <label class="radio-opt"><input type="radio" name="warmth" value="no" onchange="handleRadio('warmth',this.value)"> No</label>
+      <label class="radio-opt"><input type="radio" name="warmth" value="yes" onchange="handleRadio('warmth',this.value)"> Yes</label>
+    </div>
+  </div>
+
+  <div class="q-group" id="qg-odor">
+    <div class="q-label">Any unusual odor from the wound?</div>
+    <div class="radio-group horizontal" id="rg-odor">
+      <label class="radio-opt"><input type="radio" name="odor" value="no" onchange="handleRadio('odor',this.value)"> No</label>
+      <label class="radio-opt"><input type="radio" name="odor" value="yes" onchange="handleRadio('odor',this.value)"> Yes</label>
+    </div>
+  </div>
+
+  <div class="q-group" id="qg-swelling">
+    <div class="q-label">Swelling at or near wound site</div>
+    <div class="radio-group horizontal" id="rg-swelling">
+      <label class="radio-opt"><input type="radio" name="swelling" value="none" onchange="handleRadio('swelling',this.value)"> None</label>
+      <label class="radio-opt"><input type="radio" name="swelling" value="mild" onchange="handleRadio('swelling',this.value)"> Mild</label>
+      <label class="radio-opt"><input type="radio" name="swelling" value="moderate" onchange="handleRadio('swelling',this.value)"> Moderate</label>
+      <label class="radio-opt"><input type="radio" name="swelling" value="severe" onchange="handleRadio('swelling',this.value)"> Severe</label>
+    </div>
+  </div>
+
+  <div class="q-group">
+    <div class="q-label">Wound appearance notes</div>
+    <textarea class="q-textarea" id="woundNotes" placeholder="Describe wound appearance, staple/suture status, dressing condition..."></textarea>
+  </div>
+
+  <div class="domain-score-bar">
+    <span class="domain-score-label">Wound Score: <span class="domain-score-val" id="score-wound">—</span>/100</span>
+    <button class="next-btn" onclick="switchTab('gi')">Next: GI →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════ PANEL: GI ═══════════════════ -->
+<div class="panel" id="panel-gi">
+  <div class="panel-header">
+    <h2>GI Function</h2>
+    <p>Assess gastrointestinal recovery. Return of bowel function is a key post-operative milestone.</p>
+  </div>
+
+  <div class="q-group" id="qg-bm">
+    <div class="q-label">Has the patient had a bowel movement?</div>
+    <div class="radio-group" id="rg-bm">
+      <label class="radio-opt"><input type="radio" name="bm" value="yes-normal" onchange="handleRadio('bm',this.value)"> Yes, normal</label>
+      <label class="radio-opt"><input type="radio" name="bm" value="yes-loose" onchange="handleRadio('bm',this.value)"> Yes, loose or diarrhea</label>
+      <label class="radio-opt"><input type="radio" name="bm" value="no-under24" onchange="handleRadio('bm',this.value)"> No, but less than 24 hours since surgery</label>
+      <label class="radio-opt"><input type="radio" name="bm" value="no-over24" onchange="handleRadio('bm',this.value)"> No, more than 24 hours since surgery</label>
+    </div>
+  </div>
+
+  <div class="q-group">
+    <div class="q-label">When was the last bowel movement?</div>
+    <input type="text" class="q-textarea" id="lastBM" placeholder="e.g., this morning, 2 days ago" style="min-height:auto;height:38px;resize:none;">
+  </div>
+
+  <div class="q-group" id="qg-nausea">
+    <div class="q-label">Nausea</div>
+    <div class="radio-group" id="rg-nausea">
+      <label class="radio-opt"><input type="radio" name="nausea" value="none" onchange="handleRadio('nausea',this.value)"> None</label>
+      <label class="radio-opt"><input type="radio" name="nausea" value="mild" onchange="handleRadio('nausea',this.value)"> Mild (uncomfortable but manageable)</label>
+      <label class="radio-opt"><input type="radio" name="nausea" value="moderate" onchange="handleRadio('nausea',this.value)"> Moderate (interfering with activity)</label>
+      <label class="radio-opt"><input type="radio" name="nausea" value="severe" onchange="handleRadio('nausea',this.value)"> Severe (constant or debilitating)</label>
+    </div>
+  </div>
+
+  <div class="q-group" id="qg-vomiting">
+    <div class="q-label">Vomiting</div>
+    <div class="radio-group horizontal" id="rg-vomiting">
+      <label class="radio-opt"><input type="radio" name="vomiting" value="none" onchange="handleRadio('vomiting',this.value)"> None</label>
+      <label class="radio-opt"><input type="radio" name="vomiting" value="once" onchange="handleRadio('vomiting',this.value)"> Once in past 24 hrs</label>
+      <label class="radio-opt"><input type="radio" name="vomiting" value="multiple" onchange="handleRadio('vomiting',this.value)"> Multiple episodes</label>
+    </div>
+  </div>
+
+  <div class="q-group" id="qg-intake">
+    <div class="q-label">Oral intake tolerance</div>
+    <div class="radio-group" id="rg-intake">
+      <label class="radio-opt"><input type="radio" name="intake" value="normal" onchange="handleRadio('intake',this.value)"> Normal (eating and drinking well)</label>
+      <label class="radio-opt"><input type="radio" name="intake" value="reduced" onchange="handleRadio('intake',this.value)"> Reduced (eating less than usual)</label>
+      <label class="radio-opt"><input type="radio" name="intake" value="minimal" onchange="handleRadio('intake',this.value)"> Minimal (sips of fluid only)</label>
+      <label class="radio-opt"><input type="radio" name="intake" value="none" onchange="handleRadio('intake',this.value)"> None (unable to take anything by mouth)</label>
+    </div>
+  </div>
+
+  <div class="q-group" id="qg-flatus">
+    <div class="q-label">Passing gas (flatus)?</div>
+    <div class="radio-group horizontal" id="rg-flatus">
+      <label class="radio-opt"><input type="radio" name="flatus" value="yes" onchange="handleRadio('flatus',this.value)"> Yes</label>
+      <label class="radio-opt"><input type="radio" name="flatus" value="no" onchange="handleRadio('flatus',this.value)"> No</label>
+    </div>
+  </div>
+
+  <div class="domain-score-bar">
+    <span class="domain-score-label">GI Score: <span class="domain-score-val" id="score-gi">—</span>/100</span>
+    <button class="next-btn" onclick="switchTab('functional')">Next: Function →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════ PANEL: FUNCTIONAL ═══════════════════ -->
+<div class="panel" id="panel-functional">
+  <div class="panel-header">
+    <h2>Functional Recovery</h2>
+    <p>Assess the patient's current functional status and mobility level.</p>
+  </div>
+
+  <div class="q-group" id="qg-ambulation">
+    <div class="q-label">Ambulation status</div>
+    <div class="radio-group" id="rg-ambulation">
+      <label class="radio-opt"><input type="radio" name="ambulation" value="independent" onchange="handleRadio('ambulation',this.value)"> Walking independently</label>
+      <label class="radio-opt"><input type="radio" name="ambulation" value="with-assistance" onchange="handleRadio('ambulation',this.value)"> Walking with assistance (person or device)</label>
+      <label class="radio-opt"><input type="radio" name="ambulation" value="minimal" onchange="handleRadio('ambulation',this.value)"> Minimal walking (only to bathroom)</label>
+      <label class="radio-opt"><input type="radio" name="ambulation" value="bedbound" onchange="handleRadio('ambulation',this.value)"> Bedbound or chair-bound</label>
+    </div>
+  </div>
+
+  <div class="q-group" id="qg-adl">
+    <div class="q-label">Activities of daily living (bathing, dressing, toileting)</div>
+    <div class="radio-group" id="rg-adl">
+      <label class="radio-opt"><input type="radio" name="adl" value="full" onchange="handleRadio('adl',this.value)"> Fully independent</label>
+      <label class="radio-opt"><input type="radio" name="adl" value="partial" onchange="handleRadio('adl',this.value)"> Needs some help</label>
+      <label class="radio-opt"><input type="radio" name="adl" value="dependent" onchange="handleRadio('adl',this.value)"> Depends on others for most activities</label>
+    </div>
+  </div>
+
+  <div class="q-group" id="qg-actlevel">
+    <div class="q-label">Activity level compared to expected recovery stage</div>
+    <div class="radio-group" id="rg-actlevel">
+      <label class="radio-opt"><input type="radio" name="actlevel" value="above" onchange="handleRadio('actlevel',this.value)"> Above expected for this POD</label>
+      <label class="radio-opt"><input type="radio" name="actlevel" value="expected" onchange="handleRadio('actlevel',this.value)"> As expected for this POD</label>
+      <label class="radio-opt"><input type="radio" name="actlevel" value="below" onchange="handleRadio('actlevel',this.value)"> Below expected</label>
+      <label class="radio-opt"><input type="radio" name="actlevel" value="sig-below" onchange="handleRadio('actlevel',this.value)"> Significantly below expected</label>
+    </div>
+  </div>
+
+  <div class="q-group" id="qg-dvt">
+    <div class="q-label">DVT prevention activity</div>
+    <div class="radio-group" id="rg-dvt">
+      <label class="radio-opt"><input type="radio" name="dvt" value="regular" onchange="handleRadio('dvt',this.value)"> Walking regularly as instructed</label>
+      <label class="radio-opt"><input type="radio" name="dvt" value="some" onchange="handleRadio('dvt',this.value)"> Some walking but less than recommended</label>
+      <label class="radio-opt"><input type="radio" name="dvt" value="minimal" onchange="handleRadio('dvt',this.value)"> Minimal movement</label>
+      <label class="radio-opt"><input type="radio" name="dvt" value="none" onchange="handleRadio('dvt',this.value)"> Not walking at all</label>
+    </div>
+  </div>
+
+  <div class="domain-score-bar">
+    <span class="domain-score-label">Functional Score: <span class="domain-score-val" id="score-functional">—</span>/100</span>
+    <button class="next-btn" onclick="switchTab('mental')">Next: Mental →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════ PANEL: MENTAL ═══════════════════ -->
+<div class="panel" id="panel-mental">
+  <div class="panel-header">
+    <h2>Emotional / Mental State</h2>
+    <p>Assess emotional well-being and psychological recovery. Mental health significantly impacts surgical outcomes.</p>
+  </div>
+
+  <div class="q-group" id="qg-anxiety">
+    <div class="q-label">Current anxiety level</div>
+    <div class="radio-group" id="rg-anxiety">
+      <label class="radio-opt"><input type="radio" name="anxiety" value="none" onchange="handleRadio('anxiety',this.value)"> None or minimal</label>
+      <label class="radio-opt"><input type="radio" name="anxiety" value="mild" onchange="handleRadio('anxiety',this.value)"> Mild (occasional worry)</label>
+      <label class="radio-opt"><input type="radio" name="anxiety" value="moderate" onchange="handleRadio('anxiety',this.value)"> Moderate (frequent worry, hard to relax)</label>
+      <label class="radio-opt"><input type="radio" name="anxiety" value="severe" onchange="handleRadio('anxiety',this.value)"> Severe (constant anxiety, panicky)</label>
+    </div>
+  </div>
+
+  <div class="q-group" id="qg-sleep">
+    <div class="q-label">Sleep quality (last night)</div>
+    <div class="radio-group" id="rg-sleep">
+      <label class="radio-opt"><input type="radio" name="sleep" value="good" onchange="handleRadio('sleep',this.value)"> Good (6+ hours, restful)</label>
+      <label class="radio-opt"><input type="radio" name="sleep" value="fair" onchange="handleRadio('sleep',this.value)"> Fair (some sleep, woke multiple times)</label>
+      <label class="radio-opt"><input type="radio" name="sleep" value="poor" onchange="handleRadio('sleep',this.value)"> Poor (very little sleep)</label>
+      <label class="radio-opt"><input type="radio" name="sleep" value="unable" onchange="handleRadio('sleep',this.value)"> Unable to sleep</label>
+    </div>
+  </div>
+
+  <div class="q-group" id="qg-mood">
+    <div class="q-label">Overall mood</div>
+    <div class="radio-group horizontal" id="rg-mood">
+      <label class="radio-opt"><input type="radio" name="mood" value="positive" onchange="handleRadio('mood',this.value)"> Positive</label>
+      <label class="radio-opt"><input type="radio" name="mood" value="neutral" onchange="handleRadio('mood',this.value)"> Neutral</label>
+      <label class="radio-opt"><input type="radio" name="mood" value="low" onchange="handleRadio('mood',this.value)"> Low</label>
+      <label class="radio-opt"><input type="radio" name="mood" value="very-low" onchange="handleRadio('mood',this.value)"> Very low</label>
+    </div>
+  </div>
+
+  <div class="q-group" id="qg-fear">
+    <div class="q-label">Fear of complications</div>
+    <div class="radio-group" id="rg-fear">
+      <label class="radio-opt"><input type="radio" name="fear" value="none" onchange="handleRadio('fear',this.value)"> None</label>
+      <label class="radio-opt"><input type="radio" name="fear" value="some" onchange="handleRadio('fear',this.value)"> Some (manageable concern)</label>
+      <label class="radio-opt"><input type="radio" name="fear" value="significant" onchange="handleRadio('fear',this.value)"> Significant (frequent worry)</label>
+      <label class="radio-opt"><input type="radio" name="fear" value="overwhelming" onchange="handleRadio('fear',this.value)"> Overwhelming (constant fear)</label>
+    </div>
+  </div>
+
+  <div class="q-group" id="qg-support">
+    <div class="q-label">Adequate social support at home</div>
+    <div class="radio-group" id="rg-support">
+      <label class="radio-opt"><input type="radio" name="support" value="strong" onchange="handleRadio('support',this.value)"> Strong (caregiver/family present)</label>
+      <label class="radio-opt"><input type="radio" name="support" value="adequate" onchange="handleRadio('support',this.value)"> Adequate (someone checks in regularly)</label>
+      <label class="radio-opt"><input type="radio" name="support" value="limited" onchange="handleRadio('support',this.value)"> Limited (occasional help)</label>
+      <label class="radio-opt"><input type="radio" name="support" value="none" onchange="handleRadio('support',this.value)"> None (alone at home)</label>
+    </div>
+  </div>
+
+  <div class="domain-score-bar">
+    <span class="domain-score-label">Mental Score: <span class="domain-score-val" id="score-mental">—</span>/100</span>
+    <button class="next-btn" onclick="switchTab('redflags')">Next: Red Flags →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════ PANEL: RED FLAGS ═══════════════════ -->
+<div class="panel" id="panel-redflags">
+  <div class="panel-header">
+    <h2>Red Flag Symptoms</h2>
+    <p>Check any symptoms currently present. Items marked EMERGENCY require immediate action.</p>
+  </div>
+
+  <div class="flag-group">
+    <label class="flag-item" id="flag-1"><input type="checkbox" onchange="handleFlag(this)"> Wound drainage, opening, or increasing redness</label>
+    <label class="flag-item" id="flag-2"><input type="checkbox" onchange="handleFlag(this)"> No bowel movement for more than 24 hours</label>
+    <label class="flag-item" id="flag-3"><input type="checkbox" onchange="handleFlag(this)"> Increasing or worsening abdominal pain</label>
+    <label class="flag-item" id="flag-4"><input type="checkbox" onchange="handleFlag(this)"> Vomiting</label>
+    <label class="flag-item" id="flag-5"><input type="checkbox" onchange="handleFlag(this)"> Abdominal swelling or bloating</label>
+    <label class="flag-item" id="flag-6"><input type="checkbox" onchange="handleFlag(this)"> High ostomy output and/or dark or no urine output</label>
+    <label class="flag-item" id="flag-7"><input type="checkbox" onchange="handleFlag(this)"> Fever greater than 101.5°F</label>
+    <label class="flag-item" id="flag-8"><input type="checkbox" onchange="handleFlag(this)"> Unable to take anything by mouth for more than 24 hours</label>
+    <label class="flag-item emergency" id="flag-9"><input type="checkbox" onchange="handleFlag(this)"> Shortness of breath or difficulty breathing <span class="emergency-badge">EMERGENCY</span></label>
+    <label class="flag-item emergency" id="flag-10"><input type="checkbox" onchange="handleFlag(this)"> Chest pain <span class="emergency-badge">EMERGENCY</span></label>
+  </div>
+
+  <div class="domain-score-bar">
+    <span class="domain-score-label">Red Flag Score: <span class="domain-score-val" id="score-redflags">—</span>/100</span>
+    <button class="next-btn" onclick="switchTab('summary')">View Summary →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════ PANEL: SUMMARY ═══════════════════ -->
+<div class="panel" id="panel-summary">
+  <div class="panel-header">
+    <h2>Recovery Summary</h2>
+    <p>Composite recovery score and clinical overview.</p>
+  </div>
+
+  <div class="summary-grid">
+    <!-- Gauge -->
+    <div class="summary-card">
+      <h3>Recovery Score</h3>
+      <div class="gauge-wrap">
+        <svg id="gaugeChart" width="220" height="140" viewBox="0 0 220 140"></svg>
+        <div class="risk-badge" id="riskBadge">Incomplete</div>
+        <div class="risk-action" id="riskAction">Complete all domains for scoring</div>
+      </div>
+    </div>
+
+    <!-- Domain Bars -->
+    <div class="summary-card">
+      <h3>Domain Breakdown</h3>
+      <div id="domainBars"></div>
+    </div>
+
+    <!-- Alerts -->
+    <div class="summary-card">
+      <h3>Alerts</h3>
+      <div id="alertsList"><div class="alert-item green-msg"><span class="alert-icon">&#10003;</span> Complete assessment to generate alerts.</div></div>
+    </div>
+
+    <!-- Trend -->
+    <div class="summary-card">
+      <h3>Recovery Trend</h3>
+      <div class="trend-container" id="trendContainer">
+        <div class="trend-empty">Save assessments to see recovery trend over time.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ EMERGENCY MODAL ═══════════════════ -->
+<div class="modal-overlay" id="emergencyModal">
+  <div class="modal-card">
+    <div class="emergency-icon">&#9888;</div>
+    <h2>Emergency Symptoms Detected</h2>
+    <p class="call-911">If the patient is in immediate danger, call 911.</p>
+    <div class="flag-list"><ul id="emergencyFlagList"></ul></div>
+    <p>These symptoms may indicate a life-threatening complication such as pulmonary embolism, cardiac event, or respiratory failure. Immediate medical evaluation is recommended.</p>
+    <button class="modal-dismiss" onclick="dismissModal()">I Understand — Close</button>
+  </div>
+</div>
+
+<!-- ═══════════════════ ACTION BAR ═══════════════════ -->
+<div class="action-bar">
+  <div class="action-bar-inner">
+    <button class="action-btn btn-copy" onclick="copyChartNote()">Copy for Chart Note</button>
+    <button class="action-btn btn-print" onclick="printAssessment()">Print Assessment</button>
+    <button class="action-btn btn-save" onclick="saveToHistory()">Save to History</button>
+    <button class="action-btn btn-clear" onclick="clearAssessment()">Clear / New</button>
+  </div>
+</div>
+
+<!-- ═══════════════════ TOAST ═══════════════════ -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* ════════════════════════════════════════════════════════════
+   STATE
+   ════════════════════════════════════════════════════════════ */
+const state = {
+  painRest: 0, painActivity: 0, painLocation: '', painManaged: null, painMeds: null,
+  hr: null, sbp: null, dbp: null, temp: null, rr: null, spo2: null,
+  drainage: null, opening: null, redness: null, warmth: null, odor: null, swelling: null, woundNotes: '',
+  bm: null, lastBM: '', nausea: null, vomiting: null, intake: null, flatus: null,
+  ambulation: null, adl: null, actlevel: null, dvt: null,
+  anxiety: null, sleep: null, mood: null, fear: null, support: null,
+  flags: [false,false,false,false,false,false,false,false,false,false]
+};
+
+const FLAG_LABELS = [
+  'Wound drainage, opening, or increasing redness',
+  'No bowel movement for more than 24 hours',
+  'Increasing or worsening abdominal pain',
+  'Vomiting',
+  'Abdominal swelling or bloating',
+  'High ostomy output and/or dark or no urine output',
+  'Fever greater than 101.5°F',
+  'Unable to take anything by mouth for more than 24 hours',
+  'Shortness of breath or difficulty breathing',
+  'Chest pain'
+];
+
+const SURGERY_INTENSITY = {
+  'major-abdominal':'intensive','bariatric':'intensive','cancer':'intensive','thoracic':'intensive','vascular':'intensive',
+  'cosmetic-bbl':'enhanced','cosmetic-tummy':'enhanced','cosmetic-other':'enhanced','joint-replacement':'enhanced','hysterectomy':'enhanced','cesarean':'enhanced','moderate-other':'enhanced',
+  'laparoscopic':'standard','outpatient':'standard','low-risk-other':'standard'
+};
+
+/* ════════════════════════════════════════════════════════════
+   TAB NAVIGATION
+   ════════════════════════════════════════════════════════════ */
+function switchTab(tabId) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  const panel = document.getElementById('panel-' + tabId);
+  if (panel) panel.classList.add('active');
+  const btn = document.querySelector('[data-tab="'+tabId+'"]');
+  if (btn) btn.classList.add('active');
+  if (tabId === 'summary') renderSummary();
+}
+
+function toggleAbbreviated() {
+  const abbr = document.getElementById('abbreviatedMode').checked;
+  const hideTabs = ['gi','functional','mental'];
+  hideTabs.forEach(t => {
+    const btn = document.querySelector('[data-tab="'+t+'"]');
+    if (btn) btn.style.display = abbr ? 'none' : 'flex';
+  });
+}
+
+/* ════════════════════════════════════════════════════════════
+   POD & INTENSITY
+   ════════════════════════════════════════════════════════════ */
+function updatePOD() {
+  const dateStr = document.getElementById('surgeryDate').value;
+  if (!dateStr) { document.getElementById('podNum').textContent = '—'; return; }
+  const surgDate = new Date(dateStr + 'T00:00:00');
+  const today = new Date(); today.setHours(0,0,0,0);
+  const diff = Math.floor((today - surgDate) / 86400000);
+  document.getElementById('podNum').textContent = diff >= 0 ? diff : '—';
+  // Auto-suggest abbreviated mode for POD 4+
+  if (diff >= 4) {
+    document.getElementById('abbreviatedMode').checked = true;
+    toggleAbbreviated();
+  }
+}
+
+function updateIntensity() {
+  const sel = document.getElementById('surgeryType').value;
+  const badge = document.getElementById('intensityBadge');
+  const level = SURGERY_INTENSITY[sel];
+  if (!level) { badge.style.display = 'none'; return; }
+  badge.style.display = 'inline-flex';
+  badge.className = 'intensity-badge intensity-' + level;
+  badge.textContent = level.charAt(0).toUpperCase() + level.slice(1) + ' Monitoring';
+}
+
+/* ════════════════════════════════════════════════════════════
+   INPUT HANDLERS
+   ════════════════════════════════════════════════════════════ */
+function handleSlider(id, val) {
+  val = parseInt(val);
+  state[id] = val;
+  const el = document.getElementById(id + 'Val');
+  el.textContent = val;
+  el.className = 'slider-val ' + (val <= 3 ? 'green' : val <= 6 ? 'yellow' : 'red');
+  const qg = el.closest('.q-group');
+  qg.className = 'q-group' + (val <= 3 ? ' alert-green' : val <= 6 ? ' alert-yellow' : ' alert-red');
+  updateDomainScore('pain');
+}
+
+function handleRadio(name, val) {
+  state[name] = val;
+  // Visual feedback on radio options
+  const rg = document.getElementById('rg-' + name);
+  if (rg) {
+    rg.querySelectorAll('.radio-opt').forEach(o => {
+      o.classList.remove('selected','selected-yellow','selected-red');
+    });
+    const checked = rg.querySelector('input[value="'+val+'"]');
+    if (checked) {
+      const opt = checked.closest('.radio-opt');
+      opt.classList.add('selected');
+    }
+  }
+  // Determine which domain to update
+  if (['painManaged','painMeds'].includes(name)) updateDomainScore('pain');
+  else if (['drainage','opening','redness','warmth','odor','swelling'].includes(name)) updateDomainScore('wound');
+  else if (['bm','nausea','vomiting','intake','flatus'].includes(name)) { autoDetectFlags(); updateDomainScore('gi'); }
+  else if (['ambulation','adl','actlevel','dvt'].includes(name)) updateDomainScore('functional');
+  else if (['anxiety','sleep','mood','fear','support'].includes(name)) updateDomainScore('mental');
+}
+
+function handleVital(field, val) {
+  val = val === '' ? null : parseFloat(val);
+  state[field] = val;
+  const inp = document.getElementById('vital' + field.toUpperCase().replace('SPO2','SpO2').replace('SBP','SBP').replace('DBP','DBP'));
+  const inputEl = {hr:'vitalHR',sbp:'vitalSBP',dbp:'vitalDBP',temp:'vitalTemp',rr:'vitalRR',spo2:'vitalSpO2'}[field];
+  const el = document.getElementById(inputEl);
+  const tag = document.getElementById('tag-' + (field === 'sbp' || field === 'dbp' ? 'bp' : field));
+  if (val === null) { el.className = 'vital-input'; if(tag) { tag.style.display='none'; } }
+  else {
+    const status = getVitalStatus(field, val);
+    el.className = 'vital-input ' + status;
+    if (tag) {
+      tag.style.display = status === 'normal' ? 'none' : 'inline';
+      tag.className = 'alert-tag ' + (status === 'danger' ? 'red' : 'yellow');
+      tag.textContent = status === 'danger' ? 'RED ALERT' : 'CAUTION';
+    }
+  }
+  // Auto-detect fever flag
+  if (field === 'temp') autoDetectFlags();
+  updateDomainScore('vitals');
+}
+
+function getVitalStatus(field, val) {
+  if (val === null) return '';
+  switch(field) {
+    case 'hr': return (val >= 110 || val <= 50) ? 'danger' : (val >= 100 || val <= 60) ? 'caution' : 'normal';
+    case 'sbp': return (val <= 90 || val >= 180) ? 'danger' : (val <= 100 || val >= 160) ? 'caution' : 'normal';
+    case 'dbp': return (val <= 50 || val >= 110) ? 'danger' : (val <= 60 || val >= 90) ? 'caution' : 'normal';
+    case 'temp': return val > 101.5 ? 'danger' : val >= 100.5 ? 'caution' : 'normal';
+    case 'rr': return (val >= 25 || val <= 8) ? 'danger' : (val >= 21 || val <= 11) ? 'caution' : 'normal';
+    case 'spo2': return val < 90 ? 'danger' : val <= 93 ? 'caution' : 'normal';
+    default: return 'normal';
+  }
+}
+
+function handleFlag(cb) {
+  const idx = parseInt(cb.closest('.flag-item').id.replace('flag-','')) - 1;
+  state.flags[idx] = cb.checked;
+  cb.closest('.flag-item').classList.toggle('checked', cb.checked);
+  // Emergency modal
+  if ((idx === 8 || idx === 9) && cb.checked) showEmergencyModal();
+  updateDomainScore('redflags');
+}
+
+function autoDetectFlags() {
+  // Auto-check "no BM >24hr" flag
+  if (state.bm === 'no-over24') { state.flags[1] = true; setFlagCheckbox(1, true); }
+  // Auto-check vomiting flag
+  if (state.vomiting === 'multiple') { state.flags[3] = true; setFlagCheckbox(3, true); }
+  // Auto-check fever flag
+  if (state.temp !== null && state.temp > 101.5) { state.flags[6] = true; setFlagCheckbox(6, true); }
+  // Auto-check unable to eat flag
+  if (state.intake === 'none') { state.flags[7] = true; setFlagCheckbox(7, true); }
+  updateDomainScore('redflags');
+}
+
+function setFlagCheckbox(idx, checked) {
+  const item = document.getElementById('flag-' + (idx + 1));
+  if (item) {
+    const cb = item.querySelector('input[type="checkbox"]');
+    cb.checked = checked;
+    item.classList.toggle('checked', checked);
+  }
+}
+
+/* ════════════════════════════════════════════════════════════
+   SCORING ENGINE
+   ════════════════════════════════════════════════════════════ */
+function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
+
+function scorePain() {
+  const restP = state.painRest * 10;
+  const actP = state.painActivity * 7;
+  const managed = {yes:0, somewhat:-10, no:-25};
+  const meds = {yes:0, partial:-5, no:-15, 'not-taking':0};
+  let raw = 100 - (restP * 0.6 + actP * 0.4) / 10;
+  if (state.painManaged !== null) raw += (managed[state.painManaged] || 0);
+  if (state.painMeds !== null) raw += (meds[state.painMeds] || 0);
+  return clamp(Math.round(raw), 0, 100);
+}
+
+function scoreVitals() {
+  let penalty = 0, count = 0;
+  if (state.hr !== null) { count++;
+    if (state.hr >= 110 || state.hr <= 50) penalty += 30;
+    else if (state.hr >= 100 || state.hr <= 60) penalty += 15;
+  }
+  if (state.sbp !== null) { count++;
+    if (state.sbp <= 90 || state.sbp >= 180) penalty += 30;
+    else if (state.sbp <= 100 || state.sbp >= 160) penalty += 15;
+  }
+  if (state.temp !== null) { count++;
+    if (state.temp > 101.5) penalty += 25;
+    else if (state.temp >= 100.5) penalty += 12;
+  }
+  if (state.rr !== null) { count++;
+    if (state.rr >= 25 || state.rr <= 8) penalty += 25;
+    else if (state.rr >= 21 || state.rr <= 11) penalty += 12;
+  }
+  if (state.spo2 !== null) { count++;
+    if (state.spo2 < 90) penalty += 30;
+    else if (state.spo2 <= 93) penalty += 15;
+  }
+  if (count === 0) return null;
+  return clamp(Math.round(100 - penalty), 0, 100);
+}
+
+function scoreWound() {
+  const scores = {
+    drainage: {none:0,'minimal-clear':5,moderate:20,heavy:35,bloody:40,foul:50},
+    opening: {no:0,slight:15,significant:35},
+    redness: {none:0,mild:10,spreading:30},
+    warmth: {no:0,yes:15},
+    odor: {no:0,yes:25},
+    swelling: {none:0,mild:5,moderate:15,severe:30}
+  };
+  let penalty = 0, count = 0;
+  for (const key of Object.keys(scores)) {
+    if (state[key] !== null) { count++; penalty += (scores[key][state[key]] || 0); }
+  }
+  if (count === 0) return null;
+  return clamp(Math.round(100 - penalty), 0, 100);
+}
+
+function scoreGI() {
+  const scores = {
+    bm: {'yes-normal':0,'yes-loose':10,'no-under24':15,'no-over24':35},
+    nausea: {none:0,mild:8,moderate:20,severe:35},
+    vomiting: {none:0,once:15,multiple:35},
+    intake: {normal:0,reduced:10,minimal:25,none:45},
+    flatus: {yes:0,no:10}
+  };
+  let penalty = 0, count = 0;
+  for (const key of Object.keys(scores)) {
+    if (state[key] !== null) { count++; penalty += (scores[key][state[key]] || 0); }
+  }
+  if (count === 0) return null;
+  return clamp(Math.round(100 - penalty), 0, 100);
+}
+
+function scoreFunctional() {
+  const scores = {
+    ambulation: {independent:0,'with-assistance':15,minimal:35,bedbound:55},
+    adl: {full:0,partial:15,dependent:35},
+    actlevel: {above:0,expected:0,below:20,'sig-below':40},
+    dvt: {regular:0,some:10,minimal:25,none:40}
+  };
+  let penalty = 0, count = 0;
+  for (const key of Object.keys(scores)) {
+    if (state[key] !== null) { count++; penalty += (scores[key][state[key]] || 0); }
+  }
+  if (count === 0) return null;
+  return clamp(Math.round(100 - (penalty / Math.max(count,1))), 0, 100);
+}
+
+function scoreMental() {
+  const scores = {
+    anxiety: {none:0,mild:10,moderate:25,severe:45},
+    sleep: {good:0,fair:10,poor:25,unable:40},
+    mood: {positive:0,neutral:5,low:25,'very-low':45},
+    fear: {none:0,some:5,significant:20,overwhelming:40},
+    support: {strong:0,adequate:5,limited:20,none:35}
+  };
+  let penalty = 0, count = 0;
+  for (const key of Object.keys(scores)) {
+    if (state[key] !== null) { count++; penalty += (scores[key][state[key]] || 0); }
+  }
+  if (count === 0) return null;
+  return clamp(Math.round(100 - (penalty / Math.max(count,1))), 0, 100);
+}
+
+function scoreRedFlags() {
+  const flagCount = state.flags.filter(Boolean).length;
+  const emergency = (state.flags[8] || state.flags[9]);
+  if (emergency) return 0;
+  if (flagCount >= 4) return 10;
+  if (flagCount === 3) return 25;
+  if (flagCount === 2) return 40;
+  if (flagCount === 1) return 60;
+  return 100;
+}
+
+function calculateComposite() {
+  const weights = {pain:0.10, vitals:0.30, wound:0.15, gi:0.10, functional:0.15, mental:0.10, redflags:0.10};
+  const scores = {
+    pain: scorePain(),
+    vitals: scoreVitals(),
+    wound: scoreWound(),
+    gi: scoreGI(),
+    functional: scoreFunctional(),
+    mental: scoreMental(),
+    redflags: scoreRedFlags()
+  };
+  let totalWeight = 0, weightedSum = 0;
+  for (const [k, v] of Object.entries(scores)) {
+    if (v !== null) { totalWeight += weights[k]; weightedSum += v * weights[k]; }
+  }
+  if (totalWeight === 0) return {composite:null, scores, risk:null};
+  let composite = Math.round(weightedSum / totalWeight);
+  // Emergency override
+  if (state.flags[8] || state.flags[9]) composite = Math.min(composite, 25);
+  return {composite, scores, risk: classifyRisk(composite)};
+}
+
+function classifyRisk(score) {
+  if (score === null) return {level:'incomplete',color:'#888',label:'Incomplete',action:'Complete all domains'};
+  if (score >= 80) return {level:'low',color:'#16A34A',label:'Low Risk',action:'Routine follow-up'};
+  if (score >= 60) return {level:'moderate',color:'#CA8A04',label:'Moderate Risk',action:'Enhanced monitoring recommended'};
+  if (score >= 40) return {level:'high',color:'#D97706',label:'High Risk',action:'Physician review needed'};
+  return {level:'critical',color:'#DC2626',label:'Critical Risk',action:'Immediate contact / consider ED'};
+}
+
+function updateDomainScore(domain) {
+  const fns = {pain:scorePain,vitals:scoreVitals,wound:scoreWound,gi:scoreGI,functional:scoreFunctional,mental:scoreMental,redflags:scoreRedFlags};
+  const score = fns[domain]();
+  const el = document.getElementById('score-' + domain);
+  if (el) {
+    el.textContent = score !== null ? score : '—';
+    if (score !== null) {
+      el.style.color = score >= 80 ? 'var(--status-green)' : score >= 60 ? 'var(--status-yellow)' : score >= 40 ? 'var(--status-orange)' : 'var(--status-red)';
+    } else { el.style.color = ''; }
+  }
+  // Update tab dot
+  const dot = document.getElementById('dot-' + domain);
+  if (dot && score !== null) {
+    dot.className = 'tab-dot ' + (score >= 80 ? 'green' : score >= 60 ? 'yellow' : 'red');
+  }
+}
+
+/* ════════════════════════════════════════════════════════════
+   SUMMARY RENDERING
+   ════════════════════════════════════════════════════════════ */
+function renderSummary() {
+  const {composite, scores, risk} = calculateComposite();
+  renderGauge(composite, risk);
+  renderDomainBars(scores);
+  renderAlerts(scores);
+  renderTrend();
+}
+
+function renderGauge(score, risk) {
+  const svg = document.getElementById('gaugeChart');
+  const cx = 110, cy = 120, r = 90;
+  const startAngle = 180, endAngle = 360;
+  const totalArc = endAngle - startAngle;
+
+  let bgPath = describeArc(cx, cy, r, startAngle, endAngle);
+  let scorePath = '';
+  let color = '#ccc';
+
+  if (score !== null && risk) {
+    const scoreAngle = startAngle + (score / 100) * totalArc;
+    scorePath = describeArc(cx, cy, r, startAngle, scoreAngle);
+    color = risk.color;
+  }
+
+  svg.innerHTML = `
+    <path d="${bgPath}" fill="none" stroke="#E5E7EB" stroke-width="18" stroke-linecap="round"/>
+    ${scorePath ? `<path d="${scorePath}" fill="none" stroke="${color}" stroke-width="18" stroke-linecap="round"/>` : ''}
+    <text x="${cx}" y="${cy - 10}" text-anchor="middle" font-family="Playfair Display,serif" font-size="42" font-weight="700" fill="${color}">${score !== null ? score : '—'}</text>
+    <text x="${cx}" y="${cy + 14}" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="14" fill="#999">/100</text>
+  `;
+
+  const badge = document.getElementById('riskBadge');
+  const action = document.getElementById('riskAction');
+  if (risk) {
+    badge.textContent = risk.label;
+    badge.style.background = risk.color + '18';
+    badge.style.color = risk.color;
+    action.textContent = risk.action;
+  } else {
+    badge.textContent = 'Incomplete';
+    badge.style.background = '#eee';
+    badge.style.color = '#888';
+    action.textContent = 'Complete all domains for scoring';
+  }
+}
+
+function describeArc(cx, cy, radius, startAngle, endAngle) {
+  const start = polarToCartesian(cx, cy, radius, endAngle);
+  const end = polarToCartesian(cx, cy, radius, startAngle);
+  const largeArc = endAngle - startAngle <= 180 ? '0' : '1';
+  return `M ${start.x} ${start.y} A ${radius} ${radius} 0 ${largeArc} 0 ${end.x} ${end.y}`;
+}
+
+function polarToCartesian(cx, cy, radius, angleDeg) {
+  const rad = (angleDeg) * Math.PI / 180;
+  return { x: cx + radius * Math.cos(rad), y: cy + radius * Math.sin(rad) };
+}
+
+function renderDomainBars(scores) {
+  const container = document.getElementById('domainBars');
+  const labels = {pain:'Pain',vitals:'Vitals',wound:'Wound',gi:'GI',functional:'Function',mental:'Mental',redflags:'Red Flags'};
+  let html = '';
+  for (const [key, label] of Object.entries(labels)) {
+    const val = scores[key];
+    const color = val === null ? '#ccc' : val >= 80 ? '#16A34A' : val >= 60 ? '#CA8A04' : val >= 40 ? '#D97706' : '#DC2626';
+    const width = val !== null ? val : 0;
+    html += `<div class="domain-bar-row">
+      <span class="domain-bar-label">${label}</span>
+      <div class="domain-bar-track"><div class="domain-bar-fill" style="width:${width}%;background:${color};"></div></div>
+      <span class="domain-bar-score" style="color:${color}">${val !== null ? val : '—'}</span>
+    </div>`;
+  }
+  container.innerHTML = html;
+}
+
+function renderAlerts(scores) {
+  const container = document.getElementById('alertsList');
+  let alerts = [];
+  // Vital alerts
+  const vitalChecks = [
+    {field:'hr',label:'Heart Rate',val:state.hr},
+    {field:'sbp',label:'Systolic BP',val:state.sbp},
+    {field:'temp',label:'Temperature',val:state.temp},
+    {field:'rr',label:'Respiratory Rate',val:state.rr},
+    {field:'spo2',label:'SpO₂',val:state.spo2}
+  ];
+  for (const v of vitalChecks) {
+    if (v.val === null) continue;
+    const status = getVitalStatus(v.field, v.val);
+    if (status === 'danger') alerts.push({type:'red', msg:`${v.label}: ${v.val} — RED ALERT`});
+    else if (status === 'caution') alerts.push({type:'yellow', msg:`${v.label}: ${v.val} — Caution`});
+  }
+  // Red flags
+  state.flags.forEach((f, i) => {
+    if (f) alerts.push({type: i >= 8 ? 'red' : 'yellow', msg: FLAG_LABELS[i] + (i >= 8 ? ' (EMERGENCY)' : '')});
+  });
+
+  if (alerts.length === 0) {
+    container.innerHTML = '<div class="alert-item green-msg"><span class="alert-icon">&#10003;</span> No alerts at this time.</div>';
+    return;
+  }
+  // Sort: red first
+  alerts.sort((a, b) => (a.type === 'red' ? 0 : 1) - (b.type === 'red' ? 0 : 1));
+  container.innerHTML = alerts.map(a =>
+    `<div class="alert-item ${a.type}-alert"><span class="alert-icon">${a.type === 'red' ? '&#9888;' : '&#9888;'}</span> ${a.msg}</div>`
+  ).join('');
+}
+
+/* ════════════════════════════════════════════════════════════
+   TREND CHART (SVG)
+   ════════════════════════════════════════════════════════════ */
+function renderTrend() {
+  const container = document.getElementById('trendContainer');
+  const history = getPatientHistory();
+  if (!history || history.length === 0) {
+    container.innerHTML = '<div class="trend-empty">Save assessments to see recovery trend over time.</div>';
+    return;
+  }
+  const W = 400, H = 180, padL = 45, padR = 15, padT = 15, padB = 30;
+  const chartW = W - padL - padR, chartH = H - padT - padB;
+
+  let svg = `<svg viewBox="0 0 ${W} ${H}" width="100%" preserveAspectRatio="xMidYMid meet" style="max-height:200px;">`;
+  // Risk zone backgrounds
+  const zones = [{y1:0,y2:20,color:'#FEE2E2'},{y1:20,y2:40,color:'#FEE2E2'},{y1:40,y2:60,color:'#FFF7ED'},{y1:60,y2:80,color:'#FEF9C3'},{y1:80,y2:100,color:'#DCFCE7'}];
+  for (const z of zones) {
+    const ry = padT + chartH - (z.y2/100)*chartH;
+    const rh = ((z.y2-z.y1)/100)*chartH;
+    svg += `<rect x="${padL}" y="${ry}" width="${chartW}" height="${rh}" fill="${z.color}" opacity="0.5"/>`;
+  }
+  // Grid lines
+  for (let v = 0; v <= 100; v += 20) {
+    const y = padT + chartH - (v/100)*chartH;
+    svg += `<line x1="${padL}" y1="${y}" x2="${padL+chartW}" y2="${y}" stroke="#ddd" stroke-width="0.5"/>`;
+    svg += `<text x="${padL-5}" y="${y+4}" text-anchor="end" font-size="10" fill="#999" font-family="DM Sans">${v}</text>`;
+  }
+  // Data points + line
+  const n = history.length;
+  const points = history.map((h, i) => {
+    const x = padL + (n === 1 ? chartW/2 : (i/(n-1))*chartW);
+    const y = padT + chartH - (h.composite/100)*chartH;
+    return {x, y, ...h};
+  });
+  if (points.length > 1) {
+    const lineD = points.map((p,i) => `${i===0?'M':'L'}${p.x},${p.y}`).join(' ');
+    svg += `<path d="${lineD}" fill="none" stroke="#2D5A3D" stroke-width="2.5"/>`;
+  }
+  for (const p of points) {
+    const risk = classifyRisk(p.composite);
+    svg += `<circle cx="${p.x}" cy="${p.y}" r="5" fill="${risk.color}" stroke="#fff" stroke-width="2"/>`;
+    svg += `<text x="${p.x}" y="${p.y-10}" text-anchor="middle" font-size="10" font-weight="700" fill="${risk.color}" font-family="DM Sans">${p.composite}</text>`;
+  }
+  // X labels
+  for (let i = 0; i < points.length; i++) {
+    svg += `<text x="${points[i].x}" y="${H-5}" text-anchor="middle" font-size="9" fill="#999" font-family="DM Sans">POD ${points[i].pod}</text>`;
+  }
+  svg += '</svg>';
+  container.innerHTML = svg;
+}
+
+/* ════════════════════════════════════════════════════════════
+   HISTORY (localStorage)
+   ════════════════════════════════════════════════════════════ */
+function getPatientKey() {
+  const name = document.getElementById('patientName').value.trim().toLowerCase().replace(/\s+/g,'-') || 'unnamed';
+  const date = document.getElementById('surgeryDate').value || 'nodate';
+  return name + '_' + date;
+}
+
+function getHistory() {
+  try { return JSON.parse(localStorage.getItem('opwell_recovery_history') || '{}'); }
+  catch { return {}; }
+}
+
+function getPatientHistory() {
+  const key = getPatientKey();
+  const h = getHistory();
+  return (h[key] && h[key].assessments) || [];
+}
+
+function saveToHistory() {
+  const {composite, scores, risk} = calculateComposite();
+  if (composite === null) { showToast('Complete at least one domain before saving.'); return; }
+  const key = getPatientKey();
+  const h = getHistory();
+  if (!h[key]) h[key] = {patient:{name:document.getElementById('patientName').value,surgeryType:document.getElementById('surgeryType').value,surgeryDate:document.getElementById('surgeryDate').value},assessments:[]};
+  const podText = document.getElementById('podNum').textContent;
+  h[key].assessments.push({
+    date: new Date().toISOString(),
+    pod: podText === '—' ? 0 : parseInt(podText),
+    composite,
+    scores: {...scores},
+    riskLevel: risk ? risk.level : 'incomplete',
+    flagsTriggered: state.flags.map((f,i) => f ? FLAG_LABELS[i] : null).filter(Boolean)
+  });
+  localStorage.setItem('opwell_recovery_history', JSON.stringify(h));
+  showToast('Assessment saved to history.');
+  if (document.querySelector('[data-tab="summary"]').classList.contains('active')) renderTrend();
+}
+
+function clearAssessment() {
+  if (!confirm('Clear all current assessment data?')) return;
+  // Reset state
+  state.painRest = 0; state.painActivity = 0; state.painLocation = ''; state.painManaged = null; state.painMeds = null;
+  state.hr = null; state.sbp = null; state.dbp = null; state.temp = null; state.rr = null; state.spo2 = null;
+  state.drainage = null; state.opening = null; state.redness = null; state.warmth = null; state.odor = null; state.swelling = null; state.woundNotes = '';
+  state.bm = null; state.lastBM = ''; state.nausea = null; state.vomiting = null; state.intake = null; state.flatus = null;
+  state.ambulation = null; state.adl = null; state.actlevel = null; state.dvt = null;
+  state.anxiety = null; state.sleep = null; state.mood = null; state.fear = null; state.support = null;
+  state.flags = [false,false,false,false,false,false,false,false,false,false];
+  // Reset UI
+  document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+  document.querySelectorAll('input[type="checkbox"]').forEach(c => c.checked = false);
+  document.querySelectorAll('.radio-opt').forEach(o => o.classList.remove('selected','selected-yellow','selected-red'));
+  document.querySelectorAll('.flag-item').forEach(f => f.classList.remove('checked'));
+  document.querySelectorAll('.vital-input').forEach(v => { v.value = ''; v.className = 'vital-input'; });
+  document.querySelectorAll('.alert-tag').forEach(t => t.style.display = 'none');
+  document.querySelectorAll('.q-group').forEach(g => g.className = 'q-group');
+  document.getElementById('painRest').value = 0; document.getElementById('painActivity').value = 0;
+  document.getElementById('painRestVal').textContent = '0'; document.getElementById('painRestVal').className = 'slider-val green';
+  document.getElementById('painActivityVal').textContent = '0'; document.getElementById('painActivityVal').className = 'slider-val green';
+  document.getElementById('painLocation').value = '';
+  document.getElementById('lastBM').value = '';
+  document.getElementById('woundNotes').value = '';
+  ['pain','vitals','wound','gi','functional','mental','redflags'].forEach(d => {
+    const el = document.getElementById('score-' + d);
+    if (el) { el.textContent = '—'; el.style.color = ''; }
+    const dot = document.getElementById('dot-' + d);
+    if (dot) dot.className = 'tab-dot';
+  });
+  switchTab('pain');
+  showToast('Assessment cleared.');
+}
+
+/* ════════════════════════════════════════════════════════════
+   EMERGENCY MODAL
+   ════════════════════════════════════════════════════════════ */
+function showEmergencyModal() {
+  const list = document.getElementById('emergencyFlagList');
+  let items = '';
+  if (state.flags[8]) items += '<li>Shortness of breath or difficulty breathing</li>';
+  if (state.flags[9]) items += '<li>Chest pain</li>';
+  list.innerHTML = items;
+  document.getElementById('emergencyModal').classList.add('show');
+}
+function dismissModal() { document.getElementById('emergencyModal').classList.remove('show'); }
+
+/* ════════════════════════════════════════════════════════════
+   CHART NOTE GENERATOR
+   ════════════════════════════════════════════════════════════ */
+function copyChartNote() {
+  const {composite, scores, risk} = calculateComposite();
+  const name = document.getElementById('patientName').value || '[Not entered]';
+  const surgType = document.getElementById('surgeryType');
+  const surgText = surgType.selectedIndex > 0 ? surgType.options[surgType.selectedIndex].text : '[Not selected]';
+  const surgDate = document.getElementById('surgeryDate').value || '[Not entered]';
+  const pod = document.getElementById('podNum').textContent;
+  const now = new Date().toLocaleString();
+
+  const labelMap = {
+    painManaged: {yes:'Yes',somewhat:'Somewhat',no:'No'},
+    painMeds: {yes:'Yes',partial:'Partially',no:'No','not-taking':'Not taking medication'},
+    drainage: {none:'None','minimal-clear':'Minimal, clear','moderate':'Moderate','heavy':'Heavy','bloody':'Bloody','foul':'Foul-smelling'},
+    opening: {no:'No',slight:'Slight separation',significant:'Significant opening'},
+    redness: {none:'None',mild:'Mild',spreading:'Spreading'},
+    warmth: {no:'No',yes:'Yes'}, odor: {no:'No',yes:'Yes'},
+    swelling: {none:'None',mild:'Mild',moderate:'Moderate',severe:'Severe'},
+    bm: {'yes-normal':'Yes, normal','yes-loose':'Yes, loose/diarrhea','no-under24':'No (<24hr)','no-over24':'No (>24hr)'},
+    nausea: {none:'None',mild:'Mild',moderate:'Moderate',severe:'Severe'},
+    vomiting: {none:'None',once:'Once',multiple:'Multiple episodes'},
+    intake: {normal:'Normal',reduced:'Reduced',minimal:'Minimal (sips only)',none:'None (NPO)'},
+    flatus: {yes:'Yes',no:'No'},
+    ambulation: {independent:'Independent','with-assistance':'With assistance',minimal:'Minimal',bedbound:'Bedbound'},
+    adl: {full:'Fully independent',partial:'Needs some help',dependent:'Dependent'},
+    actlevel: {above:'Above expected',expected:'As expected',below:'Below expected','sig-below':'Significantly below'},
+    dvt: {regular:'Walking regularly',some:'Some walking',minimal:'Minimal',none:'Not walking'},
+    anxiety: {none:'None/minimal',mild:'Mild',moderate:'Moderate',severe:'Severe'},
+    sleep: {good:'Good',fair:'Fair',poor:'Poor',unable:'Unable to sleep'},
+    mood: {positive:'Positive',neutral:'Neutral',low:'Low','very-low':'Very low'},
+    fear: {none:'None',some:'Some',significant:'Significant',overwhelming:'Overwhelming'},
+    support: {strong:'Strong',adequate:'Adequate',limited:'Limited',none:'None'}
+  };
+  const lbl = (field) => { const m = labelMap[field]; return m && state[field] ? m[state[field]] : (state[field] || '—'); };
+  const sLbl = (v) => v !== null ? v + '/100' : '—';
+
+  const flagsText = state.flags.some(Boolean) ?
+    state.flags.map((f,i) => f ? '  [x] ' + FLAG_LABELS[i] + (i >= 8 ? ' — EMERGENCY' : '') : null).filter(Boolean).join('\n') :
+    '  No red flags identified.';
+
+  // Alerts
+  let alertsText = '';
+  const vChecks = [{f:'hr',l:'Heart Rate'},{f:'sbp',l:'Systolic BP'},{f:'temp',l:'Temperature'},{f:'rr',l:'Respiratory Rate'},{f:'spo2',l:'SpO2'}];
+  for (const v of vChecks) {
+    if (state[v.f] === null) continue;
+    const s = getVitalStatus(v.f, state[v.f]);
+    if (s === 'danger') alertsText += '  RED: ' + v.l + ' = ' + state[v.f] + '\n';
+    else if (s === 'caution') alertsText += '  YELLOW: ' + v.l + ' = ' + state[v.f] + '\n';
+  }
+  if (!alertsText) alertsText = '  No vital sign alerts.\n';
+
+  // Trend
+  const history = getPatientHistory();
+  let trendText = '';
+  if (history.length > 0) {
+    trendText = '\nTREND:\n';
+    for (const h of history) {
+      trendText += `  POD ${h.pod} (${new Date(h.date).toLocaleDateString()}): ${h.composite}/100 — ${h.riskLevel}\n`;
+    }
+    if (composite !== null) {
+      trendText += `  Current: ${composite}/100 — ${risk.label}\n`;
+      if (history.length >= 1) {
+        const last = history[history.length - 1].composite;
+        const diff = composite - last;
+        trendText += `  Trajectory: ${diff > 5 ? 'Improving' : diff < -5 ? 'Declining' : 'Stable'}\n`;
+      }
+    }
+  }
+
+  const note = `POST-OPERATIVE RECOVERY ASSESSMENT
+OpWell Concierge™ — Dr. Ornella Oluwole, MD
+(678) 235-5822 | opwellconcierge.com
+────────────────────────────────────────────────
+Patient: ${name}
+Surgery: ${surgText}
+Surgery Date: ${surgDate}
+Post-Operative Day: ${pod}
+Assessment Date: ${now}
+────────────────────────────────────────────────
+
+COMPOSITE RECOVERY SCORE: ${composite !== null ? composite + '/100' : 'Incomplete'} — ${risk ? risk.label : 'N/A'}
+Recommended Action: ${risk ? risk.action : 'Complete assessment'}
+
+DOMAIN SCORES:
+  Pain Control:         ${sLbl(scores.pain)}
+  Vital Sign Stability: ${sLbl(scores.vitals)}
+  Wound Healing:        ${sLbl(scores.wound)}
+  GI Function:          ${sLbl(scores.gi)}
+  Functional Recovery:  ${sLbl(scores.functional)}
+  Emotional State:      ${sLbl(scores.mental)}
+  Red Flag Screen:      ${sLbl(scores.redflags)}
+
+────────────────────────────────────────────────
+PAIN ASSESSMENT:
+  Pain at rest: ${state.painRest}/10 NRS
+  Pain with activity: ${state.painActivity}/10 NRS
+  Location: ${state.painLocation || '—'}
+  Pain managed: ${lbl('painManaged')}
+  Medication effective: ${lbl('painMeds')}
+
+VITAL SIGNS:
+  HR: ${state.hr !== null ? state.hr + ' bpm' : '—'}
+  BP: ${state.sbp !== null ? state.sbp + '/' + (state.dbp || '—') + ' mmHg' : '—'}
+  Temp: ${state.temp !== null ? state.temp + '°F' : '—'}
+  RR: ${state.rr !== null ? state.rr + ' breaths/min' : '—'}
+  SpO2: ${state.spo2 !== null ? state.spo2 + '%' : '—'}
+
+WOUND ASSESSMENT:
+  Drainage: ${lbl('drainage')}
+  Opening/separation: ${lbl('opening')}
+  Redness: ${lbl('redness')}
+  Warmth: ${lbl('warmth')}
+  Odor: ${lbl('odor')}
+  Swelling: ${lbl('swelling')}
+  Notes: ${state.woundNotes || '—'}
+
+GI FUNCTION:
+  Bowel movement: ${lbl('bm')}
+  Last BM: ${state.lastBM || '—'}
+  Nausea: ${lbl('nausea')}
+  Vomiting: ${lbl('vomiting')}
+  Oral intake: ${lbl('intake')}
+  Flatus: ${lbl('flatus')}
+
+FUNCTIONAL STATUS:
+  Ambulation: ${lbl('ambulation')}
+  ADL independence: ${lbl('adl')}
+  Activity level: ${lbl('actlevel')}
+  DVT prevention: ${lbl('dvt')}
+
+EMOTIONAL/MENTAL STATE:
+  Anxiety: ${lbl('anxiety')}
+  Sleep quality: ${lbl('sleep')}
+  Mood: ${lbl('mood')}
+  Fear of complications: ${lbl('fear')}
+  Social support: ${lbl('support')}
+
+RED FLAG SCREENING:
+${flagsText}
+
+ALERTS:
+${alertsText}
+${trendText}
+────────────────────────────────────────────────
+This assessment was generated using the OpWell Concierge™
+Post-Op Recovery Check-In Tool.
+Dr. Ornella Oluwole, MD | (678) 235-5822
+opwellconcierge.com`;
+
+  navigator.clipboard.writeText(note).then(() => {
+    showToast('Copied to clipboard — ready to paste into chart.');
+  }).catch(() => {
+    // Fallback
+    const ta = document.createElement('textarea');
+    ta.value = note; document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); showToast('Copied to clipboard.'); }
+    catch { showToast('Copy failed — please select and copy manually.'); }
+    document.body.removeChild(ta);
+  });
+}
+
+/* ════════════════════════════════════════════════════════════
+   PRINT
+   ════════════════════════════════════════════════════════════ */
+function printAssessment() {
+  const {composite, scores, risk} = calculateComposite();
+  const name = document.getElementById('patientName').value || '[Not entered]';
+  const surgType = document.getElementById('surgeryType');
+  const surgText = surgType.selectedIndex > 0 ? surgType.options[surgType.selectedIndex].text : '[Not selected]';
+  const surgDate = document.getElementById('surgeryDate').value || '[Not entered]';
+  const pod = document.getElementById('podNum').textContent;
+
+  const labelMap = {
+    painManaged:{yes:'Yes',somewhat:'Somewhat',no:'No'},painMeds:{yes:'Yes',partial:'Partially',no:'No','not-taking':'Not taking'},
+    drainage:{none:'None','minimal-clear':'Minimal, clear',moderate:'Moderate',heavy:'Heavy',bloody:'Bloody',foul:'Foul-smelling'},
+    opening:{no:'No',slight:'Slight separation',significant:'Significant opening'},redness:{none:'None',mild:'Mild',spreading:'Spreading'},
+    warmth:{no:'No',yes:'Yes'},odor:{no:'No',yes:'Yes'},swelling:{none:'None',mild:'Mild',moderate:'Moderate',severe:'Severe'},
+    bm:{'yes-normal':'Yes, normal','yes-loose':'Yes, loose','no-under24':'No (<24hr)','no-over24':'No (>24hr)'},
+    nausea:{none:'None',mild:'Mild',moderate:'Moderate',severe:'Severe'},vomiting:{none:'None',once:'Once',multiple:'Multiple'},
+    intake:{normal:'Normal',reduced:'Reduced',minimal:'Minimal',none:'NPO'},flatus:{yes:'Yes',no:'No'},
+    ambulation:{independent:'Independent','with-assistance':'With assistance',minimal:'Minimal',bedbound:'Bedbound'},
+    adl:{full:'Independent',partial:'Needs help',dependent:'Dependent'},actlevel:{above:'Above expected',expected:'As expected',below:'Below',
+    'sig-below':'Significantly below'},dvt:{regular:'Walking regularly',some:'Some',minimal:'Minimal',none:'None'},
+    anxiety:{none:'None',mild:'Mild',moderate:'Moderate',severe:'Severe'},sleep:{good:'Good',fair:'Fair',poor:'Poor',unable:'Unable'},
+    mood:{positive:'Positive',neutral:'Neutral',low:'Low','very-low':'Very low'},fear:{none:'None',some:'Some',significant:'Significant',overwhelming:'Overwhelming'},
+    support:{strong:'Strong',adequate:'Adequate',limited:'Limited',none:'None'}
+  };
+  const lbl = (f) => { const m = labelMap[f]; return m && state[f] ? m[state[f]] : '—'; };
+
+  const riskColor = risk ? risk.color : '#888';
+  const flagsHtml = state.flags.some(Boolean) ?
+    state.flags.map((f,i) => f ? `<div style="padding:4px 0;color:${i>=8?'#DC2626':'#CA8A04'};">&#9888; ${FLAG_LABELS[i]}${i>=8?' — EMERGENCY':''}</div>` : '').filter(Boolean).join('') :
+    '<div style="color:#16A34A;">No red flags identified.</div>';
+
+  const win = window.open('','_blank');
+  win.document.write(`<!DOCTYPE html><html><head><title>Post-Op Assessment — ${name}</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;font-size:13px;color:#1C1C1C;padding:24px;max-width:750px;margin:0 auto;}
+h1{font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:4px;}
+.hdr{border-bottom:2px solid #2D5A3D;padding-bottom:12px;margin-bottom:16px;}
+.hdr .sub{font-size:0.8rem;color:#5A5A5A;}
+.meta{display:grid;grid-template-columns:1fr 1fr;gap:4px 20px;margin-bottom:16px;font-size:0.85rem;}
+.meta b{color:#2D5A3D;}
+.score-box{text-align:center;padding:16px;border:2px solid ${riskColor};border-radius:12px;margin-bottom:16px;}
+.score-box .num{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:700;color:${riskColor};}
+.score-box .lbl{font-size:0.85rem;font-weight:700;color:${riskColor};margin-top:4px;}
+.score-box .act{font-size:0.8rem;color:#5A5A5A;margin-top:2px;}
+.domain-table{width:100%;border-collapse:collapse;margin-bottom:16px;}
+.domain-table td{padding:5px 8px;border-bottom:1px solid #eee;font-size:0.85rem;}
+.domain-table td:first-child{font-weight:600;width:140px;}
+.section{font-family:'Playfair Display',serif;font-size:1rem;font-weight:600;color:#2D5A3D;margin:14px 0 6px;border-bottom:1px solid #ddd;padding-bottom:3px;}
+.detail-grid{display:grid;grid-template-columns:140px 1fr;gap:2px 12px;font-size:0.85rem;margin-bottom:10px;}
+.detail-grid .dlbl{font-weight:600;color:#5A5A5A;}
+.footer{margin-top:20px;padding-top:10px;border-top:1px solid #ddd;font-size:0.75rem;color:#999;text-align:center;}
+@media print{body{padding:12px;}}
+</style></head><body>
+<div class="hdr"><h1>Post-Op Recovery Assessment</h1><div class="sub">OpWell Concierge™ — Dr. Ornella Oluwole, MD | (678) 235-5822 | opwellconcierge.com</div></div>
+<div class="meta"><div><b>Patient:</b> ${name}</div><div><b>Surgery:</b> ${surgText}</div><div><b>Surgery Date:</b> ${surgDate}</div><div><b>POD:</b> ${pod}</div><div><b>Assessment Date:</b> ${new Date().toLocaleString()}</div></div>
+<div class="score-box"><div class="num">${composite !== null ? composite : '—'}</div><div>/100</div><div class="lbl">${risk?risk.label:'Incomplete'}</div><div class="act">${risk?risk.action:'Complete assessment'}</div></div>
+<table class="domain-table"><tr><td>Pain Control</td><td>${scores.pain !== null ? scores.pain : '—'}/100</td></tr><tr><td>Vital Stability</td><td>${scores.vitals !== null ? scores.vitals : '—'}/100</td></tr><tr><td>Wound Healing</td><td>${scores.wound !== null ? scores.wound : '—'}/100</td></tr><tr><td>GI Function</td><td>${scores.gi !== null ? scores.gi : '—'}/100</td></tr><tr><td>Functional Recovery</td><td>${scores.functional !== null ? scores.functional : '—'}/100</td></tr><tr><td>Emotional State</td><td>${scores.mental !== null ? scores.mental : '—'}/100</td></tr><tr><td>Red Flag Screen</td><td>${scores.redflags !== null ? scores.redflags : '—'}/100</td></tr></table>
+<div class="section">Pain</div><div class="detail-grid"><span class="dlbl">Rest:</span><span>${state.painRest}/10</span><span class="dlbl">Activity:</span><span>${state.painActivity}/10</span><span class="dlbl">Location:</span><span>${state.painLocation||'—'}</span><span class="dlbl">Managed:</span><span>${lbl('painManaged')}</span><span class="dlbl">Meds effective:</span><span>${lbl('painMeds')}</span></div>
+<div class="section">Vitals</div><div class="detail-grid"><span class="dlbl">HR:</span><span>${state.hr!==null?state.hr+' bpm':'—'}</span><span class="dlbl">BP:</span><span>${state.sbp!==null?state.sbp+'/'+(state.dbp||'—')+' mmHg':'—'}</span><span class="dlbl">Temp:</span><span>${state.temp!==null?state.temp+'°F':'—'}</span><span class="dlbl">RR:</span><span>${state.rr!==null?state.rr+'/min':'—'}</span><span class="dlbl">SpO₂:</span><span>${state.spo2!==null?state.spo2+'%':'—'}</span></div>
+<div class="section">Wound</div><div class="detail-grid"><span class="dlbl">Drainage:</span><span>${lbl('drainage')}</span><span class="dlbl">Opening:</span><span>${lbl('opening')}</span><span class="dlbl">Redness:</span><span>${lbl('redness')}</span><span class="dlbl">Warmth:</span><span>${lbl('warmth')}</span><span class="dlbl">Odor:</span><span>${lbl('odor')}</span><span class="dlbl">Swelling:</span><span>${lbl('swelling')}</span></div>
+<div class="section">GI Function</div><div class="detail-grid"><span class="dlbl">Bowel movement:</span><span>${lbl('bm')}</span><span class="dlbl">Nausea:</span><span>${lbl('nausea')}</span><span class="dlbl">Vomiting:</span><span>${lbl('vomiting')}</span><span class="dlbl">Oral intake:</span><span>${lbl('intake')}</span><span class="dlbl">Flatus:</span><span>${lbl('flatus')}</span></div>
+<div class="section">Functional</div><div class="detail-grid"><span class="dlbl">Ambulation:</span><span>${lbl('ambulation')}</span><span class="dlbl">ADL:</span><span>${lbl('adl')}</span><span class="dlbl">Activity level:</span><span>${lbl('actlevel')}</span><span class="dlbl">DVT prevention:</span><span>${lbl('dvt')}</span></div>
+<div class="section">Mental / Emotional</div><div class="detail-grid"><span class="dlbl">Anxiety:</span><span>${lbl('anxiety')}</span><span class="dlbl">Sleep:</span><span>${lbl('sleep')}</span><span class="dlbl">Mood:</span><span>${lbl('mood')}</span><span class="dlbl">Fear:</span><span>${lbl('fear')}</span><span class="dlbl">Support:</span><span>${lbl('support')}</span></div>
+<div class="section">Red Flags</div>${flagsHtml}
+<div class="footer">OpWell Concierge™ Post-Op Recovery Check-In Tool | Dr. Ornella Oluwole, MD | opwellconcierge.com</div>
+<script>window.onload=function(){setTimeout(function(){window.print();},400);}<\/script>
+</body></html>`);
+  win.document.close();
+}
+
+/* ════════════════════════════════════════════════════════════
+   TOAST
+   ════════════════════════════════════════════════════════════ */
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3200);
+}
+
+/* ════════════════════════════════════════════════════════════
+   INIT
+   ════════════════════════════════════════════════════════════ */
+(function init() {
+  // Set today as default for quick use
+  const today = new Date().toISOString().split('T')[0];
+  // Don't auto-set surgery date — let user choose
+})();
+</script>
+</body>
+</html>
