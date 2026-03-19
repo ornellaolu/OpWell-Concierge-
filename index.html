@@ -2193,7 +2193,7 @@
     .fade-in-group.visible > *:nth-child(6) { opacity:1; transform:translateY(0); transition-delay:0.5s; }
 
     /* Blog filter tabs */
-    .blog-filters { display:flex; flex-wrap:wrap; gap:0.5rem; margin:1.5rem 0 0.5rem; }
+    .blog-filters { display:flex; flex-wrap:wrap; gap:0.5rem; margin:1.5rem 0 1.5rem; }
     .blog-filter-btn { font-family:'DM Sans',sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; padding:0.4rem 1rem; border-radius:50px; border:1.5px solid rgba(45,90,61,0.25); background:#fff; color:var(--slate); cursor:pointer; transition:all 0.2s; }
     .blog-filter-btn:hover { background:rgba(45,90,61,0.08); }
     .blog-filter-btn.active { background:var(--sage); color:#fff; border-color:var(--sage); }
@@ -2232,8 +2232,11 @@
     .blog-card-category { font-family:'DM Sans',sans-serif; font-size:0.65rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold); }
     .blog-card-title { font-family:'Playfair Display',serif; font-size:1.12rem; color:var(--sage); line-height:1.4; }
     .blog-card-meta { font-family:'DM Sans',sans-serif; font-size:0.75rem; color:var(--slate); }
-    .blog-card-excerpt { font-family:'DM Sans',sans-serif; font-size:0.875rem; color:var(--charcoal); line-height:1.65; flex:1; }
+    .blog-card-excerpt { font-family:'DM Sans',sans-serif; font-size:0.84rem; color:var(--slate); line-height:1.6; flex:1; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
     .blog-card-link { font-family:'DM Sans',sans-serif; font-size:0.82rem; font-weight:700; color:var(--sage); margin-top:0.4rem; }
+    .blog-card.blog-hidden { display:none; }
+    .blog-show-more { display:block; margin:2.5rem auto 0; padding:0.9rem 2.5rem; font-family:'DM Sans',sans-serif; font-size:0.7rem; font-weight:500; letter-spacing:0.15em; text-transform:uppercase; color:var(--sage); background:transparent; border:1.5px solid var(--sage); border-radius:50px; cursor:pointer; transition:all 0.2s; }
+    .blog-show-more:hover { background:var(--sage); color:#fff; }
     .blog-post-body { max-width:720px; margin:0 auto; padding:0 1.5rem 4rem; font-family:'DM Sans',sans-serif; font-size:1rem; line-height:1.85; color:var(--charcoal); }
     .blog-post-body h2 { font-family:'Playfair Display',serif; font-size:1.5rem; color:var(--sage); margin-top:2.5rem; margin-bottom:0.7rem; line-height:1.3; }
     .blog-post-body h3 { font-family:'Playfair Display',serif; font-size:1.15rem; color:var(--sage); margin-top:1.75rem; margin-bottom:0.45rem; }
@@ -5248,6 +5251,7 @@
         <div class="blog-card-link">Read Article →</div>
       </div>
     </div>
+    <button class="blog-show-more" id="blogShowMore" onclick="showMoreBlogCards()">Show More Articles</button>
   </section>
   <section class="content-section alt" style="text-align:center;">
     <div class="section-tag">Work With Us</div>
@@ -13052,6 +13056,8 @@
       }
     });
 
+    applyBlogLimit();
+
     // Inject "Back to Blog" bar at the bottom of every individual blog page
     document.querySelectorAll('[id^="page-blog-"]').forEach(function(page) {
       if (page.querySelector('.blog-back-bar')) return; // already present
@@ -13064,6 +13070,22 @@
     });
   });
 
+  var BLOG_INITIAL_COUNT = 6;
+  function applyBlogLimit() {
+    var cards = document.querySelectorAll('.blog-card[data-category]:not([data-hidden="true"])');
+    var count = 0;
+    cards.forEach(function(card) {
+      if (count < BLOG_INITIAL_COUNT) { card.classList.remove('blog-hidden'); } else { card.classList.add('blog-hidden'); }
+      count++;
+    });
+    var btn = document.getElementById('blogShowMore');
+    if (btn) btn.style.display = count > BLOG_INITIAL_COUNT ? 'block' : 'none';
+  }
+  function showMoreBlogCards() {
+    document.querySelectorAll('.blog-card.blog-hidden').forEach(function(card) { card.classList.remove('blog-hidden'); });
+    var btn = document.getElementById('blogShowMore');
+    if (btn) btn.style.display = 'none';
+  }
   function filterBlog(category, btn) {
     document.querySelectorAll('.blog-filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
@@ -13074,6 +13096,7 @@
         card.setAttribute('data-hidden', 'true');
       }
     });
+    applyBlogLimit();
   }
   // ── END BLOG ACCESS CONTROL ──
 
