@@ -762,6 +762,10 @@ input[type="range"]::-moz-range-thumb {
       <input type="text" id="lastName" placeholder="Last name" autocomplete="family-name">
     </div>
     <div class="field-group">
+      <div class="field-label">Phone number</div>
+      <input type="tel" id="phoneNumber" placeholder="(555) 555-5555" autocomplete="tel" inputmode="tel">
+    </div>
+    <div class="field-group">
       <div class="field-label">What surgery did you have?</div>
       <select id="surgeryType">
         <option value="">Select your surgery type</option>
@@ -1241,7 +1245,7 @@ document.addEventListener('keydown', function(e) {
 const TOTAL_STEPS = 7; // 0-6 are input steps, 7 is thank-you
 
 const state = {
-  firstName: '', lastName: '', surgeryType: '', surgeryDate: '',
+  firstName: '', lastName: '', phone: '', surgeryType: '', surgeryDate: '',
   painRest: null, painActivity: null, painRestTouched: false, painActivityTouched: false,
   painManaged: null,
   drainage: null, opening: null, redness: null,
@@ -1271,6 +1275,7 @@ function loadProgress() {
 function restoreUI() {
   document.getElementById('firstName').value = state.firstName;
   document.getElementById('lastName').value = state.lastName;
+  document.getElementById('phoneNumber').value = state.phone;
   document.getElementById('surgeryType').value = state.surgeryType;
   document.getElementById('surgeryDate').value = state.surgeryDate;
   if (state.surgeryDate) updatePOD();
@@ -1410,6 +1415,7 @@ function validateStep(step) {
   switch(step) {
     case 0:
       if (!state.firstName.trim() || !state.lastName.trim()) { showError('Please enter your first and last name.'); return false; }
+      if (!state.phone.trim() || state.phone.replace(/\D/g,'').length < 10) { showError('Please enter a valid phone number.'); return false; }
       if (!state.surgeryType) { showError('Please select your surgery type.'); return false; }
       if (!state.surgeryDate) { showError('Please enter your surgery date.'); return false; }
       return true;
@@ -1446,6 +1452,7 @@ function hideError() {
 // Text inputs
 document.getElementById('firstName').addEventListener('input', function() { state.firstName = this.value; saveProgress(); });
 document.getElementById('lastName').addEventListener('input', function() { state.lastName = this.value; saveProgress(); });
+document.getElementById('phoneNumber').addEventListener('input', function() { state.phone = this.value; saveProgress(); });
 document.getElementById('surgeryType').addEventListener('change', function() {
   state.surgeryType = this.value;
   updateSurgeryFlags();
@@ -1759,6 +1766,7 @@ async function submitCheckin() {
   const payload = {
     firstName: state.firstName,
     lastName: state.lastName,
+    phone: state.phone,
     surgeryType: state.surgeryType,
     surgeryDate: state.surgeryDate,
     pod: pod,

@@ -205,6 +205,7 @@ function buildDoctorEmail(d) {
   <div style="padding:32px; background:#fdf8f4;">
     <table style="width:100%; border-collapse:collapse; font-size:0.95rem; margin-bottom:20px;">
       <tr><td style="padding:6px 0; color:#888; width:120px;">Patient</td><td style="padding:6px 0; font-weight:600;">${esc(d.patientName)}</td></tr>
+      <tr><td style="padding:6px 0; color:#888;">Phone</td><td style="padding:6px 0; font-weight:600;"><a href="tel:${esc(d.phone || '')}" style="color:#2d5a3d; text-decoration:none;">${esc(d.phone || '—')}</a></td></tr>
       <tr><td style="padding:6px 0; color:#888;">Surgery</td><td style="padding:6px 0;">${esc(surgLabel)}</td></tr>
       <tr><td style="padding:6px 0; color:#888;">POD</td><td style="padding:6px 0; font-weight:600;">Day ${d.pod}</td></tr>
       <tr><td style="padding:6px 0; color:#888;">Submitted</td><td style="padding:6px 0;">${ts}</td></tr>
@@ -331,7 +332,7 @@ module.exports = async function handler(req, res) {
 
   try {
     const resend = new Resend(process.env.RESEND_API_KEY);
-    const { firstName, lastName, surgeryType, surgeryDate, pod, responses, flags, surgeryFlags, patientEmail, notes, timestamp } = req.body;
+    const { firstName, lastName, phone, surgeryType, surgeryDate, pod, responses, flags, surgeryFlags, patientEmail, notes, timestamp } = req.body;
 
     if (!firstName || !lastName) {
       return res.status(400).json({ error: 'Patient name is required' });
@@ -361,7 +362,7 @@ module.exports = async function handler(req, res) {
       from: 'OpWell Recovery <info@opwellconcierge.com>',
       to: 'dr.oluwole@opwellconcierge.com',
       subject,
-      html: buildDoctorEmail({ patientName, surgeryType, pod, responses: responses || {}, flags: flags || [], surgeryFlags: surgeryFlags || {}, scores, composite, risk, notes, timestamp, patientEmail, hasRedFlags, hasEmergencyFlags })
+      html: buildDoctorEmail({ patientName, phone, surgeryType, pod, responses: responses || {}, flags: flags || [], surgeryFlags: surgeryFlags || {}, scores, composite, risk, notes, timestamp, patientEmail, hasRedFlags, hasEmergencyFlags })
     });
 
     // Patient copy (OPTIONAL)
