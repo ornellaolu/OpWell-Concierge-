@@ -2286,6 +2286,22 @@
     .blog-timeline-phase-label { flex:1; }
     .blog-timeline-phase-label strong { display:block; font-family:'Playfair Display',serif; font-size:1.08rem; color:#1a3a25; font-weight:700; line-height:1.2; }
     .blog-timeline-phase-label span { font-size:0.7rem; color:#6b7280; font-weight:600; text-transform:uppercase; letter-spacing:0.07em; }
+    /* Blog accordion sections */
+    .blog-accordion { margin:1.5rem 0 0; }
+    .blog-accordion-header { display:flex; align-items:center; gap:0.85rem; padding:0.7rem 1rem; background:rgba(45,90,61,0.05); border-radius:12px; border-left:4px solid var(--sage); cursor:pointer; transition:background 0.2s; }
+    .blog-accordion-header:hover { background:rgba(45,90,61,0.09); }
+    .blog-accordion-header .blog-timeline-phase-dot { flex-shrink:0; width:38px; height:38px; border-radius:50%; background:linear-gradient(135deg,#2d5a3d,#4a8c61); color:#fff; display:flex; align-items:center; justify-content:center; font-size:1.05rem; }
+    .blog-accordion-header .blog-accordion-label { flex:1; }
+    .blog-accordion-header .blog-accordion-label strong { display:block; font-family:'Playfair Display',serif; font-size:1.08rem; color:#1a3a25; font-weight:700; line-height:1.2; }
+    .blog-accordion-header .blog-accordion-label span { font-size:0.7rem; color:#6b7280; font-weight:600; text-transform:uppercase; letter-spacing:0.07em; }
+    .blog-accordion-icon { font-size:1.2rem; color:var(--sage); font-weight:700; transition:transform 0.3s; flex-shrink:0; margin-left:auto; }
+    .blog-accordion.open .blog-accordion-icon { transform:rotate(45deg); }
+    .blog-accordion-body { max-height:0; overflow:hidden; transition:max-height 0.4s ease; }
+    .blog-accordion.open .blog-accordion-body { max-height:3000px; }
+    .blog-accordion-body-inner { padding:0.5rem 0 1.5rem; }
+    /* H2-based accordion (for non-timeline posts) */
+    .blog-accordion-header.h2-style { border-left-color:var(--sage); padding:0.85rem 1rem; }
+    .blog-accordion-header.h2-style .blog-accordion-title { font-family:'Playfair Display',serif; font-size:1.25rem; color:var(--sage); font-weight:700; flex:1; }
     /* ERAS big stat (blog-9) */
     .blog-eras-stat { background:linear-gradient(135deg,#1a3a25 0%,#2d5a3d 100%); border-radius:16px; padding:1.75rem 1.5rem; text-align:center; margin:1.5rem 0; color:#fff; display:flex; align-items:center; justify-content:center; gap:1.5rem; flex-wrap:wrap; }
     .blog-eras-stat .eras-num { font-family:'Playfair Display',serif; font-size:2.8rem; font-weight:700; color:#e8c97a; line-height:1; display:block; }
@@ -5370,13 +5386,13 @@
         </div>
       </div>
 
-      <div class="blog-timeline-phase">
-        <div class="blog-timeline-phase-dot">📅</div>
-        <div class="blog-timeline-phase-label">
-          <span>Phase 1</span>
-          <strong>4–6 Weeks Before Surgery</strong>
+      <div class="blog-accordion open">
+        <div class="blog-accordion-header" onclick="toggleBlogAccordion(this)">
+          <div class="blog-timeline-phase-dot">📅</div>
+          <div class="blog-accordion-label"><span>Phase 1</span><strong>4–6 Weeks Before Surgery</strong></div>
+          <div class="blog-accordion-icon">+</div>
         </div>
-      </div>
+        <div class="blog-accordion-body"><div class="blog-accordion-body-inner">
       <h3>Get your medical clearances done early</h3>
       <p>If you have a heart condition, diabetes, sleep apnea, or other chronic illness, your surgeon may require clearance from a specialist before operating. <strong>Don't wait until the week before.</strong> Delays with cardiologists or pulmonologists can push your surgery date back by months.</p>
       <h3>Stop smoking</h3>
@@ -5390,14 +5406,16 @@
         <li>Iron — if you have anemia, address it before surgery-related blood loss compounds it</li>
       </ul>
       <div class="highlight-box"><strong>Clinical Note:</strong> Malnutrition is one of the strongest predictors of surgical complications. Patients with low albumin levels (a marker of protein stores) have significantly higher rates of infection, poor wound healing, and prolonged hospital stays.</div>
-
-      <div class="blog-timeline-phase">
-        <div class="blog-timeline-phase-dot">💊</div>
-        <div class="blog-timeline-phase-label">
-          <span>Phase 2</span>
-          <strong>1–2 Weeks Before Surgery</strong>
-        </div>
+        </div></div>
       </div>
+
+      <div class="blog-accordion">
+        <div class="blog-accordion-header" onclick="toggleBlogAccordion(this)">
+          <div class="blog-timeline-phase-dot">💊</div>
+          <div class="blog-accordion-label"><span>Phase 2</span><strong>1–2 Weeks Before Surgery</strong></div>
+          <div class="blog-accordion-icon">+</div>
+        </div>
+        <div class="blog-accordion-body"><div class="blog-accordion-body-inner">
       <h3>Stop blood thinners and NSAIDs (as directed)</h3>
       <p>Aspirin, ibuprofen (Advil/Motrin), naproxen (Aleve), and prescription blood thinners like warfarin or apixaban (Eliquis) all increase bleeding risk during surgery. Your care team will give specific guidance, but generally:</p>
       <ul>
@@ -5423,14 +5441,16 @@
         <li>Easy-to-digest foods: broth, crackers, applesauce, yogurt</li>
         <li>Phone charger and medications within arm's reach of your resting spot</li>
       </ul>
-
-      <div class="blog-timeline-phase">
-        <div class="blog-timeline-phase-dot">🌙</div>
-        <div class="blog-timeline-phase-label">
-          <span>Phase 3</span>
-          <strong>The Night Before Surgery</strong>
-        </div>
+        </div></div>
       </div>
+
+      <div class="blog-accordion">
+        <div class="blog-accordion-header" onclick="toggleBlogAccordion(this)">
+          <div class="blog-timeline-phase-dot">🌙</div>
+          <div class="blog-accordion-label"><span>Phase 3</span><strong>The Night Before Surgery</strong></div>
+          <div class="blog-accordion-icon">+</div>
+        </div>
+        <div class="blog-accordion-body"><div class="blog-accordion-body-inner">
       <h3>Follow fasting instructions exactly</h3>
       <p>Anesthesia combined with a full stomach is a dangerous situation. If you vomit while unconscious and aspirate stomach contents into your lungs, you can develop aspiration pneumonia — a potentially life-threatening complication. The standard fasting guidelines:</p>
       <ul>
@@ -5441,14 +5461,16 @@
       <div class="risk-callout"><strong>⚠ Important:</strong> If you forget to fast and your surgery is already scheduled, tell your care team. Operations are cancelled for this reason — it is far safer to reschedule than to risk aspiration under anesthesia.</div>
       <h3>Shower with a chlorhexidine antiseptic scrub</h3>
       <p>Your skin carries bacteria. A pre-surgical antiseptic shower the night before — and morning of — surgery significantly reduces surgical site infection risk. Use Hibiclens (chlorhexidine gluconate) wash from neck to toes. Let it air dry; do not rinse off with plain water after application.</p>
-
-      <div class="blog-timeline-phase">
-        <div class="blog-timeline-phase-dot">☀️</div>
-        <div class="blog-timeline-phase-label">
-          <span>Phase 4</span>
-          <strong>Morning of Surgery</strong>
-        </div>
+        </div></div>
       </div>
+
+      <div class="blog-accordion">
+        <div class="blog-accordion-header" onclick="toggleBlogAccordion(this)">
+          <div class="blog-timeline-phase-dot">☀️</div>
+          <div class="blog-accordion-label"><span>Phase 4</span><strong>Morning of Surgery</strong></div>
+          <div class="blog-accordion-icon">+</div>
+        </div>
+        <div class="blog-accordion-body"><div class="blog-accordion-body-inner">
       <ul>
         <li>Take only the medications your anesthesiologist specifically told you to take, with a small sip of water. Typically: blood pressure, seizure, and thyroid medications</li>
         <li><strong>Do not take diabetes medications the morning of surgery</strong> without explicit clearance — hypoglycemia under anesthesia is dangerous</li>
@@ -5458,16 +5480,20 @@
         <li>Arrange a responsible adult to drive you home — you will not be cleared to drive yourself</li>
       </ul>
       <blockquote>"Surgery is a team sport. The more prepared you are when you arrive, the more we can focus our energy on giving you the safest possible experience."</blockquote>
-
-      <div class="blog-timeline-phase">
-        <div class="blog-timeline-phase-dot">🩺</div>
-        <div class="blog-timeline-phase-label">
-          <span>OpWell</span>
-          <strong>How OpWell Helps You Prepare</strong>
-        </div>
+        </div></div>
       </div>
+
+      <div class="blog-accordion">
+        <div class="blog-accordion-header" onclick="toggleBlogAccordion(this)">
+          <div class="blog-timeline-phase-dot">🩺</div>
+          <div class="blog-accordion-label"><span>OpWell</span><strong>How OpWell Helps You Prepare</strong></div>
+          <div class="blog-accordion-icon">+</div>
+        </div>
+        <div class="blog-accordion-body"><div class="blog-accordion-body-inner">
       <p>OpWell's Surgery Preparation service is a personalized pre-surgical consultation with a board-certified anesthesiologist. We review your full medical history, optimize your medications, walk you through exactly what will happen on your surgical day, and create a customized preparation protocol — including a post-op recovery plan — before you ever go under.</p>
       <p>Most patients have never had this conversation with an anesthesiologist before surgery. We believe every patient deserves it.</p>
+        </div></div>
+      </div>
 
       <div class="blog-author-box">
         <div class="blog-author-icon">🩺</div>
@@ -5579,15 +5605,34 @@
         </div>
       </div>
 
-      <h2>First: Who Is Your Anesthesiologist?</h2>
+      <div class="blog-accordion open">
+        <div class="blog-accordion-header h2-style" onclick="toggleBlogAccordion(this)">
+          <div class="blog-accordion-title">Who Is Your Anesthesiologist?</div>
+          <div class="blog-accordion-icon">+</div>
+        </div>
+        <div class="blog-accordion-body"><div class="blog-accordion-body-inner">
       <p>Your anesthesiologist is not just "the person who puts you to sleep." We're physicians who train for 12+ years specifically in the science of anesthetic drugs, human physiology, and critical care. During your surgery, we are monitoring every vital parameter of your physiology in real time — from the moment you close your eyes to the moment you open them again.</p>
+        </div></div>
+      </div>
 
-      <h2>Stage 1: Induction — The First 30 Seconds</h2>
+      <div class="blog-accordion">
+        <div class="blog-accordion-header h2-style" onclick="toggleBlogAccordion(this)">
+          <div class="blog-accordion-title">Stage 1: Induction — The First 30 Seconds</div>
+          <div class="blog-accordion-icon">+</div>
+        </div>
+        <div class="blog-accordion-body"><div class="blog-accordion-body-inner">
       <p>Induction is the transition from awake to unconscious. In most cases, it's done with an intravenous medication called propofol. Within seconds of the drug entering your IV, you'll feel a brief warmth or mild burning sensation in your arm. The ceiling will seem to shift. Your eyes will feel heavy. Within 10–30 seconds, you'll be unconscious.</p>
       <p>What you won't notice: your anesthesiologist placing a breathing tube or mask to protect your airway and deliver oxygen and anesthetic gas throughout the case. You won't feel any of it.</p>
       <div class="highlight-box"><strong>Note on Propofol:</strong> Propofol works fast and wears off fast. Its precision is one of the reasons it's the most widely used induction agent in modern anesthesia. It's not the same as a sedative you might take at home — it produces a reliable, controllable, medically managed state of unconsciousness.</div>
+        </div></div>
+      </div>
 
-      <h2>Stage 2: Maintenance — Staying Under</h2>
+      <div class="blog-accordion">
+        <div class="blog-accordion-header h2-style" onclick="toggleBlogAccordion(this)">
+          <div class="blog-accordion-title">Stage 2: Maintenance — Staying Under</div>
+          <div class="blog-accordion-icon">+</div>
+        </div>
+        <div class="blog-accordion-body"><div class="blog-accordion-body-inner">
       <p>Once you're unconscious, your anesthesiologist switches from IV induction agents to inhaled anesthetic gases — typically sevoflurane or desflurane. These are delivered continuously through a breathing circuit, keeping you in a precise state of unconsciousness for the duration of your procedure.</p>
       <p><strong>What we monitor while you're under:</strong></p>
       <ul>
@@ -5600,12 +5645,26 @@
         <li>Fluid balance and estimated blood loss</li>
       </ul>
       <p>Every number on our screen tells us something about your physiology — and we respond to changes in real time, adjusting your anesthetic depth, giving medications, and managing your cardiovascular function as needed throughout the case.</p>
+        </div></div>
+      </div>
 
-      <h2>Stage 3: Emergence — Waking Up</h2>
+      <div class="blog-accordion">
+        <div class="blog-accordion-header h2-style" onclick="toggleBlogAccordion(this)">
+          <div class="blog-accordion-title">Stage 3: Emergence — Waking Up</div>
+          <div class="blog-accordion-icon">+</div>
+        </div>
+        <div class="blog-accordion-body"><div class="blog-accordion-body-inner">
       <p>As surgery wraps up, we begin reducing the anesthetic gases. We may give medications to reverse any muscle relaxants used during the procedure. As the anesthetic leaves your system, you'll begin breathing spontaneously — which signals that we can safely remove your breathing tube or mask.</p>
       <p>Some patients wake up quickly, feeling alert within minutes. Others take longer, particularly after lengthy procedures or if they are older or have certain medical conditions. You won't remember anything. The combination of anesthetic and amnestic agents ensures a complete memory blackout from induction through emergence.</p>
+        </div></div>
+      </div>
 
-      <h2>Common Side Effects After General Anesthesia</h2>
+      <div class="blog-accordion">
+        <div class="blog-accordion-header h2-style" onclick="toggleBlogAccordion(this)">
+          <div class="blog-accordion-title">Common Side Effects After General Anesthesia</div>
+          <div class="blog-accordion-icon">+</div>
+        </div>
+        <div class="blog-accordion-body"><div class="blog-accordion-body-inner">
       <ul>
         <li><strong>Post-operative nausea and vomiting (PONV):</strong> Affects roughly 20–30% of patients. Risk is higher in women, non-smokers, those with a history of motion sickness, and longer surgeries. We prophylactically treat high-risk patients with anti-nausea medications before you even wake up.</li>
         <li><strong>Sore throat:</strong> From the breathing tube or airway device. Usually resolves within 1–2 days. Ice chips and throat lozenges help.</li>
@@ -5613,12 +5672,17 @@
         <li><strong>Shivering:</strong> Your body temperature drops during surgery. A warming blanket in the recovery room helps bring it back up quickly.</li>
         <li><strong>Muscle aches:</strong> Can occur from certain muscle relaxants. Usually brief and resolves within 24–48 hours.</li>
       </ul>
+        </div></div>
+      </div>
 
-      <h2>The Questions No One Wants to Ask</h2>
+      <div class="blog-accordion">
+        <div class="blog-accordion-header h2-style" onclick="toggleBlogAccordion(this)">
+          <div class="blog-accordion-title">The Questions No One Wants to Ask</div>
+          <div class="blog-accordion-icon">+</div>
+        </div>
+        <div class="blog-accordion-body"><div class="blog-accordion-body-inner">
       <h3>"What if I wake up during surgery?"</h3>
       <p>Anesthesia awareness — being conscious but unable to move during surgery — occurs in approximately 1–2 per 1,000 general anesthetics. Your anesthesiologist monitors the depth of anesthesia throughout the case to prevent this. If you have concerns or a history of awareness, discuss it with your anesthesiologist during your pre-op visit so they can take additional precautions.</p>
-
-      <!-- Stat callouts: reassuring numbers -->
       <div class="blog-stat-strip" style="margin:1rem 0 1.5rem;">
         <div class="blog-stat-strip-item">
           <span class="bss-num">1–2</span>
@@ -5633,15 +5697,23 @@
           <div class="bss-label">vital parameters monitored continuously throughout your surgery</div>
         </div>
       </div>
-
       <h3>"What are the chances I won't wake up?"</h3>
       <p>For a healthy adult undergoing elective surgery, anesthesia-related mortality is extremely rare — estimated at approximately 1 in 200,000. The vast majority of surgical deaths are related to the underlying procedure or patient's health condition, not the anesthesia itself.</p>
       <h3>"Will I say embarrassing things?"</h3>
       <p>Propofol is not a truth serum. It does cause brief disinhibition in some patients during emergence, but the dramatic stories about patients confessing secrets or behaving wildly are largely exaggerated. What is true: you may say something silly as you come out of anesthesia. You won't remember it.</p>
+        </div></div>
+      </div>
 
-      <h2>Talk to Your Anesthesiologist Before Surgery</h2>
+      <div class="blog-accordion">
+        <div class="blog-accordion-header h2-style" onclick="toggleBlogAccordion(this)">
+          <div class="blog-accordion-title">Talk to Your Anesthesiologist Before Surgery</div>
+          <div class="blog-accordion-icon">+</div>
+        </div>
+        <div class="blog-accordion-body"><div class="blog-accordion-body-inner">
       <p>Most patients never speak to their anesthesiologist until the morning of surgery — often minutes before going into the OR. This is a significant gap. A pre-operative consultation with your anesthesiologist, well before your surgery date, allows you to ask every question, understand every step, and walk into the OR informed and calm instead of anxious and uncertain.</p>
       <p>That's exactly what OpWell's Surgery Preparation service provides.</p>
+        </div></div>
+      </div>
 
       <div class="blog-author-box">
         <div class="blog-author-icon">🩺</div>
@@ -5745,13 +5817,13 @@
         </div>
       </div>
 
-      <div class="blog-timeline-phase">
-        <div class="blog-timeline-phase-dot">🏥</div>
-        <div class="blog-timeline-phase-label">
-          <span>Hours 0–2</span>
-          <strong>The Post-Anesthesia Care Unit (PACU)</strong>
+      <div class="blog-accordion open">
+        <div class="blog-accordion-header" onclick="toggleBlogAccordion(this)">
+          <div class="blog-timeline-phase-dot">🏥</div>
+          <div class="blog-accordion-label"><span>Hours 0–2</span><strong>The Post-Anesthesia Care Unit (PACU)</strong></div>
+          <div class="blog-accordion-icon">+</div>
         </div>
-      </div>
+        <div class="blog-accordion-body"><div class="blog-accordion-body-inner">
       <p>The moment your surgery is complete, you'll be transferred to the PACU — also called the recovery room. This is a specialized unit where nurses monitor you continuously as the anesthesia wears off.</p>
       <p>When you first wake up, you may feel:</p>
       <ul>
@@ -5763,38 +5835,44 @@
       </ul>
       <p>Your PACU nurse will check your pain level frequently and administer medications to keep you comfortable. You won't leave the PACU until you meet specific criteria: stable vitals, controlled pain, adequate oxygen saturation, and the ability to swallow safely.</p>
       <p>Most patients spend 1–3 hours in the PACU before going to a hospital room (inpatient procedures) or being cleared to go home (outpatient procedures).</p>
-
-      <div class="blog-timeline-phase">
-        <div class="blog-timeline-phase-dot">🌙</div>
-        <div class="blog-timeline-phase-label">
-          <span>Night 1</span>
-          <strong>The First Night at Home</strong>
-        </div>
+        </div></div>
       </div>
+
+      <div class="blog-accordion">
+        <div class="blog-accordion-header" onclick="toggleBlogAccordion(this)">
+          <div class="blog-timeline-phase-dot">🌙</div>
+          <div class="blog-accordion-label"><span>Night 1</span><strong>The First Night at Home</strong></div>
+          <div class="blog-accordion-icon">+</div>
+        </div>
+        <div class="blog-accordion-body"><div class="blog-accordion-body-inner">
       <p>Once you're home, your only job is to rest. Ideally, you set up your recovery space before surgery so you don't need to make decisions tonight. Sleep in an accessible location, have someone stay with you — this is non-negotiable the first night after general anesthesia — and keep phone, medications, and water within reach.</p>
       <p><strong>Pain management:</strong> Take your prescribed pain medications on schedule, not just when pain becomes severe. Pain is much easier to control when you stay ahead of it. Set an alarm if needed.</p>
       <p><strong>Constipation prevention — start tonight:</strong> Opioid pain medications slow your gut significantly, and post-operative constipation is one of the most common patient complaints — and one of the most preventable. Start stool softeners (MiraLax or Colace) from day one. Don't wait until you're uncomfortable.</p>
       <div class="highlight-box"><strong>Tip:</strong> Set up your bed or recliner before surgery day. Have ice packs, stool softeners, easy foods, and a water bottle ready so you (or your caregiver) doesn't have to problem-solve while you're groggy and in pain.</div>
-
-      <div class="blog-timeline-phase" style="border-left-color:#dc2626;">
-        <div class="blog-timeline-phase-dot" style="background:linear-gradient(135deg,#b91c1c,#dc2626);">😔</div>
-        <div class="blog-timeline-phase-label">
-          <span>Day 2 (Hours 24–48)</span>
-          <strong>Often the Hardest Day</strong>
-        </div>
+        </div></div>
       </div>
+
+      <div class="blog-accordion">
+        <div class="blog-accordion-header" style="border-left-color:#dc2626;" onclick="toggleBlogAccordion(this)">
+          <div class="blog-timeline-phase-dot" style="background:linear-gradient(135deg,#b91c1c,#dc2626);">😔</div>
+          <div class="blog-accordion-label"><span>Day 2 (Hours 24–48)</span><strong>Often the Hardest Day</strong></div>
+          <div class="blog-accordion-icon">+</div>
+        </div>
+        <div class="blog-accordion-body"><div class="blog-accordion-body-inner">
       <p>Many patients feel worse on post-op day 2 than day 1. This is normal and expected. The local anesthetic injected at your surgical site during the procedure starts wearing off around 12–24 hours post-op, and surgical inflammation peaks around 36–48 hours.</p>
       <p><strong>Wound care:</strong> Unless your surgeon gave specific instructions, leave your original dressing alone on day 1. On day 2, if cleared to shower, you may gently clean the incision as directed. Do not soak the wound in a bath, pool, or hot tub.</p>
       <p><strong>Swelling and bruising:</strong> Elevation and ice (20 minutes on, 20 off) are your best tools for extremity swelling. Never apply ice directly to bare skin.</p>
       <p><strong>Hydration:</strong> Dehydration is common after fasting and surgery. Aim for 6–8 glasses of clear fluids. If nausea makes water difficult, try small sips of ginger tea, broth, or electrolyte drinks.</p>
-
-      <div class="blog-timeline-phase">
-        <div class="blog-timeline-phase-dot">🌱</div>
-        <div class="blog-timeline-phase-label">
-          <span>Day 3 (Hours 48–72)</span>
-          <strong>Turning the Corner</strong>
-        </div>
+        </div></div>
       </div>
+
+      <div class="blog-accordion">
+        <div class="blog-accordion-header" onclick="toggleBlogAccordion(this)">
+          <div class="blog-timeline-phase-dot">🌱</div>
+          <div class="blog-accordion-label"><span>Day 3 (Hours 48–72)</span><strong>Turning the Corner</strong></div>
+          <div class="blog-accordion-icon">+</div>
+        </div>
+        <div class="blog-accordion-body"><div class="blog-accordion-body-inner">
       <p>By day 3, most patients begin to feel incrementally better. Your goal today is gentle, deliberate movement.</p>
       <p>Short walks — 5–10 minutes around your home, every 2–3 hours — are critically important for:</p>
       <ul>
@@ -5803,14 +5881,16 @@
         <li>Improving circulation, mood, and oxygen delivery to healing tissues</li>
       </ul>
       <p>You should <em>not</em> drive, lift more than 10 lbs, or make important decisions while taking opioid pain medications.</p>
-
-      <div class="blog-timeline-phase" style="border-left-color:#C8845A;">
-        <div class="blog-timeline-phase-dot" style="background:linear-gradient(135deg,#C8845A,#b5703c);">⚠️</div>
-        <div class="blog-timeline-phase-label">
-          <span>Know Before You Need It</span>
-          <strong>Red Flags: When to Call Your Surgeon or Go to the ER</strong>
-        </div>
+        </div></div>
       </div>
+
+      <div class="blog-accordion">
+        <div class="blog-accordion-header" style="border-left-color:#C8845A;" onclick="toggleBlogAccordion(this)">
+          <div class="blog-timeline-phase-dot" style="background:linear-gradient(135deg,#C8845A,#b5703c);">⚠️</div>
+          <div class="blog-accordion-label"><span>Know Before You Need It</span><strong>Red Flags: When to Call Your Surgeon or Go to the ER</strong></div>
+          <div class="blog-accordion-icon">+</div>
+        </div>
+        <div class="blog-accordion-body"><div class="blog-accordion-body-inner">
       <p>Do not wait to seek care if you experience any of the following:</p>
       <ul>
         <li>Fever above 101.5°F (38.6°C)</li>
@@ -5823,6 +5903,8 @@
         <li>Any symptom that feels wrong and is getting worse — trust your instincts</li>
       </ul>
       <div class="risk-callout"><strong>⚠ When in doubt, call.</strong> Your surgeon's office would rather get a call about something that turns out to be nothing than have you wait too long on a complication that needed earlier intervention.</div>
+        </div></div>
+      </div>
 
       <h2>Getting the Support You Need</h2>
       <p>OpWell's Post-Op Recovery service provides structured, physician-led support during this critical window — including a personalized recovery protocol before your procedure and a post-op check-in to monitor your progress and address questions as they come up.</p>
@@ -13302,6 +13384,15 @@
     const isOpen = item.classList.contains('open');
     document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
     if (!isOpen) item.classList.add('open');
+  }
+
+  function toggleBlogAccordion(el) {
+    var acc = el.closest('.blog-accordion');
+    var isOpen = acc.classList.contains('open');
+    acc.classList.toggle('open');
+    if (!isOpen) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
 
   /* ── SCROLL FADE-IN OBSERVER ── */
