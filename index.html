@@ -12201,6 +12201,15 @@
     <p class="lp-sub" style="color:rgba(250,240,232,0.85);">Transparent pricing. No hidden fees. HSA & FSA accepted. No referral required.</p>
   </div>
 
+  <div class="tabs-nav" id="pricing-tabs">
+    <button class="tab-btn active" onclick="showPricingTab('medical')">Medical</button>
+    <button class="tab-btn" onclick="showPricingTab('ld')">Labor & Delivery</button>
+    <button class="tab-btn" onclick="showPricingTab('mental')">Mental Wellness</button>
+    <button class="tab-btn" onclick="showPricingTab('bariatric')">Bariatric Vitamins</button>
+    <button class="tab-btn" onclick="showPricingTab('gifts')">Gifts</button>
+  </div>
+
+  <div class="tab-panel active" id="prtab-medical">
   <div class="package-section" style="padding-top:4rem;">
     <div class="section-tag">Medical Consultations</div>
     <h2 class="section-title">Choose the level of support<br>that fits your journey.</h2>
@@ -12270,7 +12279,9 @@
 
     </div>
   </div>
+  </div><!-- /prtab-medical -->
 
+  <div class="tab-panel" id="prtab-ld">
   <div class="package-section" style="padding-top:2rem;">
     <div class="section-tag">Labor & Delivery</div>
     <div class="packages-grid" style="max-width:700px; margin:1.5rem auto 0;">
@@ -12314,7 +12325,9 @@
       </div>
     </div>
   </div>
+  </div><!-- /prtab-ld -->
 
+  <div class="tab-panel" id="prtab-mental">
   <div class="package-section" style="padding-top:2rem;">
     <div class="section-tag">Mental Wellness</div>
     <div class="packages-grid" style="max-width:1000px; margin:1.5rem auto 0;">
@@ -12373,7 +12386,9 @@
       </div>
     </div>
   </div>
+  </div><!-- /prtab-mental -->
 
+  <div class="tab-panel" id="prtab-bariatric">
   <div class="package-section" style="padding-top:2rem;">
     <div class="section-tag">Personalized Bariatric Vitamin Supplementation Plan</div>
     <div class="packages-grid" style="max-width:700px; margin:1.5rem auto 0;">
@@ -12410,8 +12425,10 @@
     </div>
     <p style="text-align:center; font-family:'DM Sans',sans-serif; font-size:0.78rem; color:var(--slate); margin-top:1rem; max-width:600px; margin-left:auto; margin-right:auto;">Initial vitamin consultation is included at no additional cost when booked with any Pre-Surgical or Post-Operative bariatric service. Supplement costs vary based on formulation — shipped directly to your door.</p>
   </div>
+  </div><!-- /prtab-bariatric -->
 
   <!-- GIFT SECTION -->
+  <div class="tab-panel" id="prtab-gifts">
   <div class="package-section" style="padding-top:2rem;">
     <div class="section-tag" style="color:var(--terracotta);">Give the Gift of Care</div>
     <h2 class="section-title">Purchase an OpWell consultation<br>as a gift.</h2>
@@ -12451,6 +12468,7 @@
       </div>
     </div>
   </div>
+  </div><!-- /prtab-gifts -->
 
   <section class="final-cta">
     <h2 class="section-title">Not sure which plan is right for you?</h2>
@@ -12724,6 +12742,15 @@
     nav.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
     document.querySelectorAll('[id^="ptab-"]').forEach(function(p) { p.classList.remove('active'); });
     document.getElementById('ptab-' + tabId).classList.add('active');
+    event.target.classList.add('active');
+    nav.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function showPricingTab(tabId) {
+    var nav = document.getElementById('pricing-tabs');
+    nav.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+    document.querySelectorAll('[id^="prtab-"]').forEach(function(p) { p.classList.remove('active'); });
+    document.getElementById('prtab-' + tabId).classList.add('active');
     event.target.classList.add('active');
     nav.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
