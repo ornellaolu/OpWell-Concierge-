@@ -2227,13 +2227,19 @@
 
     /* Blog styles */
     .blog-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1.5rem; margin-top:2rem; }
-    .blog-card { background:#fff; border:1px solid rgba(45,90,61,0.12); border-radius:12px; padding:1.75rem; display:flex; flex-direction:column; gap:0.6rem; transition:transform 0.25s ease,box-shadow 0.25s ease; cursor:pointer; }
-    .blog-card:hover { transform:translateY(-5px); box-shadow:0 14px 40px rgba(45,90,61,0.13); }
-    .blog-card-category { font-family:'DM Sans',sans-serif; font-size:0.65rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold); }
-    .blog-card-title { font-family:'Playfair Display',serif; font-size:1.12rem; color:var(--sage); line-height:1.4; }
-    .blog-card-meta { font-family:'DM Sans',sans-serif; font-size:0.75rem; color:var(--slate); }
-    .blog-card-excerpt { font-family:'DM Sans',sans-serif; font-size:0.84rem; color:var(--slate); line-height:1.6; flex:1; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
-    .blog-card-link { font-family:'DM Sans',sans-serif; font-size:0.82rem; font-weight:700; color:var(--sage); margin-top:0.4rem; }
+    .blog-card { background:#fff; border:1px solid rgba(45,90,61,0.08); border-left:3px solid var(--sage); border-radius:0 12px 12px 0; padding:1.5rem 1.75rem; display:flex; flex-direction:column; gap:0.5rem; transition:transform 0.25s ease,box-shadow 0.25s ease; cursor:pointer; }
+    .blog-card:hover { transform:translateY(-4px); box-shadow:0 14px 40px rgba(45,90,61,0.10); }
+    .blog-card[data-category="post-op-recovery"] { border-left-color: var(--terracotta); }
+    .blog-card[data-category="mental-wellness"] { border-left-color: var(--sage-mid); }
+    .blog-card[data-category="medical-tourism"] { border-left-color: #6B8FAD; }
+    .blog-card[data-category="bariatric-surgery"] { border-left-color: #8B6DAF; }
+    .blog-card[data-category="cosmetic-surgery"] { border-left-color: var(--terracotta-light); }
+    .blog-card[data-category="labor-delivery"] { border-left-color: #D4849A; }
+    .blog-card-category { font-family:'DM Sans',sans-serif; font-size:0.62rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--slate); }
+    .blog-card-title { font-family:'Playfair Display',serif; font-size:1.05rem; color:var(--charcoal); line-height:1.4; }
+    .blog-card-meta { font-family:'DM Sans',sans-serif; font-size:0.72rem; color:var(--slate); }
+    .blog-card-excerpt { display:none; }
+    .blog-card-link { font-family:'DM Sans',sans-serif; font-size:0.78rem; font-weight:600; color:var(--sage); margin-top:auto; }
     .blog-card.blog-hidden { display:none; }
     .blog-show-more { display:block; margin:2.5rem auto 0; padding:0.9rem 2.5rem; font-family:'DM Sans',sans-serif; font-size:0.7rem; font-weight:500; letter-spacing:0.15em; text-transform:uppercase; color:var(--sage); background:transparent; border:1.5px solid var(--sage); border-radius:50px; cursor:pointer; transition:all 0.2s; }
     .blog-show-more:hover { background:var(--sage); color:#fff; }
