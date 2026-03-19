@@ -2898,6 +2898,8 @@
     <button class="tab-btn" onclick="showTab('bariatric')">Bariatric Surgery</button>
     <button class="tab-btn" onclick="showTab('general')">General Surgery</button>
     <button class="tab-btn" onclick="showTab('glp1')">GLP-1 Medications</button>
+    <button class="tab-btn" onclick="showTab('sp-pricing')">Pricing</button>
+    <button class="tab-btn" onclick="showTab('sp-faq')">FAQ</button>
   </div>
 
   <!-- TAB: COSMETIC -->
@@ -3118,6 +3120,7 @@
   </div>
 
   <!-- PACKAGES -->
+  <div class="tab-panel" id="tab-sp-pricing">
   <div class="package-section">
     <div class="section-tag">Investment</div>
     <h2 class="section-title">Choose your level of support.</h2>
@@ -3210,7 +3213,10 @@
     </div>
   </div>
 
+  </div><!-- /tab-sp-pricing -->
+
   <!-- FAQ -->
+  <div class="tab-panel" id="tab-sp-faq">
   <div class="faq-section">
     <div class="section-tag">Common Questions</div>
     <h2 class="section-title">What patients ask us most.</h2>
@@ -3260,6 +3266,7 @@
       <div class="faq-a">Yes — while we recommend booking 4–6 weeks before your procedure for the full benefit of prehabilitation, OpWell can still provide meaningful support even close to your surgery date. A focused consultation, medication review, and clearance letter can be completed quickly when time is limited.</div>
     </div>
   </div>
+  </div><!-- /tab-sp-faq -->
 
   <section class="final-cta">
     <h2 class="section-title">You deserve<br>a full support system.</h2>
@@ -3677,6 +3684,14 @@
     <a onclick="showPage('schedule')" class="btn-primary" style="cursor:pointer;">Book Your Consultation →</a>
   </div>
 
+  <div class="tabs-nav" id="mental-tabs">
+    <button class="tab-btn active" onclick="showMentalTab('who')">Who It's For</button>
+    <button class="tab-btn" onclick="showMentalTab('what')">What We Offer</button>
+    <button class="tab-btn" onclick="showMentalTab('pricing')">Pricing</button>
+    <button class="tab-btn" onclick="showMentalTab('faq')">FAQ</button>
+  </div>
+
+  <div class="tab-panel active" id="mtab-who">
   <div class="content-section alt">
     <div class="section-tag">Who This Is For</div>
     <h2 class="section-title">Every OpWell patient.<br>At any stage.</h2>
@@ -3708,7 +3723,9 @@
       </div>
     </div>
   </div>
+  </div><!-- /mtab-who -->
 
+  <div class="tab-panel" id="mtab-what">
   <div class="content-section">
     <div class="section-tag">What We Offer</div>
     <h2 class="section-title">Integrated. In-house.<br>No referral needed.</h2>
@@ -3741,7 +3758,9 @@
       </div>
     </div>
   </div>
+  </div><!-- /mtab-what -->
 
+  <div class="tab-panel" id="mtab-pricing">
   <div class="package-section">
     <div class="section-tag">Investment</div>
     <h2 class="section-title">Mental health support,<br>built into your care.</h2>
@@ -3805,7 +3824,9 @@
       </div>
     </div>
   </div>
+  </div><!-- /mtab-pricing -->
 
+  <div class="tab-panel" id="mtab-faq">
   <div class="faq-section">
     <div class="section-tag">Common Questions</div>
     <h2 class="section-title">What patients ask us most.</h2>
@@ -3823,6 +3844,7 @@
       <div class="faq-a">Most therapists are not familiar with the specific psychological dimensions of surgical preparation, anesthesia, perioperative anxiety, or post-operative emotional recovery. Stacey works directly within the OpWell care team and understands the medical context of what you are facing — so you never have to start from scratch or re-explain your situation. The support is clinically informed, perioperative-specific, and coordinated with your physician.</div>
     </div>
   </div>
+  </div><!-- /mtab-faq -->
 
   <section class="final-cta">
     <h2 class="section-title">Take care of your mind.<br><em>Your body will thank you.</em></h2>
@@ -3895,6 +3917,13 @@
     <a onclick="showPage('schedule')" class="btn-primary" style="cursor:pointer;">Book Your Consultation →</a>
   </div>
 
+  <div class="tabs-nav" id="ob-tabs">
+    <button class="tab-btn active" onclick="showObTab('overview')">Overview</button>
+    <button class="tab-btn" onclick="showObTab('pricing')">Pricing</button>
+    <button class="tab-btn" onclick="showObTab('faq')">FAQ</button>
+  </div>
+
+  <div class="tab-panel active" id="obtab-overview">
   <div class="content-section alt">
     <div class="content-2col">
       <div>
@@ -3956,7 +3985,9 @@
       </div>
     </div>
   </div>
+  </div><!-- /obtab-overview -->
 
+  <div class="tab-panel" id="obtab-pricing">
   <div class="package-section">
     <div class="section-tag">Investment</div>
     <h2 class="section-title">Choose your<br>preparation.</h2>
@@ -4003,7 +4034,9 @@
       </div>
     </div>
   </div>
+  </div><!-- /obtab-pricing -->
 
+  <div class="tab-panel" id="obtab-faq">
   <div class="faq-section">
     <div class="section-tag">Questions</div>
     <h2 class="section-title">What expectant mothers ask us.</h2>
@@ -4037,6 +4070,7 @@
       <div class="faq-a">Yes — with your written authorization, Dr. Oluwole can share your Birth Plan Anesthesia Summary and clinical notes directly with your OB, midwife, or MFM specialist. OpWell complements your existing obstetric care team — we do not replace them.</div>
     </div>
   </div>
+  </div><!-- /obtab-faq -->
 
   <section class="final-cta">
     <h2 class="section-title">Know your options<br>before labor begins.</h2>
@@ -12726,6 +12760,7 @@
     document.querySelectorAll('[id^="tab-"]').forEach(function(p) { if (p.classList.contains('tab-panel')) p.classList.remove('active'); });
     document.getElementById('tab-' + tabId).classList.add('active');
     event.target.classList.add('active');
+    if (nav) nav.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   function showRecoveryTab(tabId) {
@@ -12751,6 +12786,24 @@
     nav.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
     document.querySelectorAll('[id^="prtab-"]').forEach(function(p) { p.classList.remove('active'); });
     document.getElementById('prtab-' + tabId).classList.add('active');
+    event.target.classList.add('active');
+    nav.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function showMentalTab(tabId) {
+    var nav = document.getElementById('mental-tabs');
+    nav.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+    document.querySelectorAll('[id^="mtab-"]').forEach(function(p) { p.classList.remove('active'); });
+    document.getElementById('mtab-' + tabId).classList.add('active');
+    event.target.classList.add('active');
+    nav.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function showObTab(tabId) {
+    var nav = document.getElementById('ob-tabs');
+    nav.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+    document.querySelectorAll('[id^="obtab-"]').forEach(function(p) { p.classList.remove('active'); });
+    document.getElementById('obtab-' + tabId).classList.add('active');
     event.target.classList.add('active');
     nav.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
