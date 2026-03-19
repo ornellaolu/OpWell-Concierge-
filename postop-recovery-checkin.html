@@ -315,21 +315,23 @@ body { font-family:'DM Sans',sans-serif; background:var(--ivory); color:var(--ch
   </div>
 
   <div class="q-group" id="qg-pain-rest">
-    <div class="q-label">Pain at rest (0–10)</div>
+    <div class="q-label">Pain at rest (0–10) <span class="alert-tag" id="tag-pain-rest" style="display:none;"></span></div>
     <div class="slider-wrap">
-      <input type="range" min="0" max="10" value="0" id="painRest" oninput="handleSlider('painRest',this.value)">
-      <span class="slider-val green" id="painRestVal">0</span>
+      <input type="range" min="0" max="10" value="5" id="painRest" oninput="handleSlider('painRest',this.value)" style="opacity:0.4;">
+      <span class="slider-val" id="painRestVal" style="color:#999;">—</span>
     </div>
     <div class="slider-labels"><span>No pain</span><span>Worst imaginable</span></div>
+    <div style="font-size:0.75rem; color:var(--terracotta); margin-top:4px; display:block;" id="painRestHint">Slide to record pain level</div>
   </div>
 
   <div class="q-group" id="qg-pain-activity">
-    <div class="q-label">Pain with activity (0–10)</div>
+    <div class="q-label">Pain with activity (0–10) <span class="alert-tag" id="tag-pain-activity" style="display:none;"></span></div>
     <div class="slider-wrap">
-      <input type="range" min="0" max="10" value="0" id="painActivity" oninput="handleSlider('painActivity',this.value)">
-      <span class="slider-val green" id="painActivityVal">0</span>
+      <input type="range" min="0" max="10" value="5" id="painActivity" oninput="handleSlider('painActivity',this.value)" style="opacity:0.4;">
+      <span class="slider-val" id="painActivityVal" style="color:#999;">—</span>
     </div>
     <div class="slider-labels"><span>No pain</span><span>Worst imaginable</span></div>
+    <div style="font-size:0.75rem; color:var(--terracotta); margin-top:4px; display:block;" id="painActivityHint">Slide to record pain level</div>
   </div>
 
   <div class="q-group">
@@ -691,6 +693,33 @@ body { font-family:'DM Sans',sans-serif; background:var(--ivory); color:var(--ch
     <label class="flag-item emergency" id="flag-10"><input type="checkbox" onchange="handleFlag(this)"> Chest pain <span class="emergency-badge">EMERGENCY</span></label>
   </div>
 
+  <!-- Surgery-Specific Red Flags (conditional) -->
+  <div class="flag-group" id="surgerySpecificFlags" style="display:none; margin-top:18px; padding-top:14px; border-top:1px dashed var(--border);">
+    <div class="q-label" style="margin-bottom:10px; color:var(--terracotta);">Surgery-Specific Concerns</div>
+
+    <!-- BBL-specific -->
+    <label class="flag-item emergency" id="flag-bbl-1" style="display:none;"><input type="checkbox" onchange="handleFlag(this)"> Unilateral leg swelling or calf pain (DVT/PE risk) <span class="emergency-badge">BBL</span></label>
+    <label class="flag-item emergency" id="flag-bbl-2" style="display:none;"><input type="checkbox" onchange="handleFlag(this)"> Buttock pain with tachycardia — possible fat embolism <span class="emergency-badge">BBL</span></label>
+    <label class="flag-item" id="flag-bbl-3" style="display:none;"><input type="checkbox" onchange="handleFlag(this)"> Asymmetric swelling or hardening at surgical site</label>
+
+    <!-- Bariatric-specific -->
+    <label class="flag-item emergency" id="flag-bar-1" style="display:none;"><input type="checkbox" onchange="handleFlag(this)"> Left shoulder pain with tachycardia — possible anastomotic leak <span class="emergency-badge">BARIATRIC</span></label>
+    <label class="flag-item" id="flag-bar-2" style="display:none;"><input type="checkbox" onchange="handleFlag(this)"> Dumping syndrome (cramping, diarrhea, dizziness after eating)</label>
+    <label class="flag-item" id="flag-bar-3" style="display:none;"><input type="checkbox" onchange="handleFlag(this)"> Blood sugar instability (shakiness, sweating, confusion)</label>
+
+    <!-- C-section-specific -->
+    <label class="flag-item" id="flag-cs-1" style="display:none;"><input type="checkbox" onchange="handleFlag(this)"> Heavy lochia (soaking more than 1 pad per hour)</label>
+    <label class="flag-item" id="flag-cs-2" style="display:none;"><input type="checkbox" onchange="handleFlag(this)"> Feelings of disconnection from baby, intrusive thoughts, or inability to sleep even when baby sleeps (PPD screen)</label>
+    <label class="flag-item" id="flag-cs-3" style="display:none;"><input type="checkbox" onchange="handleFlag(this)"> Foul-smelling vaginal discharge</label>
+  </div>
+
+  <!-- Additional universal red flags -->
+  <div class="flag-group" style="margin-top:14px; padding-top:14px; border-top:1px dashed var(--border);">
+    <div class="q-label" style="margin-bottom:10px; color:var(--slate); font-size:0.85rem;">Additional Red Flags</div>
+    <label class="flag-item emergency" id="flag-11"><input type="checkbox" onchange="handleFlag(this)"> Unilateral leg swelling or calf pain <span class="emergency-badge">DVT RISK</span></label>
+    <label class="flag-item" id="flag-12"><input type="checkbox" onchange="handleFlag(this)"> New confusion or altered mental status</label>
+  </div>
+
   <div class="domain-score-bar">
     <span class="domain-score-label">Red Flag Score: <span class="domain-score-val" id="score-redflags">—</span>/100</span>
     <button class="next-btn" onclick="switchTab('summary')">View Summary →</button>
@@ -759,6 +788,18 @@ body { font-family:'DM Sans',sans-serif; background:var(--ivory); color:var(--ch
   </div>
 </div>
 
+<!-- ═══════════════════ DISCLAIMER FOOTER ═══════════════════ -->
+<div style="max-width:var(--max-width); margin:30px auto 100px; padding:0 24px;">
+  <div style="background:rgba(45,90,61,0.04); border:1px solid var(--border-light); border-radius:10px; padding:16px 20px;">
+    <div style="font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:var(--sage); margin-bottom:6px;">Clinical Disclaimer</div>
+    <p style="font-size:0.78rem; color:var(--slate); line-height:1.6; margin-bottom:8px;">This tool is a clinical decision <strong>support</strong> instrument designed to assist physician assessment — it does <strong>not</strong> replace clinical judgment. All scores, risk categories, and recommendations should be interpreted in the context of the patient's full clinical picture. Emergency red flags always warrant immediate evaluation regardless of composite score.</p>
+    <p style="font-size:0.78rem; color:var(--slate); line-height:1.6; margin-bottom:8px;">POD-adjusted scoring provides contextual modifiers (e.g., higher pain and reduced mobility are expected in early recovery). These modifiers do not override clinical concern — if something doesn't look right, escalate.</p>
+    <div style="font-size:0.72rem; color:var(--terracotta); line-height:1.5; padding-top:6px; border-top:1px solid var(--border-light);">
+      <strong>Data Storage Notice:</strong> Assessment history is stored in your browser's localStorage on this device only. Data is not encrypted and can be cleared if browser data is deleted. Do not rely on this as a permanent medical record. For HIPAA-compliant record-keeping, always copy the chart note into your EHR system.
+    </div>
+  </div>
+</div>
+
 <!-- ═══════════════════ TOAST ═══════════════════ -->
 <div class="toast" id="toast"></div>
 
@@ -767,13 +808,15 @@ body { font-family:'DM Sans',sans-serif; background:var(--ivory); color:var(--ch
    STATE
    ════════════════════════════════════════════════════════════ */
 const state = {
-  painRest: 0, painActivity: 0, painLocation: '', painManaged: null, painMeds: null,
+  painRest: null, painActivity: null, painLocation: '', painManaged: null, painMeds: null,
+  painRestTouched: false, painActivityTouched: false,
   hr: null, sbp: null, dbp: null, temp: null, rr: null, spo2: null,
   drainage: null, opening: null, redness: null, warmth: null, odor: null, swelling: null, woundNotes: '',
   bm: null, lastBM: '', nausea: null, vomiting: null, intake: null, flatus: null,
   ambulation: null, adl: null, actlevel: null, dvt: null,
   anxiety: null, sleep: null, mood: null, fear: null, support: null,
-  flags: [false,false,false,false,false,false,false,false,false,false]
+  flags: [false,false,false,false,false,false,false,false,false,false,false,false],
+  surgeryFlags: {bbl:[false,false,false], bariatric:[false,false,false], cesarean:[false,false,false]}
 };
 
 const FLAG_LABELS = [
@@ -786,8 +829,16 @@ const FLAG_LABELS = [
   'Fever greater than 101.5°F',
   'Unable to take anything by mouth for more than 24 hours',
   'Shortness of breath or difficulty breathing',
-  'Chest pain'
+  'Chest pain',
+  'Unilateral leg swelling or calf pain',
+  'New confusion or altered mental status'
 ];
+
+const SURGERY_FLAG_LABELS = {
+  bbl: ['Unilateral leg swelling or calf pain (DVT/PE risk)','Buttock pain with tachycardia — possible fat embolism','Asymmetric swelling or hardening at surgical site'],
+  bariatric: ['Left shoulder pain with tachycardia — possible anastomotic leak','Dumping syndrome','Blood sugar instability'],
+  cesarean: ['Heavy lochia (soaking >1 pad/hour)','PPD screen — disconnection, intrusive thoughts, inability to sleep','Foul-smelling vaginal discharge']
+};
 
 const SURGERY_INTENSITY = {
   'major-abdominal':'intensive','bariatric':'intensive','cancer':'intensive','thoracic':'intensive','vascular':'intensive',
@@ -842,6 +893,27 @@ function updateIntensity() {
   badge.style.display = 'inline-flex';
   badge.className = 'intensity-badge intensity-' + level;
   badge.textContent = level.charAt(0).toUpperCase() + level.slice(1) + ' Monitoring';
+  // Show/hide surgery-specific flags
+  updateSurgerySpecificFlags(sel);
+}
+
+function updateSurgerySpecificFlags(surgeryType) {
+  const container = document.getElementById('surgerySpecificFlags');
+  // Hide all surgery-specific flags first
+  document.querySelectorAll('[id^="flag-bbl-"],[id^="flag-bar-"],[id^="flag-cs-"]').forEach(el => el.style.display = 'none');
+  // Show relevant ones
+  const flagMap = {'cosmetic-bbl':'bbl','bariatric':'bariatric','cesarean':'cesarean'};
+  const key = flagMap[surgeryType];
+  if (key) {
+    container.style.display = 'block';
+    const prefix = {bbl:'bbl',bariatric:'bar',cesarean:'cs'}[key];
+    for (let i = 1; i <= 3; i++) {
+      const el = document.getElementById('flag-' + prefix + '-' + i);
+      if (el) el.style.display = 'flex';
+    }
+  } else {
+    container.style.display = 'none';
+  }
 }
 
 /* ════════════════════════════════════════════════════════════
@@ -850,11 +922,18 @@ function updateIntensity() {
 function handleSlider(id, val) {
   val = parseInt(val);
   state[id] = val;
+  state[id + 'Touched'] = true;
   const el = document.getElementById(id + 'Val');
   el.textContent = val;
   el.className = 'slider-val ' + (val <= 3 ? 'green' : val <= 6 ? 'yellow' : 'red');
   const qg = el.closest('.q-group');
   qg.className = 'q-group' + (val <= 3 ? ' alert-green' : val <= 6 ? ' alert-yellow' : ' alert-red');
+  // Activate slider appearance
+  const slider = document.getElementById(id);
+  slider.style.opacity = '1';
+  // Hide hint
+  const hint = document.getElementById(id + 'Hint');
+  if (hint) hint.style.display = 'none';
   updateDomainScore('pain');
 }
 
@@ -910,17 +989,32 @@ function getVitalStatus(field, val) {
     case 'dbp': return (val <= 50 || val >= 110) ? 'danger' : (val <= 60 || val >= 90) ? 'caution' : 'normal';
     case 'temp': return val > 101.5 ? 'danger' : val >= 100.5 ? 'caution' : 'normal';
     case 'rr': return (val >= 25 || val <= 8) ? 'danger' : (val >= 21 || val <= 11) ? 'caution' : 'normal';
-    case 'spo2': return val < 90 ? 'danger' : val <= 93 ? 'caution' : 'normal';
+    case 'spo2': return val < 90 ? 'danger' : val <= 95 ? 'caution' : 'normal';
     default: return 'normal';
   }
 }
 
 function handleFlag(cb) {
-  const idx = parseInt(cb.closest('.flag-item').id.replace('flag-','')) - 1;
+  const flagItem = cb.closest('.flag-item');
+  const flagId = flagItem.id;
+  // Handle surgery-specific flags
+  if (flagId.startsWith('flag-bbl-') || flagId.startsWith('flag-bar-') || flagId.startsWith('flag-cs-')) {
+    const parts = flagId.split('-');
+    const surgKey = {bbl:'bbl',bar:'bariatric',cs:'cesarean'}[parts[1]];
+    const idx = parseInt(parts[2]) - 1;
+    if (surgKey) state.surgeryFlags[surgKey][idx] = cb.checked;
+    flagItem.classList.toggle('checked', cb.checked);
+    // Emergency for BBL fat embolism or bariatric anastomotic leak
+    if ((flagId === 'flag-bbl-2' || flagId === 'flag-bar-1') && cb.checked) showEmergencyModal();
+    updateDomainScore('redflags');
+    return;
+  }
+  // Standard flags
+  const idx = parseInt(flagId.replace('flag-','')) - 1;
   state.flags[idx] = cb.checked;
-  cb.closest('.flag-item').classList.toggle('checked', cb.checked);
-  // Emergency modal
-  if ((idx === 8 || idx === 9) && cb.checked) showEmergencyModal();
+  flagItem.classList.toggle('checked', cb.checked);
+  // Emergency modal for SOB, chest pain, or DVT
+  if ((idx === 8 || idx === 9 || idx === 10) && cb.checked) showEmergencyModal();
   updateDomainScore('redflags');
 }
 
@@ -951,13 +1045,26 @@ function setFlagCheckbox(idx, checked) {
 function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
 
 function scorePain() {
-  const restP = state.painRest * 10;
-  const actP = state.painActivity * 7;
+  // If neither slider has been touched, pain is unanswered
+  if (!state.painRestTouched && !state.painActivityTouched) return null;
+  const restV = state.painRest !== null ? state.painRest : 0;
+  const actV = state.painActivity !== null ? state.painActivity : 0;
+  const restP = restV * 10;
+  const actP = actV * 7;
   const managed = {yes:0, somewhat:-10, no:-25};
   const meds = {yes:0, partial:-5, no:-15, 'not-taking':0};
   let raw = 100 - (restP * 0.6 + actP * 0.4) / 10;
   if (state.painManaged !== null) raw += (managed[state.painManaged] || 0);
   if (state.painMeds !== null) raw += (meds[state.painMeds] || 0);
+  // POD-adjusted modifier: higher pain is expected on POD 0-2
+  const pod = getCurrentPOD();
+  if (pod !== null) {
+    const avgPain = (restV + actV) / 2;
+    if (pod <= 1 && avgPain >= 5) raw += 15;        // POD 0-1: pain 5+ is expected, forgive some
+    else if (pod <= 3 && avgPain >= 5) raw += 8;     // POD 2-3: moderate forgiveness
+    else if (pod >= 10 && avgPain >= 5) raw -= 10;   // POD 10+: pain 5+ is concerning, penalize more
+    else if (pod >= 14 && avgPain >= 4) raw -= 15;   // POD 14+: even moderate pain is a flag
+  }
   return clamp(Math.round(raw), 0, 100);
 }
 
@@ -981,7 +1088,7 @@ function scoreVitals() {
   }
   if (state.spo2 !== null) { count++;
     if (state.spo2 < 90) penalty += 30;
-    else if (state.spo2 <= 93) penalty += 15;
+    else if (state.spo2 <= 95) penalty += 15;
   }
   if (count === 0) return null;
   return clamp(Math.round(100 - penalty), 0, 100);
@@ -1032,7 +1139,15 @@ function scoreFunctional() {
     if (state[key] !== null) { count++; penalty += (scores[key][state[key]] || 0); }
   }
   if (count === 0) return null;
-  return clamp(Math.round(100 - (penalty / Math.max(count,1))), 0, 100);
+  let raw = 100 - (penalty / Math.max(count,1));
+  // POD-adjusted: limited mobility is expected early post-op
+  const pod = getCurrentPOD();
+  if (pod !== null) {
+    if (pod <= 1 && (state.ambulation === 'minimal' || state.ambulation === 'bedbound')) raw += 20;
+    else if (pod <= 3 && state.ambulation === 'with-assistance') raw += 10;
+    else if (pod >= 7 && state.ambulation === 'bedbound') raw -= 15; // Concerning if still bedbound at POD 7+
+  }
+  return clamp(Math.round(raw), 0, 100);
 }
 
 function scoreMental() {
@@ -1053,17 +1168,35 @@ function scoreMental() {
 
 function scoreRedFlags() {
   const flagCount = state.flags.filter(Boolean).length;
-  const emergency = (state.flags[8] || state.flags[9]);
+  // Count surgery-specific flags
+  let surgFlagCount = 0;
+  let surgEmergency = false;
+  for (const key of Object.keys(state.surgeryFlags)) {
+    state.surgeryFlags[key].forEach((f, i) => {
+      if (f) {
+        surgFlagCount++;
+        // BBL fat embolism (index 1) and bariatric anastomotic leak (index 0) are emergency-level
+        if ((key === 'bbl' && i === 1) || (key === 'bariatric' && i === 0)) surgEmergency = true;
+      }
+    });
+  }
+  const totalFlags = flagCount + surgFlagCount;
+  const emergency = (state.flags[8] || state.flags[9] || state.flags[10] || surgEmergency);
   if (emergency) return 0;
-  if (flagCount >= 4) return 10;
-  if (flagCount === 3) return 25;
-  if (flagCount === 2) return 40;
-  if (flagCount === 1) return 60;
+  if (totalFlags >= 4) return 10;
+  if (totalFlags === 3) return 25;
+  if (totalFlags === 2) return 40;
+  if (totalFlags === 1) return 60;
   return 100;
 }
 
+function getCurrentPOD() {
+  const podText = document.getElementById('podNum').textContent;
+  return podText === '—' ? null : parseInt(podText);
+}
+
 function calculateComposite() {
-  const weights = {pain:0.10, vitals:0.30, wound:0.15, gi:0.10, functional:0.15, mental:0.10, redflags:0.10};
+  const weights = {pain:0.10, vitals:0.25, wound:0.15, gi:0.10, functional:0.10, mental:0.10, redflags:0.20};
   const scores = {
     pain: scorePain(),
     vitals: scoreVitals(),
@@ -1208,6 +1341,17 @@ function renderAlerts(scores) {
   state.flags.forEach((f, i) => {
     if (f) alerts.push({type: i >= 8 ? 'red' : 'yellow', msg: FLAG_LABELS[i] + (i >= 8 ? ' (EMERGENCY)' : '')});
   });
+  // Surgery-specific flags
+  for (const [key, flags] of Object.entries(state.surgeryFlags)) {
+    if (SURGERY_FLAG_LABELS[key]) {
+      flags.forEach((f, i) => {
+        if (f) {
+          const isEmergency = (key === 'bbl' && i === 1) || (key === 'bariatric' && i === 0);
+          alerts.push({type: isEmergency ? 'red' : 'yellow', msg: SURGERY_FLAG_LABELS[key][i] + (isEmergency ? ' (EMERGENCY)' : '')});
+        }
+      });
+    }
+  }
 
   if (alerts.length === 0) {
     container.innerHTML = '<div class="alert-item green-msg"><span class="alert-icon">&#10003;</span> No alerts at this time.</div>';
@@ -1314,13 +1458,15 @@ function saveToHistory() {
 function clearAssessment() {
   if (!confirm('Clear all current assessment data?')) return;
   // Reset state
-  state.painRest = 0; state.painActivity = 0; state.painLocation = ''; state.painManaged = null; state.painMeds = null;
+  state.painRest = null; state.painActivity = null; state.painRestTouched = false; state.painActivityTouched = false;
+  state.painLocation = ''; state.painManaged = null; state.painMeds = null;
   state.hr = null; state.sbp = null; state.dbp = null; state.temp = null; state.rr = null; state.spo2 = null;
   state.drainage = null; state.opening = null; state.redness = null; state.warmth = null; state.odor = null; state.swelling = null; state.woundNotes = '';
   state.bm = null; state.lastBM = ''; state.nausea = null; state.vomiting = null; state.intake = null; state.flatus = null;
   state.ambulation = null; state.adl = null; state.actlevel = null; state.dvt = null;
   state.anxiety = null; state.sleep = null; state.mood = null; state.fear = null; state.support = null;
-  state.flags = [false,false,false,false,false,false,false,false,false,false];
+  state.flags = [false,false,false,false,false,false,false,false,false,false,false,false];
+  state.surgeryFlags = {bbl:[false,false,false], bariatric:[false,false,false], cesarean:[false,false,false]};
   // Reset UI
   document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
   document.querySelectorAll('input[type="checkbox"]').forEach(c => c.checked = false);
@@ -1329,9 +1475,12 @@ function clearAssessment() {
   document.querySelectorAll('.vital-input').forEach(v => { v.value = ''; v.className = 'vital-input'; });
   document.querySelectorAll('.alert-tag').forEach(t => t.style.display = 'none');
   document.querySelectorAll('.q-group').forEach(g => g.className = 'q-group');
-  document.getElementById('painRest').value = 0; document.getElementById('painActivity').value = 0;
-  document.getElementById('painRestVal').textContent = '0'; document.getElementById('painRestVal').className = 'slider-val green';
-  document.getElementById('painActivityVal').textContent = '0'; document.getElementById('painActivityVal').className = 'slider-val green';
+  document.getElementById('painRest').value = 5; document.getElementById('painRest').style.opacity = '0.4';
+  document.getElementById('painActivity').value = 5; document.getElementById('painActivity').style.opacity = '0.4';
+  document.getElementById('painRestVal').textContent = '—'; document.getElementById('painRestVal').style.color = '#999'; document.getElementById('painRestVal').className = 'slider-val';
+  document.getElementById('painActivityVal').textContent = '—'; document.getElementById('painActivityVal').style.color = '#999'; document.getElementById('painActivityVal').className = 'slider-val';
+  const prHint = document.getElementById('painRestHint'); if (prHint) prHint.style.display = 'block';
+  const paHint = document.getElementById('painActivityHint'); if (paHint) paHint.style.display = 'block';
   document.getElementById('painLocation').value = '';
   document.getElementById('lastBM').value = '';
   document.getElementById('woundNotes').value = '';
@@ -1353,6 +1502,10 @@ function showEmergencyModal() {
   let items = '';
   if (state.flags[8]) items += '<li>Shortness of breath or difficulty breathing</li>';
   if (state.flags[9]) items += '<li>Chest pain</li>';
+  if (state.flags[10]) items += '<li>Unilateral leg swelling or calf pain (DVT risk)</li>';
+  // Surgery-specific emergencies
+  if (state.surgeryFlags.bbl[1]) items += '<li>Buttock pain with tachycardia — possible fat embolism (BBL)</li>';
+  if (state.surgeryFlags.bariatric[0]) items += '<li>Left shoulder pain with tachycardia — possible anastomotic leak (Bariatric)</li>';
   list.innerHTML = items;
   document.getElementById('emergencyModal').classList.add('show');
 }
@@ -1396,9 +1549,14 @@ function copyChartNote() {
   const lbl = (field) => { const m = labelMap[field]; return m && state[field] ? m[state[field]] : (state[field] || '—'); };
   const sLbl = (v) => v !== null ? v + '/100' : '—';
 
-  const flagsText = state.flags.some(Boolean) ?
-    state.flags.map((f,i) => f ? '  [x] ' + FLAG_LABELS[i] + (i >= 8 ? ' — EMERGENCY' : '') : null).filter(Boolean).join('\n') :
-    '  No red flags identified.';
+  let flagsArr = state.flags.map((f,i) => f ? '  [x] ' + FLAG_LABELS[i] + (i >= 8 ? ' — EMERGENCY' : '') : null).filter(Boolean);
+  // Surgery-specific flags
+  for (const [key, flags] of Object.entries(state.surgeryFlags)) {
+    if (SURGERY_FLAG_LABELS[key]) {
+      flags.forEach((f, i) => { if (f) flagsArr.push('  [x] ' + SURGERY_FLAG_LABELS[key][i] + ' (' + key.toUpperCase() + ')'); });
+    }
+  }
+  const flagsText = flagsArr.length > 0 ? flagsArr.join('\n') : '  No red flags identified.';
 
   // Alerts
   let alertsText = '';
@@ -1454,8 +1612,8 @@ DOMAIN SCORES:
 
 ────────────────────────────────────────────────
 PAIN ASSESSMENT:
-  Pain at rest: ${state.painRest}/10 NRS
-  Pain with activity: ${state.painActivity}/10 NRS
+  Pain at rest: ${state.painRestTouched ? state.painRest + '/10 NRS' : 'Not assessed'}
+  Pain with activity: ${state.painActivityTouched ? state.painActivity + '/10 NRS' : 'Not assessed'}
   Location: ${state.painLocation || '—'}
   Pain managed: ${lbl('painManaged')}
   Medication effective: ${lbl('painMeds')}
@@ -1550,9 +1708,13 @@ function printAssessment() {
   const lbl = (f) => { const m = labelMap[f]; return m && state[f] ? m[state[f]] : '—'; };
 
   const riskColor = risk ? risk.color : '#888';
-  const flagsHtml = state.flags.some(Boolean) ?
-    state.flags.map((f,i) => f ? `<div style="padding:4px 0;color:${i>=8?'#DC2626':'#CA8A04'};">&#9888; ${FLAG_LABELS[i]}${i>=8?' — EMERGENCY':''}</div>` : '').filter(Boolean).join('') :
-    '<div style="color:#16A34A;">No red flags identified.</div>';
+  let flagsHtmlArr = state.flags.map((f,i) => f ? `<div style="padding:4px 0;color:${i>=8?'#DC2626':'#CA8A04'};">&#9888; ${FLAG_LABELS[i]}${i>=8?' — EMERGENCY':''}</div>` : '').filter(Boolean);
+  for (const [key, flags] of Object.entries(state.surgeryFlags)) {
+    if (SURGERY_FLAG_LABELS[key]) {
+      flags.forEach((f, i) => { if (f) flagsHtmlArr.push(`<div style="padding:4px 0;color:#DC2626;">&#9888; ${SURGERY_FLAG_LABELS[key][i]} (${key.toUpperCase()})</div>`); });
+    }
+  }
+  const flagsHtml = flagsHtmlArr.length > 0 ? flagsHtmlArr.join('') : '<div style="color:#16A34A;">No red flags identified.</div>';
 
   const win = window.open('','_blank');
   win.document.write(`<!DOCTYPE html><html><head><title>Post-Op Assessment — ${name}</title>
@@ -1582,7 +1744,7 @@ h1{font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:4px;}
 <div class="meta"><div><b>Patient:</b> ${name}</div><div><b>Surgery:</b> ${surgText}</div><div><b>Surgery Date:</b> ${surgDate}</div><div><b>POD:</b> ${pod}</div><div><b>Assessment Date:</b> ${new Date().toLocaleString()}</div></div>
 <div class="score-box"><div class="num">${composite !== null ? composite : '—'}</div><div>/100</div><div class="lbl">${risk?risk.label:'Incomplete'}</div><div class="act">${risk?risk.action:'Complete assessment'}</div></div>
 <table class="domain-table"><tr><td>Pain Control</td><td>${scores.pain !== null ? scores.pain : '—'}/100</td></tr><tr><td>Vital Stability</td><td>${scores.vitals !== null ? scores.vitals : '—'}/100</td></tr><tr><td>Wound Healing</td><td>${scores.wound !== null ? scores.wound : '—'}/100</td></tr><tr><td>GI Function</td><td>${scores.gi !== null ? scores.gi : '—'}/100</td></tr><tr><td>Functional Recovery</td><td>${scores.functional !== null ? scores.functional : '—'}/100</td></tr><tr><td>Emotional State</td><td>${scores.mental !== null ? scores.mental : '—'}/100</td></tr><tr><td>Red Flag Screen</td><td>${scores.redflags !== null ? scores.redflags : '—'}/100</td></tr></table>
-<div class="section">Pain</div><div class="detail-grid"><span class="dlbl">Rest:</span><span>${state.painRest}/10</span><span class="dlbl">Activity:</span><span>${state.painActivity}/10</span><span class="dlbl">Location:</span><span>${state.painLocation||'—'}</span><span class="dlbl">Managed:</span><span>${lbl('painManaged')}</span><span class="dlbl">Meds effective:</span><span>${lbl('painMeds')}</span></div>
+<div class="section">Pain</div><div class="detail-grid"><span class="dlbl">Rest:</span><span>${state.painRestTouched ? state.painRest+'/10' : 'Not assessed'}</span><span class="dlbl">Activity:</span><span>${state.painActivityTouched ? state.painActivity+'/10' : 'Not assessed'}</span><span class="dlbl">Location:</span><span>${state.painLocation||'—'}</span><span class="dlbl">Managed:</span><span>${lbl('painManaged')}</span><span class="dlbl">Meds effective:</span><span>${lbl('painMeds')}</span></div>
 <div class="section">Vitals</div><div class="detail-grid"><span class="dlbl">HR:</span><span>${state.hr!==null?state.hr+' bpm':'—'}</span><span class="dlbl">BP:</span><span>${state.sbp!==null?state.sbp+'/'+(state.dbp||'—')+' mmHg':'—'}</span><span class="dlbl">Temp:</span><span>${state.temp!==null?state.temp+'°F':'—'}</span><span class="dlbl">RR:</span><span>${state.rr!==null?state.rr+'/min':'—'}</span><span class="dlbl">SpO₂:</span><span>${state.spo2!==null?state.spo2+'%':'—'}</span></div>
 <div class="section">Wound</div><div class="detail-grid"><span class="dlbl">Drainage:</span><span>${lbl('drainage')}</span><span class="dlbl">Opening:</span><span>${lbl('opening')}</span><span class="dlbl">Redness:</span><span>${lbl('redness')}</span><span class="dlbl">Warmth:</span><span>${lbl('warmth')}</span><span class="dlbl">Odor:</span><span>${lbl('odor')}</span><span class="dlbl">Swelling:</span><span>${lbl('swelling')}</span></div>
 <div class="section">GI Function</div><div class="detail-grid"><span class="dlbl">Bowel movement:</span><span>${lbl('bm')}</span><span class="dlbl">Nausea:</span><span>${lbl('nausea')}</span><span class="dlbl">Vomiting:</span><span>${lbl('vomiting')}</span><span class="dlbl">Oral intake:</span><span>${lbl('intake')}</span><span class="dlbl">Flatus:</span><span>${lbl('flatus')}</span></div>
