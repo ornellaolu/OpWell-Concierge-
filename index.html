@@ -3334,6 +3334,19 @@
     <a onclick="showPage('schedule')" class="btn-primary" style="cursor:pointer;">Book Your Consultation →</a>
   </div>
 
+  <!-- ═══ RECOVERY TAB NAV ═══ -->
+  <div class="tabs-nav" id="recovery-tabs">
+    <button class="tab-btn active" onclick="showRecoveryTab('overview')">Overview</button>
+    <button class="tab-btn" onclick="showRecoveryTab('included')">What's Included</button>
+    <button class="tab-btn" onclick="showRecoveryTab('risk')">Risk Assessment</button>
+    <button class="tab-btn" onclick="showRecoveryTab('pricing')">Pricing</button>
+    <button class="tab-btn" onclick="showRecoveryTab('vitals')">Vitals Kit</button>
+    <button class="tab-btn" onclick="showRecoveryTab('faq')">FAQ</button>
+  </div>
+
+  <!-- ═══ TAB: OVERVIEW ═══ -->
+  <div class="tab-panel active" id="rtab-overview">
+
   <!-- ═══ SECTION 1: THE PROBLEM ═══ -->
   <div class="content-section alt">
     <div class="content-2col">
@@ -3365,6 +3378,11 @@
     </div>
   </div>
 
+  </div><!-- end rtab-overview -->
+
+  <!-- ═══ TAB: WHAT'S INCLUDED ═══ -->
+  <div class="tab-panel" id="rtab-included">
+
   <!-- ═══ SECTION 2: STRUCTURED RECOVERY MONITORING ═══ -->
   <div class="content-section" style="background:linear-gradient(135deg,#1C2B22 0%,#2D5A3D 60%,#4A7A5A 100%); color:#FAF0E8; padding:3rem 2rem;">
     <div class="section-tag" style="color:var(--terracotta-light);">Included in Your Post-Operative Care</div>
@@ -3394,6 +3412,11 @@
     <p style="font-size:0.88rem; color:var(--slate); line-height:1.6; margin-bottom:14px;">Complete your recovery check-in before your next follow-up. It takes about 3 minutes.</p>
     <a href="/patient-recovery-checkin.html" target="_blank" style="display:inline-block; padding:12px 28px; background:var(--sage); color:#fff; border-radius:8px; font-family:'DM Sans',sans-serif; font-size:0.92rem; font-weight:600; text-decoration:none; letter-spacing:0.02em;">Start Your Check-In →</a>
   </div>
+
+  </div><!-- end rtab-included -->
+
+  <!-- ═══ TAB: RISK ASSESSMENT ═══ -->
+  <div class="tab-panel" id="rtab-risk">
 
   <!-- ═══ SECTION 3: HIGH-RISK SELF-ASSESSMENT ═══ -->
   <div class="content-section">
@@ -3431,6 +3454,11 @@
     </div>
     <p class="body-text" style="font-size:0.85rem; color:var(--slate); max-width:700px;">High-risk patients who receive structured post-operative monitoring experience a <strong>23.7% vs 18.2%</strong> reduction in readmissions and a <strong>37% reduction in 30-day mortality</strong> compared to standard follow-up alone.</p>
   </div>
+
+  </div><!-- end rtab-risk -->
+
+  <!-- ═══ TAB: PRICING ═══ -->
+  <div class="tab-panel" id="rtab-pricing">
 
   <!-- ═══ SECTION 4: PRICING ═══ -->
   <div class="package-section">
@@ -3500,6 +3528,11 @@
     </div>
     <p class="section-subtitle" style="margin-top:1.5rem;"><a onclick="showPage('pricing')" style="color:var(--terracotta); cursor:pointer; text-decoration:underline;">Compare all care plans & packages →</a></p>
   </div>
+
+  </div><!-- end rtab-pricing -->
+
+  <!-- ═══ TAB: VITALS KIT ═══ -->
+  <div class="tab-panel" id="rtab-vitals">
 
   <!-- ═══ SECTION 5: DEVICE RECOMMENDATIONS (Optional) ═══ -->
   <div class="content-section alt">
@@ -3586,6 +3619,11 @@
     <p style="font-size:0.78rem; color:var(--slate); max-width:700px; margin-top:1.5rem; line-height:1.6;">These are recommendations, not requirements. You can use any reliable BP cuff, pulse oximeter, and thermometer for your check-ins. OpWell does not manufacture or sell these devices. Links direct to Amazon for your convenience.</p>
   </div>
 
+  </div><!-- end rtab-vitals -->
+
+  <!-- ═══ TAB: FAQ ═══ -->
+  <div class="tab-panel" id="rtab-faq">
+
   <!-- ═══ SECTION 6: FAQ ═══ -->
   <div class="faq-section">
     <div class="section-tag">Common Questions</div>
@@ -3608,6 +3646,8 @@
       <div class="faq-a">If your recovery requires additional support beyond 30 days, we will work with you to determine the best path forward. Extended support options are available and can be discussed during your recovery visits.</div>
     </div>
   </div>
+
+  </div><!-- end rtab-faq -->
 
   <!-- ═══ SECTION 7: FINAL CTA ═══ -->
   <section class="final-cta">
@@ -4391,6 +4431,20 @@
         <p>Every product here is vetted by our clinical team and informed by feedback from surgeons across orthopedics, plastics, bariatrics, and OB — based on what actually works for real patients in real recoveries.</p>
       </div>
     </div>
+  </div>
+
+  <!-- ═══ PRODUCTS TAB NAV ═══ -->
+  <div class="tabs-nav" id="products-tabs">
+    <button class="tab-btn active" onclick="showProductsTab('wound')">Wound & Compression</button>
+    <button class="tab-btn" onclick="showProductsTab('pain')">Pain & Comfort</button>
+    <button class="tab-btn" onclick="showProductsTab('nutrition')">Nutrition & GI</button>
+    <button class="tab-btn" onclick="showProductsTab('daily')">Daily Living</button>
+    <button class="tab-btn" onclick="showProductsTab('wellness')">Wellness & Specialty</button>
+  </div>
+
+  <!-- ═══ TAB: WOUND & COMPRESSION ═══ -->
+  <div class="tab-panel active" id="ptab-wound">
+  <div class="content-section alt">
 
     <!-- WOUND CARE & SCAR -->
     <div class="shop-section">
@@ -4470,6 +4524,13 @@
       </div>
     </div>
 
+  </div>
+  </div><!-- end ptab-wound -->
+
+  <!-- ═══ TAB: PAIN & COMFORT ═══ -->
+  <div class="tab-panel" id="ptab-pain">
+  <div class="content-section alt">
+
     <!-- PAIN & COMFORT -->
     <div class="shop-section">
       <div class="shop-section-header">
@@ -4527,6 +4588,13 @@
         </div>
       </div>
     </div>
+
+  </div>
+  </div><!-- end ptab-pain -->
+
+  <!-- ═══ TAB: NUTRITION & GI ═══ -->
+  <div class="tab-panel" id="ptab-nutrition">
+  <div class="content-section alt">
 
     <!-- GUT HEALTH & HYDRATION -->
     <div class="shop-section">
@@ -4622,6 +4690,13 @@
       </div>
     </div>
 
+  </div>
+  </div><!-- end ptab-nutrition -->
+
+  <!-- ═══ TAB: DAILY LIVING ═══ -->
+  <div class="tab-panel" id="ptab-daily">
+  <div class="content-section alt">
+
     <!-- HYGIENE & BATHING -->
     <div class="shop-section">
       <div class="shop-section-header">
@@ -4680,6 +4755,13 @@
         </div>
       </div>
     </div>
+
+  </div>
+  </div><!-- end ptab-daily -->
+
+  <!-- ═══ TAB: WELLNESS & SPECIALTY ═══ -->
+  <div class="tab-panel" id="ptab-wellness">
+  <div class="content-section alt">
 
     <!-- MENTAL WELLNESS & SLEEP -->
     <div class="shop-section">
@@ -4770,6 +4852,7 @@
     </div>
 
   </div>
+  </div><!-- end ptab-wellness -->
 
   <div class="content-section" style="text-align:center; padding: 3rem;">
     <div class="section-tag">Browse All</div>
@@ -12623,10 +12706,29 @@
   })();
 
   function showTab(tabId) {
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    var nav = event.target.closest('.tabs-nav');
+    if (nav) nav.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+    document.querySelectorAll('[id^="tab-"]').forEach(function(p) { if (p.classList.contains('tab-panel')) p.classList.remove('active'); });
     document.getElementById('tab-' + tabId).classList.add('active');
     event.target.classList.add('active');
+  }
+
+  function showRecoveryTab(tabId) {
+    var nav = document.getElementById('recovery-tabs');
+    nav.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+    document.querySelectorAll('[id^="rtab-"]').forEach(function(p) { p.classList.remove('active'); });
+    document.getElementById('rtab-' + tabId).classList.add('active');
+    event.target.classList.add('active');
+    nav.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function showProductsTab(tabId) {
+    var nav = document.getElementById('products-tabs');
+    nav.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+    document.querySelectorAll('[id^="ptab-"]').forEach(function(p) { p.classList.remove('active'); });
+    document.getElementById('ptab-' + tabId).classList.add('active');
+    event.target.classList.add('active');
+    nav.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   // ── SCHEDULE FORM ──
