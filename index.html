@@ -1792,7 +1792,8 @@
       .about-preview { grid-template-columns: 1fr; padding: 2.5rem 1rem; gap: 1.5rem; }
       .content-2col { grid-template-columns: 1fr; gap: 1.5rem; }
       .ob-cards { grid-template-columns: 1fr; }
-      footer { grid-template-columns: 1fr; padding: 2rem 1rem; gap: 1.5rem; }
+      footer { flex-direction: column; padding: 2rem 1rem; gap: 1.5rem; }
+      .footer-group { flex-direction: column; }
       .footer-bottom { padding: 1rem; flex-direction: column; gap: 0.5rem; text-align: center; }
       .lp-hero { padding: 4rem 1rem 2rem; }
       .glp1-block { padding: 2rem 1rem; }
@@ -1887,7 +1888,7 @@
       .hero-sub { font-size: 0.8rem; }
       .nav-mark { height: 80px; }
       .paths-section, .problem-strip, .hiw-section, .content-section, .package-section, .faq-section { padding: 2rem 0.85rem; }
-      footer { grid-template-columns: 1fr; padding: 1.5rem 0.85rem; }
+      footer { flex-direction: column; padding: 1.5rem 0.85rem; }
       .stat-strip { grid-template-columns: 1fr 1fr; }
       .stat { border-right: none; border-bottom: 1px solid rgba(122,160,122,0.25); }
       .lp-hero { padding: 3.5rem 0.85rem 1.5rem; }
@@ -2841,46 +2842,46 @@
   <footer>
     <div class="footer-watermark"><div class="footer-watermark-circle"></div></div>
 
-    <!-- Col 1: Brand -->
-    <div>
-      <div class="footer-brand">OpWell Concierge<span>™</span></div>
-      <p class="footer-tagline">Anesthesiologist-led perioperative care.</p>
-      <a onclick="showPage('schedule')" class="footer-book-cta" style="cursor:pointer; margin-top:1.5rem; display:inline-block;">Book a Consultation →</a>
+    <!-- Left group: Brand + Programs -->
+    <div class="footer-group" style="display:flex; gap:3rem;">
+      <div>
+        <div class="footer-brand">OpWell Concierge<span>™</span></div>
+        <p class="footer-tagline">Anesthesiologist-led perioperative care.</p>
+        <a onclick="showPage('schedule')" class="footer-book-cta" style="cursor:pointer; margin-top:1.5rem; display:inline-block;">Book a Consultation →</a>
+      </div>
+      <div>
+        <div class="footer-col-title">Programs</div>
+        <ul class="footer-links">
+          <li><a onclick="showPage('surgery-prep')">Pre-Surgical Consultation</a></li>
+          <li><a onclick="showPage('recovery')">Post-Operative Care</a></li>
+          <li><a onclick="showPage('mental-health')">Mental Wellness</a></li>
+          <li><a onclick="showPage('obstetric')">Labor &amp; Delivery Consultation</a></li>
+          <li><a onclick="showPage('medical-tourism')">Medical Tourism</a></li>
+          <li><a onclick="showPage('products')">Products</a></li>
+        </ul>
+      </div>
     </div>
 
-    <!-- Col 2: Programs -->
-    <div>
-      <div class="footer-col-title">Programs</div>
-      <ul class="footer-links">
-        <li><a onclick="showPage('surgery-prep')">Pre-Surgical Consultation</a></li>
-        <li><a onclick="showPage('recovery')">Post-Operative Care</a></li>
-        <li><a onclick="showPage('mental-health')">Mental Wellness</a></li>
-        <li><a onclick="showPage('obstetric')">Labor &amp; Delivery Consultation</a></li>
-        <li><a onclick="showPage('medical-tourism')">Medical Tourism</a></li>
-        <li><a onclick="showPage('products')">Products</a></li>
-      </ul>
-    </div>
-
-    <!-- Col 3: Company -->
-    <div>
-      <div class="footer-col-title">OpWell</div>
-      <ul class="footer-links">
-        <li><a onclick="showPage('about')">Our Story</a></li>
-        <li><a onclick="showPage('blog')" style="cursor:pointer;">Blog</a></li>
-        <li><a onclick="showPage('schedule')">Get Started</a></li>
-        <li><a onclick="showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
-        <li><a onclick="showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
-      </ul>
-    </div>
-
-    <!-- Col 4: States + Waitlist -->
-    <div>
+    <!-- Right group: Company + States -->
+    <div class="footer-group" style="display:flex; gap:3rem;">
+      <div>
+        <div class="footer-col-title">OpWell</div>
+        <ul class="footer-links">
+          <li><a onclick="showPage('about')">Our Story</a></li>
+          <li><a onclick="showPage('blog')" style="cursor:pointer;">Blog</a></li>
+          <li><a onclick="showPage('schedule')">Get Started</a></li>
+          <li><a onclick="showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
+          <li><a onclick="showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
+        </ul>
+      </div>
+      <div>
       <p class="footer-connect-states">Telehealth Practice<br>Ohio · Georgia · Virginia<br>No referral required · HSA &amp; FSA accepted</p>
       <div class="footer-newsletter">
         <div class="footer-newsletter-title">Join the Waitlist</div>
         <p class="footer-newsletter-note" style="margin-bottom:0.75rem;">Want OpWell in your state? Have a question or special request?</p>
         <a onclick="showPage('contact')" style="display:inline-block; background:var(--terracotta); color:#fff; font-family:'DM Sans',sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; padding:0.65rem 1.5rem; border-radius:6px; cursor:pointer; text-decoration:none; transition:background 0.2s;" onmouseover="this.style.background='#a06040';" onmouseout="this.style.background='var(--terracotta)';">Contact Us →</a>
       </div>
+    </div>
     </div>
 
   </footer>
