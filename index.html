@@ -1798,8 +1798,8 @@
       .ob-cards { grid-template-columns: 1fr; }
       footer { grid-template-columns: 1fr; padding: 2rem 1rem; gap: 2rem; }
       .footer-nav-cols { flex-direction: column; gap: 2rem; justify-content: flex-start; }
-      .footer-row2-right { text-align: left; }
-      .footer-watermark { font-size: 12rem; }
+      .footer-watermark { width: 500px; height: 500px; }
+      .footer-watermark-circle { width: 500px; height: 500px; }
       .footer-bottom { padding: 1rem; flex-direction: column; gap: 0.5rem; text-align: center; }
       .lp-hero { padding: 4rem 1rem 2rem; }
       .glp1-block { padding: 2rem 1rem; }
@@ -1954,14 +1954,28 @@
       transform: translate(-50%, -50%);
       pointer-events: none;
       z-index: 0;
-      font-family: 'Playfair Display', serif;
-      font-size: 28rem;
-      font-weight: 700;
-      color: rgba(253,252,248,0.04);
-      letter-spacing: -0.05em;
-      white-space: nowrap;
-      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 900px;
+      height: 900px;
+    }
+    .footer-watermark-circle {
+      width: 900px;
+      height: 900px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .footer-watermark-img {
+      width: 90%;
+      height: 90%;
+      object-fit: contain;
+      opacity: 0.07;
+      filter: brightness(0) invert(1);
       user-select: none;
+      pointer-events: none;
     }
 
     /* ── FOOTER NEWSLETTER FORM ── */
@@ -2830,7 +2844,7 @@
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-watermark">OW</div>
+    <div class="footer-watermark"><div class="footer-watermark-circle"></div></div>
 
     <!-- Row 1 Left: Brand -->
     <div>
@@ -2866,16 +2880,15 @@
 
     <!-- Row 2 Left: States -->
     <div>
-      <p class="footer-connect-states">Telehealth Practice<br>Ohio · Georgia · Virginia<br>No referral required · HSA &amp; FSA accepted</p>
+      <div class="footer-col-title">Telehealth Practice</div>
+      <p style="font-size:0.82rem; color:rgba(253,251,248,0.5); line-height:1.8;">Ohio · Georgia · Virginia<br>No referral required · HSA &amp; FSA accepted</p>
     </div>
 
     <!-- Row 2 Right: Contact -->
-    <div class="footer-row2-right">
-      <div class="footer-newsletter">
-        <div class="footer-newsletter-title">Join the Waitlist</div>
-        <p class="footer-newsletter-note" style="margin-bottom:0.75rem;">Want OpWell in your state? Have a question or special request?</p>
-        <a onclick="showPage('contact')" style="display:inline-block; background:var(--terracotta); color:#fff; font-family:'DM Sans',sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; padding:0.65rem 1.5rem; border-radius:6px; cursor:pointer; text-decoration:none; transition:background 0.2s;" onmouseover="this.style.background='#a06040';" onmouseout="this.style.background='var(--terracotta)';">Contact Us →</a>
-      </div>
+    <div style="display:flex; flex-direction:column; align-items:flex-end; justify-content:flex-start;">
+      <div class="footer-col-title">Join the Waitlist</div>
+      <p style="font-size:0.78rem; color:rgba(253,251,248,0.4); margin-bottom:1rem; text-align:right; max-width:280px;">Want OpWell in your state? Have a question or special request?</p>
+      <a onclick="showPage('contact')" style="display:inline-block; background:var(--terracotta); color:#fff; font-family:'DM Sans',sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; padding:0.65rem 1.5rem; border-radius:6px; cursor:pointer; text-decoration:none; transition:background 0.2s;" onmouseover="this.style.background='#a06040';" onmouseout="this.style.background='var(--terracotta)';">Contact Us →</a>
     </div>
 
   </footer>
