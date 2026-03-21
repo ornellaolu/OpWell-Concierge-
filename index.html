@@ -950,24 +950,14 @@
     /* ── FOOTER ── */
     footer {
       background: #1A2820;
-      padding: 3rem 3rem;
-      display: flex;
-      justify-content: space-between;
-      gap: 2rem;
+      padding: 5rem 4rem 3rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 4rem 3rem;
     }
-    /* Curve Programs list to follow left side of circle */
-    .footer-group:first-of-type .footer-links li:nth-child(1) { padding-left: 2.5rem; }
-    .footer-group:first-of-type .footer-links li:nth-child(2) { padding-left: 1.5rem; }
-    .footer-group:first-of-type .footer-links li:nth-child(3) { padding-left: 0.7rem; }
-    .footer-group:first-of-type .footer-links li:nth-child(4) { padding-left: 0.3rem; }
-    .footer-group:first-of-type .footer-links li:nth-child(5) { padding-left: 0.7rem; }
-    .footer-group:first-of-type .footer-links li:nth-child(6) { padding-left: 1.5rem; }
-    /* Curve OpWell list to follow right side of circle */
-    .footer-group:last-of-type .footer-links li:nth-child(1) { padding-right: 2.5rem; text-align: right; }
-    .footer-group:last-of-type .footer-links li:nth-child(2) { padding-right: 1.5rem; text-align: right; }
-    .footer-group:last-of-type .footer-links li:nth-child(3) { padding-right: 0.5rem; text-align: right; }
-    .footer-group:last-of-type .footer-links li:nth-child(4) { padding-right: 1.5rem; text-align: right; }
-    .footer-group:last-of-type .footer-links li:nth-child(5) { padding-right: 2.5rem; text-align: right; }
+    .footer-nav-cols { display: flex; gap: 4rem; justify-content: flex-end; }
+    .footer-row2-right { text-align: right; }
 
     .footer-brand {
       font-family: 'Playfair Display', serif;
@@ -987,15 +977,16 @@
     }
 
     .footer-col-title {
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 1rem;
+      color: rgba(253,251,248,0.55);
+      margin-bottom: 1.25rem;
+      font-weight: 600;
     }
 
     .footer-links { list-style: none; }
-    .footer-links li { margin-bottom: 0.5rem; }
+    .footer-links li { margin-bottom: 0.65rem; }
     .footer-links a {
       font-size: 0.78rem;
       color: rgba(253,251,248,0.5);
@@ -1805,8 +1796,10 @@
       .about-preview { grid-template-columns: 1fr; padding: 2.5rem 1rem; gap: 1.5rem; }
       .content-2col { grid-template-columns: 1fr; gap: 1.5rem; }
       .ob-cards { grid-template-columns: 1fr; }
-      footer { flex-direction: column; padding: 2rem 1rem; gap: 1.5rem; }
-      .footer-group { flex-direction: column; }
+      footer { grid-template-columns: 1fr; padding: 2rem 1rem; gap: 2rem; }
+      .footer-nav-cols { flex-direction: column; gap: 2rem; justify-content: flex-start; }
+      .footer-row2-right { text-align: left; }
+      .footer-watermark { font-size: 12rem; }
       .footer-bottom { padding: 1rem; flex-direction: column; gap: 0.5rem; text-align: center; }
       .lp-hero { padding: 4rem 1rem 2rem; }
       .glp1-block { padding: 2rem 1rem; }
@@ -1901,7 +1894,7 @@
       .hero-sub { font-size: 0.8rem; }
       .nav-mark { height: 80px; }
       .paths-section, .problem-strip, .hiw-section, .content-section, .package-section, .faq-section { padding: 2rem 0.85rem; }
-      footer { flex-direction: column; padding: 1.5rem 0.85rem; }
+      footer { grid-template-columns: 1fr; padding: 1.5rem 0.85rem; }
       .stat-strip { grid-template-columns: 1fr 1fr; }
       .stat { border-right: none; border-bottom: 1px solid rgba(122,160,122,0.25); }
       .lp-hero { padding: 3.5rem 0.85rem 1.5rem; }
@@ -1961,30 +1954,14 @@
       transform: translate(-50%, -50%);
       pointer-events: none;
       z-index: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 750px;
-      height: 750px;
-    }
-    .footer-watermark-circle {
-      width: 750px;
-      height: 750px;
-      border-radius: 50%;
-      border: 1.5px solid rgba(253,252,248,0.07);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-    .footer-watermark-img {
-      width: 82%;
-      height: 82%;
-      object-fit: contain;
-      opacity: 0.09;
-      filter: brightness(0) invert(1);
+      font-family: 'Playfair Display', serif;
+      font-size: 28rem;
+      font-weight: 700;
+      color: rgba(253,252,248,0.04);
+      letter-spacing: -0.05em;
+      white-space: nowrap;
+      line-height: 1;
       user-select: none;
-      pointer-events: none;
     }
 
     /* ── FOOTER NEWSLETTER FORM ── */
@@ -2853,15 +2830,17 @@
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-watermark"><div class="footer-watermark-circle"></div></div>
+    <div class="footer-watermark">OW</div>
 
-    <!-- Left group: Brand + Programs -->
-    <div class="footer-group" style="display:flex; gap:3rem;">
-      <div>
-        <div class="footer-brand">OpWell Concierge<span>™</span></div>
-        <p class="footer-tagline">Anesthesiologist-led perioperative care.</p>
-        <a onclick="showPage('schedule')" class="footer-book-cta" style="cursor:pointer; margin-top:1.5rem; display:inline-block;">Book a Consultation →</a>
-      </div>
+    <!-- Row 1 Left: Brand -->
+    <div>
+      <div class="footer-brand">OpWell Concierge<span>™</span></div>
+      <p class="footer-tagline">Anesthesiologist-led perioperative care.</p>
+      <a onclick="showPage('schedule')" class="footer-book-cta" style="cursor:pointer; margin-top:1.5rem; display:inline-block;">Book a Consultation →</a>
+    </div>
+
+    <!-- Row 1 Right: Nav columns -->
+    <div class="footer-nav-cols">
       <div>
         <div class="footer-col-title">Programs</div>
         <ul class="footer-links">
@@ -2873,10 +2852,6 @@
           <li><a onclick="showPage('products')">Products</a></li>
         </ul>
       </div>
-    </div>
-
-    <!-- Right group: Company + States -->
-    <div class="footer-group" style="display:flex; gap:3rem;">
       <div>
         <div class="footer-col-title">OpWell</div>
         <ul class="footer-links">
@@ -2887,14 +2862,20 @@
           <li><a onclick="showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
         </ul>
       </div>
-      <div>
+    </div>
+
+    <!-- Row 2 Left: States -->
+    <div>
       <p class="footer-connect-states">Telehealth Practice<br>Ohio · Georgia · Virginia<br>No referral required · HSA &amp; FSA accepted</p>
+    </div>
+
+    <!-- Row 2 Right: Contact -->
+    <div class="footer-row2-right">
       <div class="footer-newsletter">
         <div class="footer-newsletter-title">Join the Waitlist</div>
         <p class="footer-newsletter-note" style="margin-bottom:0.75rem;">Want OpWell in your state? Have a question or special request?</p>
         <a onclick="showPage('contact')" style="display:inline-block; background:var(--terracotta); color:#fff; font-family:'DM Sans',sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; padding:0.65rem 1.5rem; border-radius:6px; cursor:pointer; text-decoration:none; transition:background 0.2s;" onmouseover="this.style.background='#a06040';" onmouseout="this.style.background='var(--terracotta)';">Contact Us →</a>
       </div>
-    </div>
     </div>
 
   </footer>
