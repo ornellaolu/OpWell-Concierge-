@@ -2508,26 +2508,26 @@
   </div>
 
   <ul class="nav-links">
-    <li><a onclick="showPage('home')">Home</a></li>
+    <li><a href="/" onclick="event.preventDefault(); showPage('home')">Home</a></li>
     <li class="has-dropdown">
-      <a tabindex="0">Services</a>
+      <a tabindex="0">Services <span style="font-size:0.6em;">&#9660;</span></a>
       <ul class="nav-dropdown">
-        <li><a onclick="showPage('surgery-prep')">Pre-Surgical Consultation</a></li>
-        <li><a onclick="showPage('recovery')">Post-Operative Care</a></li>
-        <li><a onclick="showPage('mental-health')">Mental Wellness</a></li>
-        <li><a onclick="showPage('obstetric')">Labor &amp; Delivery Consultation</a></li>
-        <li><a onclick="showPage('medical-tourism')">Medical Tourism</a></li>
+        <li><a href="/surgery-prep" onclick="event.preventDefault(); showPage('surgery-prep')">Pre-Surgical Consultation</a></li>
+        <li><a href="/recovery" onclick="event.preventDefault(); showPage('recovery')">Post-Operative Care</a></li>
+        <li><a href="/mental-health" onclick="event.preventDefault(); showPage('mental-health')">Mental Wellness</a></li>
+        <li><a href="/obstetric" onclick="event.preventDefault(); showPage('obstetric')">Labor &amp; Delivery Consultation</a></li>
+        <li><a href="/medical-tourism" onclick="event.preventDefault(); showPage('medical-tourism')">Medical Tourism</a></li>
       </ul>
     </li>
-    <li><a onclick="showPage('about')">Our Story</a></li>
-    <li><a onclick="showPage('pricing')">Pricing</a></li>
-    <li><a onclick="showPage('products')">Products</a></li>
-    <li><a onclick="showPage('blog')">Blog</a></li>
-    <li><a onclick="showPage('contact')">Contact</a></li>
-    <li><a onclick="showPage('schedule')">Get Started</a></li>
+    <li><a href="/about" onclick="event.preventDefault(); showPage('about')">Our Story</a></li>
+    <li><a href="/pricing" onclick="event.preventDefault(); showPage('pricing')">Pricing</a></li>
+    <li><a href="/products" onclick="event.preventDefault(); showPage('products')">Products</a></li>
+    <li><a href="/blog" onclick="event.preventDefault(); showPage('blog')">Blog</a></li>
+    <li><a href="/contact" onclick="event.preventDefault(); showPage('contact')">Contact</a></li>
+    <li><a href="/schedule" onclick="event.preventDefault(); showPage('schedule')">Get Started</a></li>
   </ul>
 
-  <a onclick="showPage('schedule')" style="cursor:pointer;" class="nav-cta">Book Now</a>
+  <a href="/schedule" onclick="event.preventDefault(); showPage('schedule')" style="cursor:pointer;" class="nav-cta">Book Now</a>
 
   <button class="hamburger" onclick="toggleMobileNav()" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -2854,12 +2854,12 @@
     <div>
       <div class="footer-col-title">Programs</div>
       <ul class="footer-links">
-        <li><a onclick="showPage('surgery-prep')">Pre-Surgical Consultation</a></li>
-        <li><a onclick="showPage('recovery')">Post-Operative Care</a></li>
-        <li><a onclick="showPage('mental-health')">Mental Wellness</a></li>
-        <li><a onclick="showPage('obstetric')">Labor &amp; Delivery Consultation</a></li>
-        <li><a onclick="showPage('medical-tourism')">Medical Tourism</a></li>
-        <li><a onclick="showPage('products')">Products</a></li>
+        <li><a href="/surgery-prep" onclick="event.preventDefault(); showPage('surgery-prep')">Pre-Surgical Consultation</a></li>
+        <li><a href="/recovery" onclick="event.preventDefault(); showPage('recovery')">Post-Operative Care</a></li>
+        <li><a href="/mental-health" onclick="event.preventDefault(); showPage('mental-health')">Mental Wellness</a></li>
+        <li><a href="/obstetric" onclick="event.preventDefault(); showPage('obstetric')">Labor &amp; Delivery Consultation</a></li>
+        <li><a href="/medical-tourism" onclick="event.preventDefault(); showPage('medical-tourism')">Medical Tourism</a></li>
+        <li><a href="/products" onclick="event.preventDefault(); showPage('products')">Products</a></li>
       </ul>
     </div>
 
@@ -2868,11 +2868,11 @@
       <div>
         <div class="footer-col-title">OpWell</div>
         <ul class="footer-links">
-          <li><a onclick="showPage('about')">Our Story</a></li>
-          <li><a onclick="showPage('blog')" style="cursor:pointer;">Blog</a></li>
-          <li><a onclick="showPage('schedule')">Get Started</a></li>
-          <li><a onclick="showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
-          <li><a onclick="showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
+          <li><a href="/about" onclick="event.preventDefault(); showPage('about')">Our Story</a></li>
+          <li><a href="/blog" onclick="event.preventDefault(); showPage('blog')" style="cursor:pointer;">Blog</a></li>
+          <li><a href="/schedule" onclick="event.preventDefault(); showPage('schedule')">Get Started</a></li>
+          <li><a href="/privacy" onclick="event.preventDefault(); showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
+          <li><a href="/terms" onclick="event.preventDefault(); showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
         </ul>
       </div>
     </div>
@@ -3300,23 +3300,23 @@
     <div>
       <div class="footer-col-title">Programs</div>
       <ul class="footer-links">
-        <li><a onclick="showPage('surgery-prep')">Pre-Surgical Consultation</a></li>
-        <li><a onclick="showPage('recovery')">Post-Operative Care</a></li>
-        <li><a onclick="showPage('mental-health')">Mental Wellness</a></li>
-        <li><a onclick="showPage('obstetric')">Labor &amp; Delivery Consultation</a></li>
-        <li><a onclick="showPage('medical-tourism')">Medical Tourism</a></li>
-        <li><a onclick="showPage('products')">Products</a></li>
+        <li><a href="/surgery-prep" onclick="event.preventDefault(); showPage('surgery-prep')">Pre-Surgical Consultation</a></li>
+        <li><a href="/recovery" onclick="event.preventDefault(); showPage('recovery')">Post-Operative Care</a></li>
+        <li><a href="/mental-health" onclick="event.preventDefault(); showPage('mental-health')">Mental Wellness</a></li>
+        <li><a href="/obstetric" onclick="event.preventDefault(); showPage('obstetric')">Labor &amp; Delivery Consultation</a></li>
+        <li><a href="/medical-tourism" onclick="event.preventDefault(); showPage('medical-tourism')">Medical Tourism</a></li>
+        <li><a href="/products" onclick="event.preventDefault(); showPage('products')">Products</a></li>
       </ul>
     </div>
     <div class="footer-nav-cols">
       <div>
         <div class="footer-col-title">OpWell</div>
         <ul class="footer-links">
-          <li><a onclick="showPage('about')">Our Story</a></li>
-          <li><a onclick="showPage('blog')" style="cursor:pointer;">Blog</a></li>
-          <li><a onclick="showPage('schedule')">Get Started</a></li>
-          <li><a onclick="showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
-          <li><a onclick="showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
+          <li><a href="/about" onclick="event.preventDefault(); showPage('about')">Our Story</a></li>
+          <li><a href="/blog" onclick="event.preventDefault(); showPage('blog')" style="cursor:pointer;">Blog</a></li>
+          <li><a href="/schedule" onclick="event.preventDefault(); showPage('schedule')">Get Started</a></li>
+          <li><a href="/privacy" onclick="event.preventDefault(); showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
+          <li><a href="/terms" onclick="event.preventDefault(); showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
         </ul>
       </div>
     </div>
@@ -3675,23 +3675,23 @@
     <div>
       <div class="footer-col-title">Programs</div>
       <ul class="footer-links">
-        <li><a onclick="showPage('surgery-prep')">Pre-Surgical Consultation</a></li>
-        <li><a onclick="showPage('recovery')">Post-Operative Care</a></li>
-        <li><a onclick="showPage('mental-health')">Mental Wellness</a></li>
-        <li><a onclick="showPage('obstetric')">Labor &amp; Delivery Consultation</a></li>
-        <li><a onclick="showPage('medical-tourism')">Medical Tourism</a></li>
-        <li><a onclick="showPage('products')">Products</a></li>
+        <li><a href="/surgery-prep" onclick="event.preventDefault(); showPage('surgery-prep')">Pre-Surgical Consultation</a></li>
+        <li><a href="/recovery" onclick="event.preventDefault(); showPage('recovery')">Post-Operative Care</a></li>
+        <li><a href="/mental-health" onclick="event.preventDefault(); showPage('mental-health')">Mental Wellness</a></li>
+        <li><a href="/obstetric" onclick="event.preventDefault(); showPage('obstetric')">Labor &amp; Delivery Consultation</a></li>
+        <li><a href="/medical-tourism" onclick="event.preventDefault(); showPage('medical-tourism')">Medical Tourism</a></li>
+        <li><a href="/products" onclick="event.preventDefault(); showPage('products')">Products</a></li>
       </ul>
     </div>
     <div class="footer-nav-cols">
       <div>
         <div class="footer-col-title">OpWell</div>
         <ul class="footer-links">
-          <li><a onclick="showPage('about')">Our Story</a></li>
-          <li><a onclick="showPage('blog')" style="cursor:pointer;">Blog</a></li>
-          <li><a onclick="showPage('schedule')">Get Started</a></li>
-          <li><a onclick="showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
-          <li><a onclick="showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
+          <li><a href="/about" onclick="event.preventDefault(); showPage('about')">Our Story</a></li>
+          <li><a href="/blog" onclick="event.preventDefault(); showPage('blog')" style="cursor:pointer;">Blog</a></li>
+          <li><a href="/schedule" onclick="event.preventDefault(); showPage('schedule')">Get Started</a></li>
+          <li><a href="/privacy" onclick="event.preventDefault(); showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
+          <li><a href="/terms" onclick="event.preventDefault(); showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
         </ul>
       </div>
     </div>
@@ -3896,23 +3896,23 @@
     <div>
       <div class="footer-col-title">Programs</div>
       <ul class="footer-links">
-        <li><a onclick="showPage('surgery-prep')">Pre-Surgical Consultation</a></li>
-        <li><a onclick="showPage('recovery')">Post-Operative Care</a></li>
-        <li><a onclick="showPage('mental-health')">Mental Wellness</a></li>
-        <li><a onclick="showPage('obstetric')">Labor &amp; Delivery Consultation</a></li>
-        <li><a onclick="showPage('medical-tourism')">Medical Tourism</a></li>
-        <li><a onclick="showPage('products')">Products</a></li>
+        <li><a href="/surgery-prep" onclick="event.preventDefault(); showPage('surgery-prep')">Pre-Surgical Consultation</a></li>
+        <li><a href="/recovery" onclick="event.preventDefault(); showPage('recovery')">Post-Operative Care</a></li>
+        <li><a href="/mental-health" onclick="event.preventDefault(); showPage('mental-health')">Mental Wellness</a></li>
+        <li><a href="/obstetric" onclick="event.preventDefault(); showPage('obstetric')">Labor &amp; Delivery Consultation</a></li>
+        <li><a href="/medical-tourism" onclick="event.preventDefault(); showPage('medical-tourism')">Medical Tourism</a></li>
+        <li><a href="/products" onclick="event.preventDefault(); showPage('products')">Products</a></li>
       </ul>
     </div>
     <div class="footer-nav-cols">
       <div>
         <div class="footer-col-title">OpWell</div>
         <ul class="footer-links">
-          <li><a onclick="showPage('about')">Our Story</a></li>
-          <li><a onclick="showPage('blog')" style="cursor:pointer;">Blog</a></li>
-          <li><a onclick="showPage('schedule')">Get Started</a></li>
-          <li><a onclick="showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
-          <li><a onclick="showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
+          <li><a href="/about" onclick="event.preventDefault(); showPage('about')">Our Story</a></li>
+          <li><a href="/blog" onclick="event.preventDefault(); showPage('blog')" style="cursor:pointer;">Blog</a></li>
+          <li><a href="/schedule" onclick="event.preventDefault(); showPage('schedule')">Get Started</a></li>
+          <li><a href="/privacy" onclick="event.preventDefault(); showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
+          <li><a href="/terms" onclick="event.preventDefault(); showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
         </ul>
       </div>
     </div>
@@ -4110,23 +4110,23 @@
     <div>
       <div class="footer-col-title">Programs</div>
       <ul class="footer-links">
-        <li><a onclick="showPage('surgery-prep')">Pre-Surgical Consultation</a></li>
-        <li><a onclick="showPage('recovery')">Post-Operative Care</a></li>
-        <li><a onclick="showPage('mental-health')">Mental Wellness</a></li>
-        <li><a onclick="showPage('obstetric')">Labor &amp; Delivery Consultation</a></li>
-        <li><a onclick="showPage('medical-tourism')">Medical Tourism</a></li>
-        <li><a onclick="showPage('products')">Products</a></li>
+        <li><a href="/surgery-prep" onclick="event.preventDefault(); showPage('surgery-prep')">Pre-Surgical Consultation</a></li>
+        <li><a href="/recovery" onclick="event.preventDefault(); showPage('recovery')">Post-Operative Care</a></li>
+        <li><a href="/mental-health" onclick="event.preventDefault(); showPage('mental-health')">Mental Wellness</a></li>
+        <li><a href="/obstetric" onclick="event.preventDefault(); showPage('obstetric')">Labor &amp; Delivery Consultation</a></li>
+        <li><a href="/medical-tourism" onclick="event.preventDefault(); showPage('medical-tourism')">Medical Tourism</a></li>
+        <li><a href="/products" onclick="event.preventDefault(); showPage('products')">Products</a></li>
       </ul>
     </div>
     <div class="footer-nav-cols">
       <div>
         <div class="footer-col-title">OpWell</div>
         <ul class="footer-links">
-          <li><a onclick="showPage('about')">Our Story</a></li>
-          <li><a onclick="showPage('blog')" style="cursor:pointer;">Blog</a></li>
-          <li><a onclick="showPage('schedule')">Get Started</a></li>
-          <li><a onclick="showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
-          <li><a onclick="showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
+          <li><a href="/about" onclick="event.preventDefault(); showPage('about')">Our Story</a></li>
+          <li><a href="/blog" onclick="event.preventDefault(); showPage('blog')" style="cursor:pointer;">Blog</a></li>
+          <li><a href="/schedule" onclick="event.preventDefault(); showPage('schedule')">Get Started</a></li>
+          <li><a href="/privacy" onclick="event.preventDefault(); showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
+          <li><a href="/terms" onclick="event.preventDefault(); showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
         </ul>
       </div>
     </div>
@@ -4364,23 +4364,23 @@
     <div>
       <div class="footer-col-title">Programs</div>
       <ul class="footer-links">
-        <li><a onclick="showPage('surgery-prep')">Pre-Surgical Consultation</a></li>
-        <li><a onclick="showPage('recovery')">Post-Operative Care</a></li>
-        <li><a onclick="showPage('mental-health')">Mental Wellness</a></li>
-        <li><a onclick="showPage('obstetric')">Labor &amp; Delivery Consultation</a></li>
-        <li><a onclick="showPage('medical-tourism')">Medical Tourism</a></li>
-        <li><a onclick="showPage('products')">Products</a></li>
+        <li><a href="/surgery-prep" onclick="event.preventDefault(); showPage('surgery-prep')">Pre-Surgical Consultation</a></li>
+        <li><a href="/recovery" onclick="event.preventDefault(); showPage('recovery')">Post-Operative Care</a></li>
+        <li><a href="/mental-health" onclick="event.preventDefault(); showPage('mental-health')">Mental Wellness</a></li>
+        <li><a href="/obstetric" onclick="event.preventDefault(); showPage('obstetric')">Labor &amp; Delivery Consultation</a></li>
+        <li><a href="/medical-tourism" onclick="event.preventDefault(); showPage('medical-tourism')">Medical Tourism</a></li>
+        <li><a href="/products" onclick="event.preventDefault(); showPage('products')">Products</a></li>
       </ul>
     </div>
     <div class="footer-nav-cols">
       <div>
         <div class="footer-col-title">OpWell</div>
         <ul class="footer-links">
-          <li><a onclick="showPage('about')">Our Story</a></li>
-          <li><a onclick="showPage('blog')" style="cursor:pointer;">Blog</a></li>
-          <li><a onclick="showPage('schedule')">Get Started</a></li>
-          <li><a onclick="showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
-          <li><a onclick="showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
+          <li><a href="/about" onclick="event.preventDefault(); showPage('about')">Our Story</a></li>
+          <li><a href="/blog" onclick="event.preventDefault(); showPage('blog')" style="cursor:pointer;">Blog</a></li>
+          <li><a href="/schedule" onclick="event.preventDefault(); showPage('schedule')">Get Started</a></li>
+          <li><a href="/privacy" onclick="event.preventDefault(); showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
+          <li><a href="/terms" onclick="event.preventDefault(); showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
         </ul>
       </div>
     </div>
@@ -4860,23 +4860,23 @@
     <div>
       <div class="footer-col-title">Programs</div>
       <ul class="footer-links">
-        <li><a onclick="showPage('surgery-prep')">Pre-Surgical Consultation</a></li>
-        <li><a onclick="showPage('recovery')">Post-Operative Care</a></li>
-        <li><a onclick="showPage('mental-health')">Mental Wellness</a></li>
-        <li><a onclick="showPage('obstetric')">Labor &amp; Delivery Consultation</a></li>
-        <li><a onclick="showPage('medical-tourism')">Medical Tourism</a></li>
-        <li><a onclick="showPage('products')">Products</a></li>
+        <li><a href="/surgery-prep" onclick="event.preventDefault(); showPage('surgery-prep')">Pre-Surgical Consultation</a></li>
+        <li><a href="/recovery" onclick="event.preventDefault(); showPage('recovery')">Post-Operative Care</a></li>
+        <li><a href="/mental-health" onclick="event.preventDefault(); showPage('mental-health')">Mental Wellness</a></li>
+        <li><a href="/obstetric" onclick="event.preventDefault(); showPage('obstetric')">Labor &amp; Delivery Consultation</a></li>
+        <li><a href="/medical-tourism" onclick="event.preventDefault(); showPage('medical-tourism')">Medical Tourism</a></li>
+        <li><a href="/products" onclick="event.preventDefault(); showPage('products')">Products</a></li>
       </ul>
     </div>
     <div class="footer-nav-cols">
       <div>
         <div class="footer-col-title">OpWell</div>
         <ul class="footer-links">
-          <li><a onclick="showPage('about')">Our Story</a></li>
-          <li><a onclick="showPage('blog')" style="cursor:pointer;">Blog</a></li>
-          <li><a onclick="showPage('schedule')">Get Started</a></li>
-          <li><a onclick="showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
-          <li><a onclick="showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
+          <li><a href="/about" onclick="event.preventDefault(); showPage('about')">Our Story</a></li>
+          <li><a href="/blog" onclick="event.preventDefault(); showPage('blog')" style="cursor:pointer;">Blog</a></li>
+          <li><a href="/schedule" onclick="event.preventDefault(); showPage('schedule')">Get Started</a></li>
+          <li><a href="/privacy" onclick="event.preventDefault(); showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
+          <li><a href="/terms" onclick="event.preventDefault(); showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
         </ul>
       </div>
     </div>
@@ -5032,23 +5032,23 @@
     <div>
       <div class="footer-col-title">Programs</div>
       <ul class="footer-links">
-        <li><a onclick="showPage('surgery-prep')">Pre-Surgical Consultation</a></li>
-        <li><a onclick="showPage('recovery')">Post-Operative Care</a></li>
-        <li><a onclick="showPage('mental-health')">Mental Wellness</a></li>
-        <li><a onclick="showPage('obstetric')">Labor &amp; Delivery Consultation</a></li>
-        <li><a onclick="showPage('medical-tourism')">Medical Tourism</a></li>
-        <li><a onclick="showPage('products')">Products</a></li>
+        <li><a href="/surgery-prep" onclick="event.preventDefault(); showPage('surgery-prep')">Pre-Surgical Consultation</a></li>
+        <li><a href="/recovery" onclick="event.preventDefault(); showPage('recovery')">Post-Operative Care</a></li>
+        <li><a href="/mental-health" onclick="event.preventDefault(); showPage('mental-health')">Mental Wellness</a></li>
+        <li><a href="/obstetric" onclick="event.preventDefault(); showPage('obstetric')">Labor &amp; Delivery Consultation</a></li>
+        <li><a href="/medical-tourism" onclick="event.preventDefault(); showPage('medical-tourism')">Medical Tourism</a></li>
+        <li><a href="/products" onclick="event.preventDefault(); showPage('products')">Products</a></li>
       </ul>
     </div>
     <div class="footer-nav-cols">
       <div>
         <div class="footer-col-title">OpWell</div>
         <ul class="footer-links">
-          <li><a onclick="showPage('about')">Our Story</a></li>
-          <li><a onclick="showPage('blog')" style="cursor:pointer;">Blog</a></li>
-          <li><a onclick="showPage('schedule')">Get Started</a></li>
-          <li><a onclick="showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
-          <li><a onclick="showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
+          <li><a href="/about" onclick="event.preventDefault(); showPage('about')">Our Story</a></li>
+          <li><a href="/blog" onclick="event.preventDefault(); showPage('blog')" style="cursor:pointer;">Blog</a></li>
+          <li><a href="/schedule" onclick="event.preventDefault(); showPage('schedule')">Get Started</a></li>
+          <li><a href="/privacy" onclick="event.preventDefault(); showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
+          <li><a href="/terms" onclick="event.preventDefault(); showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
         </ul>
       </div>
     </div>
@@ -5310,23 +5310,23 @@
     <div>
       <div class="footer-col-title">Programs</div>
       <ul class="footer-links">
-        <li><a onclick="showPage('surgery-prep')">Pre-Surgical Consultation</a></li>
-        <li><a onclick="showPage('recovery')">Post-Operative Care</a></li>
-        <li><a onclick="showPage('mental-health')">Mental Wellness</a></li>
-        <li><a onclick="showPage('obstetric')">Labor &amp; Delivery Consultation</a></li>
-        <li><a onclick="showPage('medical-tourism')">Medical Tourism</a></li>
-        <li><a onclick="showPage('products')">Products</a></li>
+        <li><a href="/surgery-prep" onclick="event.preventDefault(); showPage('surgery-prep')">Pre-Surgical Consultation</a></li>
+        <li><a href="/recovery" onclick="event.preventDefault(); showPage('recovery')">Post-Operative Care</a></li>
+        <li><a href="/mental-health" onclick="event.preventDefault(); showPage('mental-health')">Mental Wellness</a></li>
+        <li><a href="/obstetric" onclick="event.preventDefault(); showPage('obstetric')">Labor &amp; Delivery Consultation</a></li>
+        <li><a href="/medical-tourism" onclick="event.preventDefault(); showPage('medical-tourism')">Medical Tourism</a></li>
+        <li><a href="/products" onclick="event.preventDefault(); showPage('products')">Products</a></li>
       </ul>
     </div>
     <div class="footer-nav-cols">
       <div>
         <div class="footer-col-title">OpWell</div>
         <ul class="footer-links">
-          <li><a onclick="showPage('about')">Our Story</a></li>
-          <li><a onclick="showPage('blog')" style="cursor:pointer;">Blog</a></li>
-          <li><a onclick="showPage('schedule')">Get Started</a></li>
-          <li><a onclick="showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
-          <li><a onclick="showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
+          <li><a href="/about" onclick="event.preventDefault(); showPage('about')">Our Story</a></li>
+          <li><a href="/blog" onclick="event.preventDefault(); showPage('blog')" style="cursor:pointer;">Blog</a></li>
+          <li><a href="/schedule" onclick="event.preventDefault(); showPage('schedule')">Get Started</a></li>
+          <li><a href="/privacy" onclick="event.preventDefault(); showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
+          <li><a href="/terms" onclick="event.preventDefault(); showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
         </ul>
       </div>
     </div>
@@ -5605,23 +5605,23 @@
     <div>
       <div class="footer-col-title">Programs</div>
       <ul class="footer-links">
-        <li><a onclick="showPage('surgery-prep')">Pre-Surgical Consultation</a></li>
-        <li><a onclick="showPage('recovery')">Post-Operative Care</a></li>
-        <li><a onclick="showPage('mental-health')">Mental Wellness</a></li>
-        <li><a onclick="showPage('obstetric')">Labor &amp; Delivery Consultation</a></li>
-        <li><a onclick="showPage('medical-tourism')">Medical Tourism</a></li>
-        <li><a onclick="showPage('products')">Products</a></li>
+        <li><a href="/surgery-prep" onclick="event.preventDefault(); showPage('surgery-prep')">Pre-Surgical Consultation</a></li>
+        <li><a href="/recovery" onclick="event.preventDefault(); showPage('recovery')">Post-Operative Care</a></li>
+        <li><a href="/mental-health" onclick="event.preventDefault(); showPage('mental-health')">Mental Wellness</a></li>
+        <li><a href="/obstetric" onclick="event.preventDefault(); showPage('obstetric')">Labor &amp; Delivery Consultation</a></li>
+        <li><a href="/medical-tourism" onclick="event.preventDefault(); showPage('medical-tourism')">Medical Tourism</a></li>
+        <li><a href="/products" onclick="event.preventDefault(); showPage('products')">Products</a></li>
       </ul>
     </div>
     <div class="footer-nav-cols">
       <div>
         <div class="footer-col-title">OpWell</div>
         <ul class="footer-links">
-          <li><a onclick="showPage('about')">Our Story</a></li>
-          <li><a onclick="showPage('blog')" style="cursor:pointer;">Blog</a></li>
-          <li><a onclick="showPage('schedule')">Get Started</a></li>
-          <li><a onclick="showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
-          <li><a onclick="showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
+          <li><a href="/about" onclick="event.preventDefault(); showPage('about')">Our Story</a></li>
+          <li><a href="/blog" onclick="event.preventDefault(); showPage('blog')" style="cursor:pointer;">Blog</a></li>
+          <li><a href="/schedule" onclick="event.preventDefault(); showPage('schedule')">Get Started</a></li>
+          <li><a href="/privacy" onclick="event.preventDefault(); showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
+          <li><a href="/terms" onclick="event.preventDefault(); showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
         </ul>
       </div>
     </div>
@@ -5859,23 +5859,23 @@
     <div>
       <div class="footer-col-title">Programs</div>
       <ul class="footer-links">
-        <li><a onclick="showPage('surgery-prep')">Pre-Surgical Consultation</a></li>
-        <li><a onclick="showPage('recovery')">Post-Operative Care</a></li>
-        <li><a onclick="showPage('mental-health')">Mental Wellness</a></li>
-        <li><a onclick="showPage('obstetric')">Labor &amp; Delivery Consultation</a></li>
-        <li><a onclick="showPage('medical-tourism')">Medical Tourism</a></li>
-        <li><a onclick="showPage('products')">Products</a></li>
+        <li><a href="/surgery-prep" onclick="event.preventDefault(); showPage('surgery-prep')">Pre-Surgical Consultation</a></li>
+        <li><a href="/recovery" onclick="event.preventDefault(); showPage('recovery')">Post-Operative Care</a></li>
+        <li><a href="/mental-health" onclick="event.preventDefault(); showPage('mental-health')">Mental Wellness</a></li>
+        <li><a href="/obstetric" onclick="event.preventDefault(); showPage('obstetric')">Labor &amp; Delivery Consultation</a></li>
+        <li><a href="/medical-tourism" onclick="event.preventDefault(); showPage('medical-tourism')">Medical Tourism</a></li>
+        <li><a href="/products" onclick="event.preventDefault(); showPage('products')">Products</a></li>
       </ul>
     </div>
     <div class="footer-nav-cols">
       <div>
         <div class="footer-col-title">OpWell</div>
         <ul class="footer-links">
-          <li><a onclick="showPage('about')">Our Story</a></li>
-          <li><a onclick="showPage('blog')" style="cursor:pointer;">Blog</a></li>
-          <li><a onclick="showPage('schedule')">Get Started</a></li>
-          <li><a onclick="showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
-          <li><a onclick="showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
+          <li><a href="/about" onclick="event.preventDefault(); showPage('about')">Our Story</a></li>
+          <li><a href="/blog" onclick="event.preventDefault(); showPage('blog')" style="cursor:pointer;">Blog</a></li>
+          <li><a href="/schedule" onclick="event.preventDefault(); showPage('schedule')">Get Started</a></li>
+          <li><a href="/privacy" onclick="event.preventDefault(); showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
+          <li><a href="/terms" onclick="event.preventDefault(); showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
         </ul>
       </div>
     </div>
@@ -6088,23 +6088,23 @@
     <div>
       <div class="footer-col-title">Programs</div>
       <ul class="footer-links">
-        <li><a onclick="showPage('surgery-prep')">Pre-Surgical Consultation</a></li>
-        <li><a onclick="showPage('recovery')">Post-Operative Care</a></li>
-        <li><a onclick="showPage('mental-health')">Mental Wellness</a></li>
-        <li><a onclick="showPage('obstetric')">Labor &amp; Delivery Consultation</a></li>
-        <li><a onclick="showPage('medical-tourism')">Medical Tourism</a></li>
-        <li><a onclick="showPage('products')">Products</a></li>
+        <li><a href="/surgery-prep" onclick="event.preventDefault(); showPage('surgery-prep')">Pre-Surgical Consultation</a></li>
+        <li><a href="/recovery" onclick="event.preventDefault(); showPage('recovery')">Post-Operative Care</a></li>
+        <li><a href="/mental-health" onclick="event.preventDefault(); showPage('mental-health')">Mental Wellness</a></li>
+        <li><a href="/obstetric" onclick="event.preventDefault(); showPage('obstetric')">Labor &amp; Delivery Consultation</a></li>
+        <li><a href="/medical-tourism" onclick="event.preventDefault(); showPage('medical-tourism')">Medical Tourism</a></li>
+        <li><a href="/products" onclick="event.preventDefault(); showPage('products')">Products</a></li>
       </ul>
     </div>
     <div class="footer-nav-cols">
       <div>
         <div class="footer-col-title">OpWell</div>
         <ul class="footer-links">
-          <li><a onclick="showPage('about')">Our Story</a></li>
-          <li><a onclick="showPage('blog')" style="cursor:pointer;">Blog</a></li>
-          <li><a onclick="showPage('schedule')">Get Started</a></li>
-          <li><a onclick="showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
-          <li><a onclick="showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
+          <li><a href="/about" onclick="event.preventDefault(); showPage('about')">Our Story</a></li>
+          <li><a href="/blog" onclick="event.preventDefault(); showPage('blog')" style="cursor:pointer;">Blog</a></li>
+          <li><a href="/schedule" onclick="event.preventDefault(); showPage('schedule')">Get Started</a></li>
+          <li><a href="/privacy" onclick="event.preventDefault(); showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
+          <li><a href="/terms" onclick="event.preventDefault(); showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
         </ul>
       </div>
     </div>
@@ -6292,23 +6292,23 @@
     <div>
       <div class="footer-col-title">Programs</div>
       <ul class="footer-links">
-        <li><a onclick="showPage('surgery-prep')">Pre-Surgical Consultation</a></li>
-        <li><a onclick="showPage('recovery')">Post-Operative Care</a></li>
-        <li><a onclick="showPage('mental-health')">Mental Wellness</a></li>
-        <li><a onclick="showPage('obstetric')">Labor &amp; Delivery Consultation</a></li>
-        <li><a onclick="showPage('medical-tourism')">Medical Tourism</a></li>
-        <li><a onclick="showPage('products')">Products</a></li>
+        <li><a href="/surgery-prep" onclick="event.preventDefault(); showPage('surgery-prep')">Pre-Surgical Consultation</a></li>
+        <li><a href="/recovery" onclick="event.preventDefault(); showPage('recovery')">Post-Operative Care</a></li>
+        <li><a href="/mental-health" onclick="event.preventDefault(); showPage('mental-health')">Mental Wellness</a></li>
+        <li><a href="/obstetric" onclick="event.preventDefault(); showPage('obstetric')">Labor &amp; Delivery Consultation</a></li>
+        <li><a href="/medical-tourism" onclick="event.preventDefault(); showPage('medical-tourism')">Medical Tourism</a></li>
+        <li><a href="/products" onclick="event.preventDefault(); showPage('products')">Products</a></li>
       </ul>
     </div>
     <div class="footer-nav-cols">
       <div>
         <div class="footer-col-title">OpWell</div>
         <ul class="footer-links">
-          <li><a onclick="showPage('about')">Our Story</a></li>
-          <li><a onclick="showPage('blog')" style="cursor:pointer;">Blog</a></li>
-          <li><a onclick="showPage('schedule')">Get Started</a></li>
-          <li><a onclick="showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
-          <li><a onclick="showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
+          <li><a href="/about" onclick="event.preventDefault(); showPage('about')">Our Story</a></li>
+          <li><a href="/blog" onclick="event.preventDefault(); showPage('blog')" style="cursor:pointer;">Blog</a></li>
+          <li><a href="/schedule" onclick="event.preventDefault(); showPage('schedule')">Get Started</a></li>
+          <li><a href="/privacy" onclick="event.preventDefault(); showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
+          <li><a href="/terms" onclick="event.preventDefault(); showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
         </ul>
       </div>
     </div>
@@ -6497,23 +6497,23 @@
     <div>
       <div class="footer-col-title">Programs</div>
       <ul class="footer-links">
-        <li><a onclick="showPage('surgery-prep')">Pre-Surgical Consultation</a></li>
-        <li><a onclick="showPage('recovery')">Post-Operative Care</a></li>
-        <li><a onclick="showPage('mental-health')">Mental Wellness</a></li>
-        <li><a onclick="showPage('obstetric')">Labor &amp; Delivery Consultation</a></li>
-        <li><a onclick="showPage('medical-tourism')">Medical Tourism</a></li>
-        <li><a onclick="showPage('products')">Products</a></li>
+        <li><a href="/surgery-prep" onclick="event.preventDefault(); showPage('surgery-prep')">Pre-Surgical Consultation</a></li>
+        <li><a href="/recovery" onclick="event.preventDefault(); showPage('recovery')">Post-Operative Care</a></li>
+        <li><a href="/mental-health" onclick="event.preventDefault(); showPage('mental-health')">Mental Wellness</a></li>
+        <li><a href="/obstetric" onclick="event.preventDefault(); showPage('obstetric')">Labor &amp; Delivery Consultation</a></li>
+        <li><a href="/medical-tourism" onclick="event.preventDefault(); showPage('medical-tourism')">Medical Tourism</a></li>
+        <li><a href="/products" onclick="event.preventDefault(); showPage('products')">Products</a></li>
       </ul>
     </div>
     <div class="footer-nav-cols">
       <div>
         <div class="footer-col-title">OpWell</div>
         <ul class="footer-links">
-          <li><a onclick="showPage('about')">Our Story</a></li>
-          <li><a onclick="showPage('blog')" style="cursor:pointer;">Blog</a></li>
-          <li><a onclick="showPage('schedule')">Get Started</a></li>
-          <li><a onclick="showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
-          <li><a onclick="showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
+          <li><a href="/about" onclick="event.preventDefault(); showPage('about')">Our Story</a></li>
+          <li><a href="/blog" onclick="event.preventDefault(); showPage('blog')" style="cursor:pointer;">Blog</a></li>
+          <li><a href="/schedule" onclick="event.preventDefault(); showPage('schedule')">Get Started</a></li>
+          <li><a href="/privacy" onclick="event.preventDefault(); showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
+          <li><a href="/terms" onclick="event.preventDefault(); showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
         </ul>
       </div>
     </div>
@@ -14372,6 +14372,42 @@
     <p class="section-subtitle">Book any consultation and Dr. Oluwole will help you determine the best level of support for your procedure and needs.</p>
     <a onclick="showPage('schedule')" class="btn-gold" style="cursor:pointer;">Book Your Consultation →</a>
   </section>
+  <footer>
+    <div class="footer-watermark"><div class="footer-watermark-circle"></div></div>
+    <div>
+      <div class="footer-col-title">Programs</div>
+      <ul class="footer-links">
+        <li><a href="/surgery-prep" onclick="event.preventDefault(); showPage('surgery-prep')">Pre-Surgical Consultation</a></li>
+        <li><a href="/recovery" onclick="event.preventDefault(); showPage('recovery')">Post-Operative Care</a></li>
+        <li><a href="/mental-health" onclick="event.preventDefault(); showPage('mental-health')">Mental Wellness</a></li>
+        <li><a href="/obstetric" onclick="event.preventDefault(); showPage('obstetric')">Labor &amp; Delivery Consultation</a></li>
+        <li><a href="/medical-tourism" onclick="event.preventDefault(); showPage('medical-tourism')">Medical Tourism</a></li>
+        <li><a href="/products" onclick="event.preventDefault(); showPage('products')">Products</a></li>
+      </ul>
+    </div>
+    <div class="footer-nav-cols">
+      <div>
+        <div class="footer-col-title">OpWell</div>
+        <ul class="footer-links">
+          <li><a href="/about" onclick="event.preventDefault(); showPage('about')">Our Story</a></li>
+          <li><a href="/blog" onclick="event.preventDefault(); showPage('blog')" style="cursor:pointer;">Blog</a></li>
+          <li><a href="/schedule" onclick="event.preventDefault(); showPage('schedule')">Get Started</a></li>
+          <li><a href="/privacy" onclick="event.preventDefault(); showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
+          <li><a href="/terms" onclick="event.preventDefault(); showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Telehealth Practice</div>
+      <p style="font-size:0.82rem; color:rgba(253,251,248,0.5); line-height:1.8;">Ohio · Georgia · Virginia<br>No referral required · HSA &amp; FSA accepted</p>
+    </div>
+    <div style="display:flex; flex-direction:column; align-items:flex-end; justify-content:flex-start;">
+      <div class="footer-col-title">Join the Waitlist</div>
+      <p style="font-size:0.78rem; color:rgba(253,251,248,0.4); margin-bottom:1rem; text-align:right; max-width:280px;">Want OpWell in your state? Have a question or special request?</p>
+      <a onclick="showPage('contact')" style="display:inline-block; background:var(--terracotta); color:#fff; font-family:'DM Sans',sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; padding:0.65rem 1.5rem; border-radius:6px; cursor:pointer; text-decoration:none; transition:background 0.2s;" onmouseover="this.style.background='#a06040';" onmouseout="this.style.background='var(--terracotta)';">Contact Us →</a>
+    </div>
+  </footer>
+  <div class="footer-bottom"><span class="footer-legal">© 2025–2026 OpWell Concierge™. All rights reserved. Registered trade name in Ohio &amp; Georgia.</span><span class="footer-legal">Not a substitute for emergency medical care &nbsp;·&nbsp; No physician-patient relationship until a formal consultation is completed.</span></div>
 </div>
 
 <!-- ══════════════════════════════════════════════════════ -->
@@ -14594,23 +14630,23 @@
     <div>
       <div class="footer-col-title">Programs</div>
       <ul class="footer-links">
-        <li><a onclick="showPage('surgery-prep')">Pre-Surgical Consultation</a></li>
-        <li><a onclick="showPage('recovery')">Post-Operative Care</a></li>
-        <li><a onclick="showPage('mental-health')">Mental Wellness</a></li>
-        <li><a onclick="showPage('obstetric')">Labor &amp; Delivery Consultation</a></li>
-        <li><a onclick="showPage('medical-tourism')">Medical Tourism</a></li>
-        <li><a onclick="showPage('products')">Products</a></li>
+        <li><a href="/surgery-prep" onclick="event.preventDefault(); showPage('surgery-prep')">Pre-Surgical Consultation</a></li>
+        <li><a href="/recovery" onclick="event.preventDefault(); showPage('recovery')">Post-Operative Care</a></li>
+        <li><a href="/mental-health" onclick="event.preventDefault(); showPage('mental-health')">Mental Wellness</a></li>
+        <li><a href="/obstetric" onclick="event.preventDefault(); showPage('obstetric')">Labor &amp; Delivery Consultation</a></li>
+        <li><a href="/medical-tourism" onclick="event.preventDefault(); showPage('medical-tourism')">Medical Tourism</a></li>
+        <li><a href="/products" onclick="event.preventDefault(); showPage('products')">Products</a></li>
       </ul>
     </div>
     <div class="footer-nav-cols">
       <div>
         <div class="footer-col-title">OpWell</div>
         <ul class="footer-links">
-          <li><a onclick="showPage('about')">Our Story</a></li>
-          <li><a onclick="showPage('blog')" style="cursor:pointer;">Blog</a></li>
-          <li><a onclick="showPage('schedule')">Get Started</a></li>
-          <li><a onclick="showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
-          <li><a onclick="showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
+          <li><a href="/about" onclick="event.preventDefault(); showPage('about')">Our Story</a></li>
+          <li><a href="/blog" onclick="event.preventDefault(); showPage('blog')" style="cursor:pointer;">Blog</a></li>
+          <li><a href="/schedule" onclick="event.preventDefault(); showPage('schedule')">Get Started</a></li>
+          <li><a href="/privacy" onclick="event.preventDefault(); showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
+          <li><a href="/terms" onclick="event.preventDefault(); showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
         </ul>
       </div>
     </div>
@@ -15067,6 +15103,35 @@
     'schedule':        { title: 'Book a Consultation | OpWell Concierge™', desc: 'Book your pre-surgical consultation, post-operative care, or mental wellness session with OpWell Concierge™. Secure checkout. HSA & FSA accepted.' },
     'contact':         { title: 'Contact OpWell Concierge™ | Request a State or Ask a Question', desc: 'Get in touch with OpWell Concierge™. Request services in your state, ask a question, or make a special request. We’ll respond within 24 hours.' },
     'provider':        { title: 'Provider Referrals & Partnerships | OpWell Concierge™', desc: 'Refer a patient to OpWell Concierge™ or explore a practice partnership. Board-certified anesthesiologist-led perioperative telehealth for your patients.' },
+    'blog-1':          { title: 'How to Prepare for Surgery: A Complete Checklist | OpWell Concierge™', desc: 'A board-certified anesthesiologist\'s step-by-step surgery preparation checklist. Medications to stop, nutrition to optimize, and what to do weeks before your procedure.' },
+    'blog-2':          { title: 'What Happens to Your Body Under General Anesthesia | OpWell Concierge™', desc: 'The three stages of general anesthesia explained by a board-certified anesthesiologist. What you\'ll feel, what we monitor, and answers to the questions patients are afraid to ask.' },
+    'blog-3':          { title: 'The First 72 Hours After Surgery: What to Expect | OpWell Concierge™', desc: 'Hour-by-hour recovery guide covering pain management, wound care, constipation prevention, and red flags requiring immediate medical attention after surgery.' },
+    'blog-4':          { title: 'Why Mental Health Before Surgery Matters More Than You Think | OpWell Concierge™', desc: 'Research shows pre-surgical anxiety directly impacts pain levels, medication needs, and healing time. Evidence-based strategies to prepare mentally for surgery.' },
+    'blog-5':          { title: 'Medical Tourism: 7 Things to Do Before Surgery Abroad | OpWell Concierge™', desc: 'Essential safety guide for the 1.4 million Americans traveling abroad for surgery. Facility vetting, pre-op consultation, blood clot risk, and US follow-up care.' },
+    'blog-6':          { title: 'Understanding Dumping Syndrome After Bariatric Surgery | OpWell Concierge™', desc: 'Up to 40% of bariatric patients experience dumping syndrome. Learn early vs. late types, triggers, management strategies, and when to contact your doctor.' },
+    'blog-7':          { title: 'Vitamin & Supplement Schedule After Bariatric Surgery | OpWell Concierge™', desc: 'Comprehensive post-bariatric supplementation guide: B12, iron, calcium, multivitamins. Dosing schedules, absorption tips, and medication interactions after weight-loss surgery.' },
+    'blog-9':          { title: 'Evidence-Based Surgery Preparation: Complete Clinical Guide | OpWell Concierge™', desc: 'Advanced surgery prep guide based on ASA & ERAS guidelines. Medications to continue or stop, lab work, anesthesia selection, and pre-operative optimization protocols.' },
+    'blog-10':         { title: 'Managing Blood Thinners Around Surgery: A Patient Guide | OpWell Concierge™', desc: 'Evidence-based guide for managing warfarin and DOACs before surgery. Stopping timelines, bridging therapy, and perioperative anticoagulation protocols (2022 ACCP & 2024 ACC/AHA).' },
+    'blog-11':         { title: '3 Biggest Fears Before Cosmetic Surgery — What Research Says | OpWell Concierge™', desc: 'Will I like my results? How bad is the pain? Is anesthesia safe? A board-certified anesthesiologist addresses the top three cosmetic surgery fears with research-backed facts.' },
+    'blog-12':         { title: 'Your Complete Cosmetic Surgery Guide | OpWell Concierge™', desc: 'Comprehensive cosmetic surgery guide covering pre-op preparation, medications, anesthesia options, complications, recovery timeline, and what to expect at every stage.' },
+    'blog-13':         { title: 'Do Fajas Work After a Tummy Tuck? What Research Says | OpWell Concierge™', desc: 'Evidence-based look at compression garments (fajas) after abdominoplasty. Research on effectiveness, timing, do\'s and don\'ts, and practical selection guidance.' },
+    'blog-14':         { title: 'Brazilian Butt Lift (BBL): What to Know Before Surgery | OpWell Concierge™', desc: 'Complete BBL patient guide: safety statistics, the fat transfer process, complication rates, recovery requirements, and what makes BBL different from other cosmetic procedures.' },
+    'blog-15':         { title: 'Tummy Tuck: Your Complete Patient Guide | OpWell Concierge™', desc: 'Comprehensive abdominoplasty guide covering surgical techniques, recovery phases, scar management, combination procedures, and realistic timeline expectations.' },
+    'blog-16':         { title: 'Rhinoplasty (Nose Surgery): Your Complete Patient Guide | OpWell Concierge™', desc: 'Complete rhinoplasty guide covering aesthetic goals, functional breathing improvement, surgical approaches, recovery timeline, and anesthesia considerations.' },
+    'blog-17':         { title: 'Liposuction: Your Complete Patient Guide | OpWell Concierge™', desc: 'Comprehensive liposuction guide covering candidate selection, surgical techniques, fluid management, compression garments, and realistic body contouring expectations.' },
+    'blog-18':         { title: 'Breast Augmentation: Your Complete Patient Guide | OpWell Concierge™', desc: 'Complete breast augmentation guide: implant types, placement options, sizing, incision approaches, recovery timeline, and long-term implant management.' },
+    'blog-19':         { title: '5 Popular Cosmetic Surgeries: Safety Stats & What to Expect | OpWell Concierge™', desc: 'Quick comparison of BBL, tummy tuck, rhinoplasty, breast augmentation, and liposuction. Safety statistics, biggest risks, recovery times, and links to detailed guides.' },
+    'blog-20':         { title: 'Epidurals & Birth Pain: What Every Pregnant Woman Should Know | OpWell Concierge™', desc: 'Comprehensive epidural guide: how they work, effectiveness rates, side effects, risks, alternatives, and what to discuss with your anesthesiologist before your due date.' },
+    'blog-21':         { title: 'Surgery Abroad Safety Guide: Before You Board That Plane | OpWell Concierge™', desc: 'Medical tourism safety guide covering credential verification, blood clot prevention on flights, recovery logistics, complications management, and US follow-up coordination.' },
+    'blog-22':         { title: 'Cosmetic Surgery & Anesthesia: What Your Surgeon Won\'t Tell You | OpWell Concierge™', desc: 'Anesthesia considerations specific to cosmetic surgery. Different anesthesia options, safety protocols for elective procedures, and the anesthesiologist\'s role in your results.' },
+    'blog-23':         { title: 'On Ozempic, Wegovy, or Mounjaro? Read This Before Surgery | OpWell Concierge™', desc: 'Critical guide for GLP-1 patients facing surgery. Holding timelines, aspiration risk, blood sugar management, anesthesia considerations, and what to tell your surgical team.' },
+    'blog-24':         { title: 'Post-Op Nutrition & Wound Healing: Complete Patient Guide | OpWell Concierge™', desc: 'Post-operative nutrition guide covering protein requirements, vitamins for wound healing, hydration protocols, supplement timing, and strategies to optimize surgical recovery.' },
+    'blog-25':         { title: 'Quick Reference: Nutrition for Wound Healing After Surgery | OpWell Concierge™', desc: 'Quick-reference card for post-op nutrition: key nutrients, daily targets, food sources, and a simplified checklist for patients in early surgical recovery.' },
+    'blog-26':         { title: 'Why Is the BBL Considered a Higher-Risk Procedure? | OpWell Concierge™', desc: 'BBL safety profile explained: fat embolism risks, what makes BBL unique, modern safety advancements, and how ultrasound-guided techniques have improved outcomes.' },
+    'blog-27':         { title: 'BBL Red Flags: Checklist to Evaluate Surgeons & Facilities | OpWell Concierge™', desc: 'Red flags checklist for evaluating BBL surgeons and facilities. Credential verification, accreditation, complication transparency, and questions to ask before booking.' },
+    'blog-28':         { title: 'BBL Complications: Who Is Most at Risk? | OpWell Concierge™', desc: 'Evidence-based analysis of BBL complication risk factors. Patient factors, medical conditions requiring special consideration, and what the latest research shows.' },
+    'blog-29':         { title: 'Why Your Anesthesiologist May Be the Most Important Doctor You Haven\'t Met | OpWell Concierge™', desc: 'The critical role of anesthesiologists in patient safety. 12+ years of training, what we do beyond "putting you to sleep," and why physician relationship matters.' },
+    'blog-30':         { title: 'Anesthesiologist\'s Guide to Bariatric Surgery | OpWell Concierge™', desc: 'Comprehensive bariatric surgery guide from an anesthesiologist: pre-op optimization, airway management, medication dosing adjustments, and recovery protocols for weight-loss surgery.' },
   };
 
   function updatePageMeta(pageId) {
@@ -15083,7 +15148,10 @@
     var twitterDesc = document.querySelector('meta[name="twitter:description"]');
     if (twitterDesc) twitterDesc.setAttribute('content', meta.desc);
     var canonical = document.querySelector('link[rel="canonical"]');
-    if (canonical) canonical.setAttribute('href', 'https://opwellconcierge.com/' + (pageId === 'home' ? '' : pageId));
+    var pageUrl = 'https://opwellconcierge.com/' + (pageId === 'home' ? '' : pageId);
+    if (canonical) canonical.setAttribute('href', pageUrl);
+    var ogUrl = document.querySelector('meta[property="og:url"]');
+    if (ogUrl) ogUrl.setAttribute('content', pageUrl);
   }
 
   function showPage(pageId, skipPush) {
@@ -15564,17 +15632,17 @@
       <li class="has-dropdown">
         <a tabindex="0">Services</a>
         <ul class="nav-dropdown">
-          <li><a onclick="showPage('surgery-prep')">Pre-Surgical Consultation</a></li>
-          <li><a onclick="showPage('recovery')">Post-Operative Care</a></li>
-          <li><a onclick="showPage('mental-health')">Mental Wellness</a></li>
-          <li><a onclick="showPage('obstetric')">Labor &amp; Delivery Consultation</a></li>
-          <li><a onclick="showPage('medical-tourism')">Medical Tourism</a></li>
+          <li><a href="/surgery-prep" onclick="event.preventDefault(); showPage('surgery-prep')">Pre-Surgical Consultation</a></li>
+          <li><a href="/recovery" onclick="event.preventDefault(); showPage('recovery')">Post-Operative Care</a></li>
+          <li><a href="/mental-health" onclick="event.preventDefault(); showPage('mental-health')">Mental Wellness</a></li>
+          <li><a href="/obstetric" onclick="event.preventDefault(); showPage('obstetric')">Labor &amp; Delivery Consultation</a></li>
+          <li><a href="/medical-tourism" onclick="event.preventDefault(); showPage('medical-tourism')">Medical Tourism</a></li>
         </ul>
       </li>
-      <li><a onclick="showPage('products')">Products</a></li>
-      <li><a onclick="showPage('about')">Our Story</a></li>
+      <li><a href="/products" onclick="event.preventDefault(); showPage('products')">Products</a></li>
+      <li><a href="/about" onclick="event.preventDefault(); showPage('about')">Our Story</a></li>
       <li><a onclick="showPage('blog')">Blog</a></li>
-      <li><a onclick="showPage('schedule')">Get Started</a></li>
+      <li><a href="/schedule" onclick="event.preventDefault(); showPage('schedule')">Get Started</a></li>
     </ul>
     <a onclick="showPage('schedule')" style="cursor:pointer;" class="nav-cta">Book Now</a>
   </nav>
@@ -15724,17 +15792,17 @@
       <li class="has-dropdown">
         <a tabindex="0">Services</a>
         <ul class="nav-dropdown">
-          <li><a onclick="showPage('surgery-prep')">Pre-Surgical Consultation</a></li>
-          <li><a onclick="showPage('recovery')">Post-Operative Care</a></li>
-          <li><a onclick="showPage('mental-health')">Mental Wellness</a></li>
-          <li><a onclick="showPage('obstetric')">Labor &amp; Delivery Consultation</a></li>
-          <li><a onclick="showPage('medical-tourism')">Medical Tourism</a></li>
+          <li><a href="/surgery-prep" onclick="event.preventDefault(); showPage('surgery-prep')">Pre-Surgical Consultation</a></li>
+          <li><a href="/recovery" onclick="event.preventDefault(); showPage('recovery')">Post-Operative Care</a></li>
+          <li><a href="/mental-health" onclick="event.preventDefault(); showPage('mental-health')">Mental Wellness</a></li>
+          <li><a href="/obstetric" onclick="event.preventDefault(); showPage('obstetric')">Labor &amp; Delivery Consultation</a></li>
+          <li><a href="/medical-tourism" onclick="event.preventDefault(); showPage('medical-tourism')">Medical Tourism</a></li>
         </ul>
       </li>
-      <li><a onclick="showPage('products')">Products</a></li>
-      <li><a onclick="showPage('about')">Our Story</a></li>
+      <li><a href="/products" onclick="event.preventDefault(); showPage('products')">Products</a></li>
+      <li><a href="/about" onclick="event.preventDefault(); showPage('about')">Our Story</a></li>
       <li><a onclick="showPage('blog')">Blog</a></li>
-      <li><a onclick="showPage('schedule')">Get Started</a></li>
+      <li><a href="/schedule" onclick="event.preventDefault(); showPage('schedule')">Get Started</a></li>
     </ul>
     <a onclick="showPage('schedule')" style="cursor:pointer;" class="nav-cta">Book Now</a>
   </nav>
@@ -15910,18 +15978,18 @@
       <li class="has-dropdown">
         <a tabindex="0">Services</a>
         <ul class="nav-dropdown">
-          <li><a onclick="showPage('surgery-prep')">Pre-Surgical Consultation</a></li>
-          <li><a onclick="showPage('recovery')">Post-Operative Care</a></li>
-          <li><a onclick="showPage('mental-health')">Mental Wellness</a></li>
-          <li><a onclick="showPage('obstetric')">Labor &amp; Delivery Consultation</a></li>
-          <li><a onclick="showPage('medical-tourism')">Medical Tourism</a></li>
+          <li><a href="/surgery-prep" onclick="event.preventDefault(); showPage('surgery-prep')">Pre-Surgical Consultation</a></li>
+          <li><a href="/recovery" onclick="event.preventDefault(); showPage('recovery')">Post-Operative Care</a></li>
+          <li><a href="/mental-health" onclick="event.preventDefault(); showPage('mental-health')">Mental Wellness</a></li>
+          <li><a href="/obstetric" onclick="event.preventDefault(); showPage('obstetric')">Labor &amp; Delivery Consultation</a></li>
+          <li><a href="/medical-tourism" onclick="event.preventDefault(); showPage('medical-tourism')">Medical Tourism</a></li>
         </ul>
       </li>
-      <li><a onclick="showPage('about')">Our Story</a></li>
-      <li><a onclick="showPage('products')">Products</a></li>
+      <li><a href="/about" onclick="event.preventDefault(); showPage('about')">Our Story</a></li>
+      <li><a href="/products" onclick="event.preventDefault(); showPage('products')">Products</a></li>
       <li><a onclick="showPage('blog')">Blog</a></li>
       <li><a onclick="showPage('contact')" class="active">Contact</a></li>
-      <li><a onclick="showPage('schedule')">Get Started</a></li>
+      <li><a href="/schedule" onclick="event.preventDefault(); showPage('schedule')">Get Started</a></li>
     </ul>
     <a onclick="showPage('schedule')" style="cursor:pointer;" class="nav-cta">Book Now</a>
   </nav>
@@ -16065,18 +16133,18 @@
       <li class="has-dropdown">
         <a tabindex="0">Services</a>
         <ul class="nav-dropdown">
-          <li><a onclick="showPage('surgery-prep')">Pre-Surgical Consultation</a></li>
-          <li><a onclick="showPage('recovery')">Post-Operative Care</a></li>
-          <li><a onclick="showPage('mental-health')">Mental Wellness</a></li>
-          <li><a onclick="showPage('obstetric')">Labor &amp; Delivery Consultation</a></li>
-          <li><a onclick="showPage('medical-tourism')">Medical Tourism</a></li>
+          <li><a href="/surgery-prep" onclick="event.preventDefault(); showPage('surgery-prep')">Pre-Surgical Consultation</a></li>
+          <li><a href="/recovery" onclick="event.preventDefault(); showPage('recovery')">Post-Operative Care</a></li>
+          <li><a href="/mental-health" onclick="event.preventDefault(); showPage('mental-health')">Mental Wellness</a></li>
+          <li><a href="/obstetric" onclick="event.preventDefault(); showPage('obstetric')">Labor &amp; Delivery Consultation</a></li>
+          <li><a href="/medical-tourism" onclick="event.preventDefault(); showPage('medical-tourism')">Medical Tourism</a></li>
         </ul>
       </li>
-      <li><a onclick="showPage('about')">Our Story</a></li>
-      <li><a onclick="showPage('products')">Products</a></li>
+      <li><a href="/about" onclick="event.preventDefault(); showPage('about')">Our Story</a></li>
+      <li><a href="/products" onclick="event.preventDefault(); showPage('products')">Products</a></li>
       <li><a onclick="showPage('blog')">Blog</a></li>
       <li><a onclick="showPage('contact')">Contact</a></li>
-      <li><a onclick="showPage('schedule')">Get Started</a></li>
+      <li><a href="/schedule" onclick="event.preventDefault(); showPage('schedule')">Get Started</a></li>
     </ul>
     <a onclick="showPage('schedule')" style="cursor:pointer;" class="nav-cta">Book Now</a>
   </nav>
