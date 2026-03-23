@@ -4154,6 +4154,13 @@
     <a onclick="showPage('schedule')" class="btn-primary" style="cursor:pointer;">Book Your Consultation →</a>
   </div>
 
+  <div class="tabs-nav" id="mt-tabs">
+    <button class="tab-btn active" onclick="showMtTab('overview')">Overview</button>
+    <button class="tab-btn" onclick="showMtTab('pricing')">Pricing</button>
+    <button class="tab-btn" onclick="showMtTab('faq')">FAQ</button>
+  </div>
+
+  <div class="tab-panel active" id="mttab-overview">
   <div class="content-section alt">
     <div class="content-2col">
       <div>
@@ -4266,7 +4273,9 @@
       </div>
     </div>
   </div>
+  </div>
 
+  <div class="tab-panel" id="mttab-pricing">
   <div class="package-section">
     <div class="section-tag">Investment</div>
     <h2 class="section-title">Before you travel, after you return,<br>or both.</h2>
@@ -4330,7 +4339,9 @@
     </div>
     <p class="section-subtitle" style="margin-top:1.5rem;"><a onclick="showPage('pricing')" style="color:var(--terracotta); cursor:pointer; text-decoration:underline;">Compare all care plans & packages →</a></p>
   </div>
+  </div>
 
+  <div class="tab-panel" id="mttab-faq">
   <div class="faq-section">
     <div class="section-tag">Common Questions</div>
     <h2 class="section-title">What patients ask us most.</h2>
@@ -4347,6 +4358,7 @@
       <div class="faq-q" onclick="toggleFaq(this)">How do I share my foreign surgical records with OpWell? <span class="faq-icon">+</span></div>
       <div class="faq-a">You can upload any documents — operative reports, discharge summaries, medication lists, post-op instructions — directly through your OpWell patient portal. If records are in another language, we will work with what you have. The more information you can share, the better Dr. Oluwole can support your recovery.</div>
     </div>
+  </div>
   </div>
 
   <section class="final-cta">
@@ -14732,6 +14744,15 @@
     nav.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
     document.querySelectorAll('[id^="mtab-"]').forEach(function(p) { p.classList.remove('active'); });
     document.getElementById('mtab-' + tabId).classList.add('active');
+    event.target.classList.add('active');
+    nav.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function showMtTab(tabId) {
+    var nav = document.getElementById('mt-tabs');
+    nav.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+    document.querySelectorAll('[id^="mttab-"]').forEach(function(p) { p.classList.remove('active'); });
+    document.getElementById('mttab-' + tabId).classList.add('active');
     event.target.classList.add('active');
     nav.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
