@@ -683,22 +683,25 @@
       max-width: 1100px;
     }
 
-    .provider-section .section-tag { color: #7A3A20; }
-    .provider-section .section-title { color: #1E1008; }
-    .provider-section .gold-divider { background: #7A3A20; }
-    .provider-section .section-subtitle { color: #3D2010; }
+    .provider-section .section-tag { color: var(--terracotta-light); }
+    .provider-section .section-title { color: #FAF0E8; }
+    .provider-section .gold-divider { background: var(--terracotta); }
+    .provider-section .section-subtitle { color: rgba(250,240,232,0.8); }
+    .provider-section .body-text { color: rgba(250,240,232,0.85); }
+    .provider-section .btn-secondary { color: #FAF0E8; border-color: rgba(250,240,232,0.4); }
 
     .provider-card {
-      border: 1px solid rgba(100,50,20,0.12);
+      border: 1px solid rgba(250,240,232,0.15);
       padding: 2.5rem;
       border-radius: 12px;
-      background: rgba(255,255,255,0.5);
+      background: rgba(0,0,0,0.35);
+      backdrop-filter: blur(8px);
       transition: all 0.35s ease;
     }
 
     .provider-card:hover {
-      background: rgba(255,255,255,0.75);
-      border-color: rgba(100,50,20,0.3);
+      background: rgba(0,0,0,0.45);
+      border-color: rgba(250,240,232,0.25);
     }
 
     .provider-card .section-tag { color: var(--terracotta); }
@@ -707,13 +710,13 @@
       font-family: 'Playfair Display', serif;
       font-size: 1rem;
       font-weight: 500;
-      color: #2D1F14;
+      color: #FAF0E8;
       margin-bottom: 0.4rem;
     }
 
     .provider-feature-desc {
       font-size: 0.82rem;
-      color: #5A4A3A;
+      color: rgba(250,240,232,0.7);
       line-height: 1.75;
     }
 
@@ -2785,10 +2788,7 @@
   </div>
 
   <!-- PROVIDER PARTNERSHIP SECTION -->
-  <section class="provider-section">
-    <div style="max-width:1100px; margin:0 auto 3.5rem; border-radius:16px; overflow:hidden; box-shadow:0 16px 48px rgba(0,0,0,0.15);">
-      <img src="dr-oluwole-provider-collab.jpg" alt="Dr. Oluwole collaborating with a surgeon" style="width:100%; display:block; aspect-ratio:16/9; object-fit:cover; object-position:center top;">
-    </div>
+  <section class="provider-section" style="background: linear-gradient(to right, rgba(30,16,8,0.88) 0%, rgba(30,16,8,0.72) 50%, rgba(30,16,8,0.55) 100%), url('dr-oluwole-provider-collab.jpg') center center / cover no-repeat;">
     <div class="provider-inner">
       <div class="provider-text">
         <div class="section-tag">For Providers</div>
@@ -3929,7 +3929,7 @@
 <!-- OBSTETRIC PAGE -->
 <!-- ══════════════════════════════════════════════════════ -->
 <div id="page-obstetric" class="page">
-  <div class="lp-hero" style="background: linear-gradient(to right, rgba(17,17,17,0.72) 0%, rgba(17,17,17,0.42) 55%, rgba(17,17,17,0.12) 100%), url('dr-oluwole-10.jpg') center center / cover no-repeat;">
+  <div class="lp-hero" style="background: linear-gradient(to right, rgba(17,17,17,0.72) 0%, rgba(17,17,17,0.42) 55%, rgba(17,17,17,0.12) 100%), url('dr-oluwole-ld-pregnant.jpg') center center / cover no-repeat;">
     <div class="lp-hero-bg"></div>
     <div class="lp-breadcrumb" onclick="showPage('home')" style="color:rgba(255,255,255,0.7);">← OpWell Home</div>
     <h1 class="lp-headline" style="color:#FAF0E8;">Labor &amp; Delivery Consultation:<br>Confidence on delivery day<br><em>starts here.</em></h1>
@@ -3963,6 +3963,9 @@
         <p class="body-text">OpWell's Labor & Delivery Consultation gives you that conversation — on your schedule, before labor begins, with a board-certified anesthesiologist who has time to answer every question.</p>
       </div>
       <div>
+        <div style="border-radius:16px; overflow:hidden; margin-bottom:1.5rem; box-shadow:0 8px 32px rgba(0,0,0,0.1);">
+          <img src="dr-oluwole-10.jpg" alt="Couple consulting with Dr. Oluwole via telehealth" style="width:100%; display:block; aspect-ratio:4/3; object-fit:cover;">
+        </div>
         <div class="highlight-box">
           <div class="section-title">What most patients don't know about labor & delivery prep</div>
           <div class="gold-divider"></div>
