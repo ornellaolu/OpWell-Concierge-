@@ -39,6 +39,10 @@ module.exports = async function handler(req, res) {
 
     } else if (action === 'recover') {
       // Called manually or via cron to send recovery email
+      if (req.headers['x-admin-key'] !== process.env.ADMIN_NOTIFY_KEY) {
+        return res.status(401).json({ error: 'Unauthorized' });
+      }
+
       const { email, fname, service } = req.body;
 
       if (!email) return res.status(400).json({ error: 'Email required' });

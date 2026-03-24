@@ -40,6 +40,28 @@ module.exports = async function handler(req, res) {
 
     if (event.type === 'checkout.session.completed') {
       const session = event.data.object;
+
+      // Handle gift purchases
+      if (session.metadata.is_gift === 'true') {
+        const { service, gifter_name, gifter_email, recipient_name, recipient_email, gift_message } = session.metadata;
+        // Import and call gift confirmation handler
+        const giftHandler = require('./send-gift-confirmation');
+        const fakeReq = {
+          method: 'POST',
+          body: {
+            service,
+            gifterName: gifter_name,
+            gifterEmail: gifter_email,
+            recipientName: recipient_name,
+            recipientEmail: recipient_email,
+            giftMessage: gift_message
+          }
+        };
+        const fakeRes = { status: () => ({ json: () => {} }) };
+        await giftHandler(fakeReq, fakeRes);
+        return res.status(200).json({ received: true });
+      }
+
       const email = session.customer_email || session.metadata.patient_email || '';
       const patientName = session.metadata.patient_name || 'Patient';
       const services = session.metadata.services || 'Consultation';

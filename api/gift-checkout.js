@@ -27,9 +27,11 @@ module.exports = async function handler(req, res) {
       giftMessage
     } = req.body;
 
+    function isValidEmail(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
+
     if (!service) return res.status(400).json({ error: 'No service selected' });
-    if (!gifterEmail) return res.status(400).json({ error: 'Gifter email required' });
-    if (!recipientEmail) return res.status(400).json({ error: 'Recipient email required' });
+    if (!gifterEmail || !isValidEmail(gifterEmail)) return res.status(400).json({ error: 'Valid gifter email required' });
+    if (!recipientEmail || !isValidEmail(recipientEmail)) return res.status(400).json({ error: 'Valid recipient email required' });
 
     const amount = PRICES[service];
     if (!amount) return res.status(400).json({ error: `Unknown service: ${service}` });

@@ -20,8 +20,10 @@ module.exports = async function handler(req, res) {
       giftMessage
     } = req.body;
 
-    if (!gifterEmail || !recipientEmail) {
-      return res.status(400).json({ error: 'Both gifter and recipient emails are required' });
+    function isValidEmail(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
+
+    if (!gifterEmail || !isValidEmail(gifterEmail) || !recipientEmail || !isValidEmail(recipientEmail)) {
+      return res.status(400).json({ error: 'Valid gifter and recipient emails are required' });
     }
 
     const serviceName = service || 'OpWell Consultation';

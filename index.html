@@ -15000,21 +15000,8 @@
             '<strong>Service:</strong> ' + data.service + '<br>' +
             '<strong>Preferred:</strong> ' + data.date + ' at ' + data.time;
           schedSetStep(4);
-          // Send confirmation email
-          fetch('/api/send-confirmation', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              email: data.email,
-              fname: data.fname,
-              lname: data.lname,
-              service: data.items,
-              procedure: data.procedure,
-              date: data.date,
-              time: data.time,
-              feedbackConsent: data.feedbackConsent
-            })
-          }).catch(function() {});
+          // Confirmation email is sent server-side via Stripe webhook (webhook.js)
+          // No client-side email trigger needed
           sessionStorage.removeItem('opwell_booking');
           history.replaceState({}, '', window.location.pathname);
         } catch(e) {}
@@ -15367,12 +15354,7 @@
       if (saved) {
         try {
           var data = JSON.parse(saved);
-          // Send gift confirmation emails
-          fetch('/api/send-gift-confirmation', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-          }).catch(function() {});
+          // Gift confirmation emails are sent server-side via Stripe webhook (webhook.js)
           sessionStorage.removeItem('opwell_gift');
           history.replaceState({}, '', window.location.pathname);
           // Show success

@@ -9,6 +9,10 @@ module.exports = async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
+  if (req.headers['x-admin-key'] !== process.env.ADMIN_NOTIFY_KEY) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+
   try {
     const resend = new Resend(process.env.RESEND_API_KEY);
     const { email, patientName, service, date, time, telehealthLink } = req.body;
