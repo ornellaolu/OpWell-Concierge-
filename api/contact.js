@@ -13,8 +13,14 @@ module.exports = async function handler(req, res) {
     const resend = new Resend(process.env.RESEND_API_KEY);
     const { fname, lname, email, phone, state, message } = req.body;
 
+    function isValidEmail(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
+
     if (!fname || !lname || !email || !message) {
       return res.status(400).json({ error: 'Missing required fields' });
+    }
+
+    if (!isValidEmail(email)) {
+      return res.status(400).json({ error: 'Invalid email format' });
     }
 
     const patientName = `${fname} ${lname}`.trim();

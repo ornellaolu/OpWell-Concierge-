@@ -13,11 +13,17 @@ module.exports = async function handler(req, res) {
     const resend = new Resend(process.env.RESEND_API_KEY);
     const { type } = req.body;
 
+    function isValidEmail(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
+
     if (type === 'referral') {
       const { providerName, practice, providerEmail, providerPhone, patientName, patientEmail, patientPhone, service, procedure, notes } = req.body;
 
       if (!providerName || !practice || !providerEmail || !patientName || !patientEmail || !service) {
         return res.status(400).json({ error: 'Missing required fields' });
+      }
+
+      if (!isValidEmail(providerEmail) || !isValidEmail(patientEmail)) {
+        return res.status(400).json({ error: 'Invalid email format' });
       }
 
       await resend.emails.send({
@@ -113,6 +119,10 @@ module.exports = async function handler(req, res) {
 
       if (!providerName || !title || !practice || !providerEmail || !state || !specialty || !message) {
         return res.status(400).json({ error: 'Missing required fields' });
+      }
+
+      if (!isValidEmail(providerEmail)) {
+        return res.status(400).json({ error: 'Invalid email format' });
       }
 
       await resend.emails.send({

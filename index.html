@@ -1907,9 +1907,31 @@
       #gift-modal > div { max-width: 100%; margin: 0.5rem; max-height: 95vh; }
       #gift-modal > div > div:last-child { padding: 1.25rem; }
       #gift-modal input, #gift-modal textarea { font-size: 16px !important; }
-      /* Split-layout hero mobile: stack vertically */
-      .lp-hero[style*="contain"] { flex-direction: column !important; min-height: auto !important; }
-      .lp-hero[style*="contain"] > div { width: 100% !important; padding: 2.5rem 1.25rem !important; text-align: center; }
+      /* Split-layout hero mobile: switch to cover, stack text */
+      .lp-hero[style*="contain"] {
+        background-size: cover !important;
+        background-position: center !important;
+        flex-direction: column !important;
+        min-height: 50vh !important;
+        justify-content: flex-end !important;
+      }
+      .lp-hero[style*="contain"] > div {
+        width: 100% !important;
+        padding: 2rem 1.25rem !important;
+        text-align: center;
+        background: rgba(26,58,37,0.85);
+      }
+      /* Post-Op hero overlay mobile */
+      #page-recovery > div:first-child > div:last-child {
+        padding: 1.5rem 1rem 2rem !important;
+      }
+      /* Medical Tourism program section mobile */
+      .content-section[style*="70vh"] {
+        padding: 2.5rem 1rem !important;
+        min-height: auto !important;
+      }
+      /* Provider section mobile grid */
+      .provider-inner { grid-template-columns: 1fr !important; gap: 2rem !important; }
     }
 
     /* ── PAGE FOOTNOTES ── */
