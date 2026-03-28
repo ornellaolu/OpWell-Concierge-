@@ -860,7 +860,7 @@
     .about-image span { display: none; } /* hide old placeholder text */
 
     .specialist-image {
-      background: var(--charcoal);
+      background: url('stacey-floyd.jpg') center top / cover no-repeat;
       aspect-ratio: 3/4;
       min-height: 480px;
       display: flex;
@@ -4947,12 +4947,14 @@
 <!-- ABOUT PAGE -->
 <!-- ══════════════════════════════════════════════════════ -->
 <div id="page-about" class="page">
-  <!-- PHOTO SWAP: Replace url('') with url('images/about-hero.jpg') after shoot -->
-  <div class="lp-hero" style="background: linear-gradient(to right, rgba(17,17,17,0.88) 0%, rgba(17,17,17,0.60) 50%, rgba(45,90,61,0.25) 100%), url('dr-oluwole-11.jpg') center center / cover no-repeat; min-height:70vh;">
-    <div class="lp-hero-bg"></div>
-    <div class="lp-breadcrumb" onclick="showPage('home')" style="color:rgba(255,255,255,0.7);">← OpWell Home</div>
-    <h1 class="lp-headline" style="color:#FAF0E8;">Meet Your Team</h1>
-    <p class="lp-sub" style="color:rgba(250,240,232,0.85);">The clinicians behind your perioperative journey.</p>
+  <div style="position:relative;">
+    <img src="dr-oluwole-11.jpg" alt="Dr. Oluwole telehealth session" style="width:100%; display:block;">
+    <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(17,17,17,0.95) 0%, rgba(17,17,17,0.6) 35%, transparent 60%);"></div>
+    <div style="position:absolute; bottom:0; left:0; right:0; padding:2rem 2rem 2rem;">
+      <div class="lp-breadcrumb" onclick="showPage('home')" style="color:rgba(255,255,255,0.7); position:static; margin-bottom:0.75rem; cursor:pointer;">← OpWell Home</div>
+      <h1 class="lp-headline" style="color:#FAF0E8;">Meet Your Team</h1>
+      <p class="lp-sub" style="color:rgba(250,240,232,0.85);">The clinicians behind your perioperative journey.</p>
+    </div>
   </div>
 
   <section class="about-preview" style="align-items:start;">
@@ -5056,7 +5058,7 @@
           <li>Modalities — CBT, DBT, EMDR, ACT, Trauma-Focused Therapy, Mindfulness, Motivational Interviewing</li>
         </ul>
       </div>
-      <div class="specialist-image"><span>Photo — Stacey J. Floyd</span></div>
+      <div class="specialist-image"></div>
     </div>
   </div>
 
