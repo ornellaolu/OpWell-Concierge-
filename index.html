@@ -1922,9 +1922,12 @@
         background: rgba(26,58,37,0.85);
       }
       /* Post-Op hero overlay mobile */
-      /* Post-Op hero: keep overlay structure, just adjust text padding */
+      /* Post-Op hero: compact text on mobile so image stays visible */
       .recovery-hero-text {
-        padding: 1.5rem 1.25rem 2rem !important;
+        padding: 1rem 1rem 1.25rem !important;
+      }
+      .recovery-hero-sub {
+        display: none;
       }
       /* Medical Tourism departure image visible on mobile */
       .mt-mobile-img { display: block !important; }
@@ -3367,12 +3370,12 @@
 <div id="page-recovery" class="page">
   <div class="recovery-hero-wrap" style="position:relative;">
     <img src="dr-oluwole-recovery-patient-wide.jpg" alt="Patient recovering at home" style="width:100%; display:block;">
-    <div class="recovery-hero-gradient" style="position:absolute; inset:0; background:linear-gradient(to top, rgba(17,17,17,0.95) 0%, rgba(17,17,17,0.6) 35%, transparent 60%);"></div>
-    <div class="recovery-hero-text" style="position:absolute; bottom:0; left:0; right:0; padding:2rem 2rem 3rem;">
-      <div class="lp-breadcrumb" onclick="showPage('home')" style="color:rgba(255,255,255,0.7); position:static; margin-bottom:1rem; cursor:pointer;">← OpWell Home</div>
+    <div class="recovery-hero-gradient" style="position:absolute; inset:0; background:linear-gradient(to top, rgba(17,17,17,0.95) 0%, rgba(17,17,17,0.7) 40%, rgba(17,17,17,0.3) 65%, transparent 80%);"></div>
+    <div class="recovery-hero-text" style="position:absolute; bottom:0; left:0; right:0; padding:2rem 2rem 2rem;">
+      <div class="lp-breadcrumb" onclick="showPage('home')" style="color:rgba(255,255,255,0.7); position:static; margin-bottom:0.75rem; cursor:pointer;">← OpWell Home</div>
       <h1 class="lp-headline" style="color:#FAF0E8;">You made it through surgery.<br><em>Now let's focus on healing.</em></h1>
-      <p class="lp-sub" style="color:rgba(250,240,232,0.85); max-width:700px;">Because your recovery deserves just as much attention as your surgery. OpWell provides anesthesiologist-led support within the first 72 hours after surgery, followed by weekly check-ins for up to 30 days — so you always have a physician in your corner when questions arise and reassurance matters most.</p>
-      <a onclick="showPage('schedule')" class="btn-primary" style="cursor:pointer; margin-top:1rem; display:inline-block;">Book Your Consultation →</a>
+      <p class="lp-sub recovery-hero-sub" style="color:rgba(250,240,232,0.85); max-width:700px;">Because your recovery deserves just as much attention as your surgery. OpWell provides anesthesiologist-led support within the first 72 hours after surgery, followed by weekly check-ins for up to 30 days — so you always have a physician in your corner when questions arise and reassurance matters most.</p>
+      <a onclick="showPage('schedule')" class="btn-primary" style="cursor:pointer; margin-top:0.75rem; display:inline-block;">Book Your Consultation →</a>
     </div>
   </div>
 
@@ -5112,7 +5115,7 @@
 <!-- BLOG INDEX PAGE -->
 <!-- ══════════════════════════════════════════════════════ -->
 <div id="page-blog" class="page">
-  <div class="lp-hero" style="background: linear-gradient(to right, rgba(17,17,17,0.88) 0%, rgba(17,17,17,0.60) 50%, rgba(45,90,61,0.25) 100%), url('dr-oluwole-7.jpg') center center / cover no-repeat;">
+  <div class="lp-hero" style="background: linear-gradient(to right, rgba(17,17,17,0.88) 0%, rgba(17,17,17,0.60) 50%, rgba(45,90,61,0.25) 100%), url('dr-oluwole-7.jpg') center 20% / cover no-repeat; min-height:55vh;">
     <div class="lp-hero-bg"></div>
     <div class="section-tag" style="color:var(--terracotta-light); border-color:rgba(200,132,90,0.4); display:inline-block; margin-bottom:1rem;">OpWell Blog</div>
     <h1 class="lp-headline" style="color:#fff;">What Your Anesthesiologist Wants You to Know</h1>
@@ -14508,7 +14511,7 @@
     @media (max-width: 600px) { .sched-row { grid-template-columns: 1fr; } .sched-card { padding: 1.5rem; } .sched-step span { display: none; } }
   </style>
 
-  <div class="lp-hero" style="background: linear-gradient(to right, rgba(17,17,17,0.88) 0%, rgba(17,17,17,0.60) 50%, rgba(45,90,61,0.25) 100%), url('dr-oluwole-18.jpg') center center / cover no-repeat;">
+  <div class="lp-hero" style="background: linear-gradient(to right, rgba(17,17,17,0.88) 0%, rgba(17,17,17,0.60) 50%, rgba(45,90,61,0.25) 100%), url('dr-oluwole-18.jpg') center 20% / cover no-repeat; min-height:55vh;">
     <div class="lp-hero-bg"></div>
     <div class="lp-breadcrumb" onclick="showPage('home')" style="color:rgba(255,255,255,0.7);">← OpWell Home</div>
     <h1 class="lp-headline" style="color:#FAF0E8;">Book Your Consultation</h1>
