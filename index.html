@@ -1926,7 +1926,7 @@
       .recovery-hero-text {
         padding: 1rem 1rem 1.25rem !important;
       }
-      .recovery-hero-sub {
+      .recovery-hero-sub, .blog-hero-sub, .sched-hero-sub {
         display: none;
       }
       /* Medical Tourism departure image visible on mobile */
@@ -5115,11 +5115,14 @@
 <!-- BLOG INDEX PAGE -->
 <!-- ══════════════════════════════════════════════════════ -->
 <div id="page-blog" class="page">
-  <div class="lp-hero" style="background: linear-gradient(to right, rgba(17,17,17,0.88) 0%, rgba(17,17,17,0.60) 50%, rgba(45,90,61,0.25) 100%), url('dr-oluwole-7.jpg') center 20% / cover no-repeat; min-height:55vh;">
-    <div class="lp-hero-bg"></div>
-    <div class="section-tag" style="color:var(--terracotta-light); border-color:rgba(200,132,90,0.4); display:inline-block; margin-bottom:1rem;">OpWell Blog</div>
-    <h1 class="lp-headline" style="color:#fff;">What Your Anesthesiologist Wants You to Know</h1>
-    <p class="lp-sub" style="color:rgba(255,255,255,0.82);">Evidence-based guidance on surgical preparation and recovery — written for patients who want to be truly informed, not just reassured.<br>Because informed patients have better outcomes.</p>
+  <div style="position:relative;">
+    <img src="dr-oluwole-7.jpg" alt="Dr. Oluwole at laptop" style="width:100%; display:block;">
+    <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(17,17,17,0.95) 0%, rgba(17,17,17,0.6) 35%, transparent 60%);"></div>
+    <div class="blog-hero-text" style="position:absolute; bottom:0; left:0; right:0; padding:2rem 2rem 2rem;">
+      <div class="section-tag" style="color:var(--terracotta-light); border-color:rgba(200,132,90,0.4); display:inline-block; margin-bottom:0.75rem;">OpWell Blog</div>
+      <h1 class="lp-headline" style="color:#fff;">What Your Anesthesiologist Wants You to Know</h1>
+      <p class="lp-sub blog-hero-sub" style="color:rgba(255,255,255,0.82);">Evidence-based guidance on surgical preparation and recovery — written for patients who want to be truly informed, not just reassured.<br>Because informed patients have better outcomes.</p>
+    </div>
   </div>
   <section class="content-section">
     <div class="section-tag">Latest Articles</div>
@@ -14511,11 +14514,14 @@
     @media (max-width: 600px) { .sched-row { grid-template-columns: 1fr; } .sched-card { padding: 1.5rem; } .sched-step span { display: none; } }
   </style>
 
-  <div class="lp-hero" style="background: linear-gradient(to right, rgba(17,17,17,0.88) 0%, rgba(17,17,17,0.60) 50%, rgba(45,90,61,0.25) 100%), url('dr-oluwole-18.jpg') center 20% / cover no-repeat; min-height:55vh;">
-    <div class="lp-hero-bg"></div>
-    <div class="lp-breadcrumb" onclick="showPage('home')" style="color:rgba(255,255,255,0.7);">← OpWell Home</div>
-    <h1 class="lp-headline" style="color:#FAF0E8;">Book Your Consultation</h1>
-    <p class="lp-sub" style="color:rgba(250,240,232,0.85);">Tell us about yourself, choose your service, complete payment, then pick your time. HSA &amp; FSA accepted.</p>
+  <div style="position:relative;">
+    <img src="dr-oluwole-18.jpg" alt="Dr. Oluwole" style="width:100%; display:block;">
+    <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(17,17,17,0.95) 0%, rgba(17,17,17,0.6) 35%, transparent 60%);"></div>
+    <div class="sched-hero-text" style="position:absolute; bottom:0; left:0; right:0; padding:2rem 2rem 2rem;">
+      <div class="lp-breadcrumb" onclick="showPage('home')" style="color:rgba(255,255,255,0.7); position:static; margin-bottom:0.75rem; cursor:pointer;">← OpWell Home</div>
+      <h1 class="lp-headline" style="color:#FAF0E8;">Book Your Consultation</h1>
+      <p class="lp-sub sched-hero-sub" style="color:rgba(250,240,232,0.85);">Tell us about yourself, choose your service, complete payment, then pick your time. HSA &amp; FSA accepted.</p>
+    </div>
   </div>
 
   <div class="sched-wrap">
