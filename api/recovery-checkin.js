@@ -1,5 +1,7 @@
 const { Resend } = require('resend');
 
+const BLOG_ACCESS_CODE = 'OPWELL2026';
+
 function esc(str) {
   return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
@@ -43,6 +45,11 @@ function buildEmailHtml(firstName, checkin, procedure, checkinUrl) {
             <tr><td style="padding: 4px 0;">\u2022 GI function</td><td style="padding: 4px 0;">\u2022 Mobility</td></tr>
             <tr><td style="padding: 4px 0;">\u2022 Mental health</td><td style="padding: 4px 0;">\u2022 Red flag symptoms</td></tr>
           </table>
+        </div>
+        <div style="background: #f0f7f2; border: 1px solid #b8d9c4; border-radius: 8px; padding: 16px 20px; margin: 24px 0; text-align: center;">
+          <p style="margin: 0 0 4px; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #2d5a3d;">Your Clinical Library Access Code</p>
+          <p style="margin: 0 0 6px; font-size: 1.6rem; font-weight: 700; letter-spacing: 0.18em; color: #2d5a3d; font-family: monospace;">${BLOG_ACCESS_CODE}</p>
+          <p style="margin: 0; font-size: 0.78rem; color: #555;">Use this code on the <strong>OpWell Blog</strong> to unlock patient-only recovery articles.</p>
         </div>
         <div style="background: rgba(200,132,90,0.08); border-left: 4px solid #c8845a; border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 24px 0;">
           <p style="margin: 0; font-size: 0.85rem; color: #555; line-height: 1.6;"><strong style="color: #3b2a1a;">Need to talk to Dr. Oluwole?</strong> Call <strong>(678) 235-5822</strong> or reply to this email.</p>
