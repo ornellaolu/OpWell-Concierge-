@@ -3,6 +3,7 @@
     { "source": "/patient-recovery-checkin.html", "destination": "/patient-recovery-checkin.html" },
     { "source": "/postop-recovery-checkin.html", "destination": "/postop-recovery-checkin.html" },
     { "source": "/admin-checkins.html", "destination": "/admin-checkins.html" },
+    { "source": "/surgery-readiness-quiz.html", "destination": "/surgery-readiness-quiz.html" },
     { "source": "/:file*.png", "destination": "/:file*.png" },
     { "source": "/:file*.jpg", "destination": "/:file*.jpg" },
     { "source": "/:file*.svg", "destination": "/:file*.svg" },

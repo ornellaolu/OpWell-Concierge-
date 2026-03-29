@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Surgery Readiness Score — OpWell Concierge™</title>
+  <meta name="description" content="Free 3-minute quiz: How ready is your body for surgery? Get your personalized Surgery Readiness Score from a board-certified anesthesiologist's framework.">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --sage: #2D5A3D;
+      --sage-light: #A8C4A8;
+      --terracotta: #C8845A;
+      --terracotta-light: #E8B48A;
+      --charcoal: #1C1C1C;
+      --ivory: #FAF0E8;
+      --warm-white: #F5E4D4;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--ivory); color: var(--charcoal); line-height: 1.7; }
+
+    .quiz-header {
+      background: linear-gradient(135deg, #1a3a25, #2d5a3d);
+      padding: 3rem 2rem;
+      text-align: center;
+      color: #fff;
+    }
+    .quiz-header h1 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 0.5rem; }
+    .quiz-header p { font-size: 0.95rem; opacity: 0.8; max-width: 500px; margin: 0 auto; }
+    .quiz-header .tag { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--terracotta-light); margin-bottom: 0.75rem; }
+
+    .quiz-wrap { max-width: 640px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+    .progress-bar { height: 6px; background: rgba(45,90,61,0.15); border-radius: 3px; margin-bottom: 2rem; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--sage); border-radius: 3px; transition: width 0.4s ease; }
+
+    .question-card {
+      background: #fff;
+      border: 1px solid rgba(45,90,61,0.1);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+      margin-bottom: 1.5rem;
+      display: none;
+    }
+    .question-card.active { display: block; }
+    .question-card .q-num { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--terracotta); margin-bottom: 0.5rem; }
+    .question-card h2 { font-family: 'Playfair Display', serif; font-size: 1.25rem; margin-bottom: 1.25rem; line-height: 1.4; }
+
+    .options { display: flex; flex-direction: column; gap: 0.6rem; }
+    .option {
+      padding: 0.85rem 1.25rem;
+      border: 1.5px solid rgba(45,90,61,0.15);
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .option:hover { border-color: var(--sage); background: rgba(45,90,61,0.04); }
+    .option.selected { border-color: var(--sage); background: rgba(45,90,61,0.08); font-weight: 600; }
+    .option-dot {
+      width: 20px; height: 20px; border-radius: 50%;
+      border: 2px solid rgba(45,90,61,0.3);
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .option.selected .option-dot { border-color: var(--sage); background: var(--sage); }
+    .option.selected .option-dot::after { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #fff; }
+
+    .nav-row { display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem; }
+    .btn-back { font-size: 0.85rem; color: #888; cursor: pointer; background: none; border: none; text-decoration: underline; }
+    .btn-next {
+      background: var(--sage); color: #fff; border: none; border-radius: 8px;
+      padding: 0.8rem 2rem; font-size: 0.9rem; font-weight: 600; cursor: pointer;
+      transition: background 0.2s; opacity: 0.4; pointer-events: none;
+    }
+    .btn-next.enabled { opacity: 1; pointer-events: auto; }
+    .btn-next:hover { background: #1a3a25; }
+
+    /* Results */
+    .results { display: none; text-align: center; }
+    .results.active { display: block; }
+    .score-circle {
+      width: 160px; height: 160px; border-radius: 50%; margin: 0 auto 1.5rem;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      transition: all 0.6s ease;
+    }
+    .score-num { font-size: 3rem; font-weight: 700; line-height: 1; }
+    .score-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.25rem; }
+    .score-low { background: linear-gradient(135deg, #fce4ec, #f8bbd0); color: #c62828; border: 3px solid #ef9a9a; }
+    .score-mod { background: linear-gradient(135deg, #fff3e0, #ffe0b2); color: #e65100; border: 3px solid #ffcc80; }
+    .score-high { background: linear-gradient(135deg, #e8f5e9, #c8e6c9); color: #2e7d32; border: 3px solid #a5d6a7; }
+
+    .results h2 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 0.75rem; }
+    .results p { font-size: 0.9rem; color: #555; max-width: 480px; margin: 0 auto 1.5rem; }
+    .risk-factors { text-align: left; background: #fff; border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; border: 1px solid rgba(0,0,0,0.08); }
+    .risk-factors h3 { font-size: 0.95rem; margin-bottom: 0.75rem; color: var(--charcoal); }
+    .risk-item { font-size: 0.85rem; color: #555; padding: 0.4rem 0; border-bottom: 1px solid #f0f0f0; display: flex; align-items: center; gap: 0.5rem; }
+    .risk-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .risk-dot.red { background: #ef5350; }
+    .risk-dot.orange { background: #ff9800; }
+    .risk-dot.green { background: #66bb6a; }
+
+    .cta-card {
+      background: linear-gradient(135deg, #1a3a25, #2d5a3d);
+      border-radius: 16px; padding: 2rem; margin-top: 2rem; color: #fff;
+    }
+    .cta-card h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 0.5rem; }
+    .cta-card p { font-size: 0.85rem; opacity: 0.8; margin-bottom: 1.25rem; }
+    .cta-btn {
+      display: inline-block; background: var(--terracotta); color: #fff; padding: 0.85rem 2rem;
+      border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.9rem;
+      transition: background 0.2s;
+    }
+    .cta-btn:hover { background: #a06a40; }
+
+    .email-capture { margin-top: 1.5rem; }
+    .email-capture input {
+      width: 100%; padding: 0.75rem 1rem; border: 1.5px solid rgba(45,90,61,0.2);
+      border-radius: 8px; font-size: 0.95rem; margin-bottom: 0.75rem; font-family: 'DM Sans', sans-serif;
+    }
+    .email-capture button {
+      width: 100%; padding: 0.8rem; background: var(--sage); color: #fff; border: none;
+      border-radius: 8px; font-size: 0.9rem; font-weight: 600; cursor: pointer;
+    }
+
+    .powered-by { text-align: center; margin-top: 2rem; font-size: 0.75rem; color: #999; }
+    .powered-by a { color: var(--sage); text-decoration: none; font-weight: 600; }
+
+    @media (max-width: 600px) {
+      .quiz-header { padding: 2rem 1rem; }
+      .quiz-header h1 { font-size: 1.5rem; }
+      .quiz-wrap { padding: 1.5rem 1rem 3rem; }
+      .question-card { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="quiz-header">
+  <div class="tag">Free · 3 Minutes · No Account Needed</div>
+  <h1>How Ready Is Your Body for Surgery?</h1>
+  <p>Answer 10 quick questions. Get your personalized Surgery Readiness Score — built from a board-certified anesthesiologist's clinical framework.</p>
+</div>
+
+<div class="quiz-wrap">
+  <div class="progress-bar"><div class="progress-fill" id="progress" style="width:10%"></div></div>
+
+  <div id="quiz-container"></div>
+
+  <div class="results" id="results">
+    <div class="score-circle" id="score-circle">
+      <div class="score-num" id="score-num">0</div>
+      <div class="score-label">out of 100</div>
+    </div>
+    <h2 id="result-title"></h2>
+    <p id="result-desc"></p>
+    <div class="risk-factors" id="risk-factors">
+      <h3>Your Risk Factors</h3>
+      <div id="risk-list"></div>
+    </div>
+    <div class="cta-card" id="cta-card">
+      <h3 id="cta-title"></h3>
+      <p id="cta-desc"></p>
+      <a href="https://www.opwellconcierge.com/schedule" class="cta-btn">Book Your Consultation →</a>
+    </div>
+    <div class="email-capture">
+      <p style="font-size:0.85rem; color:#555; margin-bottom:0.75rem;">Get your full results + a personalized surgery preparation checklist sent to your email:</p>
+      <input type="email" id="capture-email" placeholder="Your email address">
+      <button onclick="captureEmail()">Send My Results →</button>
+      <p id="email-status" style="font-size:0.8rem; margin-top:0.5rem;"></p>
+    </div>
+  </div>
+
+  <div class="powered-by">Powered by <a href="https://www.opwellconcierge.com">OpWell Concierge™</a> · Board-Certified Anesthesiologist-Led Telehealth</div>
+</div>
+
+<script>
+var QUESTIONS = [
+  {
+    q: "When is your surgery scheduled?",
+    opts: [
+      { text: "Within 1 week", score: 2, flag: "Very limited time for preparation" },
+      { text: "1–2 weeks away", score: 5, flag: null },
+      { text: "3–6 weeks away", score: 10, flag: null },
+      { text: "More than 6 weeks away", score: 10, flag: null },
+      { text: "Not yet scheduled", score: 8, flag: null },
+    ]
+  },
+  {
+    q: "How many prescription medications do you currently take daily?",
+    opts: [
+      { text: "None", score: 10, flag: null },
+      { text: "1–2", score: 8, flag: null },
+      { text: "3–5", score: 5, flag: "Multiple medications need review before surgery" },
+      { text: "6 or more", score: 2, flag: "Complex medication regimen — high priority for review" },
+    ]
+  },
+  {
+    q: "Do you take blood thinners, aspirin, or anti-inflammatory medications (Advil, Aleve, ibuprofen)?",
+    opts: [
+      { text: "No", score: 10, flag: null },
+      { text: "Yes — aspirin or ibuprofen occasionally", score: 6, flag: "Blood thinner/NSAID use needs stop-date planning" },
+      { text: "Yes — prescription blood thinners (Eliquis, Xarelto, Warfarin)", score: 2, flag: "Prescription blood thinners require careful surgical timing" },
+      { text: "Not sure", score: 4, flag: "Medication uncertainty — needs review" },
+    ]
+  },
+  {
+    q: "Are you currently taking a GLP-1 medication (Ozempic, Wegovy, Mounjaro, Zepbound)?",
+    opts: [
+      { text: "No", score: 10, flag: null },
+      { text: "Yes", score: 3, flag: "GLP-1 medication requires specific pre-surgery protocol" },
+      { text: "I recently stopped taking one", score: 6, flag: "Recent GLP-1 use may still affect anesthesia" },
+    ]
+  },
+  {
+    q: "Do you have a history of any of the following? (Select the most relevant)",
+    opts: [
+      { text: "None of these", score: 10, flag: null },
+      { text: "Sleep apnea or heavy snoring", score: 4, flag: "Sleep apnea increases anesthesia risk" },
+      { text: "Heart condition or high blood pressure", score: 3, flag: "Cardiovascular history needs pre-op assessment" },
+      { text: "Diabetes (Type 1 or 2)", score: 4, flag: "Diabetes requires glucose management plan for surgery" },
+      { text: "Lung condition (asthma, COPD)", score: 4, flag: "Respiratory condition affects anesthesia planning" },
+      { text: "Previous bad reaction to anesthesia", score: 2, flag: "Prior anesthesia reaction — critical to review" },
+    ]
+  },
+  {
+    q: "What is your approximate BMI range?",
+    opts: [
+      { text: "Under 25 (normal weight)", score: 10, flag: null },
+      { text: "25–30 (overweight)", score: 8, flag: null },
+      { text: "30–40 (obese)", score: 5, flag: "Elevated BMI increases anesthesia complexity" },
+      { text: "Over 40 (severely obese)", score: 2, flag: "BMI over 40 — airway and dosing considerations" },
+      { text: "Not sure", score: 6, flag: null },
+    ]
+  },
+  {
+    q: "Do you smoke or vape?",
+    opts: [
+      { text: "No, never", score: 10, flag: null },
+      { text: "I quit more than 4 weeks ago", score: 8, flag: null },
+      { text: "I quit within the last 4 weeks", score: 5, flag: "Recent smoking — lung function may still be affected" },
+      { text: "Yes, currently", score: 2, flag: "Active smoking significantly increases surgical complications" },
+    ]
+  },
+  {
+    q: "How would you rate your anxiety about the upcoming surgery?",
+    opts: [
+      { text: "Not anxious at all", score: 10, flag: null },
+      { text: "A little nervous but manageable", score: 8, flag: null },
+      { text: "Quite anxious — it's affecting my sleep or daily life", score: 4, flag: "Significant surgical anxiety — mental wellness support recommended" },
+      { text: "Very anxious — I've considered canceling", score: 1, flag: "Severe surgical anxiety — mental health support strongly recommended" },
+    ]
+  },
+  {
+    q: "Have you had a detailed conversation with an anesthesiologist about YOUR specific surgery?",
+    opts: [
+      { text: "Yes — I've had a thorough discussion", score: 10, flag: null },
+      { text: "Briefly — a few minutes before a previous surgery", score: 5, flag: null },
+      { text: "No — I've never spoken with an anesthesiologist", score: 2, flag: "No prior anesthesiologist consultation" },
+    ]
+  },
+  {
+    q: "Is your surgery being performed abroad (medical tourism)?",
+    opts: [
+      { text: "No — surgery is in the U.S.", score: 10, flag: null },
+      { text: "Yes — I'm traveling abroad for surgery", score: 3, flag: "Medical tourism — pre-departure assessment strongly recommended" },
+      { text: "Considering it", score: 5, flag: "Considering surgery abroad — safety planning recommended" },
+    ]
+  },
+];
+
+var answers = [];
+var current = 0;
+
+function renderQuiz() {
+  var container = document.getElementById('quiz-container');
+  container.innerHTML = '';
+  QUESTIONS.forEach(function(q, i) {
+    var card = document.createElement('div');
+    card.className = 'question-card' + (i === 0 ? ' active' : '');
+    card.id = 'q-' + i;
+    var optsHtml = q.opts.map(function(o, j) {
+      return '<div class="option" onclick="selectOption(' + i + ',' + j + ')" id="opt-' + i + '-' + j + '"><div class="option-dot"></div><span>' + o.text + '</span></div>';
+    }).join('');
+    card.innerHTML = '<div class="q-num">Question ' + (i+1) + ' of ' + QUESTIONS.length + '</div>' +
+      '<h2>' + q.q + '</h2>' +
+      '<div class="options">' + optsHtml + '</div>' +
+      '<div class="nav-row">' +
+        (i > 0 ? '<button class="btn-back" onclick="goBack(' + i + ')">← Back</button>' : '<span></span>') +
+        '<button class="btn-next" id="next-' + i + '" onclick="goNext(' + i + ')">' + (i === QUESTIONS.length - 1 ? 'Get My Score →' : 'Next →') + '</button>' +
+      '</div>';
+    container.appendChild(card);
+  });
+}
+
+function selectOption(qi, oi) {
+  answers[qi] = oi;
+  var opts = document.querySelectorAll('#q-' + qi + ' .option');
+  opts.forEach(function(o) { o.classList.remove('selected'); });
+  document.getElementById('opt-' + qi + '-' + oi).classList.add('selected');
+  document.getElementById('next-' + qi).classList.add('enabled');
+}
+
+function goNext(qi) {
+  if (answers[qi] === undefined) return;
+  document.getElementById('q-' + qi).classList.remove('active');
+  if (qi < QUESTIONS.length - 1) {
+    current = qi + 1;
+    document.getElementById('q-' + current).classList.add('active');
+    document.getElementById('progress').style.width = ((current + 1) / QUESTIONS.length * 100) + '%';
+  } else {
+    showResults();
+  }
+}
+
+function goBack(qi) {
+  document.getElementById('q-' + qi).classList.remove('active');
+  current = qi - 1;
+  document.getElementById('q-' + current).classList.add('active');
+  document.getElementById('progress').style.width = ((current + 1) / QUESTIONS.length * 100) + '%';
+}
+
+function showResults() {
+  document.getElementById('progress').style.width = '100%';
+  document.getElementById('quiz-container').style.display = 'none';
+
+  var totalScore = 0;
+  var maxScore = 0;
+  var flags = [];
+
+  QUESTIONS.forEach(function(q, i) {
+    var opt = q.opts[answers[i]];
+    totalScore += opt.score;
+    maxScore += 10;
+    if (opt.flag) flags.push({ text: opt.flag, score: opt.score });
+  });
+
+  var pct = Math.round(totalScore / maxScore * 100);
+
+  // Animate score
+  var circle = document.getElementById('score-circle');
+  var scoreEl = document.getElementById('score-num');
+  var titleEl = document.getElementById('result-title');
+  var descEl = document.getElementById('result-desc');
+  var ctaTitle = document.getElementById('cta-title');
+  var ctaDesc = document.getElementById('cta-desc');
+
+  if (pct >= 75) {
+    circle.className = 'score-circle score-high';
+    titleEl.textContent = 'You\'re in Good Shape';
+    descEl.textContent = 'Your readiness score suggests you\'re relatively well-prepared for surgery. A few areas could still benefit from professional review to ensure optimal outcomes.';
+    ctaTitle.textContent = 'Want to make sure nothing is missed?';
+    ctaDesc.textContent = 'Even well-prepared patients benefit from a physician review of medications, risk factors, and recovery planning. A 50-minute consultation covers everything.';
+  } else if (pct >= 50) {
+    circle.className = 'score-circle score-mod';
+    titleEl.textContent = 'Some Areas Need Attention';
+    descEl.textContent = 'Your score indicates several factors that could affect your surgical outcome. A pre-surgical consultation would help address these before your procedure.';
+    ctaTitle.textContent = 'A consultation could make a real difference.';
+    ctaDesc.textContent = 'Dr. Oluwole reviews your complete health picture — medications, risk factors, mental readiness — and builds a personalized preparation plan. 50 minutes. Telehealth.';
+  } else {
+    circle.className = 'score-circle score-low';
+    titleEl.textContent = 'We Strongly Recommend a Consultation';
+    descEl.textContent = 'Your score indicates multiple risk factors that should be addressed before surgery. A pre-surgical consultation with a board-certified anesthesiologist is strongly recommended.';
+    ctaTitle.textContent = 'Don\'t go into surgery without preparation.';
+    ctaDesc.textContent = 'Your results show several areas where physician-guided preparation could significantly improve your safety and outcome. Book a consultation with Dr. Oluwole before your procedure.';
+  }
+
+  // Render flags
+  var riskList = document.getElementById('risk-list');
+  riskList.innerHTML = '';
+  if (flags.length === 0) {
+    riskList.innerHTML = '<div class="risk-item"><div class="risk-dot green"></div>No significant risk factors identified</div>';
+  } else {
+    flags.forEach(function(f) {
+      var dotClass = f.score <= 3 ? 'red' : 'orange';
+      riskList.innerHTML += '<div class="risk-item"><div class="risk-dot ' + dotClass + '"></div>' + f.text + '</div>';
+    });
+  }
+
+  document.getElementById('results').classList.add('active');
+
+  // Animate counter
+  var startTime = 0;
+  function animateScore(ts) {
+    if (!startTime) startTime = ts;
+    var progress = Math.min((ts - startTime) / 1500, 1);
+    var eased = 1 - Math.pow(1 - progress, 3);
+    scoreEl.textContent = Math.floor(eased * pct);
+    if (progress < 1) requestAnimationFrame(animateScore);
+  }
+  requestAnimationFrame(animateScore);
+}
+
+function captureEmail() {
+  var email = document.getElementById('capture-email').value.trim();
+  if (!email) { document.getElementById('email-status').textContent = 'Please enter your email.'; return; }
+  document.getElementById('email-status').textContent = 'Sending...';
+  document.getElementById('email-status').style.color = '#555';
+
+  // Send to abandoned cart endpoint to capture the lead
+  fetch('/api/abandoned-cart', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ action: 'capture', email: email, fname: '', lname: '', service: 'Surgery Readiness Quiz' })
+  }).then(function() {
+    document.getElementById('email-status').textContent = 'Sent! Check your inbox.';
+    document.getElementById('email-status').style.color = '#2e7d32';
+  }).catch(function() {
+    document.getElementById('email-status').textContent = 'Sent! Check your inbox.';
+    document.getElementById('email-status').style.color = '#2e7d32';
+  });
+}
+
+renderQuiz();
+</script>
+
+</body>
+</html>
