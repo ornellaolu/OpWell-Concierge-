@@ -133,7 +133,65 @@ module.exports = async function handler(req, res) {
       return res.status(200).json({ success: true, patient: patientName, email, phone: phone || null, procedure: procedure || null, surgeryDate, schedule });
     }
 
-    return res.status(400).json({ error: 'Invalid action. Use: get-schedule or send-single' });
+    // Action: 'schedule-all' — schedule all 6 check-in emails at once using Resend scheduledAt
+    if (action === 'schedule-all') {
+      if (!surgeryDate) {
+        return res.status(400).json({ error: 'Surgery date is required for scheduling' });
+      }
+
+      const surgery = new Date(surgeryDate + 'T09:00:00');
+      const scheduled = [];
+      const errors = [];
+
+      for (const checkin of CHECKIN_SCHEDULE) {
+        const sendDate = new Date(surgery);
+        sendDate.setDate(sendDate.getDate() + checkin.dayOffset);
+        // Send at 9 AM EST on the scheduled day
+        const scheduledAt = sendDate.toISOString();
+        const checkinUrl = buildCheckinUrl(patientName, procedure, checkin.key);
+
+        // Skip if date is in the past
+        if (sendDate < new Date()) {
+          errors.push({ key: checkin.key, label: checkin.label, reason: 'Date is in the past' });
+          continue;
+        }
+
+        try {
+          const result = await resend.emails.send({
+            from: 'OpWell Concierge <info@opwellconcierge.com>',
+            to: email,
+            subject: `${checkin.label} — How Are You Feeling?`,
+            html: buildEmailHtml(firstName, checkin, procedure, checkinUrl),
+            scheduledAt,
+          });
+
+          scheduled.push({
+            key: checkin.key,
+            label: checkin.label,
+            scheduledFor: sendDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' }),
+            scheduledAt,
+            emailId: result.data ? result.data.id : null,
+            checkinUrl,
+            textMessage: phone ? `Hi ${firstName}, it's time for your ${checkin.label} with OpWell Concierge. It takes about 3 min: ${checkinUrl}` : null,
+          });
+        } catch (emailErr) {
+          errors.push({ key: checkin.key, label: checkin.label, reason: emailErr.message });
+        }
+      }
+
+      return res.status(200).json({
+        success: true,
+        patient: patientName,
+        email,
+        surgeryDate,
+        totalScheduled: scheduled.length,
+        totalErrors: errors.length,
+        scheduled,
+        errors: errors.length ? errors : undefined,
+      });
+    }
+
+    return res.status(400).json({ error: 'Invalid action. Use: get-schedule, send-single, or schedule-all' });
 
   } catch (err) {
     console.error('Recovery check-in error:', err);

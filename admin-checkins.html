@@ -133,6 +133,10 @@
           </thead>
           <tbody id="sched-tbody"></tbody>
         </table>
+        <div class="btn-row" style="margin-top:1.5rem;">
+          <button class="btn btn-primary" id="schedule-all-btn" onclick="scheduleAll()" style="width:100%; padding:1rem; font-size:1rem;">Schedule All 6 Emails Automatically</button>
+        </div>
+        <p style="font-size:0.8rem; color:#888; margin-top:0.5rem; text-align:center;">All emails will be sent automatically at 9 AM on their scheduled dates. No manual action needed.</p>
         <div id="sched-status"></div>
       </div>
 
@@ -251,6 +255,63 @@
         document.getElementById('schedule-results').classList.remove('hidden');
       } catch(e) {
         alert('Connection error: ' + e.message);
+      }
+    }
+
+    async function scheduleAll() {
+      var name = document.getElementById('p-name').value.trim();
+      var email = document.getElementById('p-email').value.trim();
+      var phone = document.getElementById('p-phone').value.trim();
+      var procedure = document.getElementById('p-procedure').value.trim();
+      var surgeryDate = document.getElementById('p-surgery-date').value;
+      var btn = document.getElementById('schedule-all-btn');
+
+      if (!name || !email || !surgeryDate) {
+        alert('Please fill in patient name, email, and surgery date.');
+        return;
+      }
+
+      if (!confirm('This will schedule 6 automatic check-in emails for ' + name + '. Continue?')) return;
+
+      btn.disabled = true; btn.textContent = 'Scheduling...';
+      try {
+        var res = await fetch('/api/recovery-checkin', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'x-admin-key': ADMIN_KEY },
+          body: JSON.stringify({ action: 'schedule-all', email, phone, patientName: name, procedure, surgeryDate })
+        });
+        var data = await res.json();
+        var statusEl = document.getElementById('sched-status');
+        if (data.success) {
+          btn.textContent = 'All Scheduled ✓'; btn.style.background = '#2e7d32';
+          var html = '<div class="status-msg status-success" style="margin-top:1rem;">' +
+            '<strong>' + data.totalScheduled + ' emails scheduled</strong> for ' + data.patient + '</div>';
+          if (data.scheduled && data.scheduled.length) {
+            html += '<table class="schedule-table" style="margin-top:0.75rem;">';
+            html += '<tr><th>Check-In</th><th>Scheduled For</th><th>Status</th></tr>';
+            data.scheduled.forEach(function(s) {
+              html += '<tr><td>' + s.label + '</td><td>' + s.scheduledFor + '</td><td><span class="badge badge-future">Scheduled</span></td></tr>';
+            });
+            html += '</table>';
+          }
+          if (data.errors && data.errors.length) {
+            html += '<div class="status-msg status-error" style="margin-top:0.5rem;">' + data.totalErrors + ' could not be scheduled:</div>';
+            data.errors.forEach(function(e) { html += '<p style="font-size:0.8rem;color:#c62828;">' + e.label + ': ' + e.reason + '</p>'; });
+          }
+          if (data.scheduled && data.scheduled[0] && data.scheduled[0].textMessage) {
+            html += '<div class="text-msg-box" style="margin-top:0.75rem;"><strong>Text messages to copy/send manually:</strong></div>';
+            data.scheduled.forEach(function(s) {
+              if (s.textMessage) html += '<div class="text-msg-box">' + s.label + ': ' + s.textMessage + '</div>';
+            });
+          }
+          statusEl.innerHTML = html;
+        } else {
+          btn.textContent = 'Failed'; btn.style.background = '#c62828';
+          statusEl.innerHTML = '<div class="status-msg status-error">' + (data.error || 'Error scheduling') + '</div>';
+        }
+      } catch(e) {
+        btn.textContent = 'Error'; btn.style.background = '#c62828';
+        document.getElementById('sched-status').innerHTML = '<div class="status-msg status-error">Connection error: ' + e.message + '</div>';
       }
     }
 
