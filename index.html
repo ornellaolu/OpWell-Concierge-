@@ -436,12 +436,11 @@
     .stat-num {
       display: block;
       font-family: 'Playfair Display', serif;
-      font-size: 3.4rem;
-      font-weight: 700;
+      font-size: 2.8rem;
+      font-weight: 300;
       color: var(--terracotta);
       line-height: 1;
       margin-bottom: 0.5rem;
-      text-shadow: 0 2px 12px rgba(200,132,90,0.25);
     }
 
     .stat-label {
@@ -639,13 +638,12 @@
 
     .evidence-stat {
       font-family: 'Playfair Display', serif;
-      font-size: 3.6rem;
-      font-weight: 700;
+      font-size: 3rem;
+      font-weight: 400;
       color: var(--terracotta);
       line-height: 1;
       margin-bottom: 0.5rem;
       letter-spacing: -0.02em;
-      text-shadow: 0 2px 12px rgba(200,132,90,0.25);
     }
 
     .evidence-label {
@@ -1130,22 +1128,20 @@
 
     .stat-callout-num {
       font-family: 'Playfair Display', serif;
-      font-size: 2.8rem;
+      font-size: 2.2rem;
       color: var(--terracotta);
-      font-weight: 700;
+      font-weight: 300;
       line-height: 1;
-      text-shadow: 0 2px 12px rgba(200,132,90,0.2);
     }
 
     /* ── STAT NUMBER POP ENTRANCE ANIMATION ── */
     @keyframes statNumPop {
-      0%   { opacity: 0; transform: scale(0.3) translateY(30px); filter: blur(8px); }
-      50%  { opacity: 1; transform: scale(1.18) translateY(-8px); filter: blur(0); }
-      70%  { transform: scale(0.95) translateY(2px); }
-      100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+      0%   { opacity: 0; transform: scale(0.72) translateY(14px); }
+      60%  { transform: scale(1.09) translateY(-3px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
     }
     .stat-num-popped {
-      animation: statNumPop 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+      animation: statNumPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
     }
 
     .stat-callout-text {
@@ -15559,23 +15555,31 @@
 
   /* ── STAT COUNTER ANIMATION ── */
   function animateCounters() {
-    const counters = document.querySelectorAll('.stat-callout-num');
+    const counters = document.querySelectorAll('.stat-callout-num, .stat-num, .evidence-stat');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
-        if (e.isIntersecting) {
+        if (e.isIntersecting && !e.target.dataset.counted) {
           const el = e.target;
+          el.dataset.counted = '1';
           const text = el.textContent.trim();
-          const match = text.match(/^(\d+)/);
+          // Match numbers like "80", "49", "36", "4,113", "Up to 80"
+          const match = text.match(/(\d[\d,]*)/);
           if (match) {
-            const target = parseInt(match[1]);
-            const suffix = text.replace(match[1], '');
-            let start = 0;
-            const duration = 1200;
+            const numStr = match[1].replace(/,/g, '');
+            const target = parseInt(numStr);
+            const hasComma = match[1].includes(',');
+            const prefix = text.substring(0, text.indexOf(match[1]));
+            const suffix = text.substring(text.indexOf(match[1]) + match[1].length);
+            let startTime = 0;
+            const duration = 2000;
             const step = (timestamp) => {
-              if (!start) start = timestamp;
-              const progress = Math.min((timestamp - start) / duration, 1);
-              const eased = 1 - Math.pow(1 - progress, 3);
-              el.textContent = Math.floor(eased * target) + suffix;
+              if (!startTime) startTime = timestamp;
+              const progress = Math.min((timestamp - startTime) / duration, 1);
+              // Ease out quart — fast start, slow finish
+              const eased = 1 - Math.pow(1 - progress, 4);
+              let current = Math.floor(eased * target);
+              if (hasComma) current = current.toLocaleString();
+              el.textContent = prefix + current + suffix;
               if (progress < 1) requestAnimationFrame(step);
             };
             requestAnimationFrame(step);
@@ -15583,7 +15587,7 @@
           observer.unobserve(el);
         }
       });
-    }, { threshold: 0.5 });
+    }, { threshold: 0.3 });
     counters.forEach(c => observer.observe(c));
   }
 
