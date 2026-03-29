@@ -134,9 +134,9 @@
           <tbody id="sched-tbody"></tbody>
         </table>
         <div class="btn-row" style="margin-top:1.5rem;">
-          <button class="btn btn-primary" id="schedule-all-btn" onclick="scheduleAll()" style="width:100%; padding:1rem; font-size:1rem;">Schedule All 6 Emails Automatically</button>
+          <button class="btn btn-primary" id="schedule-all-btn" onclick="scheduleAll()" style="width:100%; padding:1rem; font-size:1rem;">Save Schedule & Send Me Reminders</button>
         </div>
-        <p style="font-size:0.8rem; color:#888; margin-top:0.5rem; text-align:center;">All emails will be sent automatically at 9 AM on their scheduled dates. No manual action needed.</p>
+        <p style="font-size:0.8rem; color:#888; margin-top:0.5rem; text-align:center;">Saves the schedule and emails you a reminder with all dates. Use Quick Send to send each check-in when due.</p>
         <div id="sched-status"></div>
       </div>
 
@@ -283,36 +283,17 @@
         var data = await res.json();
         var statusEl = document.getElementById('sched-status');
         if (data.success) {
-          btn.textContent = 'All Scheduled ✓'; btn.style.background = '#2e7d32';
+          btn.textContent = 'Schedule Saved ✓'; btn.style.background = '#2e7d32';
           var html = '<div class="status-msg status-success" style="margin-top:1rem;">' +
-            '<strong>' + data.totalScheduled + ' emails scheduled</strong> for ' + data.patient + '</div>';
-          if (data.scheduled && data.scheduled.length) {
+            '<strong>Schedule saved!</strong> A reminder email with all ' + data.totalScheduled + ' check-in dates has been sent to your inbox.</div>';
+          if (data.schedule && data.schedule.length) {
             html += '<table class="schedule-table" style="margin-top:0.75rem;">';
-            html += '<tr><th>Check-In</th><th>Scheduled For</th><th>Status</th></tr>';
-            data.scheduled.forEach(function(s) {
-              html += '<tr><td>' + s.label + '</td><td>' + s.scheduledFor + '</td><td><span class="badge badge-future">Scheduled</span></td></tr>';
+            html += '<tr><th>Check-In</th><th>Send On</th><th>Action</th></tr>';
+            data.schedule.forEach(function(s) {
+              html += '<tr><td>' + s.label + '</td><td>' + s.sendDateFormatted + '</td><td><span class="badge badge-pending">Send Manually</span></td></tr>';
             });
             html += '</table>';
-          }
-          if (data.manualLater && data.manualLater.length) {
-            html += '<div style="background:#fff3e0; border-radius:8px; padding:1rem; margin-top:0.75rem;">' +
-              '<strong style="color:#e65100;">' + data.totalManualLater + ' check-ins need manual sending</strong>' +
-              '<p style="font-size:0.8rem; color:#666; margin:0.25rem 0 0.5rem;">These are beyond the 7-day scheduling limit. A reminder email has been sent to you.</p>';
-            html += '<table class="schedule-table"><tr><th>Check-In</th><th>Send On</th><th>Action</th></tr>';
-            data.manualLater.forEach(function(m) {
-              html += '<tr><td>' + m.label + '</td><td>' + m.scheduledFor + '</td><td><span class="badge badge-pending">Manual</span></td></tr>';
-            });
-            html += '</table></div>';
-          }
-          if (data.errors && data.errors.length) {
-            html += '<div class="status-msg status-error" style="margin-top:0.5rem;">' + data.totalErrors + ' could not be scheduled:</div>';
-            data.errors.forEach(function(e) { html += '<p style="font-size:0.8rem;color:#c62828;">' + e.label + ': ' + e.reason + '</p>'; });
-          }
-          if (data.scheduled && data.scheduled[0] && data.scheduled[0].textMessage) {
-            html += '<div class="text-msg-box" style="margin-top:0.75rem;"><strong>Text messages to copy/send manually:</strong></div>';
-            data.scheduled.forEach(function(s) {
-              if (s.textMessage) html += '<div class="text-msg-box">' + s.label + ': ' + s.textMessage + '</div>';
-            });
+            html += '<p style="font-size:0.8rem; color:#666; margin-top:0.75rem;">Use the <strong>Quick Send</strong> section below to send each check-in when the date comes.</p>';
           }
           statusEl.innerHTML = html;
         } else {
