@@ -139,44 +139,87 @@ module.exports = async function handler(req, res) {
         return res.status(400).json({ error: 'Surgery date is required for scheduling' });
       }
 
-      const surgery = new Date(surgeryDate + 'T09:00:00');
+      const surgery = new Date(surgeryDate + 'T14:00:00Z'); // 9 AM EST = 14:00 UTC
+      const now = new Date();
+      const sevenDaysFromNow = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
       const scheduled = [];
+      const manualLater = [];
       const errors = [];
 
       for (const checkin of CHECKIN_SCHEDULE) {
         const sendDate = new Date(surgery);
         sendDate.setDate(sendDate.getDate() + checkin.dayOffset);
-        // Send at 9 AM EST on the scheduled day
-        const scheduledAt = sendDate.toISOString();
         const checkinUrl = buildCheckinUrl(patientName, procedure, checkin.key);
+        const dateFormatted = sendDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
 
         // Skip if date is in the past
-        if (sendDate < new Date()) {
+        if (sendDate < now) {
           errors.push({ key: checkin.key, label: checkin.label, reason: 'Date is in the past' });
           continue;
         }
 
-        try {
-          const result = await resend.emails.send({
-            from: 'OpWell Concierge <info@opwellconcierge.com>',
-            to: email,
-            subject: `${checkin.label} — How Are You Feeling?`,
-            html: buildEmailHtml(firstName, checkin, procedure, checkinUrl),
-            scheduledAt,
-          });
+        // If within 7 days, auto-schedule via Resend
+        if (sendDate <= sevenDaysFromNow) {
+          try {
+            const result = await resend.emails.send({
+              from: 'OpWell Concierge <info@opwellconcierge.com>',
+              to: email,
+              subject: `${checkin.label} — How Are You Feeling?`,
+              html: buildEmailHtml(firstName, checkin, procedure, checkinUrl),
+              scheduledAt: sendDate.toISOString(),
+            });
 
-          scheduled.push({
+            scheduled.push({
+              key: checkin.key,
+              label: checkin.label,
+              scheduledFor: dateFormatted,
+              scheduledAt: sendDate.toISOString(),
+              emailId: result.data ? result.data.id : null,
+              checkinUrl,
+              textMessage: phone ? `Hi ${firstName}, it's time for your ${checkin.label} with OpWell Concierge. It takes about 3 min: ${checkinUrl}` : null,
+            });
+          } catch (emailErr) {
+            errors.push({ key: checkin.key, label: checkin.label, reason: emailErr.message });
+          }
+        } else {
+          // Beyond 7 days — flag for manual sending later
+          manualLater.push({
             key: checkin.key,
             label: checkin.label,
-            scheduledFor: sendDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' }),
-            scheduledAt,
-            emailId: result.data ? result.data.id : null,
+            scheduledFor: dateFormatted,
             checkinUrl,
             textMessage: phone ? `Hi ${firstName}, it's time for your ${checkin.label} with OpWell Concierge. It takes about 3 min: ${checkinUrl}` : null,
           });
-        } catch (emailErr) {
-          errors.push({ key: checkin.key, label: checkin.label, reason: emailErr.message });
         }
+      }
+
+      // Send YOU a reminder email with the manual check-ins
+      if (manualLater.length > 0) {
+        const manualListHtml = manualLater.map(m =>
+          `<tr><td style="padding:6px 8px; border-bottom:1px solid #eee;">${m.label}</td><td style="padding:6px 8px; border-bottom:1px solid #eee;">${m.scheduledFor}</td></tr>`
+        ).join('');
+
+        await resend.emails.send({
+          from: 'OpWell Admin <info@opwellconcierge.com>',
+          to: 'dr.oluwole@opwellconcierge.com',
+          subject: `Reminder: ${manualLater.length} check-ins to send manually for ${esc(patientName)}`,
+          html: `
+            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #2c2c2c;">
+              <div style="background: #1a3a25; padding: 24px 32px;">
+                <h2 style="color: #e8c97a; margin: 0; font-size: 1.1rem;">Check-In Reminder — ${esc(patientName)}</h2>
+              </div>
+              <div style="padding: 32px; background: #fdf8f4;">
+                <p style="color: #555; line-height: 1.7;">The following check-ins for <strong>${esc(patientName)}</strong> (${esc(procedure || 'N/A')}) are beyond the 7-day scheduling limit. You'll need to send them manually from the admin page when they're due:</p>
+                <table style="width:100%; border-collapse:collapse; font-size:0.9rem; margin: 16px 0;">
+                  <tr><th style="text-align:left; padding:8px; border-bottom:2px solid #1a3a25;">Check-In</th><th style="text-align:left; padding:8px; border-bottom:2px solid #1a3a25;">Send On</th></tr>
+                  ${manualListHtml}
+                </table>
+                <p style="color: #555; font-size: 0.85rem;">Go to <a href="https://www.opwellconcierge.com/admin-checkins.html" style="color: #2d5a3d; font-weight: 600;">admin-checkins.html</a> to send these when the time comes.</p>
+                <p style="color: #888; font-size: 0.8rem; margin-top: 16px;">Tip: Upgrade Resend to Pro ($20/mo) to auto-schedule all 6 emails at once.</p>
+              </div>
+            </div>
+          `,
+        });
       }
 
       return res.status(200).json({
@@ -185,8 +228,10 @@ module.exports = async function handler(req, res) {
         email,
         surgeryDate,
         totalScheduled: scheduled.length,
+        totalManualLater: manualLater.length,
         totalErrors: errors.length,
         scheduled,
+        manualLater: manualLater.length ? manualLater : undefined,
         errors: errors.length ? errors : undefined,
       });
     }

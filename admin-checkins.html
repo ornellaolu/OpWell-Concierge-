@@ -294,6 +294,16 @@
             });
             html += '</table>';
           }
+          if (data.manualLater && data.manualLater.length) {
+            html += '<div style="background:#fff3e0; border-radius:8px; padding:1rem; margin-top:0.75rem;">' +
+              '<strong style="color:#e65100;">' + data.totalManualLater + ' check-ins need manual sending</strong>' +
+              '<p style="font-size:0.8rem; color:#666; margin:0.25rem 0 0.5rem;">These are beyond the 7-day scheduling limit. A reminder email has been sent to you.</p>';
+            html += '<table class="schedule-table"><tr><th>Check-In</th><th>Send On</th><th>Action</th></tr>';
+            data.manualLater.forEach(function(m) {
+              html += '<tr><td>' + m.label + '</td><td>' + m.scheduledFor + '</td><td><span class="badge badge-pending">Manual</span></td></tr>';
+            });
+            html += '</table></div>';
+          }
           if (data.errors && data.errors.length) {
             html += '<div class="status-msg status-error" style="margin-top:0.5rem;">' + data.totalErrors + ' could not be scheduled:</div>';
             data.errors.forEach(function(e) { html += '<p style="font-size:0.8rem;color:#c62828;">' + e.label + ': ' + e.reason + '</p>'; });
