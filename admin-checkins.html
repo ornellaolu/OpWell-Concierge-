@@ -186,8 +186,12 @@
     var ADMIN_KEY = '';
 
     function doLogin() {
-      ADMIN_KEY = document.getElementById('admin-key-input').value.trim();
-      if (!ADMIN_KEY) return;
+      var input = document.getElementById('admin-key-input').value.trim();
+      if (input.toLowerCase() !== 'opwell') {
+        alert('Invalid passcode.');
+        return;
+      }
+      ADMIN_KEY = input;
       document.getElementById('login-screen').classList.add('hidden');
       document.getElementById('dashboard').classList.remove('hidden');
       document.getElementById('admin-status').textContent = 'Logged in';
