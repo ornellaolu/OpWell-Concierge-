@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpWell Admin — Recovery Check-Ins</title>
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f5f5f5; color: #333; }
+    .header { background: #1a3a25; padding: 1.5rem 2rem; color: #fff; display: flex; align-items: center; justify-content: space-between; }
+    .header h1 { font-size: 1.2rem; font-weight: 600; }
+    .header span { font-size: 0.8rem; opacity: 0.6; }
+    .container { max-width: 800px; margin: 2rem auto; padding: 0 1.5rem; }
+
+    /* Login */
+    .login-card { background: #fff; border-radius: 12px; padding: 2.5rem; box-shadow: 0 2px 12px rgba(0,0,0,0.08); text-align: center; max-width: 400px; margin: 4rem auto; }
+    .login-card h2 { margin-bottom: 1rem; color: #1a3a25; }
+    .login-card input { width: 100%; padding: 0.75rem 1rem; border: 1.5px solid #ddd; border-radius: 8px; font-size: 1rem; margin-bottom: 1rem; }
+    .login-card button { width: 100%; padding: 0.85rem; background: #1a3a25; color: #fff; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; }
+
+    /* Main */
+    .card { background: #fff; border-radius: 12px; padding: 2rem; box-shadow: 0 2px 12px rgba(0,0,0,0.08); margin-bottom: 1.5rem; }
+    .card h2 { font-size: 1.1rem; color: #1a3a25; margin-bottom: 1rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+    .form-field { display: flex; flex-direction: column; gap: 0.3rem; }
+    .form-field.full { grid-column: 1 / -1; }
+    .form-field label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #666; }
+    .form-field input, .form-field select { padding: 0.7rem 0.9rem; border: 1.5px solid #ddd; border-radius: 8px; font-size: 0.95rem; }
+    .form-field input:focus, .form-field select:focus { border-color: #1a3a25; outline: none; }
+    .btn { padding: 0.8rem 1.5rem; border: none; border-radius: 8px; font-size: 0.9rem; font-weight: 600; cursor: pointer; }
+    .btn-primary { background: #1a3a25; color: #fff; }
+    .btn-primary:hover { background: #2d5a3d; }
+    .btn-send { background: #c8845a; color: #fff; font-size: 0.8rem; padding: 0.5rem 1rem; }
+    .btn-send:hover { background: #a06a40; }
+    .btn-copy { background: #eee; color: #333; font-size: 0.8rem; padding: 0.5rem 1rem; }
+    .btn-copy:hover { background: #ddd; }
+    .btn-row { display: flex; gap: 0.75rem; margin-top: 1rem; }
+
+    /* Schedule table */
+    .schedule-table { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: 0.85rem; }
+    .schedule-table th { text-align: left; padding: 0.6rem 0.5rem; border-bottom: 2px solid #1a3a25; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: #666; }
+    .schedule-table td { padding: 0.7rem 0.5rem; border-bottom: 1px solid #eee; }
+    .schedule-table tr:hover { background: #f9f9f9; }
+    .badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.7rem; font-weight: 600; }
+    .badge-pending { background: #fff3e0; color: #e65100; }
+    .badge-today { background: #e8f5e9; color: #2e7d32; }
+    .badge-past { background: #f5f5f5; color: #999; }
+    .badge-future { background: #e3f2fd; color: #1565c0; }
+
+    .status-msg { padding: 1rem; border-radius: 8px; margin-top: 1rem; font-size: 0.9rem; }
+    .status-success { background: #e8f5e9; color: #2e7d32; }
+    .status-error { background: #fce4ec; color: #c62828; }
+
+    .text-msg-box { background: #f0f0f0; border-radius: 8px; padding: 0.75rem 1rem; font-size: 0.85rem; color: #333; margin-top: 0.5rem; word-break: break-all; }
+
+    @media (max-width: 600px) {
+      .form-row { grid-template-columns: 1fr; }
+      .schedule-table { font-size: 0.75rem; }
+      .btn-row { flex-direction: column; }
+    }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>OpWell Admin — Recovery Check-Ins</h1>
+    <span id="admin-status"></span>
+  </div>
+
+  <!-- Login -->
+  <div id="login-screen">
+    <div class="login-card">
+      <h2>Admin Login</h2>
+      <p style="color:#666; font-size:0.85rem; margin-bottom:1.5rem;">Enter your admin key to access the check-in dashboard.</p>
+      <input type="password" id="admin-key-input" placeholder="Admin Key" onkeydown="if(event.key==='Enter') doLogin()">
+      <button onclick="doLogin()">Sign In</button>
+    </div>
+  </div>
+
+  <!-- Dashboard -->
+  <div id="dashboard" class="hidden">
+    <div class="container">
+
+      <!-- Patient Form -->
+      <div class="card">
+        <h2>Schedule Patient Check-Ins</h2>
+        <div class="form-row">
+          <div class="form-field">
+            <label>Patient Name *</label>
+            <input type="text" id="p-name" placeholder="Jane Smith">
+          </div>
+          <div class="form-field">
+            <label>Email *</label>
+            <input type="email" id="p-email" placeholder="patient@email.com">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label>Phone (for text message)</label>
+            <input type="tel" id="p-phone" placeholder="(555) 123-4567">
+          </div>
+          <div class="form-field">
+            <label>Procedure</label>
+            <input type="text" id="p-procedure" placeholder="Tummy Tuck">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label>Surgery Date *</label>
+            <input type="date" id="p-surgery-date">
+          </div>
+          <div class="form-field" style="justify-content:flex-end;">
+            <button class="btn btn-primary" onclick="generateSchedule()">Generate Schedule</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Schedule Results -->
+      <div id="schedule-results" class="card hidden">
+        <h2>Check-In Schedule for <span id="sched-patient-name"></span></h2>
+        <p style="font-size:0.85rem; color:#666; margin-bottom:0.5rem;">
+          Procedure: <strong id="sched-procedure"></strong> | Surgery: <strong id="sched-date"></strong>
+        </p>
+        <table class="schedule-table">
+          <thead>
+            <tr>
+              <th>Check-In</th>
+              <th>Send Date</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="sched-tbody"></tbody>
+        </table>
+        <div id="sched-status"></div>
+      </div>
+
+      <!-- Quick Send -->
+      <div class="card">
+        <h2>Quick Send — Single Check-In</h2>
+        <p style="font-size:0.85rem; color:#666; margin-bottom:1rem;">Send a specific check-in to any patient without generating a full schedule.</p>
+        <div class="form-row">
+          <div class="form-field">
+            <label>Patient Name *</label>
+            <input type="text" id="qs-name" placeholder="Jane Smith">
+          </div>
+          <div class="form-field">
+            <label>Email *</label>
+            <input type="email" id="qs-email" placeholder="patient@email.com">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label>Phone (optional)</label>
+            <input type="tel" id="qs-phone" placeholder="(555) 123-4567">
+          </div>
+          <div class="form-field">
+            <label>Procedure</label>
+            <input type="text" id="qs-procedure" placeholder="BBL">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label>Check-In Interval *</label>
+            <select id="qs-interval">
+              <option value="day-1">24-Hour Check-In (Day 1)</option>
+              <option value="day-3">72-Hour Check-In (Day 3)</option>
+              <option value="week-1">1-Week Check-In (Day 7)</option>
+              <option value="week-2">2-Week Check-In (Day 14)</option>
+              <option value="week-3">3-Week Check-In (Day 21)</option>
+              <option value="week-4">4-Week / Final Check-In (Day 28)</option>
+            </select>
+          </div>
+          <div class="form-field" style="justify-content:flex-end;">
+            <button class="btn btn-send" id="qs-btn" onclick="quickSend()">Send Check-In Email →</button>
+          </div>
+        </div>
+        <div id="qs-status"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    var ADMIN_KEY = '';
+
+    function doLogin() {
+      ADMIN_KEY = document.getElementById('admin-key-input').value.trim();
+      if (!ADMIN_KEY) return;
+      document.getElementById('login-screen').classList.add('hidden');
+      document.getElementById('dashboard').classList.remove('hidden');
+      document.getElementById('admin-status').textContent = 'Logged in';
+    }
+
+    async function generateSchedule() {
+      var name = document.getElementById('p-name').value.trim();
+      var email = document.getElementById('p-email').value.trim();
+      var phone = document.getElementById('p-phone').value.trim();
+      var procedure = document.getElementById('p-procedure').value.trim();
+      var surgeryDate = document.getElementById('p-surgery-date').value;
+
+      if (!name || !email || !surgeryDate) {
+        alert('Please fill in patient name, email, and surgery date.');
+        return;
+      }
+
+      try {
+        var res = await fetch('/api/schedule-checkins', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'x-admin-key': ADMIN_KEY },
+          body: JSON.stringify({ action: 'get-schedule', email, phone, patientName: name, procedure, surgeryDate })
+        });
+        var data = await res.json();
+        if (!data.success) { alert(data.error || 'Error generating schedule'); return; }
+
+        document.getElementById('sched-patient-name').textContent = data.patient;
+        document.getElementById('sched-procedure').textContent = data.procedure || 'N/A';
+        document.getElementById('sched-date').textContent = data.surgeryDate;
+
+        var today = new Date(); today.setHours(0,0,0,0);
+        var tbody = document.getElementById('sched-tbody');
+        tbody.innerHTML = '';
+
+        data.schedule.forEach(function(item) {
+          var sendDate = new Date(item.sendDate + 'T00:00:00');
+          var status = '', badgeClass = '';
+          if (sendDate.getTime() === today.getTime()) { status = 'Today'; badgeClass = 'badge-today'; }
+          else if (sendDate < today) { status = 'Past Due'; badgeClass = 'badge-past'; }
+          else { status = 'Upcoming'; badgeClass = 'badge-future'; }
+
+          var textBtn = item.textMessage ?
+            '<button class="btn btn-copy" onclick="copyText(this, \'' + item.textMessage.replace(/'/g, "\\'") + '\')">Copy Text</button>' : '';
+
+          tbody.innerHTML += '<tr>' +
+            '<td><strong>' + item.label + '</strong><br><span style="font-size:0.75rem;color:#999;">Day ' + item.dayOffset + '</span></td>' +
+            '<td>' + item.sendDateFormatted + '</td>' +
+            '<td><span class="badge ' + badgeClass + '">' + status + '</span></td>' +
+            '<td><div class="btn-row" style="margin:0;">' +
+              '<button class="btn btn-send" onclick="sendCheckin(\'' + item.key + '\', this)">Send Email</button>' +
+              textBtn +
+              '<button class="btn btn-copy" onclick="copyLink(\'' + item.checkinUrl + '\')">Copy Link</button>' +
+            '</div></td>' +
+          '</tr>';
+        });
+
+        document.getElementById('schedule-results').classList.remove('hidden');
+      } catch(e) {
+        alert('Connection error. Please try again.');
+      }
+    }
+
+    async function sendCheckin(interval, btn) {
+      var name = document.getElementById('p-name').value.trim();
+      var email = document.getElementById('p-email').value.trim();
+      var phone = document.getElementById('p-phone').value.trim();
+      var procedure = document.getElementById('p-procedure').value.trim();
+
+      btn.disabled = true; btn.textContent = 'Sending...';
+      try {
+        var res = await fetch('/api/schedule-checkins', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'x-admin-key': ADMIN_KEY },
+          body: JSON.stringify({ action: 'send-single', email, phone, patientName: name, procedure, interval })
+        });
+        var data = await res.json();
+        if (data.success) {
+          btn.textContent = 'Sent ✓'; btn.style.background = '#2e7d32';
+          if (data.textMessage) {
+            document.getElementById('sched-status').innerHTML =
+              '<div class="status-success">Email sent! Text message to copy and send:</div>' +
+              '<div class="text-msg-box">' + data.textMessage + '</div>';
+          }
+        } else {
+          btn.textContent = 'Failed'; btn.style.background = '#c62828';
+          alert(data.error || 'Error sending');
+        }
+      } catch(e) {
+        btn.textContent = 'Error'; btn.style.background = '#c62828';
+      }
+    }
+
+    async function quickSend() {
+      var name = document.getElementById('qs-name').value.trim();
+      var email = document.getElementById('qs-email').value.trim();
+      var phone = document.getElementById('qs-phone').value.trim();
+      var procedure = document.getElementById('qs-procedure').value.trim();
+      var interval = document.getElementById('qs-interval').value;
+      var btn = document.getElementById('qs-btn');
+
+      if (!name || !email) { alert('Please fill in patient name and email.'); return; }
+
+      btn.disabled = true; btn.textContent = 'Sending...';
+      try {
+        var res = await fetch('/api/schedule-checkins', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'x-admin-key': ADMIN_KEY },
+          body: JSON.stringify({ action: 'send-single', email, phone, patientName: name, procedure, interval })
+        });
+        var data = await res.json();
+        var statusEl = document.getElementById('qs-status');
+        if (data.success) {
+          statusEl.innerHTML = '<div class="status-msg status-success">Check-in email sent to ' + email + '!</div>';
+          if (data.textMessage) {
+            statusEl.innerHTML += '<div class="text-msg-box" style="margin-top:0.5rem;"><strong>Text to send:</strong> ' + data.textMessage + '</div>';
+          }
+          if (data.checkinUrl) {
+            statusEl.innerHTML += '<div class="text-msg-box" style="margin-top:0.5rem;"><strong>Shareable link:</strong> ' + data.checkinUrl + '</div>';
+          }
+          btn.textContent = 'Sent ✓'; btn.style.background = '#2e7d32';
+          setTimeout(function() { btn.disabled = false; btn.textContent = 'Send Check-In Email →'; btn.style.background = ''; }, 3000);
+        } else {
+          statusEl.innerHTML = '<div class="status-msg status-error">' + (data.error || 'Error sending') + '</div>';
+          btn.disabled = false; btn.textContent = 'Send Check-In Email →';
+        }
+      } catch(e) {
+        document.getElementById('qs-status').innerHTML = '<div class="status-msg status-error">Connection error</div>';
+        btn.disabled = false; btn.textContent = 'Send Check-In Email →';
+      }
+    }
+
+    function copyLink(url) {
+      navigator.clipboard.writeText(url);
+      alert('Link copied! You can share it via text or email.');
+    }
+
+    function copyText(btn, text) {
+      navigator.clipboard.writeText(text);
+      btn.textContent = 'Copied!';
+      setTimeout(function() { btn.textContent = 'Copy Text'; }, 2000);
+    }
+  </script>
+</body>
+</html>
