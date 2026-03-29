@@ -210,7 +210,7 @@
       }
 
       try {
-        var res = await fetch('/api/schedule-checkins', {
+        var res = await fetch('/api/recovery-checkin', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'x-admin-key': ADMIN_KEY },
           body: JSON.stringify({ action: 'get-schedule', email, phone, patientName: name, procedure, surgeryDate })
@@ -262,7 +262,7 @@
 
       btn.disabled = true; btn.textContent = 'Sending...';
       try {
-        var res = await fetch('/api/schedule-checkins', {
+        var res = await fetch('/api/recovery-checkin', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'x-admin-key': ADMIN_KEY },
           body: JSON.stringify({ action: 'send-single', email, phone, patientName: name, procedure, interval })
@@ -296,7 +296,7 @@
 
       btn.disabled = true; btn.textContent = 'Sending...';
       try {
-        var res = await fetch('/api/schedule-checkins', {
+        var res = await fetch('/api/recovery-checkin', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'x-admin-key': ADMIN_KEY },
           body: JSON.stringify({ action: 'send-single', email, phone, patientName: name, procedure, interval })
