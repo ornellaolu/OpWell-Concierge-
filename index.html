@@ -436,11 +436,12 @@
     .stat-num {
       display: block;
       font-family: 'Playfair Display', serif;
-      font-size: 2.8rem;
-      font-weight: 300;
+      font-size: 3.4rem;
+      font-weight: 700;
       color: var(--terracotta);
       line-height: 1;
       margin-bottom: 0.5rem;
+      text-shadow: 0 2px 12px rgba(200,132,90,0.25);
     }
 
     .stat-label {
@@ -638,12 +639,13 @@
 
     .evidence-stat {
       font-family: 'Playfair Display', serif;
-      font-size: 3rem;
-      font-weight: 400;
+      font-size: 3.6rem;
+      font-weight: 700;
       color: var(--terracotta);
       line-height: 1;
       margin-bottom: 0.5rem;
       letter-spacing: -0.02em;
+      text-shadow: 0 2px 12px rgba(200,132,90,0.25);
     }
 
     .evidence-label {
@@ -1128,20 +1130,22 @@
 
     .stat-callout-num {
       font-family: 'Playfair Display', serif;
-      font-size: 2.2rem;
+      font-size: 2.8rem;
       color: var(--terracotta);
-      font-weight: 300;
+      font-weight: 700;
       line-height: 1;
+      text-shadow: 0 2px 12px rgba(200,132,90,0.2);
     }
 
     /* ── STAT NUMBER POP ENTRANCE ANIMATION ── */
     @keyframes statNumPop {
-      0%   { opacity: 0; transform: scale(0.72) translateY(14px); }
-      60%  { transform: scale(1.09) translateY(-3px); }
-      100% { opacity: 1; transform: scale(1) translateY(0); }
+      0%   { opacity: 0; transform: scale(0.3) translateY(30px); filter: blur(8px); }
+      50%  { opacity: 1; transform: scale(1.18) translateY(-8px); filter: blur(0); }
+      70%  { transform: scale(0.95) translateY(2px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
     }
     .stat-num-popped {
-      animation: statNumPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+      animation: statNumPop 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) both;
     }
 
     .stat-callout-text {
