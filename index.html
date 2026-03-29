@@ -2430,11 +2430,11 @@
         "description": "OpWell Concierge™ is an anesthesiologist-led telehealth practice offering pre-surgical consultations, post-operative care, labor & delivery preparation, and integrated mental wellness support. Board-certified physician. No referral required.",
         "medicalSpecialty": "Anesthesiology",
         "availableService": [
-          { "@type": "MedicalTherapy", "name": "Pre-Surgical Consultation", "url": "https://www.opwellconcierge.com/surgery-prep" },
-          { "@type": "MedicalTherapy", "name": "Post-Operative Care", "url": "https://www.opwellconcierge.com/recovery" },
-          { "@type": "MedicalTherapy", "name": "Labor & Delivery Consultation", "url": "https://www.opwellconcierge.com/obstetric" },
-          { "@type": "MedicalTherapy", "name": "Surgical Mental Wellness", "url": "https://www.opwellconcierge.com/mental-health" },
-          { "@type": "MedicalTherapy", "name": "Medical Tourism Support", "url": "https://www.opwellconcierge.com/medical-tourism" }
+          { "@type": "MedicalTherapy", "name": "Pre-Surgical Consultation", "url": "https://www.opwellconcierge.com/surgery-prep", "offers": { "@type": "Offer", "price": "490", "priceCurrency": "USD" } },
+          { "@type": "MedicalTherapy", "name": "Post-Operative Care", "url": "https://www.opwellconcierge.com/recovery", "offers": { "@type": "Offer", "price": "490", "priceCurrency": "USD" } },
+          { "@type": "MedicalTherapy", "name": "Labor & Delivery Consultation", "url": "https://www.opwellconcierge.com/obstetric", "offers": { "@type": "Offer", "price": "400", "priceCurrency": "USD" } },
+          { "@type": "MedicalTherapy", "name": "Surgical Mental Wellness", "url": "https://www.opwellconcierge.com/mental-health", "offers": { "@type": "Offer", "price": "250", "priceCurrency": "USD" } },
+          { "@type": "MedicalTherapy", "name": "Medical Tourism Support", "url": "https://www.opwellconcierge.com/medical-tourism", "offers": { "@type": "Offer", "price": "490", "priceCurrency": "USD" } }
         ],
         "areaServed": [
           { "@type": "State", "name": "Georgia" },
@@ -2454,7 +2454,24 @@
           "honorificSuffix": "MD, D.ABA",
           "jobTitle": "Board-Certified Anesthesiologist & Founder",
           "medicalSpecialty": "Anesthesiology",
+          "image": "https://www.opwellconcierge.com/dr-oluwole-hero.jpg",
           "worksFor": { "@id": "https://www.opwellconcierge.com/#practice" }
+        },
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.opwellconcierge.com/dr-oluwole-hero.jpg"
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.opwellconcierge.com/#website",
+        "name": "OpWell Concierge™",
+        "url": "https://www.opwellconcierge.com",
+        "publisher": { "@id": "https://www.opwellconcierge.com/#practice" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://www.opwellconcierge.com/?q={search_term_string}",
+          "query-input": "required name=search_term_string"
         }
       },
       {
@@ -15254,6 +15271,26 @@
       script.id = 'article-jsonld';
       script.textContent = JSON.stringify(articleSchema);
       document.head.appendChild(script);
+    }
+
+    // Dynamic BreadcrumbList for non-homepage
+    var existingBreadcrumb = document.getElementById('breadcrumb-jsonld');
+    if (existingBreadcrumb) existingBreadcrumb.remove();
+    if (pageId !== 'home') {
+      var pageName = meta.title.split(' | ')[0];
+      var breadcrumbSchema = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.opwellconcierge.com/" },
+          { "@type": "ListItem", "position": 2, "name": pageName, "item": pageUrl }
+        ]
+      };
+      var bcScript = document.createElement('script');
+      bcScript.type = 'application/ld+json';
+      bcScript.id = 'breadcrumb-jsonld';
+      bcScript.textContent = JSON.stringify(breadcrumbSchema);
+      document.head.appendChild(bcScript);
     }
   }
 
