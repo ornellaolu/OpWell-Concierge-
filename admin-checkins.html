@@ -191,7 +191,7 @@
         alert('Invalid passcode.');
         return;
       }
-      ADMIN_KEY = input;
+      ADMIN_KEY = 'opwell';
       document.getElementById('login-screen').classList.add('hidden');
       document.getElementById('dashboard').classList.remove('hidden');
       document.getElementById('admin-status').textContent = 'Logged in';
@@ -250,7 +250,7 @@
 
         document.getElementById('schedule-results').classList.remove('hidden');
       } catch(e) {
-        alert('Connection error. Please try again.');
+        alert('Connection error: ' + e.message);
       }
     }
 
