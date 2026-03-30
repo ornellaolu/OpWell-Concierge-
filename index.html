@@ -15461,6 +15461,24 @@
 
   // ── GIFT SERVICE PRE-SELECT ──
   // ── GIFT PURCHASE FLOW ──
+  // ── MASTERCLASS PURCHASE ──
+  async function purchaseMasterclass() {
+    try {
+      var res = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          items: ['Surgery Prep Masterclass'],
+          email: '',
+          patientName: 'Masterclass Purchase'
+        })
+      });
+      var data = await res.json();
+      if (data.url) { window.location.href = data.url; }
+      else { alert('Error: ' + (data.error || 'Please try again.')); }
+    } catch(e) { alert('Connection error. Please try again.'); }
+  }
+
   var giftSelectedService = '';
 
   function giftService(consultant, serviceName) {
