@@ -8,6 +8,7 @@ const PRICES = {
   'Mental Wellness — Single Session':                      25000,
   'Mental Wellness — Bundle Add-On':                       21500,
   'Mental Wellness — 3-Session Package':                   60000,
+  'Surgery Prep Masterclass':                               9900,
 };
 
 const ALLOWED_ORIGINS = [
