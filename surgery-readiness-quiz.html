@@ -70,6 +70,7 @@
 <body>
 
 <div class="quiz-header">
+  <a href="https://www.opwellconcierge.com" style="display:inline-block; font-size:0.8rem; color:rgba(255,255,255,0.6); text-decoration:none; margin-bottom:1rem;">← Back to OpWell</a>
   <div class="tag">Free · 2 Minutes · 8 Questions</div>
   <h1>How Ready Are You for Surgery?</h1>
   <p>Quick assessment built from a board-certified anesthesiologist's clinical framework.</p>
@@ -94,10 +95,12 @@
   </div>
 
   <div id="email-capture" style="display:none; margin-top:1.5rem; background:#fff; border-radius:12px; padding:1.5rem; border:1px solid rgba(0,0,0,0.08); text-align:center;">
-    <p style="font-size:0.85rem; color:#555; margin-bottom:0.75rem;">Want a personalized surgery preparation checklist sent to your email?</p>
+    <p style="font-family:'Playfair Display',serif; font-size:1.05rem; color:var(--charcoal); margin-bottom:0.25rem;">Stay in the know.</p>
+    <p style="font-size:0.82rem; color:#888; margin-bottom:1rem;">Get surgery prep tips, new blog posts, and exclusive offers from OpWell — straight to your inbox.</p>
     <input type="email" id="capture-email" placeholder="Your email address" style="width:100%; padding:0.75rem 1rem; border:1.5px solid rgba(45,90,61,0.2); border-radius:8px; font-size:0.95rem; margin-bottom:0.75rem; font-family:'DM Sans',sans-serif;">
-    <button onclick="captureEmail()" style="width:100%; padding:0.8rem; background:var(--sage); color:#fff; border:none; border-radius:8px; font-size:0.9rem; font-weight:600; cursor:pointer;">Send My Checklist →</button>
+    <button onclick="captureEmail()" style="width:100%; padding:0.8rem; background:var(--sage); color:#fff; border:none; border-radius:8px; font-size:0.9rem; font-weight:600; cursor:pointer;">Subscribe →</button>
     <p id="email-status" style="font-size:0.8rem; margin-top:0.5rem; color:#555;"></p>
+    <p style="font-size:0.7rem; color:#aaa; margin-top:0.5rem;">No spam. Unsubscribe anytime.</p>
   </div>
 
   <div class="powered-by">Powered by <a href="https://www.opwellconcierge.com">OpWell Concierge™</a> · Board-Certified Anesthesiologist-Led Telehealth</div>
@@ -134,12 +137,12 @@ var QS = [
       {t:"Weight loss injection (Ozempic, Wegovy, Mounjaro, Zepbound)", ds:2, flag:"GLP-1 medication requires specific pre-surgery protocol"},
     ]
   },
-  // Q4 — Disease domain (BMI + smoking)
-  { q: "Which of these applies to you?",
+  // Q4 — Disease domain (weight + smoking)
+  { q: "Which best describes you?",
     opts: [
       {t:"Healthy weight, non-smoker", ds:0, flag:null},
-      {t:"Overweight (BMI 30–40) or recently quit smoking", ds:1, flag:"Weight or smoking history may affect anesthesia"},
-      {t:"BMI over 40 or currently smoke/vape", ds:3, flag:"BMI or active smoking significantly increases surgical risk"},
+      {t:"Carrying extra weight (over 200 lbs) or recently quit smoking", ds:1, flag:"Weight or smoking history may affect anesthesia"},
+      {t:"Significantly overweight (over 250 lbs) or currently smoke/vape", ds:3, flag:"Weight or active smoking significantly increases surgical risk"},
     ]
   },
   // Q5 — Surgery domain
