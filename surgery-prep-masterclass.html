@@ -629,6 +629,163 @@ a:hover { color: var(--sage-light); }
 [data-surgery] { display: none; }
 [data-surgery].show { display: block; }
 
+/* Surgery-specific modules: hide when another surgery type is selected */
+.module-card[data-relevant-surgery] { transition: opacity 0.3s ease; }
+.module-card[data-relevant-surgery].surgery-hidden { display: none; }
+.module-card[data-relevant-surgery].surgery-highlighted { border-color: var(--sage); border-width: 2px; }
+
+/* ── INTAKE WIZARD ── */
+.intake-progress { display: flex; justify-content: center; gap: 8px; margin-bottom: 28px; }
+.intake-dot {
+  width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 600; color: var(--warm-gray); background: #fff;
+  transition: all 0.25s ease;
+}
+.intake-dot.completed { background: var(--sage); border-color: var(--sage); color: #fff; }
+.intake-dot.active { border-color: var(--terracotta); color: var(--terracotta); box-shadow: 0 0 0 3px rgba(200,132,90,0.15); }
+.intake-step { display: none; animation: fadeInUp 0.3s ease; }
+.intake-step.active { display: block; }
+.intake-step h3 { text-align: center; font-size: 22px; color: var(--sage); margin-bottom: 6px; }
+.intake-step .intake-sub { text-align: center; color: var(--warm-gray); font-size: 14px; margin-bottom: 24px; }
+.intake-options {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px;
+}
+.intake-options.two-col { grid-template-columns: repeat(2, 1fr); }
+.intake-options.three-col { grid-template-columns: repeat(3, 1fr); }
+.intake-options.four-col { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); }
+.intake-opt {
+  display: flex; flex-direction: column; align-items: center; padding: 18px 12px;
+  border: 2px solid var(--border); border-radius: 12px; cursor: pointer;
+  transition: all 0.25s ease; background: #fff; text-align: center; user-select: none;
+}
+.intake-opt:hover { border-color: var(--sage); background: var(--sage-bg); }
+.intake-opt.selected { border-color: var(--sage); background: var(--sage-bg); box-shadow: 0 0 0 3px rgba(45,90,61,0.15); }
+.intake-opt .opt-icon { font-size: 28px; margin-bottom: 6px; }
+.intake-opt .opt-label { font-weight: 600; font-size: 14px; color: var(--charcoal); }
+.intake-opt .opt-desc { font-size: 12px; color: var(--warm-gray); margin-top: 4px; }
+.intake-opt.multi { position: relative; }
+.intake-opt.multi::after {
+  content: ''; position: absolute; top: 8px; right: 8px; width: 18px; height: 18px;
+  border: 2px solid var(--border); border-radius: 4px; background: #fff; transition: all 0.2s ease;
+}
+.intake-opt.multi.selected::after {
+  background: var(--sage); border-color: var(--sage);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
+  background-size: 14px; background-position: center; background-repeat: no-repeat;
+}
+.intake-nav { display: flex; justify-content: space-between; margin-top: 28px; }
+.intake-nav button {
+  padding: 12px 28px; border-radius: 8px; font-family: 'DM Sans', sans-serif;
+  font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; border: none;
+}
+.intake-back { background: var(--light-gray); color: var(--warm-gray); }
+.intake-back:hover { background: var(--border); }
+.intake-next { background: var(--sage); color: #fff; }
+.intake-next:hover { background: var(--sage-light); }
+.intake-next:disabled { background: var(--border); color: var(--warm-gray); cursor: not-allowed; }
+.intake-hidden { display: none !important; }
+
+/* ── PROFILE SUMMARY ── */
+.profile-summary {
+  background: #fff; border: 2px solid var(--sage); border-radius: 14px;
+  padding: 24px 28px; margin-bottom: 28px; position: relative;
+}
+.profile-summary h3 { font-size: 18px; color: var(--sage); margin-bottom: 14px; font-family: 'Playfair Display', serif; }
+.profile-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.profile-tag {
+  display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px;
+  border-radius: 20px; font-size: 12px; font-weight: 600;
+}
+.profile-tag.info { background: var(--sage-bg); color: var(--sage); }
+.profile-tag.warning { background: var(--terracotta-bg); color: var(--terracotta); }
+.profile-tag.neutral { background: var(--light-gray); color: var(--warm-gray); }
+.profile-edit { position: absolute; top: 20px; right: 24px; font-size: 13px; color: var(--sage); cursor: pointer; font-weight: 500; }
+.profile-edit:hover { color: var(--sage-light); text-decoration: underline; }
+.profile-message { font-size: 14px; color: var(--warm-gray); line-height: 1.6; margin-top: 10px; }
+
+/* ── CONDITIONAL CONTENT ── */
+[data-condition] { display: none; }
+[data-condition].condition-show { display: block; }
+.personalized-callout {
+  background: linear-gradient(135deg, #F0F7F2 0%, #E8F0EB 100%);
+  border-left: 4px solid var(--sage); border-radius: 0 10px 10px 0;
+  padding: 16px 20px; margin: 16px 0;
+}
+.personalized-callout::before {
+  content: 'Personalized for you'; display: block;
+  font-size: 11px; font-weight: 700; color: var(--sage); text-transform: uppercase;
+  letter-spacing: 1px; margin-bottom: 8px;
+}
+.risk-callout {
+  background: linear-gradient(135deg, #FBF0E8 0%, #F8E8DA 100%);
+  border-left: 4px solid var(--terracotta); border-radius: 0 10px 10px 0;
+  padding: 16px 20px; margin: 16px 0;
+}
+.risk-callout::before {
+  content: 'Important for your health profile'; display: block;
+  font-size: 11px; font-weight: 700; color: var(--terracotta); text-transform: uppercase;
+  letter-spacing: 1px; margin-bottom: 8px;
+}
+
+/* ── KNOWLEDGE CHECKS ── */
+.knowledge-check {
+  background: var(--light-gray); border-radius: 12px; padding: 24px;
+  margin: 24px 0 16px; border-top: 3px solid var(--sage);
+}
+.quiz-title { font-size: 16px; color: var(--sage); margin-bottom: 18px; font-family: 'DM Sans', sans-serif; font-weight: 700; }
+.quiz-question { margin-bottom: 20px; }
+.quiz-question:last-of-type { margin-bottom: 0; }
+.quiz-prompt { font-weight: 600; font-size: 14px; margin-bottom: 10px; color: var(--charcoal); }
+.quiz-options { display: flex; flex-direction: column; gap: 8px; }
+.quiz-opt {
+  padding: 10px 16px; border: 2px solid var(--border); border-radius: 8px;
+  background: #fff; cursor: pointer; font-family: 'DM Sans', sans-serif;
+  font-size: 14px; text-align: left; transition: all 0.2s ease; color: var(--charcoal);
+}
+.quiz-opt:hover:not(:disabled) { border-color: var(--sage); background: var(--sage-bg); }
+.quiz-opt:disabled { cursor: default; opacity: 0.9; }
+.quiz-opt.correct { background: #E8F5E9; border-color: #4CAF50; color: #2E7D32; }
+.quiz-opt.wrong { background: #FFEBEE; border-color: #E57373; color: #C62828; }
+.quiz-feedback { font-size: 13px; margin-top: 8px; padding: 8px 12px; border-radius: 6px; display: none; }
+.quiz-feedback.show { display: block; }
+.quiz-feedback.correct { background: #E8F5E9; color: #2E7D32; }
+.quiz-feedback.wrong { background: #FFEBEE; color: #C62828; }
+
+/* ── READINESS SCORE ── */
+.readiness-section {
+  background: #fff; border: 1px solid var(--border); border-radius: 12px;
+  padding: 20px 28px; margin-bottom: 24px; display: flex; align-items: center; gap: 20px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.03);
+}
+.readiness-ring {
+  width: 64px; height: 64px; border-radius: 50%; position: relative; flex-shrink: 0;
+  background: conic-gradient(var(--sage) var(--pct, 0%), var(--light-gray) var(--pct, 0%));
+  display: flex; align-items: center; justify-content: center;
+}
+.readiness-ring::after {
+  content: ''; width: 48px; height: 48px; border-radius: 50%; background: #fff;
+  position: absolute;
+}
+.readiness-num { position: relative; z-index: 1; font-size: 16px; font-weight: 700; color: var(--sage); }
+.readiness-info h4 { font-size: 15px; font-weight: 600; color: var(--charcoal); margin-bottom: 2px; }
+.readiness-info p { font-size: 13px; color: var(--warm-gray); }
+
+/* ── TIMELINE COMPRESSION ── */
+.timeline-postop .module-card[data-module="1"],
+.timeline-postop .module-card[data-module="2"],
+.timeline-postop .module-card[data-module="3"],
+.timeline-postop .module-card[data-module="5"] { opacity: 0.5; }
+.timeline-postop .module-card[data-module="1"]::after,
+.timeline-postop .module-card[data-module="2"]::after,
+.timeline-postop .module-card[data-module="3"]::after,
+.timeline-postop .module-card[data-module="5"]::after {
+  content: 'Pre-surgery content'; position: absolute; top: 12px; right: 16px;
+  font-size: 11px; font-weight: 600; color: var(--warm-gray); background: var(--light-gray);
+  padding: 2px 10px; border-radius: 10px;
+}
+.timeline-urgent .module-card[data-module="3"] { display: none; }
+
 /* ── RESPONSIVE ── */
 @media (max-width: 640px) {
   .hero { padding: 60px 24px 44px; }
@@ -644,11 +801,21 @@ a:hover { color: var(--sage-light); }
   .progress-dot { width: 24px; height: 24px; font-size: 10px; }
   .main-container { padding: 0 16px 40px; }
   .back-bar { padding: 10px 16px; font-size: 13px; }
+  .intake-options { grid-template-columns: repeat(2, 1fr) !important; }
+  .intake-options.two-col { grid-template-columns: repeat(2, 1fr) !important; }
+  .intake-nav { gap: 10px; }
+  .intake-nav button { padding: 10px 20px; font-size: 14px; }
+  .profile-summary { padding: 20px; }
+  .readiness-section { flex-direction: column; text-align: center; }
+  .quiz-opt { font-size: 13px; padding: 10px 14px; }
 }
 
 /* ── PRINT ── */
 @media print {
-  .back-bar, .selector-section, .progress-section, .mark-complete-btn, .module-chevron, .print-btn { display: none !important; }
+  .back-bar, .selector-section, .progress-section, .readiness-section, .profile-summary, .mark-complete-btn, .module-chevron, .print-btn, .knowledge-check, .intake-nav, .risk-callout-injected, .personalized-callout { display: none !important; }
+  [data-surgery] { display: block !important; }
+  [data-relevant-surgery] { display: block !important; }
+  .module-card.surgery-hidden { display: block !important; opacity: 1 !important; }
   body { background: #fff; font-size: 11pt; }
   .hero { padding: 40px 30px; min-height: 0; page-break-after: always; }
   .module-card { break-inside: avoid; page-break-inside: avoid; border: 1px solid #ccc; }
@@ -709,37 +876,234 @@ a:hover { color: var(--sage-light); }
 <!-- MAIN CONTAINER -->
 <div class="main-container">
 
-<!-- SURGERY TYPE SELECTOR -->
-<div class="selector-section">
-  <h2>Personalize Your Experience</h2>
-  <p class="selector-sub">Select your surgery type to see content tailored specifically for you. Universal guidance always shows.</p>
-  <div class="surgery-options">
-    <div class="surgery-opt" data-type="cosmetic" onclick="selectSurgery('cosmetic')">
-      <div class="opt-icon">&#9733;</div>
-      <div class="opt-label">Cosmetic</div>
-      <div class="opt-desc">BBL, tummy tuck, lipo, breast</div>
-    </div>
-    <div class="surgery-opt" data-type="bariatric" onclick="selectSurgery('bariatric')">
-      <div class="opt-icon">&#9878;</div>
-      <div class="opt-label">Bariatric</div>
-      <div class="opt-desc">Gastric sleeve, bypass, revision</div>
-    </div>
-    <div class="surgery-opt" data-type="general" onclick="selectSurgery('general')">
-      <div class="opt-icon">&#9764;</div>
-      <div class="opt-label">General</div>
-      <div class="opt-desc">Gallbladder, hernia, appendix</div>
-    </div>
-    <div class="surgery-opt" data-type="orthopedic" onclick="selectSurgery('orthopedic')">
-      <div class="opt-icon">&#9883;</div>
-      <div class="opt-label">Orthopedic</div>
-      <div class="opt-desc">Knee, hip, shoulder, spine</div>
-    </div>
-    <div class="surgery-opt" data-type="notsure" onclick="selectSurgery('notsure')">
-      <div class="opt-icon">?</div>
-      <div class="opt-label">Not Sure</div>
-      <div class="opt-desc">Show me everything</div>
+<!-- PERSONALIZATION INTAKE -->
+<div class="selector-section" id="intakeSection">
+
+  <!-- Step dots -->
+  <div class="intake-progress" id="intakeDots"></div>
+
+  <!-- Step 1: Surgery Type -->
+  <div class="intake-step active" data-step="1">
+    <h3>What type of surgery are you having?</h3>
+    <p class="intake-sub">We'll tailor your entire guide based on your answer.</p>
+    <div class="intake-options">
+      <div class="intake-opt" data-value="cosmetic" onclick="pickIntake(this)">
+        <div class="opt-icon">&#9733;</div>
+        <div class="opt-label">Cosmetic</div>
+        <div class="opt-desc">BBL, tummy tuck, lipo, breast</div>
+      </div>
+      <div class="intake-opt" data-value="bariatric" onclick="pickIntake(this)">
+        <div class="opt-icon">&#9878;</div>
+        <div class="opt-label">Bariatric</div>
+        <div class="opt-desc">Gastric sleeve, bypass, revision</div>
+      </div>
+      <div class="intake-opt" data-value="general" onclick="pickIntake(this)">
+        <div class="opt-icon">&#9764;</div>
+        <div class="opt-label">General</div>
+        <div class="opt-desc">Gallbladder, hernia, appendix</div>
+      </div>
+      <div class="intake-opt" data-value="orthopedic" onclick="pickIntake(this)">
+        <div class="opt-icon">&#9883;</div>
+        <div class="opt-label">Orthopedic</div>
+        <div class="opt-desc">Knee, hip, shoulder, spine</div>
+      </div>
+      <div class="intake-opt" data-value="gynecologic" onclick="pickIntake(this)">
+        <div class="opt-icon">&#9792;</div>
+        <div class="opt-label">Gynecologic</div>
+        <div class="opt-desc">Hysterectomy, fibroids, endo</div>
+      </div>
+      <div class="intake-opt" data-value="cesarean" onclick="pickIntake(this)">
+        <div class="opt-icon">&#128118;</div>
+        <div class="opt-label">C-Section</div>
+        <div class="opt-desc">Cesarean delivery &amp; recovery</div>
+      </div>
+      <div class="intake-opt" data-value="cancer" onclick="pickIntake(this)">
+        <div class="opt-icon">&#127895;</div>
+        <div class="opt-label">Cancer</div>
+        <div class="opt-desc">Tumor removal, staging, biopsy</div>
+      </div>
+      <div class="intake-opt" data-value="notsure" onclick="pickIntake(this)">
+        <div class="opt-icon">?</div>
+        <div class="opt-label">Not Sure / Show All</div>
+        <div class="opt-desc">Comprehensive view, all surgery types</div>
+      </div>
     </div>
   </div>
+
+  <!-- Step 2: Timeline -->
+  <div class="intake-step" data-step="2">
+    <h3>When is your surgery?</h3>
+    <p class="intake-sub">This helps us prioritize what you need to focus on first.</p>
+    <div class="intake-options three-col">
+      <div class="intake-opt" data-value="<1week" onclick="pickIntake(this)">
+        <div class="opt-icon">&#9888;</div>
+        <div class="opt-label">Less than 1 week</div>
+      </div>
+      <div class="intake-opt" data-value="1-2weeks" onclick="pickIntake(this)">
+        <div class="opt-icon">&#128197;</div>
+        <div class="opt-label">1&ndash;2 weeks</div>
+      </div>
+      <div class="intake-opt" data-value="2-4weeks" onclick="pickIntake(this)">
+        <div class="opt-icon">&#128197;</div>
+        <div class="opt-label">2&ndash;4 weeks</div>
+      </div>
+      <div class="intake-opt" data-value="4+weeks" onclick="pickIntake(this)">
+        <div class="opt-icon">&#128197;</div>
+        <div class="opt-label">More than 4 weeks</div>
+      </div>
+      <div class="intake-opt" data-value="postop" onclick="pickIntake(this)">
+        <div class="opt-icon">&#9989;</div>
+        <div class="opt-label">Already had surgery</div>
+        <div class="opt-desc">I need recovery info</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 3: Health Conditions (multi-select) -->
+  <div class="intake-step" data-step="3">
+    <h3>Do you have any of these conditions?</h3>
+    <p class="intake-sub">Select all that apply. This helps us highlight important safety information for you.</p>
+    <div class="intake-options four-col">
+      <div class="intake-opt multi" data-value="diabetes" onclick="pickMulti(this)">
+        <div class="opt-label">Diabetes</div>
+      </div>
+      <div class="intake-opt multi" data-value="heart" onclick="pickMulti(this)">
+        <div class="opt-label">Heart disease</div>
+      </div>
+      <div class="intake-opt multi" data-value="lung" onclick="pickMulti(this)">
+        <div class="opt-label">Lung disease</div>
+        <div class="opt-desc">COPD, asthma</div>
+      </div>
+      <div class="intake-opt multi" data-value="obesity" onclick="pickMulti(this)">
+        <div class="opt-label">Obesity</div>
+        <div class="opt-desc">BMI over 30</div>
+      </div>
+      <div class="intake-opt multi" data-value="osa" onclick="pickMulti(this)">
+        <div class="opt-label">Sleep apnea</div>
+      </div>
+      <div class="intake-opt multi" data-value="anxiety" onclick="pickMulti(this)">
+        <div class="opt-label">Anxiety / Depression</div>
+      </div>
+      <div class="intake-opt multi" data-value="clots" onclick="pickMulti(this)">
+        <div class="opt-label">Previous blood clots</div>
+      </div>
+      <div class="intake-opt multi" data-value="pain" onclick="pickMulti(this)">
+        <div class="opt-label">Chronic pain</div>
+      </div>
+      <div class="intake-opt multi" data-value="none" onclick="pickNone(this)">
+        <div class="opt-label">None of the above</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 4: Smoking -->
+  <div class="intake-step" data-step="4">
+    <h3>Do you currently smoke or use tobacco?</h3>
+    <p class="intake-sub">Smoking significantly affects surgical outcomes and healing.</p>
+    <div class="intake-options three-col">
+      <div class="intake-opt" data-value="yes" onclick="pickIntake(this)">
+        <div class="opt-label">Yes</div>
+      </div>
+      <div class="intake-opt" data-value="quit-recent" onclick="pickIntake(this)">
+        <div class="opt-label">Quit recently</div>
+        <div class="opt-desc">Within the last month</div>
+      </div>
+      <div class="intake-opt" data-value="no" onclick="pickIntake(this)">
+        <div class="opt-label">No</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 5: First Surgery -->
+  <div class="intake-step" data-step="5">
+    <h3>Have you had surgery before?</h3>
+    <p class="intake-sub">First-timers get extra guidance on what to expect.</p>
+    <div class="intake-options two-col">
+      <div class="intake-opt" data-value="first" onclick="pickIntake(this)">
+        <div class="opt-icon">&#127775;</div>
+        <div class="opt-label">No, this is my first</div>
+      </div>
+      <div class="intake-opt" data-value="experienced" onclick="pickIntake(this)">
+        <div class="opt-icon">&#9989;</div>
+        <div class="opt-label">Yes, I've had surgery before</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 6: Anxiety -->
+  <div class="intake-step" data-step="6">
+    <h3>How anxious do you feel about your surgery?</h3>
+    <p class="intake-sub">There's no wrong answer. This helps us include the right support content.</p>
+    <div class="intake-options three-col">
+      <div class="intake-opt" data-value="low" onclick="pickIntake(this)">
+        <div class="opt-icon" style="font-size:36px">&#128522;</div>
+        <div class="opt-label">A little nervous</div>
+      </div>
+      <div class="intake-opt" data-value="moderate" onclick="pickIntake(this)">
+        <div class="opt-icon" style="font-size:36px">&#128528;</div>
+        <div class="opt-label">Moderately anxious</div>
+      </div>
+      <div class="intake-opt" data-value="high" onclick="pickIntake(this)">
+        <div class="opt-icon" style="font-size:36px">&#128559;</div>
+        <div class="opt-label">Very anxious</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 7: Caregiver -->
+  <div class="intake-step" data-step="7">
+    <h3>Will someone help you recover?</h3>
+    <p class="intake-sub">We'll include caregiver-specific content if applicable.</p>
+    <div class="intake-options three-col">
+      <div class="intake-opt" data-value="yes-involved" onclick="pickIntake(this)">
+        <div class="opt-label">Yes, very involved</div>
+      </div>
+      <div class="intake-opt" data-value="yes-limited" onclick="pickIntake(this)">
+        <div class="opt-label">Yes, limited help</div>
+      </div>
+      <div class="intake-opt" data-value="no" onclick="pickIntake(this)">
+        <div class="opt-label">Mostly on my own</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 8: Activity Level -->
+  <div class="intake-step" data-step="8">
+    <h3>What's your current activity level?</h3>
+    <p class="intake-sub">This helps us tailor your prehabilitation plan.</p>
+    <div class="intake-options four-col">
+      <div class="intake-opt" data-value="sedentary" onclick="pickIntake(this)">
+        <div class="opt-label">Sedentary</div>
+        <div class="opt-desc">Little to no exercise</div>
+      </div>
+      <div class="intake-opt" data-value="light" onclick="pickIntake(this)">
+        <div class="opt-label">Light</div>
+        <div class="opt-desc">Walking, light housework</div>
+      </div>
+      <div class="intake-opt" data-value="moderate" onclick="pickIntake(this)">
+        <div class="opt-label">Moderate</div>
+        <div class="opt-desc">Exercise 2&ndash;3x/week</div>
+      </div>
+      <div class="intake-opt" data-value="active" onclick="pickIntake(this)">
+        <div class="opt-label">Very active</div>
+        <div class="opt-desc">Exercise most days</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation (hidden on step 1, managed by JS) -->
+  <div class="intake-nav" id="intakeNav" style="display:none;">
+    <button class="intake-back" onclick="intakeBack()">&#8592; Back</button>
+    <button class="intake-next" onclick="intakeNext()" disabled>Next &#8594;</button>
+  </div>
+</div>
+
+<!-- PROFILE SUMMARY (hidden until intake complete) -->
+<div class="profile-summary" id="profileSummary" style="display:none;">
+  <h3>Your Personalized Guide</h3>
+  <span class="profile-edit" onclick="retakeIntake()">Retake questionnaire</span>
+  <div class="profile-tags" id="profileTags"></div>
+  <div class="profile-message" id="profileMessage"></div>
 </div>
 
 <!-- TABLE OF CONTENTS -->
@@ -760,6 +1124,14 @@ a:hover { color: var(--sage-light); }
     <li><a href="#" onclick="toggleModule(12);return false;" style="color:var(--charcoal);text-decoration:none;font-weight:500;">Nausea &amp; Vomiting</a></li>
     <li><a href="#" onclick="toggleModule(13);return false;" style="color:var(--charcoal);text-decoration:none;font-weight:500;">Constipation After Surgery</a></li>
     <li><a href="#" onclick="toggleModule(14);return false;" style="color:var(--charcoal);text-decoration:none;font-weight:500;">Caregiver's Guide</a></li>
+    <li><a href="#" onclick="toggleModule(15);return false;" style="color:var(--charcoal);text-decoration:none;font-weight:500;">Understanding &amp; Managing Fatigue</a></li>
+    <li><a href="#" onclick="toggleModule(16);return false;" style="color:var(--charcoal);text-decoration:none;font-weight:500;">Returning to Normal Activities</a></li>
+    <li><a href="#" onclick="toggleModule(17);return false;" style="color:var(--charcoal);text-decoration:none;font-weight:500;">International Medical Tourism</a></li>
+    <li><a href="#" onclick="toggleModule(18);return false;" style="color:var(--charcoal);text-decoration:none;font-weight:500;">Preparing for Gynecologic Surgery</a></li>
+    <li><a href="#" onclick="toggleModule(19);return false;" style="color:var(--charcoal);text-decoration:none;font-weight:500;">Cesarean Section Recovery</a></li>
+    <li><a href="#" onclick="toggleModule(20);return false;" style="color:var(--charcoal);text-decoration:none;font-weight:500;">Pain Management During Labor &amp; Delivery</a></li>
+    <li><a href="#" onclick="toggleModule(21);return false;" style="color:var(--charcoal);text-decoration:none;font-weight:500;">Nutrition for Surgical Recovery</a></li>
+    <li><a href="#" onclick="toggleModule(22);return false;" style="color:var(--charcoal);text-decoration:none;font-weight:500;">Preparing for Cancer Surgery</a></li>
   </ol>
 </div>
 
@@ -773,6 +1145,17 @@ a:hover { color: var(--sage-light); }
     <div class="progress-bar-fill" id="progressFill"></div>
   </div>
   <div class="progress-modules" id="progressDots"></div>
+</div>
+
+<!-- READINESS SCORE -->
+<div class="readiness-section" id="readinessSection" style="display:none;">
+  <div class="readiness-ring" id="readinessRing" style="--pct:0%">
+    <span class="readiness-num" id="readinessNum">--</span>
+  </div>
+  <div class="readiness-info">
+    <h4>Readiness Score</h4>
+    <p id="readinessLabel">Complete the knowledge checks in each module to build your score.</p>
+  </div>
 </div>
 
 <!-- ══════════════════════════════════════════════════ -->
@@ -900,6 +1283,47 @@ a:hover { color: var(--sage-light); }
       </div>
     </div>
 
+    <!-- Gynecologic specialty -->
+    <div data-surgery="gynecologic">
+      <div class="specialty-note">
+        <div class="specialty-label">Gynecologic Surgery Note</div>
+        <p><strong>Hormonal medications:</strong> Discuss all hormonal medications with your surgeon:</p>
+        <ul>
+          <li><strong>Birth control pills (combined oral contraceptives):</strong> Slightly increase blood clot risk, but stopping before surgery is NOT routinely recommended. Blood clot prevention measures will be used.</li>
+          <li><strong>Hormone replacement therapy (HRT):</strong> Discuss with your surgeon &mdash; may or may not need to be paused depending on your risk factors</li>
+          <li><strong>GnRH agonists (Lupron):</strong> If you&rsquo;re on these for fibroids or endometriosis, your surgeon will guide timing</li>
+        </ul>
+        <p style="margin-top:10px;"><strong>UTI screening:</strong> Urinary tract infections should be treated <em>before</em> surgery. If you have symptoms (burning, frequency, urgency), tell your surgical team right away.</p>
+      </div>
+    </div>
+
+    <!-- Cesarean specialty -->
+    <div data-surgery="cesarean">
+      <div class="specialty-note">
+        <div class="specialty-label">C-Section Note</div>
+        <p><strong>Prenatal vitamins:</strong> Continue your prenatal vitamins through delivery and postpartum, especially if breastfeeding. Additionally:</p>
+        <ul>
+          <li>Review your blood pressure medications with your OB team</li>
+          <li>If on blood thinners (e.g., for blood clotting disorders), your OB will plan the timing carefully around delivery</li>
+          <li>Anti-nausea medication can be given with your spinal/epidural to prevent nausea during surgery</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Cancer specialty -->
+    <div data-surgery="cancer">
+      <div class="specialty-note">
+        <div class="specialty-label">Cancer Surgery Note</div>
+        <p><strong>Chemotherapy &amp; medications:</strong> If you&rsquo;re receiving or have recently completed chemotherapy, your surgical and medical oncology teams will coordinate timing carefully:</p>
+        <ul>
+          <li>Some chemo drugs affect blood clotting, immune function, or wound healing</li>
+          <li>Bring a complete list of all cancer medications, including targeted therapies and immunotherapies</li>
+          <li>Blood thinners may need careful coordination around surgery</li>
+          <li>Your blood counts will be checked before surgery to ensure safe levels</li>
+        </ul>
+      </div>
+    </div>
+
     <!-- Checklist -->
     <div class="checklist">
       <div class="checklist-title">&#9745; Medication Review Checklist</div>
@@ -926,6 +1350,28 @@ a:hover { color: var(--sage-light); }
       <div class="checklist-item" onclick="toggleCheck(this)">
         <div class="check-box"></div>
         <div class="check-text">Brought medication list to pre-op appointment</div>
+      </div>
+    </div>
+
+    <div class="knowledge-check" data-quiz="1">
+      <h4 class="quiz-title">Quick Knowledge Check</h4>
+      <div class="quiz-question" data-q="1">
+        <p class="quiz-prompt">When should you typically stop herbal supplements before surgery?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" data-answer="a" onclick="handleQuiz(this)">The morning of surgery</button>
+          <button class="quiz-opt" data-answer="b" data-correct onclick="handleQuiz(this)">7&ndash;14 days before surgery</button>
+          <button class="quiz-opt" data-answer="c" onclick="handleQuiz(this)">Only if your surgeon specifically mentions them</button>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+      <div class="quiz-question" data-q="2">
+        <p class="quiz-prompt">If you take a blood thinner, who should you talk to about stopping it before surgery?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" data-answer="a" onclick="handleQuiz(this)">Just stop it on your own 3 days before</button>
+          <button class="quiz-opt" data-answer="b" data-correct onclick="handleQuiz(this)">The doctor who prescribed it AND your surgeon</button>
+          <button class="quiz-opt" data-answer="c" onclick="handleQuiz(this)">Your pharmacist</button>
+        </div>
+        <div class="quiz-feedback"></div>
       </div>
     </div>
 
@@ -1031,6 +1477,45 @@ a:hover { color: var(--sage-light); }
       </div>
     </div>
 
+    <!-- Gynecologic specialty -->
+    <div data-surgery="gynecologic">
+      <div class="specialty-note">
+        <div class="specialty-label">Gynecologic Surgery Note</div>
+        <p><strong>Iron &amp; anemia:</strong> Many gynecologic patients have low iron from heavy menstrual bleeding. If you&rsquo;re anemic:</p>
+        <ul>
+          <li>Your surgeon may prescribe iron supplements before surgery</li>
+          <li>Severe anemia may need to be corrected before elective surgery can proceed</li>
+          <li>Eat iron-rich foods: red meat, spinach, lentils, fortified cereals</li>
+          <li>Take iron with vitamin C for better absorption; avoid taking with calcium or coffee</li>
+        </ul>
+        <p style="margin-top:10px;"><strong>Bowel prep:</strong> For most gynecologic surgeries, routine bowel preparation is NOT needed. Your surgeon will tell you if it&rsquo;s required for your specific procedure.</p>
+      </div>
+    </div>
+
+    <!-- Cesarean specialty -->
+    <div data-surgery="cesarean">
+      <div class="specialty-note">
+        <div class="specialty-label">C-Section Note</div>
+        <p><strong>Eating before a scheduled C-section:</strong> Modern guidelines allow clear liquids up to 2 hours before your scheduled cesarean. Your OB team will give you specific fasting instructions.</p>
+        <p style="margin-top:10px;"><strong>Post-delivery nutrition:</strong> You can usually eat a regular diet within 2 hours of your C-section. Eating soon after surgery helps your bowels recover faster and supports breastfeeding.</p>
+      </div>
+    </div>
+
+    <!-- Cancer specialty -->
+    <div data-surgery="cancer">
+      <div class="specialty-note">
+        <div class="specialty-label">Cancer Surgery Nutrition</div>
+        <p><strong>Nutrition is critical for cancer patients:</strong> Malnutrition is common and significantly increases surgical complications.</p>
+        <ul>
+          <li>If you&rsquo;ve lost weight unintentionally, tell your surgical team immediately</li>
+          <li>You may be referred to a dietitian for a personalized plan</li>
+          <li><strong>Immunonutrition</strong> formulas (containing arginine and omega-3 fatty acids) may be recommended before major abdominal cancer surgery</li>
+          <li>Oral nutritional supplements (Ensure, Boost) can help if appetite is poor</li>
+          <li>Protein needs are even higher for cancer patients &mdash; aim for 1.5 g/kg daily</li>
+        </ul>
+      </div>
+    </div>
+
     <div class="checklist">
       <div class="checklist-title">&#9745; Nutrition Checklist</div>
       <div class="checklist-item" onclick="toggleCheck(this)">
@@ -1052,6 +1537,28 @@ a:hover { color: var(--sage-light); }
       <div class="checklist-item" onclick="toggleCheck(this)">
         <div class="check-box"></div>
         <div class="check-text">Purchased carbohydrate loading drink (if recommended)</div>
+      </div>
+    </div>
+
+    <div class="knowledge-check" data-quiz="2">
+      <h4 class="quiz-title">Quick Knowledge Check</h4>
+      <div class="quiz-question" data-q="1">
+        <p class="quiz-prompt">According to modern fasting guidelines, when should you stop drinking clear liquids before surgery?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" data-answer="a" onclick="handleQuiz(this)">Midnight the night before (nothing after midnight)</button>
+          <button class="quiz-opt" data-answer="b" data-correct onclick="handleQuiz(this)">2 hours before surgery</button>
+          <button class="quiz-opt" data-answer="c" onclick="handleQuiz(this)">6 hours before surgery</button>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+      <div class="quiz-question" data-q="2">
+        <p class="quiz-prompt">Why is protein important before surgery?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" data-answer="a" onclick="handleQuiz(this)">It helps you sleep better</button>
+          <button class="quiz-opt" data-answer="b" data-correct onclick="handleQuiz(this)">It supports wound healing and maintains muscle mass</button>
+          <button class="quiz-opt" data-answer="c" onclick="handleQuiz(this)">It reduces the need for anesthesia</button>
+        </div>
+        <div class="quiz-feedback"></div>
       </div>
     </div>
 
@@ -1147,6 +1654,49 @@ a:hover { color: var(--sage-light); }
       </div>
     </div>
 
+    <!-- Gynecologic specialty -->
+    <div data-surgery="gynecologic">
+      <div class="specialty-note">
+        <div class="specialty-label">Gynecologic Surgery Focus</div>
+        <p><strong>Pelvic floor preparation:</strong> Strengthening your pelvic floor before gynecologic surgery can improve post-op outcomes:</p>
+        <ul>
+          <li><strong>Kegel exercises:</strong> Contract pelvic floor muscles (as if stopping urine flow), hold 5&ndash;10 seconds, relax. 10 reps, 3x daily</li>
+          <li><strong>Walking:</strong> 20&ndash;30 minutes daily improves circulation and overall conditioning</li>
+          <li><strong>Diaphragmatic breathing:</strong> Coordinating breath with pelvic floor relaxation helps with post-op recovery</li>
+          <li><strong>Core stabilization:</strong> Gentle planks and pelvic tilts (avoid heavy core work if you have large fibroids or prolapse)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Cesarean specialty -->
+    <div data-surgery="cesarean">
+      <div class="specialty-note">
+        <div class="specialty-label">C-Section Preparation</div>
+        <p><strong>Staying active during pregnancy:</strong> If your OB has cleared you for exercise, maintaining activity before a planned cesarean can improve recovery:</p>
+        <ul>
+          <li>Walking is the safest and most effective exercise in late pregnancy</li>
+          <li>Prenatal yoga and stretching maintain flexibility</li>
+          <li>Pelvic floor exercises (Kegels) help even with cesarean delivery</li>
+          <li>Practice the breathing exercises described above &mdash; they&rsquo;ll help post-op</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Cancer specialty -->
+    <div data-surgery="cancer">
+      <div class="specialty-note">
+        <div class="specialty-label">Cancer Surgery Prehabilitation</div>
+        <p><strong>Prehabilitation can reduce cancer surgery complications by up to 40%.</strong> Start as soon as surgery is planned:</p>
+        <ul>
+          <li>Aim for 30 minutes of moderate activity most days &mdash; even small amounts help</li>
+          <li>If you&rsquo;re receiving neoadjuvant chemo/radiation, prehab during this time is especially valuable</li>
+          <li><strong>If you smoke:</strong> Quitting before surgery is one of the most impactful things you can do. Four weeks of abstinence significantly reduces complications. Nicotine replacement is safe and is NOT a reason to delay surgery.</li>
+          <li>Breathing exercises are especially important before lung or upper abdominal cancer surgery</li>
+          <li>Mental health support is critical &mdash; distress is highest around diagnosis and surgery</li>
+        </ul>
+      </div>
+    </div>
+
     <h4>Sample Weekly Prehab Schedule</h4>
     <table class="data-table">
       <tr><th>Day</th><th>Beginner</th><th>Intermediate</th><th>Advanced</th></tr>
@@ -1177,6 +1727,28 @@ a:hover { color: var(--sage-light); }
       <div class="checklist-item" onclick="toggleCheck(this)">
         <div class="check-box"></div>
         <div class="check-text">Purchased or received an incentive spirometer</div>
+      </div>
+    </div>
+
+    <div class="knowledge-check" data-quiz="3">
+      <h4 class="quiz-title">Quick Knowledge Check</h4>
+      <div class="quiz-question" data-q="1">
+        <p class="quiz-prompt">What is the single most important physical activity you can do after surgery?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" data-answer="a" data-correct onclick="handleQuiz(this)">Walking</button>
+          <button class="quiz-opt" data-answer="b" onclick="handleQuiz(this)">Sit-ups to strengthen your core</button>
+          <button class="quiz-opt" data-answer="c" onclick="handleQuiz(this)">Stretching in bed</button>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+      <div class="quiz-question" data-q="2">
+        <p class="quiz-prompt">Why is practicing deep breathing exercises before surgery important?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" data-answer="a" onclick="handleQuiz(this)">It helps you fall asleep faster under anesthesia</button>
+          <button class="quiz-opt" data-answer="b" data-correct onclick="handleQuiz(this)">It trains your lungs and reduces pneumonia risk after surgery</button>
+          <button class="quiz-opt" data-answer="c" onclick="handleQuiz(this)">It lowers your blood pressure permanently</button>
+        </div>
+        <div class="quiz-feedback"></div>
       </div>
     </div>
 
@@ -1297,6 +1869,27 @@ a:hover { color: var(--sage-light); }
 
     <div class="dr-tip">
       <p>Want personalized, one-on-one guidance? Dr. Oluwole offers virtual Pre-Surgical Consultations where she reviews your complete health picture and builds a preparation plan specifically for your surgery. <a href='https://www.opwellconcierge.com/schedule' style='color:#2D5A3D;font-weight:600;'>Book your consultation &rarr;</a></p>
+    </div>
+
+    <div class="knowledge-check" data-quiz="4">
+      <h4 class="quiz-title">Quick Knowledge Check</h4>
+      <div class="quiz-question" data-q="1">
+        <p class="quiz-prompt">What is the biggest driver of pre-surgical anxiety?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" data-answer="a" data-correct onclick="handleQuiz(this)">Fear of the unknown</button>
+          <button class="quiz-opt" data-answer="b" onclick="handleQuiz(this)">The cost of surgery</button>
+          <button class="quiz-opt" data-answer="c" onclick="handleQuiz(this)">The length of recovery</button>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+      <div class="quiz-question" data-q="2">
+        <p class="quiz-prompt">True or False: Recovery from surgery is a straight line of improvement every day.</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" data-answer="a" onclick="handleQuiz(this)">True</button>
+          <button class="quiz-opt" data-answer="b" data-correct onclick="handleQuiz(this)">False &mdash; recovery has good days and setbacks, both are normal</button>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
     </div>
 
     <button class="mark-complete-btn" onclick="markComplete(4)">&#10003; Mark Module Complete</button>
@@ -1458,6 +2051,69 @@ a:hover { color: var(--sage-light); }
       </div>
     </div>
 
+    <!-- Gynecologic specialty -->
+    <div data-surgery="gynecologic">
+      <div class="specialty-note">
+        <div class="specialty-label">Gynecologic Surgery Reminders</div>
+        <ul>
+          <li><strong>Do NOT shave</strong> the surgical area yourself &mdash; this increases infection risk. The surgical team will handle hair removal with clippers if needed.</li>
+          <li><strong>Treat infections first:</strong> If you have a UTI or vaginal infection, tell your team &mdash; elective surgery should wait until it&rsquo;s treated</li>
+          <li>Bring <strong>loose, comfortable clothing</strong> and underwear for going home &mdash; avoid tight waistbands</li>
+          <li>Bring <strong>maxi pads</strong> (not tampons) &mdash; you may have vaginal bleeding after surgery</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Cesarean specialty -->
+    <div data-surgery="cesarean">
+      <div class="specialty-note">
+        <div class="specialty-label">C-Section Day Reminders</div>
+        <ul>
+          <li><strong>Car seat:</strong> Make sure the infant car seat is installed before surgery day</li>
+          <li><strong>Hospital bag:</strong> Pack for yourself and baby (going-home outfits, nursing bra, high-waisted underwear that won&rsquo;t rub the incision)</li>
+          <li>You will likely receive <strong>spinal or epidural anesthesia</strong> &mdash; you&rsquo;ll be awake during delivery</li>
+          <li>Your support person can usually be present in the operating room</li>
+          <li><strong>Skin-to-skin contact</strong> can often happen in the OR shortly after delivery</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Cancer specialty -->
+    <div data-surgery="cancer">
+      <div class="specialty-note">
+        <div class="specialty-label">Cancer Surgery Day Reminders</div>
+        <ul>
+          <li>Bring your <strong>complete medication list</strong> including all cancer treatments</li>
+          <li>Bring your <strong>advance directive</strong> if you have one</li>
+          <li>Know that the surgery may take longer than expected if the surgeon finds more disease than anticipated</li>
+          <li>Pathology results will take several days to a week+ &mdash; be prepared for this waiting period</li>
+          <li>You may wake up with <strong>drains, tubes, or other devices</strong> &mdash; your team will explain each one</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="knowledge-check" data-quiz="5">
+      <h4 class="quiz-title">Quick Knowledge Check</h4>
+      <div class="quiz-question" data-q="1">
+        <p class="quiz-prompt">What should you do if you accidentally ate something you weren't supposed to before surgery?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" data-answer="a" onclick="handleQuiz(this)">Don't mention it &mdash; it probably doesn't matter</button>
+          <button class="quiz-opt" data-answer="b" data-correct onclick="handleQuiz(this)">Tell your anesthesia team immediately &mdash; they can adjust the plan</button>
+          <button class="quiz-opt" data-answer="c" onclick="handleQuiz(this)">Try to make yourself vomit before arriving</button>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+      <div class="quiz-question" data-q="2">
+        <p class="quiz-prompt">What items should you remove before surgery?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" data-answer="a" onclick="handleQuiz(this)">Just jewelry and watches</button>
+          <button class="quiz-opt" data-answer="b" data-correct onclick="handleQuiz(this)">Jewelry, piercings, contact lenses, nail polish/acrylics, and dentures</button>
+          <button class="quiz-opt" data-answer="c" onclick="handleQuiz(this)">Only metal items</button>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+    </div>
+
     <button class="mark-complete-btn" onclick="markComplete(5)">&#10003; Mark Module Complete</button>
   </div>
 </div>
@@ -1606,6 +2262,73 @@ a:hover { color: var(--sage-light); }
       </div>
     </div>
 
+    <!-- Gynecologic specialty -->
+    <div data-surgery="gynecologic">
+      <div class="specialty-note">
+        <div class="specialty-label">Gynecologic Surgery Recovery</div>
+        <p><strong>Vaginal bleeding and discharge:</strong> Some vaginal bleeding or spotting is normal after hysterectomy, myomectomy, and other gynecologic procedures. This may last several weeks.</p>
+        <ul>
+          <li>Use maxi pads only &mdash; <strong>no tampons</strong> until your surgeon clears you (usually 6 weeks)</li>
+          <li><strong>No douching</strong></li>
+          <li><strong>Sexual activity:</strong> Wait 6 weeks after hysterectomy; ask your surgeon for other procedures</li>
+          <li><strong>Shoulder pain</strong> is common after laparoscopic gynecologic surgery (from CO2 gas) &mdash; it resolves in 1&ndash;3 days</li>
+        </ul>
+        <p style="margin-top:10px;"><strong>Emotional changes:</strong> Feelings of grief, relief, sadness, or mood swings are all normal after hysterectomy or oophorectomy. If ovaries were removed, you may experience sudden menopause symptoms (hot flashes, mood changes). Talk to your doctor about hormone replacement if needed.</p>
+      </div>
+    </div>
+
+    <!-- Cesarean specialty -->
+    <div data-surgery="cesarean">
+      <div class="specialty-note">
+        <div class="specialty-label">C-Section Recovery Timeline</div>
+        <p><strong>Your recovery is different</strong> because you&rsquo;re healing from major surgery while caring for a newborn:</p>
+        <ul>
+          <li><strong>Week 1:</strong> Pain worst in first 2&ndash;3 days. Focus on rest, walking short distances, breastfeeding, and pain medication on schedule. Don&rsquo;t lift anything heavier than your baby.</li>
+          <li><strong>Week 2:</strong> Pain improving. Longer walks. Continue stool softeners. &ldquo;Baby blues&rdquo; (mood swings, tearfulness) are common.</li>
+          <li><strong>Weeks 3&ndash;4:</strong> Steadily improving. Most women off prescription pain medication. Incision should be healing well.</li>
+          <li><strong>Weeks 4&ndash;6:</strong> Postpartum checkup. Most women cleared for driving, exercise, and sexual activity.</li>
+        </ul>
+        <p style="margin-top:10px;"><strong>Vaginal bleeding (lochia):</strong> You will have vaginal bleeding for 4&ndash;6 weeks after cesarean delivery &mdash; this is your uterus healing, not from the incision. Use pads only. Heavy bleeding (soaking more than 1 pad/hour) or foul-smelling discharge needs medical attention.</p>
+      </div>
+    </div>
+
+    <!-- Cancer specialty -->
+    <div data-surgery="cancer">
+      <div class="specialty-note">
+        <div class="specialty-label">Cancer Surgery Recovery</div>
+        <p><strong>Returning to Intended Oncologic Therapy (RIOT):</strong> One of the goals of good recovery is being well enough to start additional cancer treatment (chemo/radiation) on time.</p>
+        <ul>
+          <li>Prehabilitation and ERAS protocols help you recover faster for next-phase treatment</li>
+          <li>Tell your team if you&rsquo;re struggling with recovery so they can help</li>
+          <li><strong>Drains:</strong> You may go home with surgical drains. Learn to empty them, measure output, and recognize problems.</li>
+          <li><strong>Pathology results:</strong> Will take days to a week+. These determine your cancer type, grade, margins, and next steps.</li>
+          <li><strong>Emotional recovery:</strong> Relief, anxiety, sadness, fear of recurrence are all normal. Seek professional help if distress persists.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="knowledge-check" data-quiz="6">
+      <h4 class="quiz-title">Quick Knowledge Check</h4>
+      <div class="quiz-question" data-q="1">
+        <p class="quiz-prompt">When does post-surgical pain typically peak?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" data-answer="a" onclick="handleQuiz(this)">Immediately after waking up from anesthesia</button>
+          <button class="quiz-opt" data-answer="b" data-correct onclick="handleQuiz(this)">Days 2&ndash;3 after surgery</button>
+          <button class="quiz-opt" data-answer="c" onclick="handleQuiz(this)">About 1 week after surgery</button>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+      <div class="quiz-question" data-q="2">
+        <p class="quiz-prompt">What is the best approach to post-operative pain management?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" data-answer="a" onclick="handleQuiz(this)">Wait until pain is severe, then take the strongest medication</button>
+          <button class="quiz-opt" data-answer="b" data-correct onclick="handleQuiz(this)">Take scheduled non-opioid medications (Tylenol, ibuprofen) and use opioids only for breakthrough pain</button>
+          <button class="quiz-opt" data-answer="c" onclick="handleQuiz(this)">Avoid all pain medication to stay alert</button>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+    </div>
+
     <button class="mark-complete-btn" onclick="markComplete(6)">&#10003; Mark Module Complete</button>
   </div>
 </div>
@@ -1695,6 +2418,74 @@ a:hover { color: var(--sage-light); }
           <li>Carry your surgical records and surgeon's contact information</li>
           <li>Know the nearest ER to your recovery location</li>
         </ul>
+      </div>
+    </div>
+
+    <!-- Gynecologic specialty -->
+    <div data-surgery="gynecologic">
+      <div class="specialty-note">
+        <div class="specialty-label">Gynecologic Surgery Warning Signs</div>
+        <p>In addition to the general warning signs above, call your surgeon if you experience:</p>
+        <ul>
+          <li><strong>Heavy vaginal bleeding</strong> (soaking more than one pad per hour)</li>
+          <li><strong>Foul-smelling vaginal discharge</strong></li>
+          <li><strong>Difficulty urinating</strong> or inability to urinate</li>
+          <li><strong>Increasing abdominal bloating or distension</strong></li>
+          <li><strong>Persistent nausea or vomiting</strong> that prevents you from keeping fluids down</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Cesarean specialty -->
+    <div data-surgery="cesarean">
+      <div class="specialty-note">
+        <div class="specialty-label">C-Section Warning Signs</div>
+        <p>In addition to the general warning signs above, seek medical attention for:</p>
+        <ul>
+          <li><strong>Heavy vaginal bleeding</strong> (soaking more than one pad per hour) or large blood clots</li>
+          <li><strong>Foul-smelling vaginal discharge</strong></li>
+          <li><strong>Incision opening up</strong> or signs of infection (redness, warmth, cloudy drainage)</li>
+          <li><strong>Severe headache</strong> that doesn&rsquo;t improve with medication (especially if you had spinal/epidural)</li>
+          <li><strong>Signs of postpartum depression:</strong> persistent sadness, inability to care for yourself or your baby, thoughts of harming yourself or your baby &mdash; these are medical emergencies</li>
+          <li><strong>Breast redness, pain, or fever</strong> (possible mastitis if breastfeeding)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Cancer specialty -->
+    <div data-surgery="cancer">
+      <div class="specialty-note">
+        <div class="specialty-label">Cancer Surgery Warning Signs</div>
+        <p>In addition to the general warning signs above, contact your team for:</p>
+        <ul>
+          <li><strong>Changes in drain output:</strong> Sudden increase, change in color, or foul smell</li>
+          <li><strong>Signs of low blood counts:</strong> Easy bruising, prolonged bleeding, unusual fatigue (especially if recent chemotherapy)</li>
+          <li><strong>Fever:</strong> Especially important if you&rsquo;ve had recent chemotherapy, as your immune system may be compromised</li>
+          <li><strong>New lumps or swelling</strong> near the surgical site</li>
+          <li><strong>Persistent or worsening emotional distress:</strong> Anxiety, depression, or difficulty coping</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="knowledge-check" data-quiz="7">
+      <h4 class="quiz-title">Quick Knowledge Check</h4>
+      <div class="quiz-question" data-q="1">
+        <p class="quiz-prompt">You notice one calf is swollen, warm, and painful 5 days after surgery. What should you do?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" data-answer="a" onclick="handleQuiz(this)">Elevate it and wait a few days to see if it improves</button>
+          <button class="quiz-opt" data-answer="b" onclick="handleQuiz(this)">Apply ice and take ibuprofen</button>
+          <button class="quiz-opt" data-answer="c" data-correct onclick="handleQuiz(this)">Call your surgeon or go to the ER immediately &mdash; this could be a blood clot (DVT)</button>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+      <div class="quiz-question" data-q="2">
+        <p class="quiz-prompt">What temperature should prompt you to call your surgeon after surgery?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" data-answer="a" onclick="handleQuiz(this)">99.0&deg;F (37.2&deg;C)</button>
+          <button class="quiz-opt" data-answer="b" data-correct onclick="handleQuiz(this)">100.4&deg;F (38&deg;C)</button>
+          <button class="quiz-opt" data-answer="c" onclick="handleQuiz(this)">102&deg;F (38.9&deg;C)</button>
+        </div>
+        <div class="quiz-feedback"></div>
       </div>
     </div>
 
@@ -2230,6 +3021,1304 @@ a:hover { color: var(--sage-light); }
   </div>
 </div>
 
+<!-- ══════════════════════════════════════════════════ -->
+<!-- MODULE 15: POSTOPERATIVE FATIGUE                  -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="module-card bonus" data-module="15">
+  <div class="module-header" onclick="toggleModule(15)">
+    <div class="module-number">15</div>
+    <div class="module-header-text">
+      <h3>Understanding &amp; Managing Fatigue After Surgery</h3>
+      <div class="module-tag bonus-tag">Bonus Module &mdash; Why you're so tired and what actually helps</div>
+    </div>
+    <div class="module-chevron">&#9662;</div>
+  </div>
+  <div class="module-body">
+
+    <p><strong>Postoperative fatigue</strong> affects most surgical patients. After major surgery, about one-third of patients experience significant fatigue lasting throughout the first month. Understanding why it happens and what to do about it helps you recover more smoothly.</p>
+
+    <h4>How Long Does It Last?</h4>
+    <table class="data-table">
+      <tr><th>Surgery Type</th><th>Typical Fatigue Duration</th></tr>
+      <tr><td>Minor / day surgery</td><td>Mild by day 5</td></tr>
+      <tr><td>Major surgery</td><td>2&ndash;4 weeks</td></tr>
+      <tr><td>Very major (heart, cancer, transplant)</td><td>Several weeks to months</td></tr>
+    </table>
+
+    <h4>Why Does Fatigue Happen?</h4>
+    <ul>
+      <li><strong>Healing response:</strong> Surgery triggers inflammation; your immune system uses significant energy repairing tissues</li>
+      <li><strong>Anesthesia:</strong> Medications take 24&ndash;72 hours to fully clear; sleep patterns are disrupted</li>
+      <li><strong>Pain &amp; opioids:</strong> Pain itself is exhausting, and opioid medications cause drowsiness</li>
+      <li><strong>Deconditioning:</strong> Even a few days of bed rest causes muscle weakness and reduced cardiovascular efficiency</li>
+      <li><strong>Poor nutrition &amp; dehydration:</strong> Reduced appetite + increased calorie needs for healing</li>
+      <li><strong>Emotional stress:</strong> Anxiety, frustration with limitations, worry about recovery</li>
+    </ul>
+
+    <h4>The 6 Best Strategies to Fight Fatigue</h4>
+    <ol>
+      <li><strong>Walk daily.</strong> Start short, increase gradually. Activity gives you <em>more</em> energy over time, even though it feels tiring at first.</li>
+      <li><strong>Prioritize sleep.</strong> Keep a regular schedule, limit naps to 20&ndash;30 minutes, avoid screens 1 hour before bed, take pain medication as needed to sleep comfortably.</li>
+      <li><strong>Eat protein at every meal.</strong> Small, frequent meals if appetite is poor. Drink at least 8 glasses of water daily. Limit caffeine after noon.</li>
+      <li><strong>Manage pain proactively.</strong> Take medications on schedule (not just when pain is severe). Transition off opioids as soon as appropriate &mdash; they worsen fatigue.</li>
+      <li><strong>Pace yourself.</strong> Plan activities when you have the most energy. Alternate activity with rest. Accept help.</li>
+      <li><strong>Get natural light.</strong> Open curtains, sit by windows, spend time outdoors. Natural light regulates your sleep-wake cycle.</li>
+    </ol>
+
+    <h4>What to Expect Week by Week</h4>
+    <table class="data-table">
+      <tr><th>Timeframe</th><th>What to Expect</th></tr>
+      <tr><td><strong>Week 1</strong></td><td>Fatigue at its worst. Sleep more than usual. Focus on rest + short walks.</td></tr>
+      <tr><td><strong>Weeks 2&ndash;3</strong></td><td>Gradual improvement. Can do more each day. May have good and bad days.</td></tr>
+      <tr><td><strong>Weeks 4+</strong></td><td>Steady improvement. Resuming normal activities. Full energy may take months.</td></tr>
+    </table>
+
+    <h4>When to Be Concerned</h4>
+    <p>Contact your doctor if fatigue is <strong>getting worse</strong> instead of better, prevents basic activities, comes with fever/shortness of breath/chest pain, includes signs of depression, or shows no improvement after several weeks.</p>
+
+    <div class="dr-tip">
+      <p>Fatigue after surgery is normal and expected &mdash; and it will improve with time. Staying active within your limits helps more than complete rest. Be patient with yourself, and always contact your doctor if fatigue is severe or not improving.</p>
+    </div>
+
+    <button class="mark-complete-btn" onclick="markComplete(15)">&#10003; Mark Module Complete</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- MODULE 16: RETURNING TO NORMAL ACTIVITIES         -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="module-card bonus" data-module="16">
+  <div class="module-header" onclick="toggleModule(16)">
+    <div class="module-number">16</div>
+    <div class="module-header-text">
+      <h3>Returning to Normal Activities After Surgery</h3>
+      <div class="module-tag bonus-tag">Bonus Module &mdash; Driving, work, exercise, travel &amp; more</div>
+    </div>
+    <div class="module-chevron">&#9662;</div>
+  </div>
+  <div class="module-body">
+
+    <p><strong>&ldquo;When can I get back to normal?&rdquo;</strong> This depends on your surgery type, overall health, and how well you&rsquo;re healing. These are general timelines &mdash; always follow your surgeon&rsquo;s specific instructions.</p>
+
+    <div class="dr-tip">
+      <p>Recovery is gradual. Listen to your body &mdash; pain is a signal to slow down. When in doubt, ask your surgical team before resuming any activity.</p>
+    </div>
+
+    <h4>Driving</h4>
+    <p><strong>Do NOT drive</strong> if you are taking opioids, unable to brake firmly, or unable to check blind spots.</p>
+    <table class="data-table">
+      <tr><th>Surgery Type</th><th>Typical Return to Driving</th></tr>
+      <tr><td>Laparoscopic / minor</td><td>1&ndash;2 weeks</td></tr>
+      <tr><td>Open abdominal / C-section</td><td>2&ndash;6 weeks</td></tr>
+      <tr><td>Total knee/hip (right side)</td><td>1&ndash;4 weeks</td></tr>
+      <tr><td>Total knee/hip (left side, auto trans.)</td><td>1&ndash;2 weeks</td></tr>
+      <tr><td>ACL reconstruction</td><td>3&ndash;6 weeks</td></tr>
+      <tr><td>Spine fusion</td><td>2&ndash;6 weeks</td></tr>
+      <tr><td>Rotator cuff / shoulder</td><td>2&ndash;3 months</td></tr>
+      <tr><td>Carpal tunnel release</td><td>1&ndash;2 weeks</td></tr>
+    </table>
+
+    <div class="checklist">
+      <div class="checklist-title">&#9745; Before You Drive Checklist</div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">I can sit comfortably and wear a seatbelt without pain</div></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">I can turn my head/body to check blind spots</div></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">I can press the brake pedal firmly and react quickly</div></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">I am NOT taking opioid pain medications</div></div>
+    </div>
+
+    <h4>Returning to Work</h4>
+    <table class="data-table">
+      <tr><th>Job Type</th><th>Minor Surgery</th><th>Moderate</th><th>Major</th></tr>
+      <tr><td>Desk / sedentary</td><td>1&ndash;2 weeks</td><td>2&ndash;4 weeks</td><td>4&ndash;6+ weeks</td></tr>
+      <tr><td>Light physical</td><td>2&ndash;3 weeks</td><td>4&ndash;6 weeks</td><td>6&ndash;8+ weeks</td></tr>
+      <tr><td>Heavy / manual labor</td><td>4&ndash;6 weeks</td><td>6&ndash;12 weeks</td><td>3&ndash;6+ months</td></tr>
+    </table>
+    <p>Consider a gradual return (part-time initially). Get a note from your doctor specifying restrictions. Communicate with your employer about limitations.</p>
+
+    <h4>Exercise Progression</h4>
+    <table class="data-table">
+      <tr><th>Phase</th><th>Timeline</th><th>Activities</th></tr>
+      <tr><td><strong>1</strong></td><td>Days&ndash;2 weeks</td><td>Walking (start short, increase gradually). Gentle movement only.</td></tr>
+      <tr><td><strong>2</strong></td><td>Weeks 2&ndash;6</td><td>Longer walks, gentle stretching, light daily activities. No lifting/twisting.</td></tr>
+      <tr><td><strong>3</strong></td><td>Weeks 6&ndash;12</td><td>Low-impact exercise (swimming, stationary bike). Light resistance training.</td></tr>
+      <tr><td><strong>4</strong></td><td>3+ months</td><td>Gradual return to full activity. High-impact/contact sports last.</td></tr>
+    </table>
+    <p><strong>Stop exercising immediately</strong> if you experience increased pain, worsening swelling, shortness of breath, chest pain, dizziness, or wound drainage.</p>
+
+    <h4>Lifting Restrictions</h4>
+    <table class="data-table">
+      <tr><th>Restriction Level</th><th>Max Weight</th><th>Reference</th></tr>
+      <tr><td>Light</td><td>5&ndash;10 lbs</td><td>A gallon of milk (~8 lbs)</td></tr>
+      <tr><td>Moderate</td><td>10&ndash;15 lbs</td><td>A bag of groceries</td></tr>
+      <tr><td>Standard</td><td>15&ndash;20 lbs</td><td>A laundry basket</td></tr>
+    </table>
+    <p>Ask for help. Use a cart for groceries. Have children climb to you instead of lifting them.</p>
+
+    <h4>Other Activities at a Glance</h4>
+    <table class="data-table">
+      <tr><th>Activity</th><th>General Timeline</th></tr>
+      <tr><td>Showering</td><td>24&ndash;48 hours (pat incisions dry)</td></tr>
+      <tr><td>Bathing / soaking</td><td>2&ndash;4 weeks (after incisions fully healed)</td></tr>
+      <tr><td>Swimming</td><td>2&ndash;4+ weeks (chlorinated pools safer than lakes)</td></tr>
+      <tr><td>Sexual activity</td><td>1&ndash;6 weeks depending on surgery (off opioids first)</td></tr>
+      <tr><td>Light housework</td><td>Usually OK early (cooking, dishes, dusting)</td></tr>
+      <tr><td>Heavy housework</td><td>Wait until cleared (vacuuming, mopping, yard work)</td></tr>
+      <tr><td>Air travel</td><td>1&ndash;2+ weeks (wear compression stockings, walk aisle, hydrate)</td></tr>
+      <tr><td>International travel</td><td>4&ndash;6+ weeks after major surgery</td></tr>
+    </table>
+
+    <h4>Questions to Ask Your Surgeon</h4>
+    <div class="checklist">
+      <div class="checklist-title">&#9745; Ask at Your Follow-Up Appointment</div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">When can I drive?</div></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">When can I return to work? What restrictions?</div></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">What are my lifting restrictions and for how long?</div></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">When can I exercise, shower, bathe, swim, and travel?</div></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">When can I resume sexual activity?</div></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">What signs should prompt me to call you?</div></div>
+    </div>
+
+    <div class="dr-tip">
+      <p>Your surgeon&rsquo;s specific instructions override these general guidelines. A gradual return to activities is always safer than rushing. Celebrate your progress, even the small steps.</p>
+    </div>
+
+    <button class="mark-complete-btn" onclick="markComplete(16)">&#10003; Mark Module Complete</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- MODULE 17: INTERNATIONAL MEDICAL TOURISM          -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="module-card bonus" data-module="17" data-relevant-surgery="cosmetic">
+  <div class="module-header" onclick="toggleModule(17)">
+    <div class="module-number">17</div>
+    <div class="module-header-text">
+      <h3>Preparing for International Medical Tourism</h3>
+      <div class="module-tag bonus-tag">Bonus Module &mdash; What you need to know before surgery abroad</div>
+    </div>
+    <div class="module-chevron">&#9662;</div>
+  </div>
+  <div class="module-body">
+
+    <p>Medical tourism &mdash; traveling to another country for medical or surgical care &mdash; is chosen for many reasons: lower costs, shorter wait times, access to specific procedures, or combining treatment with travel. While it can offer real benefits, it also carries unique risks that require careful preparation.</p>
+
+    <h4>Important Risks to Consider</h4>
+
+    <p><strong>Infection Risks</strong></p>
+    <p>Infection is the most common complication among medical tourists:</p>
+    <ul>
+      <li>Surgical site infections</li>
+      <li>Blood-borne infections (hepatitis B, hepatitis C, HIV)</li>
+      <li>Antimicrobial-resistant infections that may be more common in certain countries</li>
+      <li>Infections from contaminated medications or equipment</li>
+    </ul>
+    <p>Several outbreaks have been documented among medical tourists, including fungal meningitis from epidural anesthesia and surgical site infections from nontuberculous mycobacteria after cosmetic surgery.</p>
+
+    <p><strong>Other Medical Complications</strong></p>
+    <ul>
+      <li>Blood clots (deep vein thrombosis, pulmonary embolism)</li>
+      <li>Wound healing problems</li>
+      <li>Poor surgical outcomes</li>
+      <li>Complications from anesthesia</li>
+      <li>Death (rare but possible)</li>
+    </ul>
+
+    <p><strong>Travel-Related Risks</strong></p>
+    <ul>
+      <li>Air travel after surgery increases blood clot risk</li>
+      <li>Changes in cabin pressure can affect healing</li>
+      <li>Long flights while in a hypercoagulable state are dangerous</li>
+      <li>Limited access to follow-up care if complications occur</li>
+    </ul>
+
+    <p><strong>Timing Restrictions for Flying</strong></p>
+    <ul>
+      <li>After chest or abdominal surgery: Wait at least 10 days before flying</li>
+      <li>After facial, eyelid, or nose procedures: Wait 7&ndash;10 days</li>
+      <li>After any major surgery: Consult your surgeon about safe timing</li>
+    </ul>
+
+    <h4>Before You Decide: Research Thoroughly</h4>
+
+    <p><strong>Evaluate the Facility</strong></p>
+    <ul>
+      <li>Look for internationally accredited facilities (Joint Commission International, Accreditation Association for Ambulatory Health Care)</li>
+      <li>Accreditation does not guarantee a good outcome, but it indicates certain standards are met</li>
+      <li>Be aware that marketing websites may not provide complete information about accreditations or qualifications</li>
+      <li>Local standards for facility accreditation may differ from those in the United States</li>
+    </ul>
+
+    <p><strong>Evaluate the Healthcare Professional</strong></p>
+    <ul>
+      <li>Verify the surgeon is certified in their specialty through a process equivalent to American Board of Medical Specialties certification</li>
+      <li>Organizations that accredit physicians abroad include the American College of Surgeons, American Society of Plastic Surgeons, and International Society of Aesthetic Plastic Surgery</li>
+      <li>Request outcome data if available (though this may not be tracked in all locations)</li>
+      <li>Ask about the surgeon&rsquo;s experience with your specific procedure</li>
+    </ul>
+
+    <p><strong>Understand What&rsquo;s Included</strong></p>
+    <ul>
+      <li>Clarify exactly what services are included in the quoted cost</li>
+      <li>Ask about fees for follow-up care, complications, or additional procedures</li>
+      <li>Determine where follow-up care will occur</li>
+      <li>Understand that pharmaceuticals, laboratory services, and medical devices may not be subject to the same regulatory oversight as in the United States</li>
+    </ul>
+
+    <h4>Essential Pre-Travel Steps</h4>
+
+    <div class="checklist">
+      <div class="checklist-title">&#9745; 4&ndash;6 Weeks Before Travel</div>
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">Discuss your plans with your primary care physician in the United States</div>
+      </div>
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">Consider consulting a travel medicine specialist</div>
+      </div>
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">Ensure all routine vaccinations are up to date, especially hepatitis B</div>
+      </div>
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">Review current medications and ensure adequate supply for the entire trip plus extra</div>
+      </div>
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">Discuss how to manage any chronic conditions during travel</div>
+      </div>
+    </div>
+
+    <p><strong>Arrange for Complications</strong></p>
+    <ul>
+      <li>Discuss the plan for addressing complications with both your U.S. healthcare professional and the overseas provider</li>
+      <li>Identify healthcare facilities at your destination that can handle emergencies</li>
+      <li>Know how to contact the U.S. Embassy or Consulate</li>
+      <li>Enroll in the U.S. Department of State&rsquo;s Smart Traveler Enrollment Program (STEP)</li>
+    </ul>
+
+    <p><strong>Insurance Considerations</strong></p>
+    <ul>
+      <li>Check your domestic health insurance carefully &mdash; most do not cover care received abroad</li>
+      <li>Purchase supplemental medical insurance that covers international care</li>
+      <li>Obtain medical evacuation insurance (essential for remote destinations)</li>
+      <li>Understand that if complications develop, you may not have the same legal recourse as in the United States</li>
+    </ul>
+
+    <div class="checklist">
+      <div class="checklist-title">&#9745; Documentation to Prepare</div>
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">Letter from your healthcare professional listing all medical conditions</div>
+      </div>
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">Current medications list (with generic names and doses)</div>
+      </div>
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">Allergy documentation</div>
+      </div>
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">Information about any required medical equipment</div>
+      </div>
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">Download travel health apps to store medical records</div>
+      </div>
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">Carry copies of prescriptions</div>
+      </div>
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">Consider medical identification jewelry if you have significant health conditions</div>
+      </div>
+    </div>
+
+    <h4>During Your Trip</h4>
+
+    <p><strong>Before the Procedure</strong></p>
+    <ul>
+      <li>Meet with your surgeon and anesthesiologist</li>
+      <li>Ask all your questions and ensure you understand the procedure</li>
+      <li>Confirm the plan for postoperative care</li>
+      <li>Know the signs of complications and when to seek help</li>
+    </ul>
+
+    <p><strong>After the Procedure</strong></p>
+    <ul>
+      <li>Follow all postoperative instructions carefully</li>
+      <li>Avoid typical vacation activities during recovery:
+        <ul>
+          <li>No alcohol consumption</li>
+          <li>No strenuous activity or exercise</li>
+          <li>No sunbathing or swimming</li>
+          <li>No long tours or sightseeing</li>
+        </ul>
+      </li>
+      <li>Do not delay seeking medical care if you suspect any complication</li>
+      <li>Request complete copies of your medical records in English before leaving</li>
+    </ul>
+
+    <div class="checklist">
+      <div class="checklist-title">&#9745; Before Flying Home</div>
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">Confirm you are medically cleared to fly</div>
+      </div>
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">Understand the risks of flying too soon after surgery</div>
+      </div>
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">Plan to walk the aisle regularly during the flight</div>
+      </div>
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">Pack compression stockings if recommended</div>
+      </div>
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">Have blood clot prevention medication if prescribed</div>
+      </div>
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">Carry all medical records from your overseas care</div>
+      </div>
+    </div>
+
+    <h4>After Returning Home</h4>
+
+    <p><strong>Immediate Steps</strong></p>
+    <ul>
+      <li>Schedule a follow-up appointment with a U.S. healthcare professional</li>
+      <li>Provide complete information about your travel history, surgeries received, medications given, and any complications</li>
+      <li>Share all medical records from your overseas care</li>
+    </ul>
+
+    <p><strong>Watch for Complications</strong></p>
+    <p>Seek medical care immediately if you experience:</p>
+    <ul>
+      <li>Fever or chills</li>
+      <li>Increasing pain, redness, or swelling at the surgical site</li>
+      <li>Wound drainage or opening</li>
+      <li>Shortness of breath or chest pain</li>
+      <li>Leg swelling, warmth, or pain (possible blood clot)</li>
+      <li>Any other concerning symptoms</li>
+    </ul>
+
+    <div class="dr-tip">
+      <p>Inform any healthcare professionals you see about your overseas medical care, even if it occurred up to 12 months ago. Some patients have returned with antimicrobial-resistant infections that require special treatment. Complete disclosure helps ensure proper care.</p>
+    </div>
+
+    <h4>Questions to Ask Before Committing</h4>
+
+    <p><strong>About the Facility</strong></p>
+    <ul>
+      <li>Is the facility accredited by an international accrediting organization?</li>
+      <li>What are the facility&rsquo;s infection rates and complication rates?</li>
+      <li>What emergency services are available on-site?</li>
+      <li>How are medical records maintained and secured?</li>
+    </ul>
+
+    <p><strong>About the Surgeon</strong></p>
+    <ul>
+      <li>What are the surgeon&rsquo;s credentials and certifications?</li>
+      <li>How many of these procedures has the surgeon performed?</li>
+      <li>What are the surgeon&rsquo;s complication rates?</li>
+      <li>Can I speak with previous patients?</li>
+    </ul>
+
+    <p><strong>About the Procedure</strong></p>
+    <ul>
+      <li>What exactly is included in the cost?</li>
+      <li>What happens if I have a complication?</li>
+      <li>Who will provide follow-up care?</li>
+      <li>When will I be cleared to fly home?</li>
+      <li>How will my care be coordinated with my U.S. healthcare team?</li>
+    </ul>
+
+    <p><strong>About Legal Protections</strong></p>
+    <ul>
+      <li>What legal recourse do I have if something goes wrong?</li>
+      <li>Is there malpractice insurance coverage?</li>
+      <li>What are my rights as a patient in this country?</li>
+    </ul>
+
+    <div class="dr-tip">
+      <p>Medical tourism must be voluntary &mdash; never feel pressured. Accreditation does not guarantee a good outcome. Lower cost does not mean lower quality, but it also doesn&rsquo;t guarantee equivalent care. Having a plan for follow-up care in the United States is essential. Your safety should always be the top priority.</p>
+    </div>
+
+    <button class="mark-complete-btn" onclick="markComplete(17)">&#10003; Mark Module Complete</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- MODULE 18: GYNECOLOGIC SURGERY                    -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="module-card bonus" data-module="18" data-relevant-surgery="gynecologic">
+  <div class="module-header" onclick="toggleModule(18)">
+    <div class="module-number">18</div>
+    <div class="module-header-text">
+      <h3>Preparing for Gynecologic Surgery</h3>
+      <div class="module-tag bonus-tag">Bonus Module &mdash; What every patient should know</div>
+    </div>
+    <div class="module-chevron">&#9662;</div>
+  </div>
+  <div class="module-body">
+
+    <p>Gynecologic surgery includes procedures on the female reproductive organs &mdash; the uterus, ovaries, fallopian tubes, cervix, vagina, and vulva. These surgeries may be performed for many reasons, including fibroids, endometriosis, ovarian cysts, abnormal bleeding, pelvic organ prolapse, or cancer.</p>
+
+    <h4>Types of Gynecologic Surgery</h4>
+    <ul>
+      <li><strong>Hysterectomy:</strong> Removal of the uterus (may include ovaries and fallopian tubes)</li>
+      <li><strong>Myomectomy:</strong> Removal of uterine fibroids</li>
+      <li><strong>Oophorectomy:</strong> Removal of one or both ovaries</li>
+      <li><strong>Salpingectomy:</strong> Removal of fallopian tubes</li>
+      <li><strong>Procedures for prolapse:</strong> Repairs for pelvic organ prolapse</li>
+      <li><strong>Endometriosis surgery:</strong> Removal of endometriosis tissue</li>
+      <li><strong>Diagnostic procedures:</strong> Laparoscopy, hysteroscopy</li>
+    </ul>
+
+    <h4>Surgical Approaches</h4>
+    <ul>
+      <li><strong>Vaginal surgery:</strong> Through the vagina with no abdominal incisions</li>
+      <li><strong>Laparoscopic surgery:</strong> Small incisions with a camera and instruments</li>
+      <li><strong>Robotic surgery:</strong> Laparoscopic surgery assisted by robotic technology</li>
+      <li><strong>Open (abdominal) surgery:</strong> Larger incision in the abdomen</li>
+    </ul>
+    <p>Minimally invasive approaches (vaginal, laparoscopic, robotic) generally have faster recovery times and fewer complications when appropriate for your condition.</p>
+
+    <h4>Before Your Surgery</h4>
+
+    <p><strong>Preoperative Appointments</strong></p>
+    <p>You will have appointments to:</p>
+    <ul>
+      <li>Discuss the procedure, risks, benefits, and alternatives</li>
+      <li>Review your medical history and current medications</li>
+      <li>Complete any necessary tests (blood work, imaging, EKG)</li>
+      <li>Meet with anesthesia if needed</li>
+      <li>Receive instructions for surgery day</li>
+    </ul>
+
+    <p><strong>Medications to Discuss</strong></p>
+    <p>Tell your surgical team about all medications, including:</p>
+    <ul>
+      <li>Blood thinners (may need to be stopped before surgery)</li>
+      <li>Diabetes medications (may need adjustment)</li>
+      <li>Hormone therapy and birth control pills</li>
+      <li>Herbal supplements (some increase bleeding risk)</li>
+      <li>Over-the-counter medications</li>
+    </ul>
+
+    <div class="checklist">
+      <div class="checklist-title">&#9745; Preparing Your Body</div>
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">Shower or bathe the night before surgery with soap (antimicrobial or regular)</div>
+      </div>
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">Do NOT shave the surgical area yourself &mdash; shaving with a razor increases infection risk</div>
+      </div>
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">Treat any infections before surgery (UTIs, skin infections, etc.)</div>
+      </div>
+    </div>
+
+    <p><strong>Fasting Instructions</strong></p>
+    <p>Modern guidelines allow:</p>
+    <ul>
+      <li>Clear liquids (water, apple juice, black coffee, tea without milk) up to 2 hours before surgery</li>
+      <li>Light solid foods up to 6 hours before surgery</li>
+      <li>Heavy or fatty meals should be avoided for at least 8 hours</li>
+    </ul>
+    <p>Follow your specific instructions &mdash; they may vary based on your procedure.</p>
+
+    <p><strong>Bowel Preparation</strong></p>
+    <p>For most gynecologic surgeries, especially minimally invasive procedures, bowel preparation is <strong>NOT routinely needed</strong>. Your surgeon will tell you if bowel prep is required for your specific procedure. The old practice of routine bowel prep has been abandoned for most gynecologic surgeries.</p>
+
+    <h4>The Day of Surgery</h4>
+    <ul>
+      <li>Arrive at the time specified (usually 1&ndash;2 hours before surgery)</li>
+      <li>You will change into a hospital gown</li>
+      <li>An IV will be placed for fluids and medications</li>
+      <li>You will meet your surgical and anesthesia team</li>
+      <li>The surgical site will be cleaned with antiseptic solution</li>
+      <li>You will receive antibiotics before surgery to prevent infection</li>
+    </ul>
+
+    <p><strong>Preventing Blood Clots</strong></p>
+    <ul>
+      <li>You may receive compression stockings or inflatable leg devices</li>
+      <li>Early walking after surgery is encouraged</li>
+      <li>Blood-thinning medication may be given depending on your risk factors</li>
+    </ul>
+
+    <h4>After Your Surgery</h4>
+
+    <p>Modern Enhanced Recovery After Surgery (ERAS) protocols help you recover faster:</p>
+    <ul>
+      <li><strong>Early eating and drinking:</strong> You can usually eat and drink soon after surgery</li>
+      <li><strong>Early walking:</strong> Getting up and walking as soon as possible helps prevent complications</li>
+      <li><strong>Pain management:</strong> A combination of medications (not just opioids) controls pain better with fewer side effects</li>
+      <li><strong>Early removal of catheter:</strong> If you have a urinary catheter, it will be removed as soon as possible</li>
+    </ul>
+
+    <p><strong>Pain Management</strong></p>
+    <p>Your pain will be managed with multiple types of medications:</p>
+    <ul>
+      <li>Non-opioid pain relievers (acetaminophen, ibuprofen) are the foundation</li>
+      <li>Opioid medications are available for breakthrough pain</li>
+      <li>This &ldquo;multimodal&rdquo; approach provides better pain control with fewer side effects</li>
+    </ul>
+
+    <div class="checklist">
+      <div class="checklist-title">&#9745; Before Discharge &mdash; Make Sure You Understand</div>
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">How to care for your incisions</div>
+      </div>
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">What medications to take and when</div>
+      </div>
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">Activity restrictions</div>
+      </div>
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">When to call your doctor</div>
+      </div>
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">Your follow-up appointment date</div>
+      </div>
+    </div>
+
+    <h4>Recovery at Home</h4>
+
+    <p><strong>Activity Guidelines</strong></p>
+    <ul>
+      <li><strong>Walking:</strong> Start walking right away and increase gradually</li>
+      <li><strong>Lifting:</strong> Avoid heavy lifting (usually &gt;10&ndash;15 pounds) for 4&ndash;6 weeks</li>
+      <li><strong>Driving:</strong> Usually 1&ndash;2 weeks after laparoscopic surgery, longer after open surgery</li>
+      <li><strong>Work:</strong> Depends on your job and type of surgery</li>
+      <li><strong>Exercise:</strong> Gradual return as directed by your surgeon</li>
+      <li><strong>Sexual activity:</strong> Usually wait 6 weeks after hysterectomy; ask your surgeon for other procedures</li>
+    </ul>
+
+    <p><strong>Wound Care</strong></p>
+    <ul>
+      <li>Keep incisions clean and dry initially</li>
+      <li>You can usually shower 24&ndash;48 hours after surgery</li>
+      <li>No soaking in tubs, pools, or hot tubs until incisions are fully healed</li>
+      <li>Watch for signs of infection (redness, swelling, drainage, fever)</li>
+    </ul>
+
+    <p><strong>What to Expect</strong></p>
+    <ul>
+      <li>Some vaginal bleeding or discharge is normal after many gynecologic procedures</li>
+      <li>Fatigue is common and may last several weeks</li>
+      <li>Constipation is common &mdash; use stool softeners as recommended</li>
+      <li>Emotional changes may occur, especially after hysterectomy or removal of ovaries</li>
+    </ul>
+
+    <h4>When to Call Your Doctor</h4>
+    <p>Contact your surgical team if you experience:</p>
+    <ul>
+      <li>Fever (temperature over 100.4&deg;F or 38&deg;C)</li>
+      <li>Heavy vaginal bleeding (soaking more than one pad per hour)</li>
+      <li>Increasing abdominal pain</li>
+      <li>Redness, swelling, or drainage from incisions</li>
+      <li>Difficulty urinating or inability to urinate</li>
+      <li>Nausea or vomiting that won&rsquo;t stop</li>
+      <li>Leg swelling, warmth, or pain</li>
+      <li>Shortness of breath or chest pain</li>
+    </ul>
+
+    <h4>Special Considerations</h4>
+
+    <p><strong>If You&rsquo;re Taking Hormones</strong></p>
+    <ul>
+      <li>Combined oral contraceptives and hormone therapy slightly increase blood clot risk</li>
+      <li>However, stopping them before surgery is not routinely recommended</li>
+      <li>If you have additional risk factors for blood clots, discuss this with your surgeon</li>
+      <li>Blood clot prevention measures will be used during and after surgery</li>
+    </ul>
+
+    <p><strong>If You Have Diabetes</strong></p>
+    <ul>
+      <li>Blood sugar control is important for healing and preventing infection</li>
+      <li>Your diabetes medications may need adjustment before and after surgery</li>
+      <li>Blood sugar will be monitored during your hospital stay</li>
+    </ul>
+
+    <p><strong>If You&rsquo;re Overweight</strong></p>
+    <ul>
+      <li>Antibiotic doses may be adjusted for your weight</li>
+      <li>Blood clot prevention is especially important</li>
+      <li>Minimally invasive surgery may still be possible</li>
+    </ul>
+
+    <div class="dr-tip">
+      <p>Follow all preoperative instructions carefully. Don&rsquo;t shave the surgical area yourself. You can eat and drink closer to surgery than you might expect. Early walking and eating after surgery help you recover faster. Pain can be well controlled with a combination of medications &mdash; and most complications are preventable with proper preparation and care.</p>
+    </div>
+
+    <button class="mark-complete-btn" onclick="markComplete(18)">&#10003; Mark Module Complete</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- MODULE 19: CESAREAN SECTION RECOVERY              -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="module-card bonus" data-module="19" data-relevant-surgery="cesarean">
+  <div class="module-header" onclick="toggleModule(19)">
+    <div class="module-number">19</div>
+    <div class="module-header-text">
+      <h3>Cesarean Section Recovery</h3>
+      <div class="module-tag bonus-tag">Bonus Module &mdash; What to expect and how to heal</div>
+    </div>
+    <div class="module-chevron">&#9662;</div>
+  </div>
+  <div class="module-body">
+
+    <p>A cesarean section (C-section) is a surgical procedure to deliver your baby through an incision in your abdomen and uterus. Whether your cesarean was planned or unplanned, understanding what to expect during recovery will help you heal well while caring for your newborn.</p>
+
+    <h4>Immediately After Surgery</h4>
+
+    <p><strong>In the Recovery Room</strong></p>
+    <ul>
+      <li>You will be monitored closely as anesthesia wears off</li>
+      <li>If you had spinal or epidural anesthesia, your legs will be numb for a few hours</li>
+      <li>You may feel shaky or cold &mdash; this is normal</li>
+      <li>You can usually hold and breastfeed your baby soon after surgery</li>
+      <li>Pain medication will be given to keep you comfortable</li>
+    </ul>
+
+    <p><strong>The First 24 Hours</strong></p>
+    <ul>
+      <li>Your IV will provide fluids until you can drink well</li>
+      <li>You can start drinking clear liquids soon after surgery</li>
+      <li>You can eat a regular diet within 2 hours of surgery (unless your doctor advises otherwise)</li>
+      <li>Your urinary catheter will be removed as soon as possible (often within 6&ndash;12 hours)</li>
+      <li>You will be encouraged to get up and walk within hours of surgery</li>
+    </ul>
+
+    <h4>Pain Management</h4>
+
+    <p><strong>Multimodal Approach</strong></p>
+    <p>Your pain will be managed with a combination of medications that work better together:</p>
+    <ul>
+      <li><strong>Scheduled acetaminophen (Tylenol):</strong> Given regularly, not just when you have pain</li>
+      <li><strong>Scheduled NSAIDs (ibuprofen or ketorolac):</strong> Anti-inflammatory medications that are very effective for post-cesarean pain and safe while breastfeeding</li>
+      <li><strong>Opioids for breakthrough pain:</strong> Available if needed, but the goal is to minimize opioid use</li>
+    </ul>
+
+    <p><strong>What to Expect</strong></p>
+    <ul>
+      <li>Some discomfort is normal, but severe pain should be reported</li>
+      <li>Pain is usually worst in the first 2&ndash;3 days and improves steadily</li>
+      <li>Taking pain medication on schedule works better than waiting until pain is severe</li>
+      <li>All recommended pain medications are safe while breastfeeding</li>
+    </ul>
+
+    <div class="dr-tip">
+      <p>Don&rsquo;t be a hero with pain medication. Taking it on schedule &mdash; before pain gets severe &mdash; actually means you&rsquo;ll need less medication overall and recover faster. All the recommended medications are safe for breastfeeding.</p>
+    </div>
+
+    <h4>Your Hospital Stay</h4>
+
+    <p><strong>Early Mobilization</strong></p>
+    <p>Getting up and moving is one of the most important things you can do:</p>
+    <ul>
+      <li>Helps prevent blood clots</li>
+      <li>Improves bowel function</li>
+      <li>Reduces risk of complications</li>
+      <li>Helps you feel better faster</li>
+    </ul>
+    <p>You will be encouraged to sit up in bed within hours of surgery, walk to the bathroom with assistance, walk in the hallway several times a day, and increase activity each day.</p>
+
+    <p><strong>Eating and Drinking</strong></p>
+    <ul>
+      <li>You can drink fluids soon after surgery</li>
+      <li>You can eat a regular diet within hours of surgery</li>
+      <li>Eating helps your bowels recover</li>
+      <li>Stay well hydrated, especially if breastfeeding</li>
+    </ul>
+
+    <p><strong>Preventing Blood Clots</strong></p>
+    <ul>
+      <li>Compression stockings or inflatable leg devices</li>
+      <li>Early and frequent walking</li>
+      <li>Staying hydrated</li>
+      <li>Blood-thinning medication if you have additional risk factors</li>
+    </ul>
+
+    <p><strong>Breastfeeding</strong></p>
+    <ul>
+      <li>You can breastfeed soon after cesarean delivery</li>
+      <li>Pain medications used are safe for breastfeeding</li>
+      <li>Nurses and lactation consultants can help with positioning</li>
+      <li>Side-lying or football hold positions may be more comfortable</li>
+      <li>Skin-to-skin contact with your baby is encouraged</li>
+    </ul>
+
+    <h4>Going Home</h4>
+
+    <p>You may be ready to go home when your pain is controlled with oral medications, you can eat and drink normally, you can walk and care for yourself, you can urinate normally, and your incision looks healthy. Many women go home 2&ndash;3 days after cesarean delivery.</p>
+
+    <div class="checklist">
+      <div class="checklist-title">&#9745; Before Discharge</div>
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">I understand how to care for my incision</div>
+      </div>
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">I know what medications to take and when</div>
+      </div>
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">I know the warning signs that need medical attention</div>
+      </div>
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">I have my follow-up appointment scheduled</div>
+      </div>
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">I know how to get help if I have questions</div>
+      </div>
+    </div>
+
+    <h4>Recovery at Home</h4>
+
+    <p><strong>The First Two Weeks</strong></p>
+    <ul>
+      <li>Rest when your baby sleeps</li>
+      <li>Accept help from family and friends</li>
+      <li>Walk regularly but avoid strenuous activity</li>
+      <li>Don&rsquo;t lift anything heavier than your baby</li>
+      <li>Take pain medication as needed</li>
+      <li>Eat nutritious foods and stay hydrated</li>
+      <li>Continue stool softeners to prevent constipation</li>
+    </ul>
+
+    <p><strong>Incision Care</strong></p>
+    <ul>
+      <li>Keep the incision clean and dry</li>
+      <li>Shower daily &mdash; let water run over the incision</li>
+      <li>Pat dry gently</li>
+      <li>Wear loose, comfortable clothing</li>
+      <li>No soaking in tubs, pools, or hot tubs until fully healed (usually 4&ndash;6 weeks)</li>
+    </ul>
+
+    <p><strong>Activity Guidelines</strong></p>
+    <ul>
+      <li><strong>Walking:</strong> Encouraged from day one; increase gradually</li>
+      <li><strong>Stairs:</strong> Use as needed, but take it slow</li>
+      <li><strong>Driving:</strong> Usually wait 2&ndash;4 weeks (until you can brake suddenly without pain)</li>
+      <li><strong>Lifting:</strong> Nothing heavier than your baby for 4&ndash;6 weeks</li>
+      <li><strong>Exercise:</strong> Gentle walking only initially; ask your doctor about returning to exercise</li>
+      <li><strong>Sexual activity:</strong> Usually wait 6 weeks until your postpartum checkup</li>
+    </ul>
+
+    <p><strong>Emotional Recovery</strong></p>
+    <ul>
+      <li>&ldquo;Baby blues&rdquo; (mood swings, tearfulness) are common in the first 2 weeks</li>
+      <li>Cesarean delivery can bring mixed emotions</li>
+      <li>Talk about your feelings with your partner, family, or healthcare provider</li>
+      <li>Seek help if you feel persistently sad, anxious, or unable to care for yourself or your baby</li>
+    </ul>
+
+    <h4>Warning Signs: When to Call Your Doctor</h4>
+
+    <p><strong>Incision Problems</strong></p>
+    <ul>
+      <li>Increasing redness, swelling, or warmth around the incision</li>
+      <li>Drainage from the incision (especially if cloudy or foul-smelling)</li>
+      <li>Incision opening up</li>
+      <li>Fever (temperature over 100.4&deg;F or 38&deg;C)</li>
+    </ul>
+
+    <p><strong>Bleeding</strong></p>
+    <ul>
+      <li>Heavy vaginal bleeding (soaking more than one pad per hour)</li>
+      <li>Large blood clots</li>
+      <li>Foul-smelling vaginal discharge</li>
+    </ul>
+
+    <p><strong>Other Concerns</strong></p>
+    <ul>
+      <li>Severe or worsening abdominal pain</li>
+      <li>Pain, redness, or swelling in your legs</li>
+      <li>Chest pain or difficulty breathing</li>
+      <li>Painful urination or inability to urinate</li>
+      <li>Severe headache that doesn&rsquo;t improve with medication</li>
+      <li>Signs of depression or thoughts of harming yourself or your baby</li>
+    </ul>
+
+    <h4>Long-Term Recovery</h4>
+
+    <p><strong>4&ndash;6 Weeks</strong></p>
+    <ul>
+      <li>Most women feel significantly better by this time</li>
+      <li>You will have a postpartum checkup</li>
+      <li>You can usually resume normal activities, including exercise and sexual activity</li>
+      <li>Your incision should be well healed</li>
+    </ul>
+
+    <p><strong>Full Recovery</strong></p>
+    <ul>
+      <li>Complete healing takes 6&ndash;8 weeks or longer</li>
+      <li>Some numbness around the incision is normal and may last months</li>
+      <li>The scar will fade over time</li>
+      <li>Future pregnancies are usually possible after cesarean delivery</li>
+    </ul>
+
+    <div class="dr-tip">
+      <p>Remember: you are recovering from major surgery while caring for a newborn. Be patient with yourself. Accept help. Pain should improve steadily each day. Early walking and eating help you recover faster. Breastfeeding is safe and encouraged. And always seek help if something doesn&rsquo;t feel right.</p>
+    </div>
+
+    <button class="mark-complete-btn" onclick="markComplete(19)">&#10003; Mark Module Complete</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- MODULE 20: L&D PAIN MANAGEMENT                    -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="module-card bonus" data-module="20" data-relevant-surgery="cesarean">
+  <div class="module-header" onclick="toggleModule(20)">
+    <div class="module-number">20</div>
+    <div class="module-header-text">
+      <h3>Pain Management During Labor &amp; Delivery</h3>
+      <div class="module-tag bonus-tag">Bonus Module &mdash; Making an informed choice</div>
+    </div>
+    <div class="module-chevron">&#9662;</div>
+  </div>
+  <div class="module-body">
+
+    <p>Labor pain is among the most intense types of physical pain. The good news: there are many effective options for managing it. Understanding your choices will help you make informed decisions and communicate your preferences to your healthcare team.</p>
+
+    <div class="dr-tip">
+      <p>There is no &ldquo;right&rdquo; way to manage labor pain. Your preferences may change during labor &mdash; and that&rsquo;s okay. Discuss options with your provider before labor begins, but keep an open mind.</p>
+    </div>
+
+    <h4>Epidural Analgesia</h4>
+    <p>The most common method of pain relief during labor, used by more than 60% of women giving birth in the United States.</p>
+
+    <p><strong>How It Works</strong></p>
+    <ul>
+      <li>A thin catheter is placed in the epidural space near your spinal cord</li>
+      <li>Local anesthetic and pain medication are delivered continuously</li>
+      <li>Pain relief begins within 10&ndash;20 minutes</li>
+      <li>You remain awake and alert</li>
+      <li>Can be adjusted throughout labor</li>
+    </ul>
+
+    <p><strong>Important Facts</strong></p>
+    <ul>
+      <li>Epidurals do <strong>NOT</strong> increase the risk of cesarean delivery</li>
+      <li>Modern epidurals do <strong>NOT</strong> increase the risk of assisted vaginal delivery</li>
+      <li>Epidurals do <strong>NOT</strong> cause long-term back pain</li>
+      <li>Epidurals are safe for your baby</li>
+      <li>Can be used for cesarean delivery if needed</li>
+    </ul>
+
+    <p><strong>Possible Side Effects</strong></p>
+    <ul>
+      <li>Temporary drop in blood pressure (treated with fluids or medication)</li>
+      <li>Itching (treatable)</li>
+      <li>Fever (about 30% of women; usually not from infection)</li>
+      <li>Headache (rare, about 1 in 144 women)</li>
+      <li>Your legs may feel heavy or tingly</li>
+    </ul>
+
+    <h4>Combined Spinal-Epidural (CSE)</h4>
+    <p>Combines rapid onset of spinal anesthesia with the ongoing relief of an epidural catheter. Popular choice that provides the benefits of both techniques.</p>
+
+    <h4>IV Opioid Medications</h4>
+    <p>Opioid pain medications given through your IV provide moderate pain relief.</p>
+    <ul>
+      <li>Common medications: fentanyl, morphine, remifentanil</li>
+      <li>Available in almost all birth settings</li>
+      <li>Allow you to remain mobile</li>
+      <li>Less effective than epidural for pain relief</li>
+      <li>May cause drowsiness or nausea</li>
+      <li>Usually avoided close to delivery to minimize effects on baby</li>
+    </ul>
+
+    <h4>Nitrous Oxide (Laughing Gas)</h4>
+    <ul>
+      <li>You control when and how much you breathe through a mask</li>
+      <li>Provides mild to moderate pain relief and reduces anxiety</li>
+      <li>Wears off quickly between contractions</li>
+      <li>Safe for your baby</li>
+      <li>Can be used while waiting for an epidural</li>
+      <li>Not available at all hospitals</li>
+    </ul>
+
+    <h4>Non-Medication Methods</h4>
+    <p>Many women use these alone or in combination with medications:</p>
+    <ul>
+      <li><strong>Movement:</strong> Walking, birthing ball, position changes, rocking</li>
+      <li><strong>Water therapy:</strong> Warm shower, laboring in a tub, warm compresses</li>
+      <li><strong>Breathing &amp; relaxation:</strong> Focused breathing, meditation, visualization</li>
+      <li><strong>Physical comfort:</strong> Massage, counterpressure, heat/cold packs</li>
+      <li><strong>Support:</strong> Continuous labor support from partner, doula, or nurse</li>
+      <li><strong>Other:</strong> Acupuncture, TENS, hypnosis (requires prior preparation)</li>
+    </ul>
+
+    <h4>Comparing Your Options</h4>
+    <table class="data-table">
+      <tr><th>Method</th><th>Pain Relief</th><th>Mobility</th><th>Availability</th></tr>
+      <tr><td>Epidural/Spinal</td><td>Most effective</td><td>Limited</td><td>Most hospitals</td></tr>
+      <tr><td>IV Opioids</td><td>Moderate</td><td>May cause drowsiness</td><td>Almost universal</td></tr>
+      <tr><td>Nitrous Oxide</td><td>Mild-moderate</td><td>Full</td><td>Some hospitals</td></tr>
+      <tr><td>Non-medication</td><td>Varies</td><td>Full</td><td>Universal</td></tr>
+    </table>
+
+    <div class="dr-tip">
+      <p>There is no &ldquo;wrong&rdquo; choice for pain management. The best choice is what works for you. You can combine different methods, and your preferences may change during labor. Trust your healthcare team to help you make the best decision in the moment.</p>
+    </div>
+
+    <button class="mark-complete-btn" onclick="markComplete(20)">&#10003; Mark Module Complete</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- MODULE 21: NUTRITION FOR SURGICAL RECOVERY        -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="module-card bonus" data-module="21">
+  <div class="module-header" onclick="toggleModule(21)">
+    <div class="module-number">21</div>
+    <div class="module-header-text">
+      <h3>Nutrition for Surgical Recovery</h3>
+      <div class="module-tag bonus-tag">Bonus Module &mdash; Eating to heal</div>
+    </div>
+    <div class="module-chevron">&#9662;</div>
+  </div>
+  <div class="module-body">
+
+    <p>Your body needs extra nutrients to heal after surgery. Good nutrition helps repair tissues, fight infection, rebuild strength, restore energy, and reduce complications. Eating well after surgery is one of the most important things you can do.</p>
+
+    <h4>Key Nutrients for Healing</h4>
+
+    <p><strong>Protein: The Building Block of Healing</strong></p>
+    <ul>
+      <li>Most surgical patients need <strong>1.2&ndash;1.5 grams per kg</strong> of body weight daily</li>
+      <li>For a 150-pound person, that&rsquo;s about <strong>80&ndash;100 grams of protein per day</strong></li>
+      <li>Good sources: meat, poultry, fish, eggs, dairy, beans, lentils, nuts, tofu</li>
+      <li>Aim for protein at every meal and snack</li>
+    </ul>
+
+    <p><strong>Vitamins &amp; Minerals</strong></p>
+    <ul>
+      <li><strong>Vitamin C:</strong> Essential for collagen and wound healing &mdash; citrus, berries, peppers, broccoli</li>
+      <li><strong>Vitamin A:</strong> Supports immune function and tissue repair &mdash; orange/yellow vegetables, leafy greens, eggs</li>
+      <li><strong>Zinc:</strong> Critical for wound healing and immunity &mdash; meat, shellfish, legumes, nuts, seeds</li>
+      <li><strong>Iron:</strong> Needed for oxygen delivery to healing tissues &mdash; red meat, poultry, fish, beans, fortified cereals</li>
+    </ul>
+
+    <p><strong>Fluids</strong></p>
+    <ul>
+      <li>Drink at least 8 glasses of water daily</li>
+      <li>More if you have drains, fever, or are losing fluids</li>
+      <li>Water, milk, and diluted juices are good choices</li>
+      <li>Limit caffeine and avoid alcohol during recovery</li>
+    </ul>
+
+    <h4>Eating After Surgery: A Timeline</h4>
+
+    <p><strong>The First Few Days</strong></p>
+    <ul>
+      <li>Start with clear liquids as directed, progress to regular foods as tolerated</li>
+      <li>Eat small, frequent meals</li>
+      <li>Focus on easy-to-digest foods</li>
+    </ul>
+
+    <p><strong>The First Week</strong></p>
+    <ul>
+      <li>Gradually increase portion sizes</li>
+      <li>Include protein at every meal</li>
+      <li>Eat a variety of fruits and vegetables</li>
+      <li>Take any prescribed supplements</li>
+    </ul>
+
+    <p><strong>Weeks 2&ndash;4 and Beyond</strong></p>
+    <ul>
+      <li>Return to a normal, balanced diet</li>
+      <li>Continue emphasizing protein</li>
+      <li>Maintain good hydration</li>
+    </ul>
+
+    <h4>Tips for Common Recovery Challenges</h4>
+
+    <p><strong>If Your Appetite Is Poor</strong></p>
+    <ul>
+      <li>Eat small, frequent meals (5&ndash;6 times per day)</li>
+      <li>Choose nutrient-dense foods over empty calories</li>
+      <li>Add protein powder to smoothies, soups, or oatmeal</li>
+      <li>Drink nutritional supplements (Ensure, Boost) between meals</li>
+    </ul>
+
+    <p><strong>If You Have Nausea</strong></p>
+    <ul>
+      <li>Eat bland, dry foods (crackers, toast, rice)</li>
+      <li>Avoid greasy, spicy, or strong-smelling foods</li>
+      <li>Sip clear liquids between meals</li>
+      <li>Try ginger tea or ginger candies</li>
+    </ul>
+
+    <p><strong>If You Have Constipation</strong></p>
+    <ul>
+      <li>Drink plenty of fluids</li>
+      <li>Eat high-fiber foods (fruits, vegetables, whole grains)</li>
+      <li>Prunes and prune juice are natural laxatives</li>
+      <li>Take stool softeners as recommended</li>
+    </ul>
+
+    <h4>Foods to Emphasize</h4>
+    <ul>
+      <li><strong>High-protein:</strong> Chicken, fish, eggs, Greek yogurt, cottage cheese, beans, tofu</li>
+      <li><strong>Healing-supportive:</strong> Colorful fruits and vegetables, whole grains, healthy fats (olive oil, avocado), bone broth, fermented foods (yogurt, kefir)</li>
+    </ul>
+
+    <h4>Foods to Limit</h4>
+    <ul>
+      <li>Alcohol (interferes with healing and medications)</li>
+      <li>Excessive sugar (empty calories, impairs immune function)</li>
+      <li>Highly processed foods (low in nutrients)</li>
+      <li>Very salty foods (can cause fluid retention)</li>
+    </ul>
+
+    <h4>Sample Meal Ideas</h4>
+    <table class="data-table">
+      <tr><th>Meal</th><th>Options</th></tr>
+      <tr><td><strong>Breakfast</strong></td><td>Scrambled eggs with cheese &amp; toast &bull; Greek yogurt with berries &bull; Oatmeal with nuts &bull; Protein smoothie</td></tr>
+      <tr><td><strong>Lunch</strong></td><td>Chicken salad sandwich &bull; Lentil soup with crackers &bull; Tuna salad &bull; Bean and cheese quesadilla</td></tr>
+      <tr><td><strong>Dinner</strong></td><td>Baked salmon with vegetables &bull; Chicken stir-fry &bull; Beef stew &bull; Pasta with meat sauce</td></tr>
+      <tr><td><strong>Snacks</strong></td><td>Cheese &amp; crackers &bull; Nuts &bull; Yogurt &bull; Hard-boiled eggs &bull; PB on apple slices</td></tr>
+    </table>
+
+    <!-- Bariatric specialty -->
+    <div data-surgery="bariatric">
+      <div class="specialty-note">
+        <div class="specialty-label">Bariatric Surgery Note</div>
+        <p>Follow your bariatric team&rsquo;s specific diet progression (see Module 6). Protein is especially important. Take all recommended vitamins and supplements for life. Eat slowly and chew thoroughly.</p>
+      </div>
+    </div>
+
+    <div class="dr-tip">
+      <p>Good nutrition is one of the most powerful tools for healing. If you&rsquo;re struggling to eat enough, don&rsquo;t be afraid to use nutritional supplements like Ensure or Boost between meals. And contact your healthcare team if you can&rsquo;t eat or drink for more than 24 hours.</p>
+    </div>
+
+    <button class="mark-complete-btn" onclick="markComplete(21)">&#10003; Mark Module Complete</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- MODULE 22: CANCER SURGERY                         -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="module-card bonus" data-module="22" data-relevant-surgery="cancer">
+  <div class="module-header" onclick="toggleModule(22)">
+    <div class="module-number">22</div>
+    <div class="module-header-text">
+      <h3>Preparing for Cancer Surgery</h3>
+      <div class="module-tag bonus-tag">Bonus Module &mdash; A complete patient guide</div>
+    </div>
+    <div class="module-chevron">&#9662;</div>
+  </div>
+  <div class="module-body">
+
+    <p>Surgery is one of the most important treatments for cancer. It may be used to remove a tumor, determine the extent of disease, relieve symptoms, or reconstruct areas affected by cancer. Preparing well can reduce complications, speed recovery, and improve your overall outcome.</p>
+
+    <h4>Your Cancer Surgery Team</h4>
+    <p>Cancer surgery involves a multidisciplinary team working together:</p>
+    <ul>
+      <li><strong>Surgical oncologist:</strong> Specializes in cancer operations</li>
+      <li><strong>Medical oncologist:</strong> Manages chemotherapy and systemic treatments</li>
+      <li><strong>Radiation oncologist:</strong> Manages radiation therapy</li>
+      <li><strong>Anesthesiologist:</strong> Manages anesthesia and pain during surgery</li>
+      <li><strong>Pathologist:</strong> Examines tissue removed during surgery</li>
+      <li><strong>Dietitian, physical therapist, social worker, psychologist:</strong> Support your preparation and recovery</li>
+    </ul>
+    <p>It is important that all team members evaluate your case before treatment begins.</p>
+
+    <h4>Prehabilitation for Cancer Surgery</h4>
+    <p>Just as athletes train before a competition, you can train your body before surgery. Studies show prehabilitation can <strong>reduce postoperative complications by up to 40%</strong>.</p>
+
+    <p><strong>Exercise</strong></p>
+    <ul>
+      <li>Aim for at least 30 minutes of moderate activity most days (walking, cycling, swimming)</li>
+      <li>Even small amounts are better than none</li>
+      <li>Your team can design a program tailored to your abilities</li>
+    </ul>
+
+    <p><strong>Nutrition</strong></p>
+    <ul>
+      <li>Eat plenty of protein to maintain muscle mass</li>
+      <li>If you&rsquo;ve lost weight or have a poor appetite, tell your team</li>
+      <li>Immunonutrition formulas (arginine, omega-3 fatty acids) may be recommended before major abdominal cancer surgery</li>
+    </ul>
+
+    <p><strong>Mental &amp; Emotional Preparation</strong></p>
+    <ul>
+      <li>Distress is highest around diagnosis and surgery &mdash; and gradually improves</li>
+      <li>Deep breathing, meditation, guided imagery, and support groups all help</li>
+      <li>Your cancer center should screen you for distress and connect you with resources</li>
+    </ul>
+
+    <div class="dr-tip">
+      <p>Ideally, prehabilitation should begin as soon as surgery is planned. If you&rsquo;re receiving chemotherapy or radiation before surgery, you may have weeks or months to prepare. Use this time wisely.</p>
+    </div>
+
+    <h4>Quitting Smoking Before Cancer Surgery</h4>
+    <p>If you smoke, quitting before surgery is one of the most important things you can do:</p>
+    <ul>
+      <li>Smoking increases risk of lung complications, wound infections, blood clots, and longer hospital stays</li>
+      <li>Even quitting on the day of surgery has some benefit</li>
+      <li>Four weeks of abstinence significantly reduces complications</li>
+      <li>Nicotine replacement therapy (patches, gum) is safe before surgery and is NOT a reason to delay</li>
+      <li>Quitting should never delay your cancer surgery</li>
+    </ul>
+
+    <h4>Medical Optimization</h4>
+    <ul>
+      <li><strong>Diabetes:</strong> Blood sugar control is critical for healing and preventing infection</li>
+      <li><strong>Heart/lung disease:</strong> May need evaluation before surgery</li>
+      <li><strong>Anemia:</strong> Low blood counts may need correction before surgery</li>
+      <li><strong>Dental care:</strong> Important before head/neck cancer surgery or radiation</li>
+    </ul>
+
+    <h4>Understanding Your Surgery</h4>
+
+    <p><strong>Surgical Approaches</strong></p>
+    <ul>
+      <li><strong>Open surgery:</strong> Larger incision for direct access</li>
+      <li><strong>Minimally invasive (laparoscopic/robotic):</strong> Smaller incisions, often faster recovery</li>
+      <li><strong>Endoscopic:</strong> Through natural openings</li>
+    </ul>
+
+    <p><strong>Lymph Node Surgery</strong></p>
+    <ul>
+      <li><strong>Sentinel node biopsy:</strong> Removing only the first node(s) where cancer would spread</li>
+      <li><strong>Lymph node dissection:</strong> Removing a group of lymph nodes</li>
+      <li>May cause lymphedema (swelling) &mdash; your team will discuss prevention</li>
+    </ul>
+
+    <h4>After Cancer Surgery</h4>
+
+    <p><strong>Enhanced Recovery (ERAS)</strong></p>
+    <ul>
+      <li>Early eating and drinking</li>
+      <li>Early walking to prevent complications</li>
+      <li>Multimodal pain management (not just opioids)</li>
+      <li>Early removal of tubes and drains</li>
+      <li>Blood clot prevention</li>
+    </ul>
+    <p>ERAS protocols reduce hospital stays and lower complication rates across many types of cancer surgery.</p>
+
+    <p><strong>Drains and Tubes</strong></p>
+    <p>You may go home with surgical drains. Your team will teach you how to empty them, measure output, and recognize problems.</p>
+
+    <p><strong>Pathology Results</strong></p>
+    <p>After surgery, tissue is examined by a pathologist (takes several days to a week+). The report determines whether all cancer was removed, the exact type and grade, lymph node involvement, and what additional treatment may be needed.</p>
+
+    <h4>Special Considerations by Cancer Type</h4>
+
+    <p><strong>Breast Cancer</strong></p>
+    <ul>
+      <li>Lumpectomy or mastectomy; sentinel node biopsy common</li>
+      <li>May go home with drains</li>
+      <li>PT can prevent shoulder stiffness and lymphedema</li>
+      <li>Discuss reconstruction options before surgery</li>
+    </ul>
+
+    <p><strong>Lung Cancer</strong></p>
+    <ul>
+      <li>Breathing exercises before surgery are especially important</li>
+      <li>Chest tubes after surgery</li>
+      <li>Early mobilization is critical</li>
+      <li>Pulmonary rehabilitation may be recommended</li>
+    </ul>
+
+    <p><strong>Colorectal Cancer</strong></p>
+    <ul>
+      <li>May need a temporary or permanent stoma (ostomy)</li>
+      <li>If a stoma is planned, you&rsquo;ll meet with a stoma nurse beforehand</li>
+      <li>Early eating and walking are especially important</li>
+    </ul>
+
+    <p><strong>Head &amp; Neck Cancer</strong></p>
+    <ul>
+      <li>Dental evaluation before surgery is essential</li>
+      <li>Speech and swallowing therapy may be needed</li>
+      <li>May need a temporary feeding tube</li>
+    </ul>
+
+    <h4>Preparing for Additional Treatment</h4>
+    <p>Many cancer patients need chemotherapy or radiation after surgery. One of the goals of good surgical recovery is to be well enough to start additional treatment on time. Prehabilitation and ERAS protocols help ensure this.</p>
+
+    <div class="checklist">
+      <div class="checklist-title">&#9745; Cancer Surgery Preparation Checklist</div>
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">I understand my diagnosis and surgical plan</div>
+      </div>
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">I&rsquo;ve asked all my questions</div>
+      </div>
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">I&rsquo;ve started prehabilitation (exercise, nutrition, stress management)</div>
+      </div>
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">If I smoke, I&rsquo;ve started a quit plan</div>
+      </div>
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">Chronic conditions are optimized</div>
+      </div>
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">Medications reviewed with surgical team</div>
+      </div>
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">Preoperative tests completed</div>
+      </div>
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">Home help arranged for recovery</div>
+      </div>
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">Home prepared for recovery</div>
+      </div>
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">Advance directive completed (if desired)</div>
+      </div>
+    </div>
+
+    <div class="dr-tip">
+      <p>Preparing well for cancer surgery genuinely improves your outcome. Prehabilitation, quitting smoking, managing distress, and following ERAS protocols all make a measurable difference. Your cancer team is there to support you every step of the way. Don&rsquo;t hesitate to ask questions or express concerns. <a href='https://www.opwellconcierge.com/schedule' style='color:#2D5A3D;font-weight:600;'>Book an OpWell consultation for personalized surgical preparation &rarr;</a></p>
+    </div>
+
+    <button class="mark-complete-btn" onclick="markComplete(22)">&#10003; Mark Module Complete</button>
+  </div>
+</div>
+
 </div><!-- end main-container -->
 
 <!-- FOOTER -->
@@ -2243,43 +4332,403 @@ a:hover { color: var(--sage-light); }
 </div>
 
 <script>
-// ── STATE ──
+// ══════════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════════
 let selectedSurgery = null;
 let completedModules = new Set();
-const TOTAL_MODULES = 14;
+let TOTAL_MODULES = 22;
+let intakeData = null;
+let intakeStep = 1;
+const INTAKE_STEPS = 8;
+let quizAnswers = {};
 
-// Load saved state
-try {
-  const saved = localStorage.getItem('opwell-masterclass');
-  if (saved) {
-    const data = JSON.parse(saved);
-    if (data.surgery) selectSurgery(data.surgery, true);
-    if (data.completed) {
-      data.completed.forEach(m => completedModules.add(m));
-      completedModules.forEach(m => {
-        const card = document.querySelector(`[data-module="${m}"]`);
-        if (card) card.classList.add('completed');
-      });
+// Surgery labels
+const SURGERY_LABELS = {
+  cosmetic:'Cosmetic Surgery', bariatric:'Bariatric Surgery', general:'General Surgery',
+  orthopedic:'Orthopedic Surgery', gynecologic:'Gynecologic Surgery', cesarean:'C-Section',
+  cancer:'Cancer Surgery', notsure:'Comprehensive View (All Types)'
+};
+
+// ══════════════════════════════════════════════════
+// INTAKE WIZARD
+// ══════════════════════════════════════════════════
+function buildIntakeDots() {
+  const c = document.getElementById('intakeDots');
+  c.innerHTML = '';
+  for (let i = 1; i <= INTAKE_STEPS; i++) {
+    const d = document.createElement('div');
+    d.className = 'intake-dot' + (i === 1 ? ' active' : '');
+    d.textContent = i;
+    c.appendChild(d);
+  }
+}
+
+function showIntakeStep(n) {
+  intakeStep = n;
+  document.querySelectorAll('.intake-step').forEach(s => s.classList.remove('active'));
+  const step = document.querySelector(`.intake-step[data-step="${n}"]`);
+  if (step) step.classList.add('active');
+
+  // Update dots
+  document.querySelectorAll('.intake-dot').forEach((d, i) => {
+    d.classList.toggle('active', i + 1 === n);
+    d.classList.toggle('completed', i + 1 < n);
+  });
+
+  // Show/hide nav
+  const nav = document.getElementById('intakeNav');
+  if (n > 1) {
+    nav.style.display = 'flex';
+    nav.querySelector('.intake-back').style.visibility = n > 1 ? 'visible' : 'hidden';
+  } else {
+    nav.style.display = 'none';
+  }
+
+  // Next button state — check if current step has selection
+  updateNextBtn();
+}
+
+function updateNextBtn() {
+  const step = document.querySelector(`.intake-step[data-step="${intakeStep}"]`);
+  const btn = document.querySelector('.intake-next');
+  if (!step || !btn) return;
+
+  const hasSelection = step.querySelector('.intake-opt.selected');
+  btn.disabled = !hasSelection;
+
+  // Change text on last step
+  if (intakeStep === INTAKE_STEPS) {
+    btn.innerHTML = 'See My Personalized Guide &#8594;';
+  } else {
+    btn.innerHTML = 'Next &#8594;';
+  }
+}
+
+function pickIntake(el) {
+  // Single-select: deselect siblings
+  el.closest('.intake-options').querySelectorAll('.intake-opt').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  updateNextBtn();
+
+  // Auto-advance after brief confirmation delay for single-select steps
+  setTimeout(() => intakeNext(), 500);
+}
+
+function pickMulti(el) {
+  // Multi-select toggle
+  const noneOpt = el.closest('.intake-options').querySelector('[data-value="none"]');
+  if (el.dataset.value === 'none') {
+    pickNone(el);
+    return;
+  }
+  el.classList.toggle('selected');
+  // Deselect "none" if any condition is selected
+  if (noneOpt) noneOpt.classList.remove('selected');
+  updateNextBtn();
+}
+
+function pickNone(el) {
+  // Deselect all others, select "none", auto-advance
+  el.closest('.intake-options').querySelectorAll('.intake-opt').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  updateNextBtn();
+  setTimeout(() => intakeNext(), 500);
+}
+
+function intakeNext() {
+  if (intakeStep >= INTAKE_STEPS) {
+    completeIntake();
+    return;
+  }
+
+  // Validate current step has selection
+  const step = document.querySelector(`.intake-step[data-step="${intakeStep}"]`);
+  if (!step.querySelector('.intake-opt.selected')) return;
+
+  showIntakeStep(intakeStep + 1);
+}
+
+function intakeBack() {
+  if (intakeStep > 1) showIntakeStep(intakeStep - 1);
+}
+
+function collectIntakeData() {
+  const data = {};
+  // Step 1: surgery
+  const s1 = document.querySelector('.intake-step[data-step="1"] .intake-opt.selected');
+  data.surgery = s1 ? s1.dataset.value : 'notsure';
+  // Step 2: timeline
+  const s2 = document.querySelector('.intake-step[data-step="2"] .intake-opt.selected');
+  data.timeline = s2 ? s2.dataset.value : '2-4weeks';
+  // Step 3: conditions (multi)
+  data.conditions = [];
+  document.querySelectorAll('.intake-step[data-step="3"] .intake-opt.selected').forEach(o => {
+    if (o.dataset.value !== 'none') data.conditions.push(o.dataset.value);
+  });
+  // Step 4: smoking
+  const s4 = document.querySelector('.intake-step[data-step="4"] .intake-opt.selected');
+  data.smoking = s4 ? s4.dataset.value : 'no';
+  // Step 5: first surgery
+  const s5 = document.querySelector('.intake-step[data-step="5"] .intake-opt.selected');
+  data.firstSurgery = s5 ? s5.dataset.value === 'first' : false;
+  // Step 6: anxiety
+  const s6 = document.querySelector('.intake-step[data-step="6"] .intake-opt.selected');
+  data.anxiety = s6 ? s6.dataset.value : 'low';
+  // Step 7: caregiver
+  const s7 = document.querySelector('.intake-step[data-step="7"] .intake-opt.selected');
+  data.caregiver = s7 ? s7.dataset.value : 'no';
+  // Step 8: activity
+  const s8 = document.querySelector('.intake-step[data-step="8"] .intake-opt.selected');
+  data.activity = s8 ? s8.dataset.value : 'moderate';
+
+  return data;
+}
+
+function completeIntake() {
+  intakeData = collectIntakeData();
+  localStorage.setItem('mc_intake', JSON.stringify(intakeData));
+
+  // Hide wizard, show compact profile
+  document.getElementById('intakeSection').style.display = 'none';
+  applyPersonalization(intakeData);
+  renderProfileSummary(intakeData);
+  document.getElementById('profileSummary').style.display = 'block';
+  document.getElementById('readinessSection').style.display = 'flex';
+}
+
+function retakeIntake() {
+  localStorage.removeItem('mc_intake');
+  intakeData = null;
+  // Reset selections
+  document.querySelectorAll('.intake-opt').forEach(o => o.classList.remove('selected'));
+  // Reset all condition-based content
+  document.querySelectorAll('[data-condition]').forEach(el => el.classList.remove('condition-show'));
+  document.querySelectorAll('.risk-callout-injected').forEach(el => el.remove());
+  document.querySelector('.main-container').classList.remove('timeline-postop','timeline-urgent');
+  // Show wizard
+  document.getElementById('intakeSection').style.display = 'block';
+  document.getElementById('profileSummary').style.display = 'none';
+  showIntakeStep(1);
+}
+
+// ══════════════════════════════════════════════════
+// PERSONALIZATION ENGINE
+// ══════════════════════════════════════════════════
+function generateTags(data) {
+  const tags = [];
+  // Timeline
+  if (data.timeline === '<1week') tags.push('urgent');
+  if (data.timeline === '1-2weeks') tags.push('compressed');
+  if (data.timeline === 'postop') tags.push('postop');
+  if (data.timeline === '4+weeks') tags.push('prehab-priority');
+  // Conditions
+  data.conditions.forEach(c => tags.push('risk-' + c));
+  // Smoking
+  if (data.smoking === 'yes') tags.push('smoker');
+  if (data.smoking === 'quit-recent') tags.push('recent-quit');
+  // First surgery
+  if (data.firstSurgery) tags.push('first-timer');
+  // Anxiety
+  if (data.anxiety === 'high') tags.push('high-anxiety');
+  if (data.anxiety === 'moderate') tags.push('moderate-anxiety');
+  // Caregiver
+  if (data.caregiver === 'no') tags.push('no-caregiver');
+  if (data.caregiver === 'yes-involved') tags.push('has-caregiver');
+  // Activity
+  if (data.activity === 'sedentary') tags.push('sedentary');
+  // Elevated risk
+  if (data.conditions.some(c => ['diabetes','heart','lung','obesity','osa','clots'].includes(c)) || data.smoking === 'yes') {
+    tags.push('elevated-risk');
+  }
+  return tags;
+}
+
+function applyPersonalization(data) {
+  const tags = generateTags(data);
+
+  // 1. Surgery filtering (existing system)
+  selectSurgery(data.surgery, true);
+
+  // 2. Conditional content blocks
+  document.querySelectorAll('[data-condition]').forEach(el => {
+    const cond = el.dataset.condition;
+    let show = false;
+    if (cond.startsWith('!')) {
+      show = !tags.includes(cond.substring(1));
+    } else {
+      show = tags.includes(cond);
     }
-    if (data.checks) {
-      data.checks.forEach(idx => {
-        const items = document.querySelectorAll('.checklist-item');
-        if (items[idx]) items[idx].classList.add('checked');
-      });
+    el.classList.toggle('condition-show', show);
+  });
+
+  // 3. Risk callouts (injected dynamically)
+  injectRiskCallouts(tags, data);
+
+  // 4. Timeline modes
+  const mc = document.querySelector('.main-container');
+  mc.classList.remove('timeline-postop', 'timeline-urgent');
+  if (data.timeline === 'postop') mc.classList.add('timeline-postop');
+  if (data.timeline === '<1week') mc.classList.add('timeline-urgent');
+
+  // 5. Caregiver module visibility
+  const caregiverModule = document.querySelector('[data-module="14"]');
+  if (caregiverModule) {
+    caregiverModule.classList.remove('surgery-hidden', 'surgery-highlighted');
+    if (data.caregiver === 'no') {
+      caregiverModule.classList.add('surgery-hidden');
+    } else if (data.caregiver === 'yes-involved' || data.caregiver === 'yes-limited') {
+      caregiverModule.classList.add('surgery-highlighted');
     }
   }
-} catch(e) {}
 
-// ── SURGERY SELECTOR ──
+  // 6. Update visible module count for progress
+  updateVisibleModuleCount();
+
+  saveState();
+}
+
+function injectRiskCallouts(tags, data) {
+  // Remove previously injected
+  document.querySelectorAll('.risk-callout-injected').forEach(el => el.remove());
+
+  const callouts = [];
+
+  if (tags.includes('risk-diabetes')) {
+    callouts.push({ module: 1, html: '<p><strong>Because you have diabetes:</strong> Blood sugar control is critical before surgery. Poorly controlled diabetes increases infection risk and slows wound healing. Talk to your doctor about adjusting your diabetes medications around surgery day &mdash; some (like metformin) may need to be paused.</p>' });
+    callouts.push({ module: 2, html: '<p><strong>Diabetes &amp; nutrition:</strong> Focus on stable blood sugar in the weeks before surgery. Avoid blood sugar spikes from processed carbs. Your A1C ideally should be below 8% before elective surgery.</p>' });
+    callouts.push({ module: 6, html: '<p><strong>Diabetes &amp; recovery:</strong> Monitor blood sugar closely after surgery &mdash; stress and medications can cause fluctuations. Report blood sugar consistently above 200 mg/dL to your surgical team.</p>' });
+  }
+
+  if (tags.includes('smoker') || tags.includes('recent-quit')) {
+    callouts.push({ module: 3, html: '<p><strong>' + (tags.includes('smoker') ? 'You smoke:' : 'You recently quit:') + '</strong> ' + (tags.includes('smoker') ? 'Quitting before surgery is one of the most impactful things you can do. Even 4 weeks of abstinence significantly reduces lung complications, wound infections, and blood clot risk. Nicotine replacement (patches, gum) is safe and is NOT a reason to delay surgery. Ask your doctor for help.' : 'Great decision. Continue staying smoke-free through surgery and recovery. Your lungs and wound healing will benefit significantly.') + '</p>' });
+    callouts.push({ module: 6, html: '<p><strong>Wound healing:</strong> Smoking impairs blood flow to healing tissues. ' + (tags.includes('smoker') ? 'If you can quit even now, your wound will heal better.' : 'Staying smoke-free will help your incision heal properly.') + '</p>' });
+  }
+
+  if (tags.includes('risk-osa')) {
+    callouts.push({ module: 5, html: '<p><strong>Sleep apnea reminder:</strong> Bring your CPAP/BiPAP machine to the hospital. You will need it after surgery. Tell your anesthesiologist about your sleep apnea &mdash; it affects how we manage your airway and monitor you after surgery.</p>' });
+  }
+
+  if (tags.includes('risk-obesity')) {
+    callouts.push({ module: 1, html: '<p><strong>Weight &amp; medications:</strong> Antibiotic doses may be adjusted for your weight. Blood clot prevention is especially important &mdash; make sure your surgical team has discussed this with you.</p>' });
+  }
+
+  if (tags.includes('risk-clots')) {
+    callouts.push({ module: 7, html: '<p><strong>Blood clot history:</strong> Because you have a history of blood clots, you are at higher risk. Your surgeon should have a specific blood clot prevention plan for you (compression devices + blood thinners). Know the DVT and PE warning signs in this module &mdash; they are especially important for you.</p>' });
+  }
+
+  if (tags.includes('risk-heart')) {
+    callouts.push({ module: 5, html: '<p><strong>Heart disease:</strong> Your anesthesiologist needs to know about your heart condition, any cardiac medications, and recent tests (EKG, echocardiogram, stress test). Bring this information to surgery day.</p>' });
+  }
+
+  if (tags.includes('risk-lung')) {
+    callouts.push({ module: 3, html: '<p><strong>Lung disease:</strong> Breathing exercises are especially important for you. Practice the incentive spirometer and deep breathing exercises in this module daily. Bring your inhalers to the hospital.</p>' });
+  }
+
+  if (tags.includes('first-timer') && tags.includes('high-anxiety')) {
+    // Combined callout to avoid stacking two in the same module
+    callouts.push({ module: 4, html: '<p><strong>First surgery + high anxiety:</strong> Feeling very anxious before your first surgery is completely normal &mdash; over 80% of first-time patients feel the same way. The mental preparation techniques in this module are especially valuable for you. Take your time with the visualization exercise, and consider speaking with OpWell&rsquo;s mental wellness specialist, Stacey J. Floyd, MA, LPC, for personalized support. <a href="https://www.opwellconcierge.com/schedule" style="color:var(--sage);font-weight:600;">Book a session &rarr;</a></p>' });
+  } else if (tags.includes('first-timer')) {
+    callouts.push({ module: 4, html: '<p><strong>First surgery?</strong> Feeling anxious is completely normal. Over 80% of first-time surgical patients feel significant anxiety. The mental preparation techniques in this module are especially valuable for you &mdash; take your time with the visualization exercise.</p>' });
+  } else if (tags.includes('high-anxiety')) {
+    callouts.push({ module: 4, html: '<p><strong>High anxiety noted:</strong> We hear you, and your feelings are valid. This module has evidence-based techniques that genuinely help. Consider speaking with OpWell&rsquo;s mental wellness specialist, Stacey J. Floyd, MA, LPC, for personalized support. <a href="https://www.opwellconcierge.com/schedule" style="color:var(--sage);font-weight:600;">Book a session &rarr;</a></p>' });
+  }
+
+  if (tags.includes('sedentary')) {
+    callouts.push({ module: 3, html: '<p><strong>Starting from sedentary:</strong> That&rsquo;s completely okay. Start with 10&ndash;15 minute walks and build up gradually. Focus on the Beginner column in the weekly prehab schedule below. Even small amounts of movement make a meaningful difference in your surgical outcome.</p>' });
+  }
+
+  if (tags.includes('no-caregiver')) {
+    callouts.push({ module: 6, html: '<p><strong>Recovering solo:</strong> Since you&rsquo;ll be mostly on your own, preparation is even more important. Before surgery: stock your home with easy meals, set up a recovery station, fill prescriptions, arrange a ride home. Consider hiring a home health aide for the first 48&ndash;72 hours if possible.</p>' });
+  }
+
+  if (data.caregiver === 'yes-limited') {
+    callouts.push({ module: 6, html: '<p><strong>Limited caregiver help:</strong> Since your caregiver&rsquo;s availability is limited, plan ahead. Prepare meals in advance, set medication alarms on your phone, and ask your caregiver to focus on the first 24&ndash;48 hours when you&rsquo;ll need the most help. Check out Module 14 (Caregiver&rsquo;s Guide) &mdash; share it with your helper so they know exactly what to prioritize.</p>' });
+  }
+
+  // Inject callouts
+  callouts.forEach(c => {
+    const moduleBody = document.querySelector(`[data-module="${c.module}"] .module-body`);
+    if (!moduleBody) return;
+    const div = document.createElement('div');
+    div.className = 'risk-callout risk-callout-injected';
+    div.innerHTML = c.html;
+    // Insert after the first paragraph
+    const firstP = moduleBody.querySelector('p');
+    if (firstP && firstP.nextSibling) {
+      firstP.parentNode.insertBefore(div, firstP.nextSibling);
+    } else {
+      moduleBody.prepend(div);
+    }
+  });
+}
+
+function renderProfileSummary(data) {
+  const tags = generateTags(data);
+  const tagsEl = document.getElementById('profileTags');
+  const msgEl = document.getElementById('profileMessage');
+  tagsEl.innerHTML = '';
+
+  // Surgery type tag
+  addTag(tagsEl, SURGERY_LABELS[data.surgery] || data.surgery, 'info');
+
+  // Timeline tag
+  const timeLabels = {'<1week':'Less than 1 week','1-2weeks':'1-2 weeks','2-4weeks':'2-4 weeks','4+weeks':'4+ weeks','postop':'Post-surgery'};
+  addTag(tagsEl, timeLabels[data.timeline] || data.timeline, data.timeline === '<1week' ? 'warning' : 'neutral');
+
+  // Conditions
+  const condLabels = {diabetes:'Diabetes',heart:'Heart Disease',lung:'Lung Disease',obesity:'Obesity',osa:'Sleep Apnea',anxiety:'Anxiety/Depression',clots:'Blood Clot History',pain:'Chronic Pain'};
+  data.conditions.forEach(c => addTag(tagsEl, condLabels[c] || c, 'warning'));
+
+  // Smoking
+  if (data.smoking === 'yes') addTag(tagsEl, 'Current Smoker', 'warning');
+  if (data.smoking === 'quit-recent') addTag(tagsEl, 'Recently Quit Smoking', 'neutral');
+
+  // First timer
+  if (data.firstSurgery) addTag(tagsEl, 'First Surgery', 'info');
+
+  // Anxiety
+  if (data.anxiety === 'high') addTag(tagsEl, 'High Anxiety', 'warning');
+  if (data.anxiety === 'moderate') addTag(tagsEl, 'Moderate Anxiety', 'neutral');
+
+  // Caregiver
+  if (data.caregiver === 'yes-involved') addTag(tagsEl, 'Caregiver Support', 'info');
+  if (data.caregiver === 'no') addTag(tagsEl, 'Solo Recovery', 'neutral');
+
+  // Activity
+  const actLabels = {sedentary:'Sedentary',light:'Light Activity',moderate:'Moderate Activity',active:'Very Active'};
+  addTag(tagsEl, actLabels[data.activity] || data.activity, data.activity === 'sedentary' ? 'warning' : 'neutral');
+
+  // Message
+  let msg = 'Your guide has been personalized based on your profile. ';
+  if (data.timeline === 'postop') msg += 'Since you\'ve already had surgery, pre-operative modules are dimmed and recovery content is prioritized. ';
+  else if (data.timeline === '<1week') msg += 'With surgery less than a week away, we\'ve focused on the essentials. ';
+  if (tags.includes('elevated-risk')) msg += 'Important safety callouts have been added throughout your modules based on your health conditions. ';
+  if (data.firstSurgery) msg += 'As a first-time surgical patient, you\'ll see extra context to help you know what to expect. ';
+  if (data.anxiety === 'high') msg += 'Mental preparation content has been highlighted for you. ';
+  msgEl.textContent = msg;
+}
+
+function addTag(container, text, type) {
+  const t = document.createElement('span');
+  t.className = 'profile-tag ' + type;
+  t.textContent = text;
+  container.appendChild(t);
+}
+
+function updateVisibleModuleCount() {
+  const visible = document.querySelectorAll('.module-card:not(.surgery-hidden):not([style*="display: none"])');
+  TOTAL_MODULES = visible.length;
+  updateProgress();
+}
+
+// ══════════════════════════════════════════════════
+// SURGERY SELECTOR (existing, preserved)
+// ══════════════════════════════════════════════════
 function selectSurgery(type, skipSave) {
   selectedSurgery = type;
 
-  // Update buttons
-  document.querySelectorAll('.surgery-opt').forEach(opt => {
-    opt.classList.toggle('active', opt.dataset.type === type);
-  });
-
-  // Show/hide specialty content
+  // Show/hide specialty content within modules
   document.querySelectorAll('[data-surgery]').forEach(el => {
     if (type === 'notsure') {
       el.classList.add('show');
@@ -2288,16 +4737,35 @@ function selectSurgery(type, skipSave) {
     }
   });
 
+  // Show/hide surgery-specific bonus modules
+  document.querySelectorAll('[data-relevant-surgery]').forEach(el => {
+    if (type === 'notsure') {
+      el.classList.remove('surgery-hidden');
+      el.classList.remove('surgery-highlighted');
+    } else if (el.dataset.relevantSurgery === type) {
+      el.classList.remove('surgery-hidden');
+      el.classList.add('surgery-highlighted');
+    } else {
+      el.classList.add('surgery-hidden');
+      el.classList.remove('surgery-highlighted');
+    }
+  });
+
+  // Rebuild progress dots to reflect visible modules
+  buildProgressDots();
+  updateProgress();
+
   if (!skipSave) saveState();
 }
 
-// ── MODULE TOGGLE ──
+// ══════════════════════════════════════════════════
+// MODULE TOGGLE
+// ══════════════════════════════════════════════════
 function toggleModule(num) {
   const card = document.querySelector(`[data-module="${num}"]`);
   if (!card) return;
 
   const wasOpen = card.classList.contains('open');
-  // Toggle this one (multiple modules can be open at once)
   if (wasOpen) {
     card.classList.remove('open');
   } else {
@@ -2309,7 +4777,9 @@ function toggleModule(num) {
   updateProgressDots();
 }
 
-// ── MARK COMPLETE ──
+// ══════════════════════════════════════════════════
+// MARK COMPLETE
+// ══════════════════════════════════════════════════
 function markComplete(num) {
   if (completedModules.has(num)) {
     completedModules.delete(num);
@@ -2322,31 +4792,43 @@ function markComplete(num) {
   saveState();
 }
 
-// ── CHECKLIST ──
+// ══════════════════════════════════════════════════
+// CHECKLIST
+// ══════════════════════════════════════════════════
 function toggleCheck(item) {
   item.classList.toggle('checked');
   saveState();
 }
 
-// ── PROGRESS ──
+// ══════════════════════════════════════════════════
+// PROGRESS
+// ══════════════════════════════════════════════════
 function buildProgressDots() {
   const container = document.getElementById('progressDots');
-  for (let i = 1; i <= TOTAL_MODULES; i++) {
+  container.innerHTML = '';
+  const visibleModules = document.querySelectorAll('.module-card:not(.surgery-hidden)');
+  let dotIndex = 1;
+  visibleModules.forEach(card => {
+    const moduleNum = parseInt(card.dataset.module);
     const dot = document.createElement('div');
     dot.className = 'progress-dot';
-    dot.textContent = i;
-    dot.title = 'Module ' + i;
-    dot.onclick = function() {
-      toggleModule(i);
-    };
+    dot.dataset.moduleNum = moduleNum;
+    dot.textContent = dotIndex;
+    dot.title = 'Module ' + dotIndex;
+    dot.onclick = function() { toggleModule(moduleNum); };
+    if (completedModules.has(moduleNum)) dot.classList.add('completed');
     container.appendChild(dot);
-  }
+    dotIndex++;
+  });
 }
 
 function updateProgress() {
-  const pct = Math.round((completedModules.size / TOTAL_MODULES) * 100);
+  const visibleModules = document.querySelectorAll('.module-card:not(.surgery-hidden)');
+  const visibleCount = visibleModules.length;
+  const completedVisible = Array.from(visibleModules).filter(m => m.classList.contains('completed')).length;
+  const pct = visibleCount > 0 ? Math.round((completedVisible / visibleCount) * 100) : 0;
   document.getElementById('progressFill').style.width = pct + '%';
-  document.getElementById('progressPct').textContent = completedModules.size + ' of ' + TOTAL_MODULES + ' complete';
+  document.getElementById('progressPct').textContent = completedVisible + ' of ' + visibleCount + ' complete';
   updateProgressDots();
 }
 
@@ -2355,14 +4837,90 @@ function updateProgressDots() {
   const openModule = document.querySelector('.module-card.open');
   const openNum = openModule ? parseInt(openModule.dataset.module) : null;
 
-  dots.forEach((dot, idx) => {
-    const num = idx + 1;
+  dots.forEach(dot => {
+    const num = parseInt(dot.dataset.moduleNum);
     dot.classList.toggle('completed', completedModules.has(num));
     dot.classList.toggle('active', num === openNum && !completedModules.has(num));
   });
 }
 
-// ── SAVE STATE ──
+// ══════════════════════════════════════════════════
+// KNOWLEDGE CHECK QUIZZES
+// ══════════════════════════════════════════════════
+function handleQuiz(btn) {
+  const question = btn.closest('.quiz-question');
+  const quiz = btn.closest('.knowledge-check');
+  if (!question || !quiz) return;
+
+  const qKey = quiz.dataset.quiz + '-' + question.dataset.q;
+  if (quizAnswers[qKey]) return; // Already answered
+
+  const isCorrect = btn.hasAttribute('data-correct');
+  quizAnswers[qKey] = { answer: btn.dataset.answer, correct: isCorrect };
+
+  // Disable all options
+  question.querySelectorAll('.quiz-opt').forEach(o => {
+    o.disabled = true;
+    if (o.hasAttribute('data-correct')) o.classList.add('correct');
+  });
+  if (!isCorrect) btn.classList.add('wrong');
+
+  // Show feedback
+  const fb = question.querySelector('.quiz-feedback');
+  if (fb) {
+    fb.classList.add('show', isCorrect ? 'correct' : 'wrong');
+    fb.textContent = isCorrect ? 'Correct!' : 'Not quite. The correct answer is highlighted above.';
+  }
+
+  // Save and update score
+  localStorage.setItem('mc_quizzes', JSON.stringify(quizAnswers));
+  updateReadinessScore();
+}
+
+function updateReadinessScore() {
+  const keys = Object.keys(quizAnswers);
+  if (keys.length === 0) return;
+
+  const correct = keys.filter(k => quizAnswers[k].correct).length;
+  const total = keys.length;
+  const pct = Math.round((correct / total) * 100);
+
+  document.getElementById('readinessNum').textContent = pct + '%';
+  document.getElementById('readinessRing').style.setProperty('--pct', pct + '%');
+  document.getElementById('readinessLabel').textContent = correct + ' of ' + total + ' correct — ' + (pct >= 80 ? 'You\'re well prepared!' : pct >= 50 ? 'Good progress! Review missed questions.' : 'Keep learning — revisit modules you missed.');
+}
+
+function loadQuizState() {
+  try {
+    const saved = localStorage.getItem('mc_quizzes');
+    if (saved) {
+      quizAnswers = JSON.parse(saved);
+      // Restore quiz UI
+      Object.keys(quizAnswers).forEach(key => {
+        const [quizNum, qNum] = key.split('-');
+        const quiz = document.querySelector(`.knowledge-check[data-quiz="${quizNum}"]`);
+        if (!quiz) return;
+        const question = quiz.querySelector(`.quiz-question[data-q="${qNum}"]`);
+        if (!question) return;
+        question.querySelectorAll('.quiz-opt').forEach(o => {
+          o.disabled = true;
+          if (o.hasAttribute('data-correct')) o.classList.add('correct');
+          if (o.dataset.answer === quizAnswers[key].answer && !quizAnswers[key].correct) o.classList.add('wrong');
+        });
+        const fb = question.querySelector('.quiz-feedback');
+        if (fb) {
+          fb.classList.add('show', quizAnswers[key].correct ? 'correct' : 'wrong');
+          fb.textContent = quizAnswers[key].correct ? 'Correct!' : 'Not quite. The correct answer is highlighted above.';
+        }
+      });
+      updateReadinessScore();
+    }
+  } catch(e) {}
+}
+
+// ══════════════════════════════════════════════════
+// SAVE STATE
+// ══════════════════════════════════════════════════
 function saveState() {
   try {
     const checks = [];
@@ -2377,22 +4935,21 @@ function saveState() {
   } catch(e) {}
 }
 
-// ── SAVE & RESTORE PROGRESS VIA URL ──
+// ══════════════════════════════════════════════════
+// SAVE & RESTORE PROGRESS VIA URL
+// ══════════════════════════════════════════════════
 function saveProgress() {
   var state = {
-    s: localStorage.getItem('mc_surgery') || '',
-    m: JSON.parse(localStorage.getItem('mc_completed') || '[]'),
+    s: selectedSurgery || '',
+    m: Array.from(completedModules),
     c: {},
     a: localStorage.getItem('mc_access') || ''
   };
-  // Save checked checkboxes
-  document.querySelectorAll('.checklist-item input[type="checkbox"]').forEach(function(cb, i) {
-    if (cb.checked) state.c[i] = 1;
+  document.querySelectorAll('.checklist-item').forEach(function(item, i) {
+    if (item.classList.contains('checked')) state.c[i] = 1;
   });
   var encoded = btoa(JSON.stringify(state)).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
   var url = window.location.origin + window.location.pathname + '#p=' + encoded;
-
-  // Copy to clipboard
   navigator.clipboard.writeText(url).then(function() {
     alert('Progress link copied! Paste it into a text to yourself or bookmark it to resume on any device.');
   }).catch(function() {
@@ -2406,48 +4963,71 @@ function restoreFromURL() {
   try {
     var encoded = hash.substring(3);
     var state = JSON.parse(atob(encoded.replace(/-/g,'+').replace(/_/g,'/')));
-
-    // Restore access code
     if (state.a) localStorage.setItem('mc_access', state.a);
-
-    // Restore surgery selection
-    if (state.s) {
-      localStorage.setItem('mc_surgery', state.s);
-      var btn = document.querySelector('[data-type="' + state.s + '"]');
-      if (btn) btn.click();
-    }
-
-    // Restore completed modules
+    if (state.s) selectSurgery(state.s, true);
     if (state.m && state.m.length) {
-      localStorage.setItem('mc_completed', JSON.stringify(state.m));
-      state.m.forEach(function(idx) {
-        var card = document.querySelectorAll('.module-card')[idx];
+      state.m.forEach(function(m) { completedModules.add(m); });
+      completedModules.forEach(m => {
+        var card = document.querySelector('[data-module="' + m + '"]');
         if (card) card.classList.add('completed');
       });
-      updateProgress();
     }
-
-    // Restore checkboxes
     if (state.c) {
-      var checkboxes = document.querySelectorAll('.checklist-item input[type="checkbox"]');
+      var items = document.querySelectorAll('.checklist-item');
       Object.keys(state.c).forEach(function(i) {
-        if (checkboxes[parseInt(i)]) {
-          checkboxes[parseInt(i)].checked = true;
-          checkboxes[parseInt(i)].closest('.checklist-item').classList.add('checked');
-        }
+        if (items[parseInt(i)]) items[parseInt(i)].classList.add('checked');
       });
     }
-
-    // Clean URL
     history.replaceState(null, '', window.location.pathname);
     return true;
   } catch(e) { return false; }
 }
 
-// ── INIT ──
-restoreFromURL();
-buildProgressDots();
-updateProgress();
+// ══════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════
+(function init() {
+  buildIntakeDots();
+  restoreFromURL();
+  buildProgressDots();
+
+  // Load saved state
+  try {
+    const saved = localStorage.getItem('opwell-masterclass');
+    if (saved) {
+      const data = JSON.parse(saved);
+      if (data.completed) {
+        data.completed.forEach(m => completedModules.add(m));
+        completedModules.forEach(m => {
+          const card = document.querySelector(`[data-module="${m}"]`);
+          if (card) card.classList.add('completed');
+        });
+      }
+      if (data.checks) {
+        data.checks.forEach(idx => {
+          const items = document.querySelectorAll('.checklist-item');
+          if (items[idx]) items[idx].classList.add('checked');
+        });
+      }
+    }
+  } catch(e) {}
+
+  // Load intake data if exists (returning user)
+  try {
+    const savedIntake = localStorage.getItem('mc_intake');
+    if (savedIntake) {
+      intakeData = JSON.parse(savedIntake);
+      document.getElementById('intakeSection').style.display = 'none';
+      applyPersonalization(intakeData);
+      renderProfileSummary(intakeData);
+      document.getElementById('profileSummary').style.display = 'block';
+      document.getElementById('readinessSection').style.display = 'flex';
+    }
+  } catch(e) {}
+
+  loadQuizState();
+  updateProgress();
+})();
 </script>
 
 </div><!-- end masterclass-content -->

@@ -156,6 +156,45 @@ module.exports = async function handler(req, res) {
         }
       }
 
+      // Determine masterclass inclusion tier
+      const sLowerCheck = services.toLowerCase();
+      const includesMasterclassFree = sLowerCheck.includes('complete surgical care') || sLowerCheck.includes('executive package');
+      const isConsultation = !includesMasterclassFree && (
+        sLowerCheck.includes('consultation') || sLowerCheck.includes('post-operative') ||
+        sLowerCheck.includes('labor') || sLowerCheck.includes('delivery')
+      );
+
+      // Generate masterclass access code for package patients
+      let masterclassCode = '';
+      let masterclassSection = '';
+      if (includesMasterclassFree && email) {
+        const now = Date.now();
+        const expiry = now + (90 * 24 * 60 * 60 * 1000);
+        masterclassCode = 'MC-' + Buffer.from(JSON.stringify({ e: email, x: expiry, t: now })).toString('base64url');
+        masterclassSection = `
+                <div style="background: #2d5a3d; color: #fff; border-radius: 12px; padding: 24px; margin: 24px 0; text-align: center;">
+                  <p style="margin: 0 0 4px; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.8;">INCLUDED WITH YOUR PACKAGE</p>
+                  <p style="margin: 0 0 8px; font-size: 1.1rem; font-weight: 700;">Surgery Prep Masterclass \u2014 FREE ($99 value)</p>
+                  <p style="margin: 0 0 4px; font-size: 0.75rem; opacity: 0.8;">Your Access Code:</p>
+                  <p style="margin: 0 0 12px; font-size: 1rem; font-weight: 700; letter-spacing: 0.05em; word-break: break-all;">${masterclassCode}</p>
+                  <p style="margin: 0; font-size: 0.78rem; opacity: 0.7;">Go to <a href="https://www.opwellconcierge.com/masterclass" style="color: #e8c97a; font-weight: 600;">opwellconcierge.com/masterclass</a> and enter your code</p>
+                </div>
+                <div style="background: rgba(200,132,90,0.08); border-left: 4px solid #c8845a; border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 0 0 24px;">
+                  <p style="margin: 0; font-size: 0.85rem; color: #555; line-height: 1.6;"><strong style="color: #3b2a1a;">PDF Download:</strong> <a href="https://www.opwellconcierge.com/OpWell-Surgery-Prep-Masterclass.pdf" style="color: #2d5a3d; font-weight: 600;">Download your PDF here</a> \u2014 this link never expires.</p>
+                </div>`;
+      } else if (isConsultation) {
+        masterclassSection = `
+                <div style="background: linear-gradient(135deg, #f0f7f2 0%, #e8f0eb 100%); border: 2px solid #b8d9c4; border-radius: 12px; padding: 24px; margin: 24px 0; text-align: center;">
+                  <p style="margin: 0 0 4px; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #2d5a3d;">PATIENT EXCLUSIVE</p>
+                  <p style="margin: 0 0 8px; font-size: 1.05rem; font-weight: 700; color: #3b2a1a;">Surgery Prep Masterclass \u2014 50% Off</p>
+                  <p style="margin: 0 0 12px; font-size: 0.88rem; color: #555; line-height: 1.5;">22-module evidence-based guide to prepare your mind and body for surgery. Personalized to your procedure.</p>
+                  <p style="margin: 0 0 4px; font-size: 0.8rem; color: #888;"><s>$99</s></p>
+                  <p style="margin: 0 0 12px; font-size: 1.4rem; font-weight: 700; color: #2d5a3d;">$49</p>
+                  <p style="margin: 0 0 4px; font-size: 0.75rem; font-weight: 700; color: #2d5a3d;">Use code: MASTERCLASS50</p>
+                  <a href="https://www.opwellconcierge.com/#products" style="display: inline-block; margin-top: 12px; background: #2d5a3d; color: #fff; padding: 10px 24px; border-radius: 8px; font-weight: 600; font-size: 0.9rem; text-decoration: none;">Get the Masterclass \u2192</a>
+                </div>`;
+      }
+
       if (email) {
         // Send patient confirmation
         await resend.emails.send({
@@ -179,6 +218,8 @@ module.exports = async function handler(req, res) {
                   <p style="margin: 6px 0; color: #555;"><strong>Service:</strong> ${esc(services)}</p>
                   <p style="margin: 6px 0; color: #555;"><strong>Amount Paid:</strong> $${amountPaid}</p>
                 </div>
+
+                ${masterclassSection}
 
                 <div style="background: #f0f7f2; border: 1px solid #b8d9c4; border-radius: 8px; padding: 20px 24px; margin: 24px 0; text-align: center;">
                   <p style="margin: 0 0 6px; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #2d5a3d;">Your Clinical Library Access Code</p>
@@ -222,6 +263,8 @@ module.exports = async function handler(req, res) {
                 <tr><td style="padding:8px 0; color:#888;">Service</td><td style="padding:8px 0;">${esc(services)}</td></tr>
                 <tr><td style="padding:8px 0; color:#888;">Amount Paid</td><td style="padding:8px 0; font-weight:600; color:#2d5a3d;">$${amountPaid}</td></tr>
                 <tr><td style="padding:8px 0; color:#888;">Stripe Session</td><td style="padding:8px 0; font-size:0.8rem; color:#888;">${session.id}</td></tr>
+                ${masterclassCode ? `<tr><td style="padding:8px 0; color:#888;">Masterclass</td><td style="padding:8px 0; color:#2d5a3d; font-weight:600;">FREE access code sent</td></tr>` : ''}
+                ${isConsultation ? `<tr><td style="padding:8px 0; color:#888;">Masterclass</td><td style="padding:8px 0; color:#b85c2b;">50% off code (MASTERCLASS50) included in email</td></tr>` : ''}
               </table>
               <div style="margin-top:24px; padding:16px; background:#fff; border:1px solid #e8d9c8; border-radius:8px;">
                 <p style="margin:0; font-size:0.9rem; color:#555;"><strong>Action needed:</strong> Create this patient in Charm Health and schedule their consultation.</p>
