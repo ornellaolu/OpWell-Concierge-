@@ -2702,7 +2702,7 @@
         <a class="btn-secondary btn-meet-dr" onclick="showPage('about')" style="color:#FAF0E8; border-color:rgba(250,240,232,0.5);">Meet Dr. Oluwole</a>
         <a class="btn-gold" href="/surgery-readiness-quiz.html" style="cursor:pointer; animation: quizPulse 2s ease-in-out infinite;">Free Surgery Readiness Score →</a>
       </div>
-      <div style="margin-top:1.25rem; background:linear-gradient(135deg, rgba(200,132,90,0.2) 0%, rgba(45,90,61,0.25) 100%); border:2px solid var(--terracotta); border-radius:14px; padding:1rem 1.5rem; display:flex; align-items:center; gap:1rem; cursor:pointer; animation: masterclassPulse 3s ease-in-out infinite; max-width:620px;" onclick="showPage('products'); setTimeout(function(){ document.getElementById('masterclass-section').scrollIntoView({behavior:'smooth'}); }, 150);">
+      <div style="margin-top:1.25rem; background:linear-gradient(135deg, rgba(200,132,90,0.2) 0%, rgba(45,90,61,0.25) 100%); border:2px solid var(--terracotta); border-radius:14px; padding:1rem 1.5rem; display:flex; align-items:center; gap:1rem; cursor:pointer; animation: masterclassPulse 3s ease-in-out infinite; max-width:620px;" onclick="showPage('products'); setTimeout(function(){ document.getElementById('products-tabs').querySelector('.tab-btn').click(); }, 150);">
         <div style="background:var(--terracotta); color:#fff; font-size:0.6rem; font-weight:800; letter-spacing:0.12em; text-transform:uppercase; padding:0.3rem 0.6rem; border-radius:6px; white-space:nowrap; flex-shrink:0;">New Product</div>
         <div style="flex:1;">
           <div style="font-family:'Playfair Display',serif; font-size:0.95rem; font-weight:700; color:#FAF0E8; line-height:1.3;">Complete Surgery Preparation Masterclass</div>
@@ -4582,12 +4582,68 @@
 
   <!-- ═══ PRODUCTS TAB NAV ═══ -->
   <div class="tabs-nav" id="products-tabs">
+    <button class="tab-btn" onclick="showProductsTab('masterclass')" style="color:var(--terracotta); font-weight:700;">Masterclass</button>
     <button class="tab-btn active" onclick="showProductsTab('wound')">Wound & Compression</button>
     <button class="tab-btn" onclick="showProductsTab('pain')">Pain & Comfort</button>
     <button class="tab-btn" onclick="showProductsTab('nutrition')">Nutrition & GI</button>
     <button class="tab-btn" onclick="showProductsTab('daily')">Daily Living</button>
     <button class="tab-btn" onclick="showProductsTab('wellness')">Wellness & Specialty</button>
   </div>
+
+  <!-- ═══ TAB: MASTERCLASS ═══ -->
+  <div class="tab-panel" id="ptab-masterclass">
+  <div class="content-section" style="background:linear-gradient(135deg, #1a3a25 0%, #2d5a3d 100%); padding:4rem 2rem;">
+    <div style="max-width:800px; margin:0 auto; text-align:center;">
+      <div style="display:inline-block; background:rgba(200,132,90,0.3); color:var(--terracotta-light); padding:0.3rem 1rem; border-radius:14px; font-size:0.65rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; margin-bottom:1rem;">Digital Course — New</div>
+      <h2 style="font-family:'Playfair Display',serif; font-size:2rem; color:#FAF0E8; margin:0.5rem 0;">Complete Surgery Preparation Masterclass</h2>
+      <div style="width:60px; height:2px; background:var(--terracotta); margin:1rem auto;"></div>
+      <p style="font-family:'DM Sans',sans-serif; font-size:1rem; color:rgba(250,240,232,0.85); max-width:620px; margin:0 auto 2rem; line-height:1.8;">The only surgery preparation guide written by a board-certified anesthesiologist — personalized to your surgery type, health profile, and timeline. 22 evidence-based modules with interactive knowledge checks and a Readiness Score.</p>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:1.25rem; text-align:left; margin-bottom:2.5rem;">
+        <div style="background:rgba(255,255,255,0.08); border-radius:12px; padding:1.25rem;">
+          <div style="font-size:1.2rem; margin-bottom:0.4rem;">📋</div>
+          <div style="font-family:'DM Sans',sans-serif; font-size:0.85rem; font-weight:600; color:#FAF0E8; margin-bottom:0.3rem;">Personalized Intake</div>
+          <div style="font-size:0.78rem; color:rgba(250,240,232,0.6); line-height:1.5;">8-step questionnaire adapts all 22 modules to your surgery, health conditions, anxiety level, and timeline.</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.08); border-radius:12px; padding:1.25rem;">
+          <div style="font-size:1.2rem; margin-bottom:0.4rem;">🩺</div>
+          <div style="font-family:'DM Sans',sans-serif; font-size:0.85rem; font-weight:600; color:#FAF0E8; margin-bottom:0.3rem;">8 Surgery Types</div>
+          <div style="font-size:0.78rem; color:rgba(250,240,232,0.6); line-height:1.5;">Cosmetic, bariatric, orthopedic, general, gynecologic, C-section, cancer — with specialty-specific guidance in every module.</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.08); border-radius:12px; padding:1.25rem;">
+          <div style="font-size:1.2rem; margin-bottom:0.4rem;">💊</div>
+          <div style="font-family:'DM Sans',sans-serif; font-size:0.85rem; font-weight:600; color:#FAF0E8; margin-bottom:0.3rem;">Medications & Safety</div>
+          <div style="font-size:0.78rem; color:rgba(250,240,232,0.6); line-height:1.5;">What to stop, when, and why — blood thinners, GLP-1s, supplements, birth control. Risk callouts based on your health profile.</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.08); border-radius:12px; padding:1.25rem;">
+          <div style="font-size:1.2rem; margin-bottom:0.4rem;">🧠</div>
+          <div style="font-family:'DM Sans',sans-serif; font-size:0.85rem; font-weight:600; color:#FAF0E8; margin-bottom:0.3rem;">Mental Preparation</div>
+          <div style="font-size:0.78rem; color:rgba(250,240,232,0.6); line-height:1.5;">Managing surgical anxiety, guided visualization, questions to ask your surgeon and anesthesiologist.</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.08); border-radius:12px; padding:1.25rem;">
+          <div style="font-size:1.2rem; margin-bottom:0.4rem;">🏃</div>
+          <div style="font-family:'DM Sans',sans-serif; font-size:0.85rem; font-weight:600; color:#FAF0E8; margin-bottom:0.3rem;">Prehab & Recovery</div>
+          <div style="font-size:0.78rem; color:rgba(250,240,232,0.6); line-height:1.5;">Exercises, nutrition, day-of checklist, week-by-week recovery roadmap, and when to call your doctor vs. go to the ER.</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.08); border-radius:12px; padding:1.25rem;">
+          <div style="font-size:1.2rem; margin-bottom:0.4rem;">&#10003;</div>
+          <div style="font-family:'DM Sans',sans-serif; font-size:0.85rem; font-weight:600; color:#FAF0E8; margin-bottom:0.3rem;">Knowledge Checks</div>
+          <div style="font-size:0.78rem; color:rgba(250,240,232,0.6); line-height:1.5;">14 quiz questions test your understanding. Build your Readiness Score and walk into surgery confident.</div>
+        </div>
+      </div>
+
+      <div style="background:rgba(0,0,0,0.2); border-radius:16px; padding:2rem; display:inline-block;">
+        <div style="font-family:'Playfair Display',serif; font-size:2.5rem; font-weight:700; color:var(--terracotta-light);">$99</div>
+        <div style="font-size:0.8rem; color:rgba(250,240,232,0.6); margin:0.25rem 0 0.5rem;">Interactive web guide + comprehensive PDF · Keep forever</div>
+        <div style="font-size:0.75rem; color:rgba(250,240,232,0.45); margin-bottom:1rem;">OpWell consultation patients receive an exclusive discount in their booking confirmation</div>
+        <a onclick="purchaseMasterclass()" class="btn-gold" style="cursor:pointer; display:inline-block; padding:1rem 2.5rem; font-size:0.95rem;">Get the Masterclass →</a>
+        <p style="font-size:0.72rem; color:rgba(250,240,232,0.4); margin-top:0.75rem;">Based on ERAS protocols, ASA guidelines, and evidence from 40+ randomized trials.<br>HSA & FSA eligible.</p>
+      </div>
+
+      <p style="font-size:0.8rem; color:rgba(250,240,232,0.5); margin-top:2rem; max-width:500px; margin-left:auto; margin-right:auto;">Want personalized 1-on-1 guidance? <a onclick="showPage('schedule')" style="color:var(--terracotta-light); cursor:pointer; text-decoration:underline;">Book a consultation</a> with Dr. Oluwole — and get the Masterclass at an exclusive patient discount.</p>
+    </div>
+  </div>
+  </div><!-- end ptab-masterclass -->
 
   <!-- ═══ TAB: WOUND & COMPRESSION ═══ -->
   <div class="tab-panel active" id="ptab-wound">
