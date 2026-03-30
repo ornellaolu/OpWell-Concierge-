@@ -832,7 +832,7 @@ a:hover { color: var(--sage-light); }
   /* Show ALL content — comprehensive PDF */
   [data-surgery] { display: block !important; }
   [data-relevant-surgery] { display: block !important; }
-  [data-condition] { display: none !important; }
+  [data-condition] { display: block !important; }
   .module-card.surgery-hidden { display: block !important; opacity: 1 !important; }
   .module-body { display: block !important; }
   .timeline-postop .module-card { opacity: 1 !important; }
@@ -1383,6 +1383,75 @@ a:hover { color: var(--sage-light); }
           <li>Bring a complete list of all cancer medications, including targeted therapies and immunotherapies</li>
           <li>Blood thinners may need careful coordination around surgery</li>
           <li>Your blood counts will be checked before surgery to ensure safe levels</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Chronic Disease Guidance (shown in print, condition-filtered in interactive) -->
+    <div data-condition="risk-diabetes">
+      <div class="specialty-note">
+        <div class="specialty-label">If You Have Diabetes</div>
+        <p><strong>Key medication guidance for diabetic patients:</strong></p>
+        <ul>
+          <li><strong>Metformin:</strong> Hold the day of surgery. Restart when eating normally.</li>
+          <li><strong>SGLT2 inhibitors</strong> (Jardiance, Farxiga, Invokana): <strong>Stop 3&ndash;4 days before surgery</strong> &mdash; risk of diabetic ketoacidosis under anesthesia.</li>
+          <li><strong>Insulin:</strong> Your doctor will adjust your dose &mdash; do NOT take your full morning dose while fasting. Typically take 50&ndash;80% of long-acting insulin the night before.</li>
+          <li><strong>Sulfonylureas</strong> (glipizide, glyburide): Hold the morning of surgery (risk of low blood sugar).</li>
+          <li><strong>A1C goal:</strong> Below 8% before elective surgery (ideally below 7%).</li>
+          <li><strong>Recovery:</strong> Check blood sugar every 4&ndash;6 hours. Target 140&ndash;180 mg/dL. Report readings above 250. Watch wounds closely &mdash; high blood sugar slows healing.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div data-condition="risk-heart">
+      <div class="specialty-note">
+        <div class="specialty-label">If You Have Heart Disease</div>
+        <ul>
+          <li><strong>Beta-blockers</strong> (metoprolol, carvedilol): <strong>Continue</strong> &mdash; do NOT stop suddenly. Take with a sip of water morning of surgery.</li>
+          <li><strong>Statins</strong> (atorvastatin, rosuvastatin): <strong>Continue</strong> through surgery.</li>
+          <li><strong>ACE inhibitors</strong> (-pril meds) and <strong>ARBs</strong> (-sartan meds): Often held the morning of surgery.</li>
+          <li><strong>Diuretics:</strong> Often held morning of surgery to prevent dehydration.</li>
+          <li><strong>If you have a coronary stent:</strong> Bare metal stent: wait 30+ days for elective surgery. Drug-eluting stent: wait 3&ndash;12 months. NEVER stop antiplatelet medications without your cardiologist&rsquo;s approval.</li>
+          <li>Bring your pacemaker/defibrillator card if applicable. Bring recent cardiac test results (EKG, echo, stress test).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div data-condition="risk-clots">
+      <div class="specialty-note">
+        <div class="specialty-label">If You Take Blood Thinners</div>
+        <ul>
+          <li><strong>Warfarin:</strong> Stop 5 days before. INR checked before surgery. May need bridging with injectable blood thinner.</li>
+          <li><strong>Eliquis/Xarelto/Edoxaban:</strong> Stop 2&ndash;3 days before (high bleeding risk) or 1&ndash;2 days (low risk).</li>
+          <li><strong>Plavix:</strong> Stop 5 days. <strong>Brilinta:</strong> Stop 5 days. <strong>Effient:</strong> Stop 7 days.</li>
+          <li><strong>Aspirin:</strong> Often continued &mdash; discuss with your surgeon.</li>
+          <li>NEVER stop blood thinners without instructions from both your prescribing doctor AND your surgeon.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div data-condition="risk-lung">
+      <div class="specialty-note">
+        <div class="specialty-label">If You Have Lung Disease</div>
+        <ul>
+          <li>Practice incentive spirometer 10 times every hour while awake &mdash; start NOW, not after surgery.</li>
+          <li><strong>Bring all inhalers</strong> to the hospital. Use your rescue inhaler morning of surgery if instructed.</li>
+          <li>If on inhaled steroids, continue through surgery.</li>
+          <li>Walking and breathing exercises for 4+ weeks before surgery significantly reduces lung complications.</li>
+          <li>After surgery: deep breathing every 1&ndash;2 hours, sit upright, walk early and often, cough and clear secretions.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div data-condition="risk-osa">
+      <div class="specialty-note">
+        <div class="specialty-label">If You Have Sleep Apnea</div>
+        <ul>
+          <li><strong>Bring your CPAP/BiPAP machine</strong>, mask, headgear, and power cord to the hospital.</li>
+          <li>Share your pressure settings and bring sleep study results if available.</li>
+          <li>Continue using CPAP every night leading up to surgery.</li>
+          <li>After surgery: you will use CPAP in recovery. Opioid doses will be carefully managed.</li>
+          <li>Avoid sleeping flat on your back &mdash; keep head of bed elevated.</li>
         </ul>
       </div>
     </div>
@@ -4879,9 +4948,9 @@ function injectRiskCallouts(tags, data) {
   const callouts = [];
 
   if (tags.includes('risk-diabetes')) {
-    callouts.push({ module: 1, html: '<p><strong>Because you have diabetes:</strong> Blood sugar control is critical before surgery. Poorly controlled diabetes increases infection risk and slows wound healing. Talk to your doctor about adjusting your diabetes medications around surgery day &mdash; some (like metformin) may need to be paused.</p>' });
-    callouts.push({ module: 2, html: '<p><strong>Diabetes &amp; nutrition:</strong> Focus on stable blood sugar in the weeks before surgery. Avoid blood sugar spikes from processed carbs. Your A1C ideally should be below 8% before elective surgery.</p>' });
-    callouts.push({ module: 6, html: '<p><strong>Diabetes &amp; recovery:</strong> Monitor blood sugar closely after surgery &mdash; stress and medications can cause fluctuations. Report blood sugar consistently above 200 mg/dL to your surgical team.</p>' });
+    callouts.push({ module: 1, html: '<p><strong>Because you have diabetes:</strong> Blood sugar control is critical before surgery. Poorly controlled diabetes increases infection risk and slows wound healing. Key medication guidance:</p><ul style="margin:8px 0 0 16px;font-size:14px;line-height:1.7;"><li><strong>Metformin:</strong> Hold the day of surgery. Restart when eating normally.</li><li><strong>SGLT2 inhibitors</strong> (Jardiance, Farxiga, Invokana): <strong>Stop 3&ndash;4 days before surgery</strong> &mdash; risk of diabetic ketoacidosis under anesthesia.</li><li><strong>Insulin:</strong> Your doctor will adjust your dose &mdash; do NOT take your full morning dose while fasting. Typically take 50&ndash;80% of long-acting insulin the night before.</li><li><strong>Sulfonylureas</strong> (glipizide, glyburide): Hold the morning of surgery (risk of low blood sugar).</li><li><strong>A1C goal:</strong> Below 8% before elective surgery (ideally below 7%).</li></ul>' });
+    callouts.push({ module: 2, html: '<p><strong>Diabetes &amp; nutrition:</strong> Focus on stable blood sugar in the weeks before surgery. Avoid processed carbs and sugar spikes. Eat consistent meals with protein and fiber. If your doctor recommends carbohydrate loading the night before surgery, discuss whether this is appropriate for your diabetes.</p>' });
+    callouts.push({ module: 6, html: '<p><strong>Diabetes &amp; recovery:</strong> Blood sugar often runs higher after surgery due to surgical stress, pain, and medications. Key recovery points:</p><ul style="margin:8px 0 0 16px;font-size:14px;line-height:1.7;"><li>Check blood sugar more frequently (every 4&ndash;6 hours)</li><li>Target: 140&ndash;180 mg/dL during recovery (your team may give a tighter range)</li><li>Report blood sugar consistently above 250 mg/dL</li><li>Watch wounds closely &mdash; high blood sugar slows healing and increases infection risk</li><li>Resume diabetes medications as directed &mdash; do NOT restart SGLT2 inhibitors until eating and drinking normally</li></ul>' });
   }
 
   if (tags.includes('smoker') || tags.includes('recent-quit')) {
@@ -4890,23 +4959,28 @@ function injectRiskCallouts(tags, data) {
   }
 
   if (tags.includes('risk-osa')) {
-    callouts.push({ module: 5, html: '<p><strong>Sleep apnea reminder:</strong> Bring your CPAP/BiPAP machine to the hospital. You will need it after surgery. Tell your anesthesiologist about your sleep apnea &mdash; it affects how we manage your airway and monitor you after surgery.</p>' });
+    callouts.push({ module: 5, html: '<p><strong>Sleep apnea &mdash; important for your safety:</strong></p><ul style="margin:8px 0 0 16px;font-size:14px;line-height:1.7;"><li><strong>Bring your CPAP/BiPAP machine</strong>, mask, headgear, and power cord to the hospital</li><li>Tell your anesthesiologist about your sleep apnea &mdash; it affects airway management and monitoring</li><li>Share your pressure settings and bring your sleep study results if available</li><li>Continue using CPAP every night leading up to surgery &mdash; good compliance improves outcomes</li><li>After surgery: you will use CPAP in recovery, may have continuous oxygen monitoring, and your pain management will be carefully planned to minimize opioid-related breathing depression</li><li><strong>Avoid sleeping flat on your back</strong> after surgery &mdash; keep the head of bed elevated</li></ul>' });
   }
 
   if (tags.includes('risk-obesity')) {
-    callouts.push({ module: 1, html: '<p><strong>Weight &amp; medications:</strong> Antibiotic doses may be adjusted for your weight. Blood clot prevention is especially important &mdash; make sure your surgical team has discussed this with you.</p>' });
+    callouts.push({ module: 1, html: '<p><strong>Weight &amp; surgical preparation:</strong></p><ul style="margin:8px 0 0 16px;font-size:14px;line-height:1.7;"><li>Antibiotic doses will be adjusted for your weight to prevent infection</li><li><strong>Blood clot prevention is critical</strong> &mdash; you are at higher risk for DVT/PE. You will receive compression devices and possibly blood thinners.</li><li>Even 5&ndash;10% weight loss before surgery can meaningfully reduce risk (if time allows)</li><li>Prehabilitation (Module 3) is especially beneficial &mdash; start a walking program now</li><li>If you snore or have been told you stop breathing at night, ask about screening for sleep apnea before surgery</li></ul>' });
+    callouts.push({ module: 6, html: '<p><strong>Recovery priorities:</strong> Early and frequent walking is critical for preventing blood clots and lung complications. Deep breathing exercises every 1&ndash;2 hours. Keep head of bed elevated. Report any leg swelling, chest pain, or shortness of breath immediately.</p>' });
   }
 
   if (tags.includes('risk-clots')) {
-    callouts.push({ module: 7, html: '<p><strong>Blood clot history:</strong> Because you have a history of blood clots, you are at higher risk. Your surgeon should have a specific blood clot prevention plan for you (compression devices + blood thinners). Know the DVT and PE warning signs in this module &mdash; they are especially important for you.</p>' });
+    callouts.push({ module: 1, html: '<p><strong>Blood thinner management:</strong> Because you have a history of blood clots or take blood thinners, careful coordination is essential:</p><ul style="margin:8px 0 0 16px;font-size:14px;line-height:1.7;"><li><strong>Warfarin:</strong> Typically stop 5 days before surgery. INR checked before procedure. May need bridging with injectable blood thinner.</li><li><strong>Eliquis/Xarelto/Edoxaban:</strong> Stop 2&ndash;3 days before (high bleeding risk surgery) or 1&ndash;2 days (low risk).</li><li><strong>Plavix:</strong> Stop 5 days before. <strong>Brilinta:</strong> Stop 5 days. <strong>Effient:</strong> Stop 7 days.</li><li><strong>Aspirin:</strong> Often continued &mdash; discuss with your surgeon.</li><li>NEVER stop blood thinners without instructions from both your prescribing doctor AND your surgeon.</li><li>Know when to restart after surgery &mdash; your team will give specific timing.</li></ul>' });
+    callouts.push({ module: 7, html: '<p><strong>Blood clot history &mdash; extra vigilance:</strong> You are at higher risk for recurrent DVT/PE. Your surgeon should have a specific prevention plan (compression devices + blood thinners). Know the DVT and PE warning signs in this module &mdash; they are especially important for you. After surgery, walk as soon and as often as allowed. Do ankle pumps every hour. Stay hydrated. Take blood thinners exactly as prescribed &mdash; do not skip doses.</p>' });
   }
 
   if (tags.includes('risk-heart')) {
-    callouts.push({ module: 5, html: '<p><strong>Heart disease:</strong> Your anesthesiologist needs to know about your heart condition, any cardiac medications, and recent tests (EKG, echocardiogram, stress test). Bring this information to surgery day.</p>' });
+    callouts.push({ module: 1, html: '<p><strong>Heart disease &mdash; medication guidance:</strong></p><ul style="margin:8px 0 0 16px;font-size:14px;line-height:1.7;"><li><strong>Beta-blockers</strong> (metoprolol, carvedilol, atenolol): <strong>Continue</strong> &mdash; do NOT stop suddenly. Take with a sip of water morning of surgery.</li><li><strong>Statins</strong> (atorvastatin, rosuvastatin): <strong>Continue</strong> through surgery.</li><li><strong>ACE inhibitors</strong> (-pril meds) and <strong>ARBs</strong> (-sartan meds): Often held the morning of surgery &mdash; your team will advise.</li><li><strong>Diuretics</strong> (water pills): Often held morning of surgery to prevent dehydration.</li><li><strong>If you have a coronary stent:</strong> Timing of surgery matters. Bare metal stent: wait 30+ days. Drug-eluting stent: wait 3&ndash;12 months. NEVER stop antiplatelet medications without your cardiologist&rsquo;s approval.</li><li>If you have a pacemaker or defibrillator, bring your cardiac device card.</li></ul>' });
+    callouts.push({ module: 5, html: '<p><strong>Heart disease &mdash; surgery day:</strong> Your anesthesiologist needs to know about your heart condition, all cardiac medications, and recent tests (EKG, echocardiogram, stress test). Bring this information. Quick self-test: can you climb 2 flights of stairs without stopping? If not, additional cardiac evaluation may be needed before surgery.</p>' });
+    callouts.push({ module: 7, html: '<p><strong>Cardiac warning signs after surgery:</strong> Contact your team immediately for chest pain or pressure, shortness of breath, irregular or racing heartbeat, unusual fatigue or weakness, new swelling in legs or feet, or dizziness/fainting. These may indicate a cardiac complication that needs urgent attention.</p>' });
   }
 
   if (tags.includes('risk-lung')) {
-    callouts.push({ module: 3, html: '<p><strong>Lung disease:</strong> Breathing exercises are especially important for you. Practice the incentive spirometer and deep breathing exercises in this module daily. Bring your inhalers to the hospital.</p>' });
+    callouts.push({ module: 3, html: '<p><strong>Lung disease &mdash; prehabilitation is critical for you:</strong></p><ul style="margin:8px 0 0 16px;font-size:14px;line-height:1.7;"><li>Practice incentive spirometer 10 times every hour while awake &mdash; start NOW, not after surgery</li><li>Diaphragmatic breathing exercises daily (see technique in this module)</li><li><strong>Bring all inhalers</strong> to the hospital &mdash; use your rescue inhaler morning of surgery if instructed</li><li>If on inhaled steroids, continue them through surgery</li><li>If you have COPD: walking and breathing exercises for 4+ weeks before surgery can significantly reduce lung complications</li><li><strong>If you smoke:</strong> Quitting even 4 weeks before surgery measurably reduces pulmonary complications</li></ul>' });
+    callouts.push({ module: 6, html: '<p><strong>Lung disease &mdash; recovery priorities:</strong> Deep breathing exercises and incentive spirometer every 1&ndash;2 hours while awake. Sit upright as much as possible. Walk early and often &mdash; this is the single best thing for your lungs. Cough and clear secretions (splint your incision with a pillow). Report any increasing shortness of breath, persistent cough, or fever to your team.</p>' });
   }
 
   if (tags.includes('first-timer') && tags.includes('high-anxiety')) {
