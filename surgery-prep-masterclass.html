@@ -2390,6 +2390,14 @@ function validateAccess() {
 
   if (!code) { errorEl.textContent = 'Please enter your access code.'; return; }
 
+  // Admin bypass
+  if (code.toLowerCase() === 'opwell') {
+    document.getElementById('access-gate').style.display = 'none';
+    document.getElementById('masterclass-content').style.display = 'block';
+    localStorage.setItem('mc_access', code);
+    return;
+  }
+
   // Check if code starts with MC- (valid masterclass code)
   if (!code.startsWith('MC-')) {
     errorEl.textContent = 'Invalid access code. Please check your purchase confirmation email.';
