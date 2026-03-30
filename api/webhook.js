@@ -104,7 +104,7 @@ module.exports = async function handler(req, res) {
                   </div>
 
                   <div style="background: rgba(200,132,90,0.08); border-left: 4px solid #c8845a; border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 24px 0;">
-                    <p style="margin: 0; font-size: 0.85rem; color: #555; line-height: 1.6;"><strong style="color: #3b2a1a;">Lifetime PDF Access:</strong> <a href="https://www.opwellconcierge.com/surgery-prep-masterclass.html" style="color: #2d5a3d; font-weight: 600;">Download your PDF here</a> \u2014 this link never expires. Save it, print it, keep it forever.</p>
+                    <p style="margin: 0; font-size: 0.85rem; color: #555; line-height: 1.6;"><strong style="color: #3b2a1a;">Lifetime PDF Access:</strong> <a href="https://www.opwellconcierge.com/OpWell-Surgery-Prep-Masterclass.pdf" style="color: #2d5a3d; font-weight: 600;">Download your PDF here (42 pages)</a> \u2014 this link never expires. Save it, print it, keep it forever.</p>
                   </div>
 
                   <div style="background: #f0f7f2; border: 1px solid #b8d9c4; border-radius: 8px; padding: 16px 20px; margin: 24px 0; text-align: center;">

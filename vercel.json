@@ -8,6 +8,7 @@
     { "source": "/masterclass", "destination": "/surgery-prep-masterclass.html" },
     { "source": "/:file*.png", "destination": "/:file*.png" },
     { "source": "/:file*.jpg", "destination": "/:file*.jpg" },
+    { "source": "/:file*.pdf", "destination": "/:file*.pdf" },
     { "source": "/:file*.svg", "destination": "/:file*.svg" },
     { "source": "/:file*.ico", "destination": "/:file*.ico" },
     { "source": "/(.*)", "destination": "/index.html" }
