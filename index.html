@@ -2702,7 +2702,7 @@
         <a class="btn-secondary btn-meet-dr" onclick="showPage('about')" style="color:#FAF0E8; border-color:rgba(250,240,232,0.5);">Meet Dr. Oluwole</a>
         <a class="btn-gold" href="/surgery-readiness-quiz.html" style="cursor:pointer; animation: quizPulse 2s ease-in-out infinite;">Free Surgery Readiness Score →</a>
       </div>
-      <div style="margin-top:1.25rem; background:linear-gradient(135deg, rgba(200,132,90,0.2) 0%, rgba(45,90,61,0.25) 100%); border:2px solid var(--terracotta); border-radius:14px; padding:1rem 1.5rem; display:flex; align-items:center; gap:1rem; cursor:pointer; animation: masterclassPulse 3s ease-in-out infinite; max-width:620px;" onclick="showPage('products')">
+      <div style="margin-top:1.25rem; background:linear-gradient(135deg, rgba(200,132,90,0.2) 0%, rgba(45,90,61,0.25) 100%); border:2px solid var(--terracotta); border-radius:14px; padding:1rem 1.5rem; display:flex; align-items:center; gap:1rem; cursor:pointer; animation: masterclassPulse 3s ease-in-out infinite; max-width:620px;" onclick="showPage('products'); setTimeout(function(){ document.getElementById('masterclass-section').scrollIntoView({behavior:'smooth'}); }, 150);">
         <div style="background:var(--terracotta); color:#fff; font-size:0.6rem; font-weight:800; letter-spacing:0.12em; text-transform:uppercase; padding:0.3rem 0.6rem; border-radius:6px; white-space:nowrap; flex-shrink:0;">New Product</div>
         <div style="flex:1;">
           <div style="font-family:'Playfair Display',serif; font-size:0.95rem; font-weight:700; color:#FAF0E8; line-height:1.3;">Complete Surgery Preparation Masterclass</div>
@@ -4559,7 +4559,7 @@
   </div>
 
   <!-- MASTERCLASS FEATURED BANNER -->
-  <div style="background:linear-gradient(135deg, #1a3a25 0%, #2d5a3d 100%); padding:2.5rem 2rem; margin:0 0 0;">
+  <div id="masterclass-section" style="background:linear-gradient(135deg, #1a3a25 0%, #2d5a3d 100%); padding:2.5rem 2rem; margin:0 0 0;">
     <div style="max-width:800px; margin:0 auto; display:flex; align-items:center; gap:2rem; flex-wrap:wrap;">
       <div style="flex:1; min-width:260px;">
         <div style="display:inline-block; background:rgba(200,132,90,0.3); color:var(--terracotta-light); padding:0.25rem 0.75rem; border-radius:12px; font-size:0.65rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.75rem;">Featured</div>
