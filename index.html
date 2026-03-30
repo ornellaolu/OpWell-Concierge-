@@ -4546,6 +4546,28 @@
     </div>
   </div>
 
+  <!-- MASTERCLASS FEATURED BANNER -->
+  <div style="background:linear-gradient(135deg, #1a3a25 0%, #2d5a3d 100%); padding:2.5rem 2rem; margin:0 0 0;">
+    <div style="max-width:800px; margin:0 auto; display:flex; align-items:center; gap:2rem; flex-wrap:wrap;">
+      <div style="flex:1; min-width:260px;">
+        <div style="display:inline-block; background:rgba(200,132,90,0.3); color:var(--terracotta-light); padding:0.25rem 0.75rem; border-radius:12px; font-size:0.65rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.75rem;">Featured</div>
+        <h3 style="font-family:'Playfair Display',serif; font-size:1.4rem; color:#FAF0E8; margin:0 0 0.6rem;">Surgery Prep Masterclass</h3>
+        <p style="font-family:'DM Sans',sans-serif; font-size:0.85rem; color:rgba(250,240,232,0.8); line-height:1.7; margin:0;">The complete evidence-based guide to preparing your body and mind for surgery — 22 personalized modules, knowledge checks, and a Readiness Score. Written by Dr. Oluwole.</p>
+        <div style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:0.75rem;">
+          <span style="font-size:0.7rem; background:rgba(255,255,255,0.1); color:rgba(250,240,232,0.7); padding:0.2rem 0.6rem; border-radius:10px;">8 Surgery Types</span>
+          <span style="font-size:0.7rem; background:rgba(255,255,255,0.1); color:rgba(250,240,232,0.7); padding:0.2rem 0.6rem; border-radius:10px;">Personalized Intake</span>
+          <span style="font-size:0.7rem; background:rgba(255,255,255,0.1); color:rgba(250,240,232,0.7); padding:0.2rem 0.6rem; border-radius:10px;">Interactive + PDF</span>
+          <span style="font-size:0.7rem; background:rgba(200,132,90,0.25); color:var(--terracotta-light); padding:0.2rem 0.6rem; border-radius:10px;">Free with packages</span>
+        </div>
+      </div>
+      <div style="text-align:center; min-width:160px;">
+        <div style="font-family:'Playfair Display',serif; font-size:2.2rem; font-weight:700; color:var(--terracotta-light);">$99</div>
+        <div style="font-size:0.72rem; color:rgba(250,240,232,0.5); margin:0.2rem 0 0.8rem;">HSA & FSA eligible</div>
+        <a onclick="purchaseMasterclass()" class="btn-gold" style="cursor:pointer; display:inline-block; padding:0.75rem 1.8rem; font-size:0.88rem;">Get the Masterclass →</a>
+      </div>
+    </div>
+  </div>
+
   <!-- ═══ PRODUCTS TAB NAV ═══ -->
   <div class="tabs-nav" id="products-tabs">
     <button class="tab-btn active" onclick="showProductsTab('wound')">Wound & Compression</button>
@@ -14357,6 +14379,30 @@
 
     </div>
   </div>
+
+  <!-- MASTERCLASS STANDALONE ON PRICING PAGE -->
+  <div class="content-section" style="background:linear-gradient(135deg, #1a3a25 0%, #2d5a3d 100%); padding:3rem 2rem; margin-top:0;">
+    <div style="max-width:800px; margin:0 auto; display:flex; align-items:center; gap:2.5rem; flex-wrap:wrap;">
+      <div style="flex:1; min-width:280px;">
+        <div style="font-size:0.65rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--terracotta-light); margin-bottom:0.5rem;">Digital Course</div>
+        <h3 style="font-family:'Playfair Display',serif; font-size:1.5rem; color:#FAF0E8; margin:0 0 0.75rem;">Surgery Prep Masterclass</h3>
+        <p style="font-family:'DM Sans',sans-serif; font-size:0.88rem; color:rgba(250,240,232,0.8); line-height:1.7; margin:0;">22 evidence-based modules personalized to your surgery type, health profile, and timeline. Interactive knowledge checks, printable checklists, and a comprehensive PDF. Written by a board-certified anesthesiologist.</p>
+        <ul style="list-style:none; padding:0; margin:1rem 0 0; font-size:0.8rem; color:rgba(250,240,232,0.7); line-height:2;">
+          <li style="display:flex; align-items:center; gap:0.4rem;"><span style="color:var(--terracotta-light);">&#10003;</span> Personalized intake questionnaire</li>
+          <li style="display:flex; align-items:center; gap:0.4rem;"><span style="color:var(--terracotta-light);">&#10003;</span> 8 surgery types with specialty content</li>
+          <li style="display:flex; align-items:center; gap:0.4rem;"><span style="color:var(--terracotta-light);">&#10003;</span> Knowledge checks with Readiness Score</li>
+          <li style="display:flex; align-items:center; gap:0.4rem;"><span style="color:var(--terracotta-light);">&#10003;</span> FREE with Complete Care or Executive packages</li>
+        </ul>
+      </div>
+      <div style="text-align:center; min-width:180px;">
+        <div style="font-family:'Playfair Display',serif; font-size:2.5rem; font-weight:700; color:var(--terracotta-light);">$99</div>
+        <div style="font-size:0.75rem; color:rgba(250,240,232,0.5); margin:0.25rem 0 1rem;">Interactive + PDF · Keep forever</div>
+        <a onclick="purchaseMasterclass()" class="btn-gold" style="cursor:pointer; display:inline-block; padding:0.85rem 2rem; font-size:0.9rem;">Get the Masterclass →</a>
+        <p style="font-size:0.7rem; color:rgba(250,240,232,0.4); margin-top:0.6rem;">HSA & FSA eligible</p>
+      </div>
+    </div>
+  </div>
+
   </div><!-- /prtab-medical -->
 
   <div class="tab-panel" id="prtab-ld">
@@ -14524,6 +14570,7 @@
         <div class="package-name">Complete Surgical Care Package</div>
         <div class="package-price">$850</div>
         <div class="package-desc">Full perioperative support from pre-op through recovery — the most complete gift of care.</div>
+        <p style="font-size:0.78rem; color:var(--terracotta); font-weight:600; margin:0.5rem 0 0;">Includes Surgery Prep Masterclass FREE ($99 value)</p>
         <br><a class="btn-primary" onclick="giftService('anesthesiologist','Complete Surgical Care Package ($850)')" style="cursor:pointer; display:inline-block;">Gift This Package →</a>
       </div>
       <div class="package-card">
@@ -14556,8 +14603,16 @@
           <li style="color:rgba(253,248,244,0.9);"><div class="service-check" style="color:#e8b48a;">✓</div>3 Mental Wellness sessions ($600 value)</li>
           <li style="color:rgba(253,248,244,0.9);"><div class="service-check" style="color:#e8b48a;">✓</div>Coordinated care — medical + mental health in one team</li>
           <li style="color:rgba(253,248,244,0.9);"><div class="service-check" style="color:#e8b48a;">✓</div>Priority scheduling &amp; extended messaging access</li>
+          <li style="margin-top:10px; padding-top:10px; border-top:1px solid rgba(232,180,138,0.25); font-size:0.72rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:#e8b48a; list-style:none;">Bonus Included</li>
+          <li style="color:rgba(253,248,244,0.9);"><div class="service-check" style="color:#e8b48a;">✓</div><strong>Surgery Prep Masterclass</strong> — FREE ($99 value)</li>
         </ul>
         <br><a class="btn-gold" onclick="giftService('anesthesiologist','Executive Package — Complete Concierge Program ($1,350)')" style="cursor:pointer; display:inline-block;">Gift This Package →</a>
+      </div>
+      <div class="package-card">
+        <div class="package-name">Surgery Prep Masterclass</div>
+        <div class="package-price">$99</div>
+        <div class="package-desc">22-module evidence-based surgery preparation guide — personalized to the recipient's surgery type, health profile, and timeline. Interactive + printable PDF.</div>
+        <br><a class="btn-secondary" onclick="giftService('anesthesiologist','Surgery Prep Masterclass ($99)')" style="cursor:pointer; display:inline-block;">Gift the Masterclass →</a>
       </div>
     </div>
   </div>

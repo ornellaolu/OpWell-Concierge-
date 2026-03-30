@@ -5,6 +5,7 @@ const PRICES = {
   'Executive Package — Complete Concierge Program':       135000,
   'Labor & Delivery Consultation — New Patient':            40000,
   'Mental Wellness — 3-Session Package':                   60000,
+  'Surgery Prep Masterclass':                               9900,
 };
 
 const ALLOWED_ORIGINS = [
