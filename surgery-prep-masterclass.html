@@ -498,8 +498,9 @@ a:hover { color: var(--sage-light); }
 .check-text { font-size: 15px; line-height: 1.5; }
 
 /* ── TABLE ── */
+.module-body table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
 .data-table {
-  width: 100%;
+  width: 100%; min-width: 400px;
   border-collapse: collapse;
   margin: 16px 0;
   font-size: 14px;
@@ -1186,7 +1187,7 @@ a:hover { color: var(--sage-light); }
       <tr><th>Medication</th><th>Typical Stop Time</th><th>Notes</th></tr>
       <tr><td><strong>Aspirin</strong> (low-dose 81mg)</td><td>7 days before</td><td>Unless cardiologist says continue</td></tr>
       <tr><td><strong>Ibuprofen</strong> (Advil, Motrin)</td><td>7 days before</td><td>Switch to Tylenol for pain</td></tr>
-      <tr><td><strong>Naproxen</strong> (Aleve)</td><td>14 days before</td><td>Longer-acting NSAID</td></tr>
+      <tr><td><strong>Naproxen</strong> (Aleve)</td><td>7&ndash;14 days before</td><td>Longer-acting NSAID &mdash; discuss with your surgeon</td></tr>
       <tr><td><strong>Eliquis</strong> (apixaban)</td><td>2&ndash;3 days before</td><td>Per prescribing physician</td></tr>
       <tr><td><strong>Xarelto</strong> (rivaroxaban)</td><td>2&ndash;3 days before</td><td>Per prescribing physician</td></tr>
       <tr><td><strong>Warfarin</strong> (Coumadin)</td><td>5 days before</td><td>May need bridging therapy</td></tr>
@@ -3938,7 +3939,7 @@ a:hover { color: var(--sage-light); }
       <li>Temporary drop in blood pressure (treated with fluids or medication)</li>
       <li>Itching (treatable)</li>
       <li>Fever (about 30% of women; usually not from infection)</li>
-      <li>Headache (rare, about 1 in 144 women)</li>
+      <li>Headache (rare, less than 1% of women)</li>
       <li>Your legs may feel heavy or tingly</li>
     </ul>
 
@@ -4422,7 +4423,7 @@ a:hover { color: var(--sage-light); }
     </ul>
 
     <h4>If an Unplanned Cesarean Becomes Necessary</h4>
-    <p>About 30% of US deliveries are cesarean. Sometimes a C-section is needed during labor for:</p>
+    <p>About 1 in 3 US deliveries are cesarean. Sometimes a C-section is needed during labor for:</p>
     <ul>
       <li>Baby showing signs of distress (abnormal heart rate patterns)</li>
       <li>Labor not progressing despite adequate contractions</li>
@@ -4460,7 +4461,7 @@ a:hover { color: var(--sage-light); }
       <li>Heavy bleeding (soaking more than 1 pad per hour) or large clots</li>
       <li>Foul-smelling vaginal discharge</li>
       <li>Incision redness, swelling, opening, or drainage (C-section)</li>
-      <li>Severe headache that doesn&rsquo;t improve (especially after epidural/spinal)</li>
+      <li>Severe headache that doesn&rsquo;t improve, vision changes, or upper abdominal pain (possible <strong>postpartum preeclampsia</strong> &mdash; can occur up to 6 weeks after delivery)</li>
       <li>Leg swelling, warmth, or pain (possible blood clot)</li>
       <li>Chest pain or difficulty breathing</li>
       <li>Painful, red, warm breast with fever (possible mastitis)</li>
@@ -4507,6 +4508,36 @@ a:hover { color: var(--sage-light); }
       <p>Want personalized, one-on-one guidance for your delivery? OpWell offers L&amp;D Consultations where Dr. Oluwole reviews your complete health picture, explains every anesthesia option honestly, addresses your specific fears, and creates a plan so nothing is a surprise on delivery day. <a href="https://www.opwellconcierge.com/schedule" style="color:var(--sage); font-weight:600;">Book your L&amp;D Consultation &rarr;</a></p>
     </div>
 
+    <div class="knowledge-check" data-quiz="23">
+      <h4 class="quiz-title">Quick Knowledge Check</h4>
+      <div class="quiz-question" data-q="1">
+        <p class="quiz-prompt">When should you go to the hospital during labor (the &ldquo;5-1-1 rule&rdquo;)?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" data-answer="a" onclick="handleQuiz(this)">Contractions 10 minutes apart for 30 minutes</button>
+          <button class="quiz-opt" data-answer="b" data-correct onclick="handleQuiz(this)">Contractions 5 minutes apart, lasting 1 minute, for 1 hour</button>
+          <button class="quiz-opt" data-answer="c" onclick="handleQuiz(this)">As soon as you feel any contractions</button>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+      <div class="quiz-question" data-q="2">
+        <p class="quiz-prompt">True or False: Getting an epidural increases your chance of needing a cesarean section.</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" data-answer="a" onclick="handleQuiz(this)">True</button>
+          <button class="quiz-opt" data-answer="b" data-correct onclick="handleQuiz(this)">False &mdash; epidurals do NOT increase cesarean risk</button>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+      <div class="quiz-question" data-q="3">
+        <p class="quiz-prompt">&ldquo;Baby blues&rdquo; typically resolve within:</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" data-answer="a" data-correct onclick="handleQuiz(this)">2 weeks</button>
+          <button class="quiz-opt" data-answer="b" onclick="handleQuiz(this)">6 months</button>
+          <button class="quiz-opt" data-answer="c" onclick="handleQuiz(this)">They don&rsquo;t resolve without treatment</button>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+    </div>
+
     <button class="mark-complete-btn" onclick="markComplete(23)">&#10003; Mark Module Complete</button>
   </div>
 </div>
@@ -4529,7 +4560,7 @@ a:hover { color: var(--sage-light); }
 // ══════════════════════════════════════════════════
 let selectedSurgery = null;
 let completedModules = new Set();
-let TOTAL_MODULES = 22;
+let TOTAL_MODULES = 23;
 let intakeData = null;
 let intakeStep = 1;
 const INTAKE_STEPS = 8;
