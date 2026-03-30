@@ -67,6 +67,73 @@ module.exports = async function handler(req, res) {
       const services = session.metadata.services || 'Consultation';
       const amountPaid = (session.amount_total / 100).toFixed(2);
 
+      // Handle Masterclass purchases
+      if (services.includes('Surgery Prep Masterclass')) {
+        const now = Date.now();
+        const expiry = now + (90 * 24 * 60 * 60 * 1000); // 90 days
+        const accessCode = 'MC-' + Buffer.from(JSON.stringify({ e: email, x: expiry, t: now })).toString('base64url');
+
+        if (email) {
+          await resend.emails.send({
+            from: 'OpWell Concierge <info@opwellconcierge.com>',
+            to: email,
+            subject: 'Your Surgery Prep Masterclass Is Ready',
+            html: `
+              <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; color: #2c2c2c;">
+                <div style="background: #3b2a1a; padding: 32px 40px; text-align: center;">
+                  <h1 style="color: #e8c97a; font-size: 1.6rem; margin: 0; letter-spacing: 0.05em;">OpWell Concierge\u2122</h1>
+                  <p style="color: rgba(232,201,122,0.75); margin: 6px 0 0; font-size: 0.85rem; letter-spacing: 0.08em;">SURGERY PREP MASTERCLASS</p>
+                </div>
+                <div style="background: #fdf8f4; padding: 40px;">
+                  <h2 style="color: #3b2a1a; font-size: 1.3rem; margin-top: 0;">Your Masterclass Is Ready!</h2>
+                  <p style="color: #555; line-height: 1.7;">Thank you for purchasing the Surgery Prep Masterclass. You now have access to the complete evidence-based guide to preparing for surgery.</p>
+
+                  <div style="background: #2d5a3d; color: #fff; border-radius: 12px; padding: 24px; margin: 24px 0; text-align: center;">
+                    <p style="margin: 0 0 6px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.8;">Your Access Code</p>
+                    <p style="margin: 0 0 12px; font-size: 1.1rem; font-weight: 700; letter-spacing: 0.05em; word-break: break-all;">${accessCode}</p>
+                    <p style="margin: 0; font-size: 0.78rem; opacity: 0.7;">Valid for 90 days from purchase</p>
+                  </div>
+
+                  <div style="background: #fff; border: 1px solid #e8d9c8; border-radius: 8px; padding: 24px; margin: 24px 0;">
+                    <h3 style="color: #3b2a1a; margin-top: 0; font-size: 1rem;">How to Access</h3>
+                    <ol style="color: #555; line-height: 2; padding-left: 1.25rem;">
+                      <li>Go to <a href="https://www.opwellconcierge.com/masterclass" style="color: #2d5a3d; font-weight: 600;">opwellconcierge.com/masterclass</a></li>
+                      <li>Enter your access code above</li>
+                      <li>Select your surgery type for personalized content</li>
+                    </ol>
+                  </div>
+
+                  <div style="background: rgba(200,132,90,0.08); border-left: 4px solid #c8845a; border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 24px 0;">
+                    <p style="margin: 0; font-size: 0.85rem; color: #555; line-height: 1.6;"><strong style="color: #3b2a1a;">Lifetime PDF Access:</strong> <a href="https://www.opwellconcierge.com/surgery-prep-masterclass.html" style="color: #2d5a3d; font-weight: 600;">Download your PDF here</a> \u2014 this link never expires. Save it, print it, keep it forever.</p>
+                  </div>
+
+                  <div style="background: #f0f7f2; border: 1px solid #b8d9c4; border-radius: 8px; padding: 16px 20px; margin: 24px 0; text-align: center;">
+                    <p style="margin: 0 0 4px; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #2d5a3d;">Your Clinical Library Access Code</p>
+                    <p style="margin: 0 0 6px; font-size: 1.6rem; font-weight: 700; letter-spacing: 0.18em; color: #2d5a3d; font-family: monospace;">${BLOG_ACCESS_CODE}</p>
+                    <p style="margin: 0; font-size: 0.78rem; color: #555;">Unlock patient-only blog articles at opwellconcierge.com/blog</p>
+                  </div>
+
+                  <p style="color: #555; line-height: 1.7;">If you have questions, reply to this email or call <strong>(678) 235-5822</strong>.</p>
+                  <p style="color: #555; line-height: 1.7;">Warmly,<br><strong>Dr. Ornella Oluwole</strong><br>OpWell Concierge\u2122</p>
+                </div>
+                <div style="background: #3b2a1a; padding: 20px 40px; text-align: center;">
+                  <p style="color: rgba(232,201,122,0.6); font-size: 0.8rem; margin: 0;">OpWell Concierge\u2122 \u00b7 Telehealth \u00b7 GA, OH & VA \u00b7 (678) 235-5822</p>
+                </div>
+              </div>
+            `,
+          });
+
+          // Also notify Dr. Oluwole
+          await resend.emails.send({
+            from: 'OpWell Bookings <info@opwellconcierge.com>',
+            to: 'dr.oluwole@opwellconcierge.com',
+            subject: `Masterclass Purchase: ${esc(email)} \u2014 $${amountPaid}`,
+            html: `<div style="font-family:Arial,sans-serif;padding:24px;"><h2>New Masterclass Purchase</h2><p>Email: ${esc(email)}</p><p>Amount: $${amountPaid}</p><p>Access Code: ${accessCode}</p></div>`,
+          });
+        }
+        return res.status(200).json({ received: true });
+      }
+
       // Auto-save patient to Resend audience for blog notifications
       if (email && process.env.RESEND_AUDIENCE_ID) {
         const sLower = services.toLowerCase();
