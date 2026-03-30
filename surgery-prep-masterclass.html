@@ -692,6 +692,7 @@ a:hover { color: var(--sage-light); }
 <!-- BACK BAR -->
 <div class="back-bar">
   <a href="https://opwellconcierge.com">&larr; Back to OpWell Concierge</a>
+  <button class="print-btn" onclick="saveProgress()" style="margin-right:0.5rem;">Save Progress 🔗</button>
   <button class="print-btn" onclick="window.print()">Print / Save PDF</button>
 </div>
 
@@ -2376,7 +2377,75 @@ function saveState() {
   } catch(e) {}
 }
 
+// ── SAVE & RESTORE PROGRESS VIA URL ──
+function saveProgress() {
+  var state = {
+    s: localStorage.getItem('mc_surgery') || '',
+    m: JSON.parse(localStorage.getItem('mc_completed') || '[]'),
+    c: {},
+    a: localStorage.getItem('mc_access') || ''
+  };
+  // Save checked checkboxes
+  document.querySelectorAll('.checklist-item input[type="checkbox"]').forEach(function(cb, i) {
+    if (cb.checked) state.c[i] = 1;
+  });
+  var encoded = btoa(JSON.stringify(state)).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+  var url = window.location.origin + window.location.pathname + '#p=' + encoded;
+
+  // Copy to clipboard
+  navigator.clipboard.writeText(url).then(function() {
+    alert('Progress link copied! Paste it into a text to yourself or bookmark it to resume on any device.');
+  }).catch(function() {
+    prompt('Copy this link to resume on any device:', url);
+  });
+}
+
+function restoreFromURL() {
+  var hash = window.location.hash;
+  if (!hash || !hash.startsWith('#p=')) return false;
+  try {
+    var encoded = hash.substring(3);
+    var state = JSON.parse(atob(encoded.replace(/-/g,'+').replace(/_/g,'/')));
+
+    // Restore access code
+    if (state.a) localStorage.setItem('mc_access', state.a);
+
+    // Restore surgery selection
+    if (state.s) {
+      localStorage.setItem('mc_surgery', state.s);
+      var btn = document.querySelector('[data-type="' + state.s + '"]');
+      if (btn) btn.click();
+    }
+
+    // Restore completed modules
+    if (state.m && state.m.length) {
+      localStorage.setItem('mc_completed', JSON.stringify(state.m));
+      state.m.forEach(function(idx) {
+        var card = document.querySelectorAll('.module-card')[idx];
+        if (card) card.classList.add('completed');
+      });
+      updateProgress();
+    }
+
+    // Restore checkboxes
+    if (state.c) {
+      var checkboxes = document.querySelectorAll('.checklist-item input[type="checkbox"]');
+      Object.keys(state.c).forEach(function(i) {
+        if (checkboxes[parseInt(i)]) {
+          checkboxes[parseInt(i)].checked = true;
+          checkboxes[parseInt(i)].closest('.checklist-item').classList.add('checked');
+        }
+      });
+    }
+
+    // Clean URL
+    history.replaceState(null, '', window.location.pathname);
+    return true;
+  } catch(e) { return false; }
+}
+
 // ── INIT ──
+restoreFromURL();
 buildProgressDots();
 updateProgress();
 </script>
