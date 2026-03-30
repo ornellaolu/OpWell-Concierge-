@@ -2215,6 +2215,30 @@
     .blog-consult-btn { background:var(--gold); color:#fff; border:none; border-radius:50px; padding:.6rem 1.6rem; font-family:'DM Sans',sans-serif; font-size:.85rem; font-weight:700; cursor:pointer; transition:background .2s; }
     .blog-consult-btn:hover { background:var(--gold-light); }
 
+    /* Blog Quiz CTA Card */
+    .blog-quiz-cta { max-width:760px; margin:2.5rem auto 0; padding:0 1.5rem; }
+    .blog-quiz-cta-inner { background:linear-gradient(135deg, #f0f7f2 0%, #faf0e8 100%); border:2px solid var(--sage); border-radius:16px; padding:2rem 2.5rem; text-align:center; position:relative; overflow:hidden; }
+    .blog-quiz-cta-inner::before { content:''; position:absolute; top:-40px; right:-40px; width:120px; height:120px; background:var(--terracotta); opacity:0.06; border-radius:50%; }
+    .blog-quiz-cta-badge { display:inline-block; font-family:'DM Sans',sans-serif; font-size:0.68rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--terracotta); background:rgba(200,132,90,0.12); border-radius:50px; padding:0.3rem 1rem; margin-bottom:0.75rem; }
+    .blog-quiz-cta-title { font-family:'Playfair Display',serif; font-size:1.35rem; font-weight:500; color:var(--charcoal); margin-bottom:0.5rem; }
+    .blog-quiz-cta-text { font-family:'DM Sans',sans-serif; font-size:0.92rem; color:var(--slate); font-weight:300; line-height:1.7; max-width:480px; margin:0 auto 1.25rem; }
+    .blog-quiz-cta-btn { display:inline-block; font-family:'DM Sans',sans-serif; font-size:0.9rem; font-weight:700; background:var(--sage); color:#fff; border:none; border-radius:50px; padding:0.75rem 2rem; text-decoration:none; cursor:pointer; transition:background 0.2s, transform 0.2s; }
+    .blog-quiz-cta-btn:hover { background:var(--gold-light); transform:translateY(-1px); }
+
+    /* Exit-Intent Popup */
+    .exit-popup-overlay { display:none; position:fixed; inset:0; z-index:10000; background:rgba(0,0,0,0.55); backdrop-filter:blur(4px); justify-content:center; align-items:center; padding:2rem; }
+    .exit-popup-overlay.active { display:flex; }
+    .exit-popup-card { background:var(--ivory); border-radius:20px; max-width:440px; width:100%; padding:2.5rem 2.5rem 2rem; text-align:center; box-shadow:0 24px 64px rgba(0,0,0,0.25); position:relative; animation:exitPopIn 0.35s ease-out; }
+    @keyframes exitPopIn { from { opacity:0; transform:translateY(-20px) scale(0.95); } to { opacity:1; transform:translateY(0) scale(1); } }
+    .exit-popup-close { position:absolute; top:1rem; right:1.25rem; background:none; border:none; font-size:1.5rem; color:var(--slate); cursor:pointer; line-height:1; }
+    .exit-popup-badge { display:inline-block; font-family:'DM Sans',sans-serif; font-size:0.65rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--terracotta); background:rgba(200,132,90,0.12); border-radius:50px; padding:0.3rem 1rem; margin-bottom:1rem; }
+    .exit-popup-heading { font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:500; color:var(--charcoal); margin-bottom:0.6rem; }
+    .exit-popup-subtext { font-family:'DM Sans',sans-serif; font-size:0.95rem; color:var(--slate); font-weight:300; line-height:1.7; margin-bottom:1.5rem; }
+    .exit-popup-btn { display:inline-block; font-family:'DM Sans',sans-serif; font-size:0.95rem; font-weight:700; background:var(--sage); color:#fff; border:none; border-radius:50px; padding:0.85rem 2.25rem; text-decoration:none; cursor:pointer; transition:background 0.2s, transform 0.2s; }
+    .exit-popup-btn:hover { background:var(--gold-light); transform:translateY(-1px); }
+    .exit-popup-dismiss { display:block; margin-top:1rem; font-family:'DM Sans',sans-serif; font-size:0.82rem; color:var(--slate); cursor:pointer; background:none; border:none; opacity:0.7; transition:opacity 0.2s; }
+    .exit-popup-dismiss:hover { opacity:1; }
+
     /* Scroll fade-in */
     .fade-in {
       opacity: 0;
@@ -15150,6 +15174,19 @@
     // Inject "Back to Blog" bar at the bottom of every individual blog page
     document.querySelectorAll('[id^="page-blog-"]').forEach(function(page) {
       if (page.querySelector('.blog-back-bar')) return; // already present
+
+      // Inject Quiz CTA card before the back bar
+      var quizCta = document.createElement('div');
+      quizCta.className = 'blog-quiz-cta';
+      quizCta.innerHTML =
+        '<div class="blog-quiz-cta-inner">' +
+          '<div class="blog-quiz-cta-badge">Free Assessment</div>' +
+          '<h3 class="blog-quiz-cta-title">How ready are you for surgery?</h3>' +
+          '<p class="blog-quiz-cta-text">Take our free 2-minute Surgery Readiness Score and find out what steps you can take today to prepare.</p>' +
+          '<a href="/surgery-readiness-quiz.html" class="blog-quiz-cta-btn">Take the Quiz &rarr;</a>' +
+        '</div>';
+      page.appendChild(quizCta);
+
       var bar = document.createElement('div');
       bar.className = 'blog-back-bar';
       bar.innerHTML =
@@ -16616,6 +16653,48 @@
     </div>
   </div>
 </div>
+
+<!-- EXIT-INTENT POPUP -->
+<div id="exitPopup" class="exit-popup-overlay">
+  <div class="exit-popup-card">
+    <button class="exit-popup-close" onclick="dismissExitPopup()">&times;</button>
+    <div class="exit-popup-badge">Free Quiz</div>
+    <h2 class="exit-popup-heading">Before you go...</h2>
+    <p class="exit-popup-subtext">Find out how ready you are for surgery &mdash; in 2 minutes.</p>
+    <a href="/surgery-readiness-quiz.html" class="exit-popup-btn">Take the Free Quiz &rarr;</a>
+    <button class="exit-popup-dismiss" onclick="dismissExitPopup()">No thanks</button>
+  </div>
+</div>
+
+<script>
+(function() {
+  // Exit-intent: desktop only, once per session
+  if (window.innerWidth < 900) return; // skip mobile/tablet
+  if (sessionStorage.getItem('opwell_exit_shown')) return;
+
+  var triggered = false;
+
+  document.addEventListener('mouseout', function(e) {
+    if (triggered) return;
+    // Only trigger when mouse leaves toward the top of the viewport
+    if (e.clientY > 10) return;
+    if (e.relatedTarget || e.toElement) return;
+
+    triggered = true;
+    sessionStorage.setItem('opwell_exit_shown', 'true');
+    document.getElementById('exitPopup').classList.add('active');
+  });
+
+  // Close on overlay click (outside the card)
+  document.getElementById('exitPopup').addEventListener('click', function(e) {
+    if (e.target === this) dismissExitPopup();
+  });
+})();
+
+function dismissExitPopup() {
+  document.getElementById('exitPopup').classList.remove('active');
+}
+</script>
 
 </body>
 </html>
