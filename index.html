@@ -6,6 +6,23 @@
   <title>OpWell Concierge™ — Anesthesiologist-Led Perioperative Care</title>
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
+  <!-- Meta Pixel -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '2283712708702892');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=2283712708702892&ev=PageView&noscript=1"
+  /></noscript>
+
   <!-- SEO Meta Description -->
   <meta name="description" content="Board-certified anesthesiologist-led telehealth: pre-surgical consultations, post-op care, and mental wellness. No referral required. Serving GA, OH, VA.">
 
@@ -15200,6 +15217,10 @@
     var btn = document.getElementById('s3-pay-btn');
     btn.disabled = true;
     btn.textContent = 'Processing...';
+    if (typeof fbq !== 'undefined') {
+      var saved = JSON.parse(sessionStorage.getItem('opwell_booking') || '{}');
+      fbq('track', 'InitiateCheckout', { content_name: (saved.items || []).join(', '), currency: 'USD' });
+    }
 
     var saved = JSON.parse(sessionStorage.getItem('opwell_booking') || '{}');
     if (!saved.items || !saved.items.length) {
@@ -15518,6 +15539,12 @@
       const page = document.getElementById('page-' + pageId);
       if (page) { page.classList.add('active'); window.scrollTo({ top: 0 }); initFadeIns(); updatePageMeta(pageId); }
     }
+    // Meta Pixel — track key page views
+    if (typeof fbq !== 'undefined') {
+      if (pageId === 'schedule') fbq('track', 'Lead', { content_name: 'Booking Page View' });
+      if (pageId === 'products') fbq('track', 'ViewContent', { content_name: 'Products Page' });
+      if (pageId === 'pricing') fbq('track', 'ViewContent', { content_name: 'Pricing Page' });
+    }
     // Update URL for SEO and shareable links
     if (!skipPush) {
       var path = pageId === 'home' ? '/' : '/' + pageId;
@@ -15564,6 +15591,7 @@
   // ── GIFT PURCHASE FLOW ──
   // ── MASTERCLASS PURCHASE ──
   async function purchaseMasterclass() {
+    if (typeof fbq !== 'undefined') fbq('track', 'InitiateCheckout', { content_name: 'Surgery Prep Masterclass', value: 99.00, currency: 'USD' });
     try {
       var res = await fetch('/api/checkout', {
         method: 'POST',
