@@ -275,67 +275,41 @@
       background: var(--charcoal);
     }
 
-    /* ── HERO STORY SLIDER (full-width background) ── */
-    .hero-slider {
+    /* ── HERO BACKGROUND VIDEO ── */
+    .hero-video-wrap {
       position: absolute;
       inset: 0;
       z-index: 0;
       overflow: hidden;
     }
-    .hero-slide {
+    .hero-video-wrap iframe {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 177.78vh; /* 16:9 aspect ratio coverage */
+      height: 100vh;
+      min-width: 100%;
+      min-height: 100%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .hero-video-fallback {
       position: absolute;
       inset: 0;
-      background-size: cover;
-      background-position: center;
-      transform: translateX(100%);
-      transition: transform 0.85s cubic-bezier(0.77,0,0.175,1);
+      background: linear-gradient(135deg, #1C2B22, #2D5A3D);
+      z-index: 0;
     }
-    .hero-slide.active  { transform: translateX(0%); }
-    .hero-slide.exiting { transform: translateX(-100%); }
     .hero-scrim {
       position: absolute;
       inset: 0;
       z-index: 1;
       background: linear-gradient(
         to right,
-        rgba(17,17,17,0.82) 0%,
-        rgba(17,17,17,0.55) 55%,
-        rgba(17,17,17,0.18) 100%
+        rgba(17,17,17,0.78) 0%,
+        rgba(17,17,17,0.50) 50%,
+        rgba(17,17,17,0.25) 100%
       );
       pointer-events: none;
     }
-    .hero-slider-dots {
-      position: absolute;
-      bottom: 2.2rem;
-      left: 4rem;
-      display: flex;
-      gap: 0.5rem;
-      z-index: 3;
-    }
-    .hero-slider-dot {
-      width: 28px; height: 3px;
-      border-radius: 2px;
-      background: rgba(255,255,255,0.28);
-      cursor: pointer;
-      transition: background 0.3s, width 0.3s;
-    }
-    .hero-slider-dot.active { background: #FAF0E8; width: 48px; }
-    .hero-slide-label {
-      position: absolute;
-      bottom: 2.4rem;
-      right: 4rem;
-      z-index: 3;
-      font-size: 0.6rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.38);
-      font-family: 'DM Sans', sans-serif;
-    }
-    .slide-surgery   { background: linear-gradient(135deg,#1C2B22,#2D5A3D); }
-    .slide-recovery  { background: linear-gradient(135deg,#1E2A38,#2A3F52); }
-    .slide-mental    { background: linear-gradient(135deg,#2A1E38,#3D2B52); }
-    .slide-obstetric { background: linear-gradient(135deg,#38241E,#52382A); }
-    .slide-tourism   { background: linear-gradient(135deg,#1E3830,#2A5244); }
 
     .hero-bg {
       position: absolute; inset: 0;
@@ -1786,9 +1760,8 @@
       .hero-actions .btn-secondary { text-align: center; padding: 0.85rem 1.5rem; width: 100%; display: block; }
       .hero-trust { flex-wrap: wrap; gap: 0.75rem; white-space: normal; margin-top: 1.5rem; }
       .trust-item { font-size: 0.55rem; white-space: normal; }
-      .hero-slider-dots, .hero-slide-label { left: 1rem; right: 1rem; }
-      .hero-slider-dots { bottom: 1.2rem; }
-      .hero-slide-label { bottom: 1.4rem; font-size: 0.5rem; }
+      /* Hero video scales to cover on mobile */
+      .hero-video-wrap iframe { width: 300vh; }
       .stat-strip { padding: 2rem 1rem; }
       .stat { padding: 0.75rem 0.75rem; }
       .stat-num { font-size: 1.8rem; }
@@ -2721,31 +2694,20 @@
       </div>
     </div>
 
-    <!-- FULL-WIDTH BACKGROUND SLIDER -->
-    <div class="hero-slider" id="heroSlider">
-      <!--
-      ════════════════════════════════════════════════════════════════
-      PHOTO SWAP — after the shoot, paste filename inside url('')
-      Slide 1 · Surgery Prep  → url('images/slide-surgery.jpg')
-      Slide 2 · Post-Op       → url('images/slide-recovery.jpg')
-      Slide 3 · Mental Health → url('images/slide-mental.jpg')
-      Slide 4 · L&D           → url('images/slide-obstetric.jpg')
-      Slide 5 · Med Tourism   → url('images/slide-tourism.jpg')
-      ════════════════════════════════════════════════════════════════
-      -->
-      <div class="hero-slide slide-surgery active" style="background-image:url('')"></div>
-      <div class="hero-slide slide-recovery"       style="background-image:url('')"></div>
-      <div class="hero-slide slide-mental"         style="background-image:url('')"></div>
-      <div class="hero-slide slide-obstetric"      style="background-image:url('')"></div>
-      <div class="hero-slide slide-tourism"        style="background-image:url('')"></div>
+    <!-- HERO BACKGROUND VIDEO (Vimeo) -->
+    <div class="hero-video-wrap">
+      <div class="hero-video-fallback"></div>
+      <iframe
+        src="https://player.vimeo.com/video/1179274823?background=1&autoplay=1&loop=1&muted=1&quality=720p"
+        frameborder="0"
+        allow="autoplay; fullscreen"
+        loading="lazy"
+        title="OpWell Concierge Hero Video"
+      ></iframe>
     </div>
 
     <!-- dark scrim so text stays readable -->
     <div class="hero-scrim"></div>
-
-    <!-- dots + current service label at bottom -->
-    <div class="hero-slider-dots" id="sliderDots"></div>
-    <div class="hero-slide-label" id="slideLabel">Pre-Surgical Consultation</div>
 
   </section>
 
@@ -15659,33 +15621,9 @@
     }
   })();
 
-  // ── HERO STORY SLIDER ──
-  (function() {
-    var slides = document.querySelectorAll('#heroSlider .hero-slide');
-    var dotsWrap = document.getElementById('sliderDots');
-    var label   = document.getElementById('slideLabel');
-    var labels  = ['Pre-Surgical Consultation','Post-Operative Care','Mental Wellness','Labor & Delivery','Medical Tourism'];
-    var current = 0;
-    slides.forEach(function(_, i) {
-      var d = document.createElement('div');
-      d.className = 'hero-slider-dot' + (i === 0 ? ' active' : '');
-      d.onclick = function() { goTo(i); };
-      dotsWrap.appendChild(d);
-    });
-    function goTo(n) {
-      var next = (n + slides.length) % slides.length;
-      if (next === current) return;
-      slides[current].classList.add('exiting');
-      slides[current].classList.remove('active');
-      dotsWrap.children[current].classList.remove('active');
-      setTimeout(function() { slides[current].classList.remove('exiting'); current = next; }, 900);
-      current = next;
-      slides[current].classList.add('active');
-      dotsWrap.children[current].classList.add('active');
-      if (label) label.textContent = labels[current];
-    }
-    setInterval(function() { goTo(current + 1); }, 5000);
-  })();
+  // ── HERO VIDEO (Vimeo background) ──
+  // Video loads via iframe with ?background=1&autoplay=1&loop=1&muted=1
+  // Fallback gradient shows while video loads
 
   function toggleFaq(el) {
     const item = el.parentElement;
