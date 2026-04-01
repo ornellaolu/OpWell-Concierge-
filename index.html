@@ -2814,6 +2814,7 @@
       <div class="about-quote">"Patients deserve to understand every step of their surgical journey — what to expect, how to prepare, and how to heal. When you're informed and supported, compliance improves, anxiety decreases, and outcomes get better — physically and emotionally."</div>
       <br>
       <a class="btn-primary btn-meet-dr" onclick="showPage('about')" style="cursor:pointer;">Meet Dr. Oluwole →</a>
+      <a onclick="showPage('about'); setTimeout(function(){ document.querySelector('#page-about .content-section[style*=charcoal]').scrollIntoView({behavior:'smooth'}); }, 200);" style="cursor:pointer; display:inline-block; margin-left:0.75rem; font-family:'DM Sans',sans-serif; font-size:0.85rem; color:var(--terracotta); font-weight:600; text-decoration:underline;">Watch: Why I Built OpWell →</a>
     </div>
   </section>
 
@@ -5081,9 +5082,22 @@
       </ul>
 
       <br>
-      <a class="btn-gold" onclick="showPage('home')" style="cursor:pointer;">Book Your Consultation →</a>
+      <a class="btn-gold" onclick="showPage('schedule')" style="cursor:pointer;">Book Your Consultation →</a>
     </div>
   </section>
+
+  <!-- WHY I BUILT OPWELL VIDEO -->
+  <div class="content-section" style="text-align:center; padding:3rem 2rem; background:var(--charcoal);">
+    <div class="section-tag" style="color:var(--terracotta-light); border-color:rgba(200,132,90,0.4); display:inline-block;">From Dr. Oluwole</div>
+    <h2 class="section-title" style="color:#FAF0E8;">Why I Built OpWell</h2>
+    <div class="gold-divider" style="margin-left:auto; margin-right:auto;"></div>
+    <div style="max-width:720px; margin:1.5rem auto 0; border-radius:12px; overflow:hidden; box-shadow:0 8px 32px rgba(0,0,0,0.3);">
+      <div style="position:relative; padding-bottom:56.25%; height:0;">
+        <iframe src="https://player.vimeo.com/video/1179325072?badge=0&autopause=0&player_id=0&app_id=58479" style="position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" referrerpolicy="strict-origin-when-cross-origin" title="Why I Built OpWell — Dr. Ornella Oluwole" loading="lazy"></iframe>
+      </div>
+    </div>
+    <p style="font-family:'DM Sans',sans-serif; font-size:0.85rem; color:rgba(250,240,232,0.5); margin-top:1.25rem; max-width:500px; margin-left:auto; margin-right:auto;">Board-certified anesthesiologist. Founder, OpWell Concierge.</p>
+  </div>
 
   <!-- LOGO CAROUSEL — full width below bio -->
   <div class="logo-carousel-section">
