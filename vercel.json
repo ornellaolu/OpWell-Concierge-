@@ -6,6 +6,8 @@
     { "source": "/surgery-readiness-quiz.html", "destination": "/surgery-readiness-quiz.html" },
     { "source": "/surgery-prep-masterclass.html", "destination": "/surgery-prep-masterclass.html" },
     { "source": "/masterclass", "destination": "/surgery-prep-masterclass.html" },
+    { "source": "/ad-landing.html", "destination": "/ad-landing.html" },
+    { "source": "/welcome", "destination": "/ad-landing.html" },
     { "source": "/:file*.png", "destination": "/:file*.png" },
     { "source": "/:file*.jpg", "destination": "/:file*.jpg" },
     { "source": "/:file*.pdf", "destination": "/:file*.pdf" },
