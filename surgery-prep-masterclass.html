@@ -1608,11 +1608,29 @@ a:hover { color: var(--sage-light); }
 
     <h4>Foods to Avoid Before Surgery</h4>
     <ul>
-      <li><strong>Alcohol</strong> &mdash; stop at least 48 hours before (ideally 1&ndash;2 weeks); affects bleeding, liver function, and anesthesia</li>
+      <li><strong>Alcohol</strong> &mdash; stop at least 48 hours before (ideally 4&ndash;8 weeks); affects bleeding, liver function, and anesthesia (see below)</li>
       <li><strong>Excessive sodium</strong> &mdash; contributes to swelling and fluid retention</li>
       <li><strong>Processed sugar</strong> &mdash; impairs immune function and wound healing</li>
       <li><strong>Fried and greasy foods</strong> &mdash; harder to digest, increase nausea risk</li>
     </ul>
+
+    <h4>Alcohol &amp; Surgery: What the Evidence Shows</h4>
+    <p>Alcohol use before surgery significantly increases your risk of complications &mdash; even at levels many people consider moderate.</p>
+    <ul>
+      <li><strong>3&ndash;4 drinks per day:</strong> Increases surgical complications by <strong>50%</strong></li>
+      <li><strong>5+ drinks per day:</strong> Increases complications by <strong>200&ndash;400%</strong></li>
+      <li><strong>Hazardous drinking</strong> is defined as 14+ drinks/week for men or 7+ drinks/week for women</li>
+    </ul>
+    <p><strong>How long before surgery should you stop?</strong></p>
+    <ul>
+      <li><strong>Minimum:</strong> 48 hours (reduces acute withdrawal risk during surgery)</li>
+      <li><strong>Ideal:</strong> 4&ndash;8 weeks (allows liver function, immune response, and wound healing capacity to improve)</li>
+      <li>Even <strong>reducing</strong> consumption (without fully stopping) shows measurable benefit</li>
+    </ul>
+
+    <div class="dr-tip">
+      <p>This is one of those conversations that can feel uncomfortable, but it matters. Alcohol affects how your body handles anesthesia, how your blood clots, how your liver processes medications, and how quickly your wounds heal. If you drink regularly, talk to your doctor about a safe plan to reduce or stop before surgery. There is no judgment here &mdash; only a genuine interest in your safety.</p>
+    </div>
 
     <!-- Bariatric specialty -->
     <div data-surgery="bariatric">
@@ -5173,6 +5191,93 @@ function markComplete(num) {
   }
   updateProgress();
   saveState();
+  checkCertificateEligibility();
+}
+
+// ══════════════════════════════════════════════════
+// COMPLETION CERTIFICATE
+// ══════════════════════════════════════════════════
+function checkCertificateEligibility() {
+  const coreModules = [1,2,3,4,5,6,7];
+  const allCoreComplete = coreModules.every(m => completedModules.has(m));
+
+  // Calculate readiness score
+  const quizKeys = Object.keys(quizAnswers);
+  const correct = quizKeys.filter(k => quizAnswers[k].correct).length;
+  const total = quizKeys.length;
+  const readinessScore = total > 0 ? Math.round((correct / total) * 100) : 0;
+
+  if (allCoreComplete && readinessScore >= 70) {
+    showCertificate(readinessScore);
+  }
+}
+
+function showCertificate(readinessScore) {
+  // Don't show if already shown this session
+  if (document.getElementById('certificateModal')) return;
+
+  const surgeryLabel = intakeData ? (SURGERY_LABELS[intakeData.surgery] || 'General Surgery') : 'General Surgery';
+  const patientName = intakeData ? (localStorage.getItem('mc_patient_name') || 'Patient') : 'Patient';
+  const today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  const completedCount = completedModules.size;
+
+  const modal = document.createElement('div');
+  modal.id = 'certificateModal';
+  modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;';
+  modal.innerHTML = `
+    <div id="certificateCard" style="background:#fff;border-radius:16px;max-width:600px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+      <div style="background:linear-gradient(135deg,#1C2B22,#2D5A3D);padding:2rem 2rem 1.5rem;text-align:center;border-radius:16px 16px 0 0;">
+        <div style="font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(250,240,232,0.6);margin-bottom:0.5rem;">OpWell Concierge&trade;</div>
+        <div style="font-family:'Playfair Display',serif;font-size:1.5rem;color:#FAF0E8;font-weight:700;">Certificate of Completion</div>
+        <div style="width:50px;height:2px;background:#C8845A;margin:0.75rem auto;"></div>
+        <div style="font-size:0.78rem;color:rgba(250,240,232,0.7);">POQI-Aligned Surgery Preparation Program</div>
+      </div>
+      <div style="padding:2rem;text-align:center;">
+        <div style="font-size:0.72rem;color:#888;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.25rem;">This certifies that</div>
+        <div style="font-family:'Playfair Display',serif;font-size:1.3rem;color:#1C1C1C;font-weight:700;margin-bottom:1rem;border-bottom:1px solid #e0d8d0;padding-bottom:0.75rem;" contenteditable="true" id="certName">${patientName}</div>
+        <div style="font-size:0.82rem;color:#555;line-height:1.7;margin-bottom:1.5rem;">
+          has successfully completed the <strong>Complete Surgery Preparation Masterclass</strong>
+          — a 23-module evidence-based perioperative education program
+          personalized for <strong>${surgeryLabel}</strong>.
+        </div>
+        <div style="display:flex;justify-content:center;gap:2rem;margin-bottom:1.5rem;">
+          <div style="text-align:center;">
+            <div style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:#2D5A3D;">${completedCount}</div>
+            <div style="font-size:0.7rem;color:#888;">Modules Completed</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:#C8845A;">${readinessScore}%</div>
+            <div style="font-size:0.7rem;color:#888;">Readiness Score</div>
+          </div>
+        </div>
+        <div style="font-size:0.78rem;color:#888;margin-bottom:0.5rem;">${today}</div>
+        <div style="font-size:0.82rem;color:#2D5A3D;font-weight:600;">Dr. Ornella Oluwole, MD, D.ABA</div>
+        <div style="font-size:0.72rem;color:#888;">Board-Certified Anesthesiologist &bull; OpWell Concierge&trade;</div>
+        <div style="margin-top:1.25rem;padding-top:1rem;border-top:1px solid #e0d8d0;">
+          <div style="font-size:0.65rem;color:#aaa;line-height:1.5;">This certificate confirms completion of an educational program and does not constitute medical clearance.<br>Based on ERAS protocols, ASA guidelines, and POQI consensus recommendations.</div>
+        </div>
+      </div>
+      <div style="padding:0 2rem 1.5rem;display:flex;gap:10px;justify-content:center;">
+        <button onclick="printCertificate()" style="padding:10px 24px;background:#2D5A3D;color:#fff;border:none;border-radius:8px;font-family:'DM Sans',sans-serif;font-weight:600;cursor:pointer;font-size:0.88rem;">Print Certificate</button>
+        <button onclick="document.getElementById('certificateModal').remove()" style="padding:10px 24px;background:#f0ebe5;color:#555;border:none;border-radius:8px;font-family:'DM Sans',sans-serif;font-weight:600;cursor:pointer;font-size:0.88rem;">Close</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+  modal.addEventListener('click', function(e) { if (e.target === modal) modal.remove(); });
+}
+
+function printCertificate() {
+  const cert = document.getElementById('certificateCard');
+  const win = window.open('', '_blank');
+  win.document.write('<html><head><title>OpWell Certificate</title>');
+  win.document.write('<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@400;600&display=swap" rel="stylesheet">');
+  win.document.write('<style>body{margin:0;padding:40px;font-family:"DM Sans",sans-serif;} @media print{body{padding:0.5in;}}</style>');
+  win.document.write('</head><body>');
+  win.document.write(cert.outerHTML);
+  win.document.write('</body></html>');
+  win.document.close();
+  setTimeout(() => win.print(), 500);
 }
 
 // ══════════════════════════════════════════════════
