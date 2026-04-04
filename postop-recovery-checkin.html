@@ -289,7 +289,7 @@ body { font-family:'DM Sans',sans-serif; background:var(--ivory); color:var(--ch
 <div class="mode-toggle-bar">
   <label class="mode-toggle">
     <input type="checkbox" id="abbreviatedMode" onchange="toggleAbbreviated()">
-    <span>Abbreviated assessment (Pain, Vitals, Wound, Red Flags only)</span>
+    <span>Abbreviated assessment (Pain, Wound, Red Flags — Vitals optional)</span>
   </label>
 </div>
 
@@ -367,8 +367,8 @@ body { font-family:'DM Sans',sans-serif; background:var(--ivory); color:var(--ch
 <!-- ═══════════════════ PANEL: VITALS ═══════════════════ -->
 <div class="panel" id="panel-vitals">
   <div class="panel-header">
-    <h2>Vital Signs</h2>
-    <p>Record current vital signs. Values outside normal range will be flagged automatically.</p>
+    <h2>Vital Signs <span style="font-size:0.65em; font-weight:400; color:#C8845A; background:rgba(200,132,90,0.1); padding:2px 10px; border-radius:10px; vertical-align:middle;">Optional</span></h2>
+    <p>If the patient has home monitoring devices (BP cuff, pulse oximeter, thermometer), record values below. <strong>This section is optional</strong> — the composite recovery score will calculate without vitals. Symptom-based assessment across the other 6 domains is the primary clinical tool.</p>
   </div>
 
   <div class="q-group" id="qg-hr">
@@ -1196,7 +1196,9 @@ function getCurrentPOD() {
 }
 
 function calculateComposite() {
-  const weights = {pain:0.10, vitals:0.25, wound:0.15, gi:0.10, functional:0.10, mental:0.10, redflags:0.20};
+  // Vitals optional — weight redistributed to symptom domains
+  // When vitals are provided, they contribute to the score; when absent, other domains fill the weight
+  const weights = {pain:0.15, vitals:0.10, wound:0.20, gi:0.10, functional:0.10, mental:0.15, redflags:0.20};
   const scores = {
     pain: scorePain(),
     vitals: scoreVitals(),
