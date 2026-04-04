@@ -713,6 +713,13 @@ input[type="range"]::-moz-range-thumb {
   margin-top: 16px;
   line-height: 1.5;
 }
+/* QoR-15 Sliders */
+.qor-slider { flex: 1; -webkit-appearance: none; appearance: none; height: 6px; border-radius: 3px; background: #e0d8d0; outline: none; }
+.qor-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 24px; height: 24px; border-radius: 50%; background: var(--sage); cursor: pointer; border: 2px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.2); }
+.qor-slider.qor-reverse { background: linear-gradient(to right, var(--red-bg), var(--green-bg)); }
+.qor-slider.qor-reverse::-webkit-slider-thumb { background: var(--terracotta); }
+.qor-val { font-size: 1.1rem; font-weight: 700; color: var(--sage); min-width: 28px; text-align: center; }
+.qor-reverse + .qor-val + .qor-val, .qor-reverse ~ .qor-val { color: var(--terracotta); }
 </style>
 </head>
 <body>
@@ -1130,8 +1137,184 @@ input[type="range"]::-moz-range-thumb {
     </div>
   </div>
 
-  <!-- ═══ STEP 6: REVIEW & SUBMIT ═══ -->
+  <!-- ═══ STEP 6: QoR-15 (Quality of Recovery) ═══ -->
   <div class="step" id="step-6">
+    <div class="step-icon">📊</div>
+    <div class="step-title">How is your recovery going?</div>
+    <div class="step-subtitle">Rate each item from 0 to 10 based on the <strong>last 24 hours</strong>. This validated assessment helps Dr. Oluwole track your recovery quality over time.</div>
+
+    <div style="background:rgba(45,90,61,0.06); border-radius:12px; padding:14px 16px; margin-bottom:20px;">
+      <p style="font-size:0.82rem; color:var(--sage); font-weight:600; margin:0 0 4px;">QoR-15 Recovery Assessment</p>
+      <p style="font-size:0.78rem; color:var(--slate); margin:0;">Internationally validated · Used in 16+ countries · Takes ~2 minutes</p>
+    </div>
+
+    <div style="font-size:0.78rem; font-weight:600; color:var(--sage); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:12px;">Part A: In the last 24 hours, how much of the time...</div>
+    <p style="font-size:0.75rem; color:var(--slate); margin:0 0 16px;">0 = none of the time · 10 = all of the time</p>
+
+    <div class="field-group" id="qor-q1">
+      <div class="field-label">1. Been able to breathe easily</div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <span style="font-size:0.75rem; color:var(--slate);">0</span>
+        <input type="range" min="0" max="10" value="5" class="qor-slider" id="qor1" oninput="updateQoR(1,this.value)">
+        <span style="font-size:0.75rem; color:var(--slate);">10</span>
+        <span class="qor-val" id="qor1-val">5</span>
+      </div>
+    </div>
+
+    <div class="field-group" id="qor-q2">
+      <div class="field-label">2. Been able to enjoy food</div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <span style="font-size:0.75rem; color:var(--slate);">0</span>
+        <input type="range" min="0" max="10" value="5" class="qor-slider" id="qor2" oninput="updateQoR(2,this.value)">
+        <span style="font-size:0.75rem; color:var(--slate);">10</span>
+        <span class="qor-val" id="qor2-val">5</span>
+      </div>
+    </div>
+
+    <div class="field-group" id="qor-q3">
+      <div class="field-label">3. Feeling rested</div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <span style="font-size:0.75rem; color:var(--slate);">0</span>
+        <input type="range" min="0" max="10" value="5" class="qor-slider" id="qor3" oninput="updateQoR(3,this.value)">
+        <span style="font-size:0.75rem; color:var(--slate);">10</span>
+        <span class="qor-val" id="qor3-val">5</span>
+      </div>
+    </div>
+
+    <div class="field-group" id="qor-q4">
+      <div class="field-label">4. Have had a good sleep</div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <span style="font-size:0.75rem; color:var(--slate);">0</span>
+        <input type="range" min="0" max="10" value="5" class="qor-slider" id="qor4" oninput="updateQoR(4,this.value)">
+        <span style="font-size:0.75rem; color:var(--slate);">10</span>
+        <span class="qor-val" id="qor4-val">5</span>
+      </div>
+    </div>
+
+    <div class="field-group" id="qor-q5">
+      <div class="field-label">5. Been able to look after personal hygiene unaided</div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <span style="font-size:0.75rem; color:var(--slate);">0</span>
+        <input type="range" min="0" max="10" value="5" class="qor-slider" id="qor5" oninput="updateQoR(5,this.value)">
+        <span style="font-size:0.75rem; color:var(--slate);">10</span>
+        <span class="qor-val" id="qor5-val">5</span>
+      </div>
+    </div>
+
+    <div class="field-group" id="qor-q6">
+      <div class="field-label">6. Been able to communicate with family or friends</div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <span style="font-size:0.75rem; color:var(--slate);">0</span>
+        <input type="range" min="0" max="10" value="5" class="qor-slider" id="qor6" oninput="updateQoR(6,this.value)">
+        <span style="font-size:0.75rem; color:var(--slate);">10</span>
+        <span class="qor-val" id="qor6-val">5</span>
+      </div>
+    </div>
+
+    <div class="field-group" id="qor-q7">
+      <div class="field-label">7. Getting support from your care team</div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <span style="font-size:0.75rem; color:var(--slate);">0</span>
+        <input type="range" min="0" max="10" value="5" class="qor-slider" id="qor7" oninput="updateQoR(7,this.value)">
+        <span style="font-size:0.75rem; color:var(--slate);">10</span>
+        <span class="qor-val" id="qor7-val">5</span>
+      </div>
+    </div>
+
+    <div class="field-group" id="qor-q8">
+      <div class="field-label">8. Been able to return to work or usual activities</div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <span style="font-size:0.75rem; color:var(--slate);">0</span>
+        <input type="range" min="0" max="10" value="5" class="qor-slider" id="qor8" oninput="updateQoR(8,this.value)">
+        <span style="font-size:0.75rem; color:var(--slate);">10</span>
+        <span class="qor-val" id="qor8-val">5</span>
+      </div>
+    </div>
+
+    <div class="field-group" id="qor-q9">
+      <div class="field-label">9. Feeling comfortable and in control</div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <span style="font-size:0.75rem; color:var(--slate);">0</span>
+        <input type="range" min="0" max="10" value="5" class="qor-slider" id="qor9" oninput="updateQoR(9,this.value)">
+        <span style="font-size:0.75rem; color:var(--slate);">10</span>
+        <span class="qor-val" id="qor9-val">5</span>
+      </div>
+    </div>
+
+    <div class="field-group" id="qor-q10">
+      <div class="field-label">10. Having a feeling of general well-being</div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <span style="font-size:0.75rem; color:var(--slate);">0</span>
+        <input type="range" min="0" max="10" value="5" class="qor-slider" id="qor10" oninput="updateQoR(10,this.value)">
+        <span style="font-size:0.75rem; color:var(--slate);">10</span>
+        <span class="qor-val" id="qor10-val">5</span>
+      </div>
+    </div>
+
+    <div style="font-size:0.78rem; font-weight:600; color:var(--terracotta); text-transform:uppercase; letter-spacing:0.08em; margin:24px 0 12px; padding-top:16px; border-top:1px solid var(--border);">Part B: In the last 24 hours, how much of the time have you had...</div>
+    <p style="font-size:0.75rem; color:var(--slate); margin:0 0 16px;">10 = none of the time · 0 = all of the time</p>
+
+    <div class="field-group" id="qor-q11">
+      <div class="field-label">11. Moderate pain</div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <span style="font-size:0.7rem; color:var(--slate);">All the time</span>
+        <input type="range" min="0" max="10" value="5" class="qor-slider qor-reverse" id="qor11" oninput="updateQoR(11,this.value)">
+        <span style="font-size:0.7rem; color:var(--slate);">None</span>
+        <span class="qor-val" id="qor11-val">5</span>
+      </div>
+    </div>
+
+    <div class="field-group" id="qor-q12">
+      <div class="field-label">12. Severe pain</div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <span style="font-size:0.7rem; color:var(--slate);">All the time</span>
+        <input type="range" min="0" max="10" value="5" class="qor-slider qor-reverse" id="qor12" oninput="updateQoR(12,this.value)">
+        <span style="font-size:0.7rem; color:var(--slate);">None</span>
+        <span class="qor-val" id="qor12-val">5</span>
+      </div>
+    </div>
+
+    <div class="field-group" id="qor-q13">
+      <div class="field-label">13. Nausea or vomiting</div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <span style="font-size:0.7rem; color:var(--slate);">All the time</span>
+        <input type="range" min="0" max="10" value="5" class="qor-slider qor-reverse" id="qor13" oninput="updateQoR(13,this.value)">
+        <span style="font-size:0.7rem; color:var(--slate);">None</span>
+        <span class="qor-val" id="qor13-val">5</span>
+      </div>
+    </div>
+
+    <div class="field-group" id="qor-q14">
+      <div class="field-label">14. Feeling worried or anxious</div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <span style="font-size:0.7rem; color:var(--slate);">All the time</span>
+        <input type="range" min="0" max="10" value="5" class="qor-slider qor-reverse" id="qor14" oninput="updateQoR(14,this.value)">
+        <span style="font-size:0.7rem; color:var(--slate);">None</span>
+        <span class="qor-val" id="qor14-val">5</span>
+      </div>
+    </div>
+
+    <div class="field-group" id="qor-q15">
+      <div class="field-label">15. Feeling sad or depressed</div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <span style="font-size:0.7rem; color:var(--slate);">All the time</span>
+        <input type="range" min="0" max="10" value="5" class="qor-slider qor-reverse" id="qor15" oninput="updateQoR(15,this.value)">
+        <span style="font-size:0.7rem; color:var(--slate);">None</span>
+        <span class="qor-val" id="qor15-val">5</span>
+      </div>
+    </div>
+
+    <!-- QoR-15 Score Display -->
+    <div style="background:rgba(45,90,61,0.08); border-radius:12px; padding:16px; margin-top:20px; text-align:center;">
+      <div style="font-size:0.78rem; color:var(--sage); font-weight:600; margin-bottom:4px;">Your Recovery Quality Score</div>
+      <div style="font-size:2rem; font-weight:700; color:var(--sage);" id="qor-total">75</div>
+      <div style="font-size:0.75rem; color:var(--slate);">out of 150</div>
+      <div style="font-size:0.75rem; color:var(--slate); margin-top:8px;" id="qor-comparison"></div>
+    </div>
+  </div>
+
+  <!-- ═══ STEP 7: REVIEW & SUBMIT ═══ -->
+  <div class="step" id="step-7">
     <div class="step-icon">📋</div>
     <div class="step-title">Review & send.</div>
     <div class="step-subtitle">Here's a summary of your check-in. When ready, send it to Dr. Oluwole.</div>
@@ -1159,8 +1342,8 @@ input[type="range"]::-moz-range-thumb {
     </div>
   </div>
 
-  <!-- ═══ STEP 7: THANK YOU ═══ -->
-  <div class="step" id="step-7">
+  <!-- ═══ STEP 8: THANK YOU ═══ -->
+  <div class="step" id="step-8">
     <div style="text-align:center; padding-top:20px;">
       <div class="thankyou-check">✓</div>
       <div class="step-title">Check-in sent!</div>
@@ -1242,10 +1425,11 @@ document.addEventListener('keydown', function(e) {
 /*            STATE MANAGEMENT               */
 /* ══════════════════════════════════════════ */
 
-const TOTAL_STEPS = 7; // 0-6 are input steps, 7 is thank-you
+const TOTAL_STEPS = 8; // 0-7 are input steps (0=welcome, 1=pain, 2=wound, 3=GI, 4=mental, 5=warnings, 6=QoR-15, 7=review), 8 is thank-you
 
 const state = {
   firstName: '', lastName: '', phone: '', surgeryType: '', surgeryDate: '',
+  qor: [5,5,5,5,5,5,5,5,5,5,5,5,5,5,5], // QoR-15 scores (Q1-Q15, default 5)
   painRest: null, painActivity: null, painRestTouched: false, painActivityTouched: false,
   painManaged: null,
   drainage: null, opening: null, redness: null,
@@ -1375,7 +1559,7 @@ function prevStep() {
 }
 
 function updateProgressBar() {
-  const pct = state.currentStep >= 7 ? 100 : Math.round((state.currentStep / (TOTAL_STEPS)) * 100);
+  const pct = state.currentStep >= 8 ? 100 : Math.round((state.currentStep / (TOTAL_STEPS)) * 100);
   document.getElementById('progressFill').style.width = pct + '%';
   if (state.currentStep >= 7) {
     document.getElementById('progressLabel').textContent = 'Complete!';
@@ -1557,6 +1741,47 @@ function showWoundFeedback(val) {
   else { el.className = 'feedback show concern'; el.textContent = "Dr. Oluwole will want to review this. Please also mention it if you call."; }
 }
 
+// QoR-15
+function updateQoR(q, val) {
+  state.qor[q - 1] = parseInt(val);
+  document.getElementById('qor' + q + '-val').textContent = val;
+  calculateQoR();
+  saveProgress();
+}
+
+function calculateQoR() {
+  // Part A (Q1-Q10): higher = better, scored as-is
+  let partA = 0;
+  for (let i = 0; i < 10; i++) partA += state.qor[i];
+  // Part B (Q11-Q15): reverse scored — the slider value IS the score
+  // (10 = none of the time = best, 0 = all of the time = worst)
+  let partB = 0;
+  for (let i = 10; i < 15; i++) partB += state.qor[i];
+  const total = partA + partB;
+  document.getElementById('qor-total').textContent = total;
+
+  // Compare to baseline if available
+  const baseline = localStorage.getItem('opwell_qor15_baseline');
+  const compEl = document.getElementById('qor-comparison');
+  if (baseline) {
+    const diff = total - parseInt(baseline);
+    if (diff > 0) compEl.textContent = '↑ Improved by ' + diff + ' points since first check-in';
+    else if (diff < 0) compEl.textContent = '↓ Decreased by ' + Math.abs(diff) + ' points since first check-in';
+    else compEl.textContent = 'Same as first check-in';
+    compEl.style.color = diff >= 8 ? 'var(--green)' : diff > 0 ? 'var(--sage)' : diff < -8 ? 'var(--red)' : 'var(--slate)';
+  } else {
+    compEl.textContent = 'This will be your baseline score for future comparison.';
+  }
+  return total;
+}
+
+function saveQoRBaseline() {
+  if (!localStorage.getItem('opwell_qor15_baseline')) {
+    const total = calculateQoR();
+    localStorage.setItem('opwell_qor15_baseline', total.toString());
+  }
+}
+
 // Flags
 function toggleFlag(el, idx) {
   state.flags[idx] = !state.flags[idx];
@@ -1717,6 +1942,20 @@ function buildReview() {
   }
   db.innerHTML = bar('Pain', scores.pain) + bar('Wound', scores.wound) + bar('GI', scores.gi) + bar('Mental', scores.mental) + bar('Flags', scores.redflags);
 
+  // QoR-15 score in review
+  const qorTotal = calculateQoR();
+  const qorBaseline = localStorage.getItem('opwell_qor15_baseline');
+  let qorHtml = `<div style="background:rgba(45,90,61,0.06); border-radius:10px; padding:12px 16px; margin:12px 0; display:flex; justify-content:space-between; align-items:center;">
+    <div><span style="font-size:0.82rem; font-weight:600; color:var(--sage);">QoR-15 Recovery Score</span></div>
+    <div style="text-align:right;"><span style="font-size:1.3rem; font-weight:700; color:var(--sage);">${qorTotal}</span><span style="font-size:0.78rem; color:var(--slate);">/150</span>`;
+  if (qorBaseline) {
+    const diff = qorTotal - parseInt(qorBaseline);
+    if (diff > 0) qorHtml += `<br><span style="font-size:0.72rem; color:var(--green);">↑ +${diff} from baseline</span>`;
+    else if (diff < 0) qorHtml += `<br><span style="font-size:0.72rem; color:var(--red);">↓ ${diff} from baseline</span>`;
+  }
+  qorHtml += '</div></div>';
+  db.insertAdjacentHTML('afterend', qorHtml);
+
   // Red flags
   const rf = document.getElementById('reviewFlags');
   const triggered = [];
@@ -1786,6 +2025,7 @@ async function submitCheckin() {
     flags: state.flags,
     surgeryFlags: state.surgeryFlags,
     scores, composite,
+    qor15: { answers: state.qor, total: calculateQoR(), baseline: localStorage.getItem('opwell_qor15_baseline') || null },
     riskLevel: risk ? risk.level : null,
     patientEmail: state.patientEmail || null,
     notes: state.notes || '',
@@ -1801,10 +2041,11 @@ async function submitCheckin() {
     const data = await res.json();
     if (data.success) {
       sessionStorage.removeItem('opwell_patient_checkin');
+      saveQoRBaseline(); // Save first QoR-15 as baseline for future comparison
       // Update thank-you page
       if (hasRedFlags) document.getElementById('thankyouRedFlag').style.display = 'block';
       if (state.patientEmail) document.getElementById('thankyouEmail').style.display = 'block';
-      goToStep(7);
+      goToStep(8);
     } else {
       showError('Something went wrong. Please try again or call (678) 235-5822.');
       btn.disabled = false;
