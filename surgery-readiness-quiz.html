@@ -94,6 +94,13 @@
     <div class="cta-card" id="cta-card"></div>
   </div>
 
+  <div id="promo-welcome" style="display:none; margin-top:1.5rem; background:linear-gradient(135deg, #faf0e8, #f0f7f2); border-radius:12px; padding:1.5rem; border:2px solid var(--terracotta); text-align:center;">
+    <p style="font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--terracotta); margin-bottom:0.5rem;">Limited Launch Offer</p>
+    <p style="font-family:'Playfair Display',serif; font-size:1.3rem; color:var(--charcoal); margin-bottom:0.5rem;">Ready to book?</p>
+    <p style="font-size:0.9rem; color:var(--charcoal); margin-bottom:0.75rem;">Use code <strong style="color:var(--terracotta); font-size:1.1rem;">WELCOME25</strong> for 25% off your first consultation.</p>
+    <a href="https://www.opwellconcierge.com/schedule" style="display:inline-block; background:var(--terracotta); color:#fff; padding:0.85rem 2rem; border-radius:8px; text-decoration:none; font-weight:700; font-size:0.9rem; transition:background 0.2s;">Book with Discount →</a>
+  </div>
+
   <div id="email-capture" style="display:none; margin-top:1.5rem; background:#fff; border-radius:12px; padding:1.5rem; border:1px solid rgba(0,0,0,0.08); text-align:center;">
     <p style="font-family:'Playfair Display',serif; font-size:1.05rem; color:var(--charcoal); margin-bottom:0.25rem;">Stay in the know.</p>
     <p style="font-size:0.82rem; color:#888; margin-bottom:1rem;">Get surgery prep tips, new blog posts, and exclusive offers from OpWell — straight to your inbox.</p>
@@ -298,7 +305,17 @@ function showResults(){
   if(level==='green' && flags.length<=1) document.getElementById('risk-factors-wrap').style.display='none';
 
   document.getElementById('results').classList.add('active');
+  document.getElementById('promo-welcome').style.display='block';
   document.getElementById('email-capture').style.display='block';
+
+  // Track quiz completion with Google Analytics
+  if(typeof gtag !== 'undefined'){
+    gtag('event', 'quiz_complete', {
+      'quiz_name': 'Surgery Readiness',
+      'risk_level': level,
+      'score': pct
+    });
+  }
 
   // Animate score number
   var scoreEl=document.getElementById('score-num');

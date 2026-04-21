@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Complete Surgery Preparation Masterclass — OpWell Concierge™</title>
+  <meta name="description" content="22 personalized modules on pre-surgery and post-op care. Written by a board-certified anesthesiologist. Everything your surgeon's office doesn't have time to teach.">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --sage: #2D5A3D;
+      --terracotta: #C8845A;
+      --charcoal: #1C1C1C;
+      --ivory: #FAF0E8;
+      --warm-white: #F5E4D4;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { overflow-x: hidden; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--ivory);
+      color: var(--charcoal);
+      font-weight: 300;
+      line-height: 1.75;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(240,246,240,0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(200,132,90,0.2);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      height: 60px;
+      gap: 1rem;
+    }
+
+    .nav-back {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      cursor: pointer;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--terracotta); }
+
+    .nav-spacer { flex: 1; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 8rem 4rem 5rem;
+      position: relative;
+      background: linear-gradient(135deg, #1a3a25, #2d5a3d);
+      color: #fff;
+    }
+
+    .hero-content { max-width: 680px; position: relative; z-index: 2; }
+
+    .hero-tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 1.5rem;
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid rgba(200,132,90,0.45);
+      border-radius: 100px;
+      padding: 0.35rem 1.1rem;
+      background: rgba(200,132,90,0.06);
+    }
+
+    .hero-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      font-weight: 400;
+      line-height: 1.1;
+      color: #FAF0E8;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      color: rgba(250,240,232,0.85);
+      line-height: 1.9;
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+      font-weight: 200;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      gap: 1rem;
+      align-items: center;
+      margin-top: 2rem;
+    }
+
+    .btn-primary {
+      background: var(--terracotta);
+      color: #fff;
+      padding: 1rem 2.5rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .btn-primary:hover { background: #a06a40; }
+
+    .price-tag {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--terracotta);
+    }
+
+    /* ── SECTION ── */
+    .section {
+      padding: 6rem 4rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-tag {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--charcoal);
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    .section-desc {
+      font-size: 1rem;
+      color: #555;
+      line-height: 1.8;
+      max-width: 700px;
+      margin-bottom: 2.5rem;
+    }
+
+    .gold-divider {
+      width: 48px;
+      height: 1px;
+      background: var(--terracotta);
+      margin: 2rem 0;
+    }
+
+    /* ── MODULES GRID ── */
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .module-card {
+      background: #fff;
+      border: 1px solid rgba(45,90,61,0.1);
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+    }
+
+    .module-card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--charcoal);
+      margin-bottom: 0.5rem;
+      line-height: 1.4;
+    }
+
+    .module-card p {
+      font-size: 0.85rem;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    /* ── BENEFITS ── */
+    .benefits-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .benefit-item {
+      display: flex;
+      gap: 1.2rem;
+    }
+
+    .benefit-icon {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(45,90,61,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+    }
+
+    .benefit-content h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--charcoal);
+      margin-bottom: 0.3rem;
+    }
+
+    .benefit-content p {
+      font-size: 0.85rem;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    /* ── PERSONALIZATION ── */
+    .pers-boxes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .pers-box {
+      background: linear-gradient(135deg, #f0f7f2, #faf0e8);
+      border: 1px solid rgba(45,90,61,0.12);
+      border-radius: 12px;
+      padding: 1.8rem;
+      text-align: center;
+    }
+
+    .pers-box h4 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--sage);
+      margin-bottom: 0.4rem;
+      letter-spacing: 0.05em;
+    }
+
+    .pers-box p {
+      font-size: 0.85rem;
+      color: #666;
+    }
+
+    /* ── AUTHOR ── */
+    .author-section {
+      background: linear-gradient(135deg, #1a3a25, #2d5a3d);
+      color: #fff;
+      padding: 4rem;
+      border-radius: 16px;
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    .author-section h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .author-section p {
+      font-size: 0.95rem;
+      opacity: 0.85;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    .author-cred {
+      font-size: 0.8rem;
+      opacity: 0.7;
+      margin-top: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ── PRICING & CTA ── */
+    .pricing-section {
+      background: var(--warm-white);
+      padding: 5rem 4rem;
+      text-align: center;
+      margin-top: 4rem;
+      border-radius: 16px;
+    }
+
+    .pricing-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      color: var(--charcoal);
+      margin-bottom: 1.5rem;
+    }
+
+    .price-display {
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: var(--terracotta);
+      margin-bottom: 0.5rem;
+    }
+
+    .price-desc {
+      font-size: 0.95rem;
+      color: #666;
+      margin-bottom: 2rem;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .btn-buy {
+      background: var(--sage);
+      color: #fff;
+      padding: 1.1rem 3rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .btn-buy:hover { background: #1a3a25; }
+
+    .guarantee {
+      font-size: 0.8rem;
+      color: #888;
+      margin-bottom: 1rem;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      padding: 2rem 4rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #999;
+      border-top: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .footer a { color: var(--sage); text-decoration: none; }
+    .footer a:hover { text-decoration: underline; }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width: 768px) {
+      .hero { padding: 6rem 1.5rem 3rem; }
+      .hero-headline { font-size: 1.8rem; }
+      .section { padding: 3rem 1.5rem; }
+      .pricing-section { padding: 3rem 1.5rem; }
+      nav { padding: 0 1rem; height: 50px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="https://www.opwellconcierge.com" class="nav-back">← Back to OpWell</a>
+  <div class="nav-spacer"></div>
+</nav>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-tag">Self-Paced · 22 Evidence-Based Modules</div>
+    <h1 class="hero-headline">Your Complete Surgery Preparation Masterclass</h1>
+    <p class="hero-sub">Everything your surgeon's office doesn't have time to teach you — personalized to your surgery type, health profile, and timeline. Written by a board-certified anesthesiologist.</p>
+    <div class="hero-cta">
+      <a href="#pricing" class="btn-primary">Enroll Now</a>
+      <span class="price-tag">$99</span>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-tag">What's Included</div>
+  <h2 class="section-title">22 Personalized Learning Modules</h2>
+  <p class="section-desc">Your modules are tailored to your specific surgery, health conditions, medications, and timeline — not a one-size-fits-all guide.</p>
+  <div class="gold-divider"></div>
+
+  <div class="modules-grid">
+    <div class="module-card">
+      <h3>🏥 Pre-Surgery Optimization</h3>
+      <p>Medication timing, what to avoid, lab work, and fasting protocols customized for your procedure.</p>
+    </div>
+    <div class="module-card">
+      <h3>💊 Medication Management</h3>
+      <p>Which medications to continue, which to stop, and when. Critical for your safety during anesthesia.</p>
+    </div>
+    <div class="module-card">
+      <h3>🧠 Mental Preparation</h3>
+      <p>Managing surgical anxiety, visualization techniques, and mental readiness strategies.</p>
+    </div>
+    <div class="module-card">
+      <h3>🛌 Anesthesia Explained</h3>
+      <p>How anesthesia works, what to expect, why your medical history matters, and common questions answered.</p>
+    </div>
+    <div class="module-card">
+      <h3>🏃 Post-Op Recovery</h3>
+      <p>Day-by-day recovery milestones, pain management, when to seek help, and realistic timelines.</p>
+    </div>
+    <div class="module-card">
+      <h3>🍽️ Nutrition & Healing</h3>
+      <p>Foods that accelerate healing, supplements to consider, hydration, and dietary timeline.</p>
+    </div>
+    <div class="module-card">
+      <h3>⚠️ Red Flags & Complications</h3>
+      <p>What's normal recovery vs. what needs immediate attention. Empower yourself to stay safe.</p>
+    </div>
+    <div class="module-card">
+      <h3>✈️ Special Situations</h3>
+      <p>Medical tourism, traveling for surgery, complications abroad, and international recovery planning.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-tag">Why This Masterclass?</div>
+  <h2 class="section-title">Partnership in Your Surgical Preparation</h2>
+  <p class="section-desc">Your surgeon is focused on the procedure itself. Your anesthesiologist is here for the complete picture: before, during, and after. This masterclass complements your surgeon's care by preparing you holistically.</p>
+  <div class="gold-divider"></div>
+
+  <div class="benefits-list">
+    <div class="benefit-item">
+      <div class="benefit-icon">📚</div>
+      <div class="benefit-content">
+        <h4>Evidence-Based</h4>
+        <p>Built on board-certified anesthesiology and surgical best practices, not guesswork.</p>
+      </div>
+    </div>
+    <div class="benefit-item">
+      <div class="benefit-icon">👤</div>
+      <div class="benefit-content">
+        <h4>Personalized to You</h4>
+        <p>Your modules match your specific surgery, health conditions, and medications — not generic advice.</p>
+      </div>
+    </div>
+    <div class="benefit-item">
+      <div class="benefit-icon">🎯</div>
+      <div class="benefit-content">
+        <h4>Actionable, Not Overwhelming</h4>
+        <p>Clear checklists, timelines, and next steps. No medical jargon. Real answers to real questions.</p>
+      </div>
+    </div>
+    <div class="benefit-item">
+      <div class="benefit-icon">🏥</div>
+      <div class="benefit-content">
+        <h4>Anesthesiologist-Led</h4>
+        <p>Written by Dr. Ornella Oluwole, a board-certified anesthesiologist with real surgical experience.</p>
+      </div>
+    </div>
+    <div class="benefit-item">
+      <div class="benefit-icon">⏱️</div>
+      <div class="benefit-content">
+        <h4>Lifetime Access</h4>
+        <p>Learn at your own pace. Revisit modules before surgery, during recovery, and beyond.</p>
+      </div>
+    </div>
+    <div class="benefit-item">
+      <div class="benefit-icon">🔒</div>
+      <div class="benefit-content">
+        <h4>Your Privacy Matters</h4>
+        <p>This is your space to learn and prepare. No ads, no selling your data, no spam.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-tag">How Personalization Works</div>
+  <h2 class="section-title">Tailored to YOUR Surgery & Health</h2>
+  <p class="section-desc">You answer a few questions about your surgery type, medical history, and timeline. We customize your 22 modules to match your specific needs.</p>
+  <div class="gold-divider"></div>
+
+  <div class="pers-boxes">
+    <div class="pers-box">
+      <h4>🏥 By Surgery Type</h4>
+      <p>Cosmetic, orthopedic, cardiac, bariatric, obstetric — your modules differ based on your procedure.</p>
+    </div>
+    <div class="pers-box">
+      <h4>💊 By Health Profile</h4>
+      <p>Diabetes? Heart disease? Sleep apnea? Your modules highlight what matters for YOUR health.</p>
+    </div>
+    <div class="pers-box">
+      <h4>📅 By Timeline</h4>
+      <p>3 weeks out? 3 months out? Your preparation plan scales to your actual surgery date.</p>
+    </div>
+    <div class="pers-box">
+      <h4>🧠 By Anxiety Level</h4>
+      <p>Highly anxious? We emphasize mental wellness and reassurance modules for you.</p>
+    </div>
+  </div>
+</section>
+
+<section class="author-section">
+  <h3>Created by Dr. Ornella Oluwole</h3>
+  <p>Board-certified anesthesiologist with years of surgical experience. She's seen firsthand what prepares patients to go into surgery confident and what leaves them anxious. This masterclass is everything she wishes every surgical patient knew.</p>
+  <p class="author-cred">MD · Board-Certified Anesthesiologist · Concierge Perioperative Care</p>
+</section>
+
+<section class="section" id="pricing">
+  <div class="pricing-section">
+    <h2>Ready to Prepare Smarter?</h2>
+    <div class="price-display">$99</div>
+    <p class="price-desc">One-time payment. Lifetime access. No subscriptions.</p>
+    <div class="cta-group">
+      <button class="btn-buy" onclick="goToCheckout()">Enroll Now</button>
+      <a href="https://www.opwellconcierge.com" style="display:inline-flex; align-items:center; gap:0.5rem; text-decoration:none; color:var(--sage); font-weight:600;">Explore Other Services →</a>
+    </div>
+  </div>
+</section>
+
+<div class="footer">
+  <p>© 2026 OpWell Concierge™ · <a href="https://www.opwellconcierge.com">Back to OpWell</a></p>
+</div>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KD14XVW4B0"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-KD14XVW4B0');
+</script>
+
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '27638520232415109');
+fbq('track', 'PageView');
+</script>
+
+<script>
+function goToCheckout() {
+  if(typeof gtag !== 'undefined'){
+    gtag('event', 'masterclass_enroll_click', {
+      'value': 99,
+      'currency': 'USD'
+    });
+  }
+  window.location.href = 'https://checkout.stripe.com/c/pay/cs_live_b1liNGbYiHz09OkWQD9TtbFwMoFqkgGQ1eprOtq4Ujr2Z65IX3ClpFB8mk#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blppbHNgWjA0UTIxVkhCfTRXXF9OZFxJcl9NMHZJbEFGNGxJd1ZSX3JgRnd%2FZn89c1dIf2xNf3BqQGh1azdJUFVRdEdOXEFVMmxhND18bzVnYkZxTjM9cGJDTj1jN3dENTVsX1BHNkJKbScpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyY3YTBkNmEnKSdpZHxqcHFRfHVgJz8naHBpcWxabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl';
+}
+</script>
+
+</body>
+</html>
