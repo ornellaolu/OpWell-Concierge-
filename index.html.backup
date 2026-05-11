@@ -3121,7 +3121,7 @@
   <div class="lp-hero" style="background: linear-gradient(to right, rgba(17,17,17,0.82) 0%, rgba(17,17,17,0.55) 55%, rgba(17,17,17,0.18) 100%), url('dr-oluwole-12.jpg') center center / cover no-repeat;">
     <div class="lp-hero-bg"></div>
     <div class="lp-breadcrumb" onclick="showPage('home')" style="color:rgba(255,255,255,0.7);">← OpWell Home</div>
-    <h2 class="lp-headline" style="color:#FAF0E8;">Preparation is the one part<br>of surgery <em>you control.</em></h2>
+    <h1 class="lp-headline" style="color:#FAF0E8;">Preparation is the one part<br>of surgery <em>you control.</em></h1>
     <p class="lp-sub" style="color:rgba(250,240,232,0.85);">OpWell's Pre-Surgical Consultation program ensures you arrive at your procedure optimized, informed, and genuinely ready — whether you're having cosmetic surgery, bariatric surgery, or any elective procedure.</p>
     <a onclick="showPage('schedule')" class="btn-primary" style="cursor:pointer;">Book Your Consultation →</a>
   </div>
@@ -3562,7 +3562,7 @@
     <div class="recovery-hero-gradient" style="position:absolute; inset:0; background:linear-gradient(to top, rgba(17,17,17,0.95) 0%, rgba(17,17,17,0.7) 40%, rgba(17,17,17,0.3) 65%, transparent 80%);"></div>
     <div class="recovery-hero-text" style="position:absolute; bottom:0; left:0; right:0; padding:2rem 2rem 2rem;">
       <div class="lp-breadcrumb" onclick="showPage('home')" style="color:rgba(255,255,255,0.7); position:static; margin-bottom:0.75rem; cursor:pointer;">← OpWell Home</div>
-      <h2 class="lp-headline" style="color:#FAF0E8;">You made it through surgery.<br><em>Now let's focus on healing.</em></h2>
+      <h1 class="lp-headline" style="color:#FAF0E8;">You made it through surgery.<br><em>Now let's focus on healing.</em></h1>
       <p class="lp-sub recovery-hero-sub" style="color:rgba(250,240,232,0.85); max-width:700px;">Because your recovery deserves just as much attention as your surgery. OpWell provides anesthesiologist-led support within the first 72 hours after surgery, followed by weekly check-ins for up to 30 days — so you always have a physician in your corner when questions arise and reassurance matters most.</p>
       <a onclick="showPage('schedule')" class="btn-primary" style="cursor:pointer; margin-top:0.75rem; display:inline-block;">Book Your Consultation →</a>
     </div>
@@ -4030,7 +4030,7 @@
   <div class="lp-hero" style="background: linear-gradient(to right, rgba(17,17,17,0.78) 0%, rgba(17,17,17,0.45) 60%, rgba(17,17,17,0.12) 100%), url('dr-oluwole-mental-wellness.jpg') center center / cover no-repeat;">
     <div class="lp-hero-bg"></div>
     <div class="lp-breadcrumb" onclick="showPage('home')" style="color:rgba(255,255,255,0.7);">← OpWell Home</div>
-    <h2 class="lp-headline" style="color:#FAF0E8;">You've prepared your body.<br>Now let's prepare <em>your mind.</em></h2>
+    <h1 class="lp-headline" style="color:#FAF0E8;">You've prepared your body.<br>Now let's prepare <em>your mind.</em></h1>
     <p class="lp-sub" style="color:rgba(250,240,232,0.85);">From surgical anxiety before your procedure to emotional recovery after — OpWell's licensed mental health specialist works directly with you as part of your care team. Every session is personalized to your individual needs, informed by your medical and surgical history, and coordinated with Dr. Oluwole so nothing is overlooked.</p>
     <a onclick="showPage('schedule')" class="btn-primary" style="cursor:pointer;">Book Your Consultation →</a>
   </div>
@@ -4251,7 +4251,7 @@
   <div class="lp-hero" style="background: linear-gradient(to right, rgba(17,17,17,0.72) 0%, rgba(17,17,17,0.42) 55%, rgba(17,17,17,0.12) 100%), url('dr-oluwole-ld-pregnant.jpg') center center / cover no-repeat;">
     <div class="lp-hero-bg"></div>
     <div class="lp-breadcrumb" onclick="showPage('home')" style="color:rgba(255,255,255,0.7);">← OpWell Home</div>
-    <h2 class="lp-headline" style="color:#FAF0E8;">Confidence on delivery day<br><em>starts here.</em></h2>
+    <h1 class="lp-headline" style="color:#FAF0E8;">Confidence on delivery day<br><em>starts here.</em></h1>
     <p class="lp-sub" style="color:rgba(250,240,232,0.85);">For most pregnant women, the epidural or C-section is the most anxiety-producing part of childbirth — and the anesthesiologist is a complete stranger who arrives when everything is already overwhelming. OpWell changes this entirely — whether you're planning a pregnancy, currently expecting, or postpartum.</p>
     <a onclick="showPage('schedule')" class="btn-primary" style="cursor:pointer;">Book Your Consultation →</a>
   </div>
@@ -4468,7 +4468,7 @@
   <div class="lp-hero" style="background: linear-gradient(to right, rgba(17,17,17,0.82) 0%, rgba(17,17,17,0.52) 55%, rgba(17,17,17,0.15) 100%), url('dr-oluwole-tourism-airport.jpg') center center / cover no-repeat;">
     <div class="lp-hero-bg"></div>
     <div class="lp-breadcrumb" onclick="showPage('home')" style="color:rgba(255,255,255,0.7);">← OpWell Home</div>
-    <h2 class="lp-headline" style="color:#FFFFFF;">Surgery Abroad.<br>Physician Support at Home — before, during, and after.</h2>
+    <h1 class="lp-headline" style="color:#FFFFFF;">Surgery Abroad.<br>Physician Support at Home — before, during, and after.</h1>
     <p class="lp-sub" style="color:rgba(250,240,232,0.85);">A board-certified anesthesiologist reviews your health, medications, and surgical plan — so you travel prepared, recover safely, and always have a doctor to call when you're home.</p>
     <a onclick="showPage('schedule')" class="btn-primary" style="cursor:pointer;">Book Your Consultation →</a>
   </div>
@@ -4739,7 +4739,7 @@
   <div class="lp-hero" style="background: linear-gradient(to right, rgba(17,17,17,0.80) 0%, rgba(17,17,17,0.48) 55%, rgba(45,90,61,0.18) 100%), url('dr-oluwole-14.jpg') center center / cover no-repeat;">
     <div class="lp-hero-bg"></div>
     <div class="lp-breadcrumb" onclick="showPage('home')" style="color:rgba(255,255,255,0.7);">← OpWell Home</div>
-    <h2 class="lp-headline" style="color:#FAF0E8;">Physician-curated resources<br><em>for your surgical journey.</em></h2>
+    <h1 class="lp-headline" style="color:#FAF0E8;">Physician-curated resources<br><em>for your surgical journey.</em></h1>
     <p class="lp-sub" style="color:rgba(250,240,232,0.85);">Every product and resource on this page has been vetted by the OpWell clinical team and informed by surgeons across specialties — based on clinical evidence and real patient outcomes.</p>
   </div>
 
@@ -5296,7 +5296,7 @@
     <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(17,17,17,0.95) 0%, rgba(17,17,17,0.6) 35%, transparent 60%);"></div>
     <div style="position:absolute; bottom:0; left:0; right:0; padding:2rem 2rem 2rem;">
       <div class="lp-breadcrumb" onclick="showPage('home')" style="color:rgba(255,255,255,0.7); position:static; margin-bottom:0.75rem; cursor:pointer;">← OpWell Home</div>
-      <h2 class="lp-headline" style="color:#FAF0E8;">Meet Your Team</h2>
+      <h1 class="lp-headline" style="color:#FAF0E8;">Meet Your Team</h1>
       <p class="lp-sub" style="color:rgba(250,240,232,0.85);">The clinicians behind your perioperative journey.</p>
     </div>
   </div>
@@ -5481,7 +5481,7 @@
     <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(17,17,17,0.95) 0%, rgba(17,17,17,0.6) 35%, transparent 60%);"></div>
     <div class="blog-hero-text" style="position:absolute; bottom:0; left:0; right:0; padding:2rem 2rem 2rem;">
       <div class="section-tag" style="color:var(--terracotta-light); border-color:rgba(200,132,90,0.4); display:inline-block; margin-bottom:0.75rem;">OpWell Blog</div>
-      <h2 class="lp-headline" style="color:#fff;">What Your Anesthesiologist Wants You to Know</h2>
+      <h1 class="lp-headline" style="color:#fff;">What Your Anesthesiologist Wants You to Know</h1>
       <p class="lp-sub blog-hero-sub" style="color:rgba(255,255,255,0.82);">Evidence-based guidance on surgical preparation and recovery — written for patients who want to be truly informed, not just reassured.<br>Because informed patients have better outcomes.</p>
     </div>
   </div>
@@ -5776,7 +5776,7 @@
   <div class="lp-hero" style="background:linear-gradient(135deg,#2d5a3d 0%,var(--sage) 100%); min-height:260px; display:flex; align-items:center; justify-content:center;">
     <div style="text-align:center; max-width:700px; padding:4rem 2rem 3rem;">
       <div class="section-tag" style="color:var(--gold); border-color:rgba(196,157,87,0.4); display:inline-block; margin-bottom:0.85rem;">🔒 Patient Access &nbsp;·&nbsp; 8 min read</div>
-      <h2 class="lp-headline" style="color:#fff; font-size:clamp(1.6rem,3.2vw,2.3rem); line-height:1.25;">How to Prepare for Surgery: A Complete Checklist from an Anesthesiologist</h2>
+      <h1 class="lp-headline" style="color:#fff; font-size:clamp(1.6rem,3.2vw,2.3rem); line-height:1.25;">How to Prepare for Surgery: A Complete Checklist from an Anesthesiologist</h1>
       <p style="color:rgba(255,255,255,0.7); font-family:'DM Sans',sans-serif; font-size:0.9rem; margin-top:1rem; font-weight:300;">By Dr. Ornella Oluwole, MD &nbsp;&middot;&nbsp; Board-Certified Anesthesiologist &nbsp;&middot;&nbsp; March 2026</p>
     </div>
   </div>
@@ -6057,7 +6057,7 @@
   <div class="lp-hero" style="background:linear-gradient(135deg,#2d5a3d 0%,var(--sage) 100%); min-height:260px; display:flex; align-items:center; justify-content:center;">
     <div style="text-align:center; max-width:700px; padding:4rem 2rem 3rem;">
       <div class="section-tag" style="color:var(--gold); border-color:rgba(196,157,87,0.4); display:inline-block; margin-bottom:0.85rem;">Anesthesia Explained &nbsp;·&nbsp; 6 min read</div>
-      <h2 class="lp-headline" style="color:#fff; font-size:clamp(1.6rem,3.2vw,2.3rem); line-height:1.25;">What Happens to Your Body Under General Anesthesia</h2>
+      <h1 class="lp-headline" style="color:#fff; font-size:clamp(1.6rem,3.2vw,2.3rem); line-height:1.25;">What Happens to Your Body Under General Anesthesia</h1>
       <p style="color:rgba(255,255,255,0.7); font-family:'DM Sans',sans-serif; font-size:0.9rem; margin-top:1rem; font-weight:300;">By Dr. Ornella Oluwole, MD &nbsp;&middot;&nbsp; Board-Certified Anesthesiologist &nbsp;&middot;&nbsp; March 2026</p>
     </div>
   </div>
@@ -6312,7 +6312,7 @@
   <div class="lp-hero" style="background:linear-gradient(135deg,#2d5a3d 0%,var(--sage) 100%); min-height:260px; display:flex; align-items:center; justify-content:center;">
     <div style="text-align:center; max-width:700px; padding:4rem 2rem 3rem;">
       <div class="section-tag" style="color:var(--gold); border-color:rgba(196,157,87,0.4); display:inline-block; margin-bottom:0.85rem;">🔒 Patient Access &nbsp;·&nbsp; Post-Op Recovery &nbsp;·&nbsp; 7 min read</div>
-      <h2 class="lp-headline" style="color:#fff; font-size:clamp(1.6rem,3.2vw,2.3rem); line-height:1.25;">The First 72 Hours After Surgery: What to Expect</h2>
+      <h1 class="lp-headline" style="color:#fff; font-size:clamp(1.6rem,3.2vw,2.3rem); line-height:1.25;">The First 72 Hours After Surgery: What to Expect</h1>
       <p style="color:rgba(255,255,255,0.7); font-family:'DM Sans',sans-serif; font-size:0.9rem; margin-top:1rem; font-weight:300;">By Dr. Ornella Oluwole, MD &nbsp;&middot;&nbsp; Board-Certified Anesthesiologist &nbsp;&middot;&nbsp; March 2026</p>
     </div>
   </div>
@@ -6542,7 +6542,7 @@
   <div class="lp-hero" style="background:linear-gradient(135deg,#2d5a3d 0%,var(--sage) 100%); min-height:260px; display:flex; align-items:center; justify-content:center;">
     <div style="text-align:center; max-width:700px; padding:4rem 2rem 3rem;">
       <div class="section-tag" style="color:var(--gold); border-color:rgba(196,157,87,0.4); display:inline-block; margin-bottom:0.85rem;">Mental Wellness &nbsp;·&nbsp; 7 min read</div>
-      <h2 class="lp-headline" style="color:#fff; font-size:clamp(1.6rem,3.2vw,2.3rem); line-height:1.25;">Why Your Mental Health Before Surgery Matters More Than You Think</h2>
+      <h1 class="lp-headline" style="color:#fff; font-size:clamp(1.6rem,3.2vw,2.3rem); line-height:1.25;">Why Your Mental Health Before Surgery Matters More Than You Think</h1>
       <p style="color:rgba(255,255,255,0.7); font-family:'DM Sans',sans-serif; font-size:0.9rem; margin-top:1rem; font-weight:300;">By Dr. Ornella Oluwole, MD &nbsp;&middot;&nbsp; Board-Certified Anesthesiologist &nbsp;&middot;&nbsp; March 2026</p>
     </div>
   </div>
@@ -6747,7 +6747,7 @@
   <div class="lp-hero" style="background:linear-gradient(135deg,#2d5a3d 0%,var(--sage) 100%); min-height:260px; display:flex; align-items:center; justify-content:center;">
     <div style="text-align:center; max-width:700px; padding:4rem 2rem 3rem;">
       <div class="section-tag" style="color:var(--gold); border-color:rgba(196,157,87,0.4); display:inline-block; margin-bottom:0.85rem;">🔒 Patient Access &nbsp;·&nbsp; Medical Tourism &nbsp;·&nbsp; 9 min read</div>
-      <h2 class="lp-headline" style="color:#fff; font-size:clamp(1.6rem,3.2vw,2.3rem); line-height:1.25;">Medical Tourism: 7 Things You Must Do Before Having Surgery Abroad</h2>
+      <h1 class="lp-headline" style="color:#fff; font-size:clamp(1.6rem,3.2vw,2.3rem); line-height:1.25;">Medical Tourism: 7 Things You Must Do Before Having Surgery Abroad</h1>
       <p style="color:rgba(255,255,255,0.7); font-family:'DM Sans',sans-serif; font-size:0.9rem; margin-top:1rem; font-weight:300;">By Dr. Ornella Oluwole, MD &nbsp;&middot;&nbsp; Board-Certified Anesthesiologist &nbsp;&middot;&nbsp; March 2026</p>
     </div>
   </div>
@@ -7016,7 +7016,7 @@
   <div class="lp-hero" style="background:linear-gradient(135deg,#1a3a25 0%,var(--sage) 100%); min-height:280px; display:flex; align-items:center; justify-content:center;">
     <div style="text-align:center; max-width:700px; padding:4.5rem 2rem 3.5rem;">
       <div class="section-tag" style="color:var(--terracotta-light); border-color:rgba(200,132,90,0.4); display:inline-block; margin-bottom:0.85rem;">🔒 Patient Access &nbsp;·&nbsp; Bariatric Surgery &nbsp;·&nbsp; 7 min read</div>
-      <h2 class="lp-headline" style="color:#fff; font-size:clamp(1.5rem,3vw,2.2rem); line-height:1.25;">"Why Do I Feel So Sick After Eating?" Understanding Dumping Syndrome</h2>
+      <h1 class="lp-headline" style="color:#fff; font-size:clamp(1.5rem,3vw,2.2rem); line-height:1.25;">"Why Do I Feel So Sick After Eating?" Understanding Dumping Syndrome</h1>
       <p style="color:rgba(255,255,255,0.7); font-family:'DM Sans',sans-serif; font-size:0.9rem; margin-top:1rem; font-weight:300;">By Dr. Ornella Oluwole, MD &nbsp;·&nbsp; Board-Certified Anesthesiologist &nbsp;·&nbsp; March 2026</p>
     </div>
   </div>
@@ -7329,7 +7329,7 @@
   <div class="lp-hero" style="background:linear-gradient(135deg,#1a3a25 0%,var(--sage) 100%); min-height:280px; display:flex; align-items:center; justify-content:center;">
     <div style="text-align:center; max-width:700px; padding:4.5rem 2rem 3.5rem;">
       <div class="section-tag" style="color:var(--terracotta-light); border-color:rgba(200,132,90,0.4); display:inline-block; margin-bottom:0.85rem;">🔒 Patient Access &nbsp;·&nbsp; Bariatric Surgery &nbsp;·&nbsp; 8 min read</div>
-      <h2 class="lp-headline" style="color:#fff; font-size:clamp(1.5rem,3vw,2.2rem); line-height:1.25;">Your Lifelong Vitamin &amp; Supplement Schedule After Bariatric Surgery</h2>
+      <h1 class="lp-headline" style="color:#fff; font-size:clamp(1.5rem,3vw,2.2rem); line-height:1.25;">Your Lifelong Vitamin &amp; Supplement Schedule After Bariatric Surgery</h1>
       <p style="color:rgba(255,255,255,0.7); font-family:'DM Sans',sans-serif; font-size:0.9rem; margin-top:1rem; font-weight:300;">By Dr. Ornella Oluwole, MD &nbsp;·&nbsp; Board-Certified Anesthesiologist &nbsp;·&nbsp; March 2026</p>
     </div>
   </div>
@@ -7648,7 +7648,7 @@
   <div class="lp-hero" style="background:linear-gradient(135deg,#1a3a25 0%,var(--sage) 100%); min-height:280px; display:flex; align-items:center; justify-content:center;">
     <div style="text-align:center; max-width:700px; padding:4.5rem 2rem 3.5rem;">
       <div class="section-tag" style="color:var(--terracotta-light); border-color:rgba(200,132,90,0.4); display:inline-block; margin-bottom:0.85rem;">Surgery Prep &nbsp;·&nbsp; 10 min read &nbsp;·&nbsp; 🔒 Patient Access</div>
-      <h2 class="lp-headline" style="color:#fff; font-size:clamp(1.5rem,3vw,2.1rem); line-height:1.25;">The Complete Clinical Guide: Evidence-Based Surgery Preparation</h2>
+      <h1 class="lp-headline" style="color:#fff; font-size:clamp(1.5rem,3vw,2.1rem); line-height:1.25;">The Complete Clinical Guide: Evidence-Based Surgery Preparation</h1>
       <p style="color:rgba(255,255,255,0.7); font-family:'DM Sans',sans-serif; font-size:0.9rem; margin-top:1rem; font-weight:300;">By Dr. Ornella Oluwole, MD &nbsp;·&nbsp; Board-Certified Anesthesiologist &nbsp;·&nbsp; March 2026</p>
     </div>
   </div>
@@ -7977,7 +7977,7 @@
   <div class="lp-hero" style="background:linear-gradient(135deg,#1a2e3a 0%,#2a4a5c 100%); min-height:280px; display:flex; align-items:center; justify-content:center;">
     <div style="text-align:center; max-width:700px; padding:4.5rem 2rem 3.5rem;">
       <div class="section-tag" style="color:var(--terracotta-light); border-color:rgba(200,132,90,0.4); display:inline-block; margin-bottom:0.85rem;">Surgery Prep &nbsp;·&nbsp; 9 min read &nbsp;·&nbsp; 🔒 Patient Access</div>
-      <h2 class="lp-headline" style="color:#fff; font-size:clamp(1.5rem,3vw,2.1rem); line-height:1.25;">Managing Your Blood Thinners Around Surgery: A Patient Guide</h2>
+      <h1 class="lp-headline" style="color:#fff; font-size:clamp(1.5rem,3vw,2.1rem); line-height:1.25;">Managing Your Blood Thinners Around Surgery: A Patient Guide</h1>
       <p style="color:rgba(255,255,255,0.7); font-family:'DM Sans',sans-serif; font-size:0.9rem; margin-top:1rem; font-weight:300;">By Dr. Ornella Oluwole, MD &nbsp;·&nbsp; Board-Certified Anesthesiologist &nbsp;·&nbsp; March 2026</p>
     </div>
   </div>
@@ -8589,7 +8589,7 @@
   <div class="lp-hero" style="background:linear-gradient(135deg,#3a1a2e 0%,#5c2a4a 100%); min-height:300px; display:flex; align-items:center; justify-content:center;">
     <div style="text-align:center; max-width:720px; padding:4.5rem 2rem 3.5rem;">
       <div class="section-tag" style="color:#f9d8e8; border-color:rgba(249,216,232,0.35); display:inline-block; margin-bottom:1rem;">Cosmetic Surgery &nbsp;·&nbsp; 5 min read &nbsp;·&nbsp; Free</div>
-      <h2 class="lp-headline" style="color:#fff; font-size:clamp(1.55rem,3.5vw,2.3rem); line-height:1.25;">The 3 Biggest Fears Before Cosmetic Surgery — And What the Research Actually Says</h2>
+      <h1 class="lp-headline" style="color:#fff; font-size:clamp(1.55rem,3.5vw,2.3rem); line-height:1.25;">The 3 Biggest Fears Before Cosmetic Surgery — And What the Research Actually Says</h1>
       <p style="color:rgba(255,255,255,0.7); font-family:'DM Sans',sans-serif; font-size:0.9rem; margin-top:1rem; font-weight:300;">By Dr. Ornella Oluwole, MD &nbsp;·&nbsp; Board-Certified Anesthesiologist &nbsp;·&nbsp; March 2026</p>
     </div>
   </div>
@@ -8817,7 +8817,7 @@
   <div class="lp-hero" style="background:linear-gradient(135deg,#3a1a2e 0%,#5c2a4a 100%); min-height:300px; display:flex; align-items:center; justify-content:center;">
     <div style="text-align:center; max-width:760px; padding:4.5rem 2rem 3.5rem;">
       <div class="section-tag" style="color:#f9d8e8; border-color:rgba(249,216,232,0.35); display:inline-block; margin-bottom:1rem;">Cosmetic Surgery &nbsp;·&nbsp; 12 min read &nbsp;·&nbsp; 🔒 Patient Access</div>
-      <h2 class="lp-headline" style="color:#fff; font-size:clamp(1.55rem,3.5vw,2.3rem); line-height:1.25;">Your Complete Cosmetic Surgery Guide: Everything You Need to Know</h2>
+      <h1 class="lp-headline" style="color:#fff; font-size:clamp(1.55rem,3.5vw,2.3rem); line-height:1.25;">Your Complete Cosmetic Surgery Guide: Everything You Need to Know</h1>
       <p style="color:rgba(255,255,255,0.7); font-family:'DM Sans',sans-serif; font-size:0.9rem; margin-top:1rem; font-weight:300;">By Dr. Ornella Oluwole, MD &nbsp;·&nbsp; Board-Certified Anesthesiologist &nbsp;·&nbsp; March 2026</p>
     </div>
   </div>
@@ -9211,7 +9211,7 @@
   <div class="lp-hero" style="background:linear-gradient(135deg,#1a3a25 0%,#2d5a3d 100%); min-height:300px; display:flex; align-items:center; justify-content:center;">
     <div style="text-align:center; max-width:720px; padding:4.5rem 2rem 3.5rem;">
       <div class="section-tag" style="color:#c8f7d0; border-color:rgba(200,247,208,0.35); display:inline-block; margin-bottom:1rem;">Cosmetic Surgery &nbsp;·&nbsp; 6 min read &nbsp;·&nbsp; Free</div>
-      <h2 class="lp-headline" style="color:#fff; font-size:clamp(1.55rem,3.5vw,2.2rem); line-height:1.25;">Do Fajas Actually Work After a Tummy Tuck? What the Research Says</h2>
+      <h1 class="lp-headline" style="color:#fff; font-size:clamp(1.55rem,3.5vw,2.2rem); line-height:1.25;">Do Fajas Actually Work After a Tummy Tuck? What the Research Says</h1>
       <p style="color:rgba(255,255,255,0.7); font-family:'DM Sans',sans-serif; font-size:0.9rem; margin-top:1rem; font-weight:300;">By Dr. Ornella Oluwole, MD &nbsp;·&nbsp; Board-Certified Anesthesiologist &nbsp;·&nbsp; March 2026</p>
     </div>
   </div>
@@ -9489,7 +9489,7 @@
   <div class="lp-hero" style="background:linear-gradient(135deg,#1a1a3e 0%,#3a3a9c 60%,#c8845a 100%); min-height:300px; display:flex; align-items:center; justify-content:center;">
     <div style="text-align:center; max-width:720px; padding:4.5rem 2rem 3.5rem;">
       <div class="section-tag" style="color:#e0e0ff; border-color:rgba(224,224,255,0.35); display:inline-block; margin-bottom:1rem;">Cosmetic Surgery &nbsp;·&nbsp; 8 min read &nbsp;·&nbsp; 🔒 Patient Access</div>
-      <h2 class="lp-headline" style="color:#fff; font-size:clamp(1.55rem,3.5vw,2.3rem); line-height:1.25;">Brazilian Butt Lift (BBL): What You Need to Know Before Surgery</h2>
+      <h1 class="lp-headline" style="color:#fff; font-size:clamp(1.55rem,3.5vw,2.3rem); line-height:1.25;">Brazilian Butt Lift (BBL): What You Need to Know Before Surgery</h1>
       <p style="color:rgba(255,255,255,0.72); font-family:'DM Sans',sans-serif; font-size:0.9rem; margin-top:1rem; font-weight:300;">By Dr. Ornella Oluwole, MD &nbsp;·&nbsp; Board-Certified Anesthesiologist &nbsp;·&nbsp; March 2026</p>
     </div>
   </div>
@@ -9914,7 +9914,7 @@
   <div class="lp-hero" style="background:linear-gradient(135deg,#3d0a1f 0%,#7c1a3a 50%,#c8845a 100%); min-height:300px; display:flex; align-items:center; justify-content:center;">
     <div style="text-align:center; max-width:720px; padding:4.5rem 2rem 3.5rem;">
       <div class="section-tag" style="color:#f9d8e8; border-color:rgba(249,216,232,0.4); display:inline-block; margin-bottom:1rem;">Cosmetic Surgery · 9 min read · 🔒 Patient Access</div>
-      <h2 class="lp-headline" style="color:#fff; font-size:clamp(1.55rem,3.5vw,2.3rem); line-height:1.25;">Tummy Tuck: Your Complete Patient Guide</h2>
+      <h1 class="lp-headline" style="color:#fff; font-size:clamp(1.55rem,3.5vw,2.3rem); line-height:1.25;">Tummy Tuck: Your Complete Patient Guide</h1>
       <p style="color:rgba(255,255,255,0.7); font-family:'DM Sans',sans-serif; font-size:0.9rem; margin-top:1rem; font-weight:300;">By Dr. Ornella Oluwole, MD · Board-Certified Anesthesiologist · March 2026</p>
     </div>
   </div>
@@ -10446,7 +10446,7 @@
   <div class="lp-hero" style="background:linear-gradient(135deg,#0c1a3a 0%,#1a3a6b 55%,#2a5aaa 100%); min-height:300px; display:flex; align-items:center; justify-content:center;">
     <div style="text-align:center; max-width:720px; padding:4.5rem 2rem 3.5rem;">
       <div class="section-tag" style="color:#b8d0f8; border-color:rgba(184,208,248,0.4); display:inline-block; margin-bottom:1rem;">Cosmetic Surgery · 8 min read · 🔒 Patient Access</div>
-      <h2 class="lp-headline" style="color:#fff; font-size:clamp(1.55rem,3.5vw,2.3rem); line-height:1.25;">Rhinoplasty (Nose Surgery): Your Complete Patient Guide</h2>
+      <h1 class="lp-headline" style="color:#fff; font-size:clamp(1.55rem,3.5vw,2.3rem); line-height:1.25;">Rhinoplasty (Nose Surgery): Your Complete Patient Guide</h1>
       <p style="color:rgba(255,255,255,0.7); font-family:'DM Sans',sans-serif; font-size:0.9rem; margin-top:1rem; font-weight:300;">By Dr. Ornella Oluwole, MD · Board-Certified Anesthesiologist · March 2026</p>
     </div>
   </div>
@@ -10873,7 +10873,7 @@
   <div class="lp-hero" style="background:linear-gradient(135deg,#0d1f0d 0%,#1a4a1a 55%,#2a7a3a 100%); min-height:300px; display:flex; align-items:center; justify-content:center;">
     <div style="text-align:center; max-width:720px; padding:4.5rem 2rem 3.5rem;">
       <div class="section-tag" style="color:#b8f0c8; border-color:rgba(184,240,200,0.4); display:inline-block; margin-bottom:1rem;">Cosmetic Surgery · 8 min read · 🔒 Patient Access</div>
-      <h2 class="lp-headline" style="color:#fff; font-size:clamp(1.55rem,3.5vw,2.3rem); line-height:1.25;">Liposuction: Your Complete Patient Guide</h2>
+      <h1 class="lp-headline" style="color:#fff; font-size:clamp(1.55rem,3.5vw,2.3rem); line-height:1.25;">Liposuction: Your Complete Patient Guide</h1>
       <p style="color:rgba(255,255,255,0.7); font-family:'DM Sans',sans-serif; font-size:0.9rem; margin-top:1rem; font-weight:300;">By Dr. Ornella Oluwole, MD · Board-Certified Anesthesiologist · March 2026</p>
     </div>
   </div>
@@ -11220,7 +11220,7 @@
   <div class="lp-hero" style="background:linear-gradient(135deg,#2d0a1f 0%,#6b2a5a 55%,#9b4a8a 100%); min-height:300px; display:flex; align-items:center; justify-content:center;">
     <div style="text-align:center; max-width:720px; padding:4.5rem 2rem 3.5rem;">
       <div class="section-tag" style="color:#f0d8e8; border-color:rgba(240,216,232,0.4); display:inline-block; margin-bottom:1rem;">Cosmetic Surgery · 10 min read · 🔒 Patient Access</div>
-      <h2 class="lp-headline" style="color:#fff; font-size:clamp(1.55rem,3.5vw,2.3rem); line-height:1.25;">Breast Augmentation: Your Complete Patient Guide</h2>
+      <h1 class="lp-headline" style="color:#fff; font-size:clamp(1.55rem,3.5vw,2.3rem); line-height:1.25;">Breast Augmentation: Your Complete Patient Guide</h1>
       <p style="color:rgba(255,255,255,0.7); font-family:'DM Sans',sans-serif; font-size:0.9rem; margin-top:1rem; font-weight:300;">By Dr. Ornella Oluwole, MD · Board-Certified Anesthesiologist · March 2026</p>
     </div>
   </div>
@@ -11556,7 +11556,7 @@
   <div class="lp-hero" style="background:linear-gradient(135deg,#1a1a2e 0%,#3a2a5a 35%,#5a3a4a 65%,#c8845a 100%); min-height:300px; display:flex; align-items:center; justify-content:center;">
     <div style="text-align:center; max-width:720px; padding:4.5rem 2rem 3.5rem;">
       <div class="section-tag" style="color:#f9d8c8; border-color:rgba(249,216,200,0.4); display:inline-block; margin-bottom:1rem;">Cosmetic Surgery · 5 min read · Free</div>
-      <h2 class="lp-headline" style="color:#fff; font-size:clamp(1.55rem,3.5vw,2.3rem); line-height:1.25;">5 Popular Cosmetic Surgeries: Safety Stats & What to Expect</h2>
+      <h1 class="lp-headline" style="color:#fff; font-size:clamp(1.55rem,3.5vw,2.3rem); line-height:1.25;">5 Popular Cosmetic Surgeries: Safety Stats & What to Expect</h1>
       <p style="color:rgba(255,255,255,0.7); font-family:'DM Sans',sans-serif; font-size:0.9rem; margin-top:1rem; font-weight:300;">By Dr. Ornella Oluwole, MD · Board-Certified Anesthesiologist · March 2026</p>
     </div>
   </div>
@@ -11850,7 +11850,7 @@
 <div class="blog-breadcrumb"><span onclick="showPage('blog')" style="cursor:pointer;">← Back to Blog</span></div>
 <div class="lp-hero" style="background:linear-gradient(135deg,#0a2235 0%,#1a5a6b 55%,#2a9a8a 100%);color:#fff;padding:3.5rem 2rem;text-align:center;">
   <div class="section-tag" style="color:rgba(255,255,255,.7);border-color:rgba(255,255,255,.25);">Labor &amp; Delivery &nbsp;&middot;&nbsp; 10 min read &nbsp;&middot;&nbsp; 🔒 Patient Access</div>
-  <h2 class="lp-headline" style="color:#fff;max-width:700px;margin:.75rem auto 0;font-size:clamp(1.6rem,4vw,2.4rem);">Epidurals, Birth Pain &amp; Your Anesthesiologist: What Every Pregnant Woman Needs to Know</h2>
+  <h1 class="lp-headline" style="color:#fff;max-width:700px;margin:.75rem auto 0;font-size:clamp(1.6rem,4vw,2.4rem);">Epidurals, Birth Pain &amp; Your Anesthesiologist: What Every Pregnant Woman Needs to Know</h1>
       <p style="color:rgba(255,255,255,0.7); font-family:'DM Sans',sans-serif; font-size:0.9rem; margin-top:1rem; font-weight:300;">By Dr. Ornella Oluwole, MD &nbsp;&middot;&nbsp; Board-Certified Anesthesiologist &nbsp;&middot;&nbsp; March 2026</p>
 </div>
 <div class="ld-post">
@@ -12068,7 +12068,7 @@
 <div class="blog-breadcrumb"><span onclick="showPage('blog')" style="cursor:pointer;">← Back to Blog</span></div>
 <div class="lp-hero" style="background:linear-gradient(135deg,#3a0808 0%,#7a1a1a 50%,#c84a2a 100%);color:#fff;padding:3.5rem 2rem;text-align:center;">
   <div class="section-tag" style="color:rgba(255,255,255,.7);border-color:rgba(255,255,255,.25);">Medical Tourism &nbsp;&middot;&nbsp; 10 min read &nbsp;&middot;&nbsp; 🔒 Patient Access</div>
-  <h2 class="lp-headline" style="color:#fff;max-width:700px;margin:.75rem auto 0;font-size:clamp(1.6rem,4vw,2.4rem);">Surgery Abroad: Your Safety Guide Before You Board That Plane</h2>
+  <h1 class="lp-headline" style="color:#fff;max-width:700px;margin:.75rem auto 0;font-size:clamp(1.6rem,4vw,2.4rem);">Surgery Abroad: Your Safety Guide Before You Board That Plane</h1>
       <p style="color:rgba(255,255,255,0.7); font-family:'DM Sans',sans-serif; font-size:0.9rem; margin-top:1rem; font-weight:300;">By Dr. Ornella Oluwole, MD &nbsp;&middot;&nbsp; Board-Certified Anesthesiologist &nbsp;&middot;&nbsp; March 2026</p>
 </div>
 <div class="mt-post">
@@ -12265,7 +12265,7 @@
 <div class="blog-breadcrumb"><span onclick="showPage('blog')" style="cursor:pointer;">← Back to Blog</span></div>
 <div class="lp-hero" style="background:linear-gradient(135deg,#1a0a2e 0%,#3a1a6b 55%,#5a3a9b 100%);color:#fff;padding:3.5rem 2rem;text-align:center;">
   <div class="section-tag" style="color:rgba(255,255,255,.7);border-color:rgba(255,255,255,.25);">Cosmetic Surgery &nbsp;&middot;&nbsp; 10 min read &nbsp;&middot;&nbsp; 🔒 Patient Access</div>
-  <h2 class="lp-headline" style="color:#fff;max-width:700px;margin:.75rem auto 0;font-size:clamp(1.6rem,4vw,2.4rem);">Cosmetic Surgery &amp; Anesthesia: What Your Surgeon Won’t Tell You</h2>
+  <h1 class="lp-headline" style="color:#fff;max-width:700px;margin:.75rem auto 0;font-size:clamp(1.6rem,4vw,2.4rem);">Cosmetic Surgery &amp; Anesthesia: What Your Surgeon Won’t Tell You</h1>
       <p style="color:rgba(255,255,255,0.7); font-family:'DM Sans',sans-serif; font-size:0.9rem; margin-top:1rem; font-weight:300;">By Dr. Ornella Oluwole, MD &nbsp;&middot;&nbsp; Board-Certified Anesthesiologist &nbsp;&middot;&nbsp; March 2026</p>
 </div>
 <div class="ca-post">
@@ -12459,7 +12459,7 @@
 <div class="blog-breadcrumb"><span onclick="showPage('blog')" style="cursor:pointer;">← Back to Blog</span></div>
 <div class="lp-hero" style="background:linear-gradient(135deg,#0a1f0a 0%,#1a5a2a 55%,#2a8a5a 100%);color:#fff;padding:3.5rem 2rem;text-align:center;">
   <div class="section-tag" style="color:rgba(255,255,255,.7);border-color:rgba(255,255,255,.25);">Surgical Safety &nbsp;&middot;&nbsp; 9 min read</div>
-  <h2 class="lp-headline" style="color:#fff;max-width:700px;margin:.75rem auto 0;font-size:clamp(1.6rem,4vw,2.4rem);">On Ozempic, Wegovy, or Mounjaro? Read This Before Any Surgery</h2>
+  <h1 class="lp-headline" style="color:#fff;max-width:700px;margin:.75rem auto 0;font-size:clamp(1.6rem,4vw,2.4rem);">On Ozempic, Wegovy, or Mounjaro? Read This Before Any Surgery</h1>
       <p style="color:rgba(255,255,255,0.7); font-family:'DM Sans',sans-serif; font-size:0.9rem; margin-top:1rem; font-weight:300;">By Dr. Ornella Oluwole, MD &nbsp;&middot;&nbsp; Board-Certified Anesthesiologist &nbsp;&middot;&nbsp; March 2026</p>
 </div>
 <div class="gl-post">
@@ -12640,7 +12640,7 @@
 <div class="blog-breadcrumb" onclick="showPage('blog')">← Back to Blog</div>
 <div class="lp-hero" style="background:linear-gradient(135deg,#0a2012 0%,#1a4a2a 55%,#2a7a4a 100%);color:#fff;padding:3.5rem 2rem;text-align:center;">
   <div class="section-tag" style="color:rgba(255,255,255,.7);border-color:rgba(255,255,255,.25);">Post-Op Recovery &nbsp;&middot;&nbsp; 11 min read &nbsp;&middot;&nbsp; 🔒 Patient Access</div>
-  <h2 class="lp-headline" style="color:#fff;max-width:700px;margin:.75rem auto 0;font-size:clamp(1.6rem,4vw,2.4rem);">Post-Operative Nutrition &amp; Wound Healing: Your Complete Patient Guide</h2>
+  <h1 class="lp-headline" style="color:#fff;max-width:700px;margin:.75rem auto 0;font-size:clamp(1.6rem,4vw,2.4rem);">Post-Operative Nutrition &amp; Wound Healing: Your Complete Patient Guide</h1>
       <p style="color:rgba(255,255,255,0.7); font-family:'DM Sans',sans-serif; font-size:0.9rem; margin-top:1rem; font-weight:300;">By Dr. Ornella Oluwole, MD &nbsp;&middot;&nbsp; Board-Certified Anesthesiologist &nbsp;&middot;&nbsp; March 2026</p>
 </div>
 <div class="nw-post">
@@ -12992,7 +12992,7 @@
 <div class="blog-breadcrumb" onclick="showPage('blog')">← Back to Blog</div>
 <div class="lp-hero" style="background:linear-gradient(135deg,#0a2012 0%,#2a7a4a 100%);color:#fff;padding:3rem 2rem;text-align:center;">
   <div class="section-tag" style="color:rgba(255,255,255,.7);border-color:rgba(255,255,255,.25);">🔒 Patient Access &nbsp;&middot;&nbsp; 3 min read</div>
-  <h2 class="lp-headline" style="color:#fff;max-width:640px;margin:.75rem auto 0;font-size:clamp(1.5rem,4vw,2.2rem);">Quick Reference: Nutrition for Wound Healing</h2>
+  <h1 class="lp-headline" style="color:#fff;max-width:640px;margin:.75rem auto 0;font-size:clamp(1.5rem,4vw,2.2rem);">Quick Reference: Nutrition for Wound Healing</h1>
       <p style="color:rgba(255,255,255,0.7); font-family:'DM Sans',sans-serif; font-size:0.9rem; margin-top:1rem; font-weight:300;">By Dr. Ornella Oluwole, MD &nbsp;&middot;&nbsp; Board-Certified Anesthesiologist &nbsp;&middot;&nbsp; March 2026</p>
 </div>
 <div class="qr-wrap">
@@ -13272,7 +13272,7 @@
 <div class="blog-breadcrumb" onclick="showPage('blog')">← Back to Blog</div>
 <div class="lp-hero" style="background:linear-gradient(135deg,#1a0810 0%,#7a1e3a 55%,#c94a6a 100%);color:#fff;padding:3.5rem 2rem;text-align:center;">
   <div class="section-tag" style="color:rgba(255,255,255,.7);border-color:rgba(255,255,255,.25);">Cosmetic Surgery &nbsp;&middot;&nbsp; 10 min read</div>
-  <h2 class="lp-headline" style="color:#fff;max-width:720px;margin:.75rem auto 0;font-size:clamp(1.6rem,4vw,2.4rem);">Why Is the Brazilian Butt Lift (BBL) Considered a Higher-Risk Procedure?</h2>
+  <h1 class="lp-headline" style="color:#fff;max-width:720px;margin:.75rem auto 0;font-size:clamp(1.6rem,4vw,2.4rem);">Why Is the Brazilian Butt Lift (BBL) Considered a Higher-Risk Procedure?</h1>
       <p style="color:rgba(255,255,255,0.7); font-family:'DM Sans',sans-serif; font-size:0.9rem; margin-top:1rem; font-weight:300;">By Dr. Ornella Oluwole, MD &nbsp;&middot;&nbsp; Board-Certified Anesthesiologist &nbsp;&middot;&nbsp; March 2026</p>
 </div>
 <div class="bb-post">
@@ -13576,7 +13576,7 @@
 <div class="blog-breadcrumb" onclick="showPage('blog')">← Back to Blog</div>
 <div class="lp-hero" style="background:linear-gradient(135deg,#1a0810 0%,#7a1e3a 100%);color:#fff;padding:3rem 2rem;text-align:center;">
   <div class="section-tag" style="color:rgba(255,255,255,.7);border-color:rgba(255,255,255,.25);">Cosmetic Surgery &nbsp;&middot;&nbsp; 4 min read</div>
-  <h2 class="lp-headline" style="color:#fff;max-width:660px;margin:.75rem auto 0;font-size:clamp(1.5rem,4vw,2.2rem);">BBL Red Flags: A Checklist to Evaluate Surgeons &amp; Facilities Before You Book</h2>
+  <h1 class="lp-headline" style="color:#fff;max-width:660px;margin:.75rem auto 0;font-size:clamp(1.5rem,4vw,2.2rem);">BBL Red Flags: A Checklist to Evaluate Surgeons &amp; Facilities Before You Book</h1>
       <p style="color:rgba(255,255,255,0.7); font-family:'DM Sans',sans-serif; font-size:0.9rem; margin-top:1rem; font-weight:300;">By Dr. Ornella Oluwole, MD &nbsp;&middot;&nbsp; Board-Certified Anesthesiologist &nbsp;&middot;&nbsp; March 2026</p>
 </div>
 <div class="rf-wrap">
@@ -13826,7 +13826,7 @@
 <div class="blog-breadcrumb" onclick="showPage('blog')">← Back to Blog</div>
 <div class="lp-hero" style="background:linear-gradient(135deg,#1a0810 0%,#7a1e3a 55%,#c94a6a 100%);color:#fff;padding:3.5rem 2rem;text-align:center;">
   <div class="section-tag" style="color:rgba(255,255,255,.7);border-color:rgba(255,255,255,.25);">Cosmetic Surgery &nbsp;&middot;&nbsp; 6 min read</div>
-  <h2 class="lp-headline" style="color:#fff;max-width:720px;margin:.75rem auto 0;font-size:clamp(1.6rem,4vw,2.4rem);">BBL Complications: Who Is Actually Most at Risk? What the Research Shows</h2>
+  <h1 class="lp-headline" style="color:#fff;max-width:720px;margin:.75rem auto 0;font-size:clamp(1.6rem,4vw,2.4rem);">BBL Complications: Who Is Actually Most at Risk? What the Research Shows</h1>
       <p style="color:rgba(255,255,255,0.7); font-family:'DM Sans',sans-serif; font-size:0.9rem; margin-top:1rem; font-weight:300;">By Dr. Ornella Oluwole, MD &nbsp;&middot;&nbsp; Board-Certified Anesthesiologist &nbsp;&middot;&nbsp; March 2026</p>
 </div>
 <div class="br-post">
@@ -14056,7 +14056,7 @@
 <div class="blog-breadcrumb"><span onclick="showPage('blog')" style="cursor:pointer;">← Back to Blog</span></div>
 <div class="lp-hero" style="background:linear-gradient(135deg,#1a0810 0%,#5a1230 55%,#8b1a4a 100%);color:#fff;padding:3.5rem 2rem;text-align:center;">
   <div class="section-tag" style="color:rgba(255,255,255,.7);border-color:rgba(255,255,255,.25);">Labor &amp; Delivery &nbsp;&middot;&nbsp; 10 min read &nbsp;&middot;&nbsp; Free</div>
-  <h2 class="lp-headline" style="color:#fff;max-width:740px;margin:.75rem auto 0;font-size:clamp(1.6rem,4vw,2.4rem);">Why Your Anesthesiologist May Be the Most Important Doctor You Haven't Met Yet</h2>
+  <h1 class="lp-headline" style="color:#fff;max-width:740px;margin:.75rem auto 0;font-size:clamp(1.6rem,4vw,2.4rem);">Why Your Anesthesiologist May Be the Most Important Doctor You Haven't Met Yet</h1>
       <p style="color:rgba(255,255,255,0.7); font-family:'DM Sans',sans-serif; font-size:0.9rem; margin-top:1rem; font-weight:300;">By Dr. Ornella Oluwole, MD &nbsp;&middot;&nbsp; Board-Certified Anesthesiologist &nbsp;&middot;&nbsp; March 2026</p>
 </div>
 <div class="mm-post">
@@ -14270,7 +14270,7 @@
 <div class="blog-breadcrumb"><span onclick="showPage('blog')" style="cursor:pointer;">← Back to Blog</span></div>
 <div class="lp-hero" style="background:linear-gradient(135deg,#0d1f2e 0%,#1e3a5f 55%,#2e6aad 100%);color:#fff;padding:3.5rem 2rem;text-align:center;">
   <div class="section-tag" style="color:rgba(255,255,255,.7);border-color:rgba(255,255,255,.25);">🔒 Patient Access &nbsp;&middot;&nbsp; Weight-Loss Surgery &nbsp;&middot;&nbsp; 12 min read</div>
-  <h2 class="lp-headline" style="color:#fff;max-width:740px;margin:.75rem auto 0;font-size:clamp(1.6rem,4vw,2.4rem);">Your Anesthesiologist's Guide to Weight-Loss Surgery: Everything You Need to Know Before, During & After</h2>
+  <h1 class="lp-headline" style="color:#fff;max-width:740px;margin:.75rem auto 0;font-size:clamp(1.6rem,4vw,2.4rem);">Your Anesthesiologist's Guide to Weight-Loss Surgery: Everything You Need to Know Before, During & After</h1>
       <p style="color:rgba(255,255,255,0.7); font-family:'DM Sans',sans-serif; font-size:0.9rem; margin-top:1rem; font-weight:300;">By Dr. Ornella Oluwole, MD &nbsp;&middot;&nbsp; Board-Certified Anesthesiologist &nbsp;&middot;&nbsp; March 2026</p>
 </div>
 <div class="bs-post">
@@ -14503,7 +14503,7 @@
   <div class="lp-hero" style="min-height:40vh; background:linear-gradient(135deg,#1C2B22,#2D5A3D);">
     <div class="lp-hero-bg"></div>
     <div class="lp-breadcrumb" onclick="showPage('home')" style="color:rgba(255,255,255,0.7);">← OpWell Home</div>
-    <h2 class="lp-headline" style="color:#FAF0E8;">Care Plans & Pricing</h2>
+    <h1 class="lp-headline" style="color:#FAF0E8;">Care Plans & Pricing</h1>
     <p class="lp-sub" style="color:rgba(250,240,232,0.85);">Transparent pricing. No hidden fees. HSA & FSA accepted. No referral required.</p>
   </div>
 
@@ -14917,7 +14917,7 @@
     <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(17,17,17,0.95) 0%, rgba(17,17,17,0.6) 35%, transparent 60%);"></div>
     <div class="sched-hero-text" style="position:absolute; bottom:0; left:0; right:0; padding:2rem 2rem 2rem;">
       <div class="lp-breadcrumb" onclick="showPage('home')" style="color:rgba(255,255,255,0.7); position:static; margin-bottom:0.75rem; cursor:pointer;">← OpWell Home</div>
-      <h2 class="lp-headline" style="color:#FAF0E8;">Book Your Consultation</h2>
+      <h1 class="lp-headline" style="color:#FAF0E8;">Book Your Consultation</h1>
       <p class="lp-sub sched-hero-sub" style="color:rgba(250,240,232,0.85);">Tell us about yourself, choose your service, complete payment, then pick your time. HSA &amp; FSA accepted.</p>
       <div style="margin-top:1rem; background:rgba(200,132,90,0.9); color:#fff; font-family:'DM Sans',sans-serif; font-size:0.82rem; font-weight:600; padding:0.6rem 1.25rem; border-radius:8px; display:inline-block;">Now Accepting Bookings — Consultations Begin May 1, 2026</div>
     </div>
@@ -16274,7 +16274,7 @@
     </div>
 
     <div style="font-family:'Playfair Display',serif; font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--terracotta); margin-bottom:0.6rem;">Legal</div>
-    <h1 style="font-family:'Playfair Display',serif; font-size:2.4rem; font-weight:500; color:var(--charcoal); margin-bottom:0.5rem; line-height:1.2;">Privacy Policy</h2>
+    <h1 style="font-family:'Playfair Display',serif; font-size:2.4rem; font-weight:500; color:var(--charcoal); margin-bottom:0.5rem; line-height:1.2;">Privacy Policy</h1>
     <p style="font-size:0.82rem; color:var(--slate); margin-bottom:2.5rem;">Effective Date: March 12, 2026 &nbsp;|&nbsp; Last Updated: March 12, 2026</p>
 
     <div style="height:2px; background:linear-gradient(90deg,var(--terracotta),transparent); margin-bottom:2.5rem;"></div>
@@ -16443,7 +16443,7 @@
     </div>
 
     <div style="font-family:'Playfair Display',serif; font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--terracotta); margin-bottom:0.6rem;">Legal</div>
-    <h1 style="font-family:'Playfair Display',serif; font-size:2.4rem; font-weight:500; color:var(--charcoal); margin-bottom:0.5rem; line-height:1.2;">Terms of Service</h2>
+    <h1 style="font-family:'Playfair Display',serif; font-size:2.4rem; font-weight:500; color:var(--charcoal); margin-bottom:0.5rem; line-height:1.2;">Terms of Service</h1>
     <p style="font-size:0.82rem; color:var(--slate); margin-bottom:2.5rem;">Effective Date: March 12, 2026 &nbsp;|&nbsp; Last Updated: March 12, 2026</p>
 
     <div style="height:2px; background:linear-gradient(90deg,var(--terracotta),transparent); margin-bottom:2.5rem;"></div>
@@ -16631,7 +16631,7 @@
 
     <div style="text-align:center; margin-bottom:2.5rem;">
       <div style="font-family:'Playfair Display',serif; font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--terracotta); margin-bottom:0.6rem;">Get in Touch</div>
-      <h1 style="font-family:'Playfair Display',serif; font-size:2.2rem; font-weight:500; color:var(--charcoal); margin-bottom:0.75rem; line-height:1.2;">Contact Us</h2>
+      <h1 style="font-family:'Playfair Display',serif; font-size:2.2rem; font-weight:500; color:var(--charcoal); margin-bottom:0.75rem; line-height:1.2;">Contact Us</h1>
       <p style="font-size:0.92rem; color:var(--slate); max-width:520px; margin:0 auto; line-height:1.7; font-weight:300;">Have a question, special request, or want OpWell services in your state? Let us know.</p>
     </div>
 
@@ -16786,7 +16786,7 @@
 
     <div style="text-align:center; margin-bottom:2.5rem;">
       <div style="font-family:'Playfair Display',serif; font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--terracotta); margin-bottom:0.6rem;">For Providers</div>
-      <h1 style="font-family:'Playfair Display',serif; font-size:2.2rem; font-weight:500; color:var(--charcoal); margin-bottom:0.75rem; line-height:1.2;">Refer a Patient or Partner with OpWell</h2>
+      <h1 style="font-family:'Playfair Display',serif; font-size:2.2rem; font-weight:500; color:var(--charcoal); margin-bottom:0.75rem; line-height:1.2;">Refer a Patient or Partner with OpWell</h1>
       <p style="font-size:0.92rem; color:var(--slate); max-width:560px; margin:0 auto; line-height:1.7; font-weight:300;">OpWell works alongside surgeons, OBs, bariatric programs, and proceduralists. Refer a patient or explore a practice partnership.</p>
     </div>
 
