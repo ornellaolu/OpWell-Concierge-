@@ -9,43 +9,252 @@
   <style>
     body { font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif; line-height: 1.6; color: #333; max-width: 1200px; margin: 0 auto; padding: 2rem; }
     h1 { font-size: 2.5rem; margin-bottom: 1rem; color: #1C1C1C; }
-    .blog-meta { color: #666; font-size: 0.95rem; margin-bottom: 2rem; }
-    .blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; }
-    .blog-card { border: 1px solid #e0e0e0; padding: 1.5rem; border-radius: 8px; text-decoration: none; color: inherit; transition: transform 0.2s; }
-    .blog-card:hover { transform: translateY(-4px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-    .blog-card h2 { font-size: 1.3rem; margin-bottom: 0.5rem; }
+    .blog-meta { color: #666; font-size: 0.95rem; margin-bottom: 2rem; border-bottom: 1px solid #eee; padding-bottom: 1rem; }
+    .back-link { color: #2D5A3D; margin-bottom: 2rem; display: inline-block; }
+    .blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem; margin-top: 2rem; }
+    .blog-card { border: 1px solid #e0e0e0; padding: 1.5rem; border-radius: 8px; text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s; }
+    .blog-card:hover { transform: translateY(-4px); box-shadow: 0 8px 16px rgba(0,0,0,0.1); }
+    .blog-card h2 { font-size: 1.1rem; margin-bottom: 0.5rem; color: #2D5A3D; line-height: 1.4; }
     .blog-card-meta { color: #999; font-size: 0.85rem; margin-bottom: 1rem; }
-    .blog-card p { color: #666; line-height: 1.6; }
+    .blog-card p { color: #666; line-height: 1.6; font-size: 0.95rem; }
+    .category { display: inline-block; background: #f0f8f5; color: #2D5A3D; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.75rem; margin-top: 0.5rem; }
     a { color: #2D5A3D; text-decoration: none; }
     a:hover { text-decoration: underline; }
+    .cta-section { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; }
+    .cta-btn { background: #2D5A3D; color: white; padding: 0.75rem 2rem; border-radius: 4px; display: inline-block; margin-top: 1rem; }
   </style>
 </head>
 <body>
+  <a href="/" class="back-link">← Back to Home</a>
+
   <h1>OpWell Blog</h1>
-  <p class="blog-meta">Evidence-based guides on surgical preparation, anesthesia, recovery, and patient education.</p>
-  
+  <p class="blog-meta">
+    Evidence-based guides on surgical preparation, anesthesia, recovery, and patient education from Dr. Ornella Oluwole, MD — Board-Certified Anesthesiologist
+  </p>
+
   <div class="blog-grid">
-    <!-- Blog posts will be listed here -->
-    <!-- Each card links to /blog/post-slug.html -->
     <div class="blog-card">
-      <h2><a href="/blog/how-to-prepare-for-surgery-checklist">How to Prepare for Surgery: A Complete Checklist from an Anesthesiologist</a></h2>
-      <div class="blog-card-meta">By Dr. Ornella Oluwole, MD</div>
+      <h2><a href="/blog/how-to-prepare-for-surgery-checklist">How to Prepare for Surgery: Complete Checklist</a></h2>
+      <div class="blog-card-meta">By Dr. Ornella Oluwole, MD • 12 min read</div>
       <p>A comprehensive step-by-step guide to optimizing your health before surgery, from your anesthesiologist's perspective.</p>
+      <span class="category">SURGICAL PREP</span>
     </div>
-    
+
     <div class="blog-card">
       <h2><a href="/blog/what-happens-under-general-anesthesia">What Happens to Your Body Under General Anesthesia</a></h2>
-      <div class="blog-card-meta">By Dr. Ornella Oluwole, MD</div>
-      <p>Understand the science behind anesthesia and what happens to your body during surgery.</p>
+      <div class="blog-card-meta">By Dr. Ornella Oluwole, MD • 8 min read</div>
+      <p>Understand the science behind anesthesia and what happens to your body and brain during surgery.</p>
+      <span class="category">ANESTHESIA</span>
     </div>
 
     <div class="blog-card">
       <h2><a href="/blog/first-72-hours-after-surgery">The First 72 Hours After Surgery: What to Expect</a></h2>
-      <div class="blog-card-meta">By Dr. Ornella Oluwole, MD</div>
+      <div class="blog-card-meta">By Dr. Ornella Oluwole, MD • 10 min read</div>
       <p>A detailed guide to recovery expectations and pain management in the critical first three days after surgery.</p>
+      <span class="category">RECOVERY</span>
     </div>
-    
-    <!-- More posts continue... -->
+
+    <div class="blog-card">
+      <h2><a href="/blog/mental-health-before-surgery">Mental Health Before Surgery: Preparation Guide</a></h2>
+      <div class="blog-card-meta">By Dr. Ornella Oluwole, MD • 9 min read</div>
+      <p>How pre-surgical anxiety impacts outcomes. Evidence-based strategies for managing pre-operative stress.</p>
+      <span class="category">WELLNESS</span>
+    </div>
+
+    <div class="blog-card">
+      <h2><a href="/blog/medical-tourism-surgery-abroad">Medical Tourism: Safety Guide for Surgery Abroad</a></h2>
+      <div class="blog-card-meta">By Dr. Ornella Oluwole, MD • 11 min read</div>
+      <p>How to stay safe when having surgery in another country: pre-op clearance, in-flight care, post-op follow-up.</p>
+      <span class="category">MEDICAL TOURISM</span>
+    </div>
+
+    <div class="blog-card">
+      <h2><a href="/blog/blood-thinners-surgery-guide">Managing Blood Thinners Around Surgery</a></h2>
+      <div class="blog-card-meta">By Dr. Ornella Oluwole, MD • 10 min read</div>
+      <p>How to safely manage anticoagulants (Warfarin, Eliquat, Pradaxa) before and after surgery.</p>
+      <span class="category">MEDICATION</span>
+    </div>
+
+    <div class="blog-card">
+      <h2><a href="/blog/dumping-syndrome-guide">Understanding Dumping Syndrome After Bariatric Surgery</a></h2>
+      <div class="blog-card-meta">By Dr. Ornella Oluwole, MD • 8 min read</div>
+      <p>What causes dumping syndrome, how to recognize it, and evidence-based management strategies.</p>
+      <span class="category">BARIATRIC</span>
+    </div>
+
+    <div class="blog-card">
+      <h2><a href="/blog/bariatric-surgery-nutrition">Vitamin & Supplement Schedule After Weight-Loss Surgery</a></h2>
+      <div class="blog-card-meta">By Dr. Ornella Oluwole, MD • 10 min read</div>
+      <p>Comprehensive guide to supplementation after weight-loss surgery to prevent deficiencies.</p>
+      <span class="category">NUTRITION</span>
+    </div>
+
+    <div class="blog-card">
+      <h2><a href="/blog/evidence-based-surgery-preparation">Evidence-Based Surgery Preparation: Clinical Guide</a></h2>
+      <div class="blog-card-meta">By Dr. Ornella Oluwole, MD • 12 min read</div>
+      <p>Clinical evidence-based approaches to pre-operative optimization including nutrition and exercise.</p>
+      <span class="category">SURGICAL PREP</span>
+    </div>
+
+    <div class="blog-card">
+      <h2><a href="/blog/ozempic-wegovy-surgery-guide">Surgery While on Ozempic, Wegovy, or Mounjaro</a></h2>
+      <div class="blog-card-meta">By Dr. Ornella Oluwole, MD • 9 min read</div>
+      <p>Important perioperative considerations for GLP-1 agonists: when to stop, surgical risks, optimization.</p>
+      <span class="category">MEDICATION</span>
+    </div>
+
+    <div class="blog-card">
+      <h2><a href="/blog/epidurals-birth-pain-anesthesia">Epidurals & Labor Pain: Your Anesthesiologist's Guide</a></h2>
+      <div class="blog-card-meta">By Dr. Ornella Oluwole, MD • 10 min read</div>
+      <p>Complete guide to epidural anesthesia during labor: how it works, risks, benefits, expectations.</p>
+      <span class="category">OB/GYN</span>
+    </div>
+
+    <div class="blog-card">
+      <h2><a href="/blog/cosmetic-surgery-fears">3 Biggest Fears Before Cosmetic Surgery (Research Says)</a></h2>
+      <div class="blog-card-meta">By Dr. Ornella Oluwole, MD • 8 min read</div>
+      <p>Address common cosmetic surgery fears with evidence-based information and real outcomes data.</p>
+      <span class="category">COSMETIC</span>
+    </div>
+
+    <div class="blog-card">
+      <h2><a href="/blog/brazilian-butt-lift-bbl-guide">Brazilian Butt Lift (BBL): Complete Patient Guide</a></h2>
+      <div class="blog-card-meta">By Dr. Ornella Oluwole, MD • 11 min read</div>
+      <p>Complete guide to BBL procedure including safety, recovery times, expectations, and risk factors.</p>
+      <span class="category">COSMETIC</span>
+    </div>
+
+    <div class="blog-card">
+      <h2><a href="/blog/tummy-tuck-patient-guide">Tummy Tuck (Abdominoplasty): Complete Patient Guide</a></h2>
+      <div class="blog-card-meta">By Dr. Ornella Oluwole, MD • 10 min read</div>
+      <p>Everything about tummy tuck surgery: procedure types, recovery timeline, aesthetic outcomes.</p>
+      <span class="category">COSMETIC</span>
+    </div>
+
+    <div class="blog-card">
+      <h2><a href="/blog/rhinoplasty-nose-surgery-guide">Rhinoplasty (Nose Surgery): Complete Patient Guide</a></h2>
+      <div class="blog-card-meta">By Dr. Ornella Oluwole, MD • 10 min read</div>
+      <p>Comprehensive guide to rhinoplasty: procedure types, recovery, and realistic aesthetic outcomes.</p>
+      <span class="category">COSMETIC</span>
+    </div>
+
+    <div class="blog-card">
+      <h2><a href="/blog/liposuction-patient-guide">Liposuction: Complete Patient Guide</a></h2>
+      <div class="blog-card-meta">By Dr. Ornella Oluwole, MD • 9 min read</div>
+      <p>Guide to liposuction procedure, different techniques, recovery expectations, and candidacy.</p>
+      <span class="category">COSMETIC</span>
+    </div>
+
+    <div class="blog-card">
+      <h2><a href="/blog/breast-augmentation-guide">Breast Augmentation: Complete Patient Guide</a></h2>
+      <div class="blog-card-meta">By Dr. Ornella Oluwole, MD • 11 min read</div>
+      <p>Everything about breast augmentation: implant types, surgical approaches, recovery, considerations.</p>
+      <span class="category">COSMETIC</span>
+    </div>
+
+    <div class="blog-card">
+      <h2><a href="/blog/postop-nutrition-wound-healing">Post-Op Nutrition & Wound Healing: Patient Guide</a></h2>
+      <div class="blog-card-meta">By Dr. Ornella Oluwole, MD • 10 min read</div>
+      <p>Evidence-based nutritional strategies to optimize wound healing and support post-operative recovery.</p>
+      <span class="category">NUTRITION</span>
+    </div>
+
+    <div class="blog-card">
+      <h2><a href="/blog/why-bbl-higher-risk">Why Is BBL Considered a Higher-Risk Procedure?</a></h2>
+      <div class="blog-card-meta">By Dr. Ornella Oluwole, MD • 9 min read</div>
+      <p>Understanding the specific risks of BBL surgery and how to minimize them.</p>
+      <span class="category">COSMETIC</span>
+    </div>
+
+    <div class="blog-card">
+      <h2><a href="/blog/bbl-red-flags-surgeon-evaluation">BBL Red Flags: Surgeon & Facility Evaluation Checklist</a></h2>
+      <div class="blog-card-meta">By Dr. Ornella Oluwole, MD • 8 min read</div>
+      <p>Critical checklist to identify warning signs when choosing a surgeon and surgical facility.</p>
+      <span class="category">COSMETIC</span>
+    </div>
+
+    <div class="blog-card">
+      <h2><a href="/blog/bbl-complications-research">BBL Complications: Who's at Risk? What Research Shows</a></h2>
+      <div class="blog-card-meta">By Dr. Ornella Oluwole, MD • 10 min read</div>
+      <p>Evidence-based review of BBL complications, risk factors, and strategies to minimize adverse outcomes.</p>
+      <span class="category">COSMETIC</span>
+    </div>
+
+    <div class="blog-card">
+      <h2><a href="/blog/cosmetic-surgery-complete-guide">Your Complete Cosmetic Surgery Guide</a></h2>
+      <div class="blog-card-meta">By Dr. Ornella Oluwole, MD • 12 min read</div>
+      <p>Comprehensive guide to cosmetic surgery options, recovery, expectations, and surgeon selection.</p>
+      <span class="category">COSMETIC</span>
+    </div>
+
+    <div class="blog-card">
+      <h2><a href="/blog/fajas-tummy-tuck-research">Do Fajas Work After Tummy Tuck? What Research Says</a></h2>
+      <div class="blog-card-meta">By Dr. Ornella Oluwole, MD • 7 min read</div>
+      <p>Evidence-based review of compression garments after tummy tuck: benefits, optimal wear, when to use.</p>
+      <span class="category">COSMETIC</span>
+    </div>
+
+    <div class="blog-card">
+      <h2><a href="/blog/cosmetic-surgeries-safety-stats">5 Popular Cosmetic Surgeries: Safety Stats</a></h2>
+      <div class="blog-card-meta">By Dr. Ornella Oluwole, MD • 9 min read</div>
+      <p>Safety statistics and realistic expectations for the 5 most popular cosmetic procedures.</p>
+      <span class="category">COSMETIC</span>
+    </div>
+
+    <div class="blog-card">
+      <h2><a href="/blog/cosmetic-surgery-anesthesia-guide">Cosmetic Surgery & Anesthesia: What You Should Know</a></h2>
+      <div class="blog-card-meta">By Dr. Ornella Oluwole, MD • 8 min read</div>
+      <p>Anesthesia safety in cosmetic surgery and critical questions to ask your anesthesiologist.</p>
+      <span class="category">ANESTHESIA</span>
+    </div>
+
+    <div class="blog-card">
+      <h2><a href="/blog/surgery-abroad-safety-guide">Surgery Abroad: Safety Guide Before You Travel</a></h2>
+      <div class="blog-card-meta">By Dr. Ornella Oluwole, MD • 10 min read</div>
+      <p>Pre-travel surgical clearance, in-flight considerations, and post-operative care internationally.</p>
+      <span class="category">MEDICAL TOURISM</span>
+    </div>
+
+    <div class="blog-card">
+      <h2><a href="/blog/nutrition-wound-healing-reference">Quick Reference: Nutrition for Wound Healing</a></h2>
+      <div class="blog-card-meta">By Dr. Ornella Oluwole, MD • 6 min read</div>
+      <p>Quick reference guide to nutrients, foods, and supplements that accelerate surgical wound healing.</p>
+      <span class="category">NUTRITION</span>
+    </div>
+
+    <div class="blog-card">
+      <h2><a href="/blog/importance-of-anesthesiologist">Why Your Anesthesiologist Is Your Most Important Doctor</a></h2>
+      <div class="blog-card-meta">By Dr. Ornella Oluwole, MD • 9 min read</div>
+      <p>Why anesthesia management is critical to surgical safety, pain control, and recovery outcomes.</p>
+      <span class="category">ANESTHESIA</span>
+    </div>
+
+    <div class="blog-card">
+      <h2><a href="/blog/weight-loss-surgery-anesthesia-guide">Weight-Loss Surgery: Anesthesiologist's Complete Guide</a></h2>
+      <div class="blog-card-meta">By Dr. Ornella Oluwole, MD • 12 min read</div>
+      <p>Comprehensive perioperative guide for bariatric surgery from an anesthesiologist's perspective.</p>
+      <span class="category">BARIATRIC</span>
+    </div>
+
+    <div class="blog-card">
+      <h2><a href="/blog/what-your-anesthesiologist-wants-you-to-know">What Your Anesthesiologist Wants You to Know</a></h2>
+      <div class="blog-card-meta">By Dr. Ornella Oluwole, MD • 8 min read</div>
+      <p>Essential information about surgical safety, pain management, and anesthesia expectations.</p>
+      <span class="category">ANESTHESIA</span>
+    </div>
+
+    <div class="blog-card">
+      <h2><a href="/blog/meet-our-team">Meet Your Team</a></h2>
+      <div class="blog-card-meta">OpWell Concierge • Profile</div>
+      <p>Meet Dr. Ornella Oluwole and the OpWell Concierge team committed to your surgical success.</p>
+      <span class="category">ABOUT</span>
+    </div>
+  </div>
+
+  <div class="cta-section">
+    <h2>Ready for Your Surgical Journey?</h2>
+    <p>OpWell Concierge offers personalized anesthesia consultations and surgical preparation guidance.</p>
+    <a href="/" class="cta-btn">Schedule a Consultation</a>
   </div>
 
   <script type="application/ld+json">
@@ -53,7 +262,7 @@
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     "name": "OpWell Blog",
-    "description": "Surgical preparation, anesthesia, and recovery guides from Dr. Ornella Oluwole, MD",
+    "description": "Surgical preparation, anesthesia, and recovery guides from board-certified anesthesiologist Dr. Ornella Oluwole",
     "url": "https://opwellconcierge.com/blog/",
     "isPartOf": {
       "@type": "WebSite",
