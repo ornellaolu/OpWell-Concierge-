@@ -6,13 +6,14 @@
   <title>OpWell Concierge™ — Anesthesiologist-Led Perioperative Care</title>
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
-  <!-- Google Analytics -->
+  <!-- Google Analytics & Google Ads (consolidated) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-KD14XVW4B0"></script>
   <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-KD14XVW4B0');
+  gtag('config', 'AW-18020334148');
   </script>
 
   <!-- Meta Pixel -->
@@ -31,15 +32,6 @@
   <noscript><img height="1" width="1" style="display:none"
   src="https://www.facebook.com/tr?id=27638520232415109&ev=PageView&noscript=1"
   /></noscript>
-
-  <!-- Google Ads Conversion Tracking -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18020334148"></script>
-  <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'AW-18020334148');
-  </script>
 
   <!-- LocalBusiness & MedicalBusiness Schema for Local SEO -->
   <script type="application/ld+json">
@@ -15375,6 +15367,8 @@
       procedure: document.getElementById('s1-procedure').value,
       service: service, date: date, time: time,
       items: items.map(function(i) { return i.name; }),
+      itemsWithPrice: items,
+      total: total,
       feedbackConsent: document.getElementById('s1-feedback-consent').checked
     }));
 
@@ -15428,6 +15422,32 @@
       if (saved) {
         try {
           var data = JSON.parse(saved);
+
+          // Fire purchase conversion events to all platforms
+          var transactionId = 'opwell_' + new Date().getTime();
+
+          // GA4 Purchase Event
+          if (typeof gtag !== 'undefined') {
+            gtag('event', 'purchase', {
+              transaction_id: transactionId,
+              value: data.total || 0,
+              currency: 'USD',
+              items: (data.itemsWithPrice || []).map(function(item) {
+                return { item_name: item.name, price: item.price, quantity: 1 };
+              })
+            });
+          }
+
+          // Meta Pixel Purchase Event
+          if (typeof fbq !== 'undefined') {
+            fbq('track', 'Purchase', {
+              value: data.total || 0,
+              currency: 'USD',
+              content_name: (data.items || []).join(', '),
+              content_type: 'product'
+            });
+          }
+
           showPage('schedule');
           document.getElementById('sched-welcome-banner').style.display = 'block';
           document.getElementById('sched-summary').innerHTML =
