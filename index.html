@@ -15305,6 +15305,10 @@
       }).catch(function() {});
     }
     updateServices();
+    // Fire Lead event when user has completed personal info and is in checkout flow
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'Lead', { content_name: 'Booking Form - Step 2' });
+    }
     schedSetStep(2);
   }
 
@@ -15729,7 +15733,6 @@
     }
     // Meta Pixel — track key page views
     if (typeof fbq !== 'undefined') {
-      if (pageId === 'schedule') fbq('track', 'Lead', { content_name: 'Booking Page View' });
       if (pageId === 'products') fbq('track', 'ViewContent', { content_name: 'Products Page' });
       if (pageId === 'pricing') fbq('track', 'ViewContent', { content_name: 'Pricing Page' });
     }
