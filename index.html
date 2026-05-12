@@ -2514,6 +2514,47 @@
       box-shadow: 0 6px 20px rgba(0,0,0,0.12);
     }
 
+    /* ── STICKY MOBILE CTA ── */
+    .sticky-cta-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--sage);
+      color: white;
+      padding: 1rem;
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 100;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    }
+    .sticky-cta-bar span {
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+    .sticky-cta-bar button {
+      background: var(--terracotta);
+      color: white;
+      border: none;
+      padding: 0.65rem 1.5rem;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+    .sticky-cta-bar button:hover {
+      background: #b8744a;
+    }
+    @media (max-width: 768px) {
+      .sticky-cta-bar {
+        display: flex;
+      }
+      body {
+        padding-bottom: 70px;
+      }
+    }
+
   </style>
   <!-- ═══════════════════════════════════════════════════════════
        STRUCTURED DATA — JSON-LD
@@ -2822,7 +2863,7 @@
       <h1 class="hero-headline">Surgery is personal.<br>Your preparation should be, too.</h1>
       <p class="hero-sub">What if you walked into surgery fully prepared — mind and body — with a physician already in your corner? OpWell Concierge™ pairs you with a board-certified anesthesiologist who personally guides your surgical journey, from preparation through recovery. No referral required. Serving patients in Georgia, Ohio & Virginia.</p>
       <div class="hero-actions">
-        <a class="btn-primary" onclick="document.getElementById('paths-section').scrollIntoView({behavior:'smooth'})">Find Your Program →</a>
+        <a class="btn-primary" onclick="showPage('schedule')">Book Your Consultation →</a>
         <a class="btn-gold" href="/surgery-readiness-quiz.html" style="cursor:pointer; animation: quizPulse 2s ease-in-out infinite;">Free Surgery Readiness Score →</a>
       </div>
       <div class="hero-trust"><!-- trust items below -->
@@ -2872,6 +2913,33 @@
   <div class="stat-footnote">
     <p><sup class="cite" style="color:rgba(253,252,248,0.5);">*</sup> Based on peer-reviewed clinical research on structured perioperative optimization programs. Figures represent ranges reported across published studies and may vary by procedure type and patient population. Sources available upon request.</p>
   </div>
+
+  <!-- TESTIMONIALS SECTION -->
+  <section style="padding: 4rem 2rem; background: linear-gradient(135deg, rgba(45,90,61,0.03) 0%, rgba(200,132,90,0.02) 100%);">
+    <div style="max-width: 1200px; margin: 0 auto;">
+      <div style="text-align: center; margin-bottom: 3rem;">
+        <div style="font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--terracotta); margin-bottom: 0.75rem; font-weight: 700;">What Patients Say</div>
+        <h2 style="font-size: 2rem; color: var(--sage); margin-bottom: 1rem; font-family: 'Playfair Display', serif;">Real Patients. Real Results.</h2>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;">
+        <div style="padding: 2rem; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-left: 4px solid var(--terracotta);">
+          <div style="color: var(--terracotta); font-size: 1.2rem; margin-bottom: 1rem;">★★★★★</div>
+          <p style="font-size: 1rem; line-height: 1.7; color: #333; margin-bottom: 1rem; font-style: italic;">"This was the conversation I didn't know I needed before my surgery. Dr Oluwole answered all my questions and really made sure I understand everything before my surgery. I was really worried about how anesthesia will affect me but we came up with a plan for me to be ready for my surgery."</p>
+          <p style="font-weight: 600; color: var(--sage);">— LB</p>
+        </div>
+        <div style="padding: 2rem; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-left: 4px solid var(--terracotta);">
+          <div style="color: var(--terracotta); font-size: 1.2rem; margin-bottom: 1rem;">★★★★★</div>
+          <p style="font-size: 1rem; line-height: 1.7; color: #333; margin-bottom: 1rem; font-style: italic;">"I underestimated having a doctor that is available to call and talk to immediately after surgery. I didn't have anyone to look after me as I live alone which made the recovery part scary. Dr Oluwole checked in with me as soon as I got home from surgery and made sure I was ok and that I was taking my medications correctly. She also checked on me days after and monitored my progress before my 2 weeks follow up appointment with my surgeon."</p>
+          <p style="font-weight: 600; color: var(--sage);">— AP</p>
+        </div>
+        <div style="padding: 2rem; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-left: 4px solid var(--terracotta);">
+          <div style="color: var(--terracotta); font-size: 1.2rem; margin-bottom: 1rem;">★★★★★</div>
+          <p style="font-size: 1rem; line-height: 1.7; color: #333; margin-bottom: 1rem; font-style: italic;">"I met with Dr Oluwole only few weeks before my delivery. I wish I met with her earlier during my pregnancy, I would have been less anxious as I'm expecting my first baby. She helped me build a realistic birth plan and talked to me about all the options I have on delivery day. I feel more confident finishing my last trimester and really excited!"</p>
+          <p style="font-weight: 600; color: var(--sage);">— JA</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- PATHS SECTION -->
   <section class="paths-section" id="paths-section">
@@ -14911,7 +14979,7 @@
       <div class="lp-breadcrumb" onclick="showPage('home')" style="color:rgba(255,255,255,0.7); position:static; margin-bottom:0.75rem; cursor:pointer;">← OpWell Home</div>
       <h2 class="lp-headline" style="color:#FAF0E8;">Book Your Consultation</h2>
       <p class="lp-sub sched-hero-sub" style="color:rgba(250,240,232,0.85);">Tell us about yourself, choose your service, complete payment, then pick your time. HSA &amp; FSA accepted.</p>
-      <div style="margin-top:1rem; background:rgba(200,132,90,0.9); color:#fff; font-family:'DM Sans',sans-serif; font-size:0.82rem; font-weight:600; padding:0.6rem 1.25rem; border-radius:8px; display:inline-block;">Now Accepting Bookings — Consultations Begin May 1, 2026</div>
+      <div style="margin-top:1rem; background:rgba(200,132,90,0.9); color:#fff; font-family:'DM Sans',sans-serif; font-size:0.82rem; font-weight:600; padding:0.6rem 1.25rem; border-radius:8px; display:inline-block;">We Are Now Taking Bookings</div>
     </div>
   </div>
 
@@ -17071,6 +17139,12 @@ function dismissExitPopup() {
   document.getElementById('exitPopup').classList.remove('active');
 }
 </script>
+
+<!-- Sticky Mobile CTA -->
+<div class="sticky-cta-bar">
+  <span>Ready to prepare for surgery?</span>
+  <button onclick="showPage('schedule')">Book Now →</button>
+</div>
 
 </body>
 </html>
