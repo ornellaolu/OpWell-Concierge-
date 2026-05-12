@@ -22,6 +22,7 @@ def test_website():
         ('OG tags for social', r'<meta property="og:', True),
         ('At least one testimonial', r'Why Patients Trust OpWell', True),
         ('Favicon reference', r'<link[^>]*rel="icon"', False),
+        ('H1 tags properly paired', None, True),  # Special check below
     ]
 
     print("\n🧪 OpWell Critical Feature Tests\n")
@@ -31,7 +32,14 @@ def test_website():
     failed = 0
 
     for test_name, pattern, is_critical in tests:
-        found = bool(re.search(pattern, html))
+        # Special check for H1 tags
+        if test_name == 'H1 tags properly paired':
+            h1_opens = html.count('<h1')
+            h1_closes = html.count('</h1>')
+            found = h1_opens == h1_closes and h1_opens > 0
+        else:
+            found = bool(re.search(pattern, html))
+
         status = "✅" if found else "❌"
         critical_marker = " [CRITICAL]" if is_critical else ""
 
