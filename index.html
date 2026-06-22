@@ -15069,22 +15069,25 @@
         <label style="display:flex; align-items:flex-start; gap:0.75rem; cursor:pointer; font-family:'DM Sans',sans-serif; font-size:0.9rem; color:var(--charcoal); font-weight:400; text-transform:none; letter-spacing:0;">
           <input type="checkbox" id="s2-addon-mh" style="width:18px; height:18px; flex-shrink:0; margin-top:2px; accent-color:var(--gold);">
           <span>
-            <strong>Add a Mental Wellness session — $215 (save $35)</strong><br>
-            <span style="font-size:0.82rem; color:var(--slate);">With Stacey J. Floyd, MA, LPC · Bundled rate auto-applied when paired with any core service above. Supports surgical anxiety, emotional recovery &amp; bariatric clearance.</span>
+            <strong>Add Mental Wellness session — $200 (save $50)</strong><br>
+            <span style="font-size:0.82rem; color:var(--slate);">With Stacey J. Floyd, MA, LPC · Bundled rate auto-applied when paired with your complete surgical care package. Supports surgical anxiety, emotional recovery &amp; psychological clearance.</span>
           </span>
         </label>
       </div>
 
 
-      <!-- UPSELL: Pre-Surgical to Complete Package upgrade nudge -->
+      <!-- MENTAL WELLNESS UPSELL -->
       <div id="s2-upsell-wrap" style="display:none; background:linear-gradient(135deg,#2D5A3D 0%,#3d7a53 100%); border-radius:12px; padding:1.1rem 1.35rem; margin-bottom:1rem; position:relative; overflow:hidden;">
         <div style="position:absolute; top:-18px; right:-18px; width:80px; height:80px; background:rgba(255,255,255,0.06); border-radius:50%;"></div>
         <div style="display:flex; align-items:flex-start; gap:0.85rem;">
           <div style="font-size:1.4rem; flex-shrink:0; margin-top:2px;">&#x1F4A1;</div>
           <div>
-            <div style="font-family:'DM Serif Display',serif; font-size:1rem; color:#fdf8f4; margin-bottom:0.3rem; letter-spacing:0.01em;">Save $130 &#8212; Add Post-Operative Care</div>
-            <div style="font-family:'DM Sans',sans-serif; font-size:0.83rem; color:rgba(253,248,244,0.85); line-height:1.5; margin-bottom:0.65rem;">Patients who prepare <em>and</em> recover with OpWell have physician support through every critical window. Bundle Pre-Surgical Consultation + Post-Operative Care for <strong style="color:#e8b48a;">$850</strong> instead of $980.</div>
-            <button onclick="upgradeToPackage()" style="background:var(--terracotta); color:#fff; border:none; border-radius:7px; padding:0.45rem 1rem; font-family:'DM Sans',sans-serif; font-size:0.82rem; font-weight:600; cursor:pointer; letter-spacing:0.02em;">Upgrade to Complete Package &#8594;</button>
+            <div style="font-family:'DM Serif Display',serif; font-size:1rem; color:#fdf8f4; margin-bottom:0.3rem; letter-spacing:0.01em;">Limited Time: Save $50 on Mental Wellness</div>
+            <div style="font-family:'DM Sans',sans-serif; font-size:0.83rem; color:rgba(253,248,244,0.85); line-height:1.5; margin-bottom:0.65rem;">Add mental wellness support with Stacey Floyd to manage surgical anxiety, emotional recovery, and psychological clearance. <strong style="color:#e8b48a;">Just $200</strong> (regularly $250) when bundled with your surgical care package.</div>
+            <label style="display:flex; align-items:center; gap:0.6rem; cursor:pointer; font-size:0.82rem; color:#fff;">
+              <input type="checkbox" onclick="document.getElementById('s2-addon-mh').checked = this.checked;" style="width:16px; height:16px; accent-color:var(--gold);">
+              Add Mental Wellness session
+            </label>
           </div>
         </div>
       </div>
@@ -15272,10 +15275,7 @@
   // ── SCHEDULE FORM ──
   var schedServices = {
     anesthesiologist: [
-      'Pre-Surgical Consultation ($490)',
-      'Post-Operative Care ($490)',
       'Complete Surgical Care Package ($850)',
-      'Executive Package — Complete Concierge Program ($1,350)',
       'Labor & Delivery Consultation — New Patient ($400)',
       'Labor & Delivery Consultation — Return Patient ($250)',
       'Vitamin Supplementation — Initial Consultation ($250)',
@@ -15311,26 +15311,13 @@
   function checkUpsell() {
     var sel = document.getElementById('s2-service');
     var upsell = document.getElementById('s2-upsell-wrap');
-    if (upsell) upsell.style.display = (sel && sel.value === 'Pre-Surgical Consultation ($490)') ? '' : 'none';
-    // Hide Mental Wellness add-on for packages that already include it
-    var addonWrap = document.getElementById('s2-addon-wrap');
-    var addonCb = document.getElementById('s2-addon-mh');
     var consultant = document.getElementById('s1-consultant').value;
-    if (addonWrap && sel && consultant === 'anesthesiologist') {
-      var v = sel.value;
-      var hideAddon = v.indexOf('Executive Package') !== -1;
-      addonWrap.style.display = hideAddon ? 'none' : '';
-      if (hideAddon && addonCb) addonCb.checked = false;
-    }
+    // Show mental wellness upsell for the Complete Surgical Care Package only
+    if (upsell) upsell.style.display = (sel && sel.value === 'Complete Surgical Care Package ($850)' && consultant === 'anesthesiologist') ? '' : 'none';
   }
 
   function upgradeToPackage() {
-    var sel = document.getElementById('s2-service');
-    if (sel) {
-      sel.value = 'Complete Surgical Care Package ($850)';
-      var upsell = document.getElementById('s2-upsell-wrap');
-      if (upsell) upsell.style.display = 'none';
-    }
+    // Deprecated - pricing simplified to single package
   }
 
   function schedSetStep(n) {
@@ -15381,14 +15368,11 @@
   }
 
   var SCHED_PRICES = {
-    'Pre-Surgical Consultation': 490,
-    'Post-Operative Care': 490,
     'Complete Surgical Care Package': 850,
-    'Executive Package — Complete Concierge Program': 1350,
     'Labor & Delivery Consultation — New Patient': 400,
     'Labor & Delivery Consultation — Return Patient': 250,
     'Mental Wellness — Single Session': 250,
-    'Mental Wellness — Bundle Add-On': 215,
+    'Mental Wellness — Bundle Add-On': 200,
     'Mental Wellness — 3-Session Package': 600,
     'Vitamin Supplementation — Initial Consultation': 250,
     'Vitamin Supplementation — Follow-Up Reevaluation': 150,
