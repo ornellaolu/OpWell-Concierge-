@@ -1,12 +1,11 @@
 const PRICES = {
-  'Surgery Preparation':                        49000,
-  'Post-Op Recovery':                           49000,
-  'Surgery Prep + Recovery Package':            85000,
-  'Labor & Delivery Prep — New Patient':        40000,
-  'Labor & Delivery Prep — Return Patient':     25000,
+  'Complete Surgical Care Package':             85000,
+  'Labor & Delivery Consultation — New Patient': 40000,
+  'Labor & Delivery Consultation — Return Patient': 25000,
   'Mental Wellness — Single Session':           25000,
-  'Mental Wellness — Bundle Add-On':            21500,
-  'Mental Wellness — 3-Session Package':        60000,
+  'Mental Wellness — Bundle Add-On':            20000,
+  'Vitamin Supplementation — Initial Consultation': 25000,
+  'Vitamin Supplementation — Follow-Up Reevaluation': 15000,
 };
 
 module.exports = async function handler(req, res) {
