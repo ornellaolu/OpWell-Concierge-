@@ -1325,6 +1325,9 @@
     .package-section {
       padding: 5.5rem 3rem;
       background: var(--warm-white);
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .section-subtitle {
@@ -1337,9 +1340,12 @@
 
     .packages-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
       margin-top: 2.5rem;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .package-card {
@@ -1962,7 +1968,7 @@
       .br-risk-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
       .qr-key-grid { grid-template-columns: 1fr; }
       /* Packages grid */
-      .packages-grid { grid-template-columns: 1fr; }
+      .packages-grid { grid-template-columns: 1fr; max-width: 100%; }
     }
 
     @media (max-width: 480px) {
@@ -2554,6 +2560,10 @@
         padding-bottom: 70px;
       }
     }
+
+    /* Hide Mental Wellness tab - now integrated into main pricing */
+    #prtab-mental { display: none !important; }
+    #pricing-tabs .tab-btn:nth-child(3) { display: none !important; }
 
   </style>
   <!-- ═══════════════════════════════════════════════════════════
@@ -14520,9 +14530,8 @@
   </div>
 
   <div class="tabs-nav" id="pricing-tabs">
-    <button class="tab-btn active" onclick="showPricingTab('medical')">Medical</button>
+    <button class="tab-btn active" onclick="showPricingTab('medical')">Complete Care Package</button>
     <button class="tab-btn" onclick="showPricingTab('ld')">Labor & Delivery</button>
-    <button class="tab-btn" onclick="showPricingTab('mental')">Mental Wellness</button>
     <button class="tab-btn" onclick="showPricingTab('bariatric')">Bariatric Vitamins</button>
     <button class="tab-btn" onclick="showPricingTab('gifts')">Gifts</button>
   </div>
@@ -14563,6 +14572,24 @@
           <li><div class="service-check">✓</div>HSA & FSA accepted · Klarna/Afterpay available</li>
         </ul>
         <br><a onclick="showPage('schedule')" class="btn-primary" style="cursor:pointer; display:inline-block;">Book Your Consultation →</a>
+      </div>
+
+      <!-- MENTAL WELLNESS ADD-ON CARD -->
+      <div class="package-card" style="border-top: 4px solid var(--terracotta); display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div class="package-name">Mental Wellness Add-On</div>
+          <div class="package-price">$200<span style="font-size: 0.8rem; color: #666;"><br><del>$250</del></span></div>
+          <div class="package-desc">Specialized support to manage surgical anxiety, emotional recovery, and psychological clearance with a licensed mental health specialist.</div>
+          <ul class="services-list">
+            <li><div class="service-check">✓</div>50-minute session with licensed therapist</li>
+            <li><div class="service-check">✓</div>Surgery anxiety assessment</li>
+            <li><div class="service-check">✓</div>Coping strategies & CBT techniques</li>
+            <li><div class="service-check">✓</div>Psychological clearance (if needed)</li>
+            <li><div class="service-check">✓</div>Coordinated care with anesthesiologist</li>
+            <li style="color: var(--terracotta); font-weight: 600; margin-top: 10px;">Save $50 when bundled with Complete Care Package</li>
+          </ul>
+        </div>
+        <br><a onclick="showPage('schedule')" class="btn-secondary" style="cursor:pointer; display:inline-block;">Add Mental Wellness →</a>
       </div>
 
     </div>
