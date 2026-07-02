@@ -1,16 +1,20 @@
 const PRICES = {
-  // Tier 1: Self-Paced Masterclass
+  // Tier 1: Blueprint
+  'The Interactive Surgical Prep Blueprint':              9900,
   'Surgery Prep Masterclass':                              9900,
   'Surgical Anxiety Digital Module':                       4900,
 
   // Tier 2: Comprehensive Care
-  'Complete Surgical Care Package':                       85000,
-  'Mind-Body Bundle':                                    100000,
+  'Comprehensive Perioperative Care':                    85000,
+  'Complete Surgical Care Package':                      85000,
+  'Mind-Body Bundle':                                   100000,
 
   // Tier 3: Retainer (application-only, not directly purchasable)
   'Private Physician Retainer':                             0,
 
   // Add-ons
+  'Mental Wellness Consultation':                        15000,
+  'Clinical Supplement & Tissue Recovery Protocol':      14900,
   'Vitamin Supplementation Add-On':                      14900,
 
   // Legacy (for backward compatibility)
