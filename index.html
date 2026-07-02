@@ -15279,6 +15279,12 @@
     if (vitaminWrap) vitaminWrap.style.display = (consultant === 'anesthesiologist') ? '' : 'none';
     var vitaminCb = document.getElementById('s2-addon-vitamin');
     if (vitaminCb && consultant !== 'anesthesiologist') vitaminCb.checked = false;
+
+    // Show Mental Wellness add-on only for Dr. Oluwole patients
+    var mentalWrap = document.getElementById('s2-addon-mental-wrap');
+    if (mentalWrap) mentalWrap.style.display = (consultant === 'anesthesiologist') ? '' : 'none';
+    var mentalCb = document.getElementById('s2-addon-mental');
+    if (mentalCb && consultant !== 'anesthesiologist') mentalCb.checked = false;
   }
 
   function upgradeToPackage() {
@@ -15355,6 +15361,7 @@
     var service = document.getElementById('s2-service').value;
     var serviceName = service.replace(/\s*\(\$[\d,]+\)/, '');
     var addOnVitamin = document.getElementById('s2-addon-vitamin') && document.getElementById('s2-addon-vitamin').checked;
+    var addOnMental = document.getElementById('s2-addon-mental') && document.getElementById('s2-addon-mental').checked;
     var fname = document.getElementById('s1-fname').value;
     var lname = document.getElementById('s1-lname').value;
     var date = document.getElementById('s2-date').value;
@@ -15363,6 +15370,7 @@
     // Build order items
     var items = [{ name: serviceName, price: SCHED_PRICES[serviceName] || 0 }];
     if (addOnVitamin) items.push({ name: 'Clinical Supplement & Tissue Recovery Protocol', price: 149 });
+    if (addOnMental) items.push({ name: 'The Integrated Mind-Body Care Pathway', price: 1000 });
 
     var total = items.reduce(function(sum, i) { return sum + i.price; }, 0);
 
