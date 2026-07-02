@@ -6,7 +6,6 @@ const PRICES = {
   // Tier 2: Comprehensive Care
   'Complete Surgical Care Package':                       85000,
   'Mind-Body Bundle':                                    100000,
-  'Mental Wellness Add-On':                              20000,
 
   // Tier 3: Retainer (application-only, not directly purchasable)
   'Private Physician Retainer':                             0,
