@@ -15017,7 +15017,7 @@
         </select>
       </div>
       <div class="sched-row">
-        <div class="sched-field"><label>Preferred Date *</label><input type="date" id="s2-date"></div>
+        <div class="sched-field"><label>Preferred Date *</label><input type="date" id="s2-date" min=""></div>
         <div class="sched-field">
           <label>Preferred Time *</label>
           <select id="s2-time">
@@ -15290,12 +15290,20 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  // Set max date to today on page load (prevents future dates in date picker)
+  // Initialize date fields on page load
   document.addEventListener('DOMContentLoaded', function() {
+    // DOB: max date is today (no future dates)
     var today = new Date();
     var todayStr = today.toISOString().split('T')[0];
     var dobInput = document.getElementById('s1-dob');
     if (dobInput) dobInput.max = todayStr;
+
+    // Appointment date: min date is tomorrow (no past dates)
+    var tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    var tomorrowStr = tomorrow.toISOString().split('T')[0];
+    var apptInput = document.getElementById('s2-date');
+    if (apptInput) apptInput.min = tomorrowStr;
   });
 
   function schedStep1Next() {
@@ -15368,6 +15376,17 @@
       else el.classList.remove('error');
     });
     if (!valid) return;
+
+    // Validate appointment date is not in the past
+    var selectedDate = new Date(document.getElementById('s2-date').value);
+    var today = new Date();
+    today.setHours(0, 0, 0, 0);
+    if (selectedDate < today) {
+      document.getElementById('s2-date').classList.add('error');
+      alert('Please select a future appointment date.');
+      return;
+    }
+    document.getElementById('s2-date').classList.remove('error');
 
     var service = document.getElementById('s2-service').value;
     var serviceName = service.replace(/\s*\(\$[\d,]+\)/, '');
