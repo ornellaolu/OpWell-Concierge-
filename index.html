@@ -15039,6 +15039,17 @@
         </label>
       </div>
 
+      <!-- VITAMIN & SUPPLEMENT ADD-ON (only shows for Dr. Oluwole patients) -->
+      <div id="s2-addon-vitamin-wrap" style="display:none; background:linear-gradient(135deg, rgba(45,90,61,0.06) 0%, rgba(200,132,90,0.06) 100%); border:1.5px solid rgba(45,90,61,0.2); border-radius:12px; padding:1.1rem 1.25rem; margin-bottom:1rem;">
+        <label style="display:flex; align-items:flex-start; gap:0.75rem; cursor:pointer; font-family:'DM Sans',sans-serif; font-size:0.9rem; color:var(--charcoal); font-weight:400; text-transform:none; letter-spacing:0;">
+          <input type="checkbox" id="s2-addon-vitamin" style="width:18px; height:18px; flex-shrink:0; margin-top:2px; accent-color:var(--sage);">
+          <span>
+            <strong style="color:var(--sage);">Clinical Supplement &amp; Tissue Recovery Protocol — $149</strong><br>
+            <span style="font-size:0.82rem; color:var(--slate); line-height:1.6; margin-top:0.35rem;">Optimize your healing and minimize surgical risks. Many common over-the-counter vitamins drastically increase bleeding or interact poorly with anesthesia. This protocol unlocks an interactive analysis of your current regimen, tells you exactly what to pause before surgery, and provides a physician-vetted, non-prescription recovery stack tailored for optimal tissue repair and post-op healing.</span>
+          </span>
+        </label>
+      </div>
+
 
       <!-- MENTAL WELLNESS UPSELL -->
       <div id="s2-upsell-wrap" style="display:none; background:linear-gradient(135deg,#2D5A3D 0%,#3d7a53 100%); border-radius:12px; padding:1.1rem 1.35rem; margin-bottom:1rem; position:relative; overflow:hidden;">
@@ -15284,6 +15295,12 @@
     if (addonWrap) addonWrap.style.display = (consultant === 'anesthesiologist') ? '' : 'none';
     var addonCb = document.getElementById('s2-addon-mh');
     if (addonCb && consultant !== 'anesthesiologist') addonCb.checked = false;
+
+    // Show Vitamin add-on only for Dr. Oluwole patients
+    var vitaminWrap = document.getElementById('s2-addon-vitamin-wrap');
+    if (vitaminWrap) vitaminWrap.style.display = (consultant === 'anesthesiologist') ? '' : 'none';
+    var vitaminCb = document.getElementById('s2-addon-vitamin');
+    if (vitaminCb && consultant !== 'anesthesiologist') vitaminCb.checked = false;
     // Attach service-change listener for upsell
     sel.addEventListener('change', checkUpsell);
   }
@@ -15353,6 +15370,7 @@
     'Labor & Delivery Consultation — Return Patient': 250,
     'Mental Wellness — Single Session': 250,
     'Mental Wellness — Bundle Add-On': 200,
+    'Clinical Supplement & Tissue Recovery Protocol': 149,
     'Vitamin Supplementation — Initial Consultation': 250,
     'Vitamin Supplementation — Follow-Up Reevaluation': 150,
   };
@@ -15369,7 +15387,8 @@
 
     var service = document.getElementById('s2-service').value;
     var serviceName = service.replace(/\s*\(\$[\d,]+\)/, '');
-    var addOn = document.getElementById('s2-addon-mh') && document.getElementById('s2-addon-mh').checked;
+    var addOnMH = document.getElementById('s2-addon-mh') && document.getElementById('s2-addon-mh').checked;
+    var addOnVitamin = document.getElementById('s2-addon-vitamin') && document.getElementById('s2-addon-vitamin').checked;
     var fname = document.getElementById('s1-fname').value;
     var lname = document.getElementById('s1-lname').value;
     var date = document.getElementById('s2-date').value;
@@ -15377,7 +15396,8 @@
 
     // Build order items
     var items = [{ name: serviceName, price: SCHED_PRICES[serviceName] || 0 }];
-    if (addOn) items.push({ name: 'Mental Wellness — Bundle Add-On', price: 200 });
+    if (addOnMH) items.push({ name: 'Mental Wellness — Bundle Add-On', price: 200 });
+    if (addOnVitamin) items.push({ name: 'Clinical Supplement & Tissue Recovery Protocol', price: 149 });
 
     var total = items.reduce(function(sum, i) { return sum + i.price; }, 0);
 

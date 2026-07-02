@@ -1,14 +1,22 @@
 const PRICES = {
-  'Pre-Surgical Consultation':                             49000,
-  'Post-Operative Care':                                   49000,
-  'Complete Surgical Care Package':                        85000,
-  'Executive Package — Complete Concierge Program':       135000,
-  'Labor & Delivery Consultation — New Patient':            40000,
-  'Labor & Delivery Consultation — Return Patient':        25000,
-  'Mental Wellness — Single Session':                      25000,
-  'Mental Wellness — Bundle Add-On':                       21500,
-  'Mental Wellness — 3-Session Package':                   60000,
-  'Surgery Prep Masterclass':                               9900,
+  // Tier 1: Self-Paced Masterclass
+  'Surgery Prep Masterclass':                              9900,
+  'Surgical Anxiety Digital Module':                       4900,
+
+  // Tier 2: Comprehensive Care
+  'Complete Surgical Care Package':                       85000,
+  'Mind-Body Bundle':                                    100000,
+  'Mental Wellness Add-On':                              20000,
+
+  // Tier 3: Retainer (application-only, not directly purchasable)
+  'Private Physician Retainer':                             0,
+
+  // Add-ons
+  'Vitamin Supplementation Add-On':                      14900,
+
+  // Legacy (for backward compatibility)
+  'Labor & Delivery Consultation — New Patient':         40000,
+  'Labor & Delivery Consultation — Return Patient':      25000,
 };
 
 const ALLOWED_ORIGINS = [
@@ -30,9 +38,19 @@ module.exports = async function handler(req, res) {
       return res.status(400).json({ error: 'No services selected' });
     }
 
+    // Handle Private Physician Retainer (application-only, no charge)
+    if (items.some(n => n === 'Private Physician Retainer')) {
+      const refOrigin = req.headers.referer ? new URL(req.headers.referer).origin : null;
+      const origin = ALLOWED_ORIGINS.includes(refOrigin) ? refOrigin : ALLOWED_ORIGINS[0];
+      return res.status(200).json({
+        url: `${origin}/contact?service=retainer`,
+        retainerApplication: true,
+      });
+    }
+
     const lineItems = items.map(name => {
       const amount = PRICES[name];
-      if (!amount) throw new Error(`Unknown service: ${name}`);
+      if (!amount && amount !== 0) throw new Error(`Unknown service: ${name}`);
       return {
         price_data: {
           currency: 'usd',
@@ -49,8 +67,12 @@ module.exports = async function handler(req, res) {
     const refOrigin = req.headers.referer ? new URL(req.headers.referer).origin : null;
     const origin = ALLOWED_ORIGINS.includes(refOrigin) ? refOrigin : ALLOWED_ORIGINS[0];
 
-    // Disable promo codes for Executive Package (already deeply discounted)
-    const hasExecutive = items.some(n => n.startsWith('Executive Package'));
+    // Disable promo codes for Mind-Body Bundle and Tier 1 masterclass combos
+    const disallowPromoCodes = items.some(n =>
+      n === 'Mind-Body Bundle' ||
+      n === 'Private Physician Retainer' ||
+      (items.length > 1 && items.some(i => i === 'Surgery Prep Masterclass'))
+    );
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -59,7 +81,7 @@ module.exports = async function handler(req, res) {
       success_url: `${origin}?paid=1`,
       cancel_url:  `${origin}?cancelled=1`,
       customer_email: email || undefined,
-      allow_promotion_codes: !hasExecutive,
+      allow_promotion_codes: !disallowPromoCodes,
       billing_address_collection: 'auto',
       metadata: {
         patient_name: patientName || '',

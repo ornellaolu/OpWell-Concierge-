@@ -156,10 +156,12 @@ module.exports = async function handler(req, res) {
         }
       }
 
-      // Determine masterclass inclusion tier
+      // Determine masterclass inclusion tier for new 3-tier structure
       const sLowerCheck = services.toLowerCase();
-      const includesMasterclassFree = sLowerCheck.includes('complete surgical care') || sLowerCheck.includes('executive package');
-      const isConsultation = !includesMasterclassFree && (
+      const includesMasterclassFree = sLowerCheck.includes('complete surgical care') ||
+                                     sLowerCheck.includes('mind-body bundle');
+      const isMasterclassPurchase = sLowerCheck.includes('surgery prep masterclass');
+      const isConsultation = !includesMasterclassFree && !isMasterclassPurchase && (
         sLowerCheck.includes('consultation') || sLowerCheck.includes('post-operative') ||
         sLowerCheck.includes('labor') || sLowerCheck.includes('delivery')
       );
@@ -167,6 +169,8 @@ module.exports = async function handler(req, res) {
       // Generate masterclass access code for package patients
       let masterclassCode = '';
       let masterclassSection = '';
+      let mentalWellnessSection = '';
+
       if (includesMasterclassFree && email) {
         const now = Date.now();
         const expiry = now + (90 * 24 * 60 * 60 * 1000);
@@ -182,6 +186,16 @@ module.exports = async function handler(req, res) {
                 <div style="background: rgba(200,132,90,0.08); border-left: 4px solid #c8845a; border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 0 0 24px;">
                   <p style="margin: 0; font-size: 0.85rem; color: #555; line-height: 1.6;"><strong style="color: #3b2a1a;">PDF Download:</strong> <a href="https://www.opwellconcierge.com/OpWell-Surgery-Prep-Masterclass.pdf" style="color: #2d5a3d; font-weight: 600;">Download your PDF here</a> \u2014 this link never expires.</p>
                 </div>`;
+
+        if (sLowerCheck.includes('mind-body bundle')) {
+          mentalWellnessSection = `
+                <div style="background: linear-gradient(135deg, #f0f7f2 0%, #e8f0eb 100%); border: 2px solid #b8d9c4; border-radius: 12px; padding: 24px; margin: 24px 0; text-align: center;">
+                  <p style="margin: 0 0 4px; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #2d5a3d;">INCLUDED WITH YOUR BUNDLE</p>
+                  <p style="margin: 0 0 8px; font-size: 1.1rem; font-weight: 700; color: #2d5a3d;">Live Mental Wellness Session</p>
+                  <p style="margin: 0 0 12px; font-size: 0.88rem; color: #555; line-height: 1.5;">50-minute session with our licensed mental health specialist. Our team will contact you within 24 hours to schedule at a time that works for you.</p>
+                  <p style="margin: 0; font-size: 0.8rem; color: #2d5a3d; font-weight: 600;">Session includes: Surgical anxiety assessment \u2022 CBT techniques \u2022 Psychological clearance support \u2022 Coordinated care with Dr. Oluwole</p>
+                </div>`;
+        }
       } else if (isConsultation) {
         masterclassSection = `
                 <div style="background: linear-gradient(135deg, #f0f7f2 0%, #e8f0eb 100%); border: 2px solid #b8d9c4; border-radius: 12px; padding: 24px; margin: 24px 0; text-align: center;">
@@ -220,6 +234,7 @@ module.exports = async function handler(req, res) {
                 </div>
 
                 ${masterclassSection}
+                ${mentalWellnessSection}
 
                 <div style="background: #f0f7f2; border: 1px solid #b8d9c4; border-radius: 8px; padding: 20px 24px; margin: 24px 0; text-align: center;">
                   <p style="margin: 0 0 6px; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #2d5a3d;">Your Clinical Library Access Code</p>

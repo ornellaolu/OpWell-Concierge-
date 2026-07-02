@@ -7,12 +7,48 @@ function esc(str) {
 }
 
 const CHECKIN_SCHEDULE = [
-  { key: 'day-1',  dayOffset: 1,  label: '24-Hour Check-In', message: 'It\'s been 24 hours since your surgery. This is the most important window for monitoring your recovery.' },
-  { key: 'day-3',  dayOffset: 3,  label: '72-Hour Check-In', message: 'You\'re 3 days post-surgery. By now, initial swelling and discomfort should be stabilizing.' },
-  { key: 'week-1', dayOffset: 7,  label: '1-Week Check-In', message: 'You\'re one week into your recovery. This is a great time to assess your progress.' },
-  { key: 'week-2', dayOffset: 14, label: '2-Week Check-In', message: 'Two weeks post-surgery. Many patients notice meaningful improvement around this time.' },
-  { key: 'week-3', dayOffset: 21, label: '3-Week Check-In', message: 'Three weeks in. Your body is doing important healing work — let\'s make sure everything is on track.' },
-  { key: 'week-4', dayOffset: 28, label: '4-Week / Final Check-In', message: 'You\'re approaching one month post-surgery. Let\'s make sure your recovery is progressing well.' },
+  {
+    key: 'day-1',
+    dayOffset: 1,
+    label: '24-Hour Check-In',
+    message: 'It\'s been 24 hours since your surgery. This is the most important window for monitoring your recovery.',
+    postOpWellnessUrl: 'https://www.opwellconcierge.com/post-op-acute-care',
+  },
+  {
+    key: 'day-3',
+    dayOffset: 3,
+    label: '72-Hour Check-In',
+    message: 'You\'re 3 days post-surgery. By now, initial swelling and discomfort should be stabilizing.',
+    postOpWellnessUrl: 'https://www.opwellconcierge.com/post-op-healing',
+  },
+  {
+    key: 'week-1',
+    dayOffset: 7,
+    label: '1-Week Check-In',
+    message: 'You\'re one week into your recovery. This is a great time to assess your progress and optimize your wellness support.',
+    postOpWellnessUrl: 'https://www.opwellconcierge.com/post-op-nutrition-support',
+  },
+  {
+    key: 'week-2',
+    dayOffset: 14,
+    label: '2-Week Check-In',
+    message: 'Two weeks post-surgery. Many patients notice meaningful improvement around this time.',
+    postOpWellnessUrl: 'https://www.opwellconcierge.com/post-op-mobility',
+  },
+  {
+    key: 'week-3',
+    dayOffset: 21,
+    label: '3-Week Check-In',
+    message: 'Three weeks in. Your body is doing important healing work — let\'s make sure everything is on track.',
+    postOpWellnessUrl: 'https://www.opwellconcierge.com/post-op-recovery-coaching',
+  },
+  {
+    key: 'week-4',
+    dayOffset: 28,
+    label: '4-Week / Final Check-In',
+    message: 'You\'re approaching one month post-surgery. Let\'s make sure your recovery is progressing well.',
+    postOpWellnessUrl: 'https://www.opwellconcierge.com/post-op-optimization',
+  },
 ];
 
 function buildCheckinUrl(patientName, procedure, interval) {
@@ -45,6 +81,12 @@ function buildEmailHtml(firstName, checkin, procedure, checkinUrl) {
             <tr><td style="padding: 4px 0;">\u2022 GI function</td><td style="padding: 4px 0;">\u2022 Mobility</td></tr>
             <tr><td style="padding: 4px 0;">\u2022 Mental health</td><td style="padding: 4px 0;">\u2022 Red flag symptoms</td></tr>
           </table>
+        </div>
+        <div style="background: linear-gradient(135deg, rgba(45,90,61,0.06) 0%, rgba(200,132,90,0.06) 100%); border: 2px solid #b8d9c4; border-radius: 12px; padding: 24px; margin: 24px 0; text-align: center;">
+          <p style="margin: 0 0 8px; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #2d5a3d;">Post-Op Wellness Support</p>
+          <p style="margin: 0 0 12px; font-size: 1rem; font-weight: 600; color: #3b2a1a;">Optimize Your Recovery</p>
+          <p style="margin: 0 0 16px; font-size: 0.9rem; color: #555; line-height: 1.6;">Evidence-based strategies and product recommendations to support your healing journey.</p>
+          <a href="${checkin.postOpWellnessUrl}" style="display: inline-block; background: #c8845a; color: #fff; padding: 12px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.95rem;">Explore Wellness Resources →</a>
         </div>
         <div style="background: #f0f7f2; border: 1px solid #b8d9c4; border-radius: 8px; padding: 16px 20px; margin: 24px 0; text-align: center;">
           <p style="margin: 0 0 4px; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #2d5a3d;">Your Clinical Library Access Code</p>
