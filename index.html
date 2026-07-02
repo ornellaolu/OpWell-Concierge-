@@ -14973,7 +14973,7 @@
       <div class="sched-field"><label>Email Address *</label><input type="email" id="s1-email" placeholder="your@email.com"></div>
       <div class="sched-row">
         <div class="sched-field"><label>Phone Number *</label><input type="tel" id="s1-phone" placeholder="(000) 000-0000"></div>
-        <div class="sched-field"><label>Date of Birth *</label><input type="date" id="s1-dob" max="" onchange="validateDOB()"></div>
+        <div class="sched-field"><label>Date of Birth *</label><input type="date" id="s1-dob" max=""></div>
       </div>
       <div class="sched-field">
         <label>Type of Procedure / Service *</label>
@@ -15290,34 +15290,13 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  function validateDOB() {
-    var dobInput = document.getElementById('s1-dob');
+  // Set max date to today on page load (prevents future dates in date picker)
+  document.addEventListener('DOMContentLoaded', function() {
     var today = new Date();
-    today.setHours(0, 0, 0, 0);
     var todayStr = today.toISOString().split('T')[0];
-    dobInput.max = todayStr;
-
-    if (dobInput.value) {
-      var dob = new Date(dobInput.value);
-      if (dob > today) {
-        dobInput.classList.add('error');
-        alert('Please enter a valid date of birth (cannot be in the future).');
-        dobInput.value = '';
-      } else {
-        var age = today.getFullYear() - dob.getFullYear();
-        var monthDiff = today.getMonth() - dob.getMonth();
-        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) age--;
-
-        if (age < 18) {
-          dobInput.classList.add('error');
-          alert('You must be at least 18 years old to book our services.');
-          dobInput.value = '';
-        } else {
-          dobInput.classList.remove('error');
-        }
-      }
-    }
-  }
+    var dobInput = document.getElementById('s1-dob');
+    if (dobInput) dobInput.max = todayStr;
+  });
 
   function schedStep1Next() {
     var fields = ['s1-fname','s1-lname','s1-email','s1-phone','s1-dob','s1-procedure','s1-consultant'];
