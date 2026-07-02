@@ -15035,8 +15035,8 @@
         <label style="display:flex; align-items:flex-start; gap:0.75rem; cursor:pointer; font-family:'DM Sans',sans-serif; font-size:0.9rem; color:var(--charcoal); font-weight:400; text-transform:none; letter-spacing:0;">
           <input type="checkbox" id="s2-addon-mental" style="width:18px; height:18px; flex-shrink:0; margin-top:2px; accent-color:var(--terracotta);">
           <span>
-            <strong style="color:var(--terracotta);">The Integrated Mind-Body Care Pathway — $1,000</strong><br>
-            <span style="font-size:0.82rem; color:var(--slate); line-height:1.6; margin-top:0.35rem;">Includes everything in the Comprehensive track, plus a dedicated live consultation with our licensed mental health provider (Stacey J. Floyd, MA, LPC) to actively regulate your nervous system, manage pre-operative stress, and prepare your mind for surgery.</span>
+            <strong style="color:var(--terracotta);">Mental Wellness Consultation — $150</strong><br>
+            <span style="font-size:0.82rem; color:var(--slate); line-height:1.6; margin-top:0.35rem;">Add a dedicated live consultation with our licensed mental health provider (Stacey J. Floyd, MA, LPC) to actively regulate your nervous system, manage pre-operative stress, and prepare your mind for surgery. (Total with Comprehensive Care: $1,000)</span>
           </span>
         </label>
       </div>
@@ -15352,7 +15352,7 @@
 
     // Build order items
     var items = [{ name: serviceName, price: SCHED_PRICES[serviceName] || 0 }];
-    if (addOnMental) items.push({ name: 'The Integrated Mind-Body Care Pathway', price: 1000 });
+    if (addOnMental) items.push({ name: 'Mental Wellness Consultation', price: 150 });
 
     var total = items.reduce(function(sum, i) { return sum + i.price; }, 0);
 
