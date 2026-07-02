@@ -1,4 +1,15 @@
 {
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    }
+  ],
   "rewrites": [
     { "source": "/patient-recovery-checkin.html", "destination": "/patient-recovery-checkin.html" },
     { "source": "/postop-recovery-checkin.html", "destination": "/postop-recovery-checkin.html" },
