@@ -14594,6 +14594,7 @@
 
           <ul class="services-list" style="margin-top: 1.5rem; border-top: 1px solid rgba(45,90,61,0.15); padding-top: 1.5rem;">
             <li><div class="service-check">✓</div>Interactive Surgical Prep Blueprint included</li>
+            <li><div class="service-check">✓</div>Clinical Supplement & Tissue Recovery Protocol included</li>
           </ul>
 
           <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(45,90,61,0.05); border-radius: 6px; font-size: 0.85rem; color: var(--sage); font-weight: 600;">
@@ -15029,17 +15030,6 @@
       </div>
       <div class="sched-field"><label>Reason for Visit / Notes (optional)</label><textarea id="s2-reason" placeholder="Share anything that will help us prepare for your consultation..."></textarea></div>
 
-      <!-- VITAMIN & SUPPLEMENT ADD-ON (only shows for Dr. Oluwole patients) -->
-      <div id="s2-addon-vitamin-wrap" style="display:none; background:linear-gradient(135deg, rgba(45,90,61,0.06) 0%, rgba(200,132,90,0.06) 100%); border:1.5px solid rgba(45,90,61,0.2); border-radius:12px; padding:1.1rem 1.25rem; margin-bottom:1rem;">
-        <label style="display:flex; align-items:flex-start; gap:0.75rem; cursor:pointer; font-family:'DM Sans',sans-serif; font-size:0.9rem; color:var(--charcoal); font-weight:400; text-transform:none; letter-spacing:0;">
-          <input type="checkbox" id="s2-addon-vitamin" style="width:18px; height:18px; flex-shrink:0; margin-top:2px; accent-color:var(--sage);">
-          <span>
-            <strong style="color:var(--sage);">Clinical Supplement &amp; Tissue Recovery Protocol — $149</strong><br>
-            <span style="font-size:0.82rem; color:var(--slate); line-height:1.6; margin-top:0.35rem;">Physician-vetted supplement analysis and optimization. We conduct a comprehensive review of your current regimen, identify medications and supplements that could impact anesthesia safety, and provide a personalized recovery stack designed for optimal tissue repair and accelerated healing.</span>
-          </span>
-        </label>
-      </div>
-
       <!-- MENTAL WELLNESS ADD-ON (only shows for Dr. Oluwole patients) -->
       <div id="s2-addon-mental-wrap" style="display:none; background:linear-gradient(135deg, rgba(200,132,90,0.06) 0%, rgba(45,90,61,0.06) 100%); border:1.5px solid rgba(200,132,90,0.2); border-radius:12px; padding:1.1rem 1.25rem; margin-bottom:1rem;">
         <label style="display:flex; align-items:flex-start; gap:0.75rem; cursor:pointer; font-family:'DM Sans',sans-serif; font-size:0.9rem; color:var(--charcoal); font-weight:400; text-transform:none; letter-spacing:0;">
@@ -15274,12 +15264,6 @@
         sel.appendChild(opt);
       });
     }
-    // Show Vitamin add-on only for Dr. Oluwole patients
-    var vitaminWrap = document.getElementById('s2-addon-vitamin-wrap');
-    if (vitaminWrap) vitaminWrap.style.display = (consultant === 'anesthesiologist') ? '' : 'none';
-    var vitaminCb = document.getElementById('s2-addon-vitamin');
-    if (vitaminCb && consultant !== 'anesthesiologist') vitaminCb.checked = false;
-
     // Show Mental Wellness add-on only for Dr. Oluwole patients
     var mentalWrap = document.getElementById('s2-addon-mental-wrap');
     if (mentalWrap) mentalWrap.style.display = (consultant === 'anesthesiologist') ? '' : 'none';
@@ -15360,7 +15344,6 @@
 
     var service = document.getElementById('s2-service').value;
     var serviceName = service.replace(/\s*\(\$[\d,]+\)/, '');
-    var addOnVitamin = document.getElementById('s2-addon-vitamin') && document.getElementById('s2-addon-vitamin').checked;
     var addOnMental = document.getElementById('s2-addon-mental') && document.getElementById('s2-addon-mental').checked;
     var fname = document.getElementById('s1-fname').value;
     var lname = document.getElementById('s1-lname').value;
@@ -15369,7 +15352,6 @@
 
     // Build order items
     var items = [{ name: serviceName, price: SCHED_PRICES[serviceName] || 0 }];
-    if (addOnVitamin) items.push({ name: 'Clinical Supplement & Tissue Recovery Protocol', price: 149 });
     if (addOnMental) items.push({ name: 'The Integrated Mind-Body Care Pathway', price: 1000 });
 
     var total = items.reduce(function(sum, i) { return sum + i.price; }, 0);
