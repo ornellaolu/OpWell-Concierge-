@@ -20,29 +20,83 @@
     :root { --sage: #2D5A3D; --terracotta: #C8845A; --charcoal: #1C1C1C; --ivory: #FAF0E8; --warm-white: #F5E4D4; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'DM Sans', -apple-system, sans-serif; line-height: 1.8; color: #333; }
-    .container { max-width: 1000px; margin: 0 auto; padding: 0 2rem; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
     header { background: var(--sage); color: white; padding: 1.5rem 0; }
-    header a { color: white; text-decoration: none; font-weight: 600; }
-    h1 { font-size: 2.5rem; color: var(--sage); margin: 2rem 0 1rem; line-height: 1.2; }
-    h2 { font-size: 1.8rem; color: var(--sage); margin: 2rem 0 1rem; }
-    h3 { font-size: 1.3rem; color: var(--sage); margin: 1.5rem 0 0.75rem; }
-    p { margin: 1rem 0; font-size: 1rem; }
-    .hero { background: linear-gradient(135deg, var(--sage) 0%, #3d7a4d 100%); color: white; padding: 4rem 2rem; text-align: center; }
-    .hero h1 { color: white; font-size: 2.8rem; }
-    .cta-button { display: inline-block; background: var(--terracotta); color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 6px; font-weight: 600; margin-top: 1.5rem; cursor: pointer; border: none; font-size: 1rem; }
+    header a { color: white; text-decoration: none; font-weight: 600; font-size: 0.95rem; }
+    h1 { font-size: clamp(2rem, 5vw, 2.5rem); color: var(--sage); margin: 2rem 0 1rem; line-height: 1.2; }
+    h2 { font-size: clamp(1.5rem, 4vw, 1.8rem); color: var(--sage); margin: 2rem 0 1rem; }
+    h3 { font-size: clamp(1.2rem, 3vw, 1.6rem); color: var(--sage); margin: 1rem 0 0.75rem; }
+    p { margin: 1rem 0; font-size: clamp(0.95rem, 2vw, 1rem); }
+    .hero { background: linear-gradient(135deg, var(--sage) 0%, #3d7a4d 100%); color: white; padding: clamp(2rem, 5vw, 4rem) 2rem; text-align: center; }
+    .hero h1 { color: white; font-size: clamp(1.8rem, 6vw, 2.8rem); }
+    .hero p { font-size: clamp(0.9rem, 2.5vw, 1.1rem); }
+    .cta-button { display: inline-block; background: var(--terracotta); color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 6px; font-weight: 600; margin-top: 1.5rem; cursor: pointer; border: none; font-size: 1rem; transition: background 0.2s; }
     .cta-button:hover { background: #b8744a; }
-    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin: 2rem 0; }
+
+    /* Desktop: 3-column grid */
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin: 2rem 0; align-items: stretch; }
+
     .price-card { padding: 2rem; background: #f9f6f2; border: 2px solid #eee; border-radius: 8px; border-top: 4px solid var(--terracotta); }
     .price-card.featured { border-top-color: var(--sage); background: var(--warm-white); }
     .price-card h3 { margin-top: 0; color: var(--sage); }
-    .price { font-size: 2.5rem; color: var(--terracotta); font-weight: bold; margin: 1rem 0; }
+    .price { font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--terracotta); font-weight: bold; margin: 1rem 0; }
     .price-card ul { list-style: none; padding: 0; margin: 1.5rem 0; }
-    .price-card li { padding: 0.5rem 0 0.5rem 1.5rem; position: relative; font-size: 0.95rem; }
+    .price-card li { padding: 0.5rem 0 0.5rem 1.5rem; position: relative; font-size: clamp(0.85rem, 2vw, 0.95rem); }
     .price-card li:before { content: "✓"; position: absolute; left: 0; color: var(--terracotta); font-weight: bold; }
     .highlight { background: var(--warm-white); padding: 1.5rem; border-left: 4px solid var(--sage); border-radius: 4px; margin: 2rem 0; }
     .section { padding: 3rem 0; border-bottom: 1px solid #eee; }
-    footer { background: #f5f5f5; padding: 2rem; text-align: center; color: #666; margin-top: 3rem; }
+    footer { background: #f5f5f5; padding: 2rem; text-align: center; color: #666; margin-top: 3rem; font-size: 0.9rem; }
     footer a { color: var(--sage); text-decoration: none; }
+
+    /* Tablet: 2 columns */
+    @media (max-width: 1024px) {
+      .container { padding: 0 1.5rem; }
+      .pricing-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+      .price-card { padding: 1.75rem; }
+      .section { padding: 2.5rem 0; }
+    }
+
+    /* Mobile: 1 column stack */
+    @media (max-width: 768px) {
+      .container { padding: 0 1rem; }
+      header { padding: 1rem 0; }
+      header a { font-size: 0.85rem; }
+      h1 { font-size: clamp(1.6rem, 4vw, 2rem); margin: 1.5rem 0 0.75rem; }
+      h2 { font-size: clamp(1.3rem, 3vw, 1.5rem); margin: 1.5rem 0 0.75rem; }
+      h3 { font-size: clamp(1.1rem, 2.5vw, 1.3rem); margin: 0.75rem 0 0.5rem; }
+      p { font-size: clamp(0.9rem, 2vw, 0.95rem); margin: 0.75rem 0; }
+
+      .hero { padding: clamp(1.5rem, 4vw, 2.5rem) 1rem; }
+      .hero h1 { font-size: clamp(1.5rem, 5vw, 2.2rem); }
+      .hero p { font-size: clamp(0.85rem, 2vw, 0.95rem); }
+
+      .pricing-grid { grid-template-columns: 1fr; gap: 1.5rem; margin: 1.5rem 0; }
+      .price-card { padding: 1.5rem; }
+      .price { font-size: clamp(1.6rem, 3vw, 2rem); margin: 0.75rem 0; }
+      .price-card li { padding: 0.4rem 0 0.4rem 1.25rem; font-size: clamp(0.8rem, 1.8vw, 0.9rem); line-height: 1.6; }
+
+      .highlight { padding: 1rem; margin: 1.5rem 0; }
+      .section { padding: 2rem 0; border-bottom: 1px solid #f0f0f0; }
+      .cta-button { padding: 0.9rem 1.5rem; font-size: 0.95rem; }
+
+      footer { padding: 1.5rem 1rem; font-size: 0.8rem; }
+    }
+
+    /* Small mobile: extra-tight spacing */
+    @media (max-width: 480px) {
+      .container { padding: 0 0.75rem; }
+      h1 { font-size: clamp(1.4rem, 3vw, 1.8rem); margin: 1rem 0 0.5rem; }
+      h2 { font-size: clamp(1.1rem, 2.5vw, 1.3rem); margin: 1rem 0 0.5rem; }
+      h3 { font-size: clamp(1rem, 2vw, 1.1rem); margin: 0.5rem 0; }
+
+      .pricing-grid { gap: 1rem; margin: 1rem 0; }
+      .price-card { padding: 1.25rem; }
+      .price { margin: 0.5rem 0; }
+      .price-card li { padding: 0.3rem 0 0.3rem 1.1rem; }
+
+      .hero { padding: 1rem 0.75rem; }
+      .section { padding: 1.5rem 0; }
+    }
   </style>
 </head>
 <body>
@@ -56,17 +110,17 @@
     <div class="container">
       <!-- Main Header Section -->
       <div class="pricing-header" style="text-align: center; margin-bottom: 3rem; padding-top: 2rem;">
-        <h2 style="font-size: 2.5rem; font-family: 'Playfair Display', serif; color: var(--sage); margin-bottom: 1rem;">
+        <h2 style="font-family: 'Playfair Display', serif; color: var(--sage); margin-bottom: 1rem;">
           Invest in Your Surgical Safety and Recovery
         </h2>
-        <p style="font-size: 1.1rem; max-width: 600px; margin: 0 auto; line-height: 1.6; color: #555;">
+        <p style="max-width: 600px; margin: 0 auto; line-height: 1.6; color: #555;">
           Choose your pathway: Self-paced preparation, comprehensive physician-led care, or elite retainer partnership. <br>
-          <span style="font-size: 0.95rem; opacity: 0.85;">Split payments available with Klarna or Afterpay • HSA & FSA accepted</span>
+          <span style="opacity: 0.85; display: block; margin-top: 0.75rem;">Split payments available with Klarna or Afterpay • HSA & FSA accepted</span>
         </p>
       </div>
 
-      <!-- Symmetrical 3-Card Grid Container -->
-      <div class="pricing-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; align-items: stretch; margin-bottom: 3rem;">
+      <!-- Symmetrical 3-Card Grid Container (3 columns on desktop, 2 on tablet, 1 on mobile) -->
+      <div class="pricing-grid" style="margin-bottom: 3rem;">
 
         <!-- TIER 1: THE BLUEPRINT -->
         <div class="pricing-card" style="display: flex; flex-direction: column; justify-content: space-between; border: 1px solid #e0e0e0; padding: 2.5rem 2rem; border-radius: 4px; height: 100%; background: #fff;">
