@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Clinical Partnerships & Referrals | OpWell Concierge™</title>
-  <meta name="description" content="OpWell is an extension of your surgical team. Refer patients or explore practice partnerships.">
+  <title>Physician Referral | OpWell Concierge™</title>
+  <meta name="description" content="Refer a patient or explore a clinical partnership with OpWell Concierge. Submit a referral and we'll contact your patient directly to schedule.">
+  <meta name="keywords" content="physician referral, clinical partnership, patient referral, surgical consultation">
   <link rel="canonical" href="https://opwellconcierge.com/provider">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --sage: #2D5A3D;
@@ -18,51 +18,17 @@
       --border: #E8DDD0;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     body {
       font-family: 'DM Sans', -apple-system, sans-serif;
-      color: var(--charcoal);
+      line-height: 1.8;
+      color: #333;
       background: #fff;
-      line-height: 1.7;
-    }
-
-    h1, h2, h3, h4, h5, h6 {
-      font-family: 'Playfair Display', serif;
-      font-weight: 500;
-      line-height: 1.3;
-    }
-
-    a { color: var(--sage); text-decoration: none; }
-    a:hover { color: var(--terracotta); }
-
-    /* HEADER */
-    header {
-      background: white;
-      border-bottom: 1px solid var(--border);
-      padding: 1.5rem 0;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-
-    header .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    header a {
-      color: var(--sage);
-      font-weight: 600;
-      font-size: 0.9rem;
-    }
-
-    header a:hover {
-      color: var(--terracotta);
     }
 
     .container {
@@ -71,326 +37,130 @@
       padding: 0 2rem;
     }
 
-    /* HERO */
-    .hero {
-      min-height: 100vh;
+    /* ════════════════════════════════════════════════════════ */
+    /* HEADER & NAVIGATION */
+    /* ════════════════════════════════════════════════════════ */
+    header {
+      background: var(--sage);
+      color: white;
+      padding: 1.5rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    header a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
       display: flex;
       align-items: center;
-      padding: 8rem 4rem 5rem;
-      position: relative;
-      overflow: hidden;
-      background: var(--charcoal);
+      gap: 0.5rem;
     }
 
-    .hero-scrim {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      background: linear-gradient(
-        to right,
-        rgba(17,17,17,0.78) 0%,
-        rgba(17,17,17,0.50) 50%,
-        rgba(17,17,17,0.25) 100%
-      );
-      pointer-events: none;
+    header a:hover {
+      opacity: 0.9;
     }
 
-    .hero-bg {
-      position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse 70% 60% at 80% 30%, rgba(45,90,61,0.06) 0%, transparent 70%),
-        radial-gradient(ellipse 50% 70% at 10% 80%, rgba(196,104,74,0.04) 0%, transparent 60%);
-      pointer-events: none;
+    /* ════════════════════════════════════════════════════════ */
+    /* HERO SECTION */
+    /* ════════════════════════════════════════════════════════ */
+    .hero {
+      background: linear-gradient(135deg, var(--sage) 0%, #3d7a4d 100%);
+      color: white;
+      padding: clamp(3rem, 8vw, 6rem) 2rem;
     }
 
-    .hero-content {
-      max-width: 680px;
-      position: relative;
-      z-index: 2;
+    .hero-breadcrumb {
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+      cursor: pointer;
+      opacity: 0.9;
+      transition: opacity 0.2s;
     }
 
-    .hero-tag {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--terracotta);
-      margin-bottom: 1.5rem;
-      display: inline-flex;
-      align-items: center;
-      border: 1px solid rgba(200,132,90,0.45);
-      border-radius: 100px;
-      padding: 0.35rem 1.1rem;
-      background: rgba(200,132,90,0.06);
+    .hero-breadcrumb:hover {
+      opacity: 1;
     }
 
     .hero h1 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(2.8rem, 5vw, 4.2rem);
+      font-size: clamp(2rem, 6vw, 3rem);
       font-weight: 400;
-      line-height: 1.1;
-      color: var(--ivory);
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
+      line-height: 1.3;
     }
 
     .hero p {
-      font-size: 1.05rem;
-      color: rgba(250,240,232,0.82);
-      line-height: 1.9;
-      max-width: 520px;
-      margin-bottom: 2.5rem;
-      font-weight: 200;
+      font-size: clamp(0.95rem, 2vw, 1.05rem);
+      color: rgba(250, 240, 232, 0.9);
+      max-width: 600px;
+      line-height: 1.7;
     }
 
-    /* SECTION SPACING */
-    .section {
-      padding: 4rem 2rem;
-    }
-
-    .section-tag {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--terracotta);
-      margin-bottom: 0.75rem;
-    }
-
-    .section-title {
-      font-size: clamp(1.8rem, 4vw, 2.4rem);
-      color: var(--charcoal);
-      margin-bottom: 0.5rem;
-    }
-
-    .section-subtitle {
-      font-size: 1.05rem;
-      color: var(--slate);
-      font-weight: 300;
-      margin-bottom: 3rem;
-      max-width: 700px;
-      line-height: 1.8;
-    }
-
-    /* CARDS */
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* ════════════════════════════════════════════════════════ */
+    /* TABS */
+    /* ════════════════════════════════════════════════════════ */
+    .tabs-container {
+      display: flex;
       gap: 2rem;
-      margin: 3rem 0;
+      margin-bottom: 3rem;
+      border-bottom: 1px solid var(--border);
     }
 
-    .card {
-      background: white;
-      border: 1.5px solid var(--border);
-      border-radius: 8px;
-      padding: 2rem;
-      transition: all 0.3s ease;
+    .tab-btn {
+      padding: 1.5rem 0;
+      background: none;
+      border: none;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--slate);
+      cursor: pointer;
+      position: relative;
+      transition: color 0.2s;
     }
 
-    .card:hover {
-      border-color: var(--terracotta);
-      box-shadow: 0 12px 32px rgba(200,132,90,0.12);
+    .tab-btn.active {
+      color: var(--sage);
     }
 
-    .card h3 {
+    .tab-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--sage);
+    }
+
+    .tab-btn:hover {
+      color: var(--sage);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* ════════════════════════════════════════════════════════ */
+    /* FORM STYLING */
+    /* ════════════════════════════════════════════════════════ */
+    .form-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .form-section h3 {
+      font-family: 'Playfair Display', serif;
       font-size: 1.3rem;
       color: var(--sage);
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
       font-weight: 500;
-    }
-
-    .card p {
-      font-size: 0.95rem;
-      color: var(--slate);
-      line-height: 1.7;
-    }
-
-    /* TABLE */
-    .evidence-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 2rem 0;
-      background: white;
-    }
-
-    .evidence-table th {
-      background: transparent;
-      border-bottom: 2px solid var(--sage);
-      padding: 1.2rem 0;
-      text-align: left;
-      font-weight: 600;
-      color: var(--sage);
-      font-size: 0.95rem;
-    }
-
-    .evidence-table td {
-      padding: 1.2rem 1rem;
-      border-bottom: 1px solid var(--border);
-      font-size: 0.95rem;
-      color: var(--slate);
-    }
-
-    .evidence-table tr:last-child td {
-      border-bottom: none;
-    }
-
-    .evidence-table strong {
-      color: var(--charcoal);
-    }
-
-    /* STEPS */
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 2rem;
-      margin: 3rem 0;
-    }
-
-    .step {
-      position: relative;
-      padding-top: 3.5rem;
-      text-align: center;
-    }
-
-    .step-number {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60px;
-      height: 60px;
-      background: var(--sage);
-      color: white;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.6rem;
-      font-weight: 700;
-    }
-
-    .step h4 {
-      font-size: 1.1rem;
-      color: var(--charcoal);
-      margin-bottom: 0.75rem;
-    }
-
-    .step p {
-      font-size: 0.9rem;
-      color: var(--slate);
-      line-height: 1.6;
-    }
-
-    /* CTA SECTION */
-    .cta-section {
-      background: linear-gradient(135deg, var(--sage) 0%, #3d7a4d 100%);
-      color: white;
-      padding: 4rem 2rem;
-      text-align: center;
-    }
-
-    .cta-title {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-      font-weight: 500;
-    }
-
-    .cta-subtitle {
-      font-size: 1.05rem;
-      color: rgba(250,240,232,0.85);
-      margin-bottom: 2.5rem;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-      line-height: 1.7;
-    }
-
-    .button-group {
-      display: flex;
-      gap: 1.2rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      padding: 0.95rem 2.2rem;
-      font-size: 0.95rem;
-      font-weight: 600;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-family: 'DM Sans', sans-serif;
-      letter-spacing: 0.05em;
-    }
-
-    .btn-primary {
-      background: white;
-      color: var(--sage);
-    }
-
-    .btn-primary:hover {
-      background: var(--warm-white);
-      transform: translateY(-2px);
-    }
-
-    .btn-secondary {
-      background: transparent;
-      color: white;
-      border: 2px solid white;
-    }
-
-    .btn-secondary:hover {
-      background: rgba(255,255,255,0.1);
-      transform: translateY(-2px);
-    }
-
-    /* FORM PAGE */
-    .form-page { display: none; }
-    .form-page.active { display: block; }
-
-    .form-wrapper {
-      padding: 3rem 2rem;
-    }
-
-    .form-container {
-      max-width: 600px;
-      margin: 2rem auto;
-      background: white;
-      border: 1.5px solid var(--border);
-      border-radius: 8px;
-      padding: 2.5rem;
-    }
-
-    .back-link {
-      color: var(--sage);
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 0.9rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-bottom: 2rem;
-      transition: all 0.2s;
-    }
-
-    .back-link:hover {
-      color: var(--terracotta);
-    }
-
-    .form-container h2 {
-      font-size: 1.8rem;
-      color: var(--sage);
-      margin-bottom: 0.5rem;
-    }
-
-    .form-subtitle {
-      font-size: 0.95rem;
-      color: var(--slate);
-      margin-bottom: 2rem;
-      line-height: 1.6;
     }
 
     .form-group {
@@ -402,399 +172,308 @@
       font-weight: 600;
       color: var(--charcoal);
       margin-bottom: 0.5rem;
-      font-size: 0.9rem;
-    }
-
-    input, textarea, select {
-      width: 100%;
-      padding: 0.85rem 1rem;
-      border: 1.5px solid var(--border);
-      border-radius: 6px;
-      font-family: 'DM Sans', sans-serif;
       font-size: 0.95rem;
-      transition: all 0.2s;
     }
 
-    input:focus, textarea:focus, select:focus {
+    .required {
+      color: var(--terracotta);
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-family: 'DM Sans', -apple-system, sans-serif;
+      font-size: 0.95rem;
+      transition: border-color 0.2s;
+    }
+
+    input:focus, select:focus, textarea:focus {
       outline: none;
       border-color: var(--terracotta);
-      box-shadow: 0 0 0 3px rgba(200,132,90,0.1);
+      box-shadow: 0 0 0 3px rgba(200, 132, 90, 0.1);
     }
 
     textarea {
       resize: vertical;
-      min-height: 110px;
+      min-height: 100px;
     }
 
-    .form-submit {
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .btn-submit {
       background: var(--sage);
       color: white;
-      width: 100%;
-      padding: 1rem;
-      margin-top: 1.5rem;
-      font-weight: 600;
+      padding: 1rem 2rem;
       border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
     }
 
-    .form-submit:hover {
+    .btn-submit:hover {
       background: #1f4730;
     }
 
-    .form-error {
-      background: #fff3f0;
-      border-left: 3px solid var(--terracotta);
-      color: var(--terracotta);
-      padding: 1rem;
-      border-radius: 0 6px 6px 0;
-      margin-top: 1.5rem;
-      font-size: 0.9rem;
-      display: none;
-    }
-
-    .form-success {
-      background: #f0f7f2;
-      border-left: 3px solid var(--sage);
-      color: var(--sage);
-      padding: 1rem;
-      border-radius: 0 6px 6px 0;
-      margin-top: 1.5rem;
-      font-size: 0.9rem;
-      display: none;
-    }
-
+    /* ════════════════════════════════════════════════════════ */
     /* FOOTER */
+    /* ════════════════════════════════════════════════════════ */
     footer {
-      background: var(--charcoal);
-      color: rgba(253,252,248,0.6);
+      background: var(--sage);
+      color: white;
       padding: 2rem;
       text-align: center;
-      font-size: 0.75rem;
-      letter-spacing: 0.05em;
+      font-size: 0.9rem;
+      margin-top: 4rem;
     }
 
     footer a {
       color: var(--terracotta);
       text-decoration: none;
+      font-weight: 600;
     }
 
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* ════════════════════════════════════════════════════════ */
     /* RESPONSIVE */
+    /* ════════════════════════════════════════════════════════ */
     @media (max-width: 768px) {
-      .section { padding: 2.5rem 1rem; }
-      .hero { padding: 3rem 1rem; }
-      .cta-section { padding: 3rem 1rem; }
-      .button-group { flex-direction: column; }
-      .btn { width: 100%; }
-      .card-grid { grid-template-columns: 1fr; }
-      .steps { grid-template-columns: repeat(2, 1fr); }
-      .form-container { padding: 2rem; }
-    }
+      .container {
+        padding: 0 1.5rem;
+      }
 
-    @media (max-width: 480px) {
-      .hero h1 { font-size: 1.8rem; }
-      .steps { grid-template-columns: 1fr; }
-      .evidence-table { font-size: 0.85rem; }
-      .evidence-table td { padding: 0.8rem 0.5rem; }
+      .tabs-container {
+        gap: 1rem;
+      }
+
+      .tab-btn {
+        padding: 1rem 0;
+        font-size: 0.9rem;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 1.8rem;
+      }
     }
   </style>
 </head>
 <body>
-
-<!-- HEADER -->
-<header>
-  <div class="container">
-    <a href="/">← Back to OpWell</a>
-  </div>
-</header>
-
-<!-- INFO PAGE -->
-<div id="info-page" class="info-page active">
+  <!-- HEADER -->
+  <header>
+    <div class="container">
+      <a href="/">← Back to Home</a>
+    </div>
+  </header>
 
   <!-- HERO -->
   <div class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-scrim"></div>
-    <div class="hero-content">
-      <div class="hero-tag">For Providers</div>
-      <h1>Clinical Partnerships & Referrals</h1>
-      <p>OpWell functions as an extension of your surgical team. We handle exhaustive perioperative preparation, medication/supplement clearance, and 30-day recovery monitoring so you stay focused on the operating room.</p>
+    <div class="container">
+      <a href="/" class="hero-breadcrumb">← Back to Home</a>
+      <h1>For Providers</h1>
+      <h2 style="font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 400; margin-bottom: 1.5rem; margin-top: 1rem;">Refer a Patient or Partner with OpWell</h2>
+      <p>OpWell works alongside surgeons, OBs, bariatric programs, and proceduralists. Refer a patient or explore a practice partnership.</p>
     </div>
   </div>
 
   <!-- MAIN CONTENT -->
-  <div class="container">
-
-    <!-- THE BIG WINS -->
-    <section class="section">
-      <div class="section-tag">What We Deliver</div>
-      <h2 class="section-title">The Big Wins</h2>
-      <p class="section-subtitle">Three clinical outcomes that compound your practice's edge.</p>
-
-      <div class="card-grid">
-        <div class="card">
-          <h3>Protect Your OR Timeline</h3>
-          <p>Deep multi-system risk stratification and strict medication/supplement audits weeks in advance. Patients arrive optimized, cleared, and ready for the table—eliminating day-of-surgery cancellations.</p>
-        </div>
-        <div class="card">
-          <h3>Offload Administrative Burden</h3>
-          <p>From surgical decision through day 30 post-op, we manage clearances, medication adjustments, and patient anxiety. Zero coordination burden. Zero scheduling overlap. Your staff stays focused.</p>
-        </div>
-        <div class="card">
-          <h3>Secure the 30-Day Window</h3>
-          <p>Proactive recovery monitoring at home. Structured touchpoints catch normal recovery hurdles early and prevent unnecessary ER readmissions—your safety net in the critical post-op phase.</p>
-        </div>
+  <main>
+    <div class="container" style="padding: 3rem 0;">
+      <!-- TABS -->
+      <div class="tabs-container">
+        <button class="tab-btn active" onclick="showTab('referral')">Refer a Patient</button>
+        <button class="tab-btn" onclick="showTab('partnership')">Explore Partnership</button>
       </div>
-    </section>
 
-    <!-- EVIDENCE -->
-    <section class="section">
-      <div class="section-tag">Clinical Evidence</div>
-      <h2 class="section-title">The Evidence at a Glance</h2>
-      <p class="section-subtitle">Outcomes from structured perioperative home models across multi-specialty cohorts.</p>
+      <!-- TAB 1: PATIENT REFERRAL -->
+      <div id="referral" class="tab-content active" style="max-width: 700px;">
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--sage); margin-bottom: 1rem; font-weight: 500;">Patient Referral</h2>
+        <p style="color: var(--slate); margin-bottom: 2rem;">Submit a referral and we will contact your patient directly to schedule.</p>
 
-      <table class="evidence-table">
-        <thead>
-          <tr>
-            <th>Outcome</th>
-            <th>Impact</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Hospital Length of Stay</strong></td>
-            <td>30–50% reduction in total LOS*</td>
-          </tr>
-          <tr>
-            <td><strong>Readmission Rates</strong></td>
-            <td>Significant drop in preventable 7- and 30-day readmissions*</td>
-          </tr>
-          <tr>
-            <td><strong>Practice Economics</strong></td>
-            <td>Up to $16,447 cost savings per patient with high ROI*</td>
-          </tr>
-          <tr>
-            <td><strong>Pre-Op Anxiety</strong></td>
-            <td>Up to 89% reduction in surgical anxiety**</td>
-          </tr>
-        </tbody>
-      </table>
-      <p style="font-size:0.8rem; color:var(--slate); margin-top:1.5rem; font-style:italic;">*Data from peer-reviewed PSH, POSH, and ERAS clinical studies. **Patient-reported outcomes. Full bibliography available upon request.</p>
-    </section>
+        <form id="referralForm" onsubmit="handleReferralSubmit(event)">
+          <!-- YOUR INFORMATION -->
+          <div class="form-section">
+            <h3>Your Information</h3>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Your Name <span class="required">*</span></label>
+                <input type="text" placeholder="Dr. Jane Smith" required>
+              </div>
+              <div class="form-group">
+                <label>Practice / Organization <span class="required">*</span></label>
+                <input type="text" placeholder="Metro Surgical Associates" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Your Email <span class="required">*</span></label>
+                <input type="email" placeholder="you@practice.com" required>
+              </div>
+              <div class="form-group">
+                <label>Your Phone <span style="color: #999;">(optional)</span></label>
+                <input type="tel" placeholder="(555) 123-4567">
+              </div>
+            </div>
+          </div>
 
-    <!-- HOW WE PARTNER -->
-    <section class="section">
-      <div class="section-tag">The Process</div>
-      <h2 class="section-title">How We Partner</h2>
-      <p class="section-subtitle">A streamlined four-step integration into your workflow.</p>
+          <!-- PATIENT INFORMATION -->
+          <div class="form-section">
+            <h3>Patient Information</h3>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Patient Name <span class="required">*</span></label>
+                <input type="text" placeholder="Patient full name" required>
+              </div>
+              <div class="form-group">
+                <label>Patient Email <span class="required">*</span></label>
+                <input type="email" placeholder="patient@email.com" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Patient Phone <span style="color: #999;">(optional)</span></label>
+                <input type="tel" placeholder="(555) 987-6543">
+              </div>
+              <div class="form-group">
+                <label>Service Needed <span class="required">*</span></label>
+                <select required>
+                  <option value="">Select a service</option>
+                  <option value="surgical-prep">Pre-Surgical Consultation</option>
+                  <option value="post-op">Post-Operative Care</option>
+                  <option value="comprehensive">Comprehensive Perioperative Care</option>
+                  <option value="labor-delivery">Labor & Delivery Consultation</option>
+                  <option value="bariatric">Bariatric Vitamin Monitoring</option>
+                  <option value="mental-wellness">Mental Wellness Consultation</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Procedure / Surgery Type <span style="color: #999;">(optional)</span></label>
+              <input type="text" placeholder="e.g. Total knee replacement, Cesarean section, BBL">
+            </div>
+            <div class="form-group">
+              <label>Additional Notes <span style="color: #999;">(optional)</span></label>
+              <textarea placeholder="Relevant medical history, timing, special considerations, etc."></textarea>
+            </div>
+          </div>
 
-      <div class="steps">
-        <div class="step">
-          <div class="step-number">1</div>
-          <h4>Fast Referral</h4>
-          <p>Submit a patient securely in under two minutes. No complex intake. No friction.</p>
-        </div>
-        <div class="step">
-          <div class="step-number">2</div>
-          <h4>Physician Optimization</h4>
-          <p>Dr. Oluwole conducts an exhaustive telehealth consultation and deploys our signature Recovery Protocol.</p>
-        </div>
-        <div class="step">
-          <div class="step-number">3</div>
-          <h4>Close the Loop</h4>
-          <p>Your practice receives the anesthesia safety brief and clearance timeline days before surgery.</p>
-        </div>
-        <div class="step">
-          <div class="step-number">4</div>
-          <h4>30-Day Safety Net</h4>
-          <p>Home monitoring through critical post-op windows. Structured touchpoints. Early issue detection.</p>
-        </div>
+          <button type="submit" class="btn-submit">Submit Referral</button>
+        </form>
       </div>
-    </section>
 
-  </div>
+      <!-- TAB 2: PARTNERSHIP -->
+      <div id="partnership" class="tab-content" style="max-width: 700px;">
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--sage); margin-bottom: 1rem; font-weight: 500;">Partnership Inquiry</h2>
+        <p style="color: var(--slate); margin-bottom: 2rem;">Interested in integrating OpWell into your practice workflow? Tell us about your program.</p>
 
-  <!-- CTA FOOTER -->
-  <div class="cta-section">
-    <h2 class="cta-title">Ready to Partner?</h2>
-    <p class="cta-subtitle">Start with a referral or explore a deeper clinical partnership.</p>
-    <div class="button-group">
-      <button class="btn btn-primary" onclick="showForm('referral')">Refer a Patient →</button>
-      <button class="btn btn-secondary" onclick="showForm('partnership')">Explore Partnership →</button>
+        <form id="partnershipForm" onsubmit="handlePartnershipSubmit(event)">
+          <!-- YOUR INFORMATION -->
+          <div class="form-section">
+            <h3>Your Information</h3>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Your Name <span class="required">*</span></label>
+                <input type="text" placeholder="Dr. Jane Smith" required>
+              </div>
+              <div class="form-group">
+                <label>Title / Role <span class="required">*</span></label>
+                <input type="text" placeholder="Surgeon, Program Director, etc." required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Practice / Organization <span class="required">*</span></label>
+                <input type="text" placeholder="Metro Surgical Associates" required>
+              </div>
+              <div class="form-group">
+                <label>Your Email <span class="required">*</span></label>
+                <input type="email" placeholder="you@practice.com" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Phone <span style="color: #999;">(optional)</span></label>
+                <input type="tel" placeholder="(555) 123-4567">
+              </div>
+              <div class="form-group">
+                <label>State <span class="required">*</span></label>
+                <input type="text" placeholder="State" required>
+              </div>
+            </div>
+          </div>
+
+          <!-- PRACTICE INFORMATION -->
+          <div class="form-section">
+            <h3>About Your Practice</h3>
+            <div class="form-group">
+              <label>Surgical Specialties <span style="color: #999;">(optional)</span></label>
+              <input type="text" placeholder="e.g. Orthopedic, General Surgery, OB/GYN">
+            </div>
+            <div class="form-group">
+              <label>Annual Volume <span style="color: #999;">(optional)</span></label>
+              <input type="text" placeholder="Approximate number of procedures/year">
+            </div>
+            <div class="form-group">
+              <label>Tell Us About Your Program <span style="color: #999;">(optional)</span></label>
+              <textarea placeholder="What challenges are you facing? What outcomes are you hoping to improve?"></textarea>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-submit">Submit Partnership Inquiry</button>
+        </form>
+      </div>
     </div>
-  </div>
+  </main>
 
-</div>
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 OpWell Concierge. All rights reserved. | <a href="/privacy">Privacy Policy</a> | <a href="/terms">Terms of Service</a></p>
+  </footer>
 
-<!-- FORM PAGE -->
-<div id="form-page" class="form-page">
-  <div class="form-wrapper">
-    <div class="container">
-      <a class="back-link" onclick="backToInfo()">← Back to Overview</a>
-    </div>
-  </div>
-
-  <div class="container">
-    <div class="form-container">
-      <h2 id="form-title"></h2>
-      <p class="form-subtitle" id="form-subtitle"></p>
-
-      <form id="provider-form" onsubmit="submitForm(event)">
-
-        <!-- REFERRAL FORM -->
-        <div id="referral-form" style="display:none;">
-          <div class="form-group">
-            <label>Your Name *</label>
-            <input type="text" name="your_name" placeholder="Dr. Jane Smith" required>
-          </div>
-          <div class="form-group">
-            <label>Practice / Organization *</label>
-            <input type="text" name="practice" placeholder="Metro Surgical Associates" required>
-          </div>
-          <div class="form-group">
-            <label>Your Email *</label>
-            <input type="email" name="your_email" placeholder="you@practice.com" required>
-          </div>
-          <div class="form-group">
-            <label>Your Phone</label>
-            <input type="tel" name="your_phone" placeholder="(555) 123-4567">
-          </div>
-          <div class="form-group">
-            <label>Patient Name *</label>
-            <input type="text" name="patient_name" placeholder="Full name" required>
-          </div>
-          <div class="form-group">
-            <label>Patient Email *</label>
-            <input type="email" name="patient_email" placeholder="patient@email.com" required>
-          </div>
-          <div class="form-group">
-            <label>Procedure / Surgery Type</label>
-            <input type="text" name="procedure" placeholder="e.g., Total knee replacement, BBL">
-          </div>
-          <div class="form-group">
-            <label>Additional Notes</label>
-            <textarea name="notes" placeholder="Any relevant medical history or special considerations..."></textarea>
-          </div>
-        </div>
-
-        <!-- PARTNERSHIP FORM -->
-        <div id="partnership-form" style="display:none;">
-          <div class="form-group">
-            <label>Your Name *</label>
-            <input type="text" name="your_name" placeholder="Dr. Jane Smith" required>
-          </div>
-          <div class="form-group">
-            <label>Title / Role *</label>
-            <input type="text" name="title" placeholder="Surgeon, Medical Director, etc." required>
-          </div>
-          <div class="form-group">
-            <label>Practice / Organization *</label>
-            <input type="text" name="practice" placeholder="Metro Surgical Associates" required>
-          </div>
-          <div class="form-group">
-            <label>Your Email *</label>
-            <input type="email" name="your_email" placeholder="you@practice.com" required>
-          </div>
-          <div class="form-group">
-            <label>Your Phone</label>
-            <input type="tel" name="your_phone" placeholder="(555) 123-4567">
-          </div>
-          <div class="form-group">
-            <label>State *</label>
-            <input type="text" name="state" placeholder="Your state" required>
-          </div>
-          <div class="form-group">
-            <label>Specialty / Program Type *</label>
-            <input type="text" name="specialty" placeholder="e.g., Orthopedic, Bariatric, General Surgery" required>
-          </div>
-          <div class="form-group">
-            <label>Tell Us About Your Interest *</label>
-            <textarea name="message" placeholder="What does your practice look like? What outcomes are you hoping to improve?" required></textarea>
-          </div>
-        </div>
-
-        <button type="submit" class="btn form-submit">Send Inquiry →</button>
-      </form>
-      <div class="form-error" id="form-error"></div>
-      <div class="form-success" id="form-success">✓ Thank you! Your information has been sent. We'll be in touch within 24 hours.</div>
-    </div>
-  </div>
-</div>
-
-<!-- FOOTER -->
-<footer>
-  <p>&copy; 2026 OpWell Concierge. All rights reserved. | <a href="/">Privacy Policy</a> | <a href="/">Terms of Service</a></p>
-</footer>
-
-<script>
-  let currentFormType = '';
-
-  function showForm(type) {
-    currentFormType = type;
-    document.getElementById('info-page').classList.remove('active');
-    document.getElementById('form-page').classList.add('active');
-
-    if (type === 'referral') {
-      document.getElementById('form-title').textContent = 'Refer a Patient';
-      document.getElementById('form-subtitle').textContent = 'Submit your patient referral. We\'ll be in touch within 24 hours to begin the optimization process.';
-      document.getElementById('referral-form').style.display = 'block';
-      document.getElementById('partnership-form').style.display = 'none';
-    } else {
-      document.getElementById('form-title').textContent = 'Explore Clinical Partnership';
-      document.getElementById('form-subtitle').textContent = 'Tell us about your practice and what you\'re hoping OpWell can help with.';
-      document.getElementById('partnership-form').style.display = 'block';
-      document.getElementById('referral-form').style.display = 'none';
-    }
-
-    window.scrollTo(0, 0);
-  }
-
-  function backToInfo() {
-    document.getElementById('form-page').classList.remove('active');
-    document.getElementById('info-page').classList.add('active');
-    document.getElementById('provider-form').reset();
-    document.getElementById('form-error').style.display = 'none';
-    document.getElementById('form-success').style.display = 'none';
-    window.scrollTo(0, 0);
-  }
-
-  async function submitForm(event) {
-    event.preventDefault();
-
-    const form = document.getElementById('provider-form');
-    const formData = new FormData(form);
-    const errorEl = document.getElementById('form-error');
-    const successEl = document.getElementById('form-success');
-
-    errorEl.style.display = 'none';
-    successEl.style.display = 'none';
-
-    try {
-      const payload = {
-        type: currentFormType,
-        ...Object.fromEntries(formData)
-      };
-
-      const response = await fetch('/api/provider-referral', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
+  <script>
+    function showTab(tabName) {
+      // Hide all tabs
+      document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.remove('active');
       });
 
-      const data = await response.json();
+      // Remove active class from all buttons
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
 
-      if (data.success) {
-        successEl.style.display = 'block';
-        form.reset();
-        setTimeout(() => backToInfo(), 2500);
-      } else {
-        errorEl.textContent = data.error || 'Error sending form. Please try again.';
-        errorEl.style.display = 'block';
-      }
-    } catch (error) {
-      errorEl.textContent = 'Connection error. Please try again.';
-      errorEl.style.display = 'block';
+      // Show selected tab
+      document.getElementById(tabName).classList.add('active');
+
+      // Add active class to clicked button
+      event.target.classList.add('active');
     }
-  }
-</script>
 
+    function handleReferralSubmit(event) {
+      event.preventDefault();
+      alert('Thank you for submitting your referral. We will contact your patient shortly to schedule their consultation.');
+      event.target.reset();
+    }
+
+    function handlePartnershipSubmit(event) {
+      event.preventDefault();
+      alert('Thank you for your partnership inquiry. We will be in touch within 24 hours to discuss collaboration opportunities.');
+      event.target.reset();
+    }
+  </script>
 </body>
 </html>
