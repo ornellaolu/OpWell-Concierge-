@@ -421,7 +421,7 @@
         <p>OpWell handles the exhaustive perioperative preparation, strict medication/supplement clearance, and structured post-discharge recovery monitoring so your surgical team can stay focused entirely on the operating room.</p>
         <div class="hero-buttons">
           <button class="btn btn-primary" onclick="scrollToForm('referral')">Refer a Patient →</button>
-          <button class="btn btn-secondary" onclick="scrollToForm('partnership')">Explore Partnership →</button>
+          <button class="btn btn-secondary" onclick="document.querySelector('.workflow-section').scrollIntoView({behavior: 'smooth'})">Explore Partnership →</button>
         </div>
       </div>
 
@@ -439,6 +439,59 @@
           <div class="metric-value">Up to $16,447 saved</div>
           <div class="metric-label">per patient with a high demonstrated ROI.</div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REFERRAL FORM SECTION -->
+  <section class="form-section" id="referral-section" style="display:none;">
+    <div class="container">
+      <div class="form-container">
+        <h2>Refer a Patient</h2>
+        <p class="form-subtitle">Submit a patient referral. We'll contact your patient directly to schedule their consultation.</p>
+
+        <form id="referral-form" onsubmit="submitForm(event, 'referral')">
+          <div class="form-group">
+            <label>Your Name *</label>
+            <input type="text" name="providerName" required>
+          </div>
+          <div class="form-group">
+            <label>Practice / Organization *</label>
+            <input type="text" name="practice" required>
+          </div>
+          <div class="form-group">
+            <label>Your Email *</label>
+            <input type="email" name="providerEmail" required>
+          </div>
+          <div class="form-group">
+            <label>Patient Name *</label>
+            <input type="text" name="patientName" required>
+          </div>
+          <div class="form-group">
+            <label>Patient Email *</label>
+            <input type="email" name="patientEmail" required>
+          </div>
+          <div class="form-group">
+            <label>Service Needed *</label>
+            <select name="service" required>
+              <option value="">Select a service</option>
+              <option value="Pre-Surgical Consultation">Pre-Surgical Consultation</option>
+              <option value="Post-Operative Care">Post-Operative Care</option>
+              <option value="Complete Surgical Care Package">Complete Surgical Care Package</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Procedure / Surgery Type</label>
+            <input type="text" name="procedure">
+          </div>
+          <div class="form-group">
+            <label>Additional Notes</label>
+            <textarea name="notes"></textarea>
+          </div>
+          <button type="submit" class="form-submit">Submit Referral →</button>
+          <div id="referral-error" class="form-error"></div>
+          <div id="referral-success" class="form-success">✓ Thank you! We'll contact your patient soon.</div>
+        </form>
       </div>
     </div>
   </section>
@@ -474,14 +527,14 @@
     </div>
   </section>
 
-  <!-- FORM SECTION -->
+  <!-- PARTNERSHIP FORM SECTION (FINAL CTA) -->
   <section class="form-section">
     <div class="container">
       <div class="form-container">
-        <h2>Schedule a Practice Presentation</h2>
-        <p class="form-subtitle">Interested in learning more about integrating OpWell into your surgical program? Let's connect.</p>
+        <h2>Explore a Clinical Partnership</h2>
+        <p class="form-subtitle">Interested in integrating OpWell into your surgical program? Schedule a presentation with our team.</p>
 
-        <form id="practice-form" onsubmit="submitForm(event)">
+        <form id="partnership-form" onsubmit="submitForm(event, 'partnership')">
           <div class="form-group">
             <label>Your Name *</label>
             <input type="text" name="name" required>
@@ -515,8 +568,8 @@
             <textarea name="message" required></textarea>
           </div>
           <button type="submit" class="form-submit">Schedule Presentation →</button>
-          <div id="form-error" class="form-error"></div>
-          <div id="form-success" class="form-success">✓ Thank you! We'll be in touch soon.</div>
+          <div id="partnership-error" class="form-error"></div>
+          <div id="partnership-success" class="form-success">✓ Thank you! We'll be in touch soon.</div>
         </form>
       </div>
     </div>
@@ -529,31 +582,58 @@
 
   <script>
     function scrollToForm(type) {
-      document.querySelector('.form-section').scrollIntoView({ behavior: 'smooth' });
+      if (type === 'referral') {
+        document.getElementById('referral-section').style.display = 'block';
+        document.getElementById('referral-section').scrollIntoView({ behavior: 'smooth' });
+      }
     }
 
-    async function submitForm(event) {
+    async function submitForm(event, type) {
       event.preventDefault();
       const form = event.target;
       const formData = new FormData(form);
-      const errorEl = document.getElementById('form-error');
-      const successEl = document.getElementById('form-success');
+
+      let errorEl, successEl;
+
+      if (type === 'referral') {
+        errorEl = document.getElementById('referral-error');
+        successEl = document.getElementById('referral-success');
+      } else {
+        errorEl = document.getElementById('partnership-error');
+        successEl = document.getElementById('partnership-success');
+      }
 
       errorEl.style.display = 'none';
       successEl.style.display = 'none';
 
       try {
-        const payload = {
-          type: 'partnership',
-          providerName: formData.get('name'),
-          title: formData.get('title'),
-          practice: formData.get('practice'),
-          providerEmail: formData.get('email'),
-          providerPhone: formData.get('phone'),
-          state: formData.get('state'),
-          specialty: formData.get('specialty'),
-          message: formData.get('message')
-        };
+        let payload;
+
+        if (type === 'referral') {
+          payload = {
+            type: 'referral',
+            providerName: formData.get('providerName'),
+            practice: formData.get('practice'),
+            providerEmail: formData.get('providerEmail'),
+            patientName: formData.get('patientName'),
+            patientEmail: formData.get('patientEmail'),
+            service: formData.get('service'),
+            procedure: formData.get('procedure'),
+            notes: formData.get('notes')
+          };
+        } else {
+          payload = {
+            type: 'partnership',
+            providerName: formData.get('name'),
+            title: formData.get('title'),
+            practice: formData.get('practice'),
+            providerEmail: formData.get('email'),
+            providerPhone: formData.get('phone'),
+            state: formData.get('state'),
+            specialty: formData.get('specialty'),
+            message: formData.get('message')
+          };
+        }
 
         const response = await fetch('/api/provider-referral', {
           method: 'POST',
