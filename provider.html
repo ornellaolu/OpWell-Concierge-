@@ -4,8 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Clinical Partnerships & Referrals | OpWell Concierge™</title>
-  <meta name="description" content="OpWell functions as a force multiplier for your surgical team. Refer patients or explore clinical partnerships.">
+  <meta name="description" content="OpWell is an extension of your surgical team. Refer patients or explore practice partnerships.">
   <link rel="canonical" href="https://opwellconcierge.com/provider">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --sage: #2D5A3D;
@@ -21,24 +22,28 @@
 
     body {
       font-family: 'DM Sans', -apple-system, sans-serif;
-      color: #333;
+      color: var(--charcoal);
       background: #fff;
-      line-height: 1.8;
+      line-height: 1.7;
     }
 
-    h1, h2, h3 { font-family: 'Playfair Display', serif; font-weight: 500; }
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 500;
+      line-height: 1.3;
+    }
 
     a { color: var(--sage); text-decoration: none; }
+    a:hover { color: var(--terracotta); }
 
     /* HEADER */
     header {
-      background: var(--sage);
-      color: white;
+      background: white;
+      border-bottom: 1px solid var(--border);
       padding: 1.5rem 0;
       position: sticky;
       top: 0;
       z-index: 100;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
 
     header .container {
@@ -51,168 +56,187 @@
     }
 
     header a {
-      color: white;
+      color: var(--sage);
       font-weight: 600;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
     }
 
-    /* HERO */
-    .hero {
-      background: linear-gradient(135deg, var(--sage) 0%, #3d7a4d 100%);
-      color: white;
-      padding: clamp(3rem, 8vw, 6rem) 2rem;
+    header a:hover {
+      color: var(--terracotta);
     }
 
-    .hero-content {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .hero h1 {
-      font-size: clamp(2rem, 6vw, 3.2rem);
-      margin-bottom: 1rem;
-      line-height: 1.3;
-    }
-
-    .hero p {
-      font-size: 1.05rem;
-      color: rgba(250,240,232,0.9);
-      max-width: 700px;
-      line-height: 1.7;
-    }
-
-    /* MAIN CONTAINER */
     .container {
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 2rem;
     }
 
-    /* SECTIONS */
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, var(--sage) 0%, #3d7a4d 100%);
+      color: var(--ivory);
+      padding: 5rem 2rem;
+    }
+
+    .hero-content {
+      max-width: 900px;
+    }
+
+    .hero-tag {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 6vw, 3.2rem);
+      margin-bottom: 1.5rem;
+      color: white;
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      color: rgba(250,240,232,0.9);
+      line-height: 1.8;
+      max-width: 700px;
+    }
+
+    /* SECTION SPACING */
     .section {
       padding: 4rem 2rem;
     }
 
+    .section-tag {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 0.75rem;
+    }
+
     .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
       color: var(--charcoal);
       margin-bottom: 0.5rem;
-      font-weight: 500;
     }
 
     .section-subtitle {
-      font-size: 1.15rem;
-      color: var(--terracotta);
-      font-weight: 600;
-      margin-bottom: 2rem;
-      letter-spacing: 0.05em;
-    }
-
-    .section-text {
-      font-size: 1rem;
+      font-size: 1.05rem;
       color: var(--slate);
-      max-width: 900px;
-      line-height: 1.8;
+      font-weight: 300;
       margin-bottom: 3rem;
+      max-width: 700px;
+      line-height: 1.8;
     }
 
-    /* VALUE PROPS */
-    .value-grid {
+    /* CARDS */
+    .card-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 2rem;
       margin: 3rem 0;
     }
 
-    .value-card {
-      background: #f9f6f1;
-      border: 1px solid var(--border);
-      border-radius: 12px;
+    .card {
+      background: white;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
       padding: 2rem;
       transition: all 0.3s ease;
     }
 
-    .value-card:hover {
-      box-shadow: 0 8px 24px rgba(45,90,61,0.12);
-      transform: translateY(-4px);
+    .card:hover {
+      border-color: var(--terracotta);
+      box-shadow: 0 12px 32px rgba(200,132,90,0.12);
     }
 
-    .value-card h3 {
-      font-size: 1.2rem;
+    .card h3 {
+      font-size: 1.3rem;
       color: var(--sage);
       margin-bottom: 1rem;
+      font-weight: 500;
     }
 
-    .value-card p {
+    .card p {
       font-size: 0.95rem;
       color: var(--slate);
       line-height: 1.7;
     }
 
-    /* EVIDENCE TABLE */
+    /* TABLE */
     .evidence-table {
       width: 100%;
       border-collapse: collapse;
       margin: 2rem 0;
       background: white;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     }
 
     .evidence-table th {
-      background: var(--sage);
-      color: white;
-      padding: 1.2rem;
+      background: transparent;
+      border-bottom: 2px solid var(--sage);
+      padding: 1.2rem 0;
       text-align: left;
       font-weight: 600;
+      color: var(--sage);
+      font-size: 0.95rem;
     }
 
     .evidence-table td {
-      padding: 1.2rem;
+      padding: 1.2rem 1rem;
       border-bottom: 1px solid var(--border);
+      font-size: 0.95rem;
+      color: var(--slate);
     }
 
     .evidence-table tr:last-child td {
       border-bottom: none;
     }
 
-    .evidence-table tr:nth-child(even) {
-      background: rgba(45,90,61,0.02);
+    .evidence-table strong {
+      color: var(--charcoal);
     }
 
     /* STEPS */
-    .steps-grid {
+    .steps {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2rem;
       margin: 3rem 0;
     }
 
     .step {
+      position: relative;
+      padding-top: 3.5rem;
       text-align: center;
     }
 
     .step-number {
-      display: inline-block;
-      width: 50px;
-      height: 50px;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 60px;
       background: var(--sage);
       color: white;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.4rem;
+      font-size: 1.6rem;
       font-weight: 700;
-      margin-bottom: 1rem;
     }
 
     .step h4 {
-      font-size: 1rem;
+      font-size: 1.1rem;
       color: var(--charcoal);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.75rem;
     }
 
     .step p {
@@ -221,36 +245,47 @@
       line-height: 1.6;
     }
 
-    /* FOOTER / CTA SECTION */
-    .footer-cta {
+    /* CTA SECTION */
+    .cta-section {
       background: linear-gradient(135deg, var(--sage) 0%, #3d7a4d 100%);
       color: white;
       padding: 4rem 2rem;
       text-align: center;
     }
 
-    .footer-cta h2 {
-      color: white;
-      margin-bottom: 2rem;
-      font-size: 1.8rem;
+    .cta-title {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .cta-subtitle {
+      font-size: 1.05rem;
+      color: rgba(250,240,232,0.85);
+      margin-bottom: 2.5rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.7;
     }
 
     .button-group {
       display: flex;
-      gap: 1rem;
+      gap: 1.2rem;
       justify-content: center;
       flex-wrap: wrap;
     }
 
     .btn {
-      padding: 1rem 2.5rem;
-      font-size: 1rem;
+      padding: 0.95rem 2.2rem;
+      font-size: 0.95rem;
       font-weight: 600;
       border: none;
-      border-radius: 8px;
+      border-radius: 6px;
       cursor: pointer;
       transition: all 0.3s ease;
       font-family: 'DM Sans', sans-serif;
+      letter-spacing: 0.05em;
     }
 
     .btn-primary {
@@ -271,23 +306,53 @@
 
     .btn-secondary:hover {
       background: rgba(255,255,255,0.1);
+      transform: translateY(-2px);
     }
 
     /* FORM PAGE */
     .form-page { display: none; }
     .form-page.active { display: block; }
 
+    .form-wrapper {
+      padding: 3rem 2rem;
+    }
+
     .form-container {
       max-width: 600px;
-      margin: 3rem auto;
-      background: #f9f6f1;
-      border-radius: 12px;
+      margin: 2rem auto;
+      background: white;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
       padding: 2.5rem;
     }
 
-    .form-container h2 {
+    .back-link {
       color: var(--sage);
-      margin-bottom: 1rem;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+      transition: all 0.2s;
+    }
+
+    .back-link:hover {
+      color: var(--terracotta);
+    }
+
+    .form-container h2 {
+      font-size: 1.8rem;
+      color: var(--sage);
+      margin-bottom: 0.5rem;
+    }
+
+    .form-subtitle {
+      font-size: 0.95rem;
+      color: var(--slate);
+      margin-bottom: 2rem;
+      line-height: 1.6;
     }
 
     .form-group {
@@ -299,7 +364,7 @@
       font-weight: 600;
       color: var(--charcoal);
       margin-bottom: 0.5rem;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
     }
 
     input, textarea, select {
@@ -309,7 +374,7 @@
       border-radius: 6px;
       font-family: 'DM Sans', sans-serif;
       font-size: 0.95rem;
-      transition: border-color 0.2s;
+      transition: all 0.2s;
     }
 
     input:focus, textarea:focus, select:focus {
@@ -320,7 +385,7 @@
 
     textarea {
       resize: vertical;
-      min-height: 120px;
+      min-height: 110px;
     }
 
     .form-submit {
@@ -328,33 +393,69 @@
       color: white;
       width: 100%;
       padding: 1rem;
-      margin-top: 1rem;
+      margin-top: 1.5rem;
+      font-weight: 600;
+      border: none;
     }
 
     .form-submit:hover {
       background: #1f4730;
     }
 
-    .back-button {
+    .form-error {
+      background: #fff3f0;
+      border-left: 3px solid var(--terracotta);
+      color: var(--terracotta);
+      padding: 1rem;
+      border-radius: 0 6px 6px 0;
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+      display: none;
+    }
+
+    .form-success {
+      background: #f0f7f2;
+      border-left: 3px solid var(--sage);
       color: var(--sage);
-      cursor: pointer;
-      font-weight: 600;
-      margin-bottom: 1.5rem;
+      padding: 1rem;
+      border-radius: 0 6px 6px 0;
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+      display: none;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--charcoal);
+      color: rgba(253,252,248,0.6);
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+
+    footer a {
+      color: var(--terracotta);
+      text-decoration: none;
     }
 
     /* RESPONSIVE */
     @media (max-width: 768px) {
       .section { padding: 2.5rem 1rem; }
-      .section-title { font-size: 1.5rem; }
+      .hero { padding: 3rem 1rem; }
+      .cta-section { padding: 3rem 1rem; }
       .button-group { flex-direction: column; }
       .btn { width: 100%; }
-      .value-grid { grid-template-columns: 1fr; }
-      .steps-grid { grid-template-columns: repeat(2, 1fr); }
+      .card-grid { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: repeat(2, 1fr); }
+      .form-container { padding: 2rem; }
     }
 
     @media (max-width: 480px) {
-      .steps-grid { grid-template-columns: 1fr; }
       .hero h1 { font-size: 1.8rem; }
+      .steps { grid-template-columns: 1fr; }
+      .evidence-table { font-size: 0.85rem; }
+      .evidence-table td { padding: 0.8rem 0.5rem; }
     }
   </style>
 </head>
@@ -364,7 +465,6 @@
 <header>
   <div class="container">
     <a href="/">← Back to OpWell</a>
-    <div></div>
   </div>
 </header>
 
@@ -374,8 +474,9 @@
   <!-- HERO -->
   <div class="hero">
     <div class="hero-content">
+      <div class="hero-tag">For Providers</div>
       <h1>Clinical Partnerships & Referrals</h1>
-      <p>OpWell functions as a force multiplier for your surgical team. We handle the exhaustive perioperative preparation, supplement/medication clearance, and post-discharge recovery monitoring so you can stay focused entirely on the operating room.</p>
+      <p>OpWell functions as an extension of your surgical team. We handle exhaustive perioperative preparation, medication/supplement clearance, and 30-day recovery monitoring so you stay focused on the operating room.</p>
     </div>
   </div>
 
@@ -384,63 +485,72 @@
 
     <!-- THE BIG WINS -->
     <section class="section">
-      <h2 class="section-subtitle">The Big Wins</h2>
-      <div class="value-grid">
-        <div class="value-card">
+      <div class="section-tag">What We Deliver</div>
+      <h2 class="section-title">The Big Wins</h2>
+      <p class="section-subtitle">Three clinical outcomes that compound your practice's edge.</p>
+
+      <div class="card-grid">
+        <div class="card">
           <h3>Protect Your OR Timeline</h3>
-          <p>We conduct deep multi-system risk stratification and complete a strict medication/supplement audit weeks in advance. Your patients arrive optimized, cleared, and ready for the table—eliminating day-of-surgery cancellations.</p>
+          <p>Deep multi-system risk stratification and strict medication/supplement audits weeks in advance. Patients arrive optimized, cleared, and ready for the table—eliminating day-of-surgery cancellations.</p>
         </div>
-        <div class="value-card">
-          <h3>Offload Your Administrative Staff</h3>
-          <p>From the decision for surgery through 30 days post-discharge, we manage the time-consuming clearances, medication adjustments, and patient anxiety management. No coordination burden or scheduling overlap for your team.</p>
+        <div class="card">
+          <h3>Offload Administrative Burden</h3>
+          <p>From surgical decision through day 30 post-op, we manage clearances, medication adjustments, and patient anxiety. Zero coordination burden. Zero scheduling overlap. Your staff stays focused.</p>
         </div>
-        <div class="value-card">
-          <h3>Secure the 30-Day Post-Op Window</h3>
-          <p>We act as a proactive safety net at home. By tracking recovery milestones and managing compliance via structured touchpoints, we catch normal recovery hurdles early and prevent unnecessary ER readmissions.</p>
+        <div class="card">
+          <h3>Secure the 30-Day Window</h3>
+          <p>Proactive recovery monitoring at home. Structured touchpoints catch normal recovery hurdles early and prevent unnecessary ER readmissions—your safety net in the critical post-op phase.</p>
         </div>
       </div>
     </section>
 
     <!-- EVIDENCE -->
     <section class="section">
-      <h2 class="section-subtitle">The Evidence at a Glance</h2>
+      <div class="section-tag">Clinical Evidence</div>
+      <h2 class="section-title">The Evidence at a Glance</h2>
+      <p class="section-subtitle">Outcomes from structured perioperative home models across multi-specialty cohorts.</p>
+
       <table class="evidence-table">
         <thead>
           <tr>
-            <th>The Metric</th>
-            <th>The Impact of Structured Perioperative Home Models</th>
+            <th>Outcome</th>
+            <th>Impact</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><strong>Hospital Stay</strong></td>
-            <td>30% to 50% reduction in total length of stay.*</td>
+            <td><strong>Hospital Length of Stay</strong></td>
+            <td>30–50% reduction in total LOS*</td>
           </tr>
           <tr>
             <td><strong>Readmission Rates</strong></td>
-            <td>Significant drop in preventable 7-day and 30-day readmissions.*</td>
+            <td>Significant drop in preventable 7- and 30-day readmissions*</td>
           </tr>
           <tr>
             <td><strong>Practice Economics</strong></td>
-            <td>Cost savings up to $16,447 per patient with a high ROI.*</td>
+            <td>Up to $16,447 cost savings per patient with high ROI*</td>
           </tr>
           <tr>
-            <td><strong>Patient Experience</strong></td>
-            <td>Up to 89% reduction in pre-surgical anxiety.**</td>
+            <td><strong>Pre-Op Anxiety</strong></td>
+            <td>Up to 89% reduction in surgical anxiety**</td>
           </tr>
         </tbody>
       </table>
-      <p style="font-size:0.85rem; color:var(--slate); margin-top:1rem; font-style:italic;">Data compiled across multi-specialty PSH, POSH, and ERAS peer-reviewed clinical studies. Full bibliography available upon request.</p>
+      <p style="font-size:0.8rem; color:var(--slate); margin-top:1.5rem; font-style:italic;">*Data from peer-reviewed PSH, POSH, and ERAS clinical studies. **Patient-reported outcomes. Full bibliography available upon request.</p>
     </section>
 
     <!-- HOW WE PARTNER -->
     <section class="section">
-      <h2 class="section-subtitle">How We Partner</h2>
-      <div class="steps-grid">
+      <div class="section-tag">The Process</div>
+      <h2 class="section-title">How We Partner</h2>
+      <p class="section-subtitle">A streamlined four-step integration into your workflow.</p>
+
+      <div class="steps">
         <div class="step">
           <div class="step-number">1</div>
           <h4>Fast Referral</h4>
-          <p>Submit a patient securely in under two minutes.</p>
+          <p>Submit a patient securely in under two minutes. No complex intake. No friction.</p>
         </div>
         <div class="step">
           <div class="step-number">2</div>
@@ -450,12 +560,12 @@
         <div class="step">
           <div class="step-number">3</div>
           <h4>Close the Loop</h4>
-          <p>Your practice receives the finalized anesthesia safety brief and clearance timeline before the procedure.</p>
+          <p>Your practice receives the anesthesia safety brief and clearance timeline days before surgery.</p>
         </div>
         <div class="step">
           <div class="step-number">4</div>
           <h4>30-Day Safety Net</h4>
-          <p>We monitor the patient at home through the critical post-op windows, tracking compliance and recovery indicators.</p>
+          <p>Home monitoring through critical post-op windows. Structured touchpoints. Early issue detection.</p>
         </div>
       </div>
     </section>
@@ -463,11 +573,12 @@
   </div>
 
   <!-- CTA FOOTER -->
-  <div class="footer-cta">
-    <h2>Ready to Partner?</h2>
+  <div class="cta-section">
+    <h2 class="cta-title">Ready to Partner?</h2>
+    <p class="cta-subtitle">Start with a referral or explore a deeper clinical partnership.</p>
     <div class="button-group">
       <button class="btn btn-primary" onclick="showForm('referral')">Refer a Patient →</button>
-      <button class="btn btn-secondary" onclick="showForm('partnership')">Connect on Practice Partnership →</button>
+      <button class="btn btn-secondary" onclick="showForm('partnership')">Explore Partnership →</button>
     </div>
   </div>
 
@@ -475,11 +586,17 @@
 
 <!-- FORM PAGE -->
 <div id="form-page" class="form-page">
+  <div class="form-wrapper">
+    <div class="container">
+      <a class="back-link" onclick="backToInfo()">← Back to Overview</a>
+    </div>
+  </div>
+
   <div class="container">
     <div class="form-container">
-      <a class="back-button" onclick="backToInfo()">← Back</a>
-
       <h2 id="form-title"></h2>
+      <p class="form-subtitle" id="form-subtitle"></p>
+
       <form id="provider-form" onsubmit="submitForm(event)">
 
         <!-- REFERRAL FORM -->
@@ -502,15 +619,11 @@
           </div>
           <div class="form-group">
             <label>Patient Name *</label>
-            <input type="text" name="patient_name" placeholder="Patient full name" required>
+            <input type="text" name="patient_name" placeholder="Full name" required>
           </div>
           <div class="form-group">
             <label>Patient Email *</label>
             <input type="email" name="patient_email" placeholder="patient@email.com" required>
-          </div>
-          <div class="form-group">
-            <label>Patient Phone</label>
-            <input type="tel" name="patient_phone" placeholder="(555) 987-6543">
           </div>
           <div class="form-group">
             <label>Procedure / Surgery Type</label>
@@ -518,7 +631,7 @@
           </div>
           <div class="form-group">
             <label>Additional Notes</label>
-            <textarea name="notes" placeholder="Any additional information..."></textarea>
+            <textarea name="notes" placeholder="Any relevant medical history or special considerations..."></textarea>
           </div>
         </div>
 
@@ -550,21 +663,26 @@
           </div>
           <div class="form-group">
             <label>Specialty / Program Type *</label>
-            <input type="text" name="specialty" placeholder="e.g., Orthopedic Surgery, Bariatric" required>
+            <input type="text" name="specialty" placeholder="e.g., Orthopedic, Bariatric, General Surgery" required>
           </div>
           <div class="form-group">
             <label>Tell Us About Your Interest *</label>
-            <textarea name="message" placeholder="What does your practice look like? What are you hoping OpWell can help with?" required></textarea>
+            <textarea name="message" placeholder="What does your practice look like? What outcomes are you hoping to improve?" required></textarea>
           </div>
         </div>
 
-        <button type="submit" class="btn form-submit">Send →</button>
+        <button type="submit" class="btn form-submit">Send Inquiry →</button>
       </form>
-      <div id="form-error" style="color:#c62828; margin-top:1rem; display:none;"></div>
-      <div id="form-success" style="color:var(--sage); margin-top:1rem; display:none;">✓ Thank you! Your information has been sent. We'll be in touch soon.</div>
+      <div class="form-error" id="form-error"></div>
+      <div class="form-success" id="form-success">✓ Thank you! Your information has been sent. We'll be in touch within 24 hours.</div>
     </div>
   </div>
 </div>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 OpWell Concierge. All rights reserved. | <a href="/">Privacy Policy</a> | <a href="/">Terms of Service</a></p>
+</footer>
 
 <script>
   let currentFormType = '';
@@ -576,10 +694,12 @@
 
     if (type === 'referral') {
       document.getElementById('form-title').textContent = 'Refer a Patient';
+      document.getElementById('form-subtitle').textContent = 'Submit your patient referral. We\'ll be in touch within 24 hours to begin the optimization process.';
       document.getElementById('referral-form').style.display = 'block';
       document.getElementById('partnership-form').style.display = 'none';
     } else {
-      document.getElementById('form-title').textContent = 'Practice Partnership Inquiry';
+      document.getElementById('form-title').textContent = 'Explore Clinical Partnership';
+      document.getElementById('form-subtitle').textContent = 'Tell us about your practice and what you\'re hoping OpWell can help with.';
       document.getElementById('partnership-form').style.display = 'block';
       document.getElementById('referral-form').style.display = 'none';
     }
@@ -624,9 +744,9 @@
       if (data.success) {
         successEl.style.display = 'block';
         form.reset();
-        setTimeout(() => backToInfo(), 2000);
+        setTimeout(() => backToInfo(), 2500);
       } else {
-        errorEl.textContent = 'Error sending form. Please try again.';
+        errorEl.textContent = data.error || 'Error sending form. Please try again.';
         errorEl.style.display = 'block';
       }
     } catch (error) {
