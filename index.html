@@ -14361,7 +14361,7 @@
             <li style="margin-top:10px; padding-top:10px; border-top:1px solid rgba(45,90,61,0.18); font-size:0.8rem; font-style:italic; color:#666;">We'll contact you within 24 hours to discuss your unique needs and customize your care partnership.</li>
           </ul>
         </div>
-        <a onclick="showPage('contact')" class="btn-secondary" style="cursor:pointer; display:inline-block; margin-top: auto;">Apply Now →</a>
+        <a onclick="showPage('private-retainer')" class="btn-secondary" style="cursor:pointer; display:inline-block; margin-top: auto;">Apply Now →</a>
       </div>
 
     </div>
@@ -14692,6 +14692,108 @@
     </div>
   </footer>
   <div class="footer-bottom"><span class="footer-legal">© 2025–2026 OpWell Concierge. All rights reserved. Registered trade name in Ohio &amp; Georgia.</span><span class="footer-legal">Not a substitute for emergency medical care &nbsp;·&nbsp; No physician-patient relationship until a formal consultation is completed.</span></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- PRIVATE RETAINER APPLICATION PAGE -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div id="page-private-retainer" class="page">
+  <div style="max-width: 800px; margin: 0 auto; padding: 4rem 2rem;">
+
+    <!-- HEADER -->
+    <div style="text-align: center; margin-bottom: 3rem;">
+      <h1 style="font-family: 'Playfair Display', serif; font-size: 2.8rem; color: var(--sage); margin-bottom: 1rem; font-weight: 400; line-height: 1.2;">Private Retainer Application</h1>
+      <div style="width: 40px; height: 2px; background: var(--terracotta); margin: 0 auto 2rem;"></div>
+      <p style="font-size: 1.1rem; color: #556B7F; line-height: 1.8; font-weight: 300;">Membership is strictly limited to ensure uncompromised access and comprehensive physician oversight. Please complete this brief introductory profile, and Dr. Oluwole will contact you personally within 24 hours.</p>
+    </div>
+
+    <!-- FORM -->
+    <div style="background: #FAFAF8; border: 1px solid rgba(45,90,61,0.15); border-radius: 12px; padding: 3rem; margin-top: 2rem;">
+      <form id="retainer-form" onsubmit="submitRetainerApplication(event)">
+
+        <!-- Full Name -->
+        <div style="margin-bottom: 2rem;">
+          <label style="display: block; font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--sage); margin-bottom: 0.75rem; font-weight: 500;">Full Name *</label>
+          <input type="text" name="fullName" required style="width: 100%; padding: 1rem 1.25rem; border: 1.5px solid rgba(45,90,61,0.25); border-radius: 6px; font-family: 'DM Sans', sans-serif; font-size: 1rem; transition: border-color 0.2s;" onfocus="this.style.borderColor='var(--terracotta)'" onblur="this.style.borderColor='rgba(45,90,61,0.25)'">
+        </div>
+
+        <!-- Preferred Contact Method -->
+        <div style="margin-bottom: 2rem;">
+          <label style="display: block; font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--sage); margin-bottom: 0.75rem; font-weight: 500;">Preferred Contact Method *</label>
+          <select name="contactMethod" required style="width: 100%; padding: 1rem 1.25rem; border: 1.5px solid rgba(45,90,61,0.25); border-radius: 6px; font-family: 'DM Sans', sans-serif; font-size: 1rem; transition: border-color 0.2s; cursor: pointer;" onfocus="this.style.borderColor='var(--terracotta)'" onblur="this.style.borderColor='rgba(45,90,61,0.25)'">
+            <option value="">Select a method</option>
+            <option value="Phone">Phone</option>
+            <option value="Email">Email</option>
+            <option value="Assistant">Assistant</option>
+          </select>
+        </div>
+
+        <!-- Upcoming Procedure & Date -->
+        <div style="margin-bottom: 2rem;">
+          <label style="display: block; font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--sage); margin-bottom: 0.75rem; font-weight: 500;">Upcoming Procedure & Date <span style="font-weight: 300; color: #999;">(Optional)</span></label>
+          <input type="text" name="procedureDate" placeholder="e.g., Rhinoplasty - August 15, 2026" style="width: 100%; padding: 1rem 1.25rem; border: 1.5px solid rgba(45,90,61,0.25); border-radius: 6px; font-family: 'DM Sans', sans-serif; font-size: 1rem; transition: border-color 0.2s;" onfocus="this.style.borderColor='var(--terracotta)'" onblur="this.style.borderColor='rgba(45,90,61,0.25)'">
+        </div>
+
+        <!-- Primary Goals -->
+        <div style="margin-bottom: 2.5rem;">
+          <label style="display: block; font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--sage); margin-bottom: 0.75rem; font-weight: 500;">Primary Goals for Your Care Partnership *</label>
+          <textarea name="goals" required placeholder="Tell us about your surgical goals, health priorities, and what you're hoping to achieve through a dedicated physician partnership..." style="width: 100%; padding: 1rem 1.25rem; border: 1.5px solid rgba(45,90,61,0.25); border-radius: 6px; font-family: 'DM Sans', sans-serif; font-size: 1rem; min-height: 140px; resize: vertical; transition: border-color 0.2s;" onfocus="this.style.borderColor='var(--terracotta)'" onblur="this.style.borderColor='rgba(45,90,61,0.25)'"></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn-primary-standard" style="width: 100%; padding: 1.2rem 2rem; font-size: 1rem;">Submit Application →</button>
+
+        <!-- Status Messages -->
+        <div id="retainer-success" style="display: none; background: rgba(45,90,61,0.1); border: 1px solid var(--sage); color: var(--sage); padding: 1rem; border-radius: 6px; margin-top: 1rem; font-size: 0.95rem;">✓ Thank you for applying! Dr. Oluwole will contact you within 24 hours.</div>
+        <div id="retainer-error" style="display: none; background: rgba(200,132,90,0.1); border: 1px solid var(--terracotta); color: var(--terracotta); padding: 1rem; border-radius: 6px; margin-top: 1rem; font-size: 0.95rem;"></div>
+      </form>
+    </div>
+
+    <!-- Footer Note -->
+    <p style="text-align: center; font-size: 0.85rem; color: #999; margin-top: 2rem; line-height: 1.7;">Your information is encrypted and HIPAA-compliant. Dr. Oluwole personally reviews all applications to ensure alignment with your unique needs.</p>
+  </div>
+
+  <script>
+    async function submitRetainerApplication(event) {
+      event.preventDefault();
+      const form = event.target;
+      const formData = new FormData(form);
+      const successEl = document.getElementById('retainer-success');
+      const errorEl = document.getElementById('retainer-error');
+
+      successEl.style.display = 'none';
+      errorEl.style.display = 'none';
+
+      try {
+        const payload = {
+          type: 'retainer-application',
+          fullName: formData.get('fullName'),
+          contactMethod: formData.get('contactMethod'),
+          procedureDate: formData.get('procedureDate') || 'Not specified',
+          goals: formData.get('goals')
+        };
+
+        const response = await fetch('/api/provider-referral', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          successEl.style.display = 'block';
+          form.reset();
+        } else {
+          errorEl.textContent = data.error || 'Error submitting application.';
+          errorEl.style.display = 'block';
+        }
+      } catch (error) {
+        errorEl.textContent = 'Connection error. Please try again.';
+        errorEl.style.display = 'block';
+      }
+    }
+  </script>
 </div>
 
 <!-- ══════════════════════════════════════════════════════ -->
