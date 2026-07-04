@@ -21,6 +21,8 @@
     { "source": "/welcome", "destination": "/ad-landing.html" },
     { "source": "/provider", "destination": "/provider.html" },
     { "source": "/provider.html", "destination": "/provider.html" },
+    { "source": "/providers", "destination": "/providers.html" },
+    { "source": "/providers.html", "destination": "/providers.html" },
     { "source": "/:file*.png", "destination": "/:file*.png" },
     { "source": "/:file*.jpg", "destination": "/:file*.jpg" },
     { "source": "/:file*.pdf", "destination": "/:file*.pdf" },
