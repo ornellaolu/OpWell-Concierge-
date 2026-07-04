@@ -622,7 +622,7 @@
         <form id="referral-form" onsubmit="submitForm(event, 'referral')">
           <div class="form-group">
             <label>Your Name *</label>
-            <input type="text" name="your_name" required>
+            <input type="text" name="providerName" required>
           </div>
           <div class="form-group">
             <label>Practice / Organization *</label>
@@ -630,19 +630,30 @@
           </div>
           <div class="form-group">
             <label>Your Email *</label>
-            <input type="email" name="your_email" required>
+            <input type="email" name="providerEmail" required>
           </div>
           <div class="form-group">
             <label>Your Phone</label>
-            <input type="tel" name="your_phone">
+            <input type="tel" name="providerPhone">
           </div>
           <div class="form-group">
             <label>Patient Name *</label>
-            <input type="text" name="patient_name" required>
+            <input type="text" name="patientName" required>
           </div>
           <div class="form-group">
             <label>Patient Email *</label>
-            <input type="email" name="patient_email" required>
+            <input type="email" name="patientEmail" required>
+          </div>
+          <div class="form-group">
+            <label>Service Needed *</label>
+            <select name="service" required>
+              <option value="">Select a service</option>
+              <option value="Pre-Surgical Consultation">Pre-Surgical Consultation</option>
+              <option value="Post-Operative Care">Post-Operative Care</option>
+              <option value="Complete Surgical Care Package">Complete Surgical Care Package</option>
+              <option value="Labor & Delivery Consultation">Labor & Delivery Consultation</option>
+              <option value="Mental Wellness">Mental Wellness</option>
+            </select>
           </div>
           <div class="form-group">
             <label>Procedure / Surgery Type</label>
@@ -670,7 +681,7 @@
         <form id="partnership-form" onsubmit="submitForm(event, 'partnership')">
           <div class="form-group">
             <label>Your Name *</label>
-            <input type="text" name="your_name" required>
+            <input type="text" name="providerName" required>
           </div>
           <div class="form-group">
             <label>Title / Role *</label>
@@ -682,11 +693,11 @@
           </div>
           <div class="form-group">
             <label>Your Email *</label>
-            <input type="email" name="your_email" required>
+            <input type="email" name="providerEmail" required>
           </div>
           <div class="form-group">
             <label>Your Phone</label>
-            <input type="tel" name="your_phone">
+            <input type="tel" name="providerPhone">
           </div>
           <div class="form-group">
             <label>State *</label>
