@@ -3206,7 +3206,6 @@
     <button class="tab-btn" onclick="showTab('bariatric')">Bariatric Surgery</button>
     <button class="tab-btn" onclick="showTab('general')">General Surgery</button>
     <button class="tab-btn" onclick="showTab('glp1')">GLP-1 Medications</button>
-    <button class="tab-btn" onclick="showTab('sp-pricing')">Pricing</button>
     <button class="tab-btn" onclick="showTab('sp-faq')">FAQ</button>
   </div>
 
@@ -3428,57 +3427,12 @@
   </div>
 
   <!-- PACKAGES -->
-  <div class="tab-panel" id="tab-sp-pricing">
-  <div class="package-section">
-    <div class="section-tag">Investment</div>
-    <h2 class="section-title">Complete Care. One Simple Price.</h2>
-    <p class="section-subtitle">Everything you need from pre-surgery through recovery. <strong>Split payments available with Klarna or Afterpay</strong> — pay in monthly installments. HSA & FSA accepted.</p>
-    <div class="packages-grid">
-      <div class="package-card featured">
-        <div class="package-badge">Everything You Need</div>
-        <div class="package-name">Complete Surgical Care Package</div>
-        <div class="package-price">$850</div>
-        <div style="color: var(--sage); font-weight: 700; font-size: 0.95rem; margin: 0.75rem 0; background: rgba(45,90,61,0.08); padding: 0.75rem; border-radius: 6px;">✓ Includes FREE Vitamin Consultation ($250 value)</div>
-        <div class="package-savings" style="color:var(--terracotta);">Optional: Add Mental Wellness for $200 (save $50)</div>
-        <div class="package-desc">Complete perioperative support — board-certified anesthesiologist-led pre-surgical preparation, risk assessment, prehabilitation protocol, 72-hour post-op check-in, plus 4 weekly follow-ups through 30 days of recovery.</div>
-        <ul class="services-list">
-          <li style="margin-top:0;"><div class="service-check">✓</div><strong>Pre-Surgical Consultation (50 min)</strong></li>
-          <li><div class="service-check">✓</div>Anesthesia & aspiration risk assessment</li>
-          <li><div class="service-check">✓</div>Personalized prehabilitation protocol</li>
-          <li><div class="service-check">✓</div>Medication & supplement safety review</li>
-          <li><div class="service-check">✓</div>Cognitive & Mental Health Assessment</li>
-          <li><div class="service-check">✓</div>Pain Management Planning</li>
-          <li style="margin-top:10px; padding-top:10px; border-top:1px solid rgba(45,90,61,0.18);"><strong>Post-Operative Care (30 days)</strong></li>
-          <li><div class="service-check">✓</div>72-hour post-discharge telehealth check-in</li>
-          <li><div class="service-check">✓</div>4 weekly follow-ups through month 1</li>
-          <li><div class="service-check">✓</div>Pain management & wound healing guidance</li>
-          <li><div class="service-check">✓</div>Complication monitoring & warning signs</li>
-          <li><div class="service-check">✓</div>Direct physician messaging access</li>
-          <li style="margin-top:10px; padding-top:10px; border-top:1px solid rgba(45,90,61,0.18); font-size:0.72rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--sage); list-style:none;">Documents Included</li>
-          <li><div class="service-check">✓</div>Surgical Clearance Letter</li>
-          <li><div class="service-check">✓</div>Personalized Surgical Summary</li>
-          <li><div class="service-check">✓</div>Post-Op Recovery Plan</li>
-          <li><div class="service-check">✓</div>Anesthesia Risk Assessment Report</li>
-          <li><div class="service-check">✓</div>HSA & FSA accepted · Klarna/Afterpay available</li>
-        </ul>
-        <br><a onclick="showPage('schedule')" class="btn-primary" style="cursor:pointer; display:inline-block;">Book Your Consultation →</a>
-      </div>
-    </div>
-
-    <!-- BARIATRIC CALLOUT -->
-    <div style="margin-top:3rem; padding:2rem; background:var(--warm-white); border-left:4px solid var(--sage); border-radius:8px;">
-      <h3 style="color:var(--sage); margin-top:0;">Special for Bariatric Surgery Patients</h3>
-      <p style="margin:0.75rem 0;">Preparing for gastric bypass, gastric sleeve, or other weight-loss surgery? We offer specialized vitamin monitoring to optimize your nutritional recovery:</p>
-      <ul style="margin:1rem 0 0 1.5rem;">
-        <li><strong>Initial Vitamin Assessment</strong> — $250 (labs ordered, personalized protocol)</li>
-        <li><strong>Quarterly Follow-Up Evaluations</strong> — $150/session</li>
-        <li>Customized supplement recommendations coordinated with your surgical journey</li>
-      </ul>
-      <p style="font-size:0.9rem; color:#666; margin-top:1rem;">Ask about these services when you book your Complete Surgical Care Package.</p>
-    </div>
+  <!-- PRICING CTA SECTION -->
+  <div class="content-section" style="text-align:center;">
+    <h2 class="section-title">Ready to get started?</h2>
+    <p class="body-text" style="max-width:700px; margin:0 auto 2rem;">View our transparent pricing and payment options — Klarna, Afterpay, HSA/FSA accepted.</p>
+    <a onclick="showPage('pricing')" class="btn-primary" style="cursor:pointer; display:inline-block;">View Pricing & Book →</a>
   </div>
-
-  </div><!-- /tab-sp-pricing -->
 
   <!-- FAQ -->
   <div class="tab-panel" id="tab-sp-faq">
@@ -3600,7 +3554,6 @@
     <button class="tab-btn active" onclick="showRecoveryTab('included')">What's Included</button>
     <button class="tab-btn" onclick="showRecoveryTab('overview')">Overview</button>
     <button class="tab-btn" onclick="showRecoveryTab('risk')">Risk Assessment</button>
-    <button class="tab-btn" onclick="showRecoveryTab('pricing')">Pricing</button>
     <button class="tab-btn" onclick="showRecoveryTab('vitals')">Vitals Kit</button>
     <button class="tab-btn" onclick="showRecoveryTab('faq')">FAQ</button>
   </div>
@@ -3807,82 +3760,12 @@
   </div><!-- end rtab-risk -->
 
   <!-- ═══ TAB: PRICING ═══ -->
-  <div class="tab-panel" id="rtab-pricing">
-
-  <!-- ═══ SECTION 4: PRICING ═══ -->
-  <div class="package-section">
-    <div class="section-tag">Investment</div>
-    <h2 class="section-title">Recovery deserves<br>physician-level support.</h2>
-    <p class="section-subtitle">Post-Operative Care is available as a standalone service or bundled with Pre-Surgical Consultation. HSA & FSA accepted.</p>
-    <div class="packages-grid">
-      <div class="package-card featured">
-
-        <div class="package-name">Post-Operative Care</div>
-        <div class="package-price">$490</div>
-        <div class="package-desc">Anesthesiologist-led post-discharge support from the first 72 hours through 30 days post-op.</div>
-        <ul class="services-list">
-          <li><div class="service-check">✓</div>72-hour post-discharge telehealth visit with Dr. Oluwole</li>
-          <li><div class="service-check">✓</div>Weekly check-ins via phone, video, or messaging — up to 30 days post-op</li>
-          <li><div class="service-check">✓</div>Async physician messaging throughout recovery</li>
-          <li><div class="service-check">✓</div>Pain management & wound healing guidance</li>
-          <li><div class="service-check">✓</div>Warning sign education — normal vs. concerning</li>
-          <li><div class="service-check">✓</div>Readmission prevention support</li>
-          <li><div class="service-check">✓</div>Structured recovery monitoring — included at no extra cost</li>
-          <li><div class="service-check">✓</div>Mental health specialist access ($215 bundled rate)</li>
-          <li style="margin-top:10px; padding-top:10px; border-top:1px solid rgba(45,90,61,0.18); font-size:0.72rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--sage); list-style:none;">Documents You Receive</li>
-          <li><div class="service-check">✓</div>Personalized Post-Op Recovery Plan</li>
-          <li><div class="service-check">✓</div>Pain Management Plan</li>
-          <li><div class="service-check">✓</div>Medication Continuation Summary</li>
-          <li><div class="service-check">✓</div>HSA & FSA accepted</li>
-        </ul>
-        <br><a onclick="showPage('schedule')" class="btn-primary" style="cursor:pointer; display:inline-block;">Book Your Consultation →</a>
-      </div>
-      <div class="package-card">
-        <div class="package-badge" style="background:var(--charcoal);">Complete</div>
-        <div class="package-name">Complete Surgical Care Package</div>
-        <div class="package-price">$850</div>
-        <div class="package-savings">Save $130 — valued at $980 separately</div>
-        <div class="package-desc">Full perioperative support — physician-led pre-surgical preparation plus post-operative care through your most critical recovery windows.</div>
-        <ul class="services-list">
-          <li><div class="service-check">✓</div>Everything in Post-Operative Care</li>
-          <li><div class="service-check">✓</div>Pre-op consultation & risk assessment</li>
-          <li><div class="service-check">✓</div>Personalized prehabilitation protocol</li>
-          <li><div class="service-check">✓</div>Continuity of care across your full journey</li>
-          <li style="margin-top:10px; padding-top:10px; border-top:1px solid rgba(45,90,61,0.18); font-size:0.72rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--sage); list-style:none;">All Documents Included</li>
-          <li><div class="service-check">✓</div>Surgical Clearance Letter</li>
-          <li><div class="service-check">✓</div>Personalized Surgical Summary</li>
-          <li><div class="service-check">✓</div>Anesthesia Risk Assessment Report</li>
-          <li><div class="service-check">✓</div>Pre-operative Optimization Recommendations</li>
-          <li><div class="service-check">✓</div>Personalized Post-Op Recovery Plan</li>
-          <li><div class="service-check">✓</div>Pain Management Plan</li>
-          <li style="margin-top:10px; padding-top:10px; border-top:1px solid rgba(45,90,61,0.18); font-size:0.72rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--terracotta); list-style:none;">Bonus Included</li>
-          <li><div class="service-check" style="color:var(--terracotta);">✓</div><strong>Surgery Prep Masterclass</strong> — FREE ($99 value)</li>
-          <li><div class="service-check">✓</div>HSA & FSA accepted</li>
-        </ul>
-        <br><a onclick="showPage('schedule')" class="btn-secondary" style="cursor:pointer; display:inline-block;">Book Your Consultation →</a>
-      </div>
-      <div class="package-card" style="background:#1E3A28; border-color:rgba(200,132,90,0.3);">
-        <div class="package-badge" style="background:var(--terracotta);">Executive Package</div>
-        <div class="package-name" style="color:#fdf8f4;">Complete Concierge Program</div>
-        <div class="package-price" style="color:#e8b48a;">$1,350</div>
-        <div class="package-savings" style="color:rgba(232,180,138,0.85);">Save $230 — valued at $1,580 separately</div>
-        <div class="package-desc" style="color:rgba(253,248,244,0.85);">OpWell's most comprehensive program — physician-led surgical preparation, post-operative care, and three dedicated mental wellness sessions. Full-spectrum perioperative support, from consultation to recovery.</div>
-        <ul class="services-list">
-          <li style="color:rgba(253,248,244,0.9);"><div class="service-check" style="color:#e8b48a;">✓</div>Everything in Post-Operative Care</li>
-          <li style="color:rgba(253,248,244,0.9);"><div class="service-check" style="color:#e8b48a;">✓</div>Everything in Pre-Surgical Consultation</li>
-          <li style="color:rgba(253,248,244,0.9);"><div class="service-check" style="color:#e8b48a;">✓</div>3 Mental Wellness sessions ($600 value)</li>
-          <li style="color:rgba(253,248,244,0.9);"><div class="service-check" style="color:#e8b48a;">✓</div>Coordinated care — medical + mental health in one team</li>
-          <li style="color:rgba(253,248,244,0.9);"><div class="service-check" style="color:#e8b48a;">✓</div>Priority scheduling &amp; extended messaging access</li>
-          <li style="margin-top:10px; padding-top:10px; border-top:1px solid rgba(232,180,138,0.25); font-size:0.72rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:#e8b48a; list-style:none;">Bonus Included</li>
-          <li style="color:rgba(253,248,244,0.9);"><div class="service-check" style="color:#e8b48a;">✓</div><strong>Surgery Prep Masterclass</strong> — FREE ($99 value)</li>
-        </ul>
-        <br><a onclick="showPage('schedule')" class="btn-gold" style="cursor:pointer; display:inline-block;">Book Executive Package →</a>
-      </div>
-    </div>
-    <p class="section-subtitle" style="margin-top:1.5rem;"><a onclick="showPage('pricing')" style="color:var(--terracotta); cursor:pointer; text-decoration:underline;">Compare all care plans & packages →</a></p>
+  <!-- PRICING CTA SECTION -->
+  <div class="content-section" style="text-align:center;">
+    <h2 class="section-title">Ready to secure your recovery?</h2>
+    <p class="body-text" style="max-width:700px; margin:0 auto 2rem;">View our transparent pricing and payment options — Klarna, Afterpay, HSA/FSA accepted.</p>
+    <a onclick="showPage('pricing')" class="btn-primary" style="cursor:pointer; display:inline-block;">View Pricing & Book →</a>
   </div>
-
-  </div><!-- end rtab-pricing -->
 
   <!-- ═══ TAB: VITALS KIT ═══ -->
   <div class="tab-panel" id="rtab-vitals">
@@ -4065,7 +3948,6 @@
   <div class="tabs-nav" id="mental-tabs">
     <button class="tab-btn active" onclick="showMentalTab('who')">Who It's For</button>
     <button class="tab-btn" onclick="showMentalTab('what')">What We Offer</button>
-    <button class="tab-btn" onclick="showMentalTab('pricing')">Pricing</button>
     <button class="tab-btn" onclick="showMentalTab('faq')">FAQ</button>
   </div>
 
@@ -4138,71 +4020,12 @@
   </div>
   </div><!-- /mtab-what -->
 
-  <div class="tab-panel" id="mtab-pricing">
-  <div class="package-section">
-    <div class="section-tag">Investment</div>
-    <h2 class="section-title">Mental health support,<br>built into your care.</h2>
-    <div class="mh-personalized-callout">
-      <div class="mh-personalized-icon">✦</div>
-      <div>
-        <strong>Every session is personalized — not generic.</strong> Stacey reviews your medical and surgical history before your session so she can meet you exactly where you are. Your diagnosis, your procedure, your recovery timeline, your concerns — all of it shapes the conversation. You'll never have to start from scratch or re-explain your situation.
-      </div>
-    </div>
-    <p class="section-subtitle">Available as a standalone session, bundled with any OpWell program, or as a 3-session package spanning your full perioperative journey. HSA & FSA accepted. No referral required.</p>
-    <div class="packages-grid">
-      <div class="package-card">
-        <div class="package-name">Single Session</div>
-        <div class="package-price">$250</div>
-        <div class="package-desc">A standalone 50-minute session with Stacey — fully personalized to your needs and informed by your medical and surgical history. For psychological clearance, surgical anxiety, diagnostic assessment, or perinatal mental health.</div>
-        <ul class="services-list">
-          <li><div class="service-check">✓</div>50-minute session tailored to your specific concerns</li>
-          <li><div class="service-check">✓</div>Surgical anxiety — addressed at your level, on your terms</li>
-          <li><div class="service-check">✓</div>Psychological clearance for bariatric surgery</li>
-          <li><div class="service-check">✓</div>Diagnostic assessment informed by your medical history</li>
-          <li><div class="service-check">✓</div>Perinatal mental health — personalized to your birth plan and concerns</li>
-          <li><div class="service-check">✓</div>Post-operative depression screening & emotional recovery support</li>
-          <li><div class="service-check">✓</div>Body image concerns addressed within your surgical context</li>
-          <li><div class="service-check">✓</div>HSA & FSA accepted</li>
-        </ul>
-        <br><a onclick="showPage('schedule')" class="btn-secondary" style="cursor:pointer; display:inline-block;">Book Your Session →</a>
-      </div>
-      <div class="package-card">
-        <div class="package-badge">Best Value</div>
-        <div class="package-name">Bundled with Any Program</div>
-        <div class="package-price">$215</div>
-        <div class="package-savings">Save $35 vs. standalone</div>
-        <div class="package-desc">Add a mental wellness session when you book any of the following core services:</div>
-        <ul class="services-list">
-          <li><div class="service-check">✓</div>Pre-Surgical Consultation ($490)</li>
-          <li><div class="service-check">✓</div>Post-Operative Recovery ($490)</li>
-          <li><div class="service-check">✓</div>Complete Surgical Care Package ($850)</li>
-          <li><div class="service-check">✓</div>Labor &amp; Delivery — New Patient ($400)</li>
-          <li><div class="service-check">✓</div>Labor &amp; Delivery — Return Patient ($250)</li>
-          <li style="margin-top:10px; padding-top:10px; border-top:1px solid rgba(45,90,61,0.18); font-size:0.72rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--sage); list-style:none;">What You Get</li>
-          <li><div class="service-check">✓</div>Coordinated with Dr. Oluwole</li>
-          <li><div class="service-check">✓</div>No separate referral or scheduling</li>
-          <li><div class="service-check">✓</div>HSA & FSA accepted</li>
-        </ul>
-        <br><a onclick="showPage('schedule')" class="btn-secondary" style="cursor:pointer; display:inline-block;">Add to My Program →</a>
-      </div>
-      <div class="package-card featured">
-        <div class="package-badge" style="background:var(--charcoal);">Complete Support</div>
-        <div class="package-name">3-Session Package</div>
-        <div class="package-price">$600</div>
-        <div class="package-savings">Save $150 vs. individual sessions</div>
-        <div class="package-desc">Three dedicated sessions with Stacey — each personalized to where you are in your surgical journey and informed by your complete medical and surgical history. Use them before surgery, around the time of your procedure, and during recovery, for consistent, informed mental health support from someone who knows your full picture.</div>
-        <ul class="services-list">
-          <li><div class="service-check">✓</div>3 × 50-minute sessions</li>
-          <li><div class="service-check">✓</div>Flexible — use before and/or after surgery</li>
-          <li><div class="service-check">✓</div>Continuity of care with same provider</li>
-          <li><div class="service-check">✓</div>Coordinated with your medical care plan</li>
-          <li><div class="service-check">✓</div>HSA & FSA accepted</li>
-        </ul>
-        <br><a onclick="showPage('schedule')" class="btn-primary" style="cursor:pointer; display:inline-block;">Book Your Package →</a>
-      </div>
-    </div>
+  <!-- PRICING CTA SECTION -->
+  <div class="content-section" style="text-align:center;">
+    <h2 class="section-title">Ready to prioritize your mental health?</h2>
+    <p class="body-text" style="max-width:700px; margin:0 auto 2rem;">View our transparent pricing for mental wellness sessions, from single sessions to 3-session packages. HSA & FSA accepted.</p>
+    <a onclick="showPage('pricing')" class="btn-primary" style="cursor:pointer; display:inline-block;">View Pricing & Book →</a>
   </div>
-  </div><!-- /mtab-pricing -->
 
   <div class="tab-panel" id="mtab-faq">
   <div class="faq-section">
