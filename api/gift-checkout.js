@@ -1,11 +1,15 @@
 const PRICES = {
+  // Gift options
+  'Complete Surgical Care Package':                        85000,
+  'Labor & Delivery Consultation — New Patient':           40000,
+  'Surgery Prep Masterclass':                               9900,
+  'Mental Wellness — Single Session':                      25000,
+
+  // Legacy options for backward compatibility
   'Pre-Surgical Consultation':                             49000,
   'Post-Operative Care':                                   49000,
-  'Complete Surgical Care Package':                        85000,
   'Executive Package — Complete Concierge Program':       135000,
-  'Labor & Delivery Consultation — New Patient':            40000,
   'Mental Wellness — 3-Session Package':                   60000,
-  'Surgery Prep Masterclass':                               9900,
 };
 
 const ALLOWED_ORIGINS = [
