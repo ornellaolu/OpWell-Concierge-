@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clinical Partnerships & Referrals | OpWell Concierge™</title>
+  <meta name="description" content="Partner with OpWell Concierge for anesthesiologist-led perioperative optimization. Reduce surgical cancellations, minimize readmissions, and drive value-based outcomes.">
+  <meta name="keywords" content="surgical referral, perioperative care, clinical partnership, physician referral program, surgical optimization">
+  <link rel="canonical" href="https://opwellconcierge.com/providers">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://opwellconcierge.com/providers">
+  <meta property="og:title" content="Clinical Partnerships & Referrals | OpWell Concierge™">
+  <meta property="og:description" content="Anesthesiologist-led perioperative optimization for surgical partnerships.">
+  <meta property="og:image" content="https://opwellconcierge.com/dr-oluwole-hero.jpg">
+  <style>
+    :root {
+      --sage: #2D5A3D;
+      --terracotta: #C8845A;
+      --charcoal: #1C1C1C;
+      --ivory: #FAF0E8;
+      --warm-white: #F5E4D4;
+      --light-gray: #f9f9f9;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'DM Sans', -apple-system, sans-serif;
+      line-height: 1.8;
+      color: #333;
+      background: #fff;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ════════════════════════════════════════════════════════ */
+    /* HEADER & NAVIGATION */
+    /* ════════════════════════════════════════════════════════ */
+    header {
+      background: var(--sage);
+      color: white;
+      padding: 1.5rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    header a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    header a:hover {
+      opacity: 0.9;
+    }
+
+    /* ════════════════════════════════════════════════════════ */
+    /* HERO SECTION */
+    /* ════════════════════════════════════════════════════════ */
+    .hero {
+      background: linear-gradient(135deg, var(--sage) 0%, #3d7a4d 100%);
+      color: white;
+      padding: clamp(3rem, 8vw, 6rem) 2rem;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 6vw, 3.2rem);
+      font-weight: 400;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+
+    .hero-subheading {
+      font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+      font-weight: 500;
+      color: rgba(250, 240, 232, 0.95);
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .hero p {
+      font-size: clamp(0.95rem, 2vw, 1.05rem);
+      color: rgba(250, 240, 232, 0.9);
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ════════════════════════════════════════════════════════ */
+    /* SECTION STYLING */
+    /* ════════════════════════════════════════════════════════ */
+    section {
+      padding: clamp(3rem, 8vw, 5rem) 0;
+      border-bottom: 1px solid rgba(45, 90, 61, 0.1);
+    }
+
+    section:last-of-type {
+      border-bottom: none;
+    }
+
+    .section-tag {
+      display: inline-block;
+      background: var(--terracotta);
+      color: white;
+      padding: 0.5rem 1.2rem;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 5vw, 2.4rem);
+      color: var(--sage);
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      line-height: 1.3;
+    }
+
+    .section-subtitle {
+      font-size: clamp(0.95rem, 2vw, 1.05rem);
+      color: #666;
+      max-width: 800px;
+      margin-bottom: 2rem;
+      line-height: 1.8;
+    }
+
+    /* ════════════════════════════════════════════════════════ */
+    /* VALUE PROPOSITIONS GRID */
+    /* ════════════════════════════════════════════════════════ */
+    .value-props-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2.5rem;
+    }
+
+    .value-prop-card {
+      background: linear-gradient(135deg, #f9f6f2 0%, rgba(250, 240, 232, 0.5) 100%);
+      border: 2px solid rgba(200, 132, 90, 0.15);
+      border-left: 4px solid var(--terracotta);
+      border-radius: 8px;
+      padding: 2rem;
+      transition: all 0.3s ease;
+    }
+
+    .value-prop-card:hover {
+      border-color: rgba(200, 132, 90, 0.3);
+      box-shadow: 0 8px 24px rgba(45, 90, 61, 0.1);
+      transform: translateY(-4px);
+    }
+
+    .value-prop-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--sage);
+      margin-bottom: 0.75rem;
+      font-weight: 500;
+    }
+
+    .value-prop-card p {
+      font-size: 0.95rem;
+      color: #555;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    /* ════════════════════════════════════════════════════════ */
+    /* CLINICAL EVIDENCE TABLE */
+    /* ════════════════════════════════════════════════════════ */
+    .evidence-table-wrapper {
+      overflow-x: auto;
+      margin-top: 2rem;
+      border-radius: 8px;
+      border: 1px solid rgba(45, 90, 61, 0.2);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+    }
+
+    thead {
+      background: var(--sage);
+      color: white;
+    }
+
+    th {
+      padding: 1.25rem;
+      text-align: left;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.05em;
+    }
+
+    td {
+      padding: 1.25rem;
+      border-bottom: 1px solid rgba(45, 90, 61, 0.1);
+      font-size: 0.95rem;
+    }
+
+    tbody tr:nth-child(odd) {
+      background: rgba(250, 240, 232, 0.5);
+    }
+
+    tbody tr:hover {
+      background: rgba(200, 132, 90, 0.08);
+    }
+
+    .metric-label {
+      font-weight: 600;
+      color: var(--sage);
+    }
+
+    .clinical-source {
+      font-size: 0.85rem;
+      color: #888;
+      font-style: italic;
+    }
+
+    .table-footnote {
+      font-size: 0.85rem;
+      color: #999;
+      margin-top: 1rem;
+      font-style: italic;
+    }
+
+    /* ════════════════════════════════════════════════════════ */
+    /* REFERRAL WORKFLOW */
+    /* ════════════════════════════════════════════════════════ */
+    .workflow-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2.5rem;
+    }
+
+    .workflow-step {
+      background: white;
+      border: 2px solid rgba(45, 90, 61, 0.15);
+      border-radius: 8px;
+      padding: 2rem;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .workflow-step:hover {
+      border-color: var(--terracotta);
+      box-shadow: 0 8px 24px rgba(200, 132, 90, 0.15);
+    }
+
+    .workflow-step-number {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      background: var(--terracotta);
+      color: white;
+      border-radius: 50%;
+      font-weight: 700;
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .workflow-step h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--sage);
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .workflow-subtitle {
+      font-size: 0.85rem;
+      color: var(--terracotta);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.75rem;
+    }
+
+    .workflow-step p {
+      font-size: 0.95rem;
+      color: #666;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    /* ════════════════════════════════════════════════════════ */
+    /* CTA SECTION */
+    /* ════════════════════════════════════════════════════════ */
+    .cta-section {
+      background: linear-gradient(135deg, rgba(45, 90, 61, 0.08) 0%, rgba(200, 132, 90, 0.08) 100%);
+      border: 2px solid var(--sage);
+      border-radius: 12px;
+      padding: 3rem 2rem;
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    .cta-section h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--sage);
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+
+    .cta-section p {
+      font-size: 1rem;
+      color: #666;
+      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+      padding: 1rem 2.5rem;
+      border-radius: 6px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      display: inline-block;
+      text-align: center;
+    }
+
+    .btn-primary {
+      background: var(--terracotta);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #b8744a;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(200, 132, 90, 0.3);
+    }
+
+    .btn-secondary {
+      background: var(--sage);
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background: #1f4730;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(45, 90, 61, 0.3);
+    }
+
+    /* ════════════════════════════════════════════════════════ */
+    /* FOOTER */
+    /* ════════════════════════════════════════════════════════ */
+    footer {
+      background: var(--sage);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.9rem;
+      margin-top: 3rem;
+    }
+
+    footer a {
+      color: var(--terracotta);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* ════════════════════════════════════════════════════════ */
+    /* RESPONSIVE DESIGN */
+    /* ════════════════════════════════════════════════════════ */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 1.5rem;
+      }
+
+      h2 {
+        font-size: clamp(1.5rem, 4vw, 1.8rem);
+      }
+
+      .hero h1 {
+        font-size: clamp(1.6rem, 5vw, 2.2rem);
+      }
+
+      .value-props-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .workflow-steps {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      table {
+        font-size: 0.85rem;
+      }
+
+      th,
+      td {
+        padding: 0.85rem;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .btn-primary,
+      .btn-secondary {
+        width: 100%;
+      }
+
+      section {
+        padding: 2rem 0;
+      }
+
+      .cta-section {
+        padding: 2rem 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 1rem;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+      }
+
+      .hero h1 {
+        font-size: 1.5rem;
+      }
+
+      .value-prop-card,
+      .workflow-step {
+        padding: 1.5rem;
+      }
+
+      .btn-primary,
+      .btn-secondary {
+        padding: 0.9rem 1.75rem;
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- ════════════════════════════════════════════════════════ -->
+  <!-- HEADER -->
+  <!-- ════════════════════════════════════════════════════════ -->
+  <header>
+    <div class="container">
+      <a href="/">← Back to OpWell Home</a>
+    </div>
+  </header>
+
+  <!-- ════════════════════════════════════════════════════════ -->
+  <!-- HERO SECTION -->
+  <!-- ════════════════════════════════════════════════════════ -->
+  <section class="hero">
+    <div class="container">
+      <h1>Clinical Partnerships & Referrals</h1>
+      <p class="hero-subheading">An Extension of Your Surgical Team.</p>
+      <p>Anesthesiologist-led concierge perioperative optimization that transforms patient readiness, protects your OR timeline, and secures your post-op recovery windows.</p>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════ -->
+  <!-- VALUE PROPOSITIONS -->
+  <!-- ════════════════════════════════════════════════════════ -->
+  <section>
+    <div class="container">
+      <div class="section-tag">Why Partner With OpWell</div>
+      <h2>The Core Value Props</h2>
+      <p class="section-subtitle">Four clinical and operational imperatives that drive measurable outcomes in surgical partnerships.</p>
+
+      <div class="value-props-grid">
+        <!-- Value Prop 1 -->
+        <div class="value-prop-card">
+          <h3>Protect Your OR Timeline & Reduce Cancellations</h3>
+          <p>Last-minute surgical cancellations are a major source of lost revenue and scheduling disruption. Preoperative anesthesia consultations actively identify and stabilize underlying physiological stressors weeks in advance. By executing a strict preoperative medication audit and implementing our Clinical Supplement & Tissue Recovery Protocol, we eliminate the primary drivers of day-of-surgery cancellations due to unchecked medical risks or supplement interference.</p>
+        </div>
+
+        <!-- Value Prop 2 -->
+        <div class="value-prop-card">
+          <h3>Offload the Administrative and Coordination Burden</h3>
+          <p>The OpWell concierge model shifts the weight of medical optimization completely away from your practice staff. Instead of your office chasing down medical clearances, managing medication adjustments, or organizing specialist referrals, Dr. Oluwole handles this comprehensively—from the initial surgical decision through 30 days post-discharge. This frees you to focus entirely on operative planning and technical execution.</p>
+        </div>
+
+        <!-- Value Prop 3 -->
+        <div class="value-prop-card">
+          <h3>Minimize Readmissions & Secure Post-Op Recovery</h3>
+          <p>The first 30 days post-discharge represent a massive vulnerability gap, especially for medically complex patients or those living alone. OpWell provides a proactive safety net during this critical window with structured recovery tracking, medication compliance tracking, and asynchronous physician messaging. We catch and triage normal recovery hurdles early, drastically reducing failure-to-rescue events and preventing unnecessary ER visits.</p>
+        </div>
+
+        <!-- Value Prop 4 -->
+        <div class="value-prop-card">
+          <h3>Drive Quantifiable Financial & Value-Based Outcomes</h3>
+          <p>In an era of bundled payments and value-based metrics, clinical partnerships with an anesthesiologist-led perioperative surgical home model deliver measurable economic advantages. Peer-reviewed health economic analyses demonstrate substantial cost savings and exceptional quality metric performance across surgical specialties.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════ -->
+  <!-- CLINICAL EVIDENCE MATRIX -->
+  <!-- ════════════════════════════════════════════════════════ -->
+  <section style="background: rgba(250, 240, 232, 0.5);">
+    <div class="container">
+      <div class="section-tag">Evidence-Based Outcomes</div>
+      <h2>The Clinical Evidence Matrix</h2>
+      <p class="section-subtitle">Peer-reviewed data demonstrating the impact of structured perioperative home models across surgical populations.</p>
+
+      <div class="evidence-table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 25%;">Metric / Domain</th>
+              <th style="width: 35%;">Impact of Structured Perioperative Home Models</th>
+              <th style="width: 40%;">Clinical Data & Sources</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="metric-label">Hospital Stay (LOS)</span></td>
+              <td>30% to 50% Reduction in total length of stay across multi-specialty surgical cohorts.</td>
+              <td><span class="clinical-source">J. Clin. Anesth. / JAMA Surg.</span></td>
+            </tr>
+            <tr>
+              <td><span class="metric-label">Readmission Rates</span></td>
+              <td>Significant Reductions in both 7-day and 30-day post-op readmissions for high-risk populations.</td>
+              <td><span class="clinical-source">POSH Initiative Data</span></td>
+            </tr>
+            <tr>
+              <td><span class="metric-label">Practice Economics</span></td>
+              <td>Demonstrated cost savings ranging from $655 to $16,447 per patient with an ROI up to 7.3:1.</td>
+              <td><span class="clinical-source">Anesth. Analg. / Milbank Q.</span></td>
+            </tr>
+            <tr>
+              <td><span class="metric-label">Patient Experience</span></td>
+              <td>89.5% Reduction in pre-surgical anxiety alongside significantly higher satisfaction metrics.</td>
+              <td><span class="clinical-source">Br. J. Anaesth. / Anesth. Analg. (2026)</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="table-footnote">* Comprehensive clinical bibliography and peer-reviewed study references available to partners upon request.</p>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════ -->
+  <!-- REFERRAL WORKFLOW -->
+  <!-- ════════════════════════════════════════════════════════ -->
+  <section>
+    <div class="container">
+      <div class="section-tag">How It Works</div>
+      <h2>The Referral Workflow</h2>
+      <p class="section-subtitle">A seamless four-step process that minimizes friction and maximizes clinical outcomes for your patients.</p>
+
+      <div class="workflow-steps">
+        <!-- Step 1 -->
+        <div class="workflow-step">
+          <div class="workflow-step-number">1</div>
+          <h3>Frictionless Referral Submission</h3>
+          <p class="workflow-subtitle">Takes under 2 minutes.</p>
+          <p>Your practice submits a secure referral through our encrypted provider portal. There is zero coordination burden or scheduling overlap for your administrative staff.</p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="workflow-step">
+          <div class="workflow-step-number">2</div>
+          <h3>Comprehensive Physician Optimization</h3>
+          <p class="workflow-subtitle">50-Minute Telehealth Session.</p>
+          <p>Dr. Oluwole conducts an exhaustive multi-system risk stratification, addresses surgical anxiety, and stabilizes underlying health metrics weeks before the procedure date.</p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="workflow-step">
+          <div class="workflow-step-number">3</div>
+          <h3>Closing the Loop with Your Team</h3>
+          <p class="workflow-subtitle">Pre-Surgical Briefing.</p>
+          <p>Your practice receives a copy of the finalized perioperative optimization map, supplement clearance timeline, and anesthesia safety brief prior to the patient arriving at the OR.</p>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="workflow-step">
+          <div class="workflow-step-number">4</div>
+          <h3>Proactive Post-Operative Safety Net</h3>
+          <p class="workflow-subtitle">30-Day Recovery Tracking.</p>
+          <p>We monitor the patient through the critical post-op windows, reinforcing your discharge instructions, tracking clinical indicators, and routing only true clinical escalations back to your team.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════ -->
+  <!-- CALL TO ACTION -->
+  <!-- ════════════════════════════════════════════════════════ -->
+  <section>
+    <div class="container">
+      <div class="cta-section">
+        <h3>Ready to Transform Your Surgical Outcomes?</h3>
+        <p>Join leading surgical practices across the country who are securing their OR timelines, reducing readmissions, and delivering exceptional value-based outcomes.</p>
+        <div class="cta-buttons">
+          <a href="https://opwellconcierge.com/secure-referral" class="btn-primary">Refer a Patient Online</a>
+          <a href="https://opwellconcierge.com/contact?interest=clinical" class="btn-secondary">Request a Clinical Practice Presentation</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════ -->
+  <!-- FOOTER -->
+  <!-- ════════════════════════════════════════════════════════ -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2025–2026 OpWell Concierge™. All rights reserved. Registered trade name in Ohio & Georgia.</p>
+      <p style="margin-top: 0.75rem; font-size: 0.85rem;"><a href="https://opwellconcierge.com">← Back to OpWell Home</a> | <a href="/privacy">Privacy Policy</a> | <a href="/terms">Terms of Service</a></p>
+      <p style="margin-top: 0.75rem; font-size: 0.85rem; color: rgba(250, 240, 232, 0.6);">Not a substitute for emergency medical care · No physician-patient relationship until a formal consultation is completed.</p>
+    </div>
+  </footer>
+</body>
+</html>
