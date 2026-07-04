@@ -5540,7 +5540,7 @@ function validateAccess() {
 
   if (!code) { errorEl.textContent = 'Please enter your access code.'; return; }
 
-  // Admin bypass
+  // Admin/Doctor bypass
   if (code.toLowerCase() === 'opwell') {
     document.getElementById('access-gate').style.display = 'none';
     document.getElementById('masterclass-content').style.display = 'block';
@@ -5548,7 +5548,15 @@ function validateAccess() {
     return;
   }
 
-  // Check if code starts with MC- (valid masterclass code)
+  // Universal practitioner trial code
+  if (code.toUpperCase() === 'PRACTITIONER2026') {
+    document.getElementById('access-gate').style.display = 'none';
+    document.getElementById('masterclass-content').style.display = 'block';
+    localStorage.setItem('mc_access', code);
+    return;
+  }
+
+  // Check if code starts with MC- (valid masterclass code from purchase)
   if (!code.startsWith('MC-')) {
     errorEl.textContent = 'Invalid access code. Please check your purchase confirmation email.';
     return;

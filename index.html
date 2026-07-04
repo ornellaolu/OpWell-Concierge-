@@ -2784,6 +2784,7 @@
     <li><a href="/products" onclick="event.preventDefault(); showPage('products')">Products</a></li>
     <li><a href="/blog" onclick="event.preventDefault(); showPage('blog')">Blog</a></li>
     <li><a href="/contact" onclick="event.preventDefault(); showPage('contact')">Contact</a></li>
+    <li><a href="/provider" onclick="event.preventDefault(); window.location.href='/provider.html'">For Providers</a></li>
     <li><a href="/schedule" onclick="event.preventDefault(); showPage('schedule')">Get Started</a></li>
   </ul>
 
@@ -2810,6 +2811,7 @@
   <a onclick="mobileNavTo('products')">Products</a>
   <a onclick="mobileNavTo('blog')">Blog</a>
   <a onclick="mobileNavTo('contact')">Contact</a>
+  <a href="/provider.html" style="border-bottom:1px solid rgba(45,90,61,0.2);">For Providers</a>
   <a class="mobile-nav-cta" onclick="mobileNavTo('schedule')">Book Your Consultation</a>
 </div>
 
@@ -15893,16 +15895,43 @@
   // ── GIFT SERVICE PRE-SELECT ──
   // ── GIFT PURCHASE FLOW ──
   // ── MASTERCLASS PURCHASE ──
-  async function purchaseMasterclass() {
+  function purchaseMasterclass() {
+    document.getElementById('mc-modal-email').value = '';
+    document.getElementById('mc-modal-name').value = '';
+    document.getElementById('mc-modal').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMcModal() {
+    document.getElementById('mc-modal').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  async function proceedMasterclassCheckout() {
+    var email = document.getElementById('mc-modal-email').value.trim();
+    var name = document.getElementById('mc-modal-name').value.trim();
+
+    if (!email || !email.includes('@')) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+    if (!name) {
+      alert('Please enter your name.');
+      return;
+    }
+
+    closeMcModal();
+
     if (typeof fbq !== 'undefined') fbq('track', 'InitiateCheckout', { content_name: 'Surgery Prep Masterclass', value: 99.00, currency: 'USD' });
+
     try {
       var res = await fetch('/api/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           items: ['Surgery Prep Masterclass'],
-          email: '',
-          patientName: 'Masterclass Purchase'
+          email: email,
+          patientName: name
         })
       });
       var data = await res.json();
@@ -16209,168 +16238,6 @@
     });
   }
 
-  /* ── Provider Referral / Partnership ── */
-  function switchProviderTab(tab) {
-    var refBtn = document.getElementById('prov-tab-referral');
-    var partBtn = document.getElementById('prov-tab-partnership');
-    var refForm = document.getElementById('prov-form-referral');
-    var partForm = document.getElementById('prov-form-partnership');
-    document.getElementById('prov-success').style.display = 'none';
-
-    if (tab === 'referral') {
-      refBtn.style.background = 'var(--sage)'; refBtn.style.color = '#fff';
-      partBtn.style.background = 'transparent'; partBtn.style.color = 'var(--sage)';
-      refForm.style.display = 'block'; partForm.style.display = 'none';
-    } else {
-      partBtn.style.background = 'var(--sage)'; partBtn.style.color = '#fff';
-      refBtn.style.background = 'transparent'; refBtn.style.color = 'var(--sage)';
-      partForm.style.display = 'block'; refForm.style.display = 'none';
-    }
-  }
-
-  function resetProviderForm() {
-    document.getElementById('prov-success').style.display = 'none';
-    document.getElementById('prov-form-referral').style.display = 'block';
-    switchProviderTab('referral');
-    // Clear all inputs
-    var page = document.getElementById('page-provider');
-    page.querySelectorAll('input, textarea, select').forEach(function(el) {
-      if (el.tagName === 'SELECT') { el.selectedIndex = 0; }
-      else { el.value = ''; }
-      el.classList.remove('error');
-    });
-  }
-
-  function submitProviderForm(type) {
-    var errBox, payload, btn;
-
-    if (type === 'referral') {
-      errBox = document.getElementById('prov-ref-error');
-      var provName = document.getElementById('prov-ref-name');
-      var provPractice = document.getElementById('prov-ref-practice');
-      var provEmail = document.getElementById('prov-ref-email');
-      var provPhone = document.getElementById('prov-ref-phone');
-      var ptName = document.getElementById('prov-ref-ptname');
-      var ptEmail = document.getElementById('prov-ref-ptemail');
-      var ptPhone = document.getElementById('prov-ref-ptphone');
-      var svc = document.getElementById('prov-ref-service');
-      var procedure = document.getElementById('prov-ref-procedure');
-      var notes = document.getElementById('prov-ref-notes');
-
-      [provName, provPractice, provEmail, ptName, ptEmail, svc].forEach(function(el) { el.classList.remove('error'); });
-      errBox.style.display = 'none';
-
-      var missing = [];
-      if (!provName.value.trim()) { provName.classList.add('error'); missing.push('Your Name'); }
-      if (!provPractice.value.trim()) { provPractice.classList.add('error'); missing.push('Practice'); }
-      if (!provEmail.value.trim() || !provEmail.value.includes('@')) { provEmail.classList.add('error'); missing.push('Your Email'); }
-      if (!ptName.value.trim()) { ptName.classList.add('error'); missing.push('Patient Name'); }
-      if (!ptEmail.value.trim() || !ptEmail.value.includes('@')) { ptEmail.classList.add('error'); missing.push('Patient Email'); }
-      if (!svc.value) { svc.classList.add('error'); missing.push('Service'); }
-
-      if (missing.length > 0) {
-        errBox.textContent = 'Please complete: ' + missing.join(', ');
-        errBox.style.display = 'block';
-        return;
-      }
-
-      btn = document.querySelector('#prov-form-referral .sched-btn-next');
-      payload = {
-        type: 'referral',
-        providerName: provName.value.trim(),
-        practice: provPractice.value.trim(),
-        providerEmail: provEmail.value.trim(),
-        providerPhone: provPhone.value.trim(),
-        patientName: ptName.value.trim(),
-        patientEmail: ptEmail.value.trim(),
-        patientPhone: ptPhone.value.trim(),
-        service: svc.value,
-        procedure: procedure.value.trim(),
-        notes: notes.value.trim()
-      };
-    } else {
-      errBox = document.getElementById('prov-part-error');
-      var partName = document.getElementById('prov-part-name');
-      var partTitle = document.getElementById('prov-part-title');
-      var partPractice = document.getElementById('prov-part-practice');
-      var partEmail = document.getElementById('prov-part-email');
-      var partPhone = document.getElementById('prov-part-phone');
-      var partState = document.getElementById('prov-part-state');
-      var partSpec = document.getElementById('prov-part-specialty');
-      var partMsg = document.getElementById('prov-part-message');
-
-      [partName, partTitle, partPractice, partEmail, partState, partSpec, partMsg].forEach(function(el) { el.classList.remove('error'); });
-      errBox.style.display = 'none';
-
-      var missing2 = [];
-      if (!partName.value.trim()) { partName.classList.add('error'); missing2.push('Name'); }
-      if (!partTitle.value.trim()) { partTitle.classList.add('error'); missing2.push('Title'); }
-      if (!partPractice.value.trim()) { partPractice.classList.add('error'); missing2.push('Practice'); }
-      if (!partEmail.value.trim() || !partEmail.value.includes('@')) { partEmail.classList.add('error'); missing2.push('Email'); }
-      if (!partState.value) { partState.classList.add('error'); missing2.push('State'); }
-      if (!partSpec.value) { partSpec.classList.add('error'); missing2.push('Specialty'); }
-      if (!partMsg.value.trim()) { partMsg.classList.add('error'); missing2.push('Message'); }
-
-      if (missing2.length > 0) {
-        errBox.textContent = 'Please complete: ' + missing2.join(', ');
-        errBox.style.display = 'block';
-        return;
-      }
-
-      btn = document.querySelector('#prov-form-partnership .sched-btn-next');
-      payload = {
-        type: 'partnership',
-        providerName: partName.value.trim(),
-        title: partTitle.value.trim(),
-        practice: partPractice.value.trim(),
-        providerEmail: partEmail.value.trim(),
-        providerPhone: partPhone.value.trim(),
-        state: partState.value,
-        specialty: partSpec.value,
-        message: partMsg.value.trim()
-      };
-    }
-
-    var origText = btn.textContent;
-    btn.textContent = 'Sending...';
-    btn.disabled = true;
-    btn.style.opacity = '0.6';
-
-    fetch('/api/provider-referral', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    })
-    .then(function(res) { return res.json(); })
-    .then(function(data) {
-      if (data.success) {
-        document.getElementById('prov-form-referral').style.display = 'none';
-        document.getElementById('prov-form-partnership').style.display = 'none';
-        var successDiv = document.getElementById('prov-success');
-        if (type === 'referral') {
-          document.getElementById('prov-success-title').textContent = 'Referral Submitted';
-          document.getElementById('prov-success-msg').textContent = 'Thank you for the referral. We will reach out to your patient within 1-2 business days to schedule their consultation.';
-        } else {
-          document.getElementById('prov-success-title').textContent = 'Inquiry Submitted';
-          document.getElementById('prov-success-msg').textContent = 'Thank you for your interest in partnering with OpWell. We will be in touch within 1-2 business days to discuss next steps.';
-        }
-        successDiv.style.display = 'block';
-      } else {
-        errBox.textContent = 'Something went wrong. Please try again or call (678) 235-5822.';
-        errBox.style.display = 'block';
-        btn.textContent = origText;
-        btn.disabled = false;
-        btn.style.opacity = '1';
-      }
-    })
-    .catch(function() {
-      errBox.textContent = 'Something went wrong. Please try again or call (678) 235-5822.';
-      errBox.style.display = 'block';
-      btn.textContent = origText;
-      btn.disabled = false;
-      btn.style.opacity = '1';
-    });
-  }
 
 </script>
 
@@ -16885,223 +16752,6 @@
 </div>
 
 <!-- ══════════════════════════════════════════════════════ -->
-<!-- PROVIDER REFERRAL / PARTNERSHIP PAGE -->
-<!-- ══════════════════════════════════════════════════════ -->
-<div class="page" id="page-provider">
-  <nav>
-    <div class="nav-logo-wrap" onclick="showPage('home')">
-      <img src="" alt="OpWell Concierge" class="nav-mark" style="height:200px;width:auto;" onerror="this.style.display='none'" />
-    </div>
-    <ul class="nav-links">
-      <li><a onclick="showPage('home')">Home</a></li>
-      <li class="has-dropdown">
-        <a tabindex="0">Services</a>
-        <ul class="nav-dropdown">
-          <li><a href="/surgery-prep" onclick="event.preventDefault(); showPage('surgery-prep')">Pre-Surgical Consultation</a></li>
-          <li><a href="/recovery" onclick="event.preventDefault(); showPage('recovery')">Post-Operative Care</a></li>
-          <li><a href="/mental-health" onclick="event.preventDefault(); showPage('mental-health')">Mental Wellness</a></li>
-          <li><a href="/obstetric" onclick="event.preventDefault(); showPage('obstetric')">Labor &amp; Delivery Consultation</a></li>
-          <li><a href="/medical-tourism" onclick="event.preventDefault(); showPage('medical-tourism')">Medical Tourism</a></li>
-        </ul>
-      </li>
-      <li><a href="/about" onclick="event.preventDefault(); showPage('about')">Our Story</a></li>
-      <li><a href="/products" onclick="event.preventDefault(); showPage('products')">Products</a></li>
-      <li><a onclick="showPage('blog')">Blog</a></li>
-      <li><a onclick="showPage('contact')">Contact</a></li>
-      <li><a href="/schedule" onclick="event.preventDefault(); showPage('schedule')">Get Started</a></li>
-    </ul>
-    <a onclick="showPage('schedule')" style="cursor:pointer;" class="nav-cta">Book Now</a>
-  </nav>
-
-  <div class="sched-wrap" style="padding-top:7rem;">
-
-    <div style="margin-bottom:2rem;">
-      <button onclick="showPage('home')" style="background:none; border:1px solid rgba(45,90,61,0.25); color:var(--sage); font-family:'DM Sans',sans-serif; font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase; padding:0.55rem 1.2rem; border-radius:4px; cursor:pointer; transition:all 0.2s;" onmouseover="this.style.background='var(--sage)';this.style.color='#fff';" onmouseout="this.style.background='none';this.style.color='var(--sage)';">Back to Home</button>
-    </div>
-
-    <div style="text-align:center; margin-bottom:2.5rem;">
-      <div style="font-family:'Playfair Display',serif; font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--terracotta); margin-bottom:0.6rem;">For Providers</div>
-      <h1 style="font-family:'Playfair Display',serif; font-size:2.2rem; font-weight:500; color:var(--charcoal); margin-bottom:0.75rem; line-height:1.2;">Refer a Patient or Partner with OpWell</h1>
-      <p style="font-size:0.92rem; color:var(--slate); max-width:560px; margin:0 auto; line-height:1.7; font-weight:300;">OpWell works alongside surgeons, OBs, bariatric programs, and proceduralists. Refer a patient or explore a practice partnership.</p>
-    </div>
-
-    <!-- TOGGLE -->
-    <div style="display:flex; gap:0; margin-bottom:2rem; justify-content:center;">
-      <button id="prov-tab-referral" onclick="switchProviderTab('referral')" style="padding:0.65rem 1.8rem; font-family:'DM Sans',sans-serif; font-size:0.82rem; letter-spacing:0.06em; font-weight:600; border:1px solid var(--sage); border-radius:6px 0 0 6px; cursor:pointer; transition:all 0.2s; background:var(--sage); color:#fff;">Refer a Patient</button>
-      <button id="prov-tab-partnership" onclick="switchProviderTab('partnership')" style="padding:0.65rem 1.8rem; font-family:'DM Sans',sans-serif; font-size:0.82rem; letter-spacing:0.06em; font-weight:600; border:1px solid var(--sage); border-left:none; border-radius:0 6px 6px 0; cursor:pointer; transition:all 0.2s; background:transparent; color:var(--sage);">Explore Partnership</button>
-    </div>
-
-    <!-- REFERRAL FORM -->
-    <div id="prov-form-referral" class="sched-card">
-      <h3 style="font-family:'Playfair Display',serif; font-size:1.15rem; font-weight:500; color:var(--charcoal); margin:0 0 0.4rem;">Patient Referral</h3>
-      <p style="font-size:0.82rem; color:var(--slate); margin:0 0 1.5rem; line-height:1.6;">Submit a referral and we will contact your patient directly to schedule.</p>
-
-      <div style="background:rgba(45,90,61,0.04); border:1px solid rgba(45,90,61,0.12); border-radius:6px; padding:1rem 1.2rem; margin-bottom:1.5rem;">
-        <p style="font-size:0.78rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--sage); margin:0 0 0.5rem;">Your Information</p>
-      </div>
-
-      <div class="sched-row">
-        <div class="sched-field">
-          <label for="prov-ref-name">Your Name <span style="color:var(--terracotta);">*</span></label>
-          <input type="text" id="prov-ref-name" placeholder="Dr. Jane Smith" required />
-        </div>
-        <div class="sched-field">
-          <label for="prov-ref-practice">Practice / Organization <span style="color:var(--terracotta);">*</span></label>
-          <input type="text" id="prov-ref-practice" placeholder="Metro Surgical Associates" required />
-        </div>
-      </div>
-
-      <div class="sched-row">
-        <div class="sched-field">
-          <label for="prov-ref-email">Your Email <span style="color:var(--terracotta);">*</span></label>
-          <input type="email" id="prov-ref-email" placeholder="you@practice.com" required />
-        </div>
-        <div class="sched-field">
-          <label for="prov-ref-phone">Your Phone <span style="color:var(--slate); font-weight:400; text-transform:none;">(optional)</span></label>
-          <input type="tel" id="prov-ref-phone" placeholder="(555) 123-4567" />
-        </div>
-      </div>
-
-      <div style="background:rgba(184,92,43,0.04); border:1px solid rgba(184,92,43,0.12); border-radius:6px; padding:1rem 1.2rem; margin:1.5rem 0;">
-        <p style="font-size:0.78rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--terracotta); margin:0 0 0.5rem;">Patient Information</p>
-      </div>
-
-      <div class="sched-row">
-        <div class="sched-field">
-          <label for="prov-ref-ptname">Patient Name <span style="color:var(--terracotta);">*</span></label>
-          <input type="text" id="prov-ref-ptname" placeholder="Patient full name" required />
-        </div>
-        <div class="sched-field">
-          <label for="prov-ref-ptemail">Patient Email <span style="color:var(--terracotta);">*</span></label>
-          <input type="email" id="prov-ref-ptemail" placeholder="patient@email.com" required />
-        </div>
-      </div>
-
-      <div class="sched-row">
-        <div class="sched-field">
-          <label for="prov-ref-ptphone">Patient Phone <span style="color:var(--slate); font-weight:400; text-transform:none;">(optional)</span></label>
-          <input type="tel" id="prov-ref-ptphone" placeholder="(555) 987-6543" />
-        </div>
-        <div class="sched-field">
-          <label for="prov-ref-service">Service Needed <span style="color:var(--terracotta);">*</span></label>
-          <select id="prov-ref-service" required>
-            <option value="" disabled selected>Select a service</option>
-            <option value="Pre-Surgical Consultation">Pre-Surgical Consultation</option>
-            <option value="Post-Operative Care">Post-Operative Care</option>
-            <option value="Complete Surgical Care Package">Complete Surgical Care Package</option>
-            <option value="Labor & Delivery Consultation">Labor &amp; Delivery Consultation</option>
-            <option value="Mental Wellness">Mental Wellness</option>
-            <option value="Medical Tourism Support">Medical Tourism Support</option>
-            <option value="Other / Not Sure">Other / Not Sure</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="sched-field">
-        <label for="prov-ref-procedure">Procedure / Surgery Type <span style="color:var(--slate); font-weight:400; text-transform:none;">(optional)</span></label>
-        <input type="text" id="prov-ref-procedure" placeholder="e.g. Total knee replacement, Cesarean section, BBL" />
-      </div>
-
-      <div class="sched-field">
-        <label for="prov-ref-notes">Additional Notes <span style="color:var(--slate); font-weight:400; text-transform:none;">(optional)</span></label>
-        <textarea id="prov-ref-notes" rows="4" placeholder="Relevant medical history, timing, special considerations, etc."></textarea>
-      </div>
-
-      <div id="prov-ref-error" style="display:none; background:#fff3f0; border-left:3px solid var(--terracotta); border-radius:0 6px 6px 0; padding:0.75rem 1rem; margin-bottom:1rem; font-size:0.85rem; color:var(--terracotta); font-weight:500;"></div>
-
-      <button onclick="submitProviderForm('referral')" class="sched-btn-next" style="width:100%; margin-top:0.5rem;">Submit Referral</button>
-    </div>
-
-    <!-- PARTNERSHIP FORM -->
-    <div id="prov-form-partnership" class="sched-card" style="display:none;">
-      <h3 style="font-family:'Playfair Display',serif; font-size:1.15rem; font-weight:500; color:var(--charcoal); margin:0 0 0.4rem;">Partnership Inquiry</h3>
-      <p style="font-size:0.82rem; color:var(--slate); margin:0 0 1.5rem; line-height:1.6;">Interested in integrating OpWell into your practice workflow? Tell us about your program.</p>
-
-      <div class="sched-row">
-        <div class="sched-field">
-          <label for="prov-part-name">Your Name <span style="color:var(--terracotta);">*</span></label>
-          <input type="text" id="prov-part-name" placeholder="Dr. Jane Smith" required />
-        </div>
-        <div class="sched-field">
-          <label for="prov-part-title">Title / Role <span style="color:var(--terracotta);">*</span></label>
-          <input type="text" id="prov-part-title" placeholder="Surgeon, Program Director, etc." required />
-        </div>
-      </div>
-
-      <div class="sched-row">
-        <div class="sched-field">
-          <label for="prov-part-practice">Practice / Organization <span style="color:var(--terracotta);">*</span></label>
-          <input type="text" id="prov-part-practice" placeholder="Metro Surgical Associates" required />
-        </div>
-        <div class="sched-field">
-          <label for="prov-part-email">Your Email <span style="color:var(--terracotta);">*</span></label>
-          <input type="email" id="prov-part-email" placeholder="you@practice.com" required />
-        </div>
-      </div>
-
-      <div class="sched-row">
-        <div class="sched-field">
-          <label for="prov-part-phone">Phone <span style="color:var(--slate); font-weight:400; text-transform:none;">(optional)</span></label>
-          <input type="tel" id="prov-part-phone" placeholder="(555) 123-4567" />
-        </div>
-        <div class="sched-field">
-          <label for="prov-part-state">State <span style="color:var(--terracotta);">*</span></label>
-          <select id="prov-part-state" required>
-            <option value="" disabled selected>Select state</option>
-            <option value="Alabama">Alabama</option><option value="Alaska">Alaska</option><option value="Arizona">Arizona</option><option value="Arkansas">Arkansas</option><option value="California">California</option><option value="Colorado">Colorado</option><option value="Connecticut">Connecticut</option><option value="Delaware">Delaware</option><option value="District of Columbia">District of Columbia</option><option value="Florida">Florida</option><option value="Georgia">Georgia</option><option value="Hawaii">Hawaii</option><option value="Idaho">Idaho</option><option value="Illinois">Illinois</option><option value="Indiana">Indiana</option><option value="Iowa">Iowa</option><option value="Kansas">Kansas</option><option value="Kentucky">Kentucky</option><option value="Louisiana">Louisiana</option><option value="Maine">Maine</option><option value="Maryland">Maryland</option><option value="Massachusetts">Massachusetts</option><option value="Michigan">Michigan</option><option value="Minnesota">Minnesota</option><option value="Mississippi">Mississippi</option><option value="Missouri">Missouri</option><option value="Montana">Montana</option><option value="Nebraska">Nebraska</option><option value="Nevada">Nevada</option><option value="New Hampshire">New Hampshire</option><option value="New Jersey">New Jersey</option><option value="New Mexico">New Mexico</option><option value="New York">New York</option><option value="North Carolina">North Carolina</option><option value="North Dakota">North Dakota</option><option value="Ohio">Ohio</option><option value="Oklahoma">Oklahoma</option><option value="Oregon">Oregon</option><option value="Pennsylvania">Pennsylvania</option><option value="Rhode Island">Rhode Island</option><option value="South Carolina">South Carolina</option><option value="South Dakota">South Dakota</option><option value="Tennessee">Tennessee</option><option value="Texas">Texas</option><option value="Utah">Utah</option><option value="Vermont">Vermont</option><option value="Virginia">Virginia</option><option value="Washington">Washington</option><option value="West Virginia">West Virginia</option><option value="Wisconsin">Wisconsin</option><option value="Wyoming">Wyoming</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="sched-field">
-        <label for="prov-part-specialty">Specialty / Program Type <span style="color:var(--terracotta);">*</span></label>
-        <select id="prov-part-specialty" required>
-          <option value="" disabled selected>Select specialty</option>
-          <option value="General Surgery">General Surgery</option>
-          <option value="Orthopedic Surgery">Orthopedic Surgery</option>
-          <option value="Bariatric Surgery">Bariatric Surgery</option>
-          <option value="Plastic / Cosmetic Surgery">Plastic / Cosmetic Surgery</option>
-          <option value="OB/GYN">OB/GYN</option>
-          <option value="Cardiothoracic Surgery">Cardiothoracic Surgery</option>
-          <option value="Neurosurgery">Neurosurgery</option>
-          <option value="Urology">Urology</option>
-          <option value="ENT">ENT</option>
-          <option value="Ambulatory Surgery Center">Ambulatory Surgery Center</option>
-          <option value="Hospital System">Hospital System</option>
-          <option value="Other">Other</option>
-        </select>
-      </div>
-
-      <div class="sched-field">
-        <label for="prov-part-message">Tell Us About Your Interest <span style="color:var(--terracotta);">*</span></label>
-        <textarea id="prov-part-message" rows="5" placeholder="What does your practice look like? How many surgical patients do you see monthly? What are you hoping OpWell can help with?"></textarea>
-      </div>
-
-      <div id="prov-part-error" style="display:none; background:#fff3f0; border-left:3px solid var(--terracotta); border-radius:0 6px 6px 0; padding:0.75rem 1rem; margin-bottom:1rem; font-size:0.85rem; color:var(--terracotta); font-weight:500;"></div>
-
-      <button onclick="submitProviderForm('partnership')" class="sched-btn-next" style="width:100%; margin-top:0.5rem;">Submit Inquiry</button>
-    </div>
-
-    <!-- SUCCESS STATE -->
-    <div id="prov-success" style="display:none;">
-      <div class="sched-card" style="text-align:center; padding:3rem 2.5rem;">
-        <div style="font-size:3rem; margin-bottom:1rem;">&#x2705;</div>
-        <h2 style="font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:500; color:var(--charcoal); margin-bottom:0.75rem;" id="prov-success-title">Referral Submitted</h2>
-        <p style="font-size:0.95rem; color:var(--slate); line-height:1.7; max-width:420px; margin:0 auto 2rem; font-weight:300;" id="prov-success-msg">Thank you for the referral. We will reach out to your patient within 1-2 business days to schedule their consultation.</p>
-        <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
-          <button onclick="showPage('home')" class="sched-btn-next" style="background:var(--sage);">Back to Home</button>
-          <button onclick="resetProviderForm()" class="sched-btn-next" style="background:var(--terracotta);">Submit Another</button>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <footer style="background:var(--charcoal); color:rgba(253,252,248,0.6); padding:2rem 3rem; font-size:0.75rem; text-align:center; letter-spacing:0.05em;">
-    <p>&copy; 2026 OpWell Concierge. All rights reserved. | <a onclick="showPage('privacy')" style="color:var(--terracotta); cursor:pointer; text-decoration:none;">Privacy Policy</a> | <a onclick="showPage('terms')" style="color:var(--terracotta); cursor:pointer; text-decoration:none;">Terms of Service</a></p>
-  </footer>
-</div>
-
 <!-- GIFT PURCHASE MODAL -->
 <div id="gift-modal" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.6); backdrop-filter:blur(4px); justify-content:center; align-items:center; padding:2rem;">
   <div style="background:#fdf8f4; border-radius:16px; max-width:520px; width:100%; max-height:90vh; overflow-y:auto; box-shadow:0 24px 64px rgba(0,0,0,0.3);">
@@ -17137,6 +16787,38 @@
         After payment, your recipient will receive a gift email with instructions to create their patient profile on Charm Health and book their appointment. You will receive a confirmation receipt.
       </div>
       <button id="gift-submit-btn" onclick="submitGiftPurchase()" style="width:100%; font-family:'DM Sans',sans-serif; font-size:1rem; font-weight:700; background:var(--charcoal); color:#fff; border:none; border-radius:10px; padding:1rem; cursor:pointer; transition:background 0.2s;" onmouseover="this.style.background='var(--sage)'" onmouseout="this.style.background='var(--charcoal)'">Pay & Send Gift &rarr;</button>
+    </div>
+  </div>
+</div>
+
+<!-- MASTERCLASS PURCHASE MODAL -->
+<div id="mc-modal" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.6); backdrop-filter:blur(4px); justify-content:center; align-items:center; padding:2rem;">
+  <div style="background:#fdf8f4; border-radius:16px; max-width:480px; width:100%; box-shadow:0 24px 64px rgba(0,0,0,0.3);">
+    <div style="background:linear-gradient(135deg, #1a3a25 0%, #2d5a3d 100%); padding:2rem; border-radius:16px 16px 0 0; display:flex; justify-content:space-between; align-items:center;">
+      <div>
+        <div style="font-family:'DM Sans',sans-serif; font-size:0.65rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--terracotta-light);">Surgery Prep Masterclass</div>
+        <h2 style="font-family:'Playfair Display',serif; font-size:1.4rem; color:#FAF0E8; margin:0.5rem 0 0; font-weight:400;">Get Instant Access</h2>
+      </div>
+      <button onclick="closeMcModal()" style="background:none; border:none; color:rgba(250,240,232,0.6); font-size:1.8rem; cursor:pointer; padding:0; margin:-0.5rem; height:2rem; width:2rem; display:flex; align-items:center; justify-content:center;">&times;</button>
+    </div>
+    <div style="padding:2rem;">
+      <p style="color:var(--slate); margin:0 0 1.5rem; font-size:0.95rem; line-height:1.6;">22 evidence-based modules personalized to your surgery type. After payment, we'll email you your access code immediately.</p>
+
+      <div style="margin-bottom:1rem;">
+        <label style="display:block; font-family:'DM Sans',sans-serif; font-size:0.8rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; color:var(--charcoal); margin-bottom:0.5rem;">Your Name *</label>
+        <input id="mc-modal-name" type="text" placeholder="First and Last Name" style="font-family:'DM Sans',sans-serif; font-size:0.95rem; padding:0.75rem 1rem; border:1.5px solid var(--border); border-radius:8px; background:#fff; outline:none; width:100%; box-sizing:border-box;">
+      </div>
+
+      <div style="margin-bottom:1.5rem;">
+        <label style="display:block; font-family:'DM Sans',sans-serif; font-size:0.8rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; color:var(--charcoal); margin-bottom:0.5rem;">Email Address *</label>
+        <input id="mc-modal-email" type="email" placeholder="you@email.com" style="font-family:'DM Sans',sans-serif; font-size:0.95rem; padding:0.75rem 1rem; border:1.5px solid var(--border); border-radius:8px; background:#fff; outline:none; width:100%; box-sizing:border-box;">
+      </div>
+
+      <div style="background:rgba(45,90,61,0.05); border-left:3px solid var(--sage); border-radius:0 6px 6px 0; padding:1rem; margin-bottom:1.5rem;">
+        <p style="margin:0; font-size:0.8rem; color:var(--slate); line-height:1.6;"><strong style="color:var(--sage);">What You'll Get:</strong> Immediate access code via email + lifetime PDF download + Clinical Library access code</p>
+      </div>
+
+      <button onclick="proceedMasterclassCheckout()" style="width:100%; font-family:'DM Sans',sans-serif; font-size:1rem; font-weight:700; background:var(--sage); color:#fff; border:none; border-radius:8px; padding:1rem; cursor:pointer; transition:background 0.2s;" onmouseover="this.style.background='#1f4730'" onmouseout="this.style.background='var(--sage)'">Continue to Payment →</button>
     </div>
   </div>
 </div>
