@@ -581,6 +581,21 @@
   </footer>
 
   <script>
+    // Handle URL hash on page load
+    window.addEventListener('load', function() {
+      const hash = window.location.hash.substring(1);
+      if (hash === 'refer-patient') {
+        setTimeout(function() {
+          document.getElementById('referral-section').style.display = 'block';
+          document.getElementById('referral-section').scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      } else if (hash === 'partnership') {
+        setTimeout(function() {
+          document.querySelector('.workflow-section').scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    });
+
     function scrollToForm(type) {
       if (type === 'referral') {
         document.getElementById('referral-section').style.display = 'block';
