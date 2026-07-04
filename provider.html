@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Clinical Partnerships & Referrals | OpWell Concierge™</title>
-  <meta name="description" content="OpWell is an extension of your surgical team. Refer patients or explore practice partnerships.">
+  <meta name="description" content="Protect your OR timeline and secure recovery windows. Refer patients or explore clinical partnerships.">
   <link rel="canonical" href="https://opwellconcierge.com/provider">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
@@ -26,84 +26,174 @@
 
     body {
       font-family: 'DM Sans', -apple-system, sans-serif;
-      line-height: 1.8;
       color: #333;
       background: #fff;
+      line-height: 1.7;
     }
 
+    a {
+      color: var(--sage);
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--terracotta);
+    }
+
+    /* HEADER */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+    }
+
+    header a {
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    /* HERO SECTION - Matches Homepage Aesthetic */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 0 2rem;
+      margin-top: 4rem;
+      background: linear-gradient(to right, rgba(30,16,8,0.88) 0%, rgba(30,16,8,0.72) 50%, rgba(30,16,8,0.55) 100%), url('dr-oluwole-provider-collab.jpg') center center / cover no-repeat;
+      position: relative;
+    }
+
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-text .section-tag {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 5vw, 3rem);
+      font-weight: 400;
+      color: white;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      font-size: 1rem;
+      color: rgba(250,240,232,0.9);
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 0.9rem 2rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: 'DM Sans', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .btn-primary {
+      background: var(--sage);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #1f4730;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.1);
+    }
+
+    /* HERO CARD - Frosted Glass Panel */
+    .hero-card {
+      background: rgba(30,30,30,0.7);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 2.5rem;
+      color: white;
+    }
+
+    .hero-card .section-tag {
+      color: var(--terracotta);
+      margin-bottom: 1.5rem;
+    }
+
+    .metric {
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(200,132,90,0.2);
+    }
+
+    .metric:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .metric-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: var(--terracotta);
+      margin-bottom: 0.5rem;
+    }
+
+    .metric-label {
+      font-size: 0.95rem;
+      color: rgba(250,240,232,0.85);
+      line-height: 1.6;
+    }
+
+    /* CONTAINER */
     .container {
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 2rem;
     }
 
-    /* HEADER */
-    header {
-      background: var(--sage);
-      color: white;
-      padding: 1.5rem 0;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    header a {
-      color: white;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.95rem;
-    }
-
-    header a:hover {
-      opacity: 0.9;
-    }
-
-    /* HERO */
-    .hero {
-      background: linear-gradient(135deg, var(--sage) 0%, #3d7a4d 100%);
-      color: white;
-      padding: clamp(3rem, 8vw, 6rem) 2rem;
-    }
-
-    .hero-breadcrumb {
-      font-size: 0.9rem;
-      margin-bottom: 2rem;
-      cursor: pointer;
-      opacity: 0.9;
-      transition: opacity 0.2s;
-    }
-
-    .hero-breadcrumb:hover {
-      opacity: 1;
-    }
-
-    .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 6vw, 3rem);
-      font-weight: 400;
-      margin-bottom: 1rem;
-      line-height: 1.3;
-    }
-
-    .hero h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.4rem, 4vw, 1.8rem);
-      font-weight: 400;
-      margin-bottom: 1.5rem;
-      margin-top: 1rem;
-    }
-
-    .hero p {
-      font-size: clamp(0.95rem, 2vw, 1.05rem);
-      color: rgba(250, 240, 232, 0.9);
-      max-width: 600px;
-      line-height: 1.7;
-    }
-
-    /* SECTIONS */
-    .section {
-      padding: 3.5rem 2rem;
+    /* WORKFLOW SECTION */
+    .workflow-section {
+      padding: 5rem 2rem;
+      background: white;
     }
 
     .section-tag {
@@ -113,7 +203,7 @@
       letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--terracotta);
-      margin-bottom: 0.75rem;
+      margin-bottom: 1rem;
     }
 
     .section-title {
@@ -121,106 +211,21 @@
       font-size: clamp(1.8rem, 4vw, 2.4rem);
       font-weight: 400;
       color: var(--charcoal);
-      margin-bottom: 1.5rem;
+      margin-bottom: 3rem;
       line-height: 1.3;
     }
 
-    .section-subtitle {
-      font-size: 1.05rem;
-      color: var(--slate);
-      font-weight: 300;
-      margin-bottom: 3rem;
-      max-width: 700px;
-      line-height: 1.8;
-    }
-
-    /* CARDS */
-    .card-grid {
+    .workflow-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      margin: 3rem 0;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2.5rem;
+      margin-bottom: 4rem;
     }
 
-    .card {
-      background: white;
-      border: 1.5px solid var(--border);
-      border-radius: 8px;
-      padding: 2rem;
-      transition: all 0.3s ease;
-    }
-
-    .card:hover {
-      border-color: var(--terracotta);
-      box-shadow: 0 12px 32px rgba(200,132,90,0.12);
-    }
-
-    .card h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
-      font-weight: 400;
-      color: var(--sage);
-      margin-bottom: 1rem;
-    }
-
-    .card p {
-      font-size: 0.95rem;
-      color: var(--slate);
-      line-height: 1.7;
-    }
-
-    /* TABLE */
-    .evidence-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 2rem 0;
-      background: white;
-    }
-
-    .evidence-table th {
-      background: transparent;
-      border-bottom: 2px solid var(--sage);
-      padding: 1.2rem 0;
-      text-align: left;
-      font-weight: 600;
-      color: var(--sage);
-      font-size: 0.95rem;
-    }
-
-    .evidence-table td {
-      padding: 1.2rem 1rem;
-      border-bottom: 1px solid var(--border);
-      font-size: 0.95rem;
-      color: var(--slate);
-    }
-
-    .evidence-table tr:last-child td {
-      border-bottom: none;
-    }
-
-    .evidence-table strong {
-      color: var(--charcoal);
-    }
-
-    .evidence-note {
-      font-size: 0.8rem;
-      color: var(--slate);
-      margin-top: 1.5rem;
-      font-style: italic;
-    }
-
-    /* STEPS */
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 2rem;
-      margin: 3rem 0;
-    }
-
-    .step {
+    .workflow-step {
+      text-align: center;
       position: relative;
       padding-top: 3.5rem;
-      text-align: center;
     }
 
     .step-number {
@@ -236,142 +241,52 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.6rem;
+      font-size: 1.8rem;
       font-weight: 700;
     }
 
-    .step h4 {
+    .workflow-step h3 {
       font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       font-weight: 400;
       color: var(--charcoal);
       margin-bottom: 0.75rem;
     }
 
-    .step p {
-      font-size: 0.9rem;
+    .workflow-step p {
+      font-size: 0.95rem;
       color: var(--slate);
       line-height: 1.6;
     }
 
-    /* CTA SECTION */
-    .cta-section {
-      background: var(--sage);
-      color: white;
-      padding: 3.5rem 2rem;
-      text-align: center;
-    }
-
-    .cta-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      font-weight: 400;
-      margin-bottom: 0.5rem;
-    }
-
-    .cta-subtitle {
-      font-size: 1.05rem;
-      color: rgba(250,240,232,0.85);
-      margin-bottom: 2.5rem;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-      line-height: 1.7;
-    }
-
-    .button-group {
-      display: flex;
-      gap: 1.2rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      padding: 0.95rem 2.2rem;
-      font-size: 0.95rem;
-      font-weight: 600;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-family: 'DM Sans', sans-serif;
-      letter-spacing: 0.05em;
-    }
-
-    .btn-primary {
-      background: white;
-      color: var(--sage);
-    }
-
-    .btn-primary:hover {
-      background: var(--warm-white);
-      transform: translateY(-2px);
-    }
-
-    .btn-secondary {
-      background: transparent;
-      color: white;
-      border: 2px solid white;
-    }
-
-    .btn-secondary:hover {
-      background: rgba(255,255,255,0.1);
-      transform: translateY(-2px);
-    }
-
-    /* FORM MODAL */
-    .form-modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      background: rgba(0,0,0,0.6);
-      backdrop-filter: blur(4px);
-      justify-content: center;
-      align-items: center;
-      padding: 2rem;
-    }
-
-    .form-modal.active {
-      display: flex;
+    /* FORM SECTION */
+    .form-section {
+      padding: 5rem 2rem;
+      background: #f9f6f1;
     }
 
     .form-container {
-      background: #fdf8f4;
-      border-radius: 16px;
-      max-width: 520px;
-      width: 100%;
-      max-height: 90vh;
-      overflow-y: auto;
-      box-shadow: 0 24px 64px rgba(0,0,0,0.3);
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 3rem;
     }
 
-    .form-header {
-      background: var(--sage);
-      padding: 1.5rem 2rem;
-      border-radius: 16px 16px 0 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .form-header h2 {
-      color: white;
-      font-size: 1.2rem;
+    .form-container h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
       font-weight: 400;
+      color: var(--sage);
+      margin-bottom: 0.5rem;
     }
 
-    .close-btn {
-      background: none;
-      border: none;
-      color: rgba(250,240,232,0.6);
-      font-size: 1.5rem;
-      cursor: pointer;
-      padding: 0;
-    }
-
-    .form-content {
-      padding: 2rem;
+    .form-subtitle {
+      font-size: 0.95rem;
+      color: var(--slate);
+      margin-bottom: 2rem;
+      line-height: 1.6;
     }
 
     .form-group {
@@ -386,9 +301,9 @@
       font-size: 0.9rem;
     }
 
-    input, select, textarea {
+    input, textarea, select {
       width: 100%;
-      padding: 0.75rem 1rem;
+      padding: 0.85rem 1rem;
       border: 1.5px solid var(--border);
       border-radius: 6px;
       font-family: 'DM Sans', -apple-system, sans-serif;
@@ -396,31 +311,35 @@
       transition: border-color 0.2s;
     }
 
-    input:focus, select:focus, textarea:focus {
+    input:focus, textarea:focus, select:focus {
       outline: none;
       border-color: var(--terracotta);
-      box-shadow: 0 0 0 3px rgba(200, 132, 90, 0.1);
+      box-shadow: 0 0 0 3px rgba(200,132,90,0.1);
     }
 
     textarea {
       resize: vertical;
-      min-height: 100px;
+      min-height: 120px;
     }
 
-    .btn-submit {
+    .form-submit {
       width: 100%;
       background: var(--sage);
       color: white;
       padding: 1rem;
-      margin-top: 1rem;
+      margin-top: 1.5rem;
       font-weight: 600;
       border: none;
       border-radius: 6px;
       cursor: pointer;
       transition: background 0.2s;
+      font-family: 'DM Sans', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.9rem;
     }
 
-    .btn-submit:hover {
+    .form-submit:hover {
       background: #1f4730;
     }
 
@@ -448,37 +367,41 @@
 
     /* FOOTER */
     footer {
-      background: var(--sage);
-      color: white;
+      background: var(--charcoal);
+      color: rgba(253,252,248,0.6);
       padding: 2rem;
       text-align: center;
-      font-size: 0.9rem;
-      margin-top: 4rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
     }
 
     footer a {
       color: var(--terracotta);
       text-decoration: none;
-      font-weight: 600;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
     }
 
     /* RESPONSIVE */
     @media (max-width: 768px) {
-      .container { padding: 0 1.5rem; }
-      .section { padding: 2.5rem 1rem; }
-      .button-group { flex-direction: column; }
-      .btn { width: 100%; }
-      .card-grid { grid-template-columns: 1fr; }
-      .steps { grid-template-columns: repeat(2, 1fr); }
-    }
+      .hero-inner {
+        grid-template-columns: 1fr;
+      }
 
-    @media (max-width: 480px) {
-      .steps { grid-template-columns: 1fr; }
-      .form-modal { padding: 1rem; }
+      .hero-buttons {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+        text-align: center;
+      }
+
+      .workflow-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-container {
+        padding: 2rem;
+      }
     }
   </style>
 </head>
@@ -486,139 +409,47 @@
 
   <!-- HEADER -->
   <header>
-    <div class="container">
-      <a href="/">← Back to Home</a>
-    </div>
+    <a href="/">← Back to Home</a>
   </header>
 
-  <!-- HERO -->
-  <div class="hero">
-    <div class="container">
-      <a href="/" class="hero-breadcrumb">← Back to Home</a>
-      <h1>For Providers</h1>
-      <h2>Clinical Partnerships & Referrals</h2>
-      <p>OpWell functions as a force multiplier for your surgical team. We handle exhaustive perioperative preparation, supplement/medication clearance, and post-discharge recovery monitoring so you can stay focused entirely on the operating room.</p>
-    </div>
-  </div>
-
-  <!-- MAIN CONTENT -->
-  <main>
-    <div class="container">
-
-      <!-- THE BOTTOM LINE -->
-      <section class="section">
-        <div class="section-tag">The Value Proposition</div>
-        <h3 class="section-title">The Bottom Line for Your Practice</h3>
-      </section>
-
-      <!-- THE BIG WINS -->
-      <section class="section" style="padding-top: 0;">
-        <div class="section-tag">Clinical Outcomes</div>
-        <h3 class="section-title">The Big Wins</h3>
-
-        <div class="card-grid">
-          <div class="card">
-            <h3>Protect Your OR Timeline</h3>
-            <p>We conduct deep multi-system risk stratification and complete a strict medication/supplement audit weeks in advance. Your patients arrive optimized, cleared, and ready for the table—eliminating day-of-surgery cancellations.</p>
-          </div>
-          <div class="card">
-            <h3>Offload Your Administrative Staff</h3>
-            <p>From the decision for surgery through 30 days post-discharge, we manage the time-consuming clearances, medication adjustments, and patient anxiety management. No coordination burden or scheduling overlap for your team.</p>
-          </div>
-          <div class="card">
-            <h3>Secure the 30-Day Post-Op Window</h3>
-            <p>We act as a proactive safety net at home. By tracking recovery milestones and managing compliance via structured touchpoints, we catch normal recovery hurdles early and prevent unnecessary ER readmissions.</p>
-          </div>
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="section-tag">For Providers</div>
+        <h1>Protect Your OR Timeline. Secure Your Recovery Windows.</h1>
+        <p>OpWell handles the exhaustive perioperative preparation, strict medication/supplement clearance, and structured post-discharge recovery monitoring so your surgical team can stay focused entirely on the operating room.</p>
+        <div class="hero-buttons">
+          <button class="btn btn-primary" onclick="scrollToForm('referral')">Refer a Patient →</button>
+          <button class="btn btn-secondary" onclick="document.querySelector('.workflow-section').scrollIntoView({behavior: 'smooth'})">Explore Partnership →</button>
         </div>
-      </section>
+      </div>
 
-      <!-- EVIDENCE -->
-      <section class="section">
-        <div class="section-tag">Clinical Evidence</div>
-        <h3 class="section-title">The Evidence at a Glance</h3>
-        <p class="section-subtitle">Impact of structured perioperative home models across multi-specialty cohorts</p>
-
-        <table class="evidence-table">
-          <thead>
-            <tr>
-              <th>The Metric</th>
-              <th>Impact of Structured Perioperative Home Models</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Hospital Stay</strong></td>
-              <td>30% to 50% reduction in total length of stay.*</td>
-            </tr>
-            <tr>
-              <td><strong>Readmission Rates</strong></td>
-              <td>Significant drop in preventable 7-day and 30-day readmissions.*</td>
-            </tr>
-            <tr>
-              <td><strong>Practice Economics</strong></td>
-              <td>Cost savings up to $16,447 per patient with a high ROI.*</td>
-            </tr>
-            <tr>
-              <td><strong>Patient Experience</strong></td>
-              <td>Up to 89% reduction in pre-surgical anxiety.**</td>
-            </tr>
-          </tbody>
-        </table>
-        <p class="evidence-note">*Data compiled across multi-specialty PSH, POSH, and ERAS peer-reviewed clinical studies. Full bibliography available upon request.</p>
-      </section>
-
-      <!-- HOW WE PARTNER -->
-      <section class="section">
-        <div class="section-tag">The Process</div>
-        <h3 class="section-title">How We Partner</h3>
-
-        <div class="steps">
-          <div class="step">
-            <div class="step-number">1</div>
-            <h4>Fast Referral</h4>
-            <p>Submit a patient securely in under two minutes.</p>
-          </div>
-          <div class="step">
-            <div class="step-number">2</div>
-            <h4>Physician Optimization</h4>
-            <p>Dr. Oluwole conducts an exhaustive telehealth consultation and deploys our signature Recovery Protocol.</p>
-          </div>
-          <div class="step">
-            <div class="step-number">3</div>
-            <h4>Close the Loop</h4>
-            <p>Your practice receives the finalized anesthesia safety brief and clearance timeline before the procedure.</p>
-          </div>
-          <div class="step">
-            <div class="step-number">4</div>
-            <h4>30-Day Safety Net</h4>
-            <p>We monitor the patient at home through the critical post-op windows, tracking compliance and recovery indicators.</p>
-          </div>
+      <div class="hero-card">
+        <div class="section-tag">The Clinical Impact</div>
+        <div class="metric">
+          <div class="metric-value">30% to 50% reduction</div>
+          <div class="metric-label">in hospital length of stay across multi-specialty cohorts.</div>
         </div>
-      </section>
-
-    </div>
-  </main>
-
-  <!-- CTA SECTION -->
-  <div class="cta-section">
-    <div class="container">
-      <h2 class="cta-title">Ready to Partner?</h2>
-      <p class="cta-subtitle">Start with a patient referral or explore a deeper clinical partnership.</p>
-      <div class="button-group">
-        <button class="btn btn-primary" onclick="openForm('referral')">Refer a Patient →</button>
-        <button class="btn btn-secondary" onclick="openForm('partnership')">Connect on Practice Partnership →</button>
+        <div class="metric">
+          <div class="metric-value">Significant drop</div>
+          <div class="metric-label">in preventable 7-day and 30-day readmissions.</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value">Up to $16,447 saved</div>
+          <div class="metric-label">per patient with a high demonstrated ROI.</div>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- FORM MODAL -->
-  <div id="referral-modal" class="form-modal">
-    <div class="form-container">
-      <div class="form-header">
+  <!-- REFERRAL FORM SECTION -->
+  <section class="form-section" id="referral-section" style="display:none;">
+    <div class="container">
+      <div class="form-container">
         <h2>Refer a Patient</h2>
-        <button class="close-btn" onclick="closeForm()">×</button>
-      </div>
-      <div class="form-content">
+        <p class="form-subtitle">Submit a patient referral. We'll contact your patient directly to schedule their consultation.</p>
+
         <form id="referral-form" onsubmit="submitForm(event, 'referral')">
           <div class="form-group">
             <label>Your Name *</label>
@@ -631,10 +462,6 @@
           <div class="form-group">
             <label>Your Email *</label>
             <input type="email" name="providerEmail" required>
-          </div>
-          <div class="form-group">
-            <label>Your Phone</label>
-            <input type="tel" name="providerPhone">
           </div>
           <div class="form-group">
             <label>Patient Name *</label>
@@ -651,37 +478,66 @@
               <option value="Pre-Surgical Consultation">Pre-Surgical Consultation</option>
               <option value="Post-Operative Care">Post-Operative Care</option>
               <option value="Complete Surgical Care Package">Complete Surgical Care Package</option>
-              <option value="Labor & Delivery Consultation">Labor & Delivery Consultation</option>
-              <option value="Mental Wellness">Mental Wellness</option>
             </select>
           </div>
           <div class="form-group">
             <label>Procedure / Surgery Type</label>
-            <input type="text" name="procedure" placeholder="e.g., Total knee replacement, BBL">
+            <input type="text" name="procedure">
           </div>
           <div class="form-group">
             <label>Additional Notes</label>
             <textarea name="notes"></textarea>
           </div>
-          <button type="submit" class="btn-submit">Submit Referral →</button>
+          <button type="submit" class="form-submit">Submit Referral →</button>
           <div id="referral-error" class="form-error"></div>
-          <div id="referral-success" class="form-success">✓ Thank you! Your referral has been sent.</div>
+          <div id="referral-success" class="form-success">✓ Thank you! We'll contact your patient soon.</div>
         </form>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div id="partnership-modal" class="form-modal">
-    <div class="form-container">
-      <div class="form-header">
-        <h2>Practice Partnership</h2>
-        <button class="close-btn" onclick="closeForm()">×</button>
+  <!-- WORKFLOW SECTION -->
+  <section class="workflow-section">
+    <div class="container">
+      <div class="section-tag">The Process</div>
+      <h2 class="section-title">How We Partner</h2>
+
+      <div class="workflow-grid">
+        <div class="workflow-step">
+          <div class="step-number">1</div>
+          <h3>Fast Referral</h3>
+          <p>Submit a patient securely in under two minutes. No complex intake. No friction.</p>
+        </div>
+        <div class="workflow-step">
+          <div class="step-number">2</div>
+          <h3>Physician Optimization</h3>
+          <p>Dr. Oluwole conducts an exhaustive telehealth consultation and deploys our signature Recovery Protocol.</p>
+        </div>
+        <div class="workflow-step">
+          <div class="step-number">3</div>
+          <h3>Close the Loop</h3>
+          <p>Your practice receives the anesthesia safety brief and clearance timeline days before surgery.</p>
+        </div>
+        <div class="workflow-step">
+          <div class="step-number">4</div>
+          <h3>30-Day Safety Net</h3>
+          <p>Home monitoring through critical post-op windows. Structured touchpoints. Early issue detection.</p>
+        </div>
       </div>
-      <div class="form-content">
+    </div>
+  </section>
+
+  <!-- PARTNERSHIP FORM SECTION (FINAL CTA) -->
+  <section class="form-section">
+    <div class="container">
+      <div class="form-container">
+        <h2>Explore a Clinical Partnership</h2>
+        <p class="form-subtitle">Interested in integrating OpWell into your surgical program? Schedule a presentation with our team.</p>
+
         <form id="partnership-form" onsubmit="submitForm(event, 'partnership')">
           <div class="form-group">
             <label>Your Name *</label>
-            <input type="text" name="providerName" required>
+            <input type="text" name="name" required>
           </div>
           <div class="form-group">
             <label>Title / Role *</label>
@@ -692,12 +548,12 @@
             <input type="text" name="practice" required>
           </div>
           <div class="form-group">
-            <label>Your Email *</label>
-            <input type="email" name="providerEmail" required>
+            <label>Email *</label>
+            <input type="email" name="email" required>
           </div>
           <div class="form-group">
-            <label>Your Phone</label>
-            <input type="tel" name="providerPhone">
+            <label>Phone *</label>
+            <input type="tel" name="phone" required>
           </div>
           <div class="form-group">
             <label>State *</label>
@@ -711,13 +567,13 @@
             <label>Tell Us About Your Interest *</label>
             <textarea name="message" required></textarea>
           </div>
-          <button type="submit" class="btn-submit">Submit Inquiry →</button>
+          <button type="submit" class="form-submit">Schedule Presentation →</button>
           <div id="partnership-error" class="form-error"></div>
-          <div id="partnership-success" class="form-success">✓ Thank you! Your inquiry has been sent.</div>
+          <div id="partnership-success" class="form-success">✓ Thank you! We'll be in touch soon.</div>
         </form>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- FOOTER -->
   <footer>
@@ -725,36 +581,74 @@
   </footer>
 
   <script>
-    function openForm(type) {
-      if (type === 'referral') {
-        document.getElementById('referral-modal').classList.add('active');
-      } else {
-        document.getElementById('partnership-modal').classList.add('active');
+    // Handle URL hash on page load
+    window.addEventListener('load', function() {
+      const hash = window.location.hash.substring(1);
+      if (hash === 'refer-patient') {
+        setTimeout(function() {
+          document.getElementById('referral-section').style.display = 'block';
+          document.getElementById('referral-section').scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      } else if (hash === 'partnership') {
+        setTimeout(function() {
+          document.querySelector('.workflow-section').scrollIntoView({ behavior: 'smooth' });
+        }, 100);
       }
-      document.body.style.overflow = 'hidden';
-    }
+    });
 
-    function closeForm() {
-      document.getElementById('referral-modal').classList.remove('active');
-      document.getElementById('partnership-modal').classList.remove('active');
-      document.body.style.overflow = '';
+    function scrollToForm(type) {
+      if (type === 'referral') {
+        document.getElementById('referral-section').style.display = 'block';
+        document.getElementById('referral-section').scrollIntoView({ behavior: 'smooth' });
+      }
     }
 
     async function submitForm(event, type) {
       event.preventDefault();
       const form = event.target;
       const formData = new FormData(form);
-      const errorEl = document.getElementById(type + '-error');
-      const successEl = document.getElementById(type + '-success');
+
+      let errorEl, successEl;
+
+      if (type === 'referral') {
+        errorEl = document.getElementById('referral-error');
+        successEl = document.getElementById('referral-success');
+      } else {
+        errorEl = document.getElementById('partnership-error');
+        successEl = document.getElementById('partnership-success');
+      }
 
       errorEl.style.display = 'none';
       successEl.style.display = 'none';
 
       try {
-        const payload = {
-          type: type,
-          ...Object.fromEntries(formData)
-        };
+        let payload;
+
+        if (type === 'referral') {
+          payload = {
+            type: 'referral',
+            providerName: formData.get('providerName'),
+            practice: formData.get('practice'),
+            providerEmail: formData.get('providerEmail'),
+            patientName: formData.get('patientName'),
+            patientEmail: formData.get('patientEmail'),
+            service: formData.get('service'),
+            procedure: formData.get('procedure'),
+            notes: formData.get('notes')
+          };
+        } else {
+          payload = {
+            type: 'partnership',
+            providerName: formData.get('name'),
+            title: formData.get('title'),
+            practice: formData.get('practice'),
+            providerEmail: formData.get('email'),
+            providerPhone: formData.get('phone'),
+            state: formData.get('state'),
+            specialty: formData.get('specialty'),
+            message: formData.get('message')
+          };
+        }
 
         const response = await fetch('/api/provider-referral', {
           method: 'POST',
@@ -767,9 +661,8 @@
         if (data.success) {
           successEl.style.display = 'block';
           form.reset();
-          setTimeout(() => closeForm(), 2000);
         } else {
-          errorEl.textContent = data.error || 'Error submitting form. Please try again.';
+          errorEl.textContent = data.error || 'Error submitting form.';
           errorEl.style.display = 'block';
         }
       } catch (error) {
@@ -777,14 +670,6 @@
         errorEl.style.display = 'block';
       }
     }
-
-    // Close modal when clicking outside
-    document.getElementById('referral-modal').addEventListener('click', function(e) {
-      if (e.target === this) closeForm();
-    });
-    document.getElementById('partnership-modal').addEventListener('click', function(e) {
-      if (e.target === this) closeForm();
-    });
   </script>
 
 </body>
