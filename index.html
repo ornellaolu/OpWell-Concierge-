@@ -14816,42 +14816,98 @@
 
   <!-- GIFT SECTION -->
   <div class="tab-panel" id="prtab-gifts">
-  <div class="package-section" style="padding-top:2rem;">
-    <div class="section-tag" style="color:var(--terracotta);">Give the Gift of Care</div>
-    <h2 class="section-title">Purchase an OpWell consultation<br>as a gift.</h2>
+  <div class="package-section" style="padding-top:4rem;">
+    <div class="section-tag">Give the Gift of Care</div>
+    <h2 class="section-title">Purchase an OpWell Consultation as a Gift</h2>
     <div class="gold-divider"></div>
-    <p class="section-subtitle" style="max-width:640px;">Your recipient books their own appointment — on their schedule, before their procedure. After purchase, they receive a personalized gift confirmation with instructions to book directly with OpWell.</p>
-    <div class="packages-grid" style="margin-top:2rem;">
-      <div class="package-card featured">
-        <div class="package-badge">Most Popular Gift</div>
-        <div class="package-name">Complete Surgical Care Package</div>
-        <div class="package-price">$850</div>
-        <div style="background: rgba(45,90,61,0.08); padding: 0.75rem; border-radius: 6px; border-left: 4px solid var(--sage); margin: 0.75rem 0; font-weight: 600; color: var(--sage); font-size: 0.9rem;">✓ Includes FREE Vitamin Consultation ($250 value)</div>
-        <div class="package-desc">Full perioperative support from pre-op through recovery. Complete pre-surgical consultation, 72-hour post-op check-in, 4 weekly follow-ups, and direct physician access — the most complete gift of care.</div>
-        <p style="font-size:0.78rem; color:var(--terracotta); font-weight:600; margin:0.5rem 0 0;">Bonus: Surgery Prep Masterclass FREE ($99 value)</p>
-        <br><a class="btn-primary" onclick="giftService('anesthesiologist','Complete Surgical Care Package ($850)')" style="cursor:pointer; display:inline-block;">Gift This Package →</a>
+    <p class="section-subtitle"><strong>The perfect gift for the patient in your life:</strong> Your recipient books their own appointment — on their schedule, before their procedure. After purchase, they receive a personalized gift confirmation with instructions to book directly with OpWell.</p>
+
+    <div class="packages-grid" style="grid-template-columns: repeat(3, 1fr); max-width: 1200px;">
+
+      <!-- GIFT 1: COMPLETE SURGICAL CARE -->
+      <div class="package-card featured" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
+        <div>
+          <div class="package-badge">Most Popular Gift</div>
+          <div class="package-name">Complete Surgical Care Package</div>
+          <div class="package-price">$850</div>
+          <div class="package-desc">Full perioperative support from pre-op through recovery. Complete pre-surgical consultation, 72-hour post-op check-in, 4 weekly follow-ups, and direct physician access — the most complete gift of care.</div>
+
+          <ul class="services-list">
+            <li><div class="service-check">✓</div>50-minute pre-surgical consultation</li>
+            <li><div class="service-check">✓</div>72-hour post-op check-in</li>
+            <li><div class="service-check">✓</div>4 weekly recovery consultations</li>
+            <li><div class="service-check">✓</div>Direct physician messaging access</li>
+            <li><div class="service-check">✓</div>Surgery Prep Masterclass included ($99 value)</li>
+          </ul>
+
+          <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(45,90,61,0.08); border-radius: 6px; font-size: 0.85rem; color: var(--sage); font-weight: 600;">
+            Bonus: Includes free Vitamin Consultation ($250 value)
+          </div>
+        </div>
+        <a class="btn-primary" onclick="giftService('anesthesiologist','Complete Surgical Care Package ($850)')" style="cursor:pointer; display:inline-block; margin-top: auto;">Gift This Package →</a>
       </div>
 
-      <div class="package-card">
-        <div class="package-name">Labor & Delivery Consultation</div>
-        <div class="package-price">$400</div>
-        <div class="package-desc">For an expectant mother — an honest clinical conversation about labor, anesthesia, and birth before the moment she needs it most.</div>
-        <br><a class="btn-secondary" onclick="giftService('anesthesiologist','Labor & Delivery Consultation — New Patient ($400)')" style="cursor:pointer; display:inline-block;">Gift This Consultation →</a>
+      <!-- GIFT 2: LABOR & DELIVERY -->
+      <div class="package-card" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
+        <div>
+          <div class="package-badge">Expectant Mothers</div>
+          <div class="package-name">Labor & Delivery Consultation</div>
+          <div class="package-price">$400</div>
+          <div class="package-desc">An honest clinical conversation about labor, anesthesia, pain management, and birth planning before the moment she needs it most.</div>
+
+          <ul class="services-list">
+            <li><div class="service-check">✓</div>50-minute consultation with Dr. Oluwole</li>
+            <li><div class="service-check">✓</div>Anesthesia & pain management options</li>
+            <li><div class="service-check">✓</div>Birth plan review & optimization</li>
+            <li><div class="service-check">✓</div>Perinatal mental health screening</li>
+            <li><div class="service-check">✓</div>Mental wellness specialist access</li>
+          </ul>
+        </div>
+        <a class="btn-primary" onclick="giftService('anesthesiologist','Labor & Delivery Consultation — New Patient ($400)')" style="cursor:pointer; display:inline-block; margin-top: auto;">Gift This Consultation →</a>
       </div>
 
-      <div class="package-card">
-        <div class="package-name">Surgery Prep Masterclass</div>
-        <div class="package-price">$99</div>
-        <div class="package-desc">22-module evidence-based surgery preparation guide — personalized to the recipient's surgery type, health profile, and timeline. Interactive + printable PDF.</div>
-        <br><a class="btn-secondary" onclick="giftService('anesthesiologist','Surgery Prep Masterclass ($99)')" style="cursor:pointer; display:inline-block;">Gift the Masterclass →</a>
+      <!-- GIFT 3: SURGERY PREP MASTERCLASS -->
+      <div class="package-card" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
+        <div>
+          <div class="package-badge">Self-Paced Learning</div>
+          <div class="package-name">Surgery Prep Masterclass</div>
+          <div class="package-price">$99</div>
+          <div class="package-desc">Evidence-based comprehensive guide with 22 modules for optimized preparation and recovery. Personalized to surgery type, health profile, and timeline.</div>
+
+          <ul class="services-list">
+            <li><div class="service-check">✓</div>Personalized preparation protocols</li>
+            <li><div class="service-check">✓</div>Evidence-based recovery milestones</li>
+            <li><div class="service-check">✓</div>Nutrition & movement optimization</li>
+            <li><div class="service-check">✓</div>Interactive modules + printable PDF</li>
+            <li><div class="service-check">✓</div>Lifetime access & digital resources</li>
+          </ul>
+        </div>
+        <a class="btn-primary" onclick="giftService('anesthesiologist','Surgery Prep Masterclass ($99)')" style="cursor:pointer; display:inline-block; margin-top: auto;">Gift the Masterclass →</a>
       </div>
 
-      <div class="package-card">
-        <div class="package-name">Mental Wellness Session</div>
-        <div class="package-price">$250</div>
-        <div class="package-desc">50-minute session with licensed mental health specialist. Help your loved one manage surgical anxiety, emotional recovery, and psychological preparation.</div>
-        <br><a class="btn-secondary" onclick="giftService('therapist','Mental Wellness — Single Session ($250)')" style="cursor:pointer; display:inline-block;">Gift This Session →</a>
+      <!-- GIFT 4: MENTAL WELLNESS (SECOND ROW) -->
+      <div class="package-card" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%; grid-column: 1;">
+        <div>
+          <div class="package-badge">Emotional Support</div>
+          <div class="package-name">Mental Wellness Session</div>
+          <div class="package-price">$250</div>
+          <div class="package-desc">50-minute session with licensed mental health specialist. Help your loved one manage surgical anxiety, emotional recovery, and psychological preparation.</div>
+
+          <ul class="services-list">
+            <li><div class="service-check">✓</div>50-minute mental health consultation</li>
+            <li><div class="service-check">✓</div>Surgical anxiety management</li>
+            <li><div class="service-check">✓</div>Emotional & psychological preparation</li>
+            <li><div class="service-check">✓</div>Recovery support strategies</li>
+            <li><div class="service-check">✓</div>Coping techniques & tools</li>
+          </ul>
+        </div>
+        <a class="btn-primary" onclick="giftService('therapist','Mental Wellness — Single Session ($250)')" style="cursor:pointer; display:inline-block; margin-top: auto;">Gift This Session →</a>
       </div>
+    </div>
+
+    <div style="margin-top: 3rem; padding: 2rem; background: linear-gradient(135deg, rgba(45,90,61,0.05) 0%, rgba(200,132,90,0.05) 100%); border: 2px solid var(--sage); border-radius: 12px; text-align: center;">
+      <h3 style="color: var(--sage); margin-bottom: 0.75rem; font-size: 1.1rem;">How Gift Delivery Works</h3>
+      <p style="color: #555; font-size: 0.95rem; margin: 0;">After purchase, your recipient receives a personalized gift confirmation via email with a unique code and simple booking instructions. They can book their appointment anytime — no expiration date.</p>
     </div>
   </div>
   </div><!-- /prtab-gifts -->
