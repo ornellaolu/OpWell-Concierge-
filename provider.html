@@ -380,6 +380,97 @@
       text-decoration: none;
     }
 
+    /* CLINICAL OUTCOMES SECTION */
+    .outcomes-section {
+      padding: 5rem 2rem;
+      background: white;
+    }
+
+    .outcomes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .outcome-card {
+      padding: 2.5rem;
+      background: #f9f6f1;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .outcome-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--sage);
+      margin-bottom: 1rem;
+    }
+
+    .outcome-card p {
+      font-size: 0.95rem;
+      color: var(--slate);
+      line-height: 1.7;
+    }
+
+    /* EVIDENCE TABLE */
+    .evidence-table-wrapper {
+      margin-top: 3rem;
+      overflow-x: auto;
+    }
+
+    .evidence-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .evidence-table th {
+      background: var(--sage);
+      color: white;
+      padding: 1.5rem;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 0.05em;
+    }
+
+    .evidence-table th:first-child {
+      border-radius: 8px 0 0 0;
+    }
+
+    .evidence-table th:last-child {
+      border-radius: 0 8px 0 0;
+    }
+
+    .evidence-table td {
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.95rem;
+      color: var(--charcoal);
+    }
+
+    .evidence-table td:first-child {
+      font-weight: 600;
+      color: var(--sage);
+      width: 25%;
+    }
+
+    .evidence-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .evidence-caption {
+      font-size: 0.85rem;
+      color: var(--slate);
+      margin-top: 1rem;
+      font-style: italic;
+      line-height: 1.6;
+    }
+
     /* RESPONSIVE */
     @media (max-width: 768px) {
       .hero-inner {
@@ -399,8 +490,21 @@
         grid-template-columns: 1fr;
       }
 
+      .outcomes-grid {
+        grid-template-columns: 1fr;
+      }
+
       .form-container {
         padding: 2rem;
+      }
+
+      .evidence-table {
+        font-size: 0.85rem;
+      }
+
+      .evidence-table th,
+      .evidence-table td {
+        padding: 1rem;
       }
     }
   </style>
@@ -522,6 +626,69 @@
           <div class="step-number">4</div>
           <h3>30-Day Safety Net</h3>
           <p>Home monitoring through critical post-op windows. Structured touchpoints. Early issue detection.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLINICAL OUTCOMES SECTION -->
+  <section class="outcomes-section">
+    <div class="container">
+      <div style="margin-bottom: 4rem;">
+        <div class="section-tag">Clinical Outcomes</div>
+        <h2 class="section-title">The Big Wins</h2>
+
+        <div class="outcomes-grid">
+          <div class="outcome-card">
+            <h3>Protect Your OR Timeline</h3>
+            <p>We conduct deep multi-system risk stratification and complete a strict medication/supplement audit weeks in advance. Your patients arrive optimized, cleared, and ready for the table—eliminating day-of-surgery cancellations.</p>
+          </div>
+          <div class="outcome-card">
+            <h3>Offload Your Administrative Staff</h3>
+            <p>From the decision for surgery through 30 days post-discharge, we manage the time-consuming clearances, medication adjustments, and patient anxiety management. No coordination burden or scheduling overlap for your team.</p>
+          </div>
+          <div class="outcome-card">
+            <h3>Secure the 30-Day Post-Op Window</h3>
+            <p>We act as a proactive safety net at home. By tracking recovery milestones and managing compliance via structured touchpoints, we catch normal recovery hurdles early and prevent unnecessary ER readmissions.</p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-tag">Clinical Evidence</div>
+        <h2 class="section-title">The Evidence at a Glance</h2>
+        <p style="font-size: 0.95rem; color: var(--slate); margin-bottom: 2rem;">Impact of structured perioperative home models across multi-specialty cohorts</p>
+
+        <div class="evidence-table-wrapper">
+          <table class="evidence-table">
+            <thead>
+              <tr>
+                <th>The Metric</th>
+                <th>Impact of Structured Perioperative Home Models</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Hospital Stay</td>
+                <td>30% to 50% reduction in total length of stay.*</td>
+              </tr>
+              <tr>
+                <td>Readmission Rates</td>
+                <td>Significant drop in preventable 7-day and 30-day readmissions.*</td>
+              </tr>
+              <tr>
+                <td>Practice Economics</td>
+                <td>Cost savings up to $16,447 per patient with a high ROI.*</td>
+              </tr>
+              <tr>
+                <td>Patient Experience</td>
+                <td>Up to 89% reduction in pre-surgical anxiety.**</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="evidence-caption">
+          *Data compiled across multi-specialty PSH, POSH, and ERAS peer-reviewed clinical studies. Full bibliography available upon request.
         </div>
       </div>
     </div>
