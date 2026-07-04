@@ -1968,7 +1968,9 @@
       .br-risk-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
       .qr-key-grid { grid-template-columns: 1fr; }
       /* Packages grid */
-      .packages-grid { grid-template-columns: 1fr; max-width: 100%; }
+      .packages-grid { grid-template-columns: 1fr !important; max-width: 100% !important; }
+      /* Pricing page 3-col grid mobile override */
+      div[style*="grid-template-columns: repeat(3, 1fr)"].packages-grid { grid-template-columns: 1fr !important; }
     }
 
     @media (max-width: 480px) {
