@@ -162,7 +162,7 @@ module.exports = async function handler(req, res) {
     } else if (type === 'retainer-application') {
       const { fullName, email, phone, contactMethod, procedureDate, goals } = req.body;
 
-      if (!fullName || !email || !phone || !contactMethod || !goals) {
+      if (!fullName || !email || !contactMethod || !goals) {
         return res.status(400).json({ error: 'Missing required fields' });
       }
 
