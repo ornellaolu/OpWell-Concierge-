@@ -14,7 +14,8 @@ module.exports = async function handler(req, res) {
 
     const patient = await db.getPatientByToken(token);
     if (!patient) {
-      return res.status(401).json({ error: 'Invalid or expired token' });
+      console.error('Token lookup failed for token:', token);
+      return res.status(401).json({ error: 'Invalid or expired token', token: token.substring(0, 5) });
     }
 
     const checkIns = await db.getCheckInHistory(patient.id);
