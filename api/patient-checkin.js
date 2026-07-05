@@ -106,14 +106,20 @@ module.exports = async function handler(req, res) {
     `;
 
     try {
-      await resend.emails.send({
+      const emailResponse = await resend.emails.send({
         from: 'OpWell Concierge <info@opwellconcierge.com>',
         to: 'dr.oluwole@opwellconcierge.com',
         subject: `Recovery Check-In: ${esc(patient.name)} — POD ${pod}`,
         html: emailHtml,
       });
+      console.log('Email sent successfully:', emailResponse);
     } catch (emailErr) {
-      console.error('Failed to send email to Dr. Oluwole:', emailErr);
+      console.error('Failed to send email to Dr. Oluwole:', {
+        error: emailErr.message,
+        stack: emailErr.stack,
+        patient: patient.id,
+        timestamp: new Date().toISOString()
+      });
     }
 
     return res.status(200).json({
