@@ -2587,6 +2587,258 @@
     #prtab-mental { display: none !important; }
     #pricing-tabs .tab-btn:nth-child(3) { display: none !important; }
 
+    /* PROVIDER PAGE STYLES */
+    .provider-hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 0 2rem;
+      margin-top: 4rem;
+      background: linear-gradient(to right, rgba(30,16,8,0.88) 0%, rgba(30,16,8,0.72) 50%, rgba(30,16,8,0.55) 100%), url('dr-oluwole-provider-collab.jpg') center center / cover no-repeat;
+      position: relative;
+    }
+    .provider-hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .provider-hero-text .section-tag {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 1rem;
+    }
+    .provider-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 5vw, 3rem);
+      font-weight: 400;
+      color: white;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+    .provider-hero p {
+      font-size: 1rem;
+      color: rgba(250,240,232,0.9);
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+    .provider-hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .provider-btn {
+      padding: 0.9rem 2rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: 'DM Sans', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .provider-btn-primary {
+      background: var(--sage);
+      color: white;
+    }
+    .provider-btn-primary:hover {
+      background: #1f4730;
+    }
+    .provider-btn-secondary {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+    }
+    .provider-btn-secondary:hover {
+      background: rgba(255,255,255,0.1);
+    }
+    .provider-hero-card {
+      background: rgba(30,30,30,0.7);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 2.5rem;
+      color: white;
+    }
+    .provider-hero-card .section-tag {
+      color: var(--terracotta);
+      margin-bottom: 1.5rem;
+    }
+    .provider-metric {
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(200,132,90,0.2);
+    }
+    .provider-metric:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    .provider-metric-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: var(--terracotta);
+      margin-bottom: 0.5rem;
+    }
+    .provider-metric-label {
+      font-size: 0.95rem;
+      color: rgba(250,240,232,0.85);
+      line-height: 1.6;
+    }
+    .provider-workflow-section {
+      padding: 5rem 2rem;
+      background: white;
+    }
+    .provider-workflow-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2.5rem;
+      margin-bottom: 4rem;
+    }
+    .provider-workflow-step {
+      text-align: center;
+      position: relative;
+      padding-top: 3.5rem;
+    }
+    .provider-step-number {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 60px;
+      background: var(--sage);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+    .provider-workflow-step h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--charcoal);
+      margin-bottom: 0.75rem;
+    }
+    .provider-workflow-step p {
+      font-size: 0.95rem;
+      color: var(--slate);
+      line-height: 1.6;
+    }
+    .provider-outcomes-section {
+      padding: 5rem 2rem;
+      background: white;
+    }
+    .provider-outcomes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2.5rem;
+      margin-bottom: 4rem;
+    }
+    .provider-outcome-card {
+      padding: 2.5rem;
+      background: #f9f6f1;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+    .provider-outcome-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--sage);
+      margin-bottom: 1rem;
+    }
+    .provider-outcome-card p {
+      font-size: 0.95rem;
+      color: var(--slate);
+      line-height: 1.7;
+    }
+    .provider-evidence-table-wrapper {
+      margin-top: 3rem;
+      overflow-x: auto;
+    }
+    .provider-evidence-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+    .provider-evidence-table th {
+      background: var(--sage);
+      color: white;
+      padding: 1.5rem;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 0.05em;
+    }
+    .provider-evidence-table th:first-child {
+      border-radius: 8px 0 0 0;
+    }
+    .provider-evidence-table th:last-child {
+      border-radius: 0 8px 0 0;
+    }
+    .provider-evidence-table td {
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.95rem;
+      color: var(--charcoal);
+    }
+    .provider-evidence-table td:first-child {
+      font-weight: 600;
+      color: var(--sage);
+      width: 25%;
+    }
+    .provider-evidence-table tr:last-child td {
+      border-bottom: none;
+    }
+    .provider-evidence-caption {
+      font-size: 0.85rem;
+      color: var(--slate);
+      margin-top: 1rem;
+      font-style: italic;
+      line-height: 1.6;
+    }
+    @media (max-width: 768px) {
+      .provider-hero-inner {
+        grid-template-columns: 1fr;
+      }
+      .provider-hero-buttons {
+        flex-direction: column;
+      }
+      .provider-btn {
+        width: 100%;
+        text-align: center;
+      }
+      .provider-workflow-grid {
+        grid-template-columns: 1fr;
+      }
+      .provider-outcomes-grid {
+        grid-template-columns: 1fr;
+      }
+      .provider-evidence-table {
+        font-size: 0.85rem;
+      }
+      .provider-evidence-table th,
+      .provider-evidence-table td {
+        padding: 1rem;
+      }
+    }
+
   </style>
   <!-- ═══════════════════════════════════════════════════════════
        STRUCTURED DATA — JSON-LD
@@ -14261,6 +14513,236 @@
 </div><!-- end blog-30 -->
 
 <!-- ══════════════════════════════════════════════════════ -->
+<!-- PROVIDER PAGE -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div id="page-provider" class="page">
+  <!-- HERO SECTION -->
+  <section class="provider-hero">
+    <div class="provider-hero-inner">
+      <div class="provider-hero-text">
+        <div class="section-tag">For Providers</div>
+        <h1>Protect Your OR Timeline. Secure Your Recovery Windows.</h1>
+        <p>OpWell handles the exhaustive perioperative preparation, strict medication/supplement clearance, and structured post-discharge recovery monitoring so your surgical team can stay focused entirely on the operating room.</p>
+        <div style="display: inline-block; background: rgba(45,90,61,0.1); border-left: 3px solid var(--sage); padding: 0.5rem 1rem; border-radius: 4px; margin: 1.5rem 0;">
+          <p style="font-size: 0.85rem; color: var(--sage); margin: 0; font-weight: 500;">✓ HSA & FSA Eligible</p>
+        </div>
+        <div class="provider-hero-buttons">
+          <button class="provider-btn provider-btn-primary" onclick="document.getElementById('provider-referral-section').style.display='block'; document.getElementById('provider-referral-section').scrollIntoView({behavior:'smooth'})">Refer a Patient →</button>
+          <button class="provider-btn provider-btn-secondary" onclick="document.querySelector('.provider-workflow-section').scrollIntoView({behavior:'smooth'})">Explore Partnership →</button>
+        </div>
+        <p style="font-size: 0.75rem; color: var(--slate); margin-top: 1rem;">Encrypted & HIPAA-Compliant Patient Intake</p>
+      </div>
+
+      <div class="provider-hero-card">
+        <div class="section-tag">The Clinical Impact</div>
+        <div class="provider-metric">
+          <div class="provider-metric-value">30% to 50% reduction</div>
+          <div class="provider-metric-label">in hospital length of stay across multi-specialty cohorts.</div>
+        </div>
+        <div class="provider-metric">
+          <div class="provider-metric-value">Significant drop</div>
+          <div class="provider-metric-label">in preventable 7-day and 30-day readmissions.</div>
+        </div>
+        <div class="provider-metric">
+          <div class="provider-metric-value">Up to $16,447 saved</div>
+          <div class="provider-metric-label">per patient with a high demonstrated ROI.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REFERRAL FORM SECTION -->
+  <section style="padding: 5rem 2rem; background: #f9f6f1;" id="provider-referral-section" style="display:none;">
+    <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+      <div style="max-width: 600px; margin: 0 auto; background: white; border: 1.5px solid var(--border); border-radius: 8px; padding: 3rem;">
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 400; color: var(--sage); margin-bottom: 0.5rem;">Refer a Patient</h2>
+        <p style="font-size: 0.95rem; color: var(--slate); margin-bottom: 2rem; line-height: 1.6;">Submit a patient referral. We'll contact your patient directly to schedule their consultation.</p>
+
+        <form id="provider-referral-form" onsubmit="submitProviderForm(event, 'referral')">
+          <div style="margin-bottom: 1.5rem;">
+            <label style="display: block; font-weight: 600; color: var(--charcoal); margin-bottom: 0.5rem; font-size: 0.9rem;">Your Name *</label>
+            <input type="text" name="providerName" required style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--border); border-radius: 6px; font-family: 'DM Sans', -apple-system, sans-serif; font-size: 0.95rem;">
+          </div>
+          <div style="margin-bottom: 1.5rem;">
+            <label style="display: block; font-weight: 600; color: var(--charcoal); margin-bottom: 0.5rem; font-size: 0.9rem;">Practice / Organization *</label>
+            <input type="text" name="practice" required style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--border); border-radius: 6px; font-family: 'DM Sans', -apple-system, sans-serif; font-size: 0.95rem;">
+          </div>
+          <div style="margin-bottom: 1.5rem;">
+            <label style="display: block; font-weight: 600; color: var(--charcoal); margin-bottom: 0.5rem; font-size: 0.9rem;">Your Email *</label>
+            <input type="email" name="providerEmail" required style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--border); border-radius: 6px; font-family: 'DM Sans', -apple-system, sans-serif; font-size: 0.95rem;">
+          </div>
+          <div style="margin-bottom: 1.5rem;">
+            <label style="display: block; font-weight: 600; color: var(--charcoal); margin-bottom: 0.5rem; font-size: 0.9rem;">Patient Name *</label>
+            <input type="text" name="patientName" required style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--border); border-radius: 6px; font-family: 'DM Sans', -apple-system, sans-serif; font-size: 0.95rem;">
+          </div>
+          <div style="margin-bottom: 1.5rem;">
+            <label style="display: block; font-weight: 600; color: var(--charcoal); margin-bottom: 0.5rem; font-size: 0.9rem;">Patient Email *</label>
+            <input type="email" name="patientEmail" required style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--border); border-radius: 6px; font-family: 'DM Sans', -apple-system, sans-serif; font-size: 0.95rem;">
+          </div>
+          <div style="margin-bottom: 1.5rem;">
+            <label style="display: block; font-weight: 600; color: var(--charcoal); margin-bottom: 0.5rem; font-size: 0.9rem;">Service Needed *</label>
+            <select name="service" required style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--border); border-radius: 6px; font-family: 'DM Sans', -apple-system, sans-serif; font-size: 0.95rem;">
+              <option value="">Select a service</option>
+              <option value="Pre-Surgical Consultation">Pre-Surgical Consultation</option>
+              <option value="Post-Operative Care">Post-Operative Care</option>
+              <option value="Complete Surgical Care Package">Complete Surgical Care Package</option>
+            </select>
+          </div>
+          <div style="margin-bottom: 1.5rem;">
+            <label style="display: block; font-weight: 600; color: var(--charcoal); margin-bottom: 0.5rem; font-size: 0.9rem;">Procedure / Surgery Type</label>
+            <input type="text" name="procedure" style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--border); border-radius: 6px; font-family: 'DM Sans', -apple-system, sans-serif; font-size: 0.95rem;">
+          </div>
+          <div style="margin-bottom: 1.5rem;">
+            <label style="display: block; font-weight: 600; color: var(--charcoal); margin-bottom: 0.5rem; font-size: 0.9rem;">Additional Notes</label>
+            <textarea name="notes" style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--border); border-radius: 6px; font-family: 'DM Sans', -apple-system, sans-serif; font-size: 0.95rem; resize: vertical; min-height: 120px;"></textarea>
+          </div>
+          <button type="submit" style="width: 100%; background: var(--sage); color: white; padding: 1rem; margin-top: 1.5rem; font-weight: 600; border: none; border-radius: 6px; cursor: pointer; font-family: 'DM Sans', sans-serif; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.9rem;">Submit Referral →</button>
+          <div id="provider-referral-error" style="background: #fff3f0; border-left: 3px solid var(--terracotta); color: var(--terracotta); padding: 1rem; border-radius: 0 6px 6px 0; margin-top: 1rem; font-size: 0.9rem; display: none;"></div>
+          <div id="provider-referral-success" style="background: #f0f7f2; border-left: 3px solid var(--sage); color: var(--sage); padding: 1rem; border-radius: 0 6px 6px 0; margin-top: 1rem; font-size: 0.9rem; display: none;">✓ Thank you! We'll contact your patient soon.</div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORKFLOW SECTION -->
+  <section class="provider-workflow-section">
+    <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+      <div class="section-tag">The Process</div>
+      <h2 class="section-title">How We Partner</h2>
+
+      <div class="provider-workflow-grid">
+        <div class="provider-workflow-step">
+          <div class="provider-step-number">1</div>
+          <h3>Fast Referral</h3>
+          <p>Submit a patient securely in under two minutes. No complex intake. No friction.</p>
+        </div>
+        <div class="provider-workflow-step">
+          <div class="provider-step-number">2</div>
+          <h3>Physician Optimization</h3>
+          <p>Dr. Oluwole conducts an exhaustive telehealth consultation and deploys our signature Recovery Protocol.</p>
+        </div>
+        <div class="provider-workflow-step">
+          <div class="provider-step-number">3</div>
+          <h3>Close the Loop</h3>
+          <p>Your practice receives the anesthesia safety brief and clearance timeline days before surgery. Our Clinical Supplement & Tissue Recovery Protocol is strictly cross-checked against your surgical preferences to ensure absolute safety and prevent bleeding risks.</p>
+        </div>
+        <div class="provider-workflow-step">
+          <div class="provider-step-number">4</div>
+          <h3>30-Day Safety Net</h3>
+          <p>Home monitoring through critical post-op windows. Structured touchpoints. Early issue detection.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLINICAL OUTCOMES SECTION -->
+  <section class="provider-outcomes-section">
+    <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+      <div style="margin-bottom: 4rem;">
+        <div class="section-tag">Clinical Outcomes</div>
+        <h2 class="section-title">The Big Wins</h2>
+
+        <div class="provider-outcomes-grid">
+          <div class="provider-outcome-card">
+            <h3>Protect Your OR Timeline</h3>
+            <p>We conduct deep multi-system risk stratification and complete a strict medication/supplement audit weeks in advance. Your patients arrive optimized, cleared, and ready for the table—eliminating day-of-surgery cancellations.</p>
+          </div>
+          <div class="provider-outcome-card">
+            <h3>Offload Your Administrative Staff</h3>
+            <p>From the decision for surgery through 30 days post-discharge, we manage the time-consuming clearances, medication adjustments, and patient anxiety management. No coordination burden or scheduling overlap for your team.</p>
+          </div>
+          <div class="provider-outcome-card">
+            <h3>Secure the 30-Day Post-Op Window</h3>
+            <p>We act as a proactive safety net at home. By tracking recovery milestones and managing compliance via structured touchpoints, we catch normal recovery hurdles early and prevent unnecessary ER readmissions.</p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-tag">Clinical Evidence</div>
+        <h2 class="section-title">The Evidence at a Glance</h2>
+        <p style="font-size: 0.95rem; color: var(--slate); margin-bottom: 2rem;">Impact of structured perioperative home models across multi-specialty cohorts</p>
+
+        <div class="provider-evidence-table-wrapper">
+          <table class="provider-evidence-table">
+            <thead>
+              <tr>
+                <th>The Metric</th>
+                <th>Impact of Structured Perioperative Home Models</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Hospital Stay</td>
+                <td>30% to 50% reduction in total length of stay.*</td>
+              </tr>
+              <tr>
+                <td>Readmission Rates</td>
+                <td>Significant drop in preventable 7-day and 30-day readmissions.*</td>
+              </tr>
+              <tr>
+                <td>Practice Economics</td>
+                <td>Cost savings up to $16,447 per patient with a high ROI.*</td>
+              </tr>
+              <tr>
+                <td>Patient Experience</td>
+                <td>Up to 89% reduction in pre-surgical anxiety.**</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="provider-evidence-caption">
+          *Data compiled across multi-specialty PSH, POSH, and ERAS peer-reviewed clinical studies. Full bibliography available upon request.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTNERSHIP FORM SECTION -->
+  <section style="padding: 5rem 2rem; background: #f9f6f1;">
+    <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+      <div style="max-width: 600px; margin: 0 auto; background: white; border: 1.5px solid var(--border); border-radius: 8px; padding: 3rem;">
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 400; color: var(--sage); margin-bottom: 0.5rem;">Explore a Clinical Partnership</h2>
+        <p style="font-size: 0.95rem; color: var(--slate); margin-bottom: 2rem; line-height: 1.6;">Interested in integrating OpWell into your surgical program? Schedule a presentation with our team.</p>
+
+        <form id="provider-partnership-form" onsubmit="submitProviderForm(event, 'partnership')">
+          <div style="margin-bottom: 1.5rem;">
+            <label style="display: block; font-weight: 600; color: var(--charcoal); margin-bottom: 0.5rem; font-size: 0.9rem;">Full Name *</label>
+            <input type="text" name="providerName" placeholder="e.g., John Smith" required style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--border); border-radius: 6px; font-family: 'DM Sans', -apple-system, sans-serif; font-size: 0.95rem;">
+          </div>
+          <div style="margin-bottom: 1.5rem;">
+            <label style="display: block; font-weight: 600; color: var(--charcoal); margin-bottom: 0.5rem; font-size: 0.9rem;">Title *</label>
+            <input type="text" name="title" placeholder="e.g., MD, Chief of Surgery" required style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--border); border-radius: 6px; font-family: 'DM Sans', -apple-system, sans-serif; font-size: 0.95rem;">
+          </div>
+          <div style="margin-bottom: 1.5rem;">
+            <label style="display: block; font-weight: 600; color: var(--charcoal); margin-bottom: 0.5rem; font-size: 0.9rem;">Practice / Organization *</label>
+            <input type="text" name="practice" required style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--border); border-radius: 6px; font-family: 'DM Sans', -apple-system, sans-serif; font-size: 0.95rem;">
+          </div>
+          <div style="margin-bottom: 1.5rem;">
+            <label style="display: block; font-weight: 600; color: var(--charcoal); margin-bottom: 0.5rem; font-size: 0.9rem;">State *</label>
+            <input type="text" name="state" placeholder="e.g., Florida, California" required style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--border); border-radius: 6px; font-family: 'DM Sans', -apple-system, sans-serif; font-size: 0.95rem;">
+          </div>
+          <div style="margin-bottom: 1.5rem;">
+            <label style="display: block; font-weight: 600; color: var(--charcoal); margin-bottom: 0.5rem; font-size: 0.9rem;">Email *</label>
+            <input type="email" name="providerEmail" required style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--border); border-radius: 6px; font-family: 'DM Sans', -apple-system, sans-serif; font-size: 0.95rem;">
+          </div>
+          <div style="margin-bottom: 1.5rem;">
+            <label style="display: block; font-weight: 600; color: var(--charcoal); margin-bottom: 0.5rem; font-size: 0.9rem;">Phone *</label>
+            <input type="tel" name="providerPhone" required style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--border); border-radius: 6px; font-family: 'DM Sans', -apple-system, sans-serif; font-size: 0.95rem;">
+          </div>
+          <div style="margin-bottom: 1.5rem;">
+            <label style="display: block; font-weight: 600; color: var(--charcoal); margin-bottom: 0.5rem; font-size: 0.9rem;">Specialty & Areas of Interest *</label>
+            <textarea name="message" placeholder="e.g., Cosmetic Surgery, Bariatric Surgery, Orthopedics, etc." required style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--border); border-radius: 6px; font-family: 'DM Sans', -apple-system, sans-serif; font-size: 0.95rem; resize: vertical; min-height: 120px;"></textarea>
+          </div>
+          <button type="submit" style="width: 100%; background: var(--sage); color: white; padding: 1rem; margin-top: 1.5rem; font-weight: 600; border: none; border-radius: 6px; cursor: pointer; font-family: 'DM Sans', sans-serif; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.9rem;">Schedule Presentation →</button>
+          <div id="provider-partnership-error" style="background: #fff3f0; border-left: 3px solid var(--terracotta); color: var(--terracotta); padding: 1rem; border-radius: 0 6px 6px 0; margin-top: 1rem; font-size: 0.9rem; display: none;"></div>
+          <div id="provider-partnership-success" style="background: #f0f7f2; border-left: 3px solid var(--sage); color: var(--sage); padding: 1rem; border-radius: 0 6px 6px 0; margin-top: 1rem; font-size: 0.9rem; display: none;">✓ Thank you! We'll be in touch soon.</div>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>
+
 <!-- PRICING PAGE -->
 <!-- ══════════════════════════════════════════════════════ -->
 <div id="page-pricing" class="page">
@@ -14786,6 +15268,73 @@
           form.reset();
         } else {
           errorEl.textContent = data.error || 'Error submitting application.';
+          errorEl.style.display = 'block';
+        }
+      } catch (error) {
+        errorEl.textContent = 'Connection error. Please try again.';
+        errorEl.style.display = 'block';
+      }
+    }
+
+    async function submitProviderForm(event, type) {
+      event.preventDefault();
+      const form = event.target;
+      const formData = new FormData(form);
+
+      let errorEl, successEl;
+
+      if (type === 'referral') {
+        errorEl = document.getElementById('provider-referral-error');
+        successEl = document.getElementById('provider-referral-success');
+      } else {
+        errorEl = document.getElementById('provider-partnership-error');
+        successEl = document.getElementById('provider-partnership-success');
+      }
+
+      errorEl.style.display = 'none';
+      successEl.style.display = 'none';
+
+      try {
+        let payload;
+
+        if (type === 'referral') {
+          payload = {
+            type: 'referral',
+            providerName: formData.get('providerName'),
+            practice: formData.get('practice'),
+            providerEmail: formData.get('providerEmail'),
+            patientName: formData.get('patientName'),
+            patientEmail: formData.get('patientEmail'),
+            service: formData.get('service'),
+            procedure: formData.get('procedure'),
+            notes: formData.get('notes')
+          };
+        } else {
+          payload = {
+            type: 'partnership',
+            providerName: formData.get('providerName'),
+            title: formData.get('title'),
+            practice: formData.get('practice'),
+            state: formData.get('state'),
+            providerEmail: formData.get('providerEmail'),
+            providerPhone: formData.get('providerPhone'),
+            message: formData.get('message')
+          };
+        }
+
+        const response = await fetch('/api/provider-referral', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          successEl.style.display = 'block';
+          form.reset();
+        } else {
+          errorEl.textContent = data.error || 'Error submitting form.';
           errorEl.style.display = 'block';
         }
       } catch (error) {
