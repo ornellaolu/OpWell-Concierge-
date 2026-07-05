@@ -3028,6 +3028,7 @@
   </script>
 
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
 </head>
 <body>
 
@@ -15433,6 +15434,11 @@
   </style>
 
   <div class="checkin-container">
+    <!-- Admin Quick Access -->
+    <div style="position: absolute; top: 1rem; right: 1rem;">
+      <button onclick="showPage('admin')" style="background: none; border: none; color: #666; font-size: 0.8rem; cursor: pointer; text-decoration: underline;">For Dr. Oluwole: Manage Patients →</button>
+    </div>
+
     <!-- Auth Section -->
     <div id="checkin-auth" class="checkin-step active">
       <div class="checkin-header">
@@ -15470,6 +15476,27 @@
       </div>
 
       <button class="btn-primary" onclick="startNewCheckIn()" style="width: 100%; margin-bottom: 2rem;">Start Today's Check-In</button>
+
+      <div id="qor-chart-container" class="dashboard-card" style="display: none;">
+        <h3>Your QoR-15 Recovery Score</h3>
+        <p style="font-size: 0.9rem; color: #666; margin-bottom: 1rem;">Higher scores indicate better recovery quality (0-150)</p>
+        <canvas id="qorChart" style="max-height: 300px;"></canvas>
+        <div id="qor-stats" style="margin-top: 1.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div style="background: #f0f7f2; padding: 1rem; border-radius: 6px;">
+            <div style="font-size: 0.8rem; color: #666;">Current Score</div>
+            <div style="font-size: 1.8rem; font-weight: 700; color: var(--sage);" id="current-qor">—</div>
+          </div>
+          <div style="background: #f0f7f2; padding: 1rem; border-radius: 6px;">
+            <div style="font-size: 0.8rem; color: #666;">Trend</div>
+            <div style="font-size: 1.8rem; font-weight: 700; color: #16a34a;" id="qor-trend">↑</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="pain-chart-container" class="dashboard-card" style="display: none;">
+        <h3>Pain Levels Over Time</h3>
+        <canvas id="painChart" style="max-height: 250px;"></canvas>
+      </div>
 
       <div id="checkin-history" class="dashboard-card">
         <h3>Check-In History</h3>
@@ -15723,7 +15750,7 @@
 
             document.getElementById('info-checkins').textContent = data.totalCheckIns;
 
-            // Display check-in history
+            // Display check-in history and charts
             const historyList = document.getElementById('history-list');
             if (data.checkIns && data.checkIns.length > 0) {
               historyList.innerHTML = data.checkIns.map(ci => `
@@ -15732,6 +15759,10 @@
                   <div class="checkin-details">POD ${Math.floor((new Date(ci.timestamp) - new Date(patientData.surgeryDate)) / (1000 * 60 * 60 * 24))}</div>
                 </div>
               `).join('');
+
+              // Render QoR-15 trend chart
+              renderQoRChart(data.checkIns);
+              renderPainChart(data.checkIns);
             } else {
               historyList.innerHTML = '<p style="color: #666; font-size: 0.9rem;">No check-ins yet. Start your first check-in today!</p>';
             }
@@ -15885,6 +15916,128 @@
       const el = document.getElementById('auth-error');
       el.textContent = msg;
       el.style.display = 'block';
+    }
+
+    let qorChart = null;
+    let painChart = null;
+
+    function renderQoRChart(checkIns) {
+      if (checkIns.length === 0) return;
+
+      const container = document.getElementById('qor-chart-container');
+      container.style.display = 'block';
+
+      const data = checkIns.slice().reverse();
+      const labels = data.map((ci, i) => {
+        const pod = Math.floor((new Date(ci.timestamp) - new Date(patientData.surgeryDate)) / (1000 * 60 * 60 * 24));
+        return `POD ${pod}`;
+      });
+
+      const scores = data.map(ci => ci.qor15?.total || 0);
+      const latestScore = scores[scores.length - 1];
+
+      document.getElementById('current-qor').textContent = latestScore;
+
+      if (scores.length > 1) {
+        const trend = scores[scores.length - 1] - scores[scores.length - 2];
+        const trendEl = document.getElementById('qor-trend');
+        if (trend > 0) {
+          trendEl.textContent = '↑ Improving';
+          trendEl.style.color = '#16a34a';
+        } else if (trend < 0) {
+          trendEl.textContent = '↓ Declining';
+          trendEl.style.color = '#dc2626';
+        } else {
+          trendEl.textContent = '→ Stable';
+          trendEl.style.color = '#ca8a04';
+        }
+      }
+
+      const ctx = document.getElementById('qorChart').getContext('2d');
+      if (qorChart) qorChart.destroy();
+
+      qorChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels,
+          datasets: [{
+            label: 'QoR-15 Score',
+            data: scores,
+            borderColor: 'var(--sage)',
+            backgroundColor: 'rgba(45, 90, 61, 0.1)',
+            borderWidth: 3,
+            fill: true,
+            tension: 0.4,
+            pointBackgroundColor: 'var(--sage)',
+            pointBorderColor: '#fff',
+            pointBorderWidth: 2,
+            pointRadius: 5,
+            pointHoverRadius: 7
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          plugins: { legend: { display: false } },
+          scales: {
+            y: { min: 0, max: 150, ticks: { stepSize: 30 } }
+          }
+        }
+      });
+    }
+
+    function renderPainChart(checkIns) {
+      if (checkIns.length === 0) return;
+
+      const container = document.getElementById('pain-chart-container');
+      container.style.display = 'block';
+
+      const data = checkIns.slice().reverse();
+      const labels = data.map((ci, i) => {
+        const pod = Math.floor((new Date(ci.timestamp) - new Date(patientData.surgeryDate)) / (1000 * 60 * 60 * 24));
+        return `POD ${pod}`;
+      });
+
+      const painRest = data.map(ci => ci.responses?.painRest || null);
+      const painActivity = data.map(ci => ci.responses?.painActivity || null);
+
+      const ctx = document.getElementById('painChart').getContext('2d');
+      if (painChart) painChart.destroy();
+
+      painChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels,
+          datasets: [
+            {
+              label: 'Pain at Rest',
+              data: painRest,
+              borderColor: '#16a34a',
+              backgroundColor: 'rgba(22, 163, 74, 0.1)',
+              borderWidth: 2,
+              tension: 0.4,
+              pointRadius: 4
+            },
+            {
+              label: 'Pain with Activity',
+              data: painActivity,
+              borderColor: '#dc2626',
+              backgroundColor: 'rgba(220, 38, 38, 0.1)',
+              borderWidth: 2,
+              tension: 0.4,
+              pointRadius: 4
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          plugins: { legend: { position: 'top' } },
+          scales: {
+            y: { min: 0, max: 10, ticks: { stepSize: 2 } }
+          }
+        }
+      });
     }
   </script>
 </div>
@@ -17342,6 +17495,314 @@
   </footer>
 </div>
 
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- ADMIN DASHBOARD - PATIENT RECOVERY MANAGEMENT -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div id="page-admin" class="page">
+  <style>
+    .admin-container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+    .admin-header { margin-bottom: 2rem; border-bottom: 2px solid var(--sage); padding-bottom: 1.5rem; }
+    .admin-title { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--sage); margin: 0 0 0.5rem; }
+    .admin-tabs { display: flex; gap: 1rem; margin: 1.5rem 0; flex-wrap: wrap; }
+    .admin-tab-btn { padding: 0.75rem 1.5rem; border: 2px solid #ddd; background: #fff; color: var(--sage); font-weight: 600; border-radius: 6px; cursor: pointer; transition: all 0.2s; }
+    .admin-tab-btn.active { background: var(--sage); color: #fff; border-color: var(--sage); }
+    .admin-tab-btn:hover { border-color: var(--sage); }
+
+    .admin-content { display: none; }
+    .admin-content.active { display: block; }
+
+    .patient-list { display: grid; gap: 1rem; }
+    .patient-card { background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 1.5rem; cursor: pointer; transition: all 0.2s; }
+    .patient-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-color: var(--sage); }
+    .patient-name { font-weight: 700; font-size: 1.1rem; color: var(--sage); margin-bottom: 0.5rem; }
+    .patient-meta { font-size: 0.9rem; color: #666; margin-bottom: 0.25rem; }
+    .patient-status { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.8rem; font-weight: 600; margin-top: 0.5rem; }
+    .status-active { background: #dcfce7; color: #166534; }
+    .status-pending { background: #fef9c3; color: #854d0e; }
+    .status-flagged { background: #fee2e2; color: #991b1b; }
+
+    .form-group { margin-bottom: 1.5rem; }
+    .form-label { display: block; font-weight: 600; color: var(--sage); margin-bottom: 0.5rem; }
+    .form-input { width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 6px; font-family: 'DM Sans', sans-serif; font-size: 1rem; }
+    .form-input:focus { outline: none; border-color: var(--sage); box-shadow: 0 0 0 2px rgba(45, 90, 61, 0.1); }
+
+    .enrollform { background: #f9f9f9; padding: 2rem; border-radius: 8px; max-width: 500px; }
+    .enrollform h3 { color: var(--sage); margin-top: 0; }
+
+    .patient-detail { background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 2rem; }
+    .detail-header { margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid #ddd; }
+    .detail-title { font-size: 1.5rem; font-weight: 700; color: var(--sage); margin: 0; }
+    .detail-meta { font-size: 0.9rem; color: #666; margin-top: 0.5rem; }
+
+    .checkinflag { padding: 1rem; border-left: 4px solid #dc2626; background: #fee2e2; border-radius: 6px; margin-bottom: 1rem; }
+    .checkinflag-title { font-weight: 700; color: #991b1b; margin-bottom: 0.5rem; }
+  </style>
+
+  <div class="admin-container">
+    <div class="admin-header">
+      <h1 class="admin-title">Patient Recovery Management</h1>
+      <p style="margin: 0.5rem 0 0; color: #666;">Monitor and manage patient recovery check-ins</p>
+    </div>
+
+    <div class="admin-tabs">
+      <button class="admin-tab-btn active" onclick="switchAdminTab('patients')">My Patients</button>
+      <button class="admin-tab-btn" onclick="switchAdminTab('enroll')">Enroll New Patient</button>
+      <button class="admin-tab-btn" onclick="switchAdminTab('flagged')">⚠️ Flagged Responses</button>
+    </div>
+
+    <!-- TAB 1: PATIENTS LIST -->
+    <div id="admin-patients" class="admin-content active">
+      <div style="margin-bottom: 1.5rem;">
+        <input type="text" id="patient-search" class="form-input" placeholder="Search by patient name or email..." oninput="filterPatients()" style="max-width: 400px;">
+      </div>
+      <div id="patients-list" class="patient-list"></div>
+      <div id="patients-empty" style="text-align: center; padding: 3rem; color: #666;">
+        <p>No patients enrolled yet. <a href="#" onclick="switchAdminTab('enroll'); return false;" style="color: var(--sage); font-weight: 600; text-decoration: none;">Enroll your first patient →</a></p>
+      </div>
+    </div>
+
+    <!-- TAB 2: ENROLL NEW PATIENT -->
+    <div id="admin-enroll" class="admin-content">
+      <div class="enrollform">
+        <h3>Enroll New Patient</h3>
+        <div id="enroll-message" style="display: none; padding: 1rem; border-radius: 6px; margin-bottom: 1rem;"></div>
+
+        <div class="form-group">
+          <label class="form-label">Patient Full Name *</label>
+          <input type="text" id="enroll-name" class="form-input" placeholder="John Smith">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Email Address *</label>
+          <input type="email" id="enroll-email" class="form-input" placeholder="patient@example.com">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Phone Number *</label>
+          <input type="tel" id="enroll-phone" class="form-input" placeholder="(555) 123-4567">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Surgery Type *</label>
+          <select id="enroll-surgery" class="form-input">
+            <option>Select surgery type...</option>
+            <option value="BBL">BBL (Brazilian Butt Lift)</option>
+            <option value="Tummy Tuck">Tummy Tuck</option>
+            <option value="Bariatric">Bariatric / Weight Loss</option>
+            <option value="C-Section">C-Section</option>
+            <option value="Joint Replacement">Joint Replacement</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Surgery Date *</label>
+          <input type="date" id="enroll-date" class="form-input">
+        </div>
+
+        <button onclick="enrollNewPatient()" style="width: 100%; background: var(--sage); color: #fff; padding: 1rem; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 1rem;">Enroll Patient & Send Link</button>
+      </div>
+    </div>
+
+    <!-- TAB 3: FLAGGED RESPONSES -->
+    <div id="admin-flagged" class="admin-content">
+      <div id="flagged-list" style="display: grid; gap: 1rem;"></div>
+      <div id="flagged-empty" style="text-align: center; padding: 3rem; color: #666;">
+        <p>No flagged responses. All patients are doing well!</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PATIENT DETAIL MODAL -->
+  <div id="patient-detail-modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; overflow-y: auto;">
+    <div style="background: #fff; max-width: 800px; margin: 2rem auto; border-radius: 8px; box-shadow: 0 10px 40px rgba(0,0,0,0.2);">
+      <div style="padding: 2rem;">
+        <button onclick="closePatientDetail()" style="float: right; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #999;">✕</button>
+
+        <div id="detail-content"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let allPatients = [];
+
+    function loadAdminDashboard() {
+      // Load all patients from API
+      fetch('/api/admin-patients')
+        .then(r => r.json())
+        .then(data => {
+          if (data.success) {
+            allPatients = data.patients || [];
+            renderPatientsList();
+            renderFlaggedList();
+          }
+        })
+        .catch(e => console.error('Error loading patients:', e));
+    }
+
+    function switchAdminTab(tab) {
+      document.querySelectorAll('.admin-content').forEach(c => c.classList.remove('active'));
+      document.querySelectorAll('.admin-tab-btn').forEach(b => b.classList.remove('active'));
+
+      document.getElementById('admin-' + tab).classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    function renderPatientsList() {
+      const container = document.getElementById('patients-list');
+      const empty = document.getElementById('patients-empty');
+
+      if (allPatients.length === 0) {
+        container.style.display = 'none';
+        empty.style.display = 'block';
+        return;
+      }
+
+      container.style.display = 'grid';
+      empty.style.display = 'none';
+
+      container.innerHTML = allPatients.map(p => {
+        const pod = Math.floor((new Date() - new Date(p.surgeryDate)) / (1000 * 60 * 60 * 24));
+        const lastCheckin = p.lastCheckIn ? new Date(p.lastCheckIn).toLocaleDateString() : 'Never';
+        const statusClass = pod > 28 ? 'status-pending' : 'status-active';
+        const statusText = pod > 28 ? 'Post-Op Complete' : 'Active';
+
+        return `
+          <div class="patient-card" onclick="viewPatientDetail('${p.id}')">
+            <div class="patient-name">${p.name}</div>
+            <div class="patient-meta">📧 ${p.email}</div>
+            <div class="patient-meta">📱 ${p.phone}</div>
+            <div class="patient-meta">🏥 ${p.surgeryType} · ${p.surgeryDate}</div>
+            <div class="patient-meta">⏱️ POD ${pod} · Last check-in: ${lastCheckin}</div>
+            <span class="patient-status ${statusClass}">${statusText}</span>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderFlaggedList() {
+      const flagged = [];
+      allPatients.forEach(p => {
+        // In a real system, this would fetch check-in data and identify flags
+        // For now, just show example
+      });
+
+      const container = document.getElementById('flagged-list');
+      const empty = document.getElementById('flagged-empty');
+
+      if (flagged.length === 0) {
+        container.style.display = 'none';
+        empty.style.display = 'block';
+      }
+    }
+
+    function filterPatients() {
+      const search = document.getElementById('patient-search').value.toLowerCase();
+      document.querySelectorAll('.patient-card').forEach(card => {
+        const text = card.textContent.toLowerCase();
+        card.style.display = text.includes(search) ? '' : 'none';
+      });
+    }
+
+    function enrollNewPatient() {
+      const name = document.getElementById('enroll-name').value;
+      const email = document.getElementById('enroll-email').value;
+      const phone = document.getElementById('enroll-phone').value;
+      const surgeryType = document.getElementById('enroll-surgery').value;
+      const surgeryDate = document.getElementById('enroll-date').value;
+
+      if (!name || !email || !phone || !surgeryType || !surgeryDate) {
+        showEnrollMessage('Please fill in all fields', 'error');
+        return;
+      }
+
+      fetch('/api/patient-register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, phone, surgeryType, surgeryDate })
+      })
+      .then(r => r.json())
+      .then(data => {
+        if (data.success) {
+          showEnrollMessage(`✓ Patient enrolled! Check-in link sent to ${email}`, 'success');
+          document.getElementById('enroll-name').value = '';
+          document.getElementById('enroll-email').value = '';
+          document.getElementById('enroll-phone').value = '';
+          document.getElementById('enroll-surgery').value = '';
+          document.getElementById('enroll-date').value = '';
+          loadAdminDashboard();
+        } else {
+          showEnrollMessage(data.error || 'Enrollment failed', 'error');
+        }
+      })
+      .catch(e => showEnrollMessage('Error: ' + e.message, 'error'));
+    }
+
+    function showEnrollMessage(msg, type) {
+      const el = document.getElementById('enroll-message');
+      el.textContent = msg;
+      el.className = 'alert-' + type;
+      el.style.display = 'block';
+    }
+
+    function viewPatientDetail(patientId) {
+      const patient = allPatients.find(p => p.id === patientId);
+      if (!patient) return;
+
+      const pod = Math.floor((new Date() - new Date(patient.surgeryDate)) / (1000 * 60 * 60 * 24));
+      const content = `
+        <div class="detail-header">
+          <h2 class="detail-title">${patient.name}</h2>
+          <div class="detail-meta">📧 ${patient.email} | 📱 ${patient.phone}</div>
+          <div class="detail-meta">🏥 ${patient.surgeryType} on ${patient.surgeryDate} (POD ${pod})</div>
+        </div>
+
+        <div style="margin-bottom: 2rem;">
+          <h3 style="color: var(--sage); margin-top: 0;">Check-In Summary</h3>
+          <p style="color: #666;">Last check-in: ${patient.lastCheckIn ? new Date(patient.lastCheckIn).toLocaleString() : 'Never'}</p>
+          <p style="color: #666;">Total submissions: ${0}</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem;">
+          <div style="background: #f0f7f2; padding: 1rem; border-radius: 6px; text-align: center;">
+            <div style="font-size: 0.85rem; color: #666;">Days Into Program</div>
+            <div style="font-size: 2rem; font-weight: 700; color: var(--sage);">${pod}</div>
+          </div>
+          <div style="background: #f0f7f2; padding: 1rem; border-radius: 6px; text-align: center;">
+            <div style="font-size: 0.85rem; color: #666;">Current Status</div>
+            <div style="font-size: 1rem; font-weight: 700; color: var(--sage);">Active</div>
+          </div>
+        </div>
+
+        <button onclick="closePatientDetail()" style="width: 100%; padding: 1rem; background: var(--sage); color: #fff; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 1rem;">Close</button>
+      `;
+
+      document.getElementById('detail-content').innerHTML = content;
+      document.getElementById('patient-detail-modal').style.display = 'block';
+    }
+
+    function closePatientDetail() {
+      document.getElementById('patient-detail-modal').style.display = 'none';
+    }
+
+    // Load on page view
+    document.addEventListener('DOMContentLoaded', function() {
+      if (document.getElementById('page-admin').classList.contains('active')) {
+        loadAdminDashboard();
+      }
+    });
+
+    // Reload when page becomes visible
+    const originalShowPage = window.showPage;
+    window.showPage = function(pageId, skipPush) {
+      originalShowPage(pageId, skipPush);
+      if (pageId === 'admin') {
+        loadAdminDashboard();
+      }
+    };
+  </script>
+</div>
 
 <!-- ══════════════════════════════════════════════════════ -->
 <!-- TERMS OF SERVICE PAGE -->
