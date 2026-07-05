@@ -2033,7 +2033,7 @@ async function submitCheckin() {
   };
 
   try {
-    const res = await fetch('/api/recovery-checkin', {
+    const res = await fetch('/api/patient-checkin-submit', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
