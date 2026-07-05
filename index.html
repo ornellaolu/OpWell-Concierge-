@@ -17911,7 +17911,7 @@
 
       document.getElementById('admin-' + tab).classList.add('active');
       event.target.classList.add('active');
-    }
+    };
 
     window.renderPatientsList = function() {
       const container = document.getElementById('patients-list');
@@ -17943,7 +17943,7 @@
           </div>
         `;
       }).join('');
-    }
+    };
 
     window.renderFlaggedList = function() {
       const flagged = [];
@@ -17959,7 +17959,7 @@
         container.style.display = 'none';
         empty.style.display = 'block';
       }
-    }
+    };
 
     window.filterPatients = function() {
       const search = document.getElementById('patient-search').value.toLowerCase();
@@ -17967,7 +17967,7 @@
         const text = card.textContent.toLowerCase();
         card.style.display = text.includes(search) ? '' : 'none';
       });
-    }
+    };
 
     window.enrollNewPatient = function() {
       const name = document.getElementById('enroll-name').value;
@@ -18001,14 +18001,14 @@
         }
       })
       .catch(e => showEnrollMessage('Error: ' + e.message, 'error'));
-    }
+    };
 
     window.showEnrollMessage = function(msg, type) {
       const el = document.getElementById('enroll-message');
       el.textContent = msg;
       el.className = 'alert-' + type;
       el.style.display = 'block';
-    }
+    };
 
     window.viewPatientDetail = function(patientId) {
       const patient = allPatients.find(p => p.id === patientId);
@@ -18044,7 +18044,7 @@
 
       document.getElementById('detail-content').innerHTML = content;
       document.getElementById('patient-detail-modal').style.display = 'block';
-    }
+    };
 
     window.closePatientDetail = function() {
       document.getElementById('patient-detail-modal').style.display = 'none';
