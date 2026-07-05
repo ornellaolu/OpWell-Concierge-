@@ -5,6 +5,7 @@
       "schedule": "0 8 * * *"
     }
   ],
+  "buildCommand": "echo 'Building OpWell with admin pages'",
   "redirects": [
     { "source": "/provider.html", "destination": "/provider", "permanent": true }
   ],
