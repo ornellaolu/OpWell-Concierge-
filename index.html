@@ -17887,21 +17887,25 @@
   <script>
     let allPatients = [];
 
-    function loadAdminDashboard() {
-      // Load all patients from API
+    window.loadAdminDashboard = function() {
+      console.log('Loading admin dashboard...');
       fetch('/api/admin-patients')
         .then(r => r.json())
         .then(data => {
+          console.log('Admin API response:', data);
           if (data.success) {
             allPatients = data.patients || [];
-            renderPatientsList();
-            renderFlaggedList();
+            console.log('Patients loaded:', allPatients.length);
+            window.renderPatientsList();
+            window.renderFlaggedList();
+          } else {
+            console.error('API error:', data);
           }
         })
         .catch(e => console.error('Error loading patients:', e));
-    }
+    };
 
-    function switchAdminTab(tab) {
+    window.switchAdminTab = function(tab) {
       document.querySelectorAll('.admin-content').forEach(c => c.classList.remove('active'));
       document.querySelectorAll('.admin-tab-btn').forEach(b => b.classList.remove('active'));
 
@@ -17909,7 +17913,7 @@
       event.target.classList.add('active');
     }
 
-    function renderPatientsList() {
+    window.renderPatientsList = function() {
       const container = document.getElementById('patients-list');
       const empty = document.getElementById('patients-empty');
 
@@ -17941,7 +17945,7 @@
       }).join('');
     }
 
-    function renderFlaggedList() {
+    window.renderFlaggedList = function() {
       const flagged = [];
       allPatients.forEach(p => {
         // In a real system, this would fetch check-in data and identify flags
@@ -17957,7 +17961,7 @@
       }
     }
 
-    function filterPatients() {
+    window.filterPatients = function() {
       const search = document.getElementById('patient-search').value.toLowerCase();
       document.querySelectorAll('.patient-card').forEach(card => {
         const text = card.textContent.toLowerCase();
@@ -17965,7 +17969,7 @@
       });
     }
 
-    function enrollNewPatient() {
+    window.enrollNewPatient = function() {
       const name = document.getElementById('enroll-name').value;
       const email = document.getElementById('enroll-email').value;
       const phone = document.getElementById('enroll-phone').value;
@@ -17999,14 +18003,14 @@
       .catch(e => showEnrollMessage('Error: ' + e.message, 'error'));
     }
 
-    function showEnrollMessage(msg, type) {
+    window.showEnrollMessage = function(msg, type) {
       const el = document.getElementById('enroll-message');
       el.textContent = msg;
       el.className = 'alert-' + type;
       el.style.display = 'block';
     }
 
-    function viewPatientDetail(patientId) {
+    window.viewPatientDetail = function(patientId) {
       const patient = allPatients.find(p => p.id === patientId);
       if (!patient) return;
 
@@ -18042,7 +18046,7 @@
       document.getElementById('patient-detail-modal').style.display = 'block';
     }
 
-    function closePatientDetail() {
+    window.closePatientDetail = function() {
       document.getElementById('patient-detail-modal').style.display = 'none';
     }
 
