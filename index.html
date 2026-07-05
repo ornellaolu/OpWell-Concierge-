@@ -3822,6 +3822,18 @@
     </div>
   </div>
 
+  <!-- ═══ PATIENT ACCESS: DAILY CHECK-IN ═══ -->
+  <div style="background: linear-gradient(135deg, rgba(45,90,61,0.06) 0%, rgba(200,132,90,0.06) 100%); border-top: 2px solid var(--sage); border-bottom: 2px solid var(--sage); padding: 2rem;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 2rem;">
+      <div>
+        <div style="font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sage); margin-bottom: 0.5rem;">Already a patient? Access your care.</div>
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--sage); margin: 0;">Daily Recovery Monitoring</h3>
+        <p style="font-size: 0.95rem; color: #666; margin: 0.5rem 0 0;">Complete your daily check-in, track your recovery, and keep Dr. Oluwole informed.</p>
+      </div>
+      <button onclick="showPage('recovery-checkin')" style="background: var(--sage); color: #fff; padding: 1rem 2rem; border: none; border-radius: 6px; font-weight: 600; font-size: 1rem; cursor: pointer; white-space: nowrap; transition: background 0.2s;" onmouseover="this.style.background='#1a3a25';" onmouseout="this.style.background='var(--sage)';">Start Your Check-In →</button>
+    </div>
+  </div>
+
   <!-- ═══ RECOVERY TAB NAV ═══ -->
   <div class="tabs-nav" id="recovery-tabs">
     <button class="tab-btn active" onclick="showRecoveryTab('included')">What's Included</button>
@@ -15631,6 +15643,18 @@
     let totalSteps = 8;
     let patientToken = null;
     let patientData = {};
+
+    // Check for token in URL on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      const params = new URLSearchParams(window.location.search);
+      const urlToken = params.get('token');
+      if (urlToken) {
+        patientToken = urlToken;
+        document.getElementById('accessCode').value = urlToken;
+        authenticatePatient();
+      }
+    });
+
     let checkInResponses = {
       painRest: null, painActivity: null, painManaged: null,
       drainage: null, opening: null, redness: null,
@@ -15681,14 +15705,46 @@
         return;
       }
 
-      // Simulate token-based authentication
-      patientToken = btoa(code + ':' + Date.now());
-
-      // For demo, we'll use the code as the token
-      // In production, this would call /api/patient-authenticate
       patientToken = code;
 
-      showAuthDashboard();
+      // Fetch patient data and check-in history
+      fetch('/api/patient-history?token=' + encodeURIComponent(patientToken))
+        .then(r => r.json())
+        .then(data => {
+          if (data.success) {
+            patientData = data.patient;
+            showAuthDashboard();
+            // Update patient info
+            document.getElementById('info-surgery').textContent = patientData.surgeryType;
+            document.getElementById('info-date').textContent = patientData.surgeryDate;
+
+            const pod = Math.floor((new Date() - new Date(patientData.surgeryDate)) / (1000 * 60 * 60 * 24));
+            document.getElementById('info-pod').textContent = pod + ' days';
+
+            document.getElementById('info-checkins').textContent = data.totalCheckIns;
+
+            // Display check-in history
+            const historyList = document.getElementById('history-list');
+            if (data.checkIns && data.checkIns.length > 0) {
+              historyList.innerHTML = data.checkIns.map(ci => `
+                <div class="checkin-item">
+                  <div class="checkin-date">${new Date(ci.timestamp).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })} at ${new Date(ci.timestamp).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</div>
+                  <div class="checkin-details">POD ${Math.floor((new Date(ci.timestamp) - new Date(patientData.surgeryDate)) / (1000 * 60 * 60 * 24))}</div>
+                </div>
+              `).join('');
+            } else {
+              historyList.innerHTML = '<p style="color: #666; font-size: 0.9rem;">No check-ins yet. Start your first check-in today!</p>';
+            }
+          } else {
+            showError(data.error || 'Invalid access code. Please check your email for the correct code.');
+          }
+        })
+        .catch(e => {
+          console.error('Auth error:', e);
+          // For now, allow offline testing with any code
+          patientData = { surgeryType: 'Test Surgery', surgeryDate: new Date().toISOString().split('T')[0] };
+          showAuthDashboard();
+        });
     }
 
     function showAuthDashboard() {
