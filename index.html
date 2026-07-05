@@ -18217,6 +18217,16 @@
     .alert-error { background: #fee2e2; color: #991b1b; padding: 1rem; border-radius: 6px; margin-bottom: 1rem; }
   </style>
 
+  <nav>
+    <div class="nav-logo-wrap" onclick="showPage('home')" style="cursor:pointer;">
+      <img src="" alt="OpWell Concierge" class="nav-mark" style="height:200px;width:auto;" onerror="this.style.display='none'" />
+    </div>
+    <ul class="nav-links">
+      <li><a href="/" onclick="event.preventDefault(); showPage('home')">HOME</a></li>
+      <li><a href="/" onclick="event.preventDefault(); showPage('home')" style="cursor:pointer;">← Back</a></li>
+    </ul>
+  </nav>
+
   <div class="admin-container">
     <div class="admin-header">
       <h1 class="admin-title">Partner Dashboard</h1>
@@ -18428,20 +18438,36 @@
     let currentPatientDetail = null;
 
     window.loadAdminDashboard = function() {
-      fetch('/api/admin-patients')
-        .then(r => r.json())
-        .then(data => {
-          if (data.success) {
-            allPatients = data.patients || [];
-            window.renderAnalytics();
-            window.renderPatientsList();
-            window.renderFlaggedList();
-          } else {
-            console.error('API error:', data);
-          }
-        })
-        .catch(e => console.error('Error loading patients:', e));
+      try {
+        fetch('/api/admin-patients')
+          .then(r => r.json())
+          .then(data => {
+            if (data.success) {
+              allPatients = data.patients || [];
+              window.renderAnalytics();
+              window.renderPatientsList();
+              window.renderFlaggedList();
+            } else {
+              console.error('API error:', data);
+              showLoadingState();
+            }
+          })
+          .catch(e => {
+            console.error('Error loading patients:', e);
+            showLoadingState();
+          });
+      } catch (err) {
+        console.error('Admin dashboard error:', err);
+        showLoadingState();
+      }
     };
+
+    function showLoadingState() {
+      const container = document.getElementById('patients-list');
+      if (container) {
+        container.innerHTML = '<div style="text-align:center; padding:3rem; color:#999;">Loading patients...</div>';
+      }
+    }
 
     window.switchAdminTab = function(tab) {
       document.querySelectorAll('.admin-content').forEach(c => c.classList.remove('active'));
