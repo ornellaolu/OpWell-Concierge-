@@ -24,10 +24,10 @@ module.exports = async function handler(req, res) {
       name: p.name,
       email: p.email,
       phone: p.phone,
-      surgeryType: p.surgeryType,
-      surgeryDate: p.surgeryDate,
-      lastCheckIn: p.lastCheckIn,
-      createdAt: p.createdAt
+      surgeryType: p.surgery_type || p.surgeryType,
+      surgeryDate: p.surgery_date || p.surgeryDate,
+      lastCheckIn: p.last_checkin || p.lastCheckIn,
+      createdAt: p.created_at || p.createdAt
     }));
 
     return res.status(200).json({
