@@ -160,10 +160,14 @@ module.exports = async function handler(req, res) {
       });
 
     } else if (type === 'retainer-application') {
-      const { fullName, contactMethod, procedureDate, goals } = req.body;
+      const { fullName, email, phone, contactMethod, procedureDate, goals } = req.body;
 
-      if (!fullName || !contactMethod || !goals) {
+      if (!fullName || !email || !phone || !contactMethod || !goals) {
         return res.status(400).json({ error: 'Missing required fields' });
+      }
+
+      if (!isValidEmail(email)) {
+        return res.status(400).json({ error: 'Invalid email format' });
       }
 
       await resend.emails.send({
@@ -178,6 +182,8 @@ module.exports = async function handler(req, res) {
             <div style="padding: 32px; background: #fdf8f4;">
               <table style="width:100%; border-collapse:collapse; font-size:0.95rem;">
                 <tr><td style="padding:8px 0; color:#888; width:140px;">Full Name</td><td style="padding:8px 0; font-weight:600;">${esc(fullName)}</td></tr>
+                <tr><td style="padding:8px 0; color:#888;">Email</td><td style="padding:8px 0;"><a href="mailto:${esc(email)}">${esc(email)}</a></td></tr>
+                <tr><td style="padding:8px 0; color:#888;">Phone</td><td style="padding:8px 0;">${esc(phone)}</td></tr>
                 <tr><td style="padding:8px 0; color:#888;">Contact Method</td><td style="padding:8px 0;">${esc(contactMethod)}</td></tr>
                 ${procedureDate ? `<tr><td style="padding:8px 0; color:#888;">Upcoming Procedure & Date</td><td style="padding:8px 0;">${esc(procedureDate)}</td></tr>` : ''}
               </table>

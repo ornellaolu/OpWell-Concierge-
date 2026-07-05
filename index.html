@@ -15200,6 +15200,18 @@
           <input type="text" name="fullName" required style="width: 100%; padding: 1rem 1.25rem; border: 1.5px solid rgba(45,90,61,0.25); border-radius: 6px; font-family: 'DM Sans', sans-serif; font-size: 1rem; transition: border-color 0.2s;" onfocus="this.style.borderColor='var(--terracotta)'" onblur="this.style.borderColor='rgba(45,90,61,0.25)'">
         </div>
 
+        <!-- Email -->
+        <div style="margin-bottom: 2rem;">
+          <label style="display: block; font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--sage); margin-bottom: 0.75rem; font-weight: 500;">Email Address *</label>
+          <input type="email" name="email" required style="width: 100%; padding: 1rem 1.25rem; border: 1.5px solid rgba(45,90,61,0.25); border-radius: 6px; font-family: 'DM Sans', sans-serif; font-size: 1rem; transition: border-color 0.2s;" onfocus="this.style.borderColor='var(--terracotta)'" onblur="this.style.borderColor='rgba(45,90,61,0.25)'">
+        </div>
+
+        <!-- Phone -->
+        <div style="margin-bottom: 2rem;">
+          <label style="display: block; font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--sage); margin-bottom: 0.75rem; font-weight: 500;">Phone Number *</label>
+          <input type="tel" name="phone" required style="width: 100%; padding: 1rem 1.25rem; border: 1.5px solid rgba(45,90,61,0.25); border-radius: 6px; font-family: 'DM Sans', sans-serif; font-size: 1rem; transition: border-color 0.2s;" onfocus="this.style.borderColor='var(--terracotta)'" onblur="this.style.borderColor='rgba(45,90,61,0.25)'">
+        </div>
+
         <!-- Preferred Contact Method -->
         <div style="margin-bottom: 2rem;">
           <label style="display: block; font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--sage); margin-bottom: 0.75rem; font-weight: 500;">Preferred Contact Method *</label>
@@ -15251,6 +15263,8 @@
         const payload = {
           type: 'retainer-application',
           fullName: formData.get('fullName'),
+          email: formData.get('email'),
+          phone: formData.get('phone'),
           contactMethod: formData.get('contactMethod'),
           procedureDate: formData.get('procedureDate') || 'Not specified',
           goals: formData.get('goals')
