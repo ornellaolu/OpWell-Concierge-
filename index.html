@@ -17574,8 +17574,22 @@
   // On page load, check URL path and show correct page
   (function() {
     var path = window.location.pathname.replace(/^\//, '').replace(/\.html$/, '');
-    if (path && path !== '' && document.getElementById('page-' + path)) {
-      showPage(path, true);
+    if (path && path !== '') {
+      var pageEl = document.getElementById('page-' + path);
+      if (pageEl) {
+        showPage(path, true);
+      } else if (path === 'admin') {
+        // Fallback: manually show admin page if element exists
+        var adminPage = document.getElementById('page-admin');
+        if (adminPage) {
+          document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+          adminPage.classList.add('active');
+          window.scrollTo({ top: 0 });
+          if (typeof loadAdminDashboard === 'function') {
+            loadAdminDashboard();
+          }
+        }
+      }
     }
   })();
 
