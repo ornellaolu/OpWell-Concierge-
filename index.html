@@ -16257,7 +16257,7 @@
 
   // On page load, check URL path and show correct page
   (function() {
-    var path = window.location.pathname.replace(/^\//, '');
+    var path = window.location.pathname.replace(/^\//, '').replace(/\.html$/, '');
     if (path && path !== '' && document.getElementById('page-' + path)) {
       showPage(path, true);
     }
