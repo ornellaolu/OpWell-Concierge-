@@ -15429,7 +15429,7 @@
   --radius: 12px;
 }
 #page-recovery-checkin * { box-sizing: border-box; }
-#page-recovery-checkin { font-family: 'DM Sans', sans-serif; color: var(--charcoal); padding-bottom: 90px; }
+#page-recovery-checkin { font-family: 'DM Sans', sans-serif; color: var(--charcoal); padding-bottom: max(90px, env(safe-area-inset-bottom)); }
 
 /* AUTH VIEW */
 #page-recovery-checkin .recovery-auth-view { display: none; }
@@ -15591,16 +15591,15 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 14px 16px;
+  padding: 16px;
   background: #fff;
   border: 2px solid rgba(45,90,61,0.15);
   border-radius: var(--radius);
   cursor: pointer;
   transition: all 0.2s;
-  min-height: 52px;
+  min-height: 56px;
   -webkit-tap-highlight-color: transparent;
 }
-#page-recovery-checkin .recovery-option-card:active { transform: scale(0.98); }
 #page-recovery-checkin .recovery-option-card.selected {
   border-color: var(--sage);
   background: rgba(45,90,61,0.04);
@@ -15635,17 +15634,16 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 14px 16px;
+  padding: 16px;
   background: #fff;
   border: 2px solid rgba(45,90,61,0.12);
   border-radius: var(--radius);
   cursor: pointer;
   transition: all 0.2s;
-  min-height: 52px;
-  margin-bottom: 8px;
+  min-height: 56px;
+  margin-bottom: 12px;
   -webkit-tap-highlight-color: transparent;
 }
-#page-recovery-checkin .recovery-flag-card:active { transform: scale(0.98); }
 #page-recovery-checkin .recovery-flag-card.checked {
   border-color: var(--orange);
   background: var(--orange-bg);
@@ -15753,16 +15751,19 @@
   width: 100%;
 }
 #page-recovery-checkin .recovery-wizard-nav {
-  position: fixed;
-  bottom: 0; left: 0; right: 0;
+  position: sticky;
+  bottom: 0;
   background: #fff;
   border-top: 1px solid rgba(45,90,61,0.1);
   padding: 12px 16px;
+  padding-bottom: max(12px, env(safe-area-inset-bottom));
   display: flex;
   gap: 12px;
   z-index: 100;
   max-width: 520px;
   margin: 0 auto;
+  left: 0;
+  right: 0;
 }
 #page-recovery-checkin .recovery-nav-btn {
   flex: 1;
@@ -15780,7 +15781,8 @@
 #page-recovery-checkin .recovery-nav-btn.back {
   background: rgba(45,90,61,0.08);
   color: var(--sage);
-  flex: 0.4;
+  flex: 0 0 70px;
+  min-width: 70px;
 }
 #page-recovery-checkin .recovery-nav-btn.next {
   background: var(--sage);
@@ -15917,6 +15919,7 @@
       <div class="recovery-field-group">
         <label class="recovery-field-label">When was your surgery?</label>
         <input type="date" id="recoverySurgeryDate">
+        <div style="font-size:0.75rem; color:var(--slate); margin-top:4px;">Must be today or earlier</div>
       </div>
     </div>
 
@@ -15927,16 +15930,22 @@
       <div class="recovery-step-subtitle">Move the sliders to show your pain level. There are no wrong answers.</div>
 
       <div class="recovery-field-group">
-        <label class="recovery-field-label">How much pain right now, while resting?</label>
-        <input type="range" id="recoveryPainRest" min="0" max="10" value="5" class="recovery-qor-slider">
+        <div style="display:flex; justify-content:space-between; align-items:baseline;">
+          <label class="recovery-field-label" style="margin-bottom:0;">How much pain right now, while resting?</label>
+          <div style="font-size:1.1rem; font-weight:700; color:var(--sage);" id="painRestValue">5 / 10</div>
+        </div>
+        <input type="range" id="recoveryPainRest" min="0" max="10" value="5" class="recovery-qor-slider" oninput="document.getElementById('painRestValue').textContent = this.value + ' / 10';">
         <div style="display:flex; justify-content:space-between; font-size:0.72rem; color:var(--slate); margin-top:4px;">
           <span>No pain</span><span>Worst pain</span>
         </div>
       </div>
 
       <div class="recovery-field-group">
-        <label class="recovery-field-label">How much pain when you move or get up?</label>
-        <input type="range" id="recoveryPainActivity" min="0" max="10" value="5" class="recovery-qor-slider">
+        <div style="display:flex; justify-content:space-between; align-items:baseline;">
+          <label class="recovery-field-label" style="margin-bottom:0;">How much pain when you move or get up?</label>
+          <div style="font-size:1.1rem; font-weight:700; color:var(--sage);" id="painActivityValue">5 / 10</div>
+        </div>
+        <input type="range" id="recoveryPainActivity" min="0" max="10" value="5" class="recovery-qor-slider" oninput="document.getElementById('painActivityValue').textContent = this.value + ' / 10';">
         <div style="display:flex; justify-content:space-between; font-size:0.72rem; color:var(--slate); margin-top:4px;">
           <span>No pain</span><span>Worst pain</span>
         </div>
@@ -16233,6 +16242,13 @@
 
     // INIT & ROUTING
     document.addEventListener('DOMContentLoaded', function() {
+      // Set date input constraints
+      const today = new Date();
+      const maxDate = today.toISOString().split('T')[0];
+      const minDate = new Date(today.getTime() - 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+      document.getElementById('recoverySurgeryDate').setAttribute('max', maxDate);
+      document.getElementById('recoverySurgeryDate').setAttribute('min', minDate);
+
       const params = new URLSearchParams(window.location.search);
       const urlToken = params.get('token');
       const storedToken = localStorage.getItem('recoveryToken');
@@ -16507,19 +16523,94 @@
     document.getElementById('recoverySurgeryDate').addEventListener('change', function() { recoveryState.surgeryDate = this.value; });
     document.getElementById('recoveryPainRest').addEventListener('input', function() { recoveryState.painRest = parseInt(this.value); });
     document.getElementById('recoveryPainActivity').addEventListener('input', function() { recoveryState.painActivity = parseInt(this.value); });
-    document.getElementById('recoveryNotes').addEventListener('input', function() { recoveryState.notes = this.value; });
+    document.getElementById('recoveryNotes').addEventListener('input', function() {
+      recoveryState.notes = this.value;
+      const charCount = this.value.length;
+      let counterEl = document.getElementById('notesCharCount');
+      if (!counterEl) {
+        counterEl = document.createElement('div');
+        counterEl.id = 'notesCharCount';
+        counterEl.style.fontSize = '0.75rem';
+        counterEl.style.color = 'var(--slate)';
+        counterEl.style.marginTop = '4px';
+        this.parentElement.appendChild(counterEl);
+      }
+      counterEl.textContent = charCount + ' / 500';
+    });
+
+    // Keyboard navigation: Enter on text input goes to next step
+    document.getElementById('recoverySurgeryDate').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') recoveryNextStep();
+    });
+
+    // Keyboard accessibility for option cards
+    document.querySelectorAll('#page-recovery-checkin .recovery-option-card').forEach(card => {
+      card.setAttribute('tabindex', '0');
+      card.addEventListener('keydown', function(e) {
+        if (e.key === ' ' || e.key === 'Enter') {
+          e.preventDefault();
+          this.click();
+        }
+      });
+    });
+
+    // Keyboard accessibility for flag cards
+    document.querySelectorAll('#page-recovery-checkin .recovery-flag-card').forEach(card => {
+      card.setAttribute('tabindex', '0');
+      card.addEventListener('keydown', function(e) {
+        if (e.key === ' ' || e.key === 'Enter') {
+          e.preventDefault();
+          this.click();
+        }
+      });
+    });
+
+    function recoveryValidateForm() {
+      const errors = [];
+
+      if (!recoveryState.firstName || !recoveryState.firstName.trim()) {
+        errors.push('First name is required');
+      }
+      if (!recoveryState.lastName || !recoveryState.lastName.trim()) {
+        errors.push('Last name is required');
+      }
+      if (!recoveryState.phone || !recoveryState.phone.trim()) {
+        errors.push('Phone number is required');
+      }
+      if (!recoveryState.surgeryType) {
+        errors.push('Surgery type is required');
+      }
+      if (!recoveryState.surgeryDate) {
+        errors.push('Surgery date is required');
+      } else {
+        const sDate = new Date(recoveryState.surgeryDate);
+        const today = new Date();
+        if (sDate > today) {
+          errors.push('Surgery date cannot be in the future');
+        }
+      }
+
+      if (errors.length > 0) {
+        recoveryShowError(errors.join(' • '));
+        recoveryGoToStep(0);
+        return false;
+      }
+      return true;
+    }
 
     async function recoverySubmitCheckIn() {
+      if (!recoveryValidateForm()) return;
+
       const btn = document.getElementById('recoveryBtnNext');
       btn.disabled = true;
-      btn.textContent = 'Sending...';
+      btn.textContent = '⏳ Sending...';
 
       const payload = {
         token: recoveryPatientToken,
         checkInData: {
-          firstName: recoveryState.firstName,
-          lastName: recoveryState.lastName,
-          phone: recoveryState.phone,
+          firstName: recoveryState.firstName.trim(),
+          lastName: recoveryState.lastName.trim(),
+          phone: recoveryState.phone.trim(),
           surgeryType: recoveryState.surgeryType,
           surgeryDate: recoveryState.surgeryDate,
           responses: {
@@ -16536,7 +16627,7 @@
             mood: recoveryState.mood
           },
           flags: recoveryState.flags,
-          notes: recoveryState.notes,
+          notes: recoveryState.notes.trim(),
           timestamp: new Date().toISOString()
         }
       };
