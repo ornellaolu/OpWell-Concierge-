@@ -764,16 +764,17 @@
 
     /* ── END EVIDENCE SECTION ── */
     .provider-section {
-      padding: 8.5rem 4rem;
+      padding: 7rem 4rem;
       background: #E0B896;
     }
 
     .provider-inner {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: start;
-      max-width: 1100px;
+      gap: 4rem;
+      align-items: flex-start;
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
     .provider-section .section-tag { color: var(--terracotta-light); }
@@ -786,33 +787,41 @@
     .provider-section .btn-secondary { color: #FAF0E8; border-color: rgba(250,240,232,0.8); font-size: 0.8rem; font-weight: 500; }
 
     .provider-card {
-      border: 1px solid rgba(250,240,232,0.15);
-      padding: 2.5rem;
-      border-radius: 12px;
-      background: rgba(0,0,0,0.35);
-      backdrop-filter: blur(8px);
+      border: none;
+      padding: 3rem;
+      border-radius: 16px;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(10px);
       transition: all 0.35s ease;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
     }
 
     .provider-card:hover {
-      background: rgba(0,0,0,0.45);
-      border-color: rgba(250,240,232,0.25);
+      background: rgba(0,0,0,0.55);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.35);
     }
 
-    .provider-card .section-tag { color: var(--terracotta); }
+    .provider-card .section-tag {
+      color: var(--terracotta-light);
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
 
     .provider-feature-title {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(1rem, 3vw, 1.4rem);
+      font-size: clamp(1.1rem, 3vw, 1.5rem);
       font-weight: 500;
-      color: #FAF0E8;
-      margin-bottom: 0.4rem;
+      color: var(--terracotta-light);
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
     }
 
     .provider-feature-desc {
-      font-size: clamp(0.8rem, 2vw, 0.95rem);
-      color: rgba(250,240,232,0.7);
-      line-height: 1.8;
+      font-size: clamp(0.85rem, 2vw, 0.95rem);
+      color: rgba(250,240,232,0.75);
+      line-height: 1.7;
     }
 
     .provider-icon {
@@ -3354,15 +3363,14 @@
         <h2 class="section-title">Protect Your OR Timeline.<br>Secure Your Recovery Windows.</h2>
         <div class="gold-divider"></div>
         <p class="body-text">OpWell handles the exhaustive perioperative preparation, strict medication/supplement clearance, and structured post-discharge recovery monitoring so your surgical team can stay focused entirely on the operating room.</p>
-        <p class="body-text" style="margin-top:1rem; font-weight: 500; font-size: 1.05rem;">Refer a patient in minutes. No coordination burden, no scheduling overlap. And if you're interested in a deeper practice partnership, we'd love to connect.</p>
-        <div style="display:flex; align-items:center; gap:1rem; margin-top:2rem; padding-left:1.25rem; border-left:4px solid var(--sage);">
-          <p style="font-size: 0.85rem; color: var(--sage); margin: 0; font-weight: 500;">✓ HSA & FSA Eligible</p>
+        <div style="display:flex; align-items:center; gap:1rem; margin-top:2.5rem; padding-left:1.5rem; border-left:4px solid var(--sage);">
+          <p style="font-size: 0.85rem; color: var(--sage); margin: 0; font-weight: 600; letter-spacing: 0.03em;">✓ HSA & FSA Eligible</p>
         </div>
-        <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-top:2rem;">
-          <a class="btn-primary" style="cursor:pointer; text-decoration: none;" onclick="showPage('provider'); setTimeout(() => { document.getElementById('provider-referral-section').style.display='block'; document.getElementById('provider-referral-section').scrollIntoView({behavior:'smooth'}); }, 100);">Refer a Patient →</a>
-          <a class="btn-secondary" style="cursor:pointer; text-decoration: none;" onclick="showPage('provider'); setTimeout(() => { document.querySelector('.provider-workflow-section').scrollIntoView({behavior:'smooth'}); }, 100);">Explore Partnership →</a>
+        <div style="display:flex; gap:1.25rem; flex-wrap:wrap; margin-top:2.5rem;">
+          <a class="btn-primary" style="cursor:pointer; text-decoration: none; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.85rem; padding: 1rem 1.75rem;" onclick="showPage('provider'); setTimeout(() => { document.getElementById('provider-referral-section').style.display='block'; document.getElementById('provider-referral-section').scrollIntoView({behavior:'smooth'}); }, 100);">Refer a Patient →</a>
+          <a class="btn-secondary" style="cursor:pointer; text-decoration: none; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.85rem; padding: 1rem 1.75rem;" onclick="showPage('provider'); setTimeout(() => { document.querySelector('.provider-workflow-section').scrollIntoView({behavior:'smooth'}); }, 100);">Explore Partnership →</a>
         </div>
-        <p style="font-size: 0.75rem; color:rgba(250,240,232,0.95); margin-top: 1rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase;">Encrypted & HIPAA-Compliant Patient Intake</p>
+        <p style="font-size: 0.75rem; color:rgba(250,240,232,0.8); margin-top: 1.5rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase;">Encrypted & HIPAA-Compliant Patient Intake</p>
       </div>
       <div class="provider-card">
         <div class="section-tag">The Clinical Impact</div>
@@ -15399,665 +15407,893 @@
 <!-- ══════════════════════════════════════════════════════ -->
 <div id="page-recovery-checkin" class="page">
   <style>
-    .checkin-container { max-width: 700px; margin: 0 auto; padding: 3rem 2rem; }
-    .checkin-header { text-align: center; margin-bottom: 2.5rem; }
-    .checkin-header h1 { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--sage); margin: 0 0 1rem; font-weight: 400; }
-    .checkin-header .underline { width: 40px; height: 2px; background: var(--terracotta); margin: 0 auto 1.5rem; }
-    .checkin-header p { font-size: 1rem; color: #666; line-height: 1.6; margin: 0; }
-
-    .checkin-step { display: none; padding: 2rem 0; }
-    .checkin-step.active { display: block; animation: fadeIn 0.3s ease; }
-
-    .field-group { margin-bottom: 1.5rem; }
-    .field-label { font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--sage); margin-bottom: 0.5rem; font-weight: 500; display: block; }
-    .field-input { width: 100%; padding: 0.75rem 1rem; border: 1.5px solid #ddd; border-radius: 6px; font-family: 'DM Sans', sans-serif; font-size: 1rem; transition: border-color 0.2s; }
-    .field-input:focus { outline: none; border-color: var(--terracotta); }
-    .field-select { width: 100%; padding: 0.75rem 1rem; border: 1.5px solid #ddd; border-radius: 6px; font-family: 'DM Sans', sans-serif; font-size: 1rem; }
-
-    .slider-container { margin: 1rem 0; }
-    .slider { width: 100%; height: 6px; border-radius: 3px; background: #ddd; outline: none; -webkit-appearance: none; }
-    .slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 24px; height: 24px; border-radius: 50%; background: var(--sage); cursor: pointer; }
-    .slider::-moz-range-thumb { width: 24px; height: 24px; border-radius: 50%; background: var(--sage); cursor: pointer; border: none; }
-    .slider-value { text-align: center; font-weight: 700; color: var(--sage); margin-top: 0.5rem; font-size: 1.1rem; }
-
-    .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
-    .option-btn { padding: 1rem; border: 2px solid #ddd; background: #fff; border-radius: 8px; cursor: pointer; transition: all 0.2s; text-align: center; font-weight: 500; }
-    .option-btn:hover { border-color: var(--terracotta); background: #fdf8f4; }
-    .option-btn.selected { border-color: var(--sage); background: rgba(45, 90, 61, 0.08); }
-
-    .button-group { display: flex; gap: 1rem; margin-top: 2rem; justify-content: space-between; }
-    .btn-primary { background: var(--sage); color: #fff; padding: 1rem 2rem; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 1rem; transition: background 0.2s; }
-    .btn-primary:hover { background: #1a3a25; }
-    .btn-primary:disabled { background: #ccc; cursor: not-allowed; }
-    .btn-secondary { background: #f0f0f0; color: var(--sage); padding: 1rem 2rem; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 1rem; }
-    .btn-secondary:hover { background: #e0e0e0; }
-
-    .progress-bar-container { margin-bottom: 2rem; }
-    .progress-bar { width: 100%; height: 4px; background: #e0e0e0; border-radius: 2px; overflow: hidden; }
-    .progress-fill { height: 100%; background: var(--sage); transition: width 0.3s ease; }
-    .progress-text { font-size: 0.9rem; color: #666; margin-top: 0.5rem; text-align: center; }
-
-    .alert { padding: 1rem; border-radius: 6px; margin-bottom: 1.5rem; }
-    .alert-error { background: #fee2e2; color: #c41e3a; border-left: 4px solid #c41e3a; }
-    .alert-success { background: #dcfce7; color: #166534; border-left: 4px solid #16a34a; }
-    .alert-info { background: #dbeafe; color: #0c4a6e; border-left: 4px solid #0284c7; }
-    .alert-warning { background: #fef9c3; color: #854d0e; border-left: 4px solid #ca8a04; }
-
-    .dashboard { padding: 2rem; }
-    .dashboard-card { background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; }
-    .dashboard-card h3 { margin: 0 0 1rem; color: var(--sage); font-size: 1.1rem; }
-    .checkin-item { padding: 1rem; border-left: 4px solid var(--sage); background: #f9f9f9; margin-bottom: 1rem; border-radius: 4px; }
-    .checkin-date { font-weight: 700; color: var(--sage); font-size: 0.95rem; }
-    .checkin-details { font-size: 0.9rem; color: #666; margin-top: 0.5rem; }
-
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+:root {
+  --sage: #2D5A3D;
+  --sage-dark: #1C2B22;
+  --sage-mid: #7AA07A;
+  --sage-light: #A8C4A8;
+  --terracotta: #C8845A;
+  --terracotta-light: #E8B48A;
+  --ivory: #FAF0E8;
+  --warm-white: #FDF8F4;
+  --charcoal: #1C1C1C;
+  --slate: #5A5A5A;
+  --green: #16A34A;
+  --green-bg: #DCFCE7;
+  --yellow: #CA8A04;
+  --yellow-bg: #FEF9C3;
+  --orange: #D97706;
+  --orange-bg: #FFF7ED;
+  --red: #DC2626;
+  --red-bg: #FEE2E2;
+  --radius: 12px;
+}
+#page-recovery-checkin * { box-sizing: border-box; }
+#page-recovery-checkin { font-family: 'DM Sans', sans-serif; color: var(--charcoal); padding-bottom: 90px; }
+#page-recovery-checkin .recovery-progress-wrap {
+  background: #fff;
+  padding: 12px 20px 8px;
+  border-bottom: 1px solid rgba(45,90,61,0.1);
+  position: sticky; top: 56px; z-index: 99;
+}
+#page-recovery-checkin .recovery-progress-bar {
+  height: 4px;
+  background: rgba(45,90,61,0.12);
+  border-radius: 4px;
+  overflow: hidden;
+}
+#page-recovery-checkin .recovery-progress-fill {
+  height: 100%;
+  background: var(--sage);
+  border-radius: 4px;
+  transition: width 0.4s ease;
+}
+#page-recovery-checkin .recovery-progress-label {
+  font-size: 0.72rem;
+  color: var(--slate);
+  margin-top: 6px;
+  text-align: center;
+}
+#page-recovery-checkin .recovery-wizard {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+#page-recovery-checkin .recovery-step {
+  display: none;
+  padding: 24px 0;
+  animation: fadeIn 0.3s ease;
+}
+#page-recovery-checkin .recovery-step.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+#page-recovery-checkin .recovery-step-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--charcoal);
+  margin-bottom: 6px;
+}
+#page-recovery-checkin .recovery-step-subtitle {
+  font-size: 0.88rem;
+  color: var(--slate);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+#page-recovery-checkin .recovery-field-group {
+  margin-bottom: 28px;
+}
+#page-recovery-checkin .recovery-field-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--charcoal);
+  margin-bottom: 10px;
+  line-height: 1.4;
+  display: block;
+}
+#page-recovery-checkin input[type="text"], #page-recovery-checkin input[type="date"], #page-recovery-checkin input[type="email"], #page-recovery-checkin select, #page-recovery-checkin textarea {
+  width: 100%;
+  padding: 14px 16px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+  border: 2px solid rgba(45,90,61,0.2);
+  border-radius: var(--radius);
+  background: #fff;
+  color: var(--charcoal);
+  -webkit-appearance: none;
+  appearance: none;
+}
+#page-recovery-checkin input:focus, #page-recovery-checkin select:focus, #page-recovery-checkin textarea:focus {
+  outline: none;
+  border-color: var(--sage);
+  box-shadow: 0 0 0 3px rgba(45,90,61,0.1);
+}
+#page-recovery-checkin select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235A5A5A' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+}
+#page-recovery-checkin textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+#page-recovery-checkin input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 12px;
+  background: linear-gradient(to right, var(--green-bg), var(--yellow-bg), var(--red-bg));
+  border-radius: 6px;
+  outline: none;
+  cursor: pointer;
+}
+#page-recovery-checkin input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--sage);
+  border: 3px solid #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+#page-recovery-checkin input[type="range"]::-moz-range-thumb {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--sage);
+  border: 3px solid #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+#page-recovery-checkin .recovery-option-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: #fff;
+  border: 2px solid rgba(45,90,61,0.15);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.2s;
+  min-height: 52px;
+  -webkit-tap-highlight-color: transparent;
+}
+#page-recovery-checkin .recovery-option-card:active { transform: scale(0.98); }
+#page-recovery-checkin .recovery-option-card.selected {
+  border-color: var(--sage);
+  background: rgba(45,90,61,0.04);
+}
+#page-recovery-checkin .recovery-option-card.selected-yellow {
+  border-color: var(--yellow);
+  background: var(--yellow-bg);
+}
+#page-recovery-checkin .recovery-option-card.selected-orange {
+  border-color: var(--orange);
+  background: var(--orange-bg);
+}
+#page-recovery-checkin .recovery-option-card.selected-red {
+  border-color: var(--red);
+  background: var(--red-bg);
+}
+#page-recovery-checkin .recovery-option-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+#page-recovery-checkin .recovery-option-dot.green { background: var(--green); }
+#page-recovery-checkin .recovery-option-dot.yellow { background: var(--yellow); }
+#page-recovery-checkin .recovery-option-dot.orange { background: var(--orange); }
+#page-recovery-checkin .recovery-option-dot.red { background: var(--red); }
+#page-recovery-checkin .recovery-option-text {
+  font-size: 0.95rem;
+  color: var(--charcoal);
+  line-height: 1.4;
+}
+#page-recovery-checkin .recovery-flag-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: #fff;
+  border: 2px solid rgba(45,90,61,0.12);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.2s;
+  min-height: 52px;
+  margin-bottom: 8px;
+  -webkit-tap-highlight-color: transparent;
+}
+#page-recovery-checkin .recovery-flag-card:active { transform: scale(0.98); }
+#page-recovery-checkin .recovery-flag-card.checked {
+  border-color: var(--orange);
+  background: var(--orange-bg);
+}
+#page-recovery-checkin .recovery-flag-card.checked.emergency {
+  border-color: var(--red);
+  background: var(--red-bg);
+}
+#page-recovery-checkin .recovery-flag-check {
+  width: 24px; height: 24px;
+  border: 2px solid rgba(45,90,61,0.3);
+  border-radius: 6px;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+#page-recovery-checkin .recovery-flag-card.checked .recovery-flag-check {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: #fff;
+}
+#page-recovery-checkin .recovery-flag-card.checked.emergency .recovery-flag-check {
+  background: var(--red);
+  border-color: var(--red);
+}
+#page-recovery-checkin .recovery-flag-text { font-size: 0.92rem; line-height: 1.4; }
+#page-recovery-checkin .recovery-flag-badge {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 20px;
+  background: var(--red);
+  color: #fff;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+#page-recovery-checkin .recovery-inline-error {
+  background: var(--red-bg);
+  color: var(--red);
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  margin-bottom: 16px;
+  display: none;
+}
+#page-recovery-checkin .recovery-inline-error.show { display: block; }
+#page-recovery-checkin .recovery-modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+#page-recovery-checkin .recovery-modal-overlay.show { display: flex; }
+#page-recovery-checkin .recovery-modal-card {
+  background: #fff;
+  border: 3px solid var(--red);
+  border-radius: 16px;
+  padding: 32px 24px;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+#page-recovery-checkin .recovery-modal-icon { font-size: 3rem; margin-bottom: 12px; }
+#page-recovery-checkin .recovery-modal-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--red);
+  margin-bottom: 12px;
+}
+#page-recovery-checkin .recovery-modal-text {
+  font-size: 0.92rem;
+  color: var(--slate);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+#page-recovery-checkin .recovery-modal-911 {
+  display: inline-block;
+  background: var(--red);
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding: 14px 36px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  margin-bottom: 16px;
+}
+#page-recovery-checkin .recovery-modal-dismiss {
+  display: block;
+  background: none;
+  border: 2px solid rgba(45,90,61,0.2);
+  color: var(--slate);
+  padding: 12px;
+  border-radius: var(--radius);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  cursor: pointer;
+  width: 100%;
+}
+#page-recovery-checkin .recovery-wizard-nav {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: #fff;
+  border-top: 1px solid rgba(45,90,61,0.1);
+  padding: 12px 16px;
+  display: flex;
+  gap: 12px;
+  z-index: 100;
+  max-width: 520px;
+  margin: 0 auto;
+}
+#page-recovery-checkin .recovery-nav-btn {
+  flex: 1;
+  padding: 16px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: var(--radius);
+  border: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: all 0.2s;
+}
+#page-recovery-checkin .recovery-nav-btn:active { transform: scale(0.97); }
+#page-recovery-checkin .recovery-nav-btn.back {
+  background: rgba(45,90,61,0.08);
+  color: var(--sage);
+  flex: 0.4;
+}
+#page-recovery-checkin .recovery-nav-btn.next {
+  background: var(--sage);
+  color: #fff;
+}
+#page-recovery-checkin .recovery-nav-btn.submit {
+  background: var(--sage);
+  color: #fff;
+}
+#page-recovery-checkin .recovery-nav-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+#page-recovery-checkin .recovery-qor-slider { flex: 1; -webkit-appearance: none; appearance: none; height: 6px; border-radius: 3px; background: #e0d8d0; outline: none; }
+#page-recovery-checkin .recovery-qor-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 24px; height: 24px; border-radius: 50%; background: var(--sage); cursor: pointer; border: 2px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.2); }
+#page-recovery-checkin .recovery-qor-val { font-size: 1.1rem; font-weight: 700; color: var(--sage); min-width: 28px; text-align: center; }
+#page-recovery-checkin .recovery-thankyou-check {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  background: var(--green);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 20px;
+  font-size: 2.5rem;
+  color: #fff;
+  animation: popIn 0.4s ease;
+}
+@keyframes popIn { from { transform: scale(0); } 70% { transform: scale(1.15); } to { transform: scale(1); } }
+@media (min-width: 600px) {
+  #page-recovery-checkin .recovery-wizard { padding: 0 24px; }
+  #page-recovery-checkin .recovery-step { padding: 32px 0; }
+  #page-recovery-checkin .recovery-wizard-nav { padding: 14px 24px; }
+}
   </style>
 
-  <div class="checkin-container">
-    <!-- Admin Quick Access -->
-    <div style="position: absolute; top: 1rem; right: 1rem; display: none;">
-      <button onclick="showPage('admin')" style="background: none; border: none; color: #666; font-size: 0.8rem; cursor: pointer; text-decoration: underline;">For Dr. Oluwole: Manage Patients →</button>
+  <!-- ── Progress ── -->
+  <div class="recovery-progress-wrap">
+    <div class="recovery-progress-bar"><div class="recovery-progress-fill" id="recoveryProgressFill" style="width:0%"></div></div>
+    <div class="recovery-progress-label" id="recoveryProgressLabel">Step 1 of 7</div>
+  </div>
+
+  <!-- ── Wizard ── -->
+  <div class="recovery-wizard" id="recoveryWizard">
+    <div id="recoveryInlineError" class="recovery-inline-error"></div>
+
+    <!-- STEP 0: WELCOME -->
+    <div class="recovery-step active" id="recovery-step-0">
+      <div style="font-size:2rem; margin-bottom: 8px;">👋</div>
+      <div class="recovery-step-title">Welcome to your recovery check-in.</div>
+      <div class="recovery-step-subtitle">This takes about 3 minutes. Your answers help Dr. Oluwole monitor your healing between visits.</div>
+
+      <div class="recovery-field-group">
+        <label class="recovery-field-label">First name</label>
+        <input type="text" id="recoveryFirstName" placeholder="First name" autocomplete="given-name">
+      </div>
+      <div class="recovery-field-group">
+        <label class="recovery-field-label">Last name</label>
+        <input type="text" id="recoveryLastName" placeholder="Last name" autocomplete="family-name">
+      </div>
+      <div class="recovery-field-group">
+        <label class="recovery-field-label">Phone number</label>
+        <input type="tel" id="recoveryPhoneNumber" placeholder="(555) 555-5555" autocomplete="tel" inputmode="tel">
+      </div>
+      <div class="recovery-field-group">
+        <label class="recovery-field-label">What surgery did you have?</label>
+        <select id="recoverySurgeryType">
+          <option value="">Select your surgery type</option>
+          <option value="cosmetic-bbl">BBL (Brazilian Butt Lift)</option>
+          <option value="cosmetic-tummy">Tummy Tuck</option>
+          <option value="bariatric">Bariatric / Weight Loss Surgery</option>
+          <option value="cesarean">C-Section</option>
+          <option value="other">Other Surgery</option>
+        </select>
+      </div>
+      <div class="recovery-field-group">
+        <label class="recovery-field-label">When was your surgery?</label>
+        <input type="date" id="recoverySurgeryDate">
+      </div>
     </div>
 
-    <!-- Auth Section -->
-    <div id="checkin-auth" class="checkin-step active">
-      <div class="checkin-header">
-        <h1>Recovery Check-In</h1>
-        <div class="underline"></div>
-        <p>Access your daily recovery monitoring program</p>
+    <!-- STEP 1: PAIN -->
+    <div class="recovery-step" id="recovery-step-1">
+      <div style="font-size:2rem; margin-bottom: 8px;">💊</div>
+      <div class="recovery-step-title">Let's talk about pain.</div>
+      <div class="recovery-step-subtitle">Move the sliders to show your pain level. There are no wrong answers.</div>
+
+      <div class="recovery-field-group">
+        <label class="recovery-field-label">How much pain right now, while resting?</label>
+        <input type="range" id="recoveryPainRest" min="0" max="10" value="5" class="recovery-qor-slider">
+        <div style="display:flex; justify-content:space-between; font-size:0.72rem; color:var(--slate); margin-top:4px;">
+          <span>No pain</span><span>Worst pain</span>
+        </div>
       </div>
 
-      <div id="auth-error" class="alert alert-error" style="display: none; margin-bottom: 1.5rem;"></div>
-
-      <div class="field-group">
-        <label class="field-label">Your Access Code *</label>
-        <p style="font-size: 0.9rem; color: #666; margin-bottom: 1rem;">You received this in your post-op enrollment email</p>
-        <input type="text" id="accessCode" class="field-input" placeholder="Enter your access code" autocomplete="off">
+      <div class="recovery-field-group">
+        <label class="recovery-field-label">How much pain when you move or get up?</label>
+        <input type="range" id="recoveryPainActivity" min="0" max="10" value="5" class="recovery-qor-slider">
+        <div style="display:flex; justify-content:space-between; font-size:0.72rem; color:var(--slate); margin-top:4px;">
+          <span>No pain</span><span>Worst pain</span>
+        </div>
       </div>
 
-      <button class="btn-primary" onclick="authenticatePatient()" style="width: 100%; margin-top: 2rem;">Access Your Program</button>
+      <div class="recovery-field-group">
+        <label class="recovery-field-label">Is your pain medication helping?</label>
+        <div style="display:flex; flex-direction:column; gap:8px;" id="recoveryPainManagedOpts">
+          <div class="recovery-option-card" data-value="yes" onclick="recoverySelectOption('painManaged','yes',this)">
+            <div class="recovery-option-dot green"></div>
+            <div class="recovery-option-text">Yes, it's helping</div>
+          </div>
+          <div class="recovery-option-card" data-value="somewhat" onclick="recoverySelectOption('painManaged','somewhat',this)">
+            <div class="recovery-option-dot yellow"></div>
+            <div class="recovery-option-text">Somewhat — not fully</div>
+          </div>
+          <div class="recovery-option-card" data-value="no" onclick="recoverySelectOption('painManaged','no',this)">
+            <div class="recovery-option-dot red"></div>
+            <div class="recovery-option-text">Not really</div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- Dashboard Section -->
-    <div id="checkin-dashboard" class="checkin-step">
-      <div class="checkin-header" style="margin-bottom: 2rem;">
-        <h1>Your Recovery Dashboard</h1>
-        <div class="underline"></div>
-      </div>
+    <!-- STEP 2: WOUND -->
+    <div class="recovery-step" id="recovery-step-2">
+      <div style="font-size:2rem; margin-bottom: 8px;">🩹</div>
+      <div class="recovery-step-title">How does your wound look?</div>
+      <div class="recovery-step-subtitle">If you have multiple incisions, answer about the one that concerns you most.</div>
 
-      <div id="patient-info" class="dashboard-card">
-        <h3>Your Information</h3>
-        <table style="width: 100%; font-size: 0.95rem;">
-          <tr><td style="padding: 0.5rem 0; color: #888;">Surgery Type:</td><td style="padding: 0.5rem 0; font-weight: 600;" id="info-surgery"></td></tr>
-          <tr><td style="padding: 0.5rem 0; color: #888;">Surgery Date:</td><td style="padding: 0.5rem 0;" id="info-date"></td></tr>
-          <tr><td style="padding: 0.5rem 0; color: #888;">Days Since Surgery:</td><td style="padding: 0.5rem 0; font-weight: 600;" id="info-pod"></td></tr>
-          <tr><td style="padding: 0.5rem 0; color: #888;">Check-Ins Completed:</td><td style="padding: 0.5rem 0; font-weight: 600;" id="info-checkins">0</td></tr>
-        </table>
-      </div>
-
-      <button class="btn-primary" onclick="startNewCheckIn()" style="width: 100%; margin-bottom: 2rem;">Start Today's Check-In</button>
-
-      <div id="qor-chart-container" class="dashboard-card" style="display: none;">
-        <h3>Your QoR-15 Recovery Score</h3>
-        <p style="font-size: 0.9rem; color: #666; margin-bottom: 1rem;">Higher scores indicate better recovery quality (0-150)</p>
-        <canvas id="qorChart" style="max-height: 300px;"></canvas>
-        <div id="qor-stats" style="margin-top: 1.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-          <div style="background: #f0f7f2; padding: 1rem; border-radius: 6px;">
-            <div style="font-size: 0.8rem; color: #666;">Current Score</div>
-            <div style="font-size: 1.8rem; font-weight: 700; color: var(--sage);" id="current-qor">—</div>
+      <div class="recovery-field-group">
+        <label class="recovery-field-label">Is there any fluid coming from your wound?</label>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <div class="recovery-option-card" data-value="none" onclick="recoverySelectOption('drainage','none',this)">
+            <div class="recovery-option-dot green"></div><div class="recovery-option-text">No drainage</div>
           </div>
-          <div style="background: #f0f7f2; padding: 1rem; border-radius: 6px;">
-            <div style="font-size: 0.8rem; color: #666;">Trend</div>
-            <div style="font-size: 1.8rem; font-weight: 700; color: #16a34a;" id="qor-trend">↑</div>
+          <div class="recovery-option-card" data-value="minimal" onclick="recoverySelectOption('drainage','minimal',this)">
+            <div class="recovery-option-dot green"></div><div class="recovery-option-text">A little bit</div>
+          </div>
+          <div class="recovery-option-card" data-value="moderate" onclick="recoverySelectOption('drainage','moderate',this)">
+            <div class="recovery-option-dot yellow"></div><div class="recovery-option-text">A moderate amount</div>
+          </div>
+          <div class="recovery-option-card" data-value="heavy" onclick="recoverySelectOption('drainage','heavy',this)">
+            <div class="recovery-option-dot red"></div><div class="recovery-option-text">Heavy drainage</div>
           </div>
         </div>
       </div>
 
-      <div id="pain-chart-container" class="dashboard-card" style="display: none;">
-        <h3>Pain Levels Over Time</h3>
-        <canvas id="painChart" style="max-height: 250px;"></canvas>
+      <div class="recovery-field-group">
+        <label class="recovery-field-label">Is your wound opening up?</label>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <div class="recovery-option-card" data-value="no" onclick="recoverySelectOption('opening','no',this)">
+            <div class="recovery-option-dot green"></div><div class="recovery-option-text">No, it looks closed</div>
+          </div>
+          <div class="recovery-option-card" data-value="slight" onclick="recoverySelectOption('opening','slight',this)">
+            <div class="recovery-option-dot yellow"></div><div class="recovery-option-text">A little at the edges</div>
+          </div>
+          <div class="recovery-option-card" data-value="significant" onclick="recoverySelectOption('opening','significant',this)">
+            <div class="recovery-option-dot red"></div><div class="recovery-option-text">Yes, opening significantly</div>
+          </div>
+        </div>
       </div>
 
-      <div id="checkin-history" class="dashboard-card">
-        <h3>Check-In History</h3>
-        <div id="history-list" style="max-height: 400px; overflow-y: auto;"></div>
+      <div class="recovery-field-group">
+        <label class="recovery-field-label">Is there redness around your wound?</label>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <div class="recovery-option-card" data-value="none" onclick="recoverySelectOption('redness','none',this)">
+            <div class="recovery-option-dot green"></div><div class="recovery-option-text">No redness</div>
+          </div>
+          <div class="recovery-option-card" data-value="mild" onclick="recoverySelectOption('redness','mild',this)">
+            <div class="recovery-option-dot yellow"></div><div class="recovery-option-text">A little redness</div>
+          </div>
+          <div class="recovery-option-card" data-value="spreading" onclick="recoverySelectOption('redness','spreading',this)">
+            <div class="recovery-option-dot red"></div><div class="recovery-option-text">Spreading beyond wound</div>
+          </div>
+        </div>
       </div>
-
-      <button class="btn-secondary" onclick="logoutPatient()" style="width: 100%;">Sign Out</button>
     </div>
 
-    <!-- Check-In Form Section -->
-    <div id="checkin-form" class="checkin-step">
-      <div class="progress-bar-container">
-        <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width: 0%"></div></div>
-        <div class="progress-text"><span id="progress-step">1</span> of 8</div>
-      </div>
+    <!-- STEP 3: GI -->
+    <div class="recovery-step" id="recovery-step-3">
+      <div style="font-size:2rem; margin-bottom: 8px;">🍽️</div>
+      <div class="recovery-step-title">How's your stomach?</div>
+      <div class="recovery-step-subtitle">Nausea and appetite changes are common after surgery.</div>
 
-      <!-- Step 1: Welcome -->
-      <div id="step-1" class="checkin-step active">
-        <div class="checkin-header" style="margin-bottom: 2rem;">
-          <h1>Welcome to Your Check-In</h1>
-          <p>This takes about 3 minutes. Your responses help Dr. Oluwole monitor your healing.</p>
-        </div>
-      </div>
-
-      <!-- Step 2: Pain Assessment -->
-      <div id="step-2" class="checkin-step">
-        <h2 style="color: var(--sage); margin-bottom: 1.5rem; font-size: 1.3rem;">How is your pain today?</h2>
-
-        <div class="field-group">
-          <label class="field-label">Pain at rest (0-10)</label>
-          <div class="slider-container">
-            <input type="range" id="painRest" min="0" max="10" value="5" class="slider" oninput="updateSlider('painRest')">
-            <div class="slider-value" id="painRest-val">5</div>
+      <div class="recovery-field-group">
+        <label class="recovery-field-label">Are you feeling nauseous?</label>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <div class="recovery-option-card" data-value="none" onclick="recoverySelectOption('nausea','none',this)">
+            <div class="recovery-option-dot green"></div><div class="recovery-option-text">Not at all</div>
           </div>
-        </div>
-
-        <div class="field-group">
-          <label class="field-label">Pain with activity (0-10)</label>
-          <div class="slider-container">
-            <input type="range" id="painActivity" min="0" max="10" value="5" class="slider" oninput="updateSlider('painActivity')">
-            <div class="slider-value" id="painActivity-val">5</div>
+          <div class="recovery-option-card" data-value="mild" onclick="recoverySelectOption('nausea','mild',this)">
+            <div class="recovery-option-dot yellow"></div><div class="recovery-option-text">A little</div>
           </div>
-        </div>
-
-        <div class="field-group">
-          <label class="field-label">Is your pain medication helping?</label>
-          <div class="options-grid">
-            <button type="button" class="option-btn" onclick="selectOption('painManaged', 'yes', this)">Yes</button>
-            <button type="button" class="option-btn" onclick="selectOption('painManaged', 'somewhat', this)">Somewhat</button>
-            <button type="button" class="option-btn" onclick="selectOption('painManaged', 'no', this)">No</button>
+          <div class="recovery-option-card" data-value="moderate" onclick="recoverySelectOption('nausea','moderate',this)">
+            <div class="recovery-option-dot orange"></div><div class="recovery-option-text">Quite a bit</div>
+          </div>
+          <div class="recovery-option-card" data-value="severe" onclick="recoverySelectOption('nausea','severe',this)">
+            <div class="recovery-option-dot red"></div><div class="recovery-option-text">Very nauseous</div>
           </div>
         </div>
       </div>
 
-      <!-- Step 3: Wound Assessment -->
-      <div id="step-3" class="checkin-step">
-        <h2 style="color: var(--sage); margin-bottom: 1.5rem; font-size: 1.3rem;">How does your wound look?</h2>
-
-        <div class="field-group">
-          <label class="field-label">Any fluid or drainage?</label>
-          <div class="options-grid">
-            <button type="button" class="option-btn" onclick="selectOption('drainage', 'none', this)">None</button>
-            <button type="button" class="option-btn" onclick="selectOption('drainage', 'minimal', this)">Minimal</button>
-            <button type="button" class="option-btn" onclick="selectOption('drainage', 'moderate', this)">Moderate</button>
-            <button type="button" class="option-btn" onclick="selectOption('drainage', 'heavy', this)">Heavy</button>
+      <div class="recovery-field-group">
+        <label class="recovery-field-label">Have you been vomiting?</label>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <div class="recovery-option-card" data-value="none" onclick="recoverySelectOption('vomiting','none',this)">
+            <div class="recovery-option-dot green"></div><div class="recovery-option-text">No</div>
           </div>
-        </div>
-
-        <div class="field-group">
-          <label class="field-label">Is the incision opening?</label>
-          <div class="options-grid">
-            <button type="button" class="option-btn" onclick="selectOption('opening', 'closed', this)">Closed</button>
-            <button type="button" class="option-btn" onclick="selectOption('opening', 'small', this)">Small opening</button>
-            <button type="button" class="option-btn" onclick="selectOption('opening', 'large', this)">Large opening</button>
+          <div class="recovery-option-card" data-value="once" onclick="recoverySelectOption('vomiting','once',this)">
+            <div class="recovery-option-dot yellow"></div><div class="recovery-option-text">Once</div>
           </div>
-        </div>
-
-        <div class="field-group">
-          <label class="field-label">Redness or swelling?</label>
-          <div class="options-grid">
-            <button type="button" class="option-btn" onclick="selectOption('redness', 'none', this)">None</button>
-            <button type="button" class="option-btn" onclick="selectOption('redness', 'mild', this)">Mild</button>
-            <button type="button" class="option-btn" onclick="selectOption('redness', 'moderate', this)">Moderate</button>
-            <button type="button" class="option-btn" onclick="selectOption('redness', 'severe', this)">Severe</button>
+          <div class="recovery-option-card" data-value="multiple" onclick="recoverySelectOption('vomiting','multiple',this)">
+            <div class="recovery-option-dot red"></div><div class="recovery-option-text">More than once</div>
           </div>
         </div>
       </div>
 
-      <!-- Step 4: GI Symptoms -->
-      <div id="step-4" class="checkin-step">
-        <h2 style="color: var(--sage); margin-bottom: 1.5rem; font-size: 1.3rem;">Any nausea or vomiting?</h2>
-
-        <div class="options-grid" style="grid-template-columns: 1fr 1fr;">
-          <button type="button" class="option-btn" onclick="selectOption('nausea', 'yes', this)">Nausea: Yes</button>
-          <button type="button" class="option-btn" onclick="selectOption('nausea', 'no', this)">Nausea: No</button>
+      <div class="recovery-field-group">
+        <label class="recovery-field-label">How is your eating and drinking?</label>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <div class="recovery-option-card" data-value="normal" onclick="recoverySelectOption('intake','normal',this)">
+            <div class="recovery-option-dot green"></div><div class="recovery-option-text">Normal</div>
+          </div>
+          <div class="recovery-option-card" data-value="reduced" onclick="recoverySelectOption('intake','reduced',this)">
+            <div class="recovery-option-dot yellow"></div><div class="recovery-option-text">Less than usual</div>
+          </div>
+          <div class="recovery-option-card" data-value="minimal" onclick="recoverySelectOption('intake','minimal',this)">
+            <div class="recovery-option-dot orange"></div><div class="recovery-option-text">Only small sips</div>
+          </div>
+          <div class="recovery-option-card" data-value="none" onclick="recoverySelectOption('intake','none',this)">
+            <div class="recovery-option-dot red"></div><div class="recovery-option-text">Can't eat or drink</div>
+          </div>
         </div>
+      </div>
+    </div>
 
-        <div class="options-grid" style="grid-template-columns: 1fr 1fr;">
-          <button type="button" class="option-btn" onclick="selectOption('vomiting', 'yes', this)">Vomiting: Yes</button>
-          <button type="button" class="option-btn" onclick="selectOption('vomiting', 'no', this)">Vomiting: No</button>
-        </div>
+    <!-- STEP 4: MENTAL -->
+    <div class="recovery-step" id="recovery-step-4">
+      <div style="font-size:2rem; margin-bottom: 8px;">🧠</div>
+      <div class="recovery-step-title">How are you feeling emotionally?</div>
+      <div class="recovery-step-subtitle">Recovery can be emotionally challenging. Your honest answer helps us support you.</div>
 
-        <div class="field-group" style="margin-top: 2rem;">
-          <label class="field-label">How's your appetite?</label>
-          <div class="options-grid">
-            <button type="button" class="option-btn" onclick="selectOption('intake', 'good', this)">Good</button>
-            <button type="button" class="option-btn" onclick="selectOption('intake', 'fair', this)">Fair</button>
-            <button type="button" class="option-btn" onclick="selectOption('intake', 'poor', this)">Poor</button>
+      <div class="recovery-field-group">
+        <label class="recovery-field-label">How anxious or worried are you?</label>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <div class="recovery-option-card" data-value="none" onclick="recoverySelectOption('anxiety','none',this)">
+            <div class="recovery-option-dot green"></div><div class="recovery-option-text">Calm and relaxed</div>
+          </div>
+          <div class="recovery-option-card" data-value="mild" onclick="recoverySelectOption('anxiety','mild',this)">
+            <div class="recovery-option-dot yellow"></div><div class="recovery-option-text">A little worried</div>
+          </div>
+          <div class="recovery-option-card" data-value="moderate" onclick="recoverySelectOption('anxiety','moderate',this)">
+            <div class="recovery-option-dot orange"></div><div class="recovery-option-text">Pretty anxious</div>
+          </div>
+          <div class="recovery-option-card" data-value="severe" onclick="recoverySelectOption('anxiety','severe',this)">
+            <div class="recovery-option-dot red"></div><div class="recovery-option-text">Very anxious</div>
           </div>
         </div>
       </div>
 
-      <!-- Step 5: Mental Health -->
-      <div id="step-5" class="checkin-step">
-        <h2 style="color: var(--sage); margin-bottom: 1.5rem; font-size: 1.3rem;">How are you feeling mentally?</h2>
-
-        <div class="field-group">
-          <label class="field-label">Anxiety level (0-10)</label>
-          <div class="slider-container">
-            <input type="range" id="anxiety" min="0" max="10" value="5" class="slider" oninput="updateSlider('anxiety')">
-            <div class="slider-value" id="anxiety-val">5</div>
+      <div class="recovery-field-group">
+        <label class="recovery-field-label">How would you describe your mood?</label>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <div class="recovery-option-card" data-value="positive" onclick="recoverySelectOption('mood','positive',this)">
+            <div class="recovery-option-dot green"></div><div class="recovery-option-text">Good / Positive</div>
           </div>
-        </div>
-
-        <div class="field-group">
-          <label class="field-label">Overall mood</label>
-          <div class="options-grid">
-            <button type="button" class="option-btn" onclick="selectOption('mood', 'positive', this)">Positive</button>
-            <button type="button" class="option-btn" onclick="selectOption('mood', 'neutral', this)">Neutral</button>
-            <button type="button" class="option-btn" onclick="selectOption('mood', 'down', this)">Down</button>
+          <div class="recovery-option-card" data-value="neutral" onclick="recoverySelectOption('mood','neutral',this)">
+            <div class="recovery-option-dot yellow"></div><div class="recovery-option-text">Okay / Neutral</div>
+          </div>
+          <div class="recovery-option-card" data-value="low" onclick="recoverySelectOption('mood','low',this)">
+            <div class="recovery-option-dot orange"></div><div class="recovery-option-text">Down / Low</div>
+          </div>
+          <div class="recovery-option-card" data-value="very-low" onclick="recoverySelectOption('mood','very-low',this)">
+            <div class="recovery-option-dot red"></div><div class="recovery-option-text">Very down</div>
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- Step 6: Recovery Metrics -->
-      <div id="step-6" class="checkin-step">
-        <h2 style="color: var(--sage); margin-bottom: 1.5rem; font-size: 1.3rem;">Your Recovery Metrics (QoR-15)</h2>
-        <p style="font-size: 0.9rem; color: #666; margin-bottom: 1.5rem;">Rate each on a scale of 0-10 over the last 24 hours.</p>
+    <!-- STEP 5: WARNING SIGNS -->
+    <div class="recovery-step" id="recovery-step-5">
+      <div style="font-size:2rem; margin-bottom: 8px;">⚠️</div>
+      <div class="recovery-step-title">Any warning signs?</div>
+      <div class="recovery-step-subtitle">Tap any that apply. <strong>If medical emergency, call 911 now.</strong></div>
 
-        <div id="qor-questions" style="max-height: 400px; overflow-y: auto;"></div>
-      </div>
+      <div id="recoveryFlagsContainer">
+        <div class="recovery-flag-card" data-flag="0" onclick="recoveryToggleFlag(this,0)">
+          <div class="recovery-flag-check"></div>
+          <div class="recovery-flag-text">Wound drainage, opening, or redness worsening</div>
+        </div>
+        <div class="recovery-flag-card" data-flag="1" onclick="recoveryToggleFlag(this,1)">
+          <div class="recovery-flag-check"></div>
+          <div class="recovery-flag-text">No bowel movement in 24+ hours</div>
+        </div>
+        <div class="recovery-flag-card" data-flag="2" onclick="recoveryToggleFlag(this,2)">
+          <div class="recovery-flag-check"></div>
+          <div class="recovery-flag-text">Pain is getting worse</div>
+        </div>
+        <div class="recovery-flag-card" data-flag="3" onclick="recoveryToggleFlag(this,3)">
+          <div class="recovery-flag-check"></div>
+          <div class="recovery-flag-text">Vomiting or severe nausea</div>
+        </div>
+        <div class="recovery-flag-card" data-flag="4" onclick="recoveryToggleFlag(this,4)">
+          <div class="recovery-flag-check"></div>
+          <div class="recovery-flag-text">Fever over 101.5°F</div>
+        </div>
+        <div class="recovery-flag-card" data-flag="5" onclick="recoveryToggleFlag(this,5)">
+          <div class="recovery-flag-check"></div>
+          <div class="recovery-flag-text">Can't eat or drink anything</div>
+        </div>
 
-      <!-- Step 7: Final Notes -->
-      <div id="step-7" class="checkin-step">
-        <h2 style="color: var(--sage); margin-bottom: 1.5rem; font-size: 1.3rem;">Any additional notes?</h2>
-
-        <div class="field-group">
-          <label class="field-label">Optional: Share any other concerns or updates</label>
-          <textarea id="notes" class="field-input" style="min-height: 120px; font-family: 'DM Sans', sans-serif; resize: vertical;" placeholder="Tell us about your recovery..."></textarea>
+        <div class="recovery-flag-card" data-flag="6" data-emergency="true" onclick="recoveryToggleFlag(this,6)">
+          <div class="recovery-flag-check"></div>
+          <div class="recovery-flag-text">Trouble breathing or short of breath</div>
+          <div class="recovery-flag-badge">Emergency</div>
+        </div>
+        <div class="recovery-flag-card" data-flag="7" data-emergency="true" onclick="recoveryToggleFlag(this,7)">
+          <div class="recovery-flag-check"></div>
+          <div class="recovery-flag-text">Chest pain</div>
+          <div class="recovery-flag-badge">Emergency</div>
+        </div>
+        <div class="recovery-flag-card" data-flag="8" data-emergency="true" onclick="recoveryToggleFlag(this,8)">
+          <div class="recovery-flag-check"></div>
+          <div class="recovery-flag-text">Leg swelling or calf pain</div>
+          <div class="recovery-flag-badge">Emergency</div>
+        </div>
+        <div class="recovery-flag-card" data-flag="9" onclick="recoveryToggleFlag(this,9)">
+          <div class="recovery-flag-check"></div>
+          <div class="recovery-flag-text">Feeling confused or not myself</div>
         </div>
       </div>
+    </div>
 
-      <!-- Step 8: Thank You -->
-      <div id="step-8" class="checkin-step" style="text-align: center;">
-        <div style="font-size: 3rem; margin-bottom: 1rem;">✓</div>
-        <h1 style="color: var(--sage); margin-bottom: 1rem;">Thank You!</h1>
-        <p style="font-size: 1.05rem; color: #666; line-height: 1.8; margin-bottom: 2rem;">Your check-in has been submitted and saved. Dr. Oluwole will review your response and contact you if needed.</p>
-        <button class="btn-primary" onclick="goToDashboard()" style="width: 100%;">Back to Dashboard</button>
+    <!-- STEP 6: NOTES -->
+    <div class="recovery-step" id="recovery-step-6">
+      <div style="font-size:2rem; margin-bottom: 8px;">📝</div>
+      <div class="recovery-step-title">Any additional notes?</div>
+      <div class="recovery-step-subtitle">Anything else you'd like Dr. Oluwole to know?</div>
+
+      <div class="recovery-field-group">
+        <label class="recovery-field-label">Optional: Share any other concerns</label>
+        <textarea id="recoveryNotes" placeholder="Tell us about your recovery..." maxlength="500"></textarea>
       </div>
+    </div>
 
-      <!-- Navigation -->
-      <div class="button-group" id="nav-buttons" style="display: flex; margin-top: 2rem;">
-        <button class="btn-secondary" id="btn-prev" onclick="prevStep()">← Previous</button>
-        <button class="btn-primary" id="btn-next" onclick="nextStep()">Next →</button>
+    <!-- STEP 7: THANK YOU -->
+    <div class="recovery-step" id="recovery-step-7" style="text-align:center; padding-top:20px;">
+      <div class="recovery-thankyou-check">✓</div>
+      <div class="recovery-step-title">Check-in sent!</div>
+      <div class="recovery-step-subtitle" style="margin-top:12px;">Your check-in has been sent to Dr. Oluwole. She will review it before your next call.</div>
+
+      <div style="background:rgba(45,90,61,0.05); border-radius:var(--radius); padding:20px; margin:24px 0;">
+        <p style="font-size:0.9rem; color:var(--charcoal); line-height:1.6; margin:0 0 8px;"><strong>Medical emergency?</strong> Call 911 immediately.</p>
+        <p style="font-size:0.9rem; color:var(--slate); line-height:1.6; margin:0;">Need to reach us? Call <a href="tel:6782355822" style="color:var(--sage); font-weight:600;">(678) 235-5822</a></p>
       </div>
     </div>
   </div>
 
-  <script>
-    let currentStep = 1;
-    let totalSteps = 8;
-    let patientToken = null;
-    let patientData = {};
+  <!-- Navigation -->
+  <div class="recovery-wizard-nav" id="recoveryWizardNav">
+    <button class="recovery-nav-btn back" id="recoveryBtnBack" onclick="recoveryPrevStep()" style="display:none;">Back</button>
+    <button class="recovery-nav-btn next" id="recoveryBtnNext" onclick="recoveryNextStep()">Next</button>
+  </div>
 
-    // Check for token in URL on page load
+  <!-- Emergency Modal -->
+  <div class="recovery-modal-overlay" id="recoveryEmergencyModal">
+    <div class="recovery-modal-card">
+      <div class="recovery-modal-icon">🚨</div>
+      <div class="recovery-modal-title">Emergency Symptoms</div>
+      <div class="recovery-modal-text">This symptom may indicate a serious complication. If experiencing this now, please call 911 immediately.</div>
+      <a href="tel:911" class="recovery-modal-911">Call 911</a>
+      <button class="recovery-modal-dismiss" onclick="recoveryDismissModal()">I understand — Continue</button>
+    </div>
+  </div>
+
+  <script>
+    let recoveryCurrentStep = 0;
+    const RECOVERY_TOTAL_STEPS = 7;
+    let recoveryPatientToken = null;
+
+    const recoveryState = {
+      firstName: '', lastName: '', phone: '', surgeryType: '', surgeryDate: '',
+      painRest: null, painActivity: null,
+      painManaged: null,
+      drainage: null, opening: null, redness: null,
+      nausea: null, vomiting: null, intake: null,
+      anxiety: null, mood: null,
+      flags: new Array(10).fill(false),
+      notes: ''
+    };
+
     document.addEventListener('DOMContentLoaded', function() {
       const params = new URLSearchParams(window.location.search);
       const urlToken = params.get('token');
       if (urlToken) {
-        patientToken = urlToken;
-        document.getElementById('accessCode').value = urlToken;
-        authenticatePatient();
+        recoveryPatientToken = urlToken;
+        recoveryGoToStep(0, true);
       }
     });
 
-    let checkInResponses = {
-      painRest: null, painActivity: null, painManaged: null,
-      drainage: null, opening: null, redness: null,
-      nausea: null, vomiting: null, intake: null,
-      anxiety: null, mood: null,
-      qor15: new Array(15).fill(5),
-      notes: ''
-    };
+    function recoveryGoToStep(n, skipSave) {
+      document.querySelectorAll('#page-recovery-checkin .recovery-step').forEach(s => s.classList.remove('active'));
+      const step = document.getElementById('recovery-step-' + n);
+      if (step) step.classList.add('active');
 
-    const QOR_QUESTIONS = [
-      'Able to sleep well',
-      'Return to normal work activities',
-      'Your pain and discomfort',
-      'Your nausea',
-      'Your sense of feeling unwell',
-      'Able to take a normal diet',
-      'Able to do normal activities',
-      'Satisfied with sleep quality',
-      'Had nightmares or bad dreams',
-      'Worried about health',
-      'Physical comfort',
-      'Able to wear regular clothing',
-      'Your appetite',
-      'Pain interference with sleep',
-      'Overall recovery satisfaction'
-    ];
-
-    function initializeCheckIn() {
-      // Initialize QoR questions
-      const qorContainer = document.getElementById('qor-questions');
-      QOR_QUESTIONS.forEach((q, i) => {
-        qorContainer.innerHTML += `
-          <div class="field-group" style="margin-bottom: 1.5rem;">
-            <label class="field-label" style="margin-bottom: 1rem;">${i+1}. ${q}</label>
-            <div class="slider-container">
-              <input type="range" id="qor${i}" min="0" max="10" value="5" class="slider" oninput="updateQoR(${i})">
-              <div class="slider-value" id="qor${i}-val">5</div>
-            </div>
-          </div>
-        `;
-      });
+      recoveryCurrentStep = n;
+      recoveryUpdateProgressBar();
+      recoveryUpdateNavButtons();
+      recoveryHideError();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function authenticatePatient() {
-      const code = document.getElementById('accessCode').value.trim();
-      if (!code) {
-        showError('Please enter your access code');
-        return;
+    function recoveryNextStep() {
+      if (recoveryCurrentStep < RECOVERY_TOTAL_STEPS) {
+        recoveryCurrentStep++;
+        recoveryGoToStep(recoveryCurrentStep);
+      } else if (recoveryCurrentStep === RECOVERY_TOTAL_STEPS) {
+        recoverySubmitCheckIn();
       }
-
-      patientToken = code;
-
-      // Fetch patient data and check-in history
-      fetch('/api/patient-history?token=' + encodeURIComponent(patientToken))
-        .then(r => r.json())
-        .then(data => {
-          if (data.success) {
-            patientData = data.patient;
-            showAuthDashboard();
-            // Update patient info
-            document.getElementById('info-surgery').textContent = patientData.surgeryType;
-            document.getElementById('info-date').textContent = patientData.surgeryDate;
-
-            const pod = Math.floor((new Date() - new Date(patientData.surgeryDate)) / (1000 * 60 * 60 * 24));
-            document.getElementById('info-pod').textContent = pod + ' days';
-
-            document.getElementById('info-checkins').textContent = data.totalCheckIns;
-
-            // Display check-in history and charts
-            const historyList = document.getElementById('history-list');
-            if (data.checkIns && data.checkIns.length > 0) {
-              historyList.innerHTML = data.checkIns.map(ci => `
-                <div class="checkin-item">
-                  <div class="checkin-date">${new Date(ci.timestamp).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })} at ${new Date(ci.timestamp).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</div>
-                  <div class="checkin-details">POD ${Math.floor((new Date(ci.timestamp) - new Date(patientData.surgeryDate)) / (1000 * 60 * 60 * 24))}</div>
-                </div>
-              `).join('');
-
-              // Render QoR-15 trend chart
-              renderQoRChart(data.checkIns);
-              renderPainChart(data.checkIns);
-            } else {
-              historyList.innerHTML = '<p style="color: #666; font-size: 0.9rem;">No check-ins yet. Start your first check-in today!</p>';
-            }
-          } else {
-            showError(data.error || 'Invalid access code. Please check your email for the correct code.');
-          }
-        })
-        .catch(e => {
-          console.error('Auth error:', e);
-          // For now, allow offline testing with any code
-          patientData = { surgeryType: 'Test Surgery', surgeryDate: new Date().toISOString().split('T')[0] };
-          showAuthDashboard();
-        });
     }
 
-    function showAuthDashboard() {
-      document.getElementById('checkin-auth').classList.remove('active');
-      document.getElementById('checkin-dashboard').classList.add('active');
-
-      // Populate patient info
-      document.getElementById('info-surgery').textContent = 'Loading...';
-      document.getElementById('info-date').textContent = 'Loading...';
-
-      // In production, fetch from /api/patient-history?token=...
-      document.getElementById('info-checkins').textContent = '0';
-      document.getElementById('history-list').innerHTML = '<p style="color: #666; font-size: 0.9rem;">No check-ins yet. Start your first check-in today!</p>';
+    function recoveryPrevStep() {
+      if (recoveryCurrentStep > 0) {
+        recoveryCurrentStep--;
+        recoveryGoToStep(recoveryCurrentStep);
+      }
     }
 
-    function startNewCheckIn() {
-      currentStep = 1;
-      checkInResponses = {
-        painRest: null, painActivity: null, painManaged: null,
-        drainage: null, opening: null, redness: null,
-        nausea: null, vomiting: null, intake: null,
-        anxiety: null, mood: null,
-        qor15: new Array(15).fill(5),
-        notes: ''
-      };
-
-      document.getElementById('checkin-dashboard').classList.remove('active');
-      document.getElementById('checkin-form').classList.add('active');
-      initializeCheckIn();
-      showStep(1);
-    }
-
-    function showStep(step) {
-      document.querySelectorAll('#checkin-form .checkin-step').forEach(s => s.classList.remove('active'));
-      document.getElementById('step-' + step).classList.add('active');
-
-      const progress = (step - 1) / (totalSteps - 1) * 100;
-      document.getElementById('progress-fill').style.width = progress + '%';
-      document.getElementById('progress-step').textContent = step;
-
-      if (step === totalSteps) {
-        document.getElementById('nav-buttons').style.display = 'none';
+    function recoveryUpdateProgressBar() {
+      const pct = recoveryCurrentStep >= RECOVERY_TOTAL_STEPS ? 100 : Math.round((recoveryCurrentStep / RECOVERY_TOTAL_STEPS) * 100);
+      document.getElementById('recoveryProgressFill').style.width = pct + '%';
+      if (recoveryCurrentStep >= RECOVERY_TOTAL_STEPS) {
+        document.getElementById('recoveryProgressLabel').textContent = 'Complete!';
       } else {
-        document.getElementById('nav-buttons').style.display = 'flex';
-      }
-
-      document.getElementById('btn-prev').disabled = step === 1;
-    }
-
-    function nextStep() {
-      if (currentStep < totalSteps) {
-        currentStep++;
-        showStep(currentStep);
-      } else if (currentStep === totalSteps) {
-        submitCheckIn();
+        document.getElementById('recoveryProgressLabel').textContent = `Step ${recoveryCurrentStep + 1} of ${RECOVERY_TOTAL_STEPS}`;
       }
     }
 
-    function prevStep() {
-      if (currentStep > 1) {
-        currentStep--;
-        showStep(currentStep);
+    function recoveryUpdateNavButtons() {
+      const back = document.getElementById('recoveryBtnBack');
+      const next = document.getElementById('recoveryBtnNext');
+      const nav = document.getElementById('recoveryWizardNav');
+
+      if (recoveryCurrentStep >= RECOVERY_TOTAL_STEPS) {
+        nav.style.display = 'none'; return;
+      }
+      nav.style.display = 'flex';
+      back.style.display = recoveryCurrentStep > 0 ? 'block' : 'none';
+
+      if (recoveryCurrentStep === RECOVERY_TOTAL_STEPS - 1) {
+        next.textContent = 'Send to Dr. Oluwole';
+        next.classList.remove('next');
+        next.classList.add('submit');
+      } else {
+        next.textContent = 'Next';
+        next.classList.remove('submit');
+        next.classList.add('next');
       }
     }
 
-    function updateSlider(id) {
-      const value = document.getElementById(id).value;
-      document.getElementById(id + '-val').textContent = value;
-      checkInResponses[id] = parseInt(value);
+    function recoverySelectOption(field, value, el) {
+      recoveryState[field] = value;
+      const parent = el.parentElement;
+      parent.querySelectorAll('.recovery-option-card').forEach(c => c.className = 'recovery-option-card');
+      el.classList.add('selected');
     }
 
-    function updateQoR(index) {
-      const value = document.getElementById('qor' + index).value;
-      document.getElementById('qor' + index + '-val').textContent = value;
-      checkInResponses.qor15[index] = parseInt(value);
+    function recoveryToggleFlag(el, idx) {
+      recoveryState.flags[idx] = !recoveryState.flags[idx];
+      el.classList.toggle('checked');
+      if (el.dataset.emergency) el.classList.toggle('emergency', recoveryState.flags[idx]);
+      el.querySelector('.recovery-flag-check').textContent = recoveryState.flags[idx] ? '✓' : '';
+
+      if (recoveryState.flags[idx] && (idx === 6 || idx === 7 || idx === 8)) {
+        recoveryShowEmergencyModal();
+      }
     }
 
-    function selectOption(name, value, btn) {
-      document.querySelectorAll(`[onclick*="selectOption('${name}"]`).forEach(b => b.classList.remove('selected'));
-      btn.classList.add('selected');
-      checkInResponses[name] = value;
+    function recoveryShowEmergencyModal() {
+      document.getElementById('recoveryEmergencyModal').classList.add('show');
     }
 
-    function submitCheckIn() {
+    function recoveryDismissModal() {
+      document.getElementById('recoveryEmergencyModal').classList.remove('show');
+    }
+
+    function recoveryShowError(msg) {
+      const el = document.getElementById('recoveryInlineError');
+      el.textContent = msg;
+      el.classList.add('show');
+    }
+
+    function recoveryHideError() {
+      document.getElementById('recoveryInlineError').classList.remove('show');
+    }
+
+    // Form listeners
+    document.getElementById('recoveryFirstName').addEventListener('input', function() { recoveryState.firstName = this.value; });
+    document.getElementById('recoveryLastName').addEventListener('input', function() { recoveryState.lastName = this.value; });
+    document.getElementById('recoveryPhoneNumber').addEventListener('input', function() { recoveryState.phone = this.value; });
+    document.getElementById('recoverySurgeryType').addEventListener('change', function() { recoveryState.surgeryType = this.value; });
+    document.getElementById('recoverySurgeryDate').addEventListener('change', function() { recoveryState.surgeryDate = this.value; });
+    document.getElementById('recoveryPainRest').addEventListener('input', function() { recoveryState.painRest = parseInt(this.value); });
+    document.getElementById('recoveryPainActivity').addEventListener('input', function() { recoveryState.painActivity = parseInt(this.value); });
+    document.getElementById('recoveryNotes').addEventListener('input', function() { recoveryState.notes = this.value; });
+
+    async function recoverySubmitCheckIn() {
+      const btn = document.getElementById('recoveryBtnNext');
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+
       const payload = {
-        token: patientToken,
+        token: recoveryPatientToken,
         checkInData: {
+          firstName: recoveryState.firstName,
+          lastName: recoveryState.lastName,
+          phone: recoveryState.phone,
+          surgeryType: recoveryState.surgeryType,
+          surgeryDate: recoveryState.surgeryDate,
           responses: {
-            painRest: checkInResponses.painRest,
-            painActivity: checkInResponses.painActivity,
-            painManaged: checkInResponses.painManaged,
-            drainage: checkInResponses.drainage,
-            opening: checkInResponses.opening,
-            redness: checkInResponses.redness,
-            nausea: checkInResponses.nausea,
-            vomiting: checkInResponses.vomiting,
-            intake: checkInResponses.intake,
-            anxiety: checkInResponses.anxiety,
-            mood: checkInResponses.mood
+            painRest: recoveryState.painRest,
+            painActivity: recoveryState.painActivity,
+            painManaged: recoveryState.painManaged,
+            drainage: recoveryState.drainage,
+            opening: recoveryState.opening,
+            redness: recoveryState.redness,
+            nausea: recoveryState.nausea,
+            vomiting: recoveryState.vomiting,
+            intake: recoveryState.intake,
+            anxiety: recoveryState.anxiety,
+            mood: recoveryState.mood
           },
-          qor15: { answers: checkInResponses.qor15, total: checkInResponses.qor15.reduce((a,b) => a+b, 0) },
-          notes: document.getElementById('notes').value
+          flags: recoveryState.flags,
+          notes: recoveryState.notes,
+          timestamp: new Date().toISOString()
         }
       };
 
-      fetch('/api/patient-checkin', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      })
-      .then(r => r.json())
-      .then(data => {
+      try {
+        const res = await fetch('/api/patient-checkin', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
         if (data.success) {
-          showStep(totalSteps);
-          setTimeout(() => goToDashboard(), 3000);
+          recoveryGoToStep(RECOVERY_TOTAL_STEPS);
+          setTimeout(() => window.location.href = 'https://opwellconcierge.com', 2000);
         } else {
-          showError(data.error || 'Failed to submit check-in');
+          recoveryShowError(data.error || 'Something went wrong. Try again or call (678) 235-5822.');
+          btn.disabled = false;
+          btn.textContent = 'Send to Dr. Oluwole';
         }
-      })
-      .catch(e => showError('Connection error. Please try again.'));
-    }
-
-    function goToDashboard() {
-      currentStep = 1;
-      document.getElementById('checkin-form').classList.remove('active');
-      document.getElementById('checkin-dashboard').classList.add('active');
-      showAuthDashboard();
-    }
-
-    function logoutPatient() {
-      patientToken = null;
-      document.getElementById('checkin-dashboard').classList.remove('active');
-      document.getElementById('checkin-auth').classList.add('active');
-      document.getElementById('accessCode').value = '';
-    }
-
-    function showError(msg) {
-      const el = document.getElementById('auth-error');
-      el.textContent = msg;
-      el.style.display = 'block';
-    }
-
-    let qorChart = null;
-    let painChart = null;
-
-    function renderQoRChart(checkIns) {
-      if (checkIns.length === 0) return;
-
-      const container = document.getElementById('qor-chart-container');
-      container.style.display = 'block';
-
-      const data = checkIns.slice().reverse();
-      const labels = data.map((ci, i) => {
-        const pod = Math.floor((new Date(ci.timestamp) - new Date(patientData.surgeryDate)) / (1000 * 60 * 60 * 24));
-        return `POD ${pod}`;
-      });
-
-      const scores = data.map(ci => ci.qor15?.total || 0);
-      const latestScore = scores[scores.length - 1];
-
-      document.getElementById('current-qor').textContent = latestScore;
-
-      if (scores.length > 1) {
-        const trend = scores[scores.length - 1] - scores[scores.length - 2];
-        const trendEl = document.getElementById('qor-trend');
-        if (trend > 0) {
-          trendEl.textContent = '↑ Improving';
-          trendEl.style.color = '#16a34a';
-        } else if (trend < 0) {
-          trendEl.textContent = '↓ Declining';
-          trendEl.style.color = '#dc2626';
-        } else {
-          trendEl.textContent = '→ Stable';
-          trendEl.style.color = '#ca8a04';
-        }
+      } catch (err) {
+        recoveryShowError('Connection error. Check your internet and try again.');
+        btn.disabled = false;
+        btn.textContent = 'Send to Dr. Oluwole';
       }
-
-      const ctx = document.getElementById('qorChart').getContext('2d');
-      if (qorChart) qorChart.destroy();
-
-      qorChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels,
-          datasets: [{
-            label: 'QoR-15 Score',
-            data: scores,
-            borderColor: 'var(--sage)',
-            backgroundColor: 'rgba(45, 90, 61, 0.1)',
-            borderWidth: 3,
-            fill: true,
-            tension: 0.4,
-            pointBackgroundColor: 'var(--sage)',
-            pointBorderColor: '#fff',
-            pointBorderWidth: 2,
-            pointRadius: 5,
-            pointHoverRadius: 7
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: true,
-          plugins: { legend: { display: false } },
-          scales: {
-            y: { min: 0, max: 150, ticks: { stepSize: 30 } }
-          }
-        }
-      });
-    }
-
-    function renderPainChart(checkIns) {
-      if (checkIns.length === 0) return;
-
-      const container = document.getElementById('pain-chart-container');
-      container.style.display = 'block';
-
-      const data = checkIns.slice().reverse();
-      const labels = data.map((ci, i) => {
-        const pod = Math.floor((new Date(ci.timestamp) - new Date(patientData.surgeryDate)) / (1000 * 60 * 60 * 24));
-        return `POD ${pod}`;
-      });
-
-      const painRest = data.map(ci => ci.responses?.painRest || null);
-      const painActivity = data.map(ci => ci.responses?.painActivity || null);
-
-      const ctx = document.getElementById('painChart').getContext('2d');
-      if (painChart) painChart.destroy();
-
-      painChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels,
-          datasets: [
-            {
-              label: 'Pain at Rest',
-              data: painRest,
-              borderColor: '#16a34a',
-              backgroundColor: 'rgba(22, 163, 74, 0.1)',
-              borderWidth: 2,
-              tension: 0.4,
-              pointRadius: 4
-            },
-            {
-              label: 'Pain with Activity',
-              data: painActivity,
-              borderColor: '#dc2626',
-              backgroundColor: 'rgba(220, 38, 38, 0.1)',
-              borderWidth: 2,
-              tension: 0.4,
-              pointRadius: 4
-            }
-          ]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: true,
-          plugins: { legend: { position: 'top' } },
-          scales: {
-            y: { min: 0, max: 10, ticks: { stepSize: 2 } }
-          }
-        }
-      });
     }
   </script>
 </div>

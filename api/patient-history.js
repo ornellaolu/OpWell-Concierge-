@@ -25,10 +25,16 @@ module.exports = async function handler(req, res) {
       patient: {
         name: patient.name,
         email: patient.email,
-        surgeryType: patient.surgeryType,
-        surgeryDate: patient.surgeryDate
+        surgeryType: patient.surgery_type,
+        surgeryDate: patient.surgery_date,
+        phone: patient.phone
       },
-      checkIns,
+      checkIns: checkIns.map(ci => ({
+        ...ci,
+        timestamp: ci.timestamp || ci.created_at || new Date(ci.date).toISOString(),
+        qor15: ci.qor15_score ? { total: ci.qor15_score } : null,
+        responses: ci.responses || {}
+      })),
       totalCheckIns: checkIns.length
     });
 
