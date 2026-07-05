@@ -777,10 +777,10 @@
     }
 
     .provider-section .section-tag { color: var(--terracotta-light); }
-    .provider-section .section-title { color: #FAF0E8; }
+    .provider-section .section-title { color: #FAF0E8; font-size: clamp(1.8rem, 5vw, 3rem); line-height: 1.2; }
     .provider-section .gold-divider { background: var(--terracotta); }
     .provider-section .section-subtitle { color: rgba(250,240,232,0.8); }
-    .provider-section .body-text { color: rgba(250,240,232,0.85); }
+    .provider-section .body-text { color: rgba(250,240,232,0.85); font-size: clamp(0.95rem, 2vw, 1.1rem); line-height: 1.8; }
     .provider-section .btn-secondary { color: #FAF0E8; border-color: rgba(250,240,232,0.8); font-size: 0.8rem; font-weight: 500; }
 
     .provider-card {
@@ -801,16 +801,16 @@
 
     .provider-feature-title {
       font-family: 'Playfair Display', serif;
-      font-size: 1rem;
+      font-size: clamp(1rem, 3vw, 1.4rem);
       font-weight: 500;
       color: #FAF0E8;
       margin-bottom: 0.4rem;
     }
 
     .provider-feature-desc {
-      font-size: 0.82rem;
+      font-size: clamp(0.8rem, 2vw, 0.95rem);
       color: rgba(250,240,232,0.7);
-      line-height: 1.75;
+      line-height: 1.8;
     }
 
     .provider-icon {
@@ -1932,7 +1932,7 @@
       .content-section { padding: 2.5rem 1rem; }
       .content-section.alt { padding: 2.5rem 1rem; }
       /* Provider section */
-      .provider-section { padding: 2.5rem 1rem; }
+      .provider-section { padding: 3rem 1.25rem; }
       .provider-grid { grid-template-columns: 1fr; }
       /* Logo carousel */
       .logo-carousel-section { padding: 1.5rem 0; }
@@ -1961,8 +1961,8 @@
       .glp1-block .content-2col { gap: 1.5rem; }
       .stat-callout-num { font-size: 1.8rem; }
       /* Provider section */
-      .provider-inner { grid-template-columns: 1fr; gap: 2rem; }
-      .provider-card { padding: 1.5rem 1rem; }
+      .provider-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .provider-card { padding: 2rem 1.25rem; }
       /* Final CTA */
       .final-cta { padding: 3rem 1rem; }
       .final-cta .section-title { font-size: clamp(1.3rem, 5vw, 1.8rem); }
