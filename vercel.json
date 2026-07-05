@@ -1,4 +1,7 @@
 {
+  "redirects": [
+    { "source": "/provider.html", "destination": "/provider", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/(.*)",
