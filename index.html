@@ -15430,6 +15430,48 @@
 }
 #page-recovery-checkin * { box-sizing: border-box; }
 #page-recovery-checkin { font-family: 'DM Sans', sans-serif; color: var(--charcoal); padding-bottom: 90px; }
+
+/* AUTH VIEW */
+#page-recovery-checkin .recovery-auth-view { display: none; }
+#page-recovery-checkin .recovery-auth-view.active { display: block; }
+#page-recovery-checkin .recovery-auth-container { max-width: 480px; margin: 60px auto; padding: 0 20px; text-align: center; }
+#page-recovery-checkin .recovery-auth-icon { font-size: 3.5rem; margin-bottom: 16px; }
+#page-recovery-checkin .recovery-auth-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: var(--charcoal); margin-bottom: 8px; line-height: 1.3; }
+#page-recovery-checkin .recovery-auth-subtitle { font-size: 0.95rem; color: var(--slate); line-height: 1.6; margin-bottom: 32px; }
+#page-recovery-checkin .recovery-auth-form { background: #fff; border: 1px solid rgba(45,90,61,0.1); border-radius: var(--radius); padding: 24px; margin-bottom: 20px; }
+#page-recovery-checkin .recovery-auth-label { display: block; font-size: 0.9rem; font-weight: 600; color: var(--charcoal); margin-bottom: 8px; text-align: left; }
+#page-recovery-checkin .recovery-auth-input { width: 100%; padding: 14px 16px; font-family: 'DM Sans', sans-serif; font-size: 1rem; border: 2px solid rgba(45,90,61,0.2); border-radius: 8px; background: #fff; color: var(--charcoal); margin-bottom: 16px; }
+#page-recovery-checkin .recovery-auth-input:focus { outline: none; border-color: var(--sage); box-shadow: 0 0 0 3px rgba(45,90,61,0.1); }
+#page-recovery-checkin .recovery-auth-error { background: var(--red-bg); color: var(--red); padding: 12px 16px; border-radius: 8px; font-size: 0.85rem; margin-bottom: 16px; display: none; text-align: left; }
+#page-recovery-checkin .recovery-auth-error.show { display: block; }
+#page-recovery-checkin .recovery-auth-btn { width: 100%; padding: 16px; background: var(--sage); color: #fff; font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 600; border: none; border-radius: var(--radius); cursor: pointer; transition: all 0.2s; }
+#page-recovery-checkin .recovery-auth-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+#page-recovery-checkin .recovery-auth-help { font-size: 0.85rem; color: var(--slate); line-height: 1.6; margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(45,90,61,0.1); }
+#page-recovery-checkin .recovery-auth-help a { color: var(--sage); font-weight: 600; text-decoration: none; }
+
+/* DASHBOARD VIEW */
+#page-recovery-checkin .recovery-dashboard-view { display: none; }
+#page-recovery-checkin .recovery-dashboard-view.active { display: block; }
+#page-recovery-checkin .recovery-dashboard-header { background: linear-gradient(135deg, rgba(45,90,61,0.08) 0%, rgba(200,132,90,0.05) 100%); padding: 24px; margin-bottom: 20px; }
+#page-recovery-checkin .recovery-patient-card { max-width: 520px; margin: 0 auto; background: #fff; border: 1px solid rgba(45,90,61,0.12); border-radius: var(--radius); padding: 20px; margin-bottom: 20px; }
+#page-recovery-checkin .recovery-patient-name { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--charcoal); margin-bottom: 16px; }
+#page-recovery-checkin .recovery-patient-info-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(45,90,61,0.08); font-size: 0.9rem; }
+#page-recovery-checkin .recovery-patient-info-row:last-child { border-bottom: none; }
+#page-recovery-checkin .recovery-patient-info-label { color: var(--slate); font-weight: 500; }
+#page-recovery-checkin .recovery-patient-info-value { color: var(--charcoal); font-weight: 600; }
+#page-recovery-checkin .recovery-dashboard-actions { max-width: 520px; margin: 0 auto 30px; padding: 0 20px; display: flex; flex-direction: column; gap: 12px; }
+#page-recovery-checkin .recovery-new-checkin-btn { width: 100%; padding: 16px; background: var(--sage); color: #fff; font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 600; border: none; border-radius: var(--radius); cursor: pointer; transition: all 0.2s; }
+#page-recovery-checkin .recovery-logout-btn { width: 100%; padding: 14px; background: none; color: var(--slate); font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 500; border: 1px solid rgba(45,90,61,0.2); border-radius: var(--radius); cursor: pointer; transition: all 0.2s; }
+#page-recovery-checkin .recovery-checkin-history { max-width: 520px; margin: 0 auto; padding: 0 20px; }
+#page-recovery-checkin .recovery-history-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--charcoal); margin-bottom: 16px; }
+#page-recovery-checkin .recovery-history-empty { background: rgba(45,90,61,0.05); border: 1px dashed rgba(45,90,61,0.2); border-radius: var(--radius); padding: 32px 20px; text-align: center; color: var(--slate); font-size: 0.95rem; }
+#page-recovery-checkin .recovery-history-item { background: #fff; border: 1px solid rgba(45,90,61,0.12); border-radius: var(--radius); padding: 16px; margin-bottom: 12px; font-size: 0.9rem; }
+#page-recovery-checkin .recovery-history-date { font-weight: 700; color: var(--charcoal); margin-bottom: 4px; }
+#page-recovery-checkin .recovery-history-detail { color: var(--slate); font-size: 0.85rem; line-height: 1.5; }
+
+/* WIZARD VIEW */
+#page-recovery-checkin .recovery-wizard-view { display: none; }
+#page-recovery-checkin .recovery-wizard-view.active { display: block; }
 #page-recovery-checkin .recovery-progress-wrap {
   background: #fff;
   padding: 12px 20px 8px;
@@ -15773,14 +15815,74 @@
 }
   </style>
 
-  <!-- ── Progress ── -->
-  <div class="recovery-progress-wrap">
-    <div class="recovery-progress-bar"><div class="recovery-progress-fill" id="recoveryProgressFill" style="width:0%"></div></div>
-    <div class="recovery-progress-label" id="recoveryProgressLabel">Step 1 of 7</div>
+  <!-- AUTH VIEW -->
+  <div class="recovery-auth-view active" id="recoveryAuthView">
+    <div class="recovery-auth-container">
+      <div class="recovery-auth-icon">🔐</div>
+      <div class="recovery-auth-title">Recovery Check-In Portal</div>
+      <div class="recovery-auth-subtitle">Enter your access token to view your check-ins and submit new ones.</div>
+      <div class="recovery-auth-form">
+        <div class="recovery-auth-error" id="recoveryAuthError"></div>
+        <label class="recovery-auth-label">Access Token</label>
+        <input type="text" class="recovery-auth-input" id="recoveryAuthToken" placeholder="Paste your token here" autocomplete="off">
+        <button class="recovery-auth-btn" id="recoveryAuthLoginBtn" onclick="recoveryAuthLogin()">Enter Portal</button>
+      </div>
+      <div class="recovery-auth-help">
+        <p>You received an access token via email after your surgery registration.</p>
+        <p>If you don't have it, call <a href="tel:6782355822">(678) 235-5822</a> to request one.</p>
+      </div>
+    </div>
   </div>
 
-  <!-- ── Wizard ── -->
-  <div class="recovery-wizard" id="recoveryWizard">
+  <!-- DASHBOARD VIEW -->
+  <div class="recovery-dashboard-view" id="recoveryDashboardView">
+    <div class="recovery-dashboard-header">
+      <div class="recovery-patient-card">
+        <div class="recovery-patient-name" id="recoveryPatientName">Loading...</div>
+        <div class="recovery-patient-info-row">
+          <span class="recovery-patient-info-label">Surgery Type</span>
+          <span class="recovery-patient-info-value" id="recoveryPatientSurgery">--</span>
+        </div>
+        <div class="recovery-patient-info-row">
+          <span class="recovery-patient-info-label">Surgery Date</span>
+          <span class="recovery-patient-info-value" id="recoveryPatientDate">--</span>
+        </div>
+        <div class="recovery-patient-info-row">
+          <span class="recovery-patient-info-label">Days Post-Op</span>
+          <span class="recovery-patient-info-value" id="recoveryPatientPOD">--</span>
+        </div>
+        <div class="recovery-patient-info-row">
+          <span class="recovery-patient-info-label">Phone</span>
+          <span class="recovery-patient-info-value" id="recoveryPatientPhone">--</span>
+        </div>
+        <div class="recovery-patient-info-row">
+          <span class="recovery-patient-info-label">Last Check-In</span>
+          <span class="recovery-patient-info-value" id="recoveryPatientLastCheckin">Never</span>
+        </div>
+      </div>
+    </div>
+    <div class="recovery-dashboard-actions">
+      <button class="recovery-new-checkin-btn" onclick="recoveryStartNewCheckin()">Submit Today's Check-In</button>
+      <button class="recovery-logout-btn" onclick="recoveryLogout()">Sign Out</button>
+    </div>
+    <div class="recovery-checkin-history">
+      <div class="recovery-history-title">Check-In History</div>
+      <div id="recoveryHistoryContainer">
+        <div class="recovery-history-empty">Loading check-in history...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WIZARD VIEW -->
+  <div class="recovery-wizard-view" id="recoveryWizardView">
+    <!-- ── Progress ── -->
+    <div class="recovery-progress-wrap">
+      <div class="recovery-progress-bar"><div class="recovery-progress-fill" id="recoveryProgressFill" style="width:0%"></div></div>
+      <div class="recovery-progress-label" id="recoveryProgressLabel">Step 1 of 7</div>
+    </div>
+
+    <!-- ── Wizard ── -->
+    <div class="recovery-wizard" id="recoveryWizard">
     <div id="recoveryInlineError" class="recovery-inline-error"></div>
 
     <!-- STEP 0: WELCOME -->
@@ -16112,9 +16214,11 @@
   </div>
 
   <script>
+    // STATE & CONFIG
     let recoveryCurrentStep = 0;
     const RECOVERY_TOTAL_STEPS = 7;
     let recoveryPatientToken = null;
+    let recoveryPatientData = null;
 
     const recoveryState = {
       firstName: '', lastName: '', phone: '', surgeryType: '', surgeryDate: '',
@@ -16127,14 +16231,177 @@
       notes: ''
     };
 
+    // INIT & ROUTING
     document.addEventListener('DOMContentLoaded', function() {
       const params = new URLSearchParams(window.location.search);
       const urlToken = params.get('token');
+      const storedToken = localStorage.getItem('recoveryToken');
+
       if (urlToken) {
         recoveryPatientToken = urlToken;
-        recoveryGoToStep(0, true);
+        localStorage.setItem('recoveryToken', urlToken);
+        recoveryAuthLogin(urlToken);
+      } else if (storedToken) {
+        recoveryPatientToken = storedToken;
+        recoveryLoadDashboard();
       }
     });
+
+    // AUTH FUNCTIONS
+    async function recoveryAuthLogin(token = null) {
+      const btn = document.getElementById('recoveryAuthLoginBtn');
+      const input = document.getElementById('recoveryAuthToken');
+      const errorEl = document.getElementById('recoveryAuthError');
+
+      const loginToken = token || input.value.trim();
+      if (!loginToken) {
+        errorEl.textContent = 'Please enter your access token.';
+        errorEl.classList.add('show');
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Verifying...';
+      errorEl.classList.remove('show');
+
+      try {
+        const res = await fetch('/api/patient-history?token=' + encodeURIComponent(loginToken));
+        const data = await res.json();
+
+        if (data.success && data.patient) {
+          recoveryPatientToken = loginToken;
+          recoveryPatientData = data.patient;
+          localStorage.setItem('recoveryToken', loginToken);
+          recoveryShowDashboard();
+        } else {
+          errorEl.textContent = data.error || 'Invalid token. Please try again.';
+          errorEl.classList.add('show');
+          btn.disabled = false;
+          btn.textContent = 'Enter Portal';
+        }
+      } catch (err) {
+        errorEl.textContent = 'Connection error. Please check your internet and try again.';
+        errorEl.classList.add('show');
+        btn.disabled = false;
+        btn.textContent = 'Enter Portal';
+      }
+    }
+
+    function recoveryLogout() {
+      if (!confirm('Are you sure? You will need your token to sign back in.')) return;
+      recoveryPatientToken = null;
+      recoveryPatientData = null;
+      localStorage.removeItem('recoveryToken');
+      recoveryShowAuth();
+    }
+
+    // VIEW ROUTING
+    function recoveryShowAuth() {
+      document.getElementById('recoveryAuthView').classList.add('active');
+      document.getElementById('recoveryDashboardView').classList.remove('active');
+      document.getElementById('recoveryWizardView').classList.remove('active');
+      document.getElementById('recoveryAuthToken').value = '';
+      document.getElementById('recoveryAuthError').classList.remove('show');
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }
+
+    function recoveryShowDashboard() {
+      document.getElementById('recoveryAuthView').classList.remove('active');
+      document.getElementById('recoveryDashboardView').classList.add('active');
+      document.getElementById('recoveryWizardView').classList.remove('active');
+      recoveryLoadDashboard();
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }
+
+    function recoveryShowWizard() {
+      document.getElementById('recoveryAuthView').classList.remove('active');
+      document.getElementById('recoveryDashboardView').classList.remove('active');
+      document.getElementById('recoveryWizardView').classList.add('active');
+      recoveryGoToStep(0);
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }
+
+    // DASHBOARD FUNCTIONS
+    async function recoveryLoadDashboard() {
+      if (!recoveryPatientData && recoveryPatientToken) {
+        try {
+          const res = await fetch('/api/patient-history?token=' + encodeURIComponent(recoveryPatientToken));
+          const data = await res.json();
+          if (data.success && data.patient) {
+            recoveryPatientData = data.patient;
+          } else {
+            recoveryShowAuth();
+            return;
+          }
+        } catch (err) {
+          recoveryShowAuth();
+          return;
+        }
+      }
+
+      if (!recoveryPatientData) {
+        recoveryShowAuth();
+        return;
+      }
+
+      const patient = recoveryPatientData;
+      document.getElementById('recoveryPatientName').textContent = patient.name || 'Patient';
+      document.getElementById('recoveryPatientSurgery').textContent = patient.surgery_type || '--';
+      document.getElementById('recoveryPatientDate').textContent = patient.surgery_date || '--';
+
+      const surgeryDate = new Date(patient.surgery_date);
+      const today = new Date();
+      const pod = Math.floor((today - surgeryDate) / (1000 * 60 * 60 * 24));
+      document.getElementById('recoveryPatientPOD').textContent = isNaN(pod) ? '--' : pod + ' days';
+
+      document.getElementById('recoveryPatientPhone').textContent = patient.phone || '--';
+      document.getElementById('recoveryPatientLastCheckin').textContent = patient.last_checkin
+        ? new Date(patient.last_checkin).toLocaleDateString()
+        : 'Never';
+
+      recoveryRenderHistory(patient.checkins || []);
+    }
+
+    function recoveryRenderHistory(checkins) {
+      const container = document.getElementById('recoveryHistoryContainer');
+
+      if (!checkins || checkins.length === 0) {
+        container.innerHTML = '<div class="recovery-history-empty">No check-ins yet. Start your first one below!</div>';
+        return;
+      }
+
+      container.innerHTML = checkins.map(c => {
+        const date = new Date(c.date);
+        const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        const qor = c.qor15_score ? 'QoR-15: ' + c.qor15_score + '/150' : '';
+        const flags = c.flags && c.flags.some(f => f) ? 'Warning flags reported' : 'No red flags';
+        return `
+          <div class="recovery-history-item">
+            <div class="recovery-history-date">${dateStr}</div>
+            <div class="recovery-history-detail">${flags}${qor ? ' - ' + qor : ''}</div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function recoveryStartNewCheckin() {
+      if (recoveryPatientData.checkins) {
+        const today = new Date().toISOString().split('T')[0];
+        const todayCheckin = recoveryPatientData.checkins.find(c => c.date === today);
+        if (todayCheckin) {
+          alert('You have already submitted a check-in today. Please try again tomorrow.');
+          return;
+        }
+      }
+      document.getElementById('recoveryFirstName').value = recoveryPatientData.name.split(' ')[0] || '';
+      document.getElementById('recoveryLastName').value = recoveryPatientData.name.split(' ').slice(1).join(' ') || '';
+      document.getElementById('recoveryPhoneNumber').value = recoveryPatientData.phone || '';
+      document.getElementById('recoverySurgeryType').value = recoveryPatientData.surgery_type || '';
+      document.getElementById('recoverySurgeryDate').value = recoveryPatientData.surgery_date || '';
+      recoveryShowWizard();
+    }
+
+    // WIZARD FUNCTIONS
 
     function recoveryGoToStep(n, skipSave) {
       document.querySelectorAll('#page-recovery-checkin .recovery-step').forEach(s => s.classList.remove('active'));
@@ -16282,8 +16549,9 @@
         });
         const data = await res.json();
         if (data.success) {
+          recoveryCurrentStep = RECOVERY_TOTAL_STEPS;
           recoveryGoToStep(RECOVERY_TOTAL_STEPS);
-          setTimeout(() => window.location.href = 'https://opwellconcierge.com', 2000);
+          setTimeout(() => recoveryShowDashboard(), 2500);
         } else {
           recoveryShowError(data.error || 'Something went wrong. Try again or call (678) 235-5822.');
           btn.disabled = false;
