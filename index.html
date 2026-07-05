@@ -15362,6 +15362,478 @@
 </div>
 
 <!-- ══════════════════════════════════════════════════════ -->
+<!-- PATIENT RECOVERY CHECK-IN PAGE -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div id="page-recovery-checkin" class="page">
+  <style>
+    .checkin-container { max-width: 700px; margin: 0 auto; padding: 3rem 2rem; }
+    .checkin-header { text-align: center; margin-bottom: 2.5rem; }
+    .checkin-header h1 { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--sage); margin: 0 0 1rem; font-weight: 400; }
+    .checkin-header .underline { width: 40px; height: 2px; background: var(--terracotta); margin: 0 auto 1.5rem; }
+    .checkin-header p { font-size: 1rem; color: #666; line-height: 1.6; margin: 0; }
+
+    .checkin-step { display: none; padding: 2rem 0; }
+    .checkin-step.active { display: block; animation: fadeIn 0.3s ease; }
+
+    .field-group { margin-bottom: 1.5rem; }
+    .field-label { font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--sage); margin-bottom: 0.5rem; font-weight: 500; display: block; }
+    .field-input { width: 100%; padding: 0.75rem 1rem; border: 1.5px solid #ddd; border-radius: 6px; font-family: 'DM Sans', sans-serif; font-size: 1rem; transition: border-color 0.2s; }
+    .field-input:focus { outline: none; border-color: var(--terracotta); }
+    .field-select { width: 100%; padding: 0.75rem 1rem; border: 1.5px solid #ddd; border-radius: 6px; font-family: 'DM Sans', sans-serif; font-size: 1rem; }
+
+    .slider-container { margin: 1rem 0; }
+    .slider { width: 100%; height: 6px; border-radius: 3px; background: #ddd; outline: none; -webkit-appearance: none; }
+    .slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 24px; height: 24px; border-radius: 50%; background: var(--sage); cursor: pointer; }
+    .slider::-moz-range-thumb { width: 24px; height: 24px; border-radius: 50%; background: var(--sage); cursor: pointer; border: none; }
+    .slider-value { text-align: center; font-weight: 700; color: var(--sage); margin-top: 0.5rem; font-size: 1.1rem; }
+
+    .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+    .option-btn { padding: 1rem; border: 2px solid #ddd; background: #fff; border-radius: 8px; cursor: pointer; transition: all 0.2s; text-align: center; font-weight: 500; }
+    .option-btn:hover { border-color: var(--terracotta); background: #fdf8f4; }
+    .option-btn.selected { border-color: var(--sage); background: rgba(45, 90, 61, 0.08); }
+
+    .button-group { display: flex; gap: 1rem; margin-top: 2rem; justify-content: space-between; }
+    .btn-primary { background: var(--sage); color: #fff; padding: 1rem 2rem; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 1rem; transition: background 0.2s; }
+    .btn-primary:hover { background: #1a3a25; }
+    .btn-primary:disabled { background: #ccc; cursor: not-allowed; }
+    .btn-secondary { background: #f0f0f0; color: var(--sage); padding: 1rem 2rem; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 1rem; }
+    .btn-secondary:hover { background: #e0e0e0; }
+
+    .progress-bar-container { margin-bottom: 2rem; }
+    .progress-bar { width: 100%; height: 4px; background: #e0e0e0; border-radius: 2px; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--sage); transition: width 0.3s ease; }
+    .progress-text { font-size: 0.9rem; color: #666; margin-top: 0.5rem; text-align: center; }
+
+    .alert { padding: 1rem; border-radius: 6px; margin-bottom: 1.5rem; }
+    .alert-error { background: #fee2e2; color: #c41e3a; border-left: 4px solid #c41e3a; }
+    .alert-success { background: #dcfce7; color: #166534; border-left: 4px solid #16a34a; }
+    .alert-info { background: #dbeafe; color: #0c4a6e; border-left: 4px solid #0284c7; }
+    .alert-warning { background: #fef9c3; color: #854d0e; border-left: 4px solid #ca8a04; }
+
+    .dashboard { padding: 2rem; }
+    .dashboard-card { background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; }
+    .dashboard-card h3 { margin: 0 0 1rem; color: var(--sage); font-size: 1.1rem; }
+    .checkin-item { padding: 1rem; border-left: 4px solid var(--sage); background: #f9f9f9; margin-bottom: 1rem; border-radius: 4px; }
+    .checkin-date { font-weight: 700; color: var(--sage); font-size: 0.95rem; }
+    .checkin-details { font-size: 0.9rem; color: #666; margin-top: 0.5rem; }
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  </style>
+
+  <div class="checkin-container">
+    <!-- Auth Section -->
+    <div id="checkin-auth" class="checkin-step active">
+      <div class="checkin-header">
+        <h1>Recovery Check-In</h1>
+        <div class="underline"></div>
+        <p>Access your daily recovery monitoring program</p>
+      </div>
+
+      <div id="auth-error" class="alert alert-error" style="display: none; margin-bottom: 1.5rem;"></div>
+
+      <div class="field-group">
+        <label class="field-label">Your Access Code *</label>
+        <p style="font-size: 0.9rem; color: #666; margin-bottom: 1rem;">You received this in your post-op enrollment email</p>
+        <input type="text" id="accessCode" class="field-input" placeholder="Enter your access code" autocomplete="off">
+      </div>
+
+      <button class="btn-primary" onclick="authenticatePatient()" style="width: 100%; margin-top: 2rem;">Access Your Program</button>
+    </div>
+
+    <!-- Dashboard Section -->
+    <div id="checkin-dashboard" class="checkin-step">
+      <div class="checkin-header" style="margin-bottom: 2rem;">
+        <h1>Your Recovery Dashboard</h1>
+        <div class="underline"></div>
+      </div>
+
+      <div id="patient-info" class="dashboard-card">
+        <h3>Your Information</h3>
+        <table style="width: 100%; font-size: 0.95rem;">
+          <tr><td style="padding: 0.5rem 0; color: #888;">Surgery Type:</td><td style="padding: 0.5rem 0; font-weight: 600;" id="info-surgery"></td></tr>
+          <tr><td style="padding: 0.5rem 0; color: #888;">Surgery Date:</td><td style="padding: 0.5rem 0;" id="info-date"></td></tr>
+          <tr><td style="padding: 0.5rem 0; color: #888;">Days Since Surgery:</td><td style="padding: 0.5rem 0; font-weight: 600;" id="info-pod"></td></tr>
+          <tr><td style="padding: 0.5rem 0; color: #888;">Check-Ins Completed:</td><td style="padding: 0.5rem 0; font-weight: 600;" id="info-checkins">0</td></tr>
+        </table>
+      </div>
+
+      <button class="btn-primary" onclick="startNewCheckIn()" style="width: 100%; margin-bottom: 2rem;">Start Today's Check-In</button>
+
+      <div id="checkin-history" class="dashboard-card">
+        <h3>Check-In History</h3>
+        <div id="history-list" style="max-height: 400px; overflow-y: auto;"></div>
+      </div>
+
+      <button class="btn-secondary" onclick="logoutPatient()" style="width: 100%;">Sign Out</button>
+    </div>
+
+    <!-- Check-In Form Section -->
+    <div id="checkin-form" class="checkin-step">
+      <div class="progress-bar-container">
+        <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width: 0%"></div></div>
+        <div class="progress-text"><span id="progress-step">1</span> of 8</div>
+      </div>
+
+      <!-- Step 1: Welcome -->
+      <div id="step-1" class="checkin-step active">
+        <div class="checkin-header" style="margin-bottom: 2rem;">
+          <h1>Welcome to Your Check-In</h1>
+          <p>This takes about 3 minutes. Your responses help Dr. Oluwole monitor your healing.</p>
+        </div>
+      </div>
+
+      <!-- Step 2: Pain Assessment -->
+      <div id="step-2" class="checkin-step">
+        <h2 style="color: var(--sage); margin-bottom: 1.5rem; font-size: 1.3rem;">How is your pain today?</h2>
+
+        <div class="field-group">
+          <label class="field-label">Pain at rest (0-10)</label>
+          <div class="slider-container">
+            <input type="range" id="painRest" min="0" max="10" value="5" class="slider" oninput="updateSlider('painRest')">
+            <div class="slider-value" id="painRest-val">5</div>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label">Pain with activity (0-10)</label>
+          <div class="slider-container">
+            <input type="range" id="painActivity" min="0" max="10" value="5" class="slider" oninput="updateSlider('painActivity')">
+            <div class="slider-value" id="painActivity-val">5</div>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label">Is your pain medication helping?</label>
+          <div class="options-grid">
+            <button type="button" class="option-btn" onclick="selectOption('painManaged', 'yes', this)">Yes</button>
+            <button type="button" class="option-btn" onclick="selectOption('painManaged', 'somewhat', this)">Somewhat</button>
+            <button type="button" class="option-btn" onclick="selectOption('painManaged', 'no', this)">No</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3: Wound Assessment -->
+      <div id="step-3" class="checkin-step">
+        <h2 style="color: var(--sage); margin-bottom: 1.5rem; font-size: 1.3rem;">How does your wound look?</h2>
+
+        <div class="field-group">
+          <label class="field-label">Any fluid or drainage?</label>
+          <div class="options-grid">
+            <button type="button" class="option-btn" onclick="selectOption('drainage', 'none', this)">None</button>
+            <button type="button" class="option-btn" onclick="selectOption('drainage', 'minimal', this)">Minimal</button>
+            <button type="button" class="option-btn" onclick="selectOption('drainage', 'moderate', this)">Moderate</button>
+            <button type="button" class="option-btn" onclick="selectOption('drainage', 'heavy', this)">Heavy</button>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label">Is the incision opening?</label>
+          <div class="options-grid">
+            <button type="button" class="option-btn" onclick="selectOption('opening', 'closed', this)">Closed</button>
+            <button type="button" class="option-btn" onclick="selectOption('opening', 'small', this)">Small opening</button>
+            <button type="button" class="option-btn" onclick="selectOption('opening', 'large', this)">Large opening</button>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label">Redness or swelling?</label>
+          <div class="options-grid">
+            <button type="button" class="option-btn" onclick="selectOption('redness', 'none', this)">None</button>
+            <button type="button" class="option-btn" onclick="selectOption('redness', 'mild', this)">Mild</button>
+            <button type="button" class="option-btn" onclick="selectOption('redness', 'moderate', this)">Moderate</button>
+            <button type="button" class="option-btn" onclick="selectOption('redness', 'severe', this)">Severe</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 4: GI Symptoms -->
+      <div id="step-4" class="checkin-step">
+        <h2 style="color: var(--sage); margin-bottom: 1.5rem; font-size: 1.3rem;">Any nausea or vomiting?</h2>
+
+        <div class="options-grid" style="grid-template-columns: 1fr 1fr;">
+          <button type="button" class="option-btn" onclick="selectOption('nausea', 'yes', this)">Nausea: Yes</button>
+          <button type="button" class="option-btn" onclick="selectOption('nausea', 'no', this)">Nausea: No</button>
+        </div>
+
+        <div class="options-grid" style="grid-template-columns: 1fr 1fr;">
+          <button type="button" class="option-btn" onclick="selectOption('vomiting', 'yes', this)">Vomiting: Yes</button>
+          <button type="button" class="option-btn" onclick="selectOption('vomiting', 'no', this)">Vomiting: No</button>
+        </div>
+
+        <div class="field-group" style="margin-top: 2rem;">
+          <label class="field-label">How's your appetite?</label>
+          <div class="options-grid">
+            <button type="button" class="option-btn" onclick="selectOption('intake', 'good', this)">Good</button>
+            <button type="button" class="option-btn" onclick="selectOption('intake', 'fair', this)">Fair</button>
+            <button type="button" class="option-btn" onclick="selectOption('intake', 'poor', this)">Poor</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 5: Mental Health -->
+      <div id="step-5" class="checkin-step">
+        <h2 style="color: var(--sage); margin-bottom: 1.5rem; font-size: 1.3rem;">How are you feeling mentally?</h2>
+
+        <div class="field-group">
+          <label class="field-label">Anxiety level (0-10)</label>
+          <div class="slider-container">
+            <input type="range" id="anxiety" min="0" max="10" value="5" class="slider" oninput="updateSlider('anxiety')">
+            <div class="slider-value" id="anxiety-val">5</div>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label">Overall mood</label>
+          <div class="options-grid">
+            <button type="button" class="option-btn" onclick="selectOption('mood', 'positive', this)">Positive</button>
+            <button type="button" class="option-btn" onclick="selectOption('mood', 'neutral', this)">Neutral</button>
+            <button type="button" class="option-btn" onclick="selectOption('mood', 'down', this)">Down</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 6: Recovery Metrics -->
+      <div id="step-6" class="checkin-step">
+        <h2 style="color: var(--sage); margin-bottom: 1.5rem; font-size: 1.3rem;">Your Recovery Metrics (QoR-15)</h2>
+        <p style="font-size: 0.9rem; color: #666; margin-bottom: 1.5rem;">Rate each on a scale of 0-10 over the last 24 hours.</p>
+
+        <div id="qor-questions" style="max-height: 400px; overflow-y: auto;"></div>
+      </div>
+
+      <!-- Step 7: Final Notes -->
+      <div id="step-7" class="checkin-step">
+        <h2 style="color: var(--sage); margin-bottom: 1.5rem; font-size: 1.3rem;">Any additional notes?</h2>
+
+        <div class="field-group">
+          <label class="field-label">Optional: Share any other concerns or updates</label>
+          <textarea id="notes" class="field-input" style="min-height: 120px; font-family: 'DM Sans', sans-serif; resize: vertical;" placeholder="Tell us about your recovery..."></textarea>
+        </div>
+      </div>
+
+      <!-- Step 8: Thank You -->
+      <div id="step-8" class="checkin-step" style="text-align: center;">
+        <div style="font-size: 3rem; margin-bottom: 1rem;">✓</div>
+        <h1 style="color: var(--sage); margin-bottom: 1rem;">Thank You!</h1>
+        <p style="font-size: 1.05rem; color: #666; line-height: 1.8; margin-bottom: 2rem;">Your check-in has been submitted and saved. Dr. Oluwole will review your response and contact you if needed.</p>
+        <button class="btn-primary" onclick="goToDashboard()" style="width: 100%;">Back to Dashboard</button>
+      </div>
+
+      <!-- Navigation -->
+      <div class="button-group" id="nav-buttons" style="display: flex; margin-top: 2rem;">
+        <button class="btn-secondary" id="btn-prev" onclick="prevStep()">← Previous</button>
+        <button class="btn-primary" id="btn-next" onclick="nextStep()">Next →</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentStep = 1;
+    let totalSteps = 8;
+    let patientToken = null;
+    let patientData = {};
+    let checkInResponses = {
+      painRest: null, painActivity: null, painManaged: null,
+      drainage: null, opening: null, redness: null,
+      nausea: null, vomiting: null, intake: null,
+      anxiety: null, mood: null,
+      qor15: new Array(15).fill(5),
+      notes: ''
+    };
+
+    const QOR_QUESTIONS = [
+      'Able to sleep well',
+      'Return to normal work activities',
+      'Your pain and discomfort',
+      'Your nausea',
+      'Your sense of feeling unwell',
+      'Able to take a normal diet',
+      'Able to do normal activities',
+      'Satisfied with sleep quality',
+      'Had nightmares or bad dreams',
+      'Worried about health',
+      'Physical comfort',
+      'Able to wear regular clothing',
+      'Your appetite',
+      'Pain interference with sleep',
+      'Overall recovery satisfaction'
+    ];
+
+    function initializeCheckIn() {
+      // Initialize QoR questions
+      const qorContainer = document.getElementById('qor-questions');
+      QOR_QUESTIONS.forEach((q, i) => {
+        qorContainer.innerHTML += `
+          <div class="field-group" style="margin-bottom: 1.5rem;">
+            <label class="field-label" style="margin-bottom: 1rem;">${i+1}. ${q}</label>
+            <div class="slider-container">
+              <input type="range" id="qor${i}" min="0" max="10" value="5" class="slider" oninput="updateQoR(${i})">
+              <div class="slider-value" id="qor${i}-val">5</div>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    function authenticatePatient() {
+      const code = document.getElementById('accessCode').value.trim();
+      if (!code) {
+        showError('Please enter your access code');
+        return;
+      }
+
+      // Simulate token-based authentication
+      patientToken = btoa(code + ':' + Date.now());
+
+      // For demo, we'll use the code as the token
+      // In production, this would call /api/patient-authenticate
+      patientToken = code;
+
+      showAuthDashboard();
+    }
+
+    function showAuthDashboard() {
+      document.getElementById('checkin-auth').classList.remove('active');
+      document.getElementById('checkin-dashboard').classList.add('active');
+
+      // Populate patient info
+      document.getElementById('info-surgery').textContent = 'Loading...';
+      document.getElementById('info-date').textContent = 'Loading...';
+
+      // In production, fetch from /api/patient-history?token=...
+      document.getElementById('info-checkins').textContent = '0';
+      document.getElementById('history-list').innerHTML = '<p style="color: #666; font-size: 0.9rem;">No check-ins yet. Start your first check-in today!</p>';
+    }
+
+    function startNewCheckIn() {
+      currentStep = 1;
+      checkInResponses = {
+        painRest: null, painActivity: null, painManaged: null,
+        drainage: null, opening: null, redness: null,
+        nausea: null, vomiting: null, intake: null,
+        anxiety: null, mood: null,
+        qor15: new Array(15).fill(5),
+        notes: ''
+      };
+
+      document.getElementById('checkin-dashboard').classList.remove('active');
+      document.getElementById('checkin-form').classList.add('active');
+      initializeCheckIn();
+      showStep(1);
+    }
+
+    function showStep(step) {
+      document.querySelectorAll('#checkin-form .checkin-step').forEach(s => s.classList.remove('active'));
+      document.getElementById('step-' + step).classList.add('active');
+
+      const progress = (step - 1) / (totalSteps - 1) * 100;
+      document.getElementById('progress-fill').style.width = progress + '%';
+      document.getElementById('progress-step').textContent = step;
+
+      if (step === totalSteps) {
+        document.getElementById('nav-buttons').style.display = 'none';
+      } else {
+        document.getElementById('nav-buttons').style.display = 'flex';
+      }
+
+      document.getElementById('btn-prev').disabled = step === 1;
+    }
+
+    function nextStep() {
+      if (currentStep < totalSteps) {
+        currentStep++;
+        showStep(currentStep);
+      } else if (currentStep === totalSteps) {
+        submitCheckIn();
+      }
+    }
+
+    function prevStep() {
+      if (currentStep > 1) {
+        currentStep--;
+        showStep(currentStep);
+      }
+    }
+
+    function updateSlider(id) {
+      const value = document.getElementById(id).value;
+      document.getElementById(id + '-val').textContent = value;
+      checkInResponses[id] = parseInt(value);
+    }
+
+    function updateQoR(index) {
+      const value = document.getElementById('qor' + index).value;
+      document.getElementById('qor' + index + '-val').textContent = value;
+      checkInResponses.qor15[index] = parseInt(value);
+    }
+
+    function selectOption(name, value, btn) {
+      document.querySelectorAll(`[onclick*="selectOption('${name}"]`).forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      checkInResponses[name] = value;
+    }
+
+    function submitCheckIn() {
+      const payload = {
+        token: patientToken,
+        checkInData: {
+          responses: {
+            painRest: checkInResponses.painRest,
+            painActivity: checkInResponses.painActivity,
+            painManaged: checkInResponses.painManaged,
+            drainage: checkInResponses.drainage,
+            opening: checkInResponses.opening,
+            redness: checkInResponses.redness,
+            nausea: checkInResponses.nausea,
+            vomiting: checkInResponses.vomiting,
+            intake: checkInResponses.intake,
+            anxiety: checkInResponses.anxiety,
+            mood: checkInResponses.mood
+          },
+          qor15: { answers: checkInResponses.qor15, total: checkInResponses.qor15.reduce((a,b) => a+b, 0) },
+          notes: document.getElementById('notes').value
+        }
+      };
+
+      fetch('/api/patient-checkin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+      .then(r => r.json())
+      .then(data => {
+        if (data.success) {
+          showStep(totalSteps);
+          setTimeout(() => goToDashboard(), 3000);
+        } else {
+          showError(data.error || 'Failed to submit check-in');
+        }
+      })
+      .catch(e => showError('Connection error. Please try again.'));
+    }
+
+    function goToDashboard() {
+      currentStep = 1;
+      document.getElementById('checkin-form').classList.remove('active');
+      document.getElementById('checkin-dashboard').classList.add('active');
+      showAuthDashboard();
+    }
+
+    function logoutPatient() {
+      patientToken = null;
+      document.getElementById('checkin-dashboard').classList.remove('active');
+      document.getElementById('checkin-auth').classList.add('active');
+      document.getElementById('accessCode').value = '';
+    }
+
+    function showError(msg) {
+      const el = document.getElementById('auth-error');
+      el.textContent = msg;
+      el.style.display = 'block';
+    }
+  </script>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
 <!-- ══════════════════════════════════════════════════════ -->
 <!-- SCHEDULE PAGE -->
 <!-- ══════════════════════════════════════════════════════ -->
