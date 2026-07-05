@@ -18217,9 +18217,15 @@
     .alert-error { background: #fee2e2; color: #991b1b; padding: 1rem; border-radius: 6px; margin-bottom: 1rem; }
   </style>
 
-  <div style="background: var(--sage); color: #fff; padding: 1rem 2rem; margin-bottom: 2rem;">
-    <button onclick="showPage('home')" style="background: rgba(255,255,255,0.2); color: #fff; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer;">← Back to Home</button>
-  </div>
+  <nav>
+    <div class="nav-logo-wrap" onclick="showPage('home')" style="cursor:pointer;">
+      <img src="" alt="OpWell Concierge" class="nav-mark" style="height:200px;width:auto;" onerror="this.style.display='none'" />
+    </div>
+    <ul class="nav-links">
+      <li><a href="/" onclick="event.preventDefault(); showPage('home')">HOME</a></li>
+      <li><a href="/" onclick="event.preventDefault(); showPage('home')" style="cursor:pointer;">← Back</a></li>
+    </ul>
+  </nav>
 
   <div class="admin-container">
     <div class="admin-header">
