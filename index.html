@@ -16923,12 +16923,15 @@
           window.scrollTo({ top: 0 });
           initFadeIns();
           updatePageMeta(pageId);
+          if (pageId === 'admin' && typeof loadAdminDashboard === 'function') {
+            loadAdminDashboard();
+          }
         }
       }, 250);
     } else {
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
       const page = document.getElementById('page-' + pageId);
-      if (page) { page.classList.add('active'); window.scrollTo({ top: 0 }); initFadeIns(); updatePageMeta(pageId); }
+      if (page) { page.classList.add('active'); window.scrollTo({ top: 0 }); initFadeIns(); updatePageMeta(pageId); if (pageId === 'admin' && typeof loadAdminDashboard === 'function') { loadAdminDashboard(); } }
     }
     // Meta Pixel — track key page views
     if (typeof fbq !== 'undefined') {
