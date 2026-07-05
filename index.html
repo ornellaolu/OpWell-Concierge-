@@ -18657,13 +18657,6 @@
         loadAdminDashboard();
       }
     });
-    const originalShowPage = window.showPage;
-    window.showPage = function(pageId, skipPush) {
-      originalShowPage(pageId, skipPush);
-      if (pageId === 'admin') {
-        loadAdminDashboard();
-      }
-    };
   </script>
 </div>
 
