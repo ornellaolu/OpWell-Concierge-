@@ -707,20 +707,28 @@
 
         <form id="partnership-form" onsubmit="submitForm(event, 'partnership')">
           <div class="form-group">
-            <label>Full Name & Title *</label>
-            <input type="text" name="name" placeholder="e.g., John Smith, MD, Chief of Surgery" required>
+            <label>Full Name *</label>
+            <input type="text" name="providerName" placeholder="e.g., John Smith" required>
+          </div>
+          <div class="form-group">
+            <label>Title *</label>
+            <input type="text" name="title" placeholder="e.g., MD, Chief of Surgery" required>
           </div>
           <div class="form-group">
             <label>Practice / Organization *</label>
             <input type="text" name="practice" required>
           </div>
           <div class="form-group">
+            <label>State *</label>
+            <input type="text" name="state" placeholder="e.g., Florida, California" required>
+          </div>
+          <div class="form-group">
             <label>Email *</label>
-            <input type="email" name="email" required>
+            <input type="email" name="providerEmail" required>
           </div>
           <div class="form-group">
             <label>Phone *</label>
-            <input type="tel" name="phone" required>
+            <input type="tel" name="providerPhone" required>
           </div>
           <div class="form-group">
             <label>Specialty & Areas of Interest *</label>
@@ -799,10 +807,12 @@
         } else {
           payload = {
             type: 'partnership',
-            providerName: formData.get('name'),
+            providerName: formData.get('providerName'),
+            title: formData.get('title'),
             practice: formData.get('practice'),
-            providerEmail: formData.get('email'),
-            providerPhone: formData.get('phone'),
+            state: formData.get('state'),
+            providerEmail: formData.get('providerEmail'),
+            providerPhone: formData.get('providerPhone'),
             message: formData.get('message')
           };
         }
