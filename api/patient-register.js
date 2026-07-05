@@ -60,11 +60,15 @@ module.exports = async function handler(req, res) {
             <p style="color: #555; line-height: 1.7;">Hi ${esc(firstName)},</p>
             <p style="color: #555; line-height: 1.7;">Thank you for choosing OpWell Concierge for your post-operative care. Dr. Oluwole is committed to monitoring your recovery closely and ensuring you heal safely.</p>
 
-            <div style="background: #2d5a3d; color: #fff; border-radius: 8px; padding: 24px; margin: 24px 0; text-align: center;">
-              <p style="margin: 0 0 8px; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.9;">Your First Check-In</p>
-              <p style="margin: 0 0 16px; font-size: 1.1rem; font-weight: 600; color: #fff;">24 Hours After Surgery</p>
-              <p style="margin: 0 0 20px; font-size: 0.9rem; opacity: 0.9;">Scheduled for ${firstCheckInDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}</p>
-              <a href="${checkInUrl}" style="display: inline-block; background: #C8845A; color: #fff; padding: 14px 40px; border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 1rem;">Start Your First Check-In</a>
+            <div style="background: #2d5a3d; color: #fff; border-radius: 8px; padding: 24px; margin: 24px 0;">
+              <p style="margin: 0 0 8px; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.9; text-align: center;">Your Access Code</p>
+              <p style="margin: 0 0 16px; text-align: center; font-family: monospace; background: rgba(0,0,0,0.2); padding: 12px; border-radius: 6px; font-size: 1.2rem; font-weight: 700; letter-spacing: 0.05em; word-break: break-all;">${patient.token}</p>
+              <p style="margin: 0 0 16px; font-size: 0.9rem; opacity: 0.9; text-align: center;"><strong>Your First Check-In</strong><br>24 Hours After Surgery</p>
+              <p style="margin: 0 0 20px; font-size: 0.85rem; opacity: 0.9; text-align: center;">Scheduled for ${firstCheckInDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}</p>
+              <div style="text-align: center;">
+                <a href="${checkInUrl}" style="display: inline-block; background: #C8845A; color: #fff; padding: 14px 40px; border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 1rem;">Start Your First Check-In</a>
+              </div>
+              <p style="margin: 12px 0 0; font-size: 0.85rem; opacity: 0.8; text-align: center;">Or enter your access code on our website</p>
             </div>
 
             <div style="background: #f0f7f2; border: 1px solid #b8d9c4; border-radius: 8px; padding: 20px; margin: 24px 0;">
