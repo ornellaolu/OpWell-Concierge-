@@ -124,7 +124,8 @@ module.exports = async function handler(req, res) {
     });
 
   } catch (err) {
-    console.error('Patient registration error:', err);
-    return res.status(500).json({ error: 'An internal error occurred. Please try again.' });
+    console.error('Patient registration error:', err.message, err.stack);
+    const errorMsg = err.message || 'An internal error occurred. Please try again.';
+    return res.status(500).json({ error: errorMsg, details: err.message });
   }
 };
