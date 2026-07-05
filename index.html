@@ -18264,6 +18264,103 @@ function dismissExitPopup() {
   <button onclick="showPage('schedule')">Book Now →</button>
 </div>
 
+<!-- Admin Page Injector -->
+<script>
+(function() {
+  const adminHTML = `<div id="page-admin" class="page">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 3rem 2rem;">
+      <h1 style="font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--sage); margin-bottom: 2rem;">Admin Dashboard</h1>
+      <div style="background: #f0f7f2; border: 2px solid var(--sage); border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
+        <h2 style="color: var(--sage); margin-top: 0;">Patient Recovery Management</h2>
+        <p style="color: #666; font-size: 1rem; line-height: 1.6; margin-bottom: 1.5rem;">Manage patients and monitor recovery check-ins.</p>
+        <div style="background: white; border: 1px solid #ddd; border-radius: 6px; padding: 1.5rem; margin-bottom: 1.5rem;">
+          <h3 style="color: var(--sage); margin-top: 0;">Enroll New Patient</h3>
+          <div style="display: grid; gap: 1rem; max-width: 400px;">
+            <div>
+              <label style="display: block; font-weight: 600; color: var(--sage); margin-bottom: 0.5rem;">Patient Name</label>
+              <input type="text" id="enroll-name" placeholder="John Smith" style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 6px; font-family: 'DM Sans', sans-serif;">
+            </div>
+            <div>
+              <label style="display: block; font-weight: 600; color: var(--sage); margin-bottom: 0.5rem;">Email</label>
+              <input type="email" id="enroll-email" placeholder="patient@example.com" style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 6px; font-family: 'DM Sans', sans-serif;">
+            </div>
+            <div>
+              <label style="display: block; font-weight: 600; color: var(--sage); margin-bottom: 0.5rem;">Phone</label>
+              <input type="tel" id="enroll-phone" placeholder="(555) 123-4567" style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 6px; font-family: 'DM Sans', sans-serif;">
+            </div>
+            <div>
+              <label style="display: block; font-weight: 600; color: var(--sage); margin-bottom: 0.5rem;">Surgery Type</label>
+              <select id="enroll-surgery" style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 6px; font-family: 'DM Sans', sans-serif;">
+                <option>BBL</option>
+                <option>Tummy Tuck</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div>
+              <label style="display: block; font-weight: 600; color: var(--sage); margin-bottom: 0.5rem;">Surgery Date</label>
+              <input type="date" id="enroll-date" style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 6px; font-family: 'DM Sans', sans-serif;">
+            </div>
+            <button onclick="enrollPatient()" style="background: var(--sage); color: white; padding: 0.8rem 1.5rem; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 1rem;">Enroll Patient</button>
+          </div>
+        </div>
+        <p style="color: #666; font-size: 0.9rem;">✓ Patient will receive an email with their recovery check-in link</p>
+      </div>
+    </div>
+  </div>`;
+
+  document.body.insertAdjacentHTML('beforeend', adminHTML);
+
+  window.enrollPatient = function() {
+    const name = document.getElementById('enroll-name').value;
+    const email = document.getElementById('enroll-email').value;
+    const phone = document.getElementById('enroll-phone').value;
+    const surgery = document.getElementById('enroll-surgery').value;
+    const date = document.getElementById('enroll-date').value;
+
+    if (!name || !email || !phone || !surgery || !date) {
+      alert('Please fill in all fields');
+      return;
+    }
+
+    fetch('/api/patient-register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name, email, phone, surgeryType: surgery, surgeryDate: date
+      })
+    })
+    .then(r => r.json())
+    .then(d => {
+      if (d.success) {
+        alert('Patient enrolled! Email sent to ' + email);
+        document.getElementById('enroll-name').value = '';
+        document.getElementById('enroll-email').value = '';
+        document.getElementById('enroll-phone').value = '';
+        document.getElementById('enroll-date').value = '';
+      } else {
+        alert('Error: ' + (d.error || 'enrollment failed'));
+      }
+    })
+    .catch(e => alert('Error: ' + e.message));
+  };
+
+  const origShowPage = window.showPage;
+  window.showPage = function(pageId, skipPush) {
+    if (pageId === 'admin') {
+      document.querySelectorAll('.page').forEach(p => { p.classList.remove('active'); p.style.opacity = ''; });
+      const adminPage = document.getElementById('page-admin');
+      if (adminPage) {
+        adminPage.classList.add('active');
+        window.scrollTo({ top: 0 });
+      }
+      if (!skipPush) history.pushState({ page: 'admin' }, '', '/admin');
+    } else {
+      origShowPage(pageId, skipPush);
+    }
+  };
+})();
+</script>
+
 </body>
 </html>
 <!-- Vercel cache bust: 1783225943 -->
