@@ -159,6 +159,42 @@ module.exports = async function handler(req, res) {
         `,
       });
 
+    } else if (type === 'retainer-application') {
+      const { fullName, contactMethod, procedureDate, goals } = req.body;
+
+      if (!fullName || !contactMethod || !goals) {
+        return res.status(400).json({ error: 'Missing required fields' });
+      }
+
+      await resend.emails.send({
+        from: 'OpWell Concierge <info@opwellconcierge.com>',
+        to: 'dr.oluwole@opwellconcierge.com',
+        subject: `Private Retainer Application: ${esc(fullName)}`,
+        html: `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #2c2c2c;">
+            <div style="background: #3b2a1a; padding: 24px 32px;">
+              <h2 style="color: #e8c97a; margin: 0; font-size: 1.2rem;">Private Retainer Application — OpWell Concierge</h2>
+            </div>
+            <div style="padding: 32px; background: #fdf8f4;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.95rem;">
+                <tr><td style="padding:8px 0; color:#888; width:140px;">Full Name</td><td style="padding:8px 0; font-weight:600;">${esc(fullName)}</td></tr>
+                <tr><td style="padding:8px 0; color:#888;">Contact Method</td><td style="padding:8px 0;">${esc(contactMethod)}</td></tr>
+                ${procedureDate ? `<tr><td style="padding:8px 0; color:#888;">Upcoming Procedure & Date</td><td style="padding:8px 0;">${esc(procedureDate)}</td></tr>` : ''}
+              </table>
+
+              <div style="margin-top: 24px; padding: 16px; background: #fff; border: 1px solid #e8d9c8; border-radius: 8px;">
+                <p style="margin: 0 0 8px; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #3b2a1a;">Primary Goals for Care Partnership</p>
+                <p style="margin: 0; font-size: 0.95rem; color: #333; line-height: 1.7; white-space: pre-wrap;">${esc(goals)}</p>
+              </div>
+
+              <div style="margin-top: 16px; padding: 12px 16px; background: rgba(45,90,61,0.06); border-radius: 6px;">
+                <p style="margin: 0; font-size: 0.85rem; color: #555;">Dr. Oluwole will review this application and respond personally within 24 hours.</p>
+              </div>
+            </div>
+          </div>
+        `,
+      });
+
     } else {
       return res.status(400).json({ error: 'Invalid form type' });
     }
