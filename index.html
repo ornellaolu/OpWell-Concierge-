@@ -16249,8 +16249,19 @@
       document.getElementById('recoverySurgeryDate').setAttribute('max', maxDate);
       document.getElementById('recoverySurgeryDate').setAttribute('min', minDate);
 
+      // Handle both direct URL (/recovery-checkin?token=xyz) and hash URL (/#/recovery-checkin?token=xyz)
+      let urlToken = null;
+
+      // Check query parameters
       const params = new URLSearchParams(window.location.search);
-      const urlToken = params.get('token');
+      urlToken = params.get('token');
+
+      // If no token in query params, check hash
+      if (!urlToken && window.location.hash.includes('?')) {
+        const hashParams = new URLSearchParams(window.location.hash.split('?')[1]);
+        urlToken = hashParams.get('token');
+      }
+
       const storedToken = localStorage.getItem('recoveryToken');
 
       if (urlToken) {
