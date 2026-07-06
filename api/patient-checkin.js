@@ -11,8 +11,12 @@ module.exports = async function handler(req, res) {
   }
 
   try {
+    console.log('=== CHECK-IN RECEIVED ===');
     const resend = new Resend(process.env.RESEND_API_KEY);
     const { token, checkInData } = req.body;
+
+    console.log('Token:', token?.substring(0, 10) + '...');
+    console.log('CheckInData keys:', Object.keys(checkInData || {}));
 
     // Validate token
     if (!token) {
@@ -24,6 +28,8 @@ module.exports = async function handler(req, res) {
       return res.status(401).json({ error: 'Invalid or expired token' });
     }
 
+    console.log('Patient found:', patient.name);
+
     // Check if patient already submitted today
     const todayCheckIn = await db.getPatientCheckInToday(patient.id);
     if (todayCheckIn) {
@@ -31,6 +37,7 @@ module.exports = async function handler(req, res) {
     }
 
     // Save check-in to database
+    console.log('Saving check-in to database...');
     const checkIn = await db.saveCheckIn(patient.id, {
       firstName: patient.name.split(' ')[0],
       lastName: patient.name.split(' ').slice(1).join(' ') || '',
@@ -39,6 +46,7 @@ module.exports = async function handler(req, res) {
       surgeryDate: patient.surgeryDate,
       ...checkInData
     });
+    console.log('Check-in saved:', checkIn.id);
 
     // Extract response data for email
     const responses = checkInData.responses || {};
@@ -106,12 +114,11 @@ module.exports = async function handler(req, res) {
     `;
 
     try {
-      console.log('Attempting to send check-in email with:', {
-        from: 'OpWell Concierge <noreply@quaarloii.resend.app>',
-        to: 'ornellaolu@gmail.com',
-        apiKeyExists: !!process.env.RESEND_API_KEY,
-        apiKeyLength: process.env.RESEND_API_KEY?.length
-      });
+      console.log('📧 Attempting to send check-in email...');
+      console.log('   From: OpWell Checkin <onboarding@resend.dev>');
+      console.log('   To: dr.oluwole@opwellconcierge.com');
+      console.log('   Patient:', patient.name);
+      console.log('   POD:', pod);
 
       const emailResponse = await resend.emails.send({
         from: 'OpWell Checkin <onboarding@resend.dev>',
@@ -119,15 +126,16 @@ module.exports = async function handler(req, res) {
         subject: `Recovery Check-In: ${esc(patient.name)} — POD ${pod}`,
         html: emailHtml,
       });
-      console.log('✅ Email sent successfully:', emailResponse);
+      console.log('✅ Email response:', {
+        data: emailResponse.data,
+        error: emailResponse.error
+      });
     } catch (emailErr) {
-      console.error('❌ Failed to send email:', {
-        error: emailErr.message,
+      console.error('❌ Email sending error:', {
+        message: emailErr.message,
         code: emailErr.code,
         status: emailErr.statusCode,
-        stack: emailErr.stack,
-        patient: patient.id,
-        timestamp: new Date().toISOString()
+        patient: patient.id
       });
     }
 
