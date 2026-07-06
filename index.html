@@ -17643,7 +17643,13 @@
           adminPage.style.visibility = 'visible';
           adminPage.style.zIndex = '10';
           window.scrollTo(0, 0);
-          debugDiv.innerHTML += '<br>✅ Admin page forced to show';
+
+          // Check what's visible
+          const activePageAfter = document.querySelector('.page.active');
+          const activeId = activePageAfter ? activePageAfter.id : 'NONE';
+          const adminVisible = window.getComputedStyle(adminPage).display;
+
+          debugDiv.innerHTML += `<br>✅ Forced show<br>Active page: ${activeId}<br>Admin display: ${adminVisible}`;
         } else {
           debugDiv.innerHTML += '<br>❌ page-admin element not found';
         }
