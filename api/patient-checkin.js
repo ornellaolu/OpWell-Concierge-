@@ -38,15 +38,26 @@ module.exports = async function handler(req, res) {
 
     // Save check-in to database
     console.log('Saving check-in to database...');
-    const checkIn = await db.saveCheckIn(patient.id, {
-      firstName: patient.name.split(' ')[0],
-      lastName: patient.name.split(' ').slice(1).join(' ') || '',
-      phone: patient.phone,
-      surgeryType: patient.surgeryType,
-      surgeryDate: patient.surgeryDate,
-      ...checkInData
-    });
-    console.log('Check-in saved:', checkIn.id);
+    let checkIn;
+    try {
+      checkIn = await db.saveCheckIn(patient.id, {
+        firstName: patient.name.split(' ')[0],
+        lastName: patient.name.split(' ').slice(1).join(' ') || '',
+        phone: patient.phone,
+        surgeryType: patient.surgeryType,
+        surgeryDate: patient.surgeryDate,
+        ...checkInData
+      });
+      console.log('✅ Check-in saved:', checkIn.id);
+    } catch (dbErr) {
+      console.error('❌ Database save failed:', {
+        message: dbErr.message,
+        details: dbErr.details,
+        hint: dbErr.hint,
+        code: dbErr.code
+      });
+      throw new Error(`Database error: ${dbErr.message}`);
+    }
 
     // Extract response data for email
     const responses = checkInData.responses || {};
@@ -163,7 +174,13 @@ module.exports = async function handler(req, res) {
     });
 
   } catch (err) {
-    console.error('Patient check-in error:', err);
-    return res.status(500).json({ error: 'An internal error occurred. Please try again.' });
+    console.error('❌ Check-in endpoint error:', {
+      message: err.message,
+      stack: err.stack
+    });
+    return res.status(500).json({
+      error: 'An internal error occurred. Please try again.',
+      details: err.message
+    });
   }
 };
