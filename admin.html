@@ -84,8 +84,39 @@
     </div>
 
     <div id="enroll" class="content" style="padding: 2rem; background: #fff; border-radius: 8px; max-width: 600px;">
-      <h2 style="color: var(--sage); margin-bottom: 1rem;">Enroll Patient</h2>
-      <p style="color: #666;">Enrollment feature coming soon</p>
+      <h2 style="color: var(--sage); margin-bottom: 1rem;">Enroll New Patient</h2>
+      <div id="enroll-message" style="display: none; padding: 1rem; border-radius: 6px; margin-bottom: 1rem;"></div>
+      <form id="enroll-form" style="display: grid; gap: 1rem;">
+        <div>
+          <label style="display: block; font-weight: 600; color: var(--sage); margin-bottom: 0.5rem;">Full Name *</label>
+          <input type="text" id="enroll-name" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 6px;">
+        </div>
+        <div>
+          <label style="display: block; font-weight: 600; color: var(--sage); margin-bottom: 0.5rem;">Email *</label>
+          <input type="email" id="enroll-email" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 6px;">
+        </div>
+        <div>
+          <label style="display: block; font-weight: 600; color: var(--sage); margin-bottom: 0.5rem;">Phone *</label>
+          <input type="tel" id="enroll-phone" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 6px;">
+        </div>
+        <div>
+          <label style="display: block; font-weight: 600; color: var(--sage); margin-bottom: 0.5rem;">Surgery Type *</label>
+          <select id="enroll-surgery" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 6px;">
+            <option value="">Select surgery type...</option>
+            <option value="BBL">BBL (Brazilian Butt Lift)</option>
+            <option value="Tummy Tuck">Tummy Tuck</option>
+            <option value="Bariatric">Bariatric / Weight Loss</option>
+            <option value="C-Section">C-Section</option>
+            <option value="Joint Replacement">Joint Replacement</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div>
+          <label style="display: block; font-weight: 600; color: var(--sage); margin-bottom: 0.5rem;">Surgery Date *</label>
+          <input type="date" id="enroll-date" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 6px;">
+        </div>
+        <button type="button" onclick="enrollPatient()" style="padding: 0.75rem; background: var(--sage); color: #fff; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 1rem;">Enroll Patient</button>
+      </form>
     </div>
   </div>
 
@@ -118,7 +149,92 @@
       document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
       document.getElementById(tabName).classList.add('active');
       event.target.classList.add('active');
+
+      if (tabName === 'analytics') loadAnalytics();
+      if (tabName === 'patients') loadPatients();
     }
+
+    function enrollPatient() {
+      const name = document.getElementById('enroll-name').value;
+      const email = document.getElementById('enroll-email').value;
+      const phone = document.getElementById('enroll-phone').value;
+      const surgeryType = document.getElementById('enroll-surgery').value;
+      const surgeryDate = document.getElementById('enroll-date').value;
+      const msgDiv = document.getElementById('enroll-message');
+
+      if (!name || !email || !phone || !surgeryType || !surgeryDate) {
+        msgDiv.textContent = 'Please fill in all fields';
+        msgDiv.style.background = '#fee2e2';
+        msgDiv.style.color = '#991b1b';
+        msgDiv.style.display = 'block';
+        return;
+      }
+
+      fetch('/api/patient-register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, phone, surgeryType, surgeryDate })
+      })
+      .then(r => r.json())
+      .then(data => {
+        if (data.success) {
+          msgDiv.textContent = `✅ Patient enrolled! Check-in link sent to ${email}`;
+          msgDiv.style.background = '#dcfce7';
+          msgDiv.style.color = '#166534';
+          document.getElementById('enroll-form').reset();
+          loadAnalytics();
+        } else {
+          msgDiv.textContent = `Error: ${data.error}`;
+          msgDiv.style.background = '#fee2e2';
+          msgDiv.style.color = '#991b1b';
+        }
+        msgDiv.style.display = 'block';
+      })
+      .catch(e => {
+        msgDiv.textContent = `Error: ${e.message}`;
+        msgDiv.style.background = '#fee2e2';
+        msgDiv.style.color = '#991b1b';
+        msgDiv.style.display = 'block';
+      });
+    }
+
+    function loadAnalytics() {
+      fetch('/api/admin-patients')
+        .then(r => r.json())
+        .then(data => {
+          if (data.success) {
+            const patients = data.patients || [];
+            const now = new Date();
+            const active = patients.filter(p => {
+              const days = Math.floor((now - new Date(p.surgeryDate)) / (1000*60*60*24));
+              return days >= 0 && days <= 28;
+            }).length;
+            document.querySelector('#analytics .analytics-grid > .card:nth-child(1) .card-value').textContent = patients.length;
+            document.querySelector('#analytics .analytics-grid > .card:nth-child(2) .card-value').textContent = active;
+          }
+        })
+        .catch(e => console.error('Error loading analytics:', e));
+    }
+
+    function loadPatients() {
+      fetch('/api/admin-patients')
+        .then(r => r.json())
+        .then(data => {
+          if (data.success) {
+            const patientsList = (data.patients || []).map(p => `<p style="padding: 0.5rem 0; border-bottom: 1px solid #eee;">${p.name} (${p.email})</p>`).join('');
+            const patientsDiv = document.getElementById('patients');
+            patientsDiv.innerHTML = `<h2 style="color: var(--sage);">Patients (${(data.patients || []).length})</h2><div style="margin-top: 1rem;">${patientsList || '<p style="color: #666;">No patients enrolled yet</p>'}</div>`;
+          }
+        })
+        .catch(e => console.error('Error loading patients:', e));
+    }
+
+    // Load analytics on page load
+    window.addEventListener('load', function() {
+      if (sessionStorage.getItem('admin-authenticated') === 'true') {
+        loadAnalytics();
+      }
+    });
   </script>
 </body>
 </html>
