@@ -20,21 +20,30 @@ module.exports = async function handler(req, res) {
 
     const checkIns = await db.getCheckInHistory(patient.id);
 
+    const checkInsFormatted = checkIns.map(ci => ({
+      ...ci,
+      date: ci.date,
+      timestamp: ci.timestamp || ci.created_at || new Date(ci.date).toISOString(),
+      qor15_score: ci.qor15_score,
+      qor15: ci.qor15_score ? { total: ci.qor15_score } : null,
+      responses: ci.responses || {},
+      flags: ci.flags || []
+    }));
+
     return res.status(200).json({
       success: true,
       patient: {
         name: patient.name,
         email: patient.email,
-        surgeryType: patient.surgery_type,
-        surgeryDate: patient.surgery_date,
-        phone: patient.phone
+        surgery_type: patient.surgery_type || patient.surgeryType,
+        surgeryType: patient.surgery_type || patient.surgeryType,
+        surgery_date: patient.surgery_date || patient.surgeryDate,
+        surgeryDate: patient.surgery_date || patient.surgeryDate,
+        phone: patient.phone,
+        last_checkin: patient.last_checkin,
+        checkins: checkInsFormatted
       },
-      checkIns: checkIns.map(ci => ({
-        ...ci,
-        timestamp: ci.timestamp || ci.created_at || new Date(ci.date).toISOString(),
-        qor15: ci.qor15_score ? { total: ci.qor15_score } : null,
-        responses: ci.responses || {}
-      })),
+      checkIns: checkInsFormatted,
       totalCheckIns: checkIns.length
     });
 
