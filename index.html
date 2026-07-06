@@ -18759,6 +18759,21 @@
   </script>
 </div>
 
+<!-- IMMEDIATE ADMIN PAGE SHOW - Runs as soon as page-admin is parsed -->
+<script>
+if (window.location.href.includes('/admin')) {
+  (function() {
+    const adminPage = document.getElementById('page-admin');
+    if (adminPage) {
+      // Remove active from all pages
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      // Make admin page active
+      adminPage.classList.add('active');
+    }
+  })();
+}
+</script>
+
 <!-- ══════════════════════════════════════════════════════ -->
 <!-- TERMS OF SERVICE PAGE -->
 <!-- ══════════════════════════════════════════════════════ -->
