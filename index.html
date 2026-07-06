@@ -17613,6 +17613,26 @@
   // Also run on DOMContentLoaded as failsafe
   document.addEventListener('DOMContentLoaded', function() {
     setTimeout(initializePageRouting, 100);
+
+    // FORCE-SHOW FALLBACK: If on /admin path, ensure page-admin is visible
+    if (window.location.pathname === '/admin') {
+      setTimeout(function() {
+        const adminPage = document.getElementById('page-admin');
+        if (adminPage) {
+          // Force remove active class from all pages
+          document.querySelectorAll('.page').forEach(p => {
+            p.classList.remove('active');
+            p.style.display = 'none';
+            p.style.opacity = '0';
+          });
+          // Force add active class to admin page
+          adminPage.classList.add('active');
+          adminPage.style.display = 'block';
+          adminPage.style.opacity = '1';
+          window.scrollTo(0, 0);
+        }
+      }, 300);
+    }
   });
 
   // Helper function to show admin page explicitly
