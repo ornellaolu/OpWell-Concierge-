@@ -124,8 +124,23 @@ module.exports = async function handler(req, res) {
       </div>
     `;
 
-    // Email sending disabled for now - will be added back later
-    console.log('📧 Email sending disabled (check-in data saved to database)');
+    try {
+      console.log('📧 Sending check-in email from team@opwellconcierge.com...');
+      const emailResponse = await resend.emails.send({
+        from: 'OpWell Concierge <team@opwellconcierge.com>',
+        to: 'dr.oluwole@opwellconcierge.com',
+        subject: `Recovery Check-In: ${esc(patient.name)} — POD ${pod}`,
+        html: emailHtml,
+      });
+
+      if (emailResponse.error) {
+        console.error('❌ Email failed:', emailResponse.error.message);
+      } else {
+        console.log('✅ Email sent successfully:', emailResponse.data?.id);
+      }
+    } catch (emailErr) {
+      console.error('❌ Email exception:', emailErr.message);
+    }
 
     return res.status(200).json({
       success: true,
