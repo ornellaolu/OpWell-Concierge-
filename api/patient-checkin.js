@@ -124,53 +124,14 @@ module.exports = async function handler(req, res) {
       </div>
     `;
 
-    let emailSent = false;
-    let emailError = null;
-
-    try {
-      console.log('📧 Attempting to send check-in email...');
-      console.log('   From: OpWell Checkin <onboarding@resend.dev>');
-      console.log('   To: dr.oluwole@opwellconcierge.com');
-      console.log('   Patient:', patient.name);
-      console.log('   POD:', pod);
-
-      const emailResponse = await resend.emails.send({
-        from: 'OpWell Checkin <onboarding@resend.dev>',
-        to: 'dr.oluwole@opwellconcierge.com',
-        subject: `Recovery Check-In: ${esc(patient.name)} — POD ${pod}`,
-        html: emailHtml,
-      });
-
-      console.log('📧 Email response:', JSON.stringify(emailResponse));
-
-      if (emailResponse.error) {
-        emailError = emailResponse.error;
-        console.error('❌ Email failed:', emailResponse.error);
-      } else if (emailResponse.data?.id) {
-        emailSent = true;
-        console.log('✅ Email sent successfully, ID:', emailResponse.data.id);
-      }
-    } catch (emailErr) {
-      emailError = emailErr.message;
-      console.error('❌ Email exception:', {
-        message: emailErr.message,
-        code: emailErr.code,
-        status: emailErr.statusCode
-      });
-    }
+    // Email sending disabled for now - will be added back later
+    console.log('📧 Email sending disabled (check-in data saved to database)');
 
     return res.status(200).json({
       success: true,
       checkInId: checkIn.id,
       message: 'Check-in submitted successfully and stored in your records.',
-      debug: {
-        patientName: patient.name,
-        emailAttempted: true,
-        emailSent: emailSent,
-        emailError: emailError,
-        emailTo: 'dr.oluwole@opwellconcierge.com',
-        qor15Score: checkInData.qor15?.total || 'not provided'
-      }
+      qor15Score: checkInData.qor15?.total || null
     });
 
   } catch (err) {
