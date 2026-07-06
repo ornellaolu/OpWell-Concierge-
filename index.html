@@ -17635,15 +17635,23 @@
 
         // Now try to show page-admin
         if (adminPage) {
-          // Hide home page
-          const homePage = document.getElementById('page-home');
-          if (homePage) homePage.style.display = 'none';
+          // Remove active class from ALL pages
+          allPages.forEach(p => p.classList.remove('active'));
 
-          // Show admin page
+          // Add active class to admin page (this is what makes it visible via CSS)
+          adminPage.classList.add('active');
+
+          // Also force inline style
           adminPage.style.display = 'block';
           adminPage.style.opacity = '1';
 
-          diagDiv.innerHTML += '<br><br>✅ Attempted to show page-admin';
+          diagDiv.innerHTML += '<br><br>✅ Added active class to page-admin';
+
+          // Verify it worked
+          setTimeout(function() {
+            const newDisplay = window.getComputedStyle(adminPage).display;
+            diagDiv.innerHTML += `<br>New display style: ${newDisplay}`;
+          }, 100);
         }
       }, 300);
     }
