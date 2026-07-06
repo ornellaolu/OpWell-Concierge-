@@ -17614,47 +17614,21 @@
   document.addEventListener('DOMContentLoaded', function() {
     setTimeout(initializePageRouting, 100);
 
-    // FORCE-SHOW FALLBACK: If on /admin path, ensure page-admin is visible
-    const pathname = window.location.pathname;
-    const href = window.location.href;
-    const isAdmin = pathname.includes('admin') || href.includes('admin') || pathname === '/admin' || pathname.endsWith('/admin');
+    // SIMPLEST POSSIBLE FALLBACK: Just show admin page if it exists
+    setTimeout(function() {
+      const adminPage = document.getElementById('page-admin');
+      const href = window.location.href;
 
-    // Add visible debug info
-    const debugDiv = document.createElement('div');
-    debugDiv.id = 'debug-info';
-    debugDiv.style.cssText = 'position:fixed;top:80px;left:0;background:#000;color:#0f0;padding:10px;font-size:12px;z-index:9999;font-family:monospace;max-width:400px;overflow:auto;';
-    debugDiv.innerHTML = `pathname: ${pathname}<br>href: ${href}<br>isAdmin: ${isAdmin}<br>page-admin exists: ${!!document.getElementById('page-admin')}`;
-    document.body.appendChild(debugDiv);
-
-    if (isAdmin) {
-      setTimeout(function() {
-        const adminPage = document.getElementById('page-admin');
-        if (adminPage) {
-          // Force remove active class from all pages
-          document.querySelectorAll('.page').forEach(p => {
-            p.classList.remove('active');
-            p.style.display = 'none !important';
-            p.style.opacity = '0';
-          });
-          // Force add active class to admin page and make SURE it's visible
-          adminPage.classList.add('active');
-          adminPage.style.display = 'block !important';
-          adminPage.style.opacity = '1';
-          adminPage.style.visibility = 'visible';
-          adminPage.style.zIndex = '10';
-          window.scrollTo(0, 0);
-
-          // Check what's visible
-          const activePageAfter = document.querySelector('.page.active');
-          const activeId = activePageAfter ? activePageAfter.id : 'NONE';
-          const adminVisible = window.getComputedStyle(adminPage).display;
-
-          debugDiv.innerHTML += `<br>✅ Forced show<br>Active page: ${activeId}<br>Admin display: ${adminVisible}`;
-        } else {
-          debugDiv.innerHTML += '<br>❌ page-admin element not found';
-        }
-      }, 300);
-    }
+      if (adminPage && href.includes('admin')) {
+        // Hide all pages
+        document.querySelectorAll('.page').forEach(p => {
+          p.style.display = 'none';
+        });
+        // Show only admin page
+        adminPage.style.display = 'block';
+        adminPage.style.opacity = '1';
+      }
+    }, 500);
   });
 
   // Helper function to show admin page explicitly
