@@ -114,8 +114,8 @@ module.exports = async function handler(req, res) {
       });
 
       const emailResponse = await resend.emails.send({
-        from: 'OpWell Concierge <onboarding@resend.dev>',
-        to: 'ornellaolu@gmail.com',
+        from: 'OpWell Concierge <noreply@quaarloii.resend.app>',
+        to: 'dr.oluwole@opwellconcierge.com',
         subject: `Recovery Check-In: ${esc(patient.name)} — POD ${pod}`,
         html: emailHtml,
       });

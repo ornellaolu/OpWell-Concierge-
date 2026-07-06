@@ -98,8 +98,8 @@ module.exports = async function handler(req, res) {
 
     // Send confirmation to Dr. Oluwole
     await resend.emails.send({
-      from: 'OpWell Admin <onboarding@resend.dev>',
-      to: 'ornellaolu@gmail.com',
+      from: 'OpWell Admin <noreply@quaarloii.resend.app>',
+      to: 'dr.oluwole@opwellconcierge.com',
       subject: `New Patient Enrolled: ${esc(name)} — ${esc(surgeryType)}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #2c2c2c;">
