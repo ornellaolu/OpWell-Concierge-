@@ -17614,31 +17614,13 @@
   document.addEventListener('DOMContentLoaded', function() {
     setTimeout(initializePageRouting, 100);
 
-    // EMERGENCY FALLBACK: If on /admin, create visible placeholder
+    // TEST: If on admin, log to body
     if (window.location.href.includes('admin')) {
-      setTimeout(function() {
-        // Hide ALL pages
-        document.querySelectorAll('.page').forEach(p => {
-          p.style.display = 'none !important';
-          p.style.visibility = 'hidden !important';
-        });
-
-        // Try to show page-admin
-        const adminPage = document.getElementById('page-admin');
-        if (adminPage) {
-          adminPage.style.display = 'block !important';
-          adminPage.style.visibility = 'visible !important';
-          adminPage.style.opacity = '1 !important';
-        } else {
-          // If page-admin doesn't exist, create placeholder
-          const placeholder = document.createElement('div');
-          placeholder.innerHTML = '<div style="padding: 100px 20px; text-align: center;"><h1>ADMIN PAGE</h1><p>Page-admin element not found</p></div>';
-          document.body.appendChild(placeholder);
-        }
-
-        // Scroll to top
-        window.scrollTo(0, 0);
-      }, 100);
+      // Append test div to body
+      const testDiv = document.createElement('div');
+      testDiv.style.cssText = 'position: fixed; top: 100px; left: 0; right: 0; z-index: 999; background: red; color: white; padding: 20px; font-size: 20px; text-align: center;';
+      testDiv.textContent = 'TEST: Admin page code is running';
+      document.body.appendChild(testDiv);
     }
   });
 
