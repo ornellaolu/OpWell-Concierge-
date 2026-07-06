@@ -17595,6 +17595,18 @@
     var path = window.location.pathname.replace(/^\//, '').replace(/\.html$/, '');
     var hashPath = window.location.hash.replace(/^#\//, '');
 
+    // Special handling for admin page - force it immediately
+    if (path === 'admin' || window.location.href.includes('/admin')) {
+      var adminPage = document.getElementById('page-admin');
+      if (adminPage) {
+        // Remove active from all pages
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        // Add active to admin page
+        adminPage.classList.add('active');
+        return;
+      }
+    }
+
     // Try path first, then hash
     if (path && path !== '' && path !== 'index') {
       var pageEl = document.getElementById('page-' + path);
@@ -17605,6 +17617,12 @@
       // Handle hash-based routing (e.g., /#/admin)
       showPage(hashPath, true);
     }
+  }
+
+  // CRITICAL: If on /admin, mark it IMMEDIATELY before anything else runs
+  if (window.location.href.includes('admin')) {
+    // Mark page-admin to show (will be processed below)
+    window.forceShowAdmin = true;
   }
 
   // Run immediately
