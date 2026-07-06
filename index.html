@@ -17622,13 +17622,16 @@
       if (adminPage && href.includes('admin')) {
         // Hide all pages
         document.querySelectorAll('.page').forEach(p => {
-          p.style.display = 'none';
+          p.style.display = 'none !important';
         });
-        // Show only admin page
-        adminPage.style.display = 'block';
-        adminPage.style.opacity = '1';
+        // Show only admin page with forced visibility
+        adminPage.style.cssText = 'display: block !important; opacity: 1 !important; visibility: visible !important; position: relative !important; z-index: 10 !important;';
+        // Scroll to top
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+        window.scrollTo(0, 0);
       }
-    }, 500);
+    }, 200);
   });
 
   // Helper function to show admin page explicitly
@@ -18280,8 +18283,8 @@
     </ul>
   </nav>
 
-  <div class="admin-container">
-    <div style="background: #fee2e2; border: 3px solid #991b1b; padding: 1rem; margin-bottom: 2rem; border-radius: 8px; text-align: center; color: #991b1b; font-weight: 700;">
+  <div class="admin-container" style="padding-top: 100px;">
+    <div style="background: #fee2e2; border: 3px solid #991b1b; padding: 1rem; margin-bottom: 2rem; border-radius: 8px; text-align: center; color: #991b1b; font-weight: 700; font-size: 16px;">
       ✅ ADMIN PAGE LOADED - If you see this, the page is working!
     </div>
     <div class="admin-header">
