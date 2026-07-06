@@ -17614,24 +17614,32 @@
   document.addEventListener('DOMContentLoaded', function() {
     setTimeout(initializePageRouting, 100);
 
-    // SIMPLEST POSSIBLE FALLBACK: Just show admin page if it exists
-    setTimeout(function() {
-      const adminPage = document.getElementById('page-admin');
-      const href = window.location.href;
-
-      if (adminPage && href.includes('admin')) {
-        // Hide all pages
+    // EMERGENCY FALLBACK: If on /admin, create visible placeholder
+    if (window.location.href.includes('admin')) {
+      setTimeout(function() {
+        // Hide ALL pages
         document.querySelectorAll('.page').forEach(p => {
           p.style.display = 'none !important';
+          p.style.visibility = 'hidden !important';
         });
-        // Show only admin page with forced visibility
-        adminPage.style.cssText = 'display: block !important; opacity: 1 !important; visibility: visible !important; position: relative !important; z-index: 10 !important;';
+
+        // Try to show page-admin
+        const adminPage = document.getElementById('page-admin');
+        if (adminPage) {
+          adminPage.style.display = 'block !important';
+          adminPage.style.visibility = 'visible !important';
+          adminPage.style.opacity = '1 !important';
+        } else {
+          // If page-admin doesn't exist, create placeholder
+          const placeholder = document.createElement('div');
+          placeholder.innerHTML = '<div style="padding: 100px 20px; text-align: center;"><h1>ADMIN PAGE</h1><p>Page-admin element not found</p></div>';
+          document.body.appendChild(placeholder);
+        }
+
         // Scroll to top
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
         window.scrollTo(0, 0);
-      }
-    }, 200);
+      }, 100);
+    }
   });
 
   // Helper function to show admin page explicitly
