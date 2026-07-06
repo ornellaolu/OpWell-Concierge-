@@ -17632,56 +17632,6 @@
   document.addEventListener('DOMContentLoaded', function() {
     setTimeout(initializePageRouting, 100);
 
-    // TEST: If on admin, show diagnostics
-    if (window.location.href.includes('admin')) {
-      setTimeout(function() {
-        const adminPage = document.getElementById('page-admin');
-        const allPages = document.querySelectorAll('.page');
-        const activePage = document.querySelector('.page.active');
-
-        // Create diagnostic box
-        const diagDiv = document.createElement('div');
-        diagDiv.style.cssText = 'position: fixed; top: 100px; left: 0; right: 0; z-index: 999; background: red; color: white; padding: 20px; font-size: 14px; text-align: left; font-family: monospace; max-height: 200px; overflow: auto;';
-        diagDiv.innerHTML = `
-          page-admin exists: ${!!adminPage}<br>
-          total pages: ${allPages.length}<br>
-          active page: ${activePage ? activePage.id : 'none'}<br>
-          page-admin display: ${adminPage ? window.getComputedStyle(adminPage).display : 'N/A'}<br>
-          page-home display: ${document.getElementById('page-home') ? window.getComputedStyle(document.getElementById('page-home')).display : 'N/A'}
-        `;
-        document.body.appendChild(diagDiv);
-
-        // Now try to show page-admin
-        if (adminPage) {
-          // Remove active class from ALL pages
-          allPages.forEach(p => p.classList.remove('active'));
-
-          // Add active class to admin page (this is what makes it visible via CSS)
-          adminPage.classList.add('active');
-
-          // Also force inline style
-          adminPage.style.display = 'block';
-          adminPage.style.opacity = '1';
-
-          diagDiv.innerHTML += '<br><br>✅ Added active class to page-admin';
-
-          // Scroll to top
-          document.body.scrollTop = 0;
-          document.documentElement.scrollTop = 0;
-          window.scrollTo(0, 0);
-
-          // Verify it worked
-          setTimeout(function() {
-            const newDisplay = window.getComputedStyle(adminPage).display;
-            diagDiv.innerHTML += `<br>New display style: ${newDisplay}`;
-
-            // Check if admin content is visible
-            const banner = adminPage.querySelector('[style*="fee2e2"]');
-            diagDiv.innerHTML += `<br>Red banner found: ${!!banner}`;
-          }, 100);
-        }
-      }, 300);
-    }
   });
 
   // Helper function to show admin page explicitly
