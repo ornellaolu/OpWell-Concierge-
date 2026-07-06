@@ -20,7 +20,7 @@ module.exports = async function handler(req, res) {
 
     console.log('Attempting to send test email...');
     const response = await resend.emails.send({
-      from: 'OpWell Concierge <team@opwellconcierge.com>',
+      from: 'OpWell Concierge <dr.oluwole@opwellconcierge.com>',
       to: 'dr.oluwole@opwellconcierge.com',
       subject: '🧪 OpWell Email Test',
       html: `

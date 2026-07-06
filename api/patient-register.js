@@ -46,7 +46,7 @@ module.exports = async function handler(req, res) {
 
     // Send welcome email with first check-in link
     await resend.emails.send({
-      from: 'OpWell Concierge <team@opwellconcierge.com>',
+      from: 'OpWell Concierge <dr.oluwole@opwellconcierge.com>',
       to: email,
       subject: 'Your OpWell Recovery Monitoring Program Begins',
       html: `
