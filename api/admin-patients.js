@@ -28,12 +28,22 @@ module.exports = async function handler(req, res) {
         ? Math.round(qor15Scores.reduce((a, b) => a + b, 0) / qor15Scores.length)
         : null;
 
+      // If token is missing, generate one and save it
+      let token = p.token;
+      if (!token) {
+        console.warn('⚠️ Patient has no token, generating one:', p.id);
+        token = await db.generateAndSaveToken(p.id);
+        if (token) {
+          console.log('✅ Token generated and saved for patient:', p.id);
+        }
+      }
+
       return {
         id: p.id,
         name: p.name,
         email: p.email,
         phone: p.phone,
-        token: p.token,
+        token: token,
         surgeryType: p.surgery_type || p.surgeryType,
         surgeryDate: p.surgery_date || p.surgeryDate,
         lastCheckIn: p.last_checkin || p.lastCheckIn,
