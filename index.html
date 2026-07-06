@@ -17548,17 +17548,25 @@
         if (page) {
           page.classList.add('active');
           window.scrollTo({ top: 0 });
-          initFadeIns();
-          updatePageMeta(pageId);
+          try { initFadeIns(); } catch(e) { console.error('initFadeIns error:', e); }
+          try { updatePageMeta(pageId); } catch(e) { console.error('updatePageMeta error:', e); }
           if (pageId === 'admin' && typeof loadAdminDashboard === 'function') {
-            loadAdminDashboard();
+            try { loadAdminDashboard(); } catch(e) { console.error('loadAdminDashboard error:', e); }
           }
         }
       }, 250);
     } else {
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
       const page = document.getElementById('page-' + pageId);
-      if (page) { page.classList.add('active'); window.scrollTo({ top: 0 }); initFadeIns(); updatePageMeta(pageId); if (pageId === 'admin' && typeof loadAdminDashboard === 'function') { loadAdminDashboard(); } }
+      if (page) {
+        page.classList.add('active');
+        window.scrollTo({ top: 0 });
+        try { initFadeIns(); } catch(e) { console.error('initFadeIns error:', e); }
+        try { updatePageMeta(pageId); } catch(e) { console.error('updatePageMeta error:', e); }
+        if (pageId === 'admin' && typeof loadAdminDashboard === 'function') {
+          try { loadAdminDashboard(); } catch(e) { console.error('loadAdminDashboard error:', e); }
+        }
+      }
     }
     // Meta Pixel — track key page views
     if (typeof fbq !== 'undefined') {
@@ -17583,7 +17591,7 @@
   });
 
   // On page load, check URL path and show correct page
-  (function() {
+  function initializePageRouting() {
     var path = window.location.pathname.replace(/^\//, '').replace(/\.html$/, '');
     var hashPath = window.location.hash.replace(/^#\//, '');
 
@@ -17597,7 +17605,15 @@
       // Handle hash-based routing (e.g., /#/admin)
       showPage(hashPath, true);
     }
-  })();
+  }
+
+  // Run immediately
+  initializePageRouting();
+
+  // Also run on DOMContentLoaded as failsafe
+  document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(initializePageRouting, 100);
+  });
 
   // Helper function to show admin page explicitly
   window.showAdminPage = function() {
