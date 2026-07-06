@@ -17647,10 +17647,19 @@
 
           diagDiv.innerHTML += '<br><br>✅ Added active class to page-admin';
 
+          // Scroll to top
+          document.body.scrollTop = 0;
+          document.documentElement.scrollTop = 0;
+          window.scrollTo(0, 0);
+
           // Verify it worked
           setTimeout(function() {
             const newDisplay = window.getComputedStyle(adminPage).display;
             diagDiv.innerHTML += `<br>New display style: ${newDisplay}`;
+
+            // Check if admin content is visible
+            const banner = adminPage.querySelector('[style*="fee2e2"]');
+            diagDiv.innerHTML += `<br>Red banner found: ${!!banner}`;
           }, 100);
         }
       }, 300);
