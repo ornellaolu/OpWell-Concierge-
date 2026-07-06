@@ -14825,7 +14825,7 @@
             <li><div class="service-check">✓</div>HSA & FSA accepted</li>
           </ul>
         </div>
-        <a onclick="showPage('schedule')" class="btn-primary" style="cursor:pointer; display:inline-block; margin-top: auto;">Get Started →</a>
+        <a onclick="buyMasterclass()" class="btn-primary" style="cursor:pointer; display:inline-block; margin-top: auto;">Get Started →</a>
       </div>
 
       <!-- TIER 2: MOST POPULAR -->
@@ -17434,6 +17434,28 @@
     } catch (err) {
       alert('Connection error. Please try again.');
       btn.disabled = false; btn.textContent = 'Pay Now →';
+    }
+  }
+
+  async function buyMasterclass() {
+    try {
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          items: ['The Interactive Surgical Prep Blueprint'],
+          email: '',
+          patientName: ''
+        })
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        alert('Payment error: ' + (data.error || 'Unknown error. Please try again.'));
+      }
+    } catch (err) {
+      alert('Connection error. Please try again.');
     }
   }
 
