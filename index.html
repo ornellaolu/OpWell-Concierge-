@@ -17615,21 +17615,27 @@
     setTimeout(initializePageRouting, 100);
 
     // FORCE-SHOW FALLBACK: If on /admin path, ensure page-admin is visible
-    if (window.location.pathname === '/admin') {
+    const pathname = window.location.pathname;
+    if (pathname.includes('admin') || pathname === '/admin' || pathname.endsWith('/admin')) {
       setTimeout(function() {
         const adminPage = document.getElementById('page-admin');
         if (adminPage) {
           // Force remove active class from all pages
           document.querySelectorAll('.page').forEach(p => {
             p.classList.remove('active');
-            p.style.display = 'none';
+            p.style.display = 'none !important';
             p.style.opacity = '0';
           });
-          // Force add active class to admin page
+          // Force add active class to admin page and make SURE it's visible
           adminPage.classList.add('active');
-          adminPage.style.display = 'block';
+          adminPage.style.display = 'block !important';
           adminPage.style.opacity = '1';
+          adminPage.style.visibility = 'visible';
+          adminPage.style.zIndex = '10';
           window.scrollTo(0, 0);
+          console.log('✅ Admin page forced to show');
+        } else {
+          console.error('❌ page-admin element not found');
         }
       }, 300);
     }
