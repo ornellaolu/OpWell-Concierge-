@@ -106,16 +106,25 @@ module.exports = async function handler(req, res) {
     `;
 
     try {
-      const emailResponse = await resend.emails.send({
+      console.log('Attempting to send check-in email with:', {
         from: 'OpWell Concierge <noreply@quaarloii.resend.app>',
+        to: 'ornellaolu@gmail.com',
+        apiKeyExists: !!process.env.RESEND_API_KEY,
+        apiKeyLength: process.env.RESEND_API_KEY?.length
+      });
+
+      const emailResponse = await resend.emails.send({
+        from: 'OpWell Concierge <onboarding@resend.dev>',
         to: 'ornellaolu@gmail.com',
         subject: `Recovery Check-In: ${esc(patient.name)} — POD ${pod}`,
         html: emailHtml,
       });
-      console.log('Email sent successfully:', emailResponse);
+      console.log('✅ Email sent successfully:', emailResponse);
     } catch (emailErr) {
-      console.error('Failed to send email to Dr. Oluwole:', {
+      console.error('❌ Failed to send email:', {
         error: emailErr.message,
+        code: emailErr.code,
+        status: emailErr.statusCode,
         stack: emailErr.stack,
         patient: patient.id,
         timestamp: new Date().toISOString()
