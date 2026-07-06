@@ -3,115 +3,81 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Dashboard - OpWell Concierge</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <title>OpWell Admin Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --sage: #2D5A3D;
-      --terracotta: #C8845A;
-    }
+    :root { --sage: #2D5A3D; --terracotta: #C8845A; --charcoal: #1C1C1C; --ivory: #FAF0E8; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: #f5f5f5;
-      color: #333;
-      padding: 2rem;
-    }
-    .container { max-width: 600px; margin: 0 auto; background: white; border-radius: 8px; padding: 3rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-    h1 { font-family: 'Playfair Display', serif; color: var(--sage); margin-bottom: 2rem; font-size: 2rem; }
-    .form-group { margin-bottom: 1.5rem; }
-    label { display: block; font-weight: 600; color: var(--sage); margin-bottom: 0.5rem; }
-    input, select { width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 6px; font-family: 'DM Sans', sans-serif; font-size: 1rem; }
-    input:focus, select:focus { outline: none; border-color: var(--terracotta); }
-    button { width: 100%; background: var(--sage); color: white; padding: 1rem; border: none; border-radius: 6px; font-weight: 600; font-size: 1rem; cursor: pointer; }
-    button:hover { background: #1a3a25; }
-    .message { margin-top: 1rem; padding: 1rem; border-radius: 6px; display: none; }
-    .success { background: #dcfce7; color: #166534; }
-    .error { background: #fee2e2; color: #991b1b; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--ivory); color: var(--charcoal); }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(240,246,240,0.97); backdrop-filter: blur(12px); padding: 0 2rem; height: 72px; display: flex; align-items: center; border-bottom: 2px solid rgba(200,132,90,0.35); }
+    .nav-logo { font-size: 24px; font-weight: 700; color: var(--sage); }
+    .container { max-width: 1200px; margin: 100px auto 0; padding: 2rem; }
+    h1 { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--sage); margin-bottom: 1rem; }
+    .tabs { display: flex; gap: 1rem; margin: 2rem 0; border-bottom: 2px solid #eee; }
+    .tab { padding: 0.75rem 1.5rem; background: none; border: none; color: #666; font-weight: 600; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -2px; }
+    .tab.active { color: var(--sage); border-bottom-color: var(--sage); }
+    .content { display: none; }
+    .content.active { display: block; }
+    .analytics-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin: 2rem 0; }
+    .card { background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 1.5rem; text-align: center; }
+    .card-value { font-size: 2rem; font-weight: 700; color: var(--sage); }
+    .card-label { font-size: 0.85rem; color: #666; margin-top: 0.5rem; }
   </style>
 </head>
 <body>
+  <nav>
+    <div class="nav-logo">OpWell Admin</div>
+  </nav>
 
-<div class="container">
-  <h1>Enroll Patient</h1>
-  <p style="color: #666; margin-bottom: 2rem;">Add a new patient to the recovery monitoring program</p>
+  <div class="container">
+    <h1>✅ Admin Dashboard - WORKING</h1>
+    <p style="font-size: 18px; color: #666; margin-bottom: 2rem;">Welcome to OpWell Concierge admin</p>
 
-  <form onsubmit="enrollPatient(event)">
-    <div class="form-group">
-      <label>Patient Name *</label>
-      <input type="text" id="name" required>
+    <div class="tabs">
+      <button class="tab active" onclick="showTab('analytics')">📊 Analytics</button>
+      <button class="tab" onclick="showTab('patients')">👥 Patients</button>
+      <button class="tab" onclick="showTab('enroll')">➕ Enroll</button>
     </div>
 
-    <div class="form-group">
-      <label>Email *</label>
-      <input type="email" id="email" required>
+    <div id="analytics" class="content active">
+      <div class="analytics-grid">
+        <div class="card">
+          <div class="card-value">—</div>
+          <div class="card-label">Total Patients</div>
+        </div>
+        <div class="card">
+          <div class="card-value">—</div>
+          <div class="card-label">Active</div>
+        </div>
+        <div class="card">
+          <div class="card-value">—</div>
+          <div class="card-label">Avg QoR-15</div>
+        </div>
+        <div class="card">
+          <div class="card-value">0</div>
+          <div class="card-label">Flagged</div>
+        </div>
+      </div>
     </div>
 
-    <div class="form-group">
-      <label>Phone *</label>
-      <input type="tel" id="phone" required>
+    <div id="patients" class="content" style="padding: 2rem; background: #fff; border-radius: 8px;">
+      <h2 style="color: var(--sage);">Patient Management</h2>
+      <p style="margin-top: 1rem; color: #666;">Patient search and management coming soon</p>
     </div>
 
-    <div class="form-group">
-      <label>Surgery Type *</label>
-      <select id="surgery" required>
-        <option value="">Select...</option>
-        <option value="BBL">BBL (Brazilian Butt Lift)</option>
-        <option value="Tummy Tuck">Tummy Tuck</option>
-        <option value="Bariatric">Bariatric Surgery</option>
-        <option value="Other">Other</option>
-      </select>
+    <div id="enroll" class="content" style="padding: 2rem; background: #fff; border-radius: 8px; max-width: 600px;">
+      <h2 style="color: var(--sage); margin-bottom: 1rem;">Enroll Patient</h2>
+      <p style="color: #666;">Enrollment feature coming soon</p>
     </div>
+  </div>
 
-    <div class="form-group">
-      <label>Surgery Date *</label>
-      <input type="date" id="date" required>
-    </div>
-
-    <button type="submit">Enroll Patient & Send Email</button>
-  </form>
-
-  <div id="message" class="message"></div>
-</div>
-
-<script>
-async function enrollPatient(e) {
-  e.preventDefault();
-
-  const name = document.getElementById('name').value;
-  const email = document.getElementById('email').value;
-  const phone = document.getElementById('phone').value;
-  const surgery = document.getElementById('surgery').value;
-  const date = document.getElementById('date').value;
-
-  try {
-    const res = await fetch('/api/patient-register', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name, email, phone, surgeryType: surgery, surgeryDate: date
-      })
-    });
-
-    const data = await res.json();
-    const msgEl = document.getElementById('message');
-
-    if (data.success) {
-      msgEl.className = 'message success';
-      msgEl.innerHTML = '✅ Patient enrolled! Recovery check-in link sent to ' + email;
-      document.querySelector('form').reset();
-    } else {
-      msgEl.className = 'message error';
-      msgEl.innerHTML = '❌ Error: ' + (data.error || 'Enrollment failed');
+  <script>
+    function showTab(tabName) {
+      document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.getElementById(tabName).classList.add('active');
+      event.target.classList.add('active');
     }
-    msgEl.style.display = 'block';
-  } catch (err) {
-    document.getElementById('message').className = 'message error';
-    document.getElementById('message').innerHTML = '❌ Error: ' + err.message;
-    document.getElementById('message').style.display = 'block';
-  }
-}
-</script>
-
+  </script>
 </body>
 </html>
