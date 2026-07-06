@@ -17585,24 +17585,33 @@
   // On page load, check URL path and show correct page
   (function() {
     var path = window.location.pathname.replace(/^\//, '').replace(/\.html$/, '');
-    if (path && path !== '') {
+    var hashPath = window.location.hash.replace(/^#\//, '');
+
+    // Try path first, then hash
+    if (path && path !== '' && path !== 'index') {
       var pageEl = document.getElementById('page-' + path);
       if (pageEl) {
         showPage(path, true);
-      } else if (path === 'admin') {
-        // Fallback: manually show admin page if element exists
-        var adminPage = document.getElementById('page-admin');
-        if (adminPage) {
-          document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-          adminPage.classList.add('active');
-          window.scrollTo({ top: 0 });
-          if (typeof loadAdminDashboard === 'function') {
-            loadAdminDashboard();
-          }
-        }
       }
+    } else if (hashPath && hashPath !== '') {
+      // Handle hash-based routing (e.g., /#/admin)
+      showPage(hashPath, true);
     }
   })();
+
+  // Helper function to show admin page explicitly
+  window.showAdminPage = function() {
+    const adminPage = document.getElementById('page-admin');
+    if (adminPage) {
+      // Make sure it exists and show it
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      adminPage.classList.add('active');
+      window.scrollTo({ top: 0 });
+      if (typeof loadAdminDashboard === 'function') {
+        setTimeout(loadAdminDashboard, 300);
+      }
+    }
+  };
 
   // ── MOBILE NAV ──
   function toggleMobileNav() {
@@ -18144,6 +18153,7 @@
 <!-- ══════════════════════════════════════════════════════ -->
 <div id="page-admin" class="page">
   <style>
+    #page-admin.active { display: block !important; opacity: 1 !important; }
     .admin-container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
     .admin-header { margin-bottom: 2rem; border-bottom: 2px solid var(--sage); padding-bottom: 1.5rem; }
     .admin-title { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--sage); margin: 0 0 0.5rem; }
