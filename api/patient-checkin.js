@@ -128,7 +128,7 @@ module.exports = async function handler(req, res) {
       console.log('📧 Sending check-in email from team@opwellconcierge.com...');
       const emailResponse = await resend.emails.send({
         from: 'OpWell Concierge <dr.oluwole@opwellconcierge.com>',
-        to: 'dr.oluwole@opwellconcierge.com',
+        to: 'ornellaolu@gmail.com',
         subject: `Recovery Check-In: ${esc(patient.name)} — POD ${pod}`,
         html: emailHtml,
       });
