@@ -124,8 +124,19 @@ module.exports = async function handler(req, res) {
       </div>
     `;
 
-    // Email sending temporarily disabled
-    console.log('✅ Check-in saved, email notification skipped for now');
+    // Send check-in result email to Dr. Oluwole
+    try {
+      await resend.emails.send({
+        from: 'OpWell Concierge <dr.oluwole@opwellconcierge.com>',
+        to: 'ornellaolu@gmail.com',
+        subject: `Patient Check-In: ${patient.name} — ${patient.surgeryType}`,
+        html: emailHtml
+      });
+      console.log('✅ Check-in email sent to dr.oluwole@opwellconcierge.com');
+    } catch (emailErr) {
+      console.error('⚠️ Failed to send check-in email:', emailErr.message);
+      // Don't fail the request if email fails - check-in was still saved
+    }
 
     return res.status(200).json({
       success: true,
