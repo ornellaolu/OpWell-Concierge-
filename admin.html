@@ -80,7 +80,7 @@
 
     <div id="patients" class="content" style="padding: 2rem; background: #fff; border-radius: 8px;">
       <h2 style="color: var(--sage);">Patient Management</h2>
-      <p style="margin-top: 1rem; color: #666;">Patient search and management coming soon</p>
+      <div style="margin-top: 1rem;" id="patients-list"></div>
     </div>
 
     <div id="enroll" class="content" style="padding: 2rem; background: #fff; border-radius: 8px; max-width: 600px;">
@@ -211,6 +211,7 @@
             }).length;
             document.querySelector('#analytics .analytics-grid > .card:nth-child(1) .card-value').textContent = patients.length;
             document.querySelector('#analytics .analytics-grid > .card:nth-child(2) .card-value').textContent = active;
+            document.querySelector('#analytics .analytics-grid > .card:nth-child(3) .card-value').textContent = data.avgQor15Overall || '—';
           }
         })
         .catch(e => console.error('Error loading analytics:', e));
@@ -221,9 +222,31 @@
         .then(r => r.json())
         .then(data => {
           if (data.success) {
-            const patientsList = (data.patients || []).map(p => `<p style="padding: 0.5rem 0; border-bottom: 1px solid #eee;">${p.name} (${p.email})</p>`).join('');
-            const patientsDiv = document.getElementById('patients');
-            patientsDiv.innerHTML = `<h2 style="color: var(--sage);">Patients (${(data.patients || []).length})</h2><div style="margin-top: 1rem;">${patientsList || '<p style="color: #666;">No patients enrolled yet</p>'}</div>`;
+            const patients = data.patients || [];
+            const patientsList = patients.map(p => {
+              const lastCheckIn = p.lastCheckIn ? new Date(p.lastCheckIn).toLocaleString() : 'Never';
+              const checkInStatus = p.lastCheckIn ? `✅ ${lastCheckIn}` : '❌ Never checked in';
+              const surgeryDate = new Date(p.surgeryDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+              return `
+                <div style="padding: 1rem; background: #fafafa; border: 1px solid #eee; border-radius: 6px; margin-bottom: 1rem;">
+                  <div style="display: flex; justify-content: space-between; align-items: start;">
+                    <div style="flex: 1;">
+                      <h3 style="margin: 0 0 0.5rem; color: var(--sage); font-size: 1rem;">${p.name}</h3>
+                      <p style="margin: 0.25rem 0; color: #666; font-size: 0.9rem;"><strong>Email:</strong> ${p.email}</p>
+                      <p style="margin: 0.25rem 0; color: #666; font-size: 0.9rem;"><strong>Phone:</strong> ${p.phone}</p>
+                      <p style="margin: 0.25rem 0; color: #666; font-size: 0.9rem;"><strong>Surgery:</strong> ${p.surgeryType} (${surgeryDate})</p>
+                    </div>
+                    <div style="text-align: right;">
+                      <p style="margin: 0 0 0.5rem; font-size: 0.9rem; padding: 0.5rem 1rem; border-radius: 4px; ${p.lastCheckIn ? 'background: #dcfce7; color: #166534;' : 'background: #fee2e2; color: #991b1b;'}">${checkInStatus}</p>
+                      ${p.checkInsCount > 0 ? `<p style="margin: 0; color: #666; font-size: 0.85rem;"><strong>${p.checkInsCount}</strong> check-in${p.checkInsCount !== 1 ? 's' : ''}</p>` : ''}
+                      ${p.latestQor15 ? `<p style="margin: 0.25rem 0 0; color: var(--sage); font-size: 0.85rem;"><strong>QoR-15:</strong> ${p.latestQor15}/150</p>` : ''}
+                    </div>
+                  </div>
+                </div>
+              `;
+            }).join('');
+            const patientsListDiv = document.getElementById('patients-list');
+            patientsListDiv.innerHTML = patients.length ? patientsList : '<p style="color: #666;">No patients enrolled yet</p>';
           }
         })
         .catch(e => console.error('Error loading patients:', e));

@@ -19,21 +19,40 @@ module.exports = async function handler(req, res) {
 
     const patients = await db.getAllPatients();
 
-    const patientList = patients.map(p => ({
-      id: p.id,
-      name: p.name,
-      email: p.email,
-      phone: p.phone,
-      surgeryType: p.surgery_type || p.surgeryType,
-      surgeryDate: p.surgery_date || p.surgeryDate,
-      lastCheckIn: p.last_checkin || p.lastCheckIn,
-      createdAt: p.created_at || p.createdAt
+    const patientList = await Promise.all(patients.map(async (p) => {
+      const checkIns = await db.getCheckInHistory(p.id);
+      const qor15Scores = checkIns
+        .filter(c => c.qor15_score)
+        .map(c => parseInt(c.qor15_score));
+      const avgQor15 = qor15Scores.length > 0
+        ? Math.round(qor15Scores.reduce((a, b) => a + b, 0) / qor15Scores.length)
+        : null;
+
+      return {
+        id: p.id,
+        name: p.name,
+        email: p.email,
+        phone: p.phone,
+        surgeryType: p.surgery_type || p.surgeryType,
+        surgeryDate: p.surgery_date || p.surgeryDate,
+        lastCheckIn: p.last_checkin || p.lastCheckIn,
+        createdAt: p.created_at || p.createdAt,
+        checkInsCount: checkIns.length,
+        latestQor15: checkIns.length > 0 ? checkIns[0].qor15_score : null,
+        avgQor15: avgQor15
+      };
     }));
+
+    const avgQor15Overall = patientList
+      .filter(p => p.avgQor15)
+      .reduce((sum, p) => sum + p.avgQor15, 0) / (patientList.filter(p => p.avgQor15).length || 1);
 
     return res.status(200).json({
       success: true,
       patients: patientList,
-      total: patientList.length
+      total: patientList.length,
+      avgQor15Overall: Math.round(avgQor15Overall),
+      totalCheckIns: patientList.reduce((sum, p) => sum + p.checkInsCount, 0)
     });
 
   } catch (err) {
