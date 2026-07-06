@@ -113,6 +113,9 @@ module.exports = async function handler(req, res) {
       </div>
     `;
 
+    let emailSent = false;
+    let emailError = null;
+
     try {
       console.log('📧 Attempting to send check-in email...');
       console.log('   From: OpWell Checkin <onboarding@resend.dev>');
@@ -126,16 +129,22 @@ module.exports = async function handler(req, res) {
         subject: `Recovery Check-In: ${esc(patient.name)} — POD ${pod}`,
         html: emailHtml,
       });
-      console.log('✅ Email response:', {
-        data: emailResponse.data,
-        error: emailResponse.error
-      });
+
+      console.log('📧 Email response:', JSON.stringify(emailResponse));
+
+      if (emailResponse.error) {
+        emailError = emailResponse.error;
+        console.error('❌ Email failed:', emailResponse.error);
+      } else if (emailResponse.data?.id) {
+        emailSent = true;
+        console.log('✅ Email sent successfully, ID:', emailResponse.data.id);
+      }
     } catch (emailErr) {
-      console.error('❌ Email sending error:', {
+      emailError = emailErr.message;
+      console.error('❌ Email exception:', {
         message: emailErr.message,
         code: emailErr.code,
-        status: emailErr.statusCode,
-        patient: patient.id
+        status: emailErr.statusCode
       });
     }
 
@@ -146,6 +155,8 @@ module.exports = async function handler(req, res) {
       debug: {
         patientName: patient.name,
         emailAttempted: true,
+        emailSent: emailSent,
+        emailError: emailError,
         emailTo: 'dr.oluwole@opwellconcierge.com',
         qor15Score: checkInData.qor15?.total || 'not provided'
       }
