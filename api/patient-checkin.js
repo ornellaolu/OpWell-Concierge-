@@ -142,7 +142,13 @@ module.exports = async function handler(req, res) {
     return res.status(200).json({
       success: true,
       checkInId: checkIn.id,
-      message: 'Check-in submitted successfully and stored in your records.'
+      message: 'Check-in submitted successfully and stored in your records.',
+      debug: {
+        patientName: patient.name,
+        emailAttempted: true,
+        emailTo: 'dr.oluwole@opwellconcierge.com',
+        qor15Score: checkInData.qor15?.total || 'not provided'
+      }
     });
 
   } catch (err) {
