@@ -124,23 +124,8 @@ module.exports = async function handler(req, res) {
       </div>
     `;
 
-    try {
-      console.log('📧 Sending check-in email from team@opwellconcierge.com...');
-      const emailResponse = await resend.emails.send({
-        from: 'OpWell Concierge <dr.oluwole@opwellconcierge.com>',
-        to: 'ornellaolu@gmail.com',
-        subject: `Recovery Check-In: ${esc(patient.name)} — POD ${pod}`,
-        html: emailHtml,
-      });
-
-      if (emailResponse.error) {
-        console.error('❌ Email failed:', emailResponse.error.message);
-      } else {
-        console.log('✅ Email sent successfully:', emailResponse.data?.id);
-      }
-    } catch (emailErr) {
-      console.error('❌ Email exception:', emailErr.message);
-    }
+    // Email sending temporarily disabled
+    console.log('✅ Check-in saved, email notification skipped for now');
 
     return res.status(200).json({
       success: true,
