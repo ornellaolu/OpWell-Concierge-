@@ -12,11 +12,20 @@ module.exports = async function handler(req, res) {
       return res.status(400).json({ error: 'Missing authentication token' });
     }
 
+    console.log('📍 Looking up patient by token:', token.substring(0, 20) + '...');
+
     const patient = await db.getPatientByToken(token);
+
     if (!patient) {
-      console.error('Token lookup failed for token:', token);
-      return res.status(401).json({ error: 'Invalid or expired token', token: token.substring(0, 5) });
+      console.error('❌ Token lookup failed for token:', token);
+      return res.status(401).json({
+        error: 'Invalid or expired token',
+        tokenLength: token.length,
+        token: token.substring(0, 20) + '...'
+      });
     }
+
+    console.log('✅ Patient found:', patient.name);
 
     const checkIns = await db.getCheckInHistory(patient.id);
 
