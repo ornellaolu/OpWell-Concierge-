@@ -1,7 +1,7 @@
 const PRICES = {
-  // Tier 1: Self-Paced Masterclass
-  'Surgery Prep Masterclass':                              9900,
+  // Tier 1: Blueprint
   'The Interactive Surgical Prep Blueprint':              9900,
+  'Surgery Prep Masterclass':                              9900,
   'Surgical Anxiety Digital Module':                       4900,
 
   // Tier 2: Comprehensive Care
