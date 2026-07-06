@@ -33,6 +33,7 @@ module.exports = async function handler(req, res) {
         name: p.name,
         email: p.email,
         phone: p.phone,
+        token: p.token,
         surgeryType: p.surgery_type || p.surgeryType,
         surgeryDate: p.surgery_date || p.surgeryDate,
         lastCheckIn: p.last_checkin || p.lastCheckIn,
