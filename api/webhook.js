@@ -32,12 +32,14 @@ module.exports = async function handler(req, res) {
 
     // Vercel may already parse the body — check for pre-parsed body first
     if (typeof req.body === 'string') {
-      rawBody = req.body;
+      // Convert string to Buffer for Stripe verification
+      rawBody = Buffer.from(req.body, 'utf8');
     } else if (Buffer.isBuffer(req.body)) {
       rawBody = req.body;
     } else if (req.body && typeof req.body === 'object') {
-      // Body was already parsed as JSON — re-stringify it without whitespace
-      rawBody = JSON.stringify(req.body);
+      // Body was already parsed as JSON — re-stringify it and convert to Buffer
+      const stringBody = JSON.stringify(req.body);
+      rawBody = Buffer.from(stringBody, 'utf8');
     } else {
       // Fall back to streaming if nothing else worked
       rawBody = await getRawBody(req);
@@ -49,8 +51,10 @@ module.exports = async function handler(req, res) {
     } catch (err) {
       console.error('Webhook signature verification failed:', err.message);
       console.error('Raw body type:', typeof rawBody);
+      console.error('Raw body is Buffer:', Buffer.isBuffer(rawBody));
       console.error('Signature header:', sig);
       console.error('Webhook secret exists:', !!process.env.STRIPE_WEBHOOK_SECRET);
+      console.error('Webhook secret length:', process.env.STRIPE_WEBHOOK_SECRET?.length);
       return res.status(400).json({ error: 'Invalid signature', details: err.message });
     }
 
