@@ -6,19 +6,20 @@ function esc(str) {
   return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
-// Stripe sends raw body — Vercel needs this config
-module.exports.config = { api: { bodyParser: false } };
-
-function getRawBody(req) {
+async function getRawBody(req) {
   return new Promise((resolve, reject) => {
     const chunks = [];
-    req.on('data', chunk => chunks.push(chunk));
-    req.on('end', () => resolve(Buffer.concat(chunks)));
+    req.on('data', chunk => {
+      chunks.push(chunk);
+    });
+    req.on('end', () => {
+      resolve(Buffer.concat(chunks));
+    });
     req.on('error', reject);
   });
 }
 
-module.exports = async function handler(req, res) {
+async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -27,22 +28,24 @@ module.exports = async function handler(req, res) {
     const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
     const resend = new Resend(process.env.RESEND_API_KEY);
 
-    let rawBody;
     const sig = req.headers['stripe-signature'];
 
-    // Vercel may already parse the body — check for pre-parsed body first
+    // CRITICAL: Get raw body from the request stream
+    // If req.body exists as a string, use it; otherwise stream it
+    let rawBody;
     if (typeof req.body === 'string') {
-      // Convert string to Buffer for Stripe verification
       rawBody = Buffer.from(req.body, 'utf8');
-    } else if (Buffer.isBuffer(req.body)) {
-      rawBody = req.body;
-    } else if (req.body && typeof req.body === 'object') {
-      // Body was already parsed as JSON — re-stringify it and convert to Buffer
-      const stringBody = JSON.stringify(req.body);
-      rawBody = Buffer.from(stringBody, 'utf8');
     } else {
-      // Fall back to streaming if nothing else worked
-      rawBody = await getRawBody(req);
+      // Try to read from stream if body hasn't been parsed
+      try {
+        rawBody = await getRawBody(req);
+      } catch (e) {
+        console.error('Failed to read body stream:', e.message);
+        // Last resort: if body is an object, it was pre-parsed and we can't recover the original
+        console.error('CRITICAL: Body is pre-parsed as object. Webhook signature cannot be verified.');
+        console.error('This indicates bodyParser: false config is not working in Vercel.');
+        return res.status(400).json({ error: 'Cannot verify webhook signature - body parser misconfiguration' });
+      }
     }
 
     let event;
@@ -50,8 +53,8 @@ module.exports = async function handler(req, res) {
       event = stripe.webhooks.constructEvent(rawBody, sig, process.env.STRIPE_WEBHOOK_SECRET);
     } catch (err) {
       console.error('Webhook signature verification failed:', err.message);
-      console.error('Raw body type:', typeof rawBody);
-      console.error('Raw body is Buffer:', Buffer.isBuffer(rawBody));
+      console.error('Raw body sample (first 100 chars):', rawBody.toString().substring(0, 100));
+      console.error('Raw body length:', rawBody.length);
       console.error('Signature header:', sig);
       console.error('Webhook secret exists:', !!process.env.STRIPE_WEBHOOK_SECRET);
       console.error('Webhook secret length:', process.env.STRIPE_WEBHOOK_SECRET?.length);
@@ -397,4 +400,13 @@ module.exports = async function handler(req, res) {
     console.error('Webhook error:', err);
     return res.status(500).json({ error: 'An internal error occurred.' });
   }
+}
+
+// CRITICAL CONFIG: Disable body parser so we get raw stream
+handler.config = {
+  api: {
+    bodyParser: false,
+  },
 };
+
+module.exports = handler;
