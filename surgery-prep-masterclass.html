@@ -5587,37 +5587,55 @@ function validateAccess() {
 
 // Auto-unlock if they have a valid token in URL or localStorage
 (function() {
+  console.log('🔍 Checking for magic link token...');
   // Check URL for magic link token
   var params = new URLSearchParams(window.location.search);
   var token = params.get('token');
+  console.log('Token found:', !!token, token ? token.substring(0, 20) + '...' : 'none');
 
   if (token) {
     // Validate magic link token
     try {
-      var decoded = JSON.parse(atob(token.replace(/-/g,'+').replace(/_/g,'/')));
+      console.log('🔐 Attempting to decode token...');
+      var payload = token.replace(/-/g,'+').replace(/_/g,'/');
+      console.log('Payload after conversion:', payload.substring(0, 20) + '...');
+
+      var decoded = JSON.parse(atob(payload));
+      console.log('✅ Token decoded successfully:', decoded);
+
       var expiry = decoded.x;
       var email = decoded.e;
       var now = Date.now();
+      console.log('Email:', email, 'Expiry:', expiry, 'Now:', now, 'Expired?', now > expiry);
 
       if (now <= expiry && email) {
+        console.log('✅ Token valid! Unlocking course...');
         // Valid token! Unlock and save session
         document.getElementById('access-gate').style.display = 'none';
         document.getElementById('masterclass-content').style.display = 'block';
         localStorage.setItem('mc_access', token);
         // Clean up URL (remove token)
         window.history.replaceState({}, document.title, window.location.pathname);
+        console.log('✅ Course unlocked!');
         return;
+      } else {
+        console.error('❌ Token validation failed: expired or missing email');
       }
     } catch(e) {
-      console.error('Invalid token:', e);
+      console.error('❌ Token decode error:', e.message, e);
     }
+  } else {
+    console.log('ℹ️ No token in URL, checking localStorage...');
   }
 
   // Fall back to localStorage if no valid URL token
   var saved = localStorage.getItem('mc_access');
   if (saved) {
+    console.log('📦 Found saved token in localStorage, auto-validating...');
     document.getElementById('access-code-input').value = saved;
     validateAccess();
+  } else {
+    console.log('ℹ️ No saved token in localStorage either');
   }
 })();
 </script>
