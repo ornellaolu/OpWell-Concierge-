@@ -5633,11 +5633,36 @@ function validateAccess() {
       console.error('❌ Token decode error:', e.message, e);
     }
   } else {
-    console.log('ℹ️ No token in URL, checking localStorage...');
+    console.log('ℹ️ No token in URL, checking for demo mode...');
+  }
+
+  // Check for demo mode
+  var demoMode = params.get('demo') === 'true';
+  if (demoMode) {
+    console.log('🎓 DEMO MODE ACTIVATED - Public course access');
+    document.getElementById('access-gate').style.display = 'none';
+    document.getElementById('masterclass-content').style.display = 'block';
+    localStorage.setItem('mc_demo', 'true');
+    // Add demo banner
+    var demoBanner = document.createElement('div');
+    demoBanner.style.cssText = 'background:#f9f0e6;border-bottom:2px solid #c8845a;padding:12px 20px;text-align:center;font-size:0.9rem;color:#3b2a1a;font-weight:600;';
+    demoBanner.innerHTML = '📚 Demo Mode: Complete access to all course materials';
+    document.body.insertBefore(demoBanner, document.body.firstChild);
+    console.log('✅ Demo course unlocked!');
+    return;
   }
 
   // Fall back to localStorage if no valid URL token
   var saved = localStorage.getItem('mc_access');
+  var demoSaved = localStorage.getItem('mc_demo');
+
+  if (demoSaved === 'true') {
+    console.log('📦 Demo mode previously enabled, re-activating...');
+    document.getElementById('access-gate').style.display = 'none';
+    document.getElementById('masterclass-content').style.display = 'block';
+    return;
+  }
+
   if (saved) {
     console.log('📦 Found saved token in localStorage, auto-validating...');
     document.getElementById('access-code-input').value = saved;
