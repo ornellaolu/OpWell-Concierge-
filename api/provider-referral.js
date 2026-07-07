@@ -170,9 +170,11 @@ module.exports = async function handler(req, res) {
         return res.status(400).json({ error: 'Invalid email format' });
       }
 
+      // Send notification email to Dr. Oluwole
       await resend.emails.send({
         from: 'OpWell Concierge <info@opwellconcierge.com>',
         to: 'dr.oluwole@opwellconcierge.com',
+        replyTo: email,
         subject: `Private Retainer Application: ${esc(fullName)}`,
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #2c2c2c;">
@@ -200,6 +202,47 @@ module.exports = async function handler(req, res) {
           </div>
         `,
       });
+
+      // Send confirmation email to applicant
+      await resend.emails.send({
+        from: 'OpWell Concierge <info@opwellconcierge.com>',
+        to: email,
+        subject: 'Your Private Retainer Application — Received & Under Review',
+        html: `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #2c2c2c;">
+            <div style="background: linear-gradient(135deg, #2d5a3d 0%, #3a6b4a 100%); padding: 32px 40px; text-align: center;">
+              <h1 style="color: #fff; font-size: 1.4rem; margin: 0; letter-spacing: -0.5px;">OpWell Concierge™</h1>
+              <p style="color: rgba(255,255,255,0.8); font-size: 0.85rem; margin: 8px 0 0; letter-spacing: 0.08em; text-transform: uppercase;">Private Retainer Program</p>
+            </div>
+            <div style="padding: 40px; background: #fdf8f4;">
+              <h2 style="color: #2d5a3d; font-size: 1.3rem; margin-top: 0;">Application Received</h2>
+              <p style="color: #555; line-height: 1.8; font-size: 0.95rem;">Hi ${esc(fullName)},</p>
+              <p style="color: #555; line-height: 1.8; font-size: 0.95rem;">Thank you for submitting your private retainer application to OpWell Concierge. We've received your information and are reviewing your request.</p>
+
+              <div style="background: rgba(45,90,61,0.06); border-left: 4px solid #2d5a3d; padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 24px 0;">
+                <p style="margin: 0; font-size: 0.9rem; color: #555;"><strong>What happens next:</strong></p>
+                <ol style="margin: 8px 0 0; padding-left: 20px; color: #555; font-size: 0.9rem;">
+                  <li>Dr. Oluwole personally reviews your application</li>
+                  <li>She'll reach out within 24 hours to discuss your goals</li>
+                  <li>Together, you'll design a customized care partnership</li>
+                </ol>
+              </div>
+
+              <div style="background: #fff; border: 1px solid #e8d9c8; border-radius: 8px; padding: 16px 20px; margin: 24px 0;">
+                <p style="margin: 0; font-size: 0.85rem; color: #888;"><strong>Questions in the meantime?</strong><br>Call (678) 235-5822 or reply to this email.</p>
+              </div>
+
+              <p style="color: #555; line-height: 1.8; font-size: 0.95rem;">We look forward to partnering with you.</p>
+              <p style="color: #555; line-height: 1.8; font-size: 0.95rem;"><strong>Warmly,</strong><br><strong style="color: #2d5a3d;">Dr. Ornella Oluwole</strong><br>Board-Certified Anesthesiologist</p>
+            </div>
+            <div style="background: #3b2a1a; padding: 20px 40px; text-align: center;">
+              <p style="color: rgba(232, 201, 122, 0.6); font-size: 0.75rem; margin: 0;">OpWell Concierge™ · Anesthesiologist-Led Telehealth · GA, OH & VA<br>(678) 235-5822 · dr.oluwole@opwellconcierge.com</p>
+            </div>
+          </div>
+        `,
+      });
+
+      console.log('✅ Retainer application received from', email, '— emails sent to applicant and Dr. Oluwole');
 
     } else {
       return res.status(400).json({ error: 'Invalid form type' });
