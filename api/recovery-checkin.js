@@ -73,7 +73,7 @@ module.exports = async function handler(req, res) {
       try {
         console.log('📧 Sending schedule notification to dr.oluwole@opwellconcierge.com...');
         await resend.emails.send({
-          from: 'OpWell Concierge <info@opwellconcierge.com>',
+          from: 'OpWell Concierge <dr.oluwole@opwellconcierge.com>',
           to: 'dr.oluwole@opwellconcierge.com',
           replyTo: email,
           subject: `Recovery Check-In Schedule Created: ${patientName} — ${procedure}`,
