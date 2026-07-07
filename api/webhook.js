@@ -1,5 +1,5 @@
 const { Resend } = require('resend');
-const { bookingConfirmationEmail, laborDeliveryConfirmationEmail, masterclassConfirmationEmail } = require('./email-templates');
+const { bookingConfirmationEmail, laborDeliveryConfirmationEmail, masterclassConfirmationEmail, tier1CourseAccessEmail } = require('./email-templates');
 
 const BLOG_ACCESS_CODE = 'OPWELL2026';
 
@@ -91,24 +91,24 @@ async function handler(req, res) {
       const services = session.metadata.services || 'Consultation';
       const amountPaid = (session.amount_total / 100).toFixed(2);
 
-      // Handle Masterclass purchases
-      if (services.includes('Surgery Prep Masterclass')) {
+      // Handle Tier 1 Self-Paced Course (Masterclass / Blueprint) purchases
+      if (services.includes('Surgery Prep Masterclass') || services.includes('Interactive Surgical Prep Blueprint')) {
         const now = Date.now();
         const expiry = now + (90 * 24 * 60 * 60 * 1000); // 90 days
         const accessCode = 'MC-' + Buffer.from(JSON.stringify({ e: email, x: expiry, t: now })).toString('base64url');
 
         if (email) {
           try {
-            console.log('\ud83d\udce7 Sending masterclass confirmation email to:', email);
+            console.log('\ud83d\udce7 Sending tier 1 course access email to:', email);
             await resend.emails.send({
               from: 'OpWell Concierge <info@opwellconcierge.com>',
               to: email,
-              subject: 'Your Surgery Prep Masterclass is Ready \u2013 Lifetime Access',
-              html: masterclassConfirmationEmail(email, accessCode),
+              subject: 'Access Granted: Your Interactive Surgical Prep Blueprint is Ready!',
+              html: tier1CourseAccessEmail(email, amountPaid),
             });
-            console.log('\u2705 Masterclass confirmation email sent successfully');
+            console.log('\u2705 Tier 1 course access email sent successfully');
           } catch (emailErr) {
-            console.error('\u274c Failed to send masterclass email:', emailErr.message);
+            console.error('\u274c Failed to send tier 1 course email:', emailErr.message);
           }
 
           // Also notify Dr. Oluwole

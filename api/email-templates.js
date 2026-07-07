@@ -449,4 +449,163 @@ function masterclassConfirmationEmail(patientEmail, accessCode) {
 </html>`;
 }
 
-module.exports = { bookingConfirmationEmail, laborDeliveryConfirmationEmail, masterclassConfirmationEmail };
+function tier1CourseAccessEmail(patientEmail, amountPaid) {
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Interactive Surgical Prep Blueprint Access</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; }
+    .container { max-width: 600px; margin: 0 auto; background: #fdf8f4; }
+    .header { background: linear-gradient(135deg, #2d5a3d 0%, #3a6b4a 100%); padding: 40px 24px; text-align: center; }
+    .header h1 { margin: 0; font-size: 28px; font-weight: 700; color: #fff; letter-spacing: -0.5px; }
+    .header p { margin: 8px 0 0; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.8); }
+    .content { padding: 40px 32px; }
+    .greeting { font-size: 16px; color: #555; line-height: 1.8; margin-bottom: 24px; }
+    .greeting strong { color: #2d5a3d; }
+    .section { margin-bottom: 32px; }
+    .section-title { font-size: 14px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: #2d5a3d; margin-bottom: 12px; }
+    .section-content { background: #fff; border-left: 4px solid #c8845a; padding: 20px 24px; border-radius: 0 8px 8px 0; }
+    .summary-item { margin: 10px 0; font-size: 15px; color: #555; }
+    .summary-item strong { color: #2d5a3d; }
+    .cta-button { display: inline-block; background: #2d5a3d; color: #fff; padding: 14px 32px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 15px; margin: 12px 0; }
+    .cta-button:hover { background: #1f3f28; }
+    .feature-list { list-style: none; padding: 0; margin: 0; }
+    .feature-list li { padding: 10px 0; font-size: 15px; color: #555; border-bottom: 1px solid #e8d9c8; }
+    .feature-list li:last-child { border-bottom: none; }
+    .highlight-box { background: linear-gradient(135deg, rgba(45, 90, 61, 0.06) 0%, rgba(200, 132, 90, 0.04) 100%); border-left: 4px solid #2d5a3d; padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+    .highlight-box p { margin: 0; font-size: 14px; color: #555; line-height: 1.6; }
+    .security-banner { background: #2d5a3d; color: #fff; padding: 16px 20px; border-radius: 8px; margin: 20px 0; }
+    .security-banner .label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.85; margin-bottom: 6px; }
+    .security-banner p { margin: 0; font-size: 14px; line-height: 1.6; }
+    .step { display: flex; gap: 12px; margin-bottom: 12px; }
+    .step-num { font-size: 20px; font-weight: 700; color: #c8845a; min-width: 24px; }
+    .step-text { font-size: 15px; color: #555; }
+    .email-display { background: #f5f5f5; padding: 12px 16px; border-radius: 6px; font-family: 'Courier New', monospace; font-size: 14px; color: #2d5a3d; font-weight: 600; word-break: break-all; margin: 8px 0; }
+    .footer { background: #3b2a1a; padding: 24px 32px; text-align: center; }
+    .footer p { margin: 6px 0; font-size: 13px; color: rgba(232, 201, 122, 0.7); line-height: 1.6; }
+    @media (max-width: 600px) {
+      .header { padding: 32px 16px; }
+      .header h1 { font-size: 24px; }
+      .content { padding: 24px 16px; }
+      .section-content { padding: 16px; }
+      .cta-button { width: 100%; text-align: center; box-sizing: border-box; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>OpWell Concierge™</h1>
+      <p>Evidence-Based Surgical Preparation</p>
+    </div>
+
+    <div class="content">
+      <h2 style="font-size: 24px; margin-top: 0; color: #2d5a3d; line-height: 1.3;">Your Access is Confirmed</h2>
+
+      <div class="greeting">
+        Thank you for purchasing <strong>The Interactive Surgical Prep Blueprint</strong>. Your payment has been successfully processed, and your lifetime digital access to the course portal is officially active.
+      </div>
+
+      <!-- Purchase Summary -->
+      <div class="section">
+        <div class="section-title">📋 Purchase Summary</div>
+        <div class="section-content">
+          <div class="summary-item"><strong>Product:</strong> The Interactive Surgical Prep Blueprint (Self-Paced Course)</div>
+          <div class="summary-item"><strong>Amount Paid:</strong> $${amountPaid}</div>
+          <div class="summary-item"><strong>Status:</strong> <span style="color: #2d5a3d; font-weight: 600;">✓ Paid & Confirmed</span></div>
+          <div class="summary-item"><strong>Access Level:</strong> Unlimited Lifetime Access (HSA/FSA Eligible)</div>
+        </div>
+      </div>
+
+      <!-- Launch Course -->
+      <div class="section">
+        <div class="section-title">🚀 Step 1: Launch Your Course Portal</div>
+        <div class="section-content">
+          <p style="margin: 0 0 12px; font-size: 15px; color: #555;">Your course features a 22-module, evidence-based guide tailored to prepare your mind and body for surgery, complete with interactive progress tracking and clinical quizzes to monitor your milestones.</p>
+          <a href="https://www.opwellconcierge.com/masterclass" class="cta-button" style="display: inline-block;">💻 Launch Your Course Portal</a>
+        </div>
+      </div>
+
+      <!-- Passwordless Login -->
+      <div class="section">
+        <div class="section-title">🔐 Instant Passwordless Access</div>
+        <div class="section-content">
+          <p style="margin: 0 0 12px; font-size: 15px; color: #555;">No access codes or password creation required. Simply click the link above and log in using your checkout email address:</p>
+          <div class="email-display">${escapeHtml(patientEmail)}</div>
+          <p style="margin: 12px 0 0; font-size: 14px; color: #888;">Our Vercel backend will instantly authenticate your profile and load your personal dashboard.</p>
+        </div>
+      </div>
+
+      <!-- What's Included -->
+      <div class="section">
+        <div class="section-title">📚 What's Included in Your Course</div>
+        <div class="section-content">
+          <ul class="feature-list">
+            <li>✓ <strong>22 Interactive Modules</strong> — Evidence-based surgical prep across all specialties</li>
+            <li>✓ <strong>Personalized Prep Protocols</strong> — Tailored guidelines to optimize your mind and body</li>
+            <li>✓ <strong>Recovery Milestones</strong> — Clear timelines so you know exactly what to expect post-op</li>
+            <li>✓ <strong>Nutrition & Movement Plans</strong> — Guided protocols to safely accelerate healing</li>
+            <li>✓ <strong>Interactive Quizzes</strong> — Built-in checks to ensure you retain key safety insights</li>
+            <li>✓ <strong>Progress Dashboard</strong> — Track your completion and quiz performance</li>
+            <li>✓ <strong>Lifetime Access</strong> — Study anytime, at your own pace, forever</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- How It Works -->
+      <div class="section">
+        <div class="section-title">⚡ How to Get Started</div>
+        <div class="section-content">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-text"><strong>Click the button above</strong> to launch your course portal</div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-text"><strong>Log in with your email:</strong> ${escapeHtml(patientEmail)}</div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-text"><strong>Select your surgery type</strong> for personalized content</div>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-text"><strong>Start learning</strong> at your own pace</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Security & Progress -->
+      <div class="security-banner">
+        <div class="label">🔐 Privacy & Progress Tracking</div>
+        <p>Your email address is your unique identifier. All your quiz scores, module progress, and learning data are securely stored and associated with your email. No passwords to remember—just one-click access every time.</p>
+      </div>
+
+      <!-- Free Resources -->
+      <div class="section" style="background: rgba(45, 90, 61, 0.04); padding: 20px; border-radius: 8px; margin-bottom: 24px;">
+        <p style="margin: 0; font-size: 15px; color: #555;"><strong>📖 Explore Our Free Clinical Library:</strong> For additional reading, visit the <a href="https://www.opwellconcierge.com/blog" style="color: #2d5a3d; text-decoration: none; font-weight: 600;">OpWell Clinical Blog</a>. We publish free, peer-reviewed articles on anesthesia, surgical preparation, and recovery optimization.</p>
+      </div>
+
+      <!-- Support -->
+      <div class="highlight-box">
+        <p><strong>Technical Support:</strong> If you experience any issues accessing your dashboard or logging in, reply directly to this email or call (678) 235-5822. Our team is here to help.</p>
+      </div>
+
+      <p style="margin-top: 32px; margin-bottom: 0; font-size: 15px; color: #555; line-height: 1.8;">We're thrilled to support you through a safer, more confident surgical journey.<br><br><strong>Warmly,</strong><br><strong style="color: #2d5a3d;">The OpWell Concierge Team</strong><br>opwellconcierge.com</p>
+    </div>
+
+    <div class="footer">
+      <p><strong>OpWell Concierge™</strong></p>
+      <p>Digital Health & Surgical Education · Serving GA, OH & VA</p>
+      <p>(678) 235-5822 · <a href="mailto:info@opwellconcierge.com" style="color: rgba(232, 201, 122, 0.9); text-decoration: none;">info@opwellconcierge.com</a></p>
+      <p style="margin-top: 12px; border-top: 1px solid rgba(232, 201, 122, 0.2); padding-top: 12px; font-size: 11px;">Lifetime access · No expiration · HSA/FSA eligible<br>This email contains information about your digital course access.</p>
+    </div>
+  </div>
+</body>
+</html>`;
+}
+
+module.exports = { bookingConfirmationEmail, laborDeliveryConfirmationEmail, masterclassConfirmationEmail, tier1CourseAccessEmail };
