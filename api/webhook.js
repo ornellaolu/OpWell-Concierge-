@@ -27,15 +27,31 @@ module.exports = async function handler(req, res) {
     const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
     const resend = new Resend(process.env.RESEND_API_KEY);
 
-    const rawBody = await getRawBody(req);
+    let rawBody;
     const sig = req.headers['stripe-signature'];
+
+    // Vercel may already parse the body — check for pre-parsed body first
+    if (typeof req.body === 'string') {
+      rawBody = req.body;
+    } else if (Buffer.isBuffer(req.body)) {
+      rawBody = req.body;
+    } else if (req.body && typeof req.body === 'object') {
+      // Body was already parsed as JSON — re-stringify it without whitespace
+      rawBody = JSON.stringify(req.body);
+    } else {
+      // Fall back to streaming if nothing else worked
+      rawBody = await getRawBody(req);
+    }
 
     let event;
     try {
       event = stripe.webhooks.constructEvent(rawBody, sig, process.env.STRIPE_WEBHOOK_SECRET);
     } catch (err) {
       console.error('Webhook signature verification failed:', err.message);
-      return res.status(400).json({ error: 'Invalid signature' });
+      console.error('Raw body type:', typeof rawBody);
+      console.error('Signature header:', sig);
+      console.error('Webhook secret exists:', !!process.env.STRIPE_WEBHOOK_SECRET);
+      return res.status(400).json({ error: 'Invalid signature', details: err.message });
     }
 
     if (event.type === 'checkout.session.completed') {
