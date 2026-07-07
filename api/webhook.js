@@ -1,4 +1,5 @@
 const { Resend } = require('resend');
+const { bookingConfirmationEmail } = require('./email-templates');
 
 const BLOG_ACCESS_CODE = 'OPWELL2026';
 
@@ -259,50 +260,8 @@ async function handler(req, res) {
           await resend.emails.send({
             from: 'OpWell Concierge <info@opwellconcierge.com>',
             to: email,
-            subject: 'Your OpWell Concierge Booking is Confirmed',
-            html: `
-            <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; color: #2c2c2c;">
-              <div style="background: #3b2a1a; padding: 32px 40px; text-align: center;">
-                <h1 style="color: #e8c97a; font-size: 1.6rem; margin: 0; letter-spacing: 0.05em;">OpWell Concierge\u2122</h1>
-                <p style="color: rgba(232,201,122,0.75); margin: 6px 0 0; font-size: 0.85rem; letter-spacing: 0.08em;">ANESTHESIOLOGIST-LED TELEHEALTH</p>
-              </div>
-
-              <div style="background: #fdf8f4; padding: 40px;">
-                <h2 style="color: #3b2a1a; font-size: 1.3rem; margin-top: 0;">Your Booking is Confirmed</h2>
-                <p style="color: #555; line-height: 1.7;">Dear ${esc(patientName)},</p>
-                <p style="color: #555; line-height: 1.7;">Thank you for booking with OpWell Concierge. Your payment has been received and your appointment is confirmed.</p>
-
-                <div style="background: #fff; border: 1px solid #e8d9c8; border-radius: 8px; padding: 24px; margin: 24px 0;">
-                  <h3 style="color: #3b2a1a; margin-top: 0; font-size: 1rem;">Booking Summary</h3>
-                  <p style="margin: 6px 0; color: #555;"><strong>Service:</strong> ${esc(services)}</p>
-                  <p style="margin: 6px 0; color: #555;"><strong>Amount Paid:</strong> $${amountPaid}</p>
-                </div>
-
-                ${masterclassSection}
-                ${mentalWellnessSection}
-
-                <div style="background: #f0f7f2; border: 1px solid #b8d9c4; border-radius: 8px; padding: 20px 24px; margin: 24px 0; text-align: center;">
-                  <p style="margin: 0 0 6px; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #2d5a3d;">Your Clinical Library Access Code</p>
-                  <p style="margin: 0 0 10px; font-size: 2rem; font-weight: 700; letter-spacing: 0.18em; color: #2d5a3d; font-family: monospace;">${BLOG_ACCESS_CODE}</p>
-                  <p style="margin: 0; font-size: 0.82rem; color: #555; line-height: 1.5;">Use this code on the <strong>OpWell Blog</strong> to unlock patient-only clinical articles on surgery preparation, recovery, and more.</p>
-                </div>
-
-                <h3 style="color: #3b2a1a; font-size: 1rem;">What Happens Next</h3>
-                <ol style="color: #555; line-height: 2;">
-                  <li>Our team will contact you within 24 hours to set up your intake forms and schedule your telehealth consultation.</li>
-                  <li>Your telehealth appointment link will be sent to this email before your consultation.</li>
-                  <li>If you have any questions, reply to this email or call us at <strong>(678) 235-5822</strong>.</li>
-                </ol>
-
-                <p style="color: #555; line-height: 1.7;">We look forward to supporting you on your medical journey.</p>
-                <p style="color: #555; line-height: 1.7;">Warmly,<br><strong>Dr. Ornella Oluwole</strong><br>OpWell Concierge\u2122</p>
-              </div>
-
-              <div style="background: #3b2a1a; padding: 20px 40px; text-align: center;">
-                <p style="color: rgba(232,201,122,0.6); font-size: 0.8rem; margin: 0;">OpWell Concierge\u2122 \u00b7 Telehealth \u00b7 GA, OH & VA \u00b7 (678) 235-5822</p>
-              </div>
-            </div>
-          `,
+            subject: 'Confirmed: Your OpWell Concierge Booking & Next Steps',
+            html: bookingConfirmationEmail(patientName, services, amountPaid, BLOG_ACCESS_CODE, 'https://calendar.app.google/1QHgQh3mSWwbsW8v8'),
           });
           console.log('✅ Patient confirmation email sent successfully');
         } catch (emailErr) {
