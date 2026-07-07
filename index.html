@@ -14936,10 +14936,13 @@
           </ul>
 
           <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(200,132,90,0.08); border-radius: 6px; font-size: 0.85rem; color: var(--terracotta); font-weight: 600;">
-            Add Mental Wellness Consultation (+$150) to create The Integrated Mind-Body Care Pathway: $1,000 total
+            <label style="display: flex; align-items: flex-start; gap: 0.75rem; cursor: pointer; margin: 0;">
+              <input type="checkbox" id="add-mental-wellness-850" style="margin-top: 2px; cursor: pointer;">
+              <span>Add Mental Wellness Consultation (<strong>+$150</strong>) to create The Integrated Mind-Body Care Pathway: <strong>$1,000 total</strong></span>
+            </label>
           </div>
         </div>
-        <a onclick="buySurgicalCarePackage()" class="btn-primary" style="cursor:pointer; display:inline-block; margin-top: auto;">Book Now →</a>
+        <a onclick="buySurgicalCarePackageWithAddon()" class="btn-primary" style="cursor:pointer; display:inline-block; margin-top: auto;">Book Now →</a>
         <p style="font-size: 0.75rem; color: rgba(45,90,61,0.6); margin-top: 0.75rem; margin-bottom: 0; text-align: center;">ⓘ Calendar booking link and intake documents will be emailed immediately after checkout.</p>
       </div>
 
@@ -17630,6 +17633,34 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           items: ['Comprehensive Perioperative Care'],
+          email: '',
+          patientName: ''
+        })
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        alert('Payment error: ' + (data.error || 'Unknown error. Please try again.'));
+      }
+    } catch (err) {
+      alert('Connection error. Please try again.');
+    }
+  }
+
+  async function buySurgicalCarePackageWithAddon() {
+    try {
+      const addMentalWellness = document.getElementById('add-mental-wellness-850').checked;
+      const items = ['Comprehensive Perioperative Care'];
+      if (addMentalWellness) {
+        items.push('Mental Wellness Consultation');
+      }
+
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          items: items,
           email: '',
           patientName: ''
         })
