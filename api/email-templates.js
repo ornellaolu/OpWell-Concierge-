@@ -449,7 +449,7 @@ function masterclassConfirmationEmail(patientEmail, accessCode) {
 </html>`;
 }
 
-function tier1CourseAccessEmail(patientEmail, amountPaid, accessToken) {
+function tier1CourseAccessEmail(patientEmail, amountPaid, accessToken, pdfPassword) {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -589,6 +589,22 @@ function tier1CourseAccessEmail(patientEmail, amountPaid, accessToken) {
       <div class="section" style="background: rgba(45, 90, 61, 0.04); padding: 20px; border-radius: 8px; margin-bottom: 24px;">
         <p style="margin: 0; font-size: 15px; color: #555;"><strong>📖 Explore Our Free Clinical Library:</strong> For additional reading, visit the <a href="https://www.opwellconcierge.com/blog" style="color: #2d5a3d; text-decoration: none; font-weight: 600;">OpWell Clinical Blog</a>. We publish free, peer-reviewed articles on anesthesia, surgical preparation, and recovery optimization.</p>
       </div>
+
+      <!-- PDF Alternative -->
+      ${pdfPassword ? `
+      <div class="section">
+        <div class="section-title">📥 PDF Alternative Available</div>
+        <div class="section-content">
+          <p style="margin: 0 0 12px; font-size: 15px; color: #555;">Prefer to study offline? We've included a password-protected PDF version of the complete masterclass with this email. This gives you a backup copy you can download, print, or study anywhere without internet access.</p>
+          <div style="background: #f9f7f4; border-radius: 8px; padding: 16px; margin: 12px 0;">
+            <p style="margin: 0 0 10px; font-size: 14px; font-weight: 600; color: #2d5a3d;">Your PDF Access Password:</p>
+            <div style="background: #fff; padding: 12px; border-radius: 6px; font-family: 'Courier New', monospace; font-size: 15px; color: #333; font-weight: 700; letter-spacing: 0.05em; text-align: center; border: 1px solid #e8d9c8;">${escapeHtml(pdfPassword)}</div>
+            <p style="margin: 10px 0 0; font-size: 12px; color: #888; text-align: center;"><em>Keep this password secure—do not share it.</em></p>
+          </div>
+          <p style="margin: 12px 0 0; font-size: 14px; color: #555; line-height: 1.6;"><strong>📎 Look for the attachment:</strong> "OpWell-Surgery-Prep-Masterclass.pdf" in this email. When prompted for a password to open it, paste the code above.</p>
+        </div>
+      </div>
+      ` : ''}
 
       <!-- Support -->
       <div class="highlight-box">

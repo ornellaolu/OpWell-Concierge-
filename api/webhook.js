@@ -1,5 +1,6 @@
 const { Resend } = require('resend');
 const { bookingConfirmationEmail, laborDeliveryConfirmationEmail, masterclassConfirmationEmail, tier1CourseAccessEmail } = require('./email-templates');
+const { createPasswordProtectedPDF } = require('./encrypt-pdf');
 
 const BLOG_ACCESS_CODE = 'OPWELL2026';
 
@@ -101,14 +102,43 @@ async function handler(req, res) {
         if (email) {
           try {
             console.log('\ud83d\udce7 Sending tier 1 course access email to:', email);
-            const htmlContent = tier1CourseAccessEmail(email, amountPaid, accessCode);
+
+            // Create password-protected PDF
+            const pdfResult = await createPasswordProtectedPDF(email);
+            const pdfPassword = pdfResult.password;
+            console.log('\ud83d\udd10 Generated PDF password for', email, '(first 5 chars):', pdfPassword.substring(0, 5) + '...');
+
+            const htmlContent = tier1CourseAccessEmail(email, amountPaid, accessCode, pdfPassword);
             console.log('\ud83d\udd17 Email contains token:', htmlContent.includes(accessCode) ? '\u2705 YES' : '\u274c NO');
-            await resend.emails.send({
+
+            // Build email config with optional PDF attachment
+            const emailConfig = {
               from: 'OpWell Concierge <info@opwellconcierge.com>',
               to: email,
               subject: 'Access Granted: Your Interactive Surgical Prep Blueprint is Ready!',
               html: htmlContent,
-            });
+            };
+
+            // Add PDF attachment if available
+            if (pdfResult.pdf && pdfResult.success) {
+              emailConfig.attachments = [
+                {
+                  filename: 'OpWell-Surgery-Prep-Masterclass.pdf',
+                  content: pdfResult.pdf.toString('base64'),
+                }
+              ];
+              console.log('\ud83d\udcce PDF encrypted and attached to email');
+            } else if (pdfResult.pdf) {
+              emailConfig.attachments = [
+                {
+                  filename: 'OpWell-Surgery-Prep-Masterclass.pdf',
+                  content: pdfResult.pdf.toString('base64'),
+                }
+              ];
+              console.log('\u26a0\ufe0f PDF attached (unencrypted fallback):', pdfResult.note);
+            }
+
+            await resend.emails.send(emailConfig);
             console.log('\u2705 Tier 1 course access email sent successfully');
           } catch (emailErr) {
             console.error('\u274c Failed to send tier 1 course email:', emailErr.message);
