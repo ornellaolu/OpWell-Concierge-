@@ -254,11 +254,13 @@ async function handler(req, res) {
 
       if (email) {
         // Send patient confirmation
-        await resend.emails.send({
-          from: 'OpWell Concierge <info@opwellconcierge.com>',
-          to: email,
-          subject: 'Your OpWell Concierge Booking is Confirmed',
-          html: `
+        try {
+          console.log('📧 Sending patient confirmation email to:', email);
+          await resend.emails.send({
+            from: 'OpWell Concierge <info@opwellconcierge.com>',
+            to: email,
+            subject: 'Your OpWell Concierge Booking is Confirmed',
+            html: `
             <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; color: #2c2c2c;">
               <div style="background: #3b2a1a; padding: 32px 40px; text-align: center;">
                 <h1 style="color: #e8c97a; font-size: 1.6rem; margin: 0; letter-spacing: 0.05em;">OpWell Concierge\u2122</h1>
@@ -301,11 +303,20 @@ async function handler(req, res) {
               </div>
             </div>
           `,
-        });
+          });
+          console.log('✅ Patient confirmation email sent successfully');
+        } catch (emailErr) {
+          console.error('❌ Failed to send patient confirmation email:', emailErr.message);
+          console.error('Email error details:', emailErr);
+        }
+      } else {
+        console.warn('⚠️ No email address provided - skipping patient confirmation');
       }
 
     // Always send doctor notification
-    await resend.emails.send({
+    try {
+      console.log('📧 Sending doctor notification email to: dr.oluwole@opwellconcierge.com');
+      await resend.emails.send({
         from: 'OpWell Bookings <info@opwellconcierge.com>',
         to: 'dr.oluwole@opwellconcierge.com',
         subject: `New Payment: ${esc(patientName)} \u2014 $${amountPaid} \u2014 ${esc(services)}`,
@@ -330,16 +341,23 @@ async function handler(req, res) {
             </div>
           </div>
         `,
-      });
+        });
+        console.log('✅ Doctor notification email sent successfully');
+    } catch (emailErr) {
+      console.error('❌ Failed to send doctor notification email:', emailErr.message);
+      console.error('Email error details:', emailErr);
+    }
 
       // Send patient receipt/invoice
       if (email) {
-        const serviceItems = services.split(', ');
-        const lineItemsHtml = serviceItems.map(s => {
-          return `<tr><td style="padding:8px 0; color:#333; border-bottom:1px solid #eee;">${esc(s)}</td><td style="padding:8px 0; text-align:right; color:#333; border-bottom:1px solid #eee;">Included</td></tr>`;
-        }).join('');
+        try {
+          console.log('📧 Sending receipt email to:', email);
+          const serviceItems = services.split(', ');
+          const lineItemsHtml = serviceItems.map(s => {
+            return `<tr><td style="padding:8px 0; color:#333; border-bottom:1px solid #eee;">${esc(s)}</td><td style="padding:8px 0; text-align:right; color:#333; border-bottom:1px solid #eee;">Included</td></tr>`;
+          }).join('');
 
-        await resend.emails.send({
+          await resend.emails.send({
           from: 'OpWell Concierge <info@opwellconcierge.com>',
           to: email,
           subject: `Your OpWell Receipt \u2014 $${amountPaid}`,
@@ -391,7 +409,12 @@ async function handler(req, res) {
               </div>
             </div>
           `,
-        });
+          });
+          console.log('✅ Receipt email sent successfully');
+        } catch (emailErr) {
+          console.error('❌ Failed to send receipt email:', emailErr.message);
+          console.error('Email error details:', emailErr);
+        }
       }
     }
 
