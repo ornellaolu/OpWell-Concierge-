@@ -1,4 +1,5 @@
 const { Resend } = require('resend');
+const db = require('../lib/db');
 
 function esc(str) {
   return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -69,6 +70,23 @@ module.exports = async function handler(req, res) {
 
       const resend = new Resend(process.env.RESEND_API_KEY);
 
+      // Save patient to database
+      let patientRecord;
+      try {
+        console.log('💾 Saving patient to database:', patientName);
+        patientRecord = await db.createPatient({
+          name: patientName,
+          email: email,
+          phone: phone || '',
+          surgeryType: procedure,
+          surgeryDate: surgeryDate
+        });
+        console.log('✅ Patient saved with token:', patientRecord.token.substring(0, 20) + '...');
+      } catch (dbErr) {
+        console.error('⚠️ Failed to save patient to database:', dbErr.message);
+        // Continue anyway - still send emails even if DB fails
+      }
+
       // Send notification to Dr. Oluwole
       try {
         console.log('📧 Sending schedule notification to dr.oluwole@opwellconcierge.com...');
@@ -130,6 +148,11 @@ module.exports = async function handler(req, res) {
 
                 <div style="text-align: center; margin: 24px 0;">
                   <a href="https://www.opwellconcierge.com/patient-recovery-checkin.html" style="display: inline-block; background: #2d5a3d; color: #fff; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 16px;">📋 Submit Your First Check-In</a>
+                </div>
+
+                <div style="background: rgba(45,90,61,0.06); border-left: 4px solid #2d5a3d; padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 24px 0;">
+                  <p style="margin: 0 0 8px; font-size: 0.85rem; color: #888;"><strong>Your Access Token (for records):</strong></p>
+                  <p style="margin: 0; font-family: 'Courier New', monospace; font-size: 0.8rem; color: #2d5a3d; word-break: break-all; background: #fff; padding: 8px; border-radius: 4px;">${patientRecord ? patientRecord.token : 'token-will-be-provided'}</p>
                 </div>
 
                 <div style="background: #fff; border: 1px solid #e8d9c8; border-radius: 8px; padding: 16px 20px; margin: 24px 0;">
