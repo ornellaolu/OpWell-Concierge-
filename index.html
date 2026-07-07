@@ -17606,12 +17606,18 @@
 
   async function buyMasterclass() {
     try {
+      const email = prompt('Please enter your email address for the payment confirmation:');
+      if (!email || !email.includes('@')) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+
       const res = await fetch('/api/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           items: ['The Interactive Surgical Prep Blueprint'],
-          email: '',
+          email: email,
           patientName: ''
         })
       });
@@ -17628,12 +17634,18 @@
 
   async function buySurgicalCarePackage() {
     try {
+      const email = prompt('Please enter your email address for the payment confirmation and booking link:');
+      if (!email || !email.includes('@')) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+
       const res = await fetch('/api/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           items: ['Comprehensive Perioperative Care'],
-          email: '',
+          email: email,
           patientName: ''
         })
       });
@@ -17650,6 +17662,12 @@
 
   async function buySurgicalCarePackageWithAddon() {
     try {
+      const email = prompt('Please enter your email address for the payment confirmation and booking link:');
+      if (!email || !email.includes('@')) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+
       const addMentalWellness = document.getElementById('add-mental-wellness-850').checked;
       const items = ['Comprehensive Perioperative Care'];
       if (addMentalWellness) {
@@ -17661,7 +17679,7 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           items: items,
-          email: '',
+          email: email,
           patientName: ''
         })
       });
@@ -17678,12 +17696,18 @@
 
   async function buyLaborDeliveryNew() {
     try {
+      const email = prompt('Please enter your email address for the payment confirmation and booking link:');
+      if (!email || !email.includes('@')) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+
       const res = await fetch('/api/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           items: ['Labor & Delivery Consultation — New Patient'],
-          email: '',
+          email: email,
           patientName: ''
         })
       });
@@ -17700,12 +17724,18 @@
 
   async function buyLaborDeliveryReturn() {
     try {
+      const email = prompt('Please enter your email address for the payment confirmation and booking link:');
+      if (!email || !email.includes('@')) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+
       const res = await fetch('/api/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           items: ['Labor & Delivery Consultation — Return Patient'],
-          email: '',
+          email: email,
           patientName: ''
         })
       });
