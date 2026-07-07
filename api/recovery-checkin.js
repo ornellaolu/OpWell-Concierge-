@@ -5,7 +5,7 @@ function esc(str) {
 }
 
 // Admin key for verification
-const ADMIN_KEY = process.env.ADMIN_KEY || 'opwell-admin-2024';
+const ADMIN_KEY = process.env.ADMIN_KEY || 'opwell';
 
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
