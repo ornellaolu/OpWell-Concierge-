@@ -5597,7 +5597,15 @@ function validateAccess() {
     // Validate magic link token
     try {
       console.log('🔐 Attempting to decode token...');
-      var payload = token.replace(/-/g,'+').replace(/_/g,'/');
+
+      // Strip 'MC-' prefix from token
+      var basePayload = token;
+      if (token.startsWith('MC-')) {
+        console.log('Found MC- prefix, removing...');
+        basePayload = token.substring(3);
+      }
+
+      var payload = basePayload.replace(/-/g,'+').replace(/_/g,'/');
       console.log('Payload after conversion:', payload.substring(0, 20) + '...');
 
       var decoded = JSON.parse(atob(payload));
