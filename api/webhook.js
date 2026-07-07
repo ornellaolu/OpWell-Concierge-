@@ -96,15 +96,18 @@ async function handler(req, res) {
         const now = Date.now();
         const expiry = now + (90 * 24 * 60 * 60 * 1000); // 90 days
         const accessCode = 'MC-' + Buffer.from(JSON.stringify({ e: email, x: expiry, t: now })).toString('base64url');
+        console.log('\ud83d\udd11 Generated access code for', email, ':', accessCode.substring(0, 20) + '...');
 
         if (email) {
           try {
             console.log('\ud83d\udce7 Sending tier 1 course access email to:', email);
+            const htmlContent = tier1CourseAccessEmail(email, amountPaid, accessCode);
+            console.log('\ud83d\udd17 Email contains token:', htmlContent.includes(accessCode) ? '\u2705 YES' : '\u274c NO');
             await resend.emails.send({
               from: 'OpWell Concierge <info@opwellconcierge.com>',
               to: email,
               subject: 'Access Granted: Your Interactive Surgical Prep Blueprint is Ready!',
-              html: tier1CourseAccessEmail(email, amountPaid, accessCode),
+              html: htmlContent,
             });
             console.log('\u2705 Tier 1 course access email sent successfully');
           } catch (emailErr) {

@@ -525,7 +525,8 @@ function tier1CourseAccessEmail(patientEmail, amountPaid, accessToken) {
         <div class="section-title">🚀 Step 1: Launch Your Course Portal</div>
         <div class="section-content">
           <p style="margin: 0 0 12px; font-size: 15px; color: #555;">Your course features a 22-module, evidence-based guide tailored to prepare your mind and body for surgery, complete with interactive progress tracking and clinical quizzes to monitor your milestones.</p>
-          <a href="https://www.opwellconcierge.com/surgery-prep-masterclass.html?token=${escapeHtml(accessToken)}" class="cta-button" style="display: inline-block;">💻 Launch Your Course Portal</a>
+          <p style="margin: 0 0 12px; text-align: center;"><a href="https://www.opwellconcierge.com/surgery-prep-masterclass.html?token=${accessToken}" style="display: inline-block; background: #2d5a3d; color: #fff; padding: 14px 32px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 15px; margin: 12px 0;">💻 Launch Your Course Portal</a></p>
+          <p style="margin: 12px 0 0; font-size: 13px; color: #888; text-align: center;">Or copy this link into your browser:<br><code style="background: #f5f5f5; padding: 4px 8px; border-radius: 4px; font-family: 'Courier New', monospace; font-size: 12px;">https://www.opwellconcierge.com/surgery-prep-masterclass.html?token=${accessToken}</code></p>
         </div>
       </div>
 
