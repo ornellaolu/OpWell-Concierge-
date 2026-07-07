@@ -15028,7 +15028,7 @@
           <li><div class="service-check">✓</div>Pre-delivery Optimization Recommendations</li>
           <li><div class="service-check">✓</div>HSA &amp; FSA accepted</li>
         </ul>
-        <br><a onclick="showPage('pricing')" class="btn-secondary" style="cursor:pointer; display:inline-block;">Book Consultation →</a>
+        <br><a onclick="buyLaborDeliveryNew()" class="btn-secondary" style="cursor:pointer; display:inline-block;">Book Consultation →</a>
       </div>
       <div class="package-card">
         <div class="package-name">L&D Consultation — Return Patient</div>
@@ -15045,7 +15045,7 @@
           <li><div class="service-check">✓</div>Updated Anesthesia Risk Assessment</li>
           <li><div class="service-check">✓</div>HSA &amp; FSA accepted</li>
         </ul>
-        <br><a onclick="showPage('pricing')" class="btn-secondary" style="cursor:pointer; display:inline-block;">Book Consultation →</a>
+        <br><a onclick="buyLaborDeliveryReturn()" class="btn-secondary" style="cursor:pointer; display:inline-block;">Book Consultation →</a>
       </div>
     </div>
   </div>
@@ -17630,6 +17630,50 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           items: ['Comprehensive Perioperative Care'],
+          email: '',
+          patientName: ''
+        })
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        alert('Payment error: ' + (data.error || 'Unknown error. Please try again.'));
+      }
+    } catch (err) {
+      alert('Connection error. Please try again.');
+    }
+  }
+
+  async function buyLaborDeliveryNew() {
+    try {
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          items: ['Labor & Delivery Consultation — New Patient'],
+          email: '',
+          patientName: ''
+        })
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        alert('Payment error: ' + (data.error || 'Unknown error. Please try again.'));
+      }
+    } catch (err) {
+      alert('Connection error. Please try again.');
+    }
+  }
+
+  async function buyLaborDeliveryReturn() {
+    try {
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          items: ['Labor & Delivery Consultation — Return Patient'],
           email: '',
           patientName: ''
         })
