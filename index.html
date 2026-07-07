@@ -14939,7 +14939,7 @@
             Add Mental Wellness Consultation (+$150) to create The Integrated Mind-Body Care Pathway: $1,000 total
           </div>
         </div>
-        <a onclick="showPage('pricing')" class="btn-primary" style="cursor:pointer; display:inline-block; margin-top: auto;">Book Now →</a>
+        <a onclick="buySurgicalCarePackage()" class="btn-primary" style="cursor:pointer; display:inline-block; margin-top: auto;">Book Now →</a>
         <p style="font-size: 0.75rem; color: rgba(45,90,61,0.6); margin-top: 0.75rem; margin-bottom: 0; text-align: center;">ⓘ Calendar booking link and intake documents will be emailed immediately after checkout.</p>
       </div>
 
@@ -17608,6 +17608,28 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           items: ['The Interactive Surgical Prep Blueprint'],
+          email: '',
+          patientName: ''
+        })
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        alert('Payment error: ' + (data.error || 'Unknown error. Please try again.'));
+      }
+    } catch (err) {
+      alert('Connection error. Please try again.');
+    }
+  }
+
+  async function buySurgicalCarePackage() {
+    try {
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          items: ['Comprehensive Perioperative Care'],
           email: '',
           patientName: ''
         })
