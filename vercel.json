@@ -34,7 +34,7 @@
     { "source": "/welcome", "destination": "/ad-landing.html" },
     { "source": "/provider", "destination": "/index.html" },
     { "source": "/provider.html", "destination": "/index.html" },
-    { "source": "/admin", "destination": "/admin.html" },
+    { "source": "/admin", "destination": "/admin-checkins.html" },
     { "source": "/recovery-checkin", "destination": "/index.html" },
     { "source": "/:file*.png", "destination": "/:file*.png" },
     { "source": "/:file*.jpg", "destination": "/:file*.jpg" },
