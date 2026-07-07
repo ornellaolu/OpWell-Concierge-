@@ -3069,10 +3069,10 @@
     <li><a href="/blog" onclick="event.preventDefault(); showPage('blog')">Blog</a></li>
     <li><a href="/contact" onclick="event.preventDefault(); showPage('contact')">Contact</a></li>
     <li><a href="/provider" onclick="event.preventDefault(); window.location.href='/provider.html'">For Providers</a></li>
-    <li><a href="/schedule" onclick="event.preventDefault(); showPage('booking')">Get Started</a></li>
+    <li><a href="/schedule" onclick="event.preventDefault(); showPage('pricing')">Get Started</a></li>
   </ul>
 
-  <a href="/booking" onclick="event.preventDefault(); showPage('booking')" style="cursor:pointer;" class="nav-cta">Book Now</a>
+  <a href="/booking" onclick="event.preventDefault(); showPage('pricing')" style="cursor:pointer;" class="nav-cta">Book Now</a>
 
   <button class="hamburger" onclick="toggleMobileNav()" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -3144,10 +3144,10 @@
   </style>
   <div id="launch-banner" class="banner-scroll">
     <div class="banner-scroll-inner">
-      <div class="banner-scroll-item"><span class="bp">Launch Special</span> 25% off your first consultation — use code <span class="bc">WELCOME25</span> at checkout <a onclick="showPage('booking')" class="bl">Book now →</a></div>
-      <div class="banner-scroll-item"><span class="bp">Launch Special</span> 25% off your first consultation — use code <span class="bc">WELCOME25</span> at checkout <a onclick="showPage('booking')" class="bl">Book now →</a></div>
-      <div class="banner-scroll-item"><span class="bp">Launch Special</span> 25% off your first consultation — use code <span class="bc">WELCOME25</span> at checkout <a onclick="showPage('booking')" class="bl">Book now →</a></div>
-      <div class="banner-scroll-item"><span class="bp">Launch Special</span> 25% off your first consultation — use code <span class="bc">WELCOME25</span> at checkout <a onclick="showPage('booking')" class="bl">Book now →</a></div>
+      <div class="banner-scroll-item"><span class="bp">Launch Special</span> 25% off your first consultation — use code <span class="bc">WELCOME25</span> at checkout <a onclick="showPage('pricing')" class="bl">Book now →</a></div>
+      <div class="banner-scroll-item"><span class="bp">Launch Special</span> 25% off your first consultation — use code <span class="bc">WELCOME25</span> at checkout <a onclick="showPage('pricing')" class="bl">Book now →</a></div>
+      <div class="banner-scroll-item"><span class="bp">Launch Special</span> 25% off your first consultation — use code <span class="bc">WELCOME25</span> at checkout <a onclick="showPage('pricing')" class="bl">Book now →</a></div>
+      <div class="banner-scroll-item"><span class="bp">Launch Special</span> 25% off your first consultation — use code <span class="bc">WELCOME25</span> at checkout <a onclick="showPage('pricing')" class="bl">Book now →</a></div>
     </div>
     <button class="banner-x" onclick="document.getElementById('launch-banner').style.display='none';" aria-label="Close">&times;</button>
   </div>
@@ -3161,7 +3161,7 @@
       <h1 class="hero-headline">Surgery is personal.<br>Your preparation should be, too.</h1>
       <p class="hero-sub">What if you walked into surgery fully prepared — mind and body — with a physician already in your corner? OpWell Concierge pairs you with a board-certified anesthesiologist who personally guides your surgical journey, from optimization through recovery. No referral required.<br><br>Privately serving patients across Georgia, Ohio, and Virginia.</p>
       <div class="hero-actions">
-        <a class="btn-primary" onclick="showPage('booking')">Book Your Consultation →</a>
+        <a class="btn-primary" onclick="showPage('pricing')">Book Your Consultation →</a>
         <a class="btn-gold" href="/surgery-readiness-quiz.html" style="cursor:pointer; animation: quizPulse 2s ease-in-out infinite;">Free Surgery Readiness Score →</a>
       </div>
       <div class="hero-trust"><!-- trust items below -->
@@ -3419,7 +3419,7 @@
     <div class="section-tag" style="color:var(--gold-light); text-align:center; margin-bottom:1rem;">For Patients</div>
     <h2 class="section-title">Surgery is personal.<br>Your preparation should be, too.</h2>
     <p class="section-subtitle" style="font-size:1.05rem; line-height:1.8; margin-bottom:2rem;">What if you walked into surgery fully prepared — mind and body — with a physician already in your corner? OpWell Concierge pairs you with a board-certified anesthesiologist who personally guides your surgical journey, from optimization through recovery. No referral required.<br><br>Privately serving patients across Georgia, Ohio, and Virginia.</p>
-    <a onclick="showPage('booking')" class="btn-gold">Book Your Consultation →</a>
+    <a onclick="showPage('pricing')" class="btn-gold">Book Your Consultation →</a>
   </section>
 
   <!-- FOOTER -->
@@ -3446,7 +3446,7 @@
         <ul class="footer-links">
           <li><a href="/about" onclick="event.preventDefault(); showPage('about')">Our Story</a></li>
           <li><a href="/blog" onclick="event.preventDefault(); showPage('blog')" style="cursor:pointer;">Blog</a></li>
-          <li><a href="/schedule" onclick="event.preventDefault(); showPage('booking')">Get Started</a></li>
+          <li><a href="/schedule" onclick="event.preventDefault(); showPage('pricing')">Get Started</a></li>
           <li><a href="/privacy" onclick="event.preventDefault(); showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
           <li><a href="/terms" onclick="event.preventDefault(); showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
           <li><a href="/admin" style="font-size: 0.9rem; opacity: 0.8;">Admin</a></li>
@@ -3477,167 +3477,6 @@
 
 
 <!-- ══════════════════════════════════════════════════════ -->
-<!-- SCHEDULE APPOINTMENT PAGE -->
-<!-- ══════════════════════════════════════════════════════ -->
-<div id="page-booking" class="page">
-  <div class="lp-hero" style="min-height:50vh; background: linear-gradient(135deg, #2D5A3D 0%, #1A3D28 100%);">
-    <div class="lp-breadcrumb" onclick="showPage('home')" style="color:rgba(255,255,255,0.7);">← OpWell Home</div>
-    <h1 class="lp-headline" style="color:#FAF0E8; margin-bottom: 1rem;">Schedule Your Consultation</h1>
-    <p class="lp-sub" style="color:rgba(250,240,232,0.85); max-width: 700px; margin: 0 auto; font-size: 1.1rem; line-height: 1.7;">
-      Book your appointment time first. Choose a time that works best for you, then select your service and complete payment. It's that simple.
-    </p>
-  </div>
-
-  <div style="max-width: 900px; margin: 0 auto; padding: 4rem 2rem;">
-
-    <!-- STEP 1: CALENDAR BOOKING -->
-    <div id="booking-step-1" style="margin-bottom: 3rem;">
-      <div style="background: white; border-radius: 12px; padding: 3rem 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
-        <div style="text-align: center; margin-bottom: 2rem;">
-          <div style="display: inline-block; background: rgba(45,90,61,0.1); padding: 0.5rem 1.5rem; border-radius: 20px; margin-bottom: 1rem;">
-            <span style="font-size: 0.85rem; font-weight: 600; color: var(--sage); text-transform: uppercase; letter-spacing: 0.1em;">Step 1 of 2</span>
-          </div>
-          <h2 style="color: #3b2a1a; font-size: 1.8rem; margin: 0 0 1rem; font-family: 'Playfair Display', serif; font-weight: 400;">Select Your Time</h2>
-          <p style="color: var(--slate); font-size: 0.95rem; line-height: 1.7; max-width: 600px; margin: 0 auto;">
-            Click the button below to open our scheduling calendar. Select your preferred appointment time.
-          </p>
-        </div>
-
-        <div style="text-align: center; padding: 2rem; background: rgba(45,90,61,0.04); border-radius: 8px; margin: 2rem 0;">
-          <a href="https://calendar.app.google/1QHgQh3mSWwbsW8v8" target="_blank" style="display: inline-block; background: var(--sage); color: white; padding: 1.2rem 3rem; border-radius: 8px; font-weight: 600; font-family: 'DM Sans', sans-serif; text-decoration: none; font-size: 1rem; cursor: pointer; transition: background 0.2s; box-shadow: 0 2px 8px rgba(45,90,61,0.2);" onmouseover="this.style.background='#1A3D28'" onmouseout="this.style.background='var(--sage)'">📅 Open Booking Calendar →</a>
-          <p style="font-size: 0.9rem; color: var(--slate); margin-top: 1.5rem;">A new window will open with available times. Select your preferred slot, then return here to confirm.</p>
-        </div>
-
-        <div style="background: #f0f7f2; border-left: 4px solid var(--sage); border-radius: 0 8px 8px 0; padding: 16px 20px; margin-top: 2rem;">
-          <p style="margin: 0; color: #2d5a3d; font-size: 0.9rem; line-height: 1.6;">
-            <strong>✓ Your appointment is locked:</strong> Once you book a time slot in the calendar, it's reserved for you. After confirming below and completing payment, you'll receive a confirmation email with all details.
-          </p>
-        </div>
-
-        <div style="text-align: center; margin-top: 2rem;">
-          <button type="button" onclick="showBookingInfoForm()" style="background: var(--sage); color: white; padding: 1rem 2.5rem; border: none; border-radius: 8px; font-weight: 600; font-family: 'DM Sans', sans-serif; font-size: 1rem; cursor: pointer; transition: background 0.2s;" onmouseover="this.style.background='#1A3D28'" onmouseout="this.style.background='var(--sage)'">I've Booked My Appointment → Proceed to Checkout</button>
-          <p style="font-size: 0.85rem; color: var(--slate); margin-top: 1rem;">Click this button after you've selected your appointment time in the calendar above. You'll complete payment, then receive your pre-appointment documents.</p>
-        </div>
-
-        <!-- QUICK INFO FORM (appears after clicking button) -->
-        <div id="booking-quick-form" style="display: none; margin-top: 2rem; background: #f0f7f2; border: 2px solid var(--sage); border-radius: 12px; padding: 2rem;">
-          <h3 style="color: #3b2a1a; margin-top: 0; text-align: center;">Quick Appointment Info</h3>
-          <p style="color: var(--slate); text-align: center; font-size: 0.9rem;">Enter your details so we have them for your appointment:</p>
-
-          <form id="booking-info-form" onsubmit="submitBookingInfo(event)" style="margin-top: 1.5rem;">
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
-              <div>
-                <label style="display: block; font-weight: 600; color: var(--charcoal); margin-bottom: 0.4rem; font-size: 0.85rem;">Name *</label>
-                <input type="text" name="name" required style="width: 100%; padding: 0.7rem 0.8rem; border: 1.5px solid var(--border); border-radius: 6px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem;">
-              </div>
-              <div>
-                <label style="display: block; font-weight: 600; color: var(--charcoal); margin-bottom: 0.4rem; font-size: 0.85rem;">Email *</label>
-                <input type="email" name="email" required style="width: 100%; padding: 0.7rem 0.8rem; border: 1.5px solid var(--border); border-radius: 6px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem;">
-              </div>
-            </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
-              <div>
-                <label style="display: block; font-weight: 600; color: var(--charcoal); margin-bottom: 0.4rem; font-size: 0.85rem;">Phone *</label>
-                <input type="tel" name="phone" required style="width: 100%; padding: 0.7rem 0.8rem; border: 1.5px solid var(--border); border-radius: 6px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem;">
-              </div>
-              <div>
-                <label style="display: block; font-weight: 600; color: var(--charcoal); margin-bottom: 0.4rem; font-size: 0.85rem;">Appointment Time *</label>
-                <input type="text" name="appointmentTime" placeholder="e.g., Tue Jul 16, 2:00 PM" required style="width: 100%; padding: 0.7rem 0.8rem; border: 1.5px solid var(--border); border-radius: 6px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem;">
-              </div>
-            </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem;">
-              <button type="button" onclick="hideBookingInfoForm()" style="background: white; color: var(--sage); border: 2px solid var(--sage); padding: 0.7rem 1.5rem; border-radius: 6px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 0.9rem;">← Back</button>
-              <button type="submit" style="background: var(--sage); color: white; padding: 0.7rem 1.5rem; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 0.9rem;">Continue to Services →</button>
-            </div>
-            <div id="booking-info-error" style="background: #fff3f0; border-left: 3px solid var(--terracotta); color: var(--terracotta); padding: 1rem; border-radius: 0 6px 6px 0; margin-top: 1rem; font-size: 0.9rem; display: none;"></div>
-          </form>
-        </div>
-      </div>
-    </div>
-
-    <!-- STEP 2: APPOINTMENT CONFIRMATION -->
-    <div id="booking-step-2" style="display: none;">
-      <div style="background: white; border-radius: 12px; padding: 3rem 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
-        <div style="text-align: center; margin-bottom: 2rem;">
-          <div style="display: inline-block; background: rgba(45,90,61,0.1); padding: 0.5rem 1.5rem; border-radius: 20px; margin-bottom: 1rem;">
-            <span style="font-size: 0.85rem; font-weight: 600; color: var(--sage); text-transform: uppercase; letter-spacing: 0.1em;">Step 2 of 2</span>
-          </div>
-          <h2 style="color: #3b2a1a; font-size: 1.8rem; margin: 0 0 1rem; font-family: 'Playfair Display', serif; font-weight: 400;">Confirm Your Details</h2>
-          <p style="color: var(--slate); font-size: 0.95rem; line-height: 1.7; max-width: 600px; margin: 0 auto;">
-            Enter your appointment details so we have them on file. We'll send a confirmation email with your booking details.
-          </p>
-        </div>
-
-        <form id="appointment-confirmation-form" onsubmit="submitAppointmentConfirmation(event)" style="margin: 2rem 0;">
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
-            <div>
-              <label style="display: block; font-weight: 600; color: var(--charcoal); margin-bottom: 0.5rem; font-size: 0.9rem;">Full Name *</label>
-              <input type="text" name="name" required style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--border); border-radius: 6px; font-family: 'DM Sans', sans-serif; font-size: 0.95rem;">
-            </div>
-            <div>
-              <label style="display: block; font-weight: 600; color: var(--charcoal); margin-bottom: 0.5rem; font-size: 0.9rem;">Email *</label>
-              <input type="email" name="email" required style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--border); border-radius: 6px; font-family: 'DM Sans', sans-serif; font-size: 0.95rem;">
-            </div>
-          </div>
-
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
-            <div>
-              <label style="display: block; font-weight: 600; color: var(--charcoal); margin-bottom: 0.5rem; font-size: 0.9rem;">Phone *</label>
-              <input type="tel" name="phone" required style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--border); border-radius: 6px; font-family: 'DM Sans', sans-serif; font-size: 0.95rem;">
-            </div>
-            <div>
-              <label style="display: block; font-weight: 600; color: var(--charcoal); margin-bottom: 0.5rem; font-size: 0.9rem;">Surgery Type / Procedure</label>
-              <input type="text" name="procedure" placeholder="e.g., Breast Augmentation, Hernia Repair" style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--border); border-radius: 6px; font-family: 'DM Sans', sans-serif; font-size: 0.95rem;">
-            </div>
-          </div>
-
-          <div style="margin-bottom: 1.5rem;">
-            <label style="display: block; font-weight: 600; color: var(--charcoal); margin-bottom: 0.5rem; font-size: 0.9rem;">Appointment Date & Time *</label>
-            <input type="text" name="appointmentTime" placeholder="e.g., Tuesday, July 16 at 2:00 PM EST" required style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--border); border-radius: 6px; font-family: 'DM Sans', sans-serif; font-size: 0.95rem;">
-            <p style="font-size: 0.8rem; color: var(--slate); margin-top: 0.5rem;">Enter the date and time you selected in the calendar above.</p>
-          </div>
-
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem;">
-            <button type="button" onclick="bookingGoBack()" style="background: white; color: var(--sage); border: 2px solid var(--sage); padding: 0.85rem 1.5rem; border-radius: 6px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 0.9rem;">← Back</button>
-            <button type="submit" style="background: var(--sage); color: white; padding: 0.85rem 1.5rem; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 0.9rem;">Next: Choose Service →</button>
-          </div>
-
-          <div id="appointment-confirm-error" style="background: #fff3f0; border-left: 3px solid var(--terracotta); color: var(--terracotta); padding: 1rem; border-radius: 0 6px 6px 0; margin-top: 1rem; font-size: 0.9rem; display: none;"></div>
-        </form>
-      </div>
-    </div>
-
-  </div>
-
-  <footer>
-    <div class="footer-watermark"><div class="footer-watermark-circle"></div></div>
-    <div>
-      <div class="footer-col-title">Programs</div>
-      <ul class="footer-links">
-        <li><a href="/surgery-prep" onclick="event.preventDefault(); showPage('surgery-prep')">Pre-Surgical Consultation</a></li>
-        <li><a href="/recovery" onclick="event.preventDefault(); showPage('recovery')">Post-Operative Care</a></li>
-        <li><a href="/mental-health" onclick="event.preventDefault(); showPage('mental-health')">Mental Wellness</a></li>
-      </ul>
-    </div>
-    <div class="footer-nav-cols">
-      <div>
-        <div class="footer-col-title">OpWell</div>
-        <ul class="footer-links">
-          <li><a href="/about" onclick="event.preventDefault(); showPage('about')">Our Story</a></li>
-          <li><a href="/blog" onclick="event.preventDefault(); showPage('blog')">Blog</a></li>
-          <li><a href="/contact" onclick="event.preventDefault(); showPage('contact')">Contact</a></li>
-        </ul>
-      </div>
-    </div>
-    <div style="display:flex; flex-direction:column; align-items:flex-end; justify-content:flex-start;">
-      <div class="footer-col-title">Get Started</div>
-      <p style="font-size:0.78rem; color:rgba(253,251,248,0.4); margin-bottom:1rem; text-align:right;">Ready to optimize your surgical outcome?</p>
-      <a onclick="showPage('booking')" style="display:inline-block; background:var(--terracotta); color:#fff; font-family:'DM Sans',sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; padding:0.65rem 1.5rem; border-radius:6px; cursor:pointer; text-decoration:none; transition:background 0.2s;" onmouseover="this.style.background='#a06040';" onmouseout="this.style.background='var(--terracotta)';">Schedule Now →</a>
-    </div>
-  </footer>
-  <div class="footer-bottom"><span class="footer-legal">© 2025–2026 OpWell Concierge. All rights reserved. Registered trade name in Ohio & Georgia.</span><span class="footer-legal">Not a substitute for emergency medical care · No physician-patient relationship until a formal consultation is completed.</span></div>
-
-</div><!-- end booking -->
 
 
 <!-- ══════════════════════════════════════════════════════ -->
@@ -3649,7 +3488,7 @@
     <div class="lp-breadcrumb" onclick="showPage('home')" style="color:rgba(255,255,255,0.7);">← OpWell Home</div>
     <h2 class="lp-headline" style="color:#FAF0E8;">Preparation is the one part<br>of surgery <em>you control.</em></h2>
     <p class="lp-sub" style="color:rgba(250,240,232,0.85);">OpWell's Pre-Surgical Consultation program ensures you arrive at your procedure optimized, informed, and genuinely ready — whether you're having cosmetic surgery, bariatric surgery, or any elective procedure.</p>
-    <a onclick="showPage('booking')" class="btn-primary" style="cursor:pointer;">Book Your Consultation →</a>
+    <a onclick="showPage('pricing')" class="btn-primary" style="cursor:pointer;">Book Your Consultation →</a>
   </div>
 
   <!-- TABS NAV -->
@@ -3800,7 +3639,7 @@
       </div>
 
       <div style="text-align:center; margin-top:1.5rem;">
-        <a onclick="showPage('booking')" class="btn-primary" style="cursor:pointer; display:inline-block;">Start Your Personalized Vitamin Plan →</a>
+        <a onclick="showPage('pricing')" class="btn-primary" style="cursor:pointer; display:inline-block;">Start Your Personalized Vitamin Plan →</a>
         <p style="font-family:'DM Sans',sans-serif; font-size:0.78rem; color:var(--slate); margin-top:0.75rem;">Included free with any bariatric core service or Executive Concierge Program · Standalone initiation: $250 · Follow-up reevaluation &amp; adjustment: $150</p>
       </div>
     </div>
@@ -3942,7 +3781,7 @@
   <section class="final-cta">
     <h2 class="section-title">You deserve<br>a full support system.</h2>
     <p class="section-subtitle">No referral required. HSA & FSA accepted. Telehealth available in GA, OH & VA — more states coming soon.</p>
-    <a onclick="showPage('booking')" class="btn-gold" style="cursor:pointer;">Book Your Consultation →</a>
+    <a onclick="showPage('pricing')" class="btn-gold" style="cursor:pointer;">Book Your Consultation →</a>
   </section>
   <div class="page-footnotes">
     <p style="white-space:nowrap;">All statistics reflect published peer-reviewed research on perioperative optimization (*36% complication reduction, 49% of preventable readmissions linked to inadequate follow-up); individual results may vary by procedure type and patient population — sources upon request.</p>
@@ -3966,7 +3805,7 @@
         <ul class="footer-links">
           <li><a href="/about" onclick="event.preventDefault(); showPage('about')">Our Story</a></li>
           <li><a href="/blog" onclick="event.preventDefault(); showPage('blog')" style="cursor:pointer;">Blog</a></li>
-          <li><a href="/schedule" onclick="event.preventDefault(); showPage('booking')">Get Started</a></li>
+          <li><a href="/schedule" onclick="event.preventDefault(); showPage('pricing')">Get Started</a></li>
           <li><a href="/privacy" onclick="event.preventDefault(); showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
           <li><a href="/terms" onclick="event.preventDefault(); showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
           <li><a href="/admin" style="font-size: 0.9rem; opacity: 0.8;">Admin</a></li>
@@ -3998,7 +3837,7 @@
       <div class="lp-breadcrumb" onclick="showPage('home')" style="color:rgba(255,255,255,0.7); position:static; margin-bottom:0.75rem; cursor:pointer;">← OpWell Home</div>
       <h2 class="lp-headline" style="color:#FAF0E8;">You made it through surgery.<br><em>Now let's focus on healing.</em></h2>
       <p class="lp-sub recovery-hero-sub" style="color:rgba(250,240,232,0.85); max-width:700px;">Because your recovery deserves just as much attention as your surgery. OpWell provides anesthesiologist-led support within the first 72 hours after surgery, followed by weekly check-ins for up to 30 days — so you always have a physician in your corner when questions arise and reassurance matters most.</p>
-      <a onclick="showPage('booking')" class="btn-primary" style="cursor:pointer; margin-top:0.75rem; display:inline-block;">Book Your Consultation →</a>
+      <a onclick="showPage('pricing')" class="btn-primary" style="cursor:pointer; margin-top:0.75rem; display:inline-block;">Book Your Consultation →</a>
     </div>
   </div>
 
@@ -4354,7 +4193,7 @@
   <section class="final-cta">
     <h2 class="section-title">Your recovery deserves<br>a physician in your corner.</h2>
     <p class="section-subtitle">Structured recovery monitoring included. HSA & FSA accepted. No referral required.</p>
-    <a onclick="showPage('booking')" class="btn-gold" style="cursor:pointer;">Book Your Consultation →</a>
+    <a onclick="showPage('pricing')" class="btn-gold" style="cursor:pointer;">Book Your Consultation →</a>
   </section>
   <div class="page-footnotes">
     <p style="white-space:nowrap;">All statistics reflect published peer-reviewed ranges (49% preventable readmissions, 42% manageable outpatient, 23.7% vs 18.2% readmission reduction and 37% mortality reduction with structured monitoring); individual results may vary — sources upon request.</p>
@@ -4378,7 +4217,7 @@
         <ul class="footer-links">
           <li><a href="/about" onclick="event.preventDefault(); showPage('about')">Our Story</a></li>
           <li><a href="/blog" onclick="event.preventDefault(); showPage('blog')" style="cursor:pointer;">Blog</a></li>
-          <li><a href="/schedule" onclick="event.preventDefault(); showPage('booking')">Get Started</a></li>
+          <li><a href="/schedule" onclick="event.preventDefault(); showPage('pricing')">Get Started</a></li>
           <li><a href="/privacy" onclick="event.preventDefault(); showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
           <li><a href="/terms" onclick="event.preventDefault(); showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
           <li><a href="/admin" style="font-size: 0.9rem; opacity: 0.8;">Admin</a></li>
@@ -4408,7 +4247,7 @@
     <div class="lp-breadcrumb" onclick="showPage('home')" style="color:rgba(255,255,255,0.7);">← OpWell Home</div>
     <h2 class="lp-headline" style="color:#FAF0E8;">You've prepared your body.<br>Now let's prepare <em>your mind.</em></h2>
     <p class="lp-sub" style="color:rgba(250,240,232,0.85);">From surgical anxiety before your procedure to emotional recovery after — OpWell's licensed mental health specialist works directly with you as part of your care team. Every session is personalized to your individual needs, informed by your medical and surgical history, and coordinated with Dr. Oluwole so nothing is overlooked.</p>
-    <a onclick="showPage('booking')" class="btn-primary" style="cursor:pointer;">Book Your Consultation →</a>
+    <a onclick="showPage('pricing')" class="btn-primary" style="cursor:pointer;">Book Your Consultation →</a>
   </div>
 
   <div class="tabs-nav" id="mental-tabs">
@@ -4516,7 +4355,7 @@
   <section class="final-cta">
     <h2 class="section-title">Take care of your mind.<br><em>Your body will thank you.</em></h2>
     <p class="section-subtitle">No referral required. HSA & FSA accepted. Telehealth available in GA, OH & VA.</p>
-    <a onclick="showPage('booking')" class="btn-gold" style="cursor:pointer;">Book Your Consultation →</a>
+    <a onclick="showPage('pricing')" class="btn-gold" style="cursor:pointer;">Book Your Consultation →</a>
   </section>
   <div class="page-footnotes">
     <p style="white-space:nowrap;">Perioperative anxiety prevalence (*40%) based on published estimates; reported rates vary 20–60% across studies. Mental wellness services do not substitute for licensed mental health or psychiatric care; behavioral health referrals coordinated when clinically indicated — sources upon request.</p>
@@ -4540,7 +4379,7 @@
         <ul class="footer-links">
           <li><a href="/about" onclick="event.preventDefault(); showPage('about')">Our Story</a></li>
           <li><a href="/blog" onclick="event.preventDefault(); showPage('blog')" style="cursor:pointer;">Blog</a></li>
-          <li><a href="/schedule" onclick="event.preventDefault(); showPage('booking')">Get Started</a></li>
+          <li><a href="/schedule" onclick="event.preventDefault(); showPage('pricing')">Get Started</a></li>
           <li><a href="/privacy" onclick="event.preventDefault(); showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
           <li><a href="/terms" onclick="event.preventDefault(); showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
           <li><a href="/admin" style="font-size: 0.9rem; opacity: 0.8;">Admin</a></li>
@@ -4570,7 +4409,7 @@
     <div class="lp-breadcrumb" onclick="showPage('home')" style="color:rgba(255,255,255,0.7);">← OpWell Home</div>
     <h2 class="lp-headline" style="color:#FAF0E8;">Confidence on delivery day<br><em>starts here.</em></h2>
     <p class="lp-sub" style="color:rgba(250,240,232,0.85);">For most pregnant women, the epidural or C-section is the most anxiety-producing part of childbirth — and the anesthesiologist is a complete stranger who arrives when everything is already overwhelming. OpWell changes this entirely — whether you're planning a pregnancy, currently expecting, or postpartum.</p>
-    <a onclick="showPage('booking')" class="btn-primary" style="cursor:pointer;">Book Your Consultation →</a>
+    <a onclick="showPage('pricing')" class="btn-primary" style="cursor:pointer;">Book Your Consultation →</a>
   </div>
 
   <div class="tabs-nav" id="ob-tabs">
@@ -4627,7 +4466,7 @@
           </div>
           <div style="display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;">
             <button onclick="openBlogPost('blog-29')" style="background:#c49d57;color:#fff;border:none;border-radius:50px;padding:.65rem 1.6rem;font-family:'DM Sans',sans-serif;font-weight:700;font-size:.85rem;cursor:pointer;letter-spacing:.02em;">Read the Full Guide →</button>
-            <button onclick="showPage('booking')" style="background:transparent;color:rgba(250,240,232,.85);border:1.5px solid rgba(250,240,232,.3);border-radius:50px;padding:.65rem 1.6rem;font-family:'DM Sans',sans-serif;font-weight:600;font-size:.85rem;cursor:pointer;">Book a Consult →</button>
+            <button onclick="showPage('pricing')" style="background:transparent;color:rgba(250,240,232,.85);border:1.5px solid rgba(250,240,232,.3);border-radius:50px;padding:.65rem 1.6rem;font-family:'DM Sans',sans-serif;font-weight:600;font-size:.85rem;cursor:pointer;">Book a Consult →</button>
           </div>
         </div>
         <div style="width:180px;min-width:140px;background:rgba(0,0,0,.2);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:1.5rem;padding:2rem 1.25rem;border-left:1px solid rgba(255,255,255,.08);">
@@ -4691,7 +4530,7 @@
   <section class="final-cta">
     <h2 class="section-title">Know your options<br>before labor begins.</h2>
     <p class="section-subtitle">No referral required. HSA & FSA accepted. Telehealth available in GA, OH & VA — more states coming soon.</p>
-    <a onclick="showPage('booking')" class="btn-gold" style="cursor:pointer;">Book Your Consultation →</a>
+    <a onclick="showPage('pricing')" class="btn-gold" style="cursor:pointer;">Book Your Consultation →</a>
   </section>
   <div class="page-footnotes">
     <p style="white-space:nowrap;">Statistics cited (80% labor anesthesia anxiety, 84% preventable maternal deaths, 3–4× racial disparity) reflect published peer-reviewed research; individual results vary. Consultations do not replace OB, MFM, or hospital anesthesia care; OpWell does not provide intrapartum or intraoperative anesthesia — sources upon request.</p>
@@ -4715,7 +4554,7 @@
         <ul class="footer-links">
           <li><a href="/about" onclick="event.preventDefault(); showPage('about')">Our Story</a></li>
           <li><a href="/blog" onclick="event.preventDefault(); showPage('blog')" style="cursor:pointer;">Blog</a></li>
-          <li><a href="/schedule" onclick="event.preventDefault(); showPage('booking')">Get Started</a></li>
+          <li><a href="/schedule" onclick="event.preventDefault(); showPage('pricing')">Get Started</a></li>
           <li><a href="/privacy" onclick="event.preventDefault(); showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
           <li><a href="/terms" onclick="event.preventDefault(); showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
           <li><a href="/admin" style="font-size: 0.9rem; opacity: 0.8;">Admin</a></li>
@@ -4745,7 +4584,7 @@
     <div class="lp-breadcrumb" onclick="showPage('home')" style="color:rgba(255,255,255,0.7);">← OpWell Home</div>
     <h2 class="lp-headline" style="color:#FFFFFF;">Surgery Abroad.<br>Physician Support at Home — before, during, and after.</h2>
     <p class="lp-sub" style="color:rgba(250,240,232,0.85);">A board-certified anesthesiologist reviews your health, medications, and surgical plan — so you travel prepared, recover safely, and always have a doctor to call when you're home.</p>
-    <a onclick="showPage('booking')" class="btn-primary" style="cursor:pointer;">Book Your Consultation →</a>
+    <a onclick="showPage('pricing')" class="btn-primary" style="cursor:pointer;">Book Your Consultation →</a>
   </div>
 
   <div class="tabs-nav" id="mt-tabs">
@@ -4899,7 +4738,7 @@
   <section class="final-cta">
     <h2 class="section-title">Wherever you are in your journey —<br>OpWell is your medical home.</h2>
     <p class="section-subtitle">No referral required. HSA & FSA accepted. Telehealth available in GA, OH & VA — more states coming soon.</p>
-    <a onclick="showPage('booking')" class="btn-gold" style="cursor:pointer;">Book Your Consultation →</a>
+    <a onclick="showPage('pricing')" class="btn-gold" style="cursor:pointer;">Book Your Consultation →</a>
   </section>
   <div class="page-footnotes">
     <p style="white-space:nowrap;">Statistics cited (1-in-3 unexpected bloodwork results, 5-day post-flight complication risk) reflect published medical tourism research; figures vary by procedure and destination. OpWell provides U.S.-based consulting only and does not endorse international facilities; patients responsible for vetting providers — sources upon request.</p>
@@ -4923,7 +4762,7 @@
         <ul class="footer-links">
           <li><a href="/about" onclick="event.preventDefault(); showPage('about')">Our Story</a></li>
           <li><a href="/blog" onclick="event.preventDefault(); showPage('blog')" style="cursor:pointer;">Blog</a></li>
-          <li><a href="/schedule" onclick="event.preventDefault(); showPage('booking')">Get Started</a></li>
+          <li><a href="/schedule" onclick="event.preventDefault(); showPage('pricing')">Get Started</a></li>
           <li><a href="/privacy" onclick="event.preventDefault(); showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
           <li><a href="/terms" onclick="event.preventDefault(); showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
           <li><a href="/admin" style="font-size: 0.9rem; opacity: 0.8;">Admin</a></li>
@@ -5029,7 +4868,7 @@
         <p style="font-size:0.72rem; color:rgba(250,240,232,0.4); margin-top:0.75rem;">Based on ERAS protocols, ASA guidelines, and evidence from 40+ randomized trials.<br>HSA & FSA eligible.</p>
       </div>
 
-      <p style="font-size:0.8rem; color:rgba(250,240,232,0.5); margin-top:2rem; max-width:500px; margin-left:auto; margin-right:auto;">Want personalized 1-on-1 guidance? <a onclick="showPage('booking')" style="color:var(--terracotta-light); cursor:pointer; text-decoration:underline;">Book a consultation</a> with Dr. Oluwole — and get the Masterclass at an exclusive patient discount.</p>
+      <p style="font-size:0.8rem; color:rgba(250,240,232,0.5); margin-top:2rem; max-width:500px; margin-left:auto; margin-right:auto;">Want personalized 1-on-1 guidance? <a onclick="showPage('pricing')" style="color:var(--terracotta-light); cursor:pointer; text-decoration:underline;">Book a consultation</a> with Dr. Oluwole — and get the Masterclass at an exclusive patient discount.</p>
     </div>
   </div>
   </div><!-- end ptab-masterclass -->
@@ -5431,7 +5270,7 @@
           <div class="product-name">Personalized Bariatric Vitamin Supplementation Plan</div>
           <div class="product-meta">With Dr. Oluwole · Included free with core services or Executive Concierge · Standalone $250</div>
           <div class="product-dr-note"><span class="dr-note-label">OpWell Recommends</span>OTC vitamins are inadequate after bariatric surgery. Dr. Oluwole uses a proprietary evidence-based clinical system — built on ASMBS 2019 guidelines — to create a personalized vitamin protocol tailored to your procedure, labs, risk factors, and medications. Every formulation is compounded with clean, pharmaceutical-grade ingredients from certified pharmacies. Nothing generic. Nothing missed. Initial consultation included free with any bariatric pre-op or post-op package, or $250 standalone. Follow-ups: $150 for reevaluation, monitoring &amp; formulation adjustment.</div>
-          <a onclick="showPage('booking')" class="btn-secondary" style="cursor:pointer; display:inline-block;">Start Your Personalized Vitamin Plan →</a>
+          <a onclick="showPage('pricing')" class="btn-secondary" style="cursor:pointer; display:inline-block;">Start Your Personalized Vitamin Plan →</a>
         </div>
         <div class="product-card">
           <div class="product-badge">LASIK / Eye Surgery</div>
@@ -5479,7 +5318,7 @@
         <ul class="footer-links">
           <li><a href="/about" onclick="event.preventDefault(); showPage('about')">Our Story</a></li>
           <li><a href="/blog" onclick="event.preventDefault(); showPage('blog')" style="cursor:pointer;">Blog</a></li>
-          <li><a href="/schedule" onclick="event.preventDefault(); showPage('booking')">Get Started</a></li>
+          <li><a href="/schedule" onclick="event.preventDefault(); showPage('pricing')">Get Started</a></li>
           <li><a href="/privacy" onclick="event.preventDefault(); showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
           <li><a href="/terms" onclick="event.preventDefault(); showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
           <li><a href="/admin" style="font-size: 0.9rem; opacity: 0.8;">Admin</a></li>
@@ -5544,7 +5383,7 @@
       </ul>
 
       <br>
-      <a class="btn-gold" onclick="showPage('booking')" style="cursor:pointer;">Book Your Consultation →</a>
+      <a class="btn-gold" onclick="showPage('pricing')" style="cursor:pointer;">Book Your Consultation →</a>
     </div>
   </section>
 
@@ -5644,7 +5483,7 @@
   <section class="final-cta">
     <h2 class="section-title">Ready to work with OpWell?</h2>
     <p class="section-subtitle">Currently accepting patients in Ohio, Georgia &amp; Virginia. Not in one of these states? <a onclick="showPage('contact')" style="color:var(--terracotta); cursor:pointer; text-decoration:underline;">Join the waitlist.</a></p>
-    <a onclick="showPage('booking')" class="btn-gold" style="cursor:pointer;">Book Your Consultation →</a>
+    <a onclick="showPage('pricing')" class="btn-gold" style="cursor:pointer;">Book Your Consultation →</a>
   </section>
   <footer>
     <div class="footer-watermark"><div class="footer-watermark-circle"></div></div>
@@ -5665,7 +5504,7 @@
         <ul class="footer-links">
           <li><a href="/about" onclick="event.preventDefault(); showPage('about')">Our Story</a></li>
           <li><a href="/blog" onclick="event.preventDefault(); showPage('blog')" style="cursor:pointer;">Blog</a></li>
-          <li><a href="/schedule" onclick="event.preventDefault(); showPage('booking')">Get Started</a></li>
+          <li><a href="/schedule" onclick="event.preventDefault(); showPage('pricing')">Get Started</a></li>
           <li><a href="/privacy" onclick="event.preventDefault(); showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
           <li><a href="/terms" onclick="event.preventDefault(); showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
           <li><a href="/admin" style="font-size: 0.9rem; opacity: 0.8;">Admin</a></li>
@@ -5925,7 +5764,7 @@
     <h2 class="section-title">Ready for personalized guidance?</h2>
     <div class="gold-divider"></div>
     <p class="section-subtitle" style="max-width:520px; margin:0 auto 2rem;">Articles are a starting point. OpWell's clinical team goes further — walking with you through every step of your surgical journey with one-on-one concierge care.</p>
-    <a onclick="showPage('booking')" class="btn-gold" style="cursor:pointer;">Book a Consultation →</a>
+    <a onclick="showPage('pricing')" class="btn-gold" style="cursor:pointer;">Book a Consultation →</a>
   </section>
   <footer>
     <div class="footer-watermark"><div class="footer-watermark-circle"></div></div>
@@ -5946,7 +5785,7 @@
         <ul class="footer-links">
           <li><a href="/about" onclick="event.preventDefault(); showPage('about')">Our Story</a></li>
           <li><a href="/blog" onclick="event.preventDefault(); showPage('blog')" style="cursor:pointer;">Blog</a></li>
-          <li><a href="/schedule" onclick="event.preventDefault(); showPage('booking')">Get Started</a></li>
+          <li><a href="/schedule" onclick="event.preventDefault(); showPage('pricing')">Get Started</a></li>
           <li><a href="/privacy" onclick="event.preventDefault(); showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
           <li><a href="/terms" onclick="event.preventDefault(); showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
           <li><a href="/admin" style="font-size: 0.9rem; opacity: 0.8;">Admin</a></li>
@@ -5978,7 +5817,7 @@
     <div class="blog-gate-error" id="blogGateError">Incorrect code. Please try again.</div>
     <button class="blog-gate-btn" onclick="submitBlogCode()">Unlock Article</button>
     <div class="blog-gate-divider">or</div>
-    <a class="blog-gate-cta" onclick="closeBlogGate(); showPage('booking');" style="cursor:pointer;">Book a Consultation to Receive Your Access Code →</a>
+    <a class="blog-gate-cta" onclick="closeBlogGate(); showPage('pricing');" style="cursor:pointer;">Book a Consultation to Receive Your Access Code →</a>
   </div>
 </div>
 
@@ -6214,7 +6053,7 @@
         </div>
       </div>
       <div style="text-align:center; padding:1.5rem 0 2.5rem;">
-        <a onclick="showPage('booking')" class="btn-gold" style="cursor:pointer;">Book Your Surgery Prep Consultation →</a>
+        <a onclick="showPage('pricing')" class="btn-gold" style="cursor:pointer;">Book Your Surgery Prep Consultation →</a>
       </div>
       <h2>More Articles</h2>
       <div class="blog-more-articles">
@@ -6243,7 +6082,7 @@
         <ul class="footer-links">
           <li><a href="/about" onclick="event.preventDefault(); showPage('about')">Our Story</a></li>
           <li><a href="/blog" onclick="event.preventDefault(); showPage('blog')" style="cursor:pointer;">Blog</a></li>
-          <li><a href="/schedule" onclick="event.preventDefault(); showPage('booking')">Get Started</a></li>
+          <li><a href="/schedule" onclick="event.preventDefault(); showPage('pricing')">Get Started</a></li>
           <li><a href="/privacy" onclick="event.preventDefault(); showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
           <li><a href="/terms" onclick="event.preventDefault(); showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
           <li><a href="/admin" style="font-size: 0.9rem; opacity: 0.8;">Admin</a></li>
@@ -6470,7 +6309,7 @@
         </div>
       </div>
       <div style="text-align:center; padding:1.5rem 0 2.5rem;">
-        <a onclick="showPage('booking')" class="btn-gold" style="cursor:pointer;">Book a Pre-Op Consultation →</a>
+        <a onclick="showPage('pricing')" class="btn-gold" style="cursor:pointer;">Book a Pre-Op Consultation →</a>
       </div>
       <h2>More Articles</h2>
       <div class="blog-more-articles">
@@ -6499,7 +6338,7 @@
         <ul class="footer-links">
           <li><a href="/about" onclick="event.preventDefault(); showPage('about')">Our Story</a></li>
           <li><a href="/blog" onclick="event.preventDefault(); showPage('blog')" style="cursor:pointer;">Blog</a></li>
-          <li><a href="/schedule" onclick="event.preventDefault(); showPage('booking')">Get Started</a></li>
+          <li><a href="/schedule" onclick="event.preventDefault(); showPage('pricing')">Get Started</a></li>
           <li><a href="/privacy" onclick="event.preventDefault(); showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
           <li><a href="/terms" onclick="event.preventDefault(); showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
           <li><a href="/admin" style="font-size: 0.9rem; opacity: 0.8;">Admin</a></li>
@@ -6701,7 +6540,7 @@
         </div>
       </div>
       <div style="text-align:center; padding:1.5rem 0 2.5rem;">
-        <a onclick="showPage('booking')" class="btn-gold" style="cursor:pointer;">Book Your Post-Op Recovery Consultation →</a>
+        <a onclick="showPage('pricing')" class="btn-gold" style="cursor:pointer;">Book Your Post-Op Recovery Consultation →</a>
       </div>
       <h2>More Articles</h2>
       <div class="blog-more-articles">
@@ -6730,7 +6569,7 @@
         <ul class="footer-links">
           <li><a href="/about" onclick="event.preventDefault(); showPage('about')">Our Story</a></li>
           <li><a href="/blog" onclick="event.preventDefault(); showPage('blog')" style="cursor:pointer;">Blog</a></li>
-          <li><a href="/schedule" onclick="event.preventDefault(); showPage('booking')">Get Started</a></li>
+          <li><a href="/schedule" onclick="event.preventDefault(); showPage('pricing')">Get Started</a></li>
           <li><a href="/privacy" onclick="event.preventDefault(); showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
           <li><a href="/terms" onclick="event.preventDefault(); showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
           <li><a href="/admin" style="font-size: 0.9rem; opacity: 0.8;">Admin</a></li>
@@ -6907,7 +6746,7 @@
         </div>
       </div>
       <div style="text-align:center; padding:1.5rem 0 2.5rem;">
-        <a onclick="showPage('booking')" class="btn-gold" style="cursor:pointer;">Book a Mental Wellness Session →</a>
+        <a onclick="showPage('pricing')" class="btn-gold" style="cursor:pointer;">Book a Mental Wellness Session →</a>
       </div>
       <h2>More Articles</h2>
       <div class="blog-more-articles">
@@ -6936,7 +6775,7 @@
         <ul class="footer-links">
           <li><a href="/about" onclick="event.preventDefault(); showPage('about')">Our Story</a></li>
           <li><a href="/blog" onclick="event.preventDefault(); showPage('blog')" style="cursor:pointer;">Blog</a></li>
-          <li><a href="/schedule" onclick="event.preventDefault(); showPage('booking')">Get Started</a></li>
+          <li><a href="/schedule" onclick="event.preventDefault(); showPage('pricing')">Get Started</a></li>
           <li><a href="/privacy" onclick="event.preventDefault(); showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
           <li><a href="/terms" onclick="event.preventDefault(); showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
           <li><a href="/admin" style="font-size: 0.9rem; opacity: 0.8;">Admin</a></li>
@@ -7114,7 +6953,7 @@
         </div>
       </div>
       <div style="text-align:center; padding:1.5rem 0 2.5rem;">
-        <a onclick="showPage('booking')" class="btn-gold" style="cursor:pointer;">Book Your Medical Tourism Consultation →</a>
+        <a onclick="showPage('pricing')" class="btn-gold" style="cursor:pointer;">Book Your Medical Tourism Consultation →</a>
       </div>
       <h2>More Articles</h2>
       <div class="blog-more-articles">
@@ -7143,7 +6982,7 @@
         <ul class="footer-links">
           <li><a href="/about" onclick="event.preventDefault(); showPage('about')">Our Story</a></li>
           <li><a href="/blog" onclick="event.preventDefault(); showPage('blog')" style="cursor:pointer;">Blog</a></li>
-          <li><a href="/schedule" onclick="event.preventDefault(); showPage('booking')">Get Started</a></li>
+          <li><a href="/schedule" onclick="event.preventDefault(); showPage('pricing')">Get Started</a></li>
           <li><a href="/privacy" onclick="event.preventDefault(); showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
           <li><a href="/terms" onclick="event.preventDefault(); showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
           <li><a href="/admin" style="font-size: 0.9rem; opacity: 0.8;">Admin</a></li>
@@ -7435,7 +7274,7 @@
       <div class="ds-cta">
         <h3>Have Questions About Your Post-Op Symptoms?</h3>
         <p>OpWell Concierge offers virtual consultations to support you before and after weight-loss surgery.</p>
-        <button class="ds-cta-btn" onclick="closeBlogGate(); showPage('booking');">Schedule a Consultation →</button>
+        <button class="ds-cta-btn" onclick="closeBlogGate(); showPage('pricing');">Schedule a Consultation →</button>
       </div>
     </article>
 
@@ -7798,7 +7637,7 @@
   <div style="max-width:720px; margin:2rem auto 0; padding:2rem 2.5rem; background:linear-gradient(135deg, #f0f5ed 0%, #faf8f5 100%); border:1.5px solid rgba(85,107,47,0.25); border-radius:16px; text-align:center;">
     <h3 style="font-family:'Playfair Display',serif; font-size:1.35rem; color:var(--sage); margin:0 0 0.6rem;">Ready for a Lab-Guided Vitamin Protocol?</h3>
     <p style="font-size:0.95rem; color:var(--slate); line-height:1.6; margin:0 0 1.2rem;">One-size-fits-all supplements aren't enough after weight-loss surgery. Dr. Oluwole uses a proven clinical system based on national bariatric surgery guidelines (ASMBS) to create a vitamin plan just for you — based on your specific procedure, blood test results, health history, and medications. Every product uses high-quality, pharmacy-grade ingredients.</p>
-    <a onclick="showPage('booking')" class="cta-button" style="display:inline-block; cursor:pointer; margin-bottom:0.5rem;">Start Your Personalized Vitamin Plan →</a>
+    <a onclick="showPage('pricing')" class="cta-button" style="display:inline-block; cursor:pointer; margin-bottom:0.5rem;">Start Your Personalized Vitamin Plan →</a>
     <p style="font-size:0.8rem; color:var(--taupe); margin:0.5rem 0 0;">Included free with any bariatric core service or Executive Concierge Program · Standalone initiation: $250 · Follow-up reevaluation &amp; adjustment: $150</p>
   </div>
 
@@ -8103,7 +7942,7 @@
       <div class="sp-cta">
         <h3>Have Questions About Your Specific Surgery?</h3>
         <p>OpWell Concierge offers one-on-one telehealth consultations with a board-certified anesthesiologist — so you can ask every question, get personalized guidance, and go into surgery truly prepared.</p>
-        <button class="sp-cta-btn" onclick="showPage('booking')">Book Your Consultation →</button>
+        <button class="sp-cta-btn" onclick="showPage('pricing')">Book Your Consultation →</button>
       </div>
     </article>
 
@@ -8751,7 +8590,7 @@
       <div class="sp-cta">
         <h3>Have Questions About Your Specific Medications?</h3>
         <p>OpWell Concierge offers one-on-one virtual consultations with a board-certified anesthesiologist — a personalized review of your blood thinner plan, when to stop and restart, and what to watch for after surgery.</p>
-        <button class="sp-cta-btn" onclick="showPage('booking')">Book Your Consultation →</button>
+        <button class="sp-cta-btn" onclick="showPage('pricing')">Book Your Consultation →</button>
       </div>
 
       <!-- References -->
@@ -9347,7 +9186,7 @@
         <div style="background:linear-gradient(135deg,#3a1a2e 0%,#5c2a4a 100%); border-radius:16px; padding:2rem; margin:2.5rem 0; text-align:center;">
           <div style="font-family:'Playfair Display',serif; font-size:1.3rem; color:#fff; margin-bottom:0.6rem;">Get Personalized Guidance</div>
           <p style="font-family:'DM Sans',sans-serif; color:rgba(255,255,255,0.8); font-size:0.9rem; margin:0 0 1.25rem;">This guide gives you the knowledge. OpWell gives you a board-certified anesthesiologist who walks with you through every step — from your first question to your full recovery.</p>
-          <button class="btn-primary-standard" onclick="showPage('booking')">Book a Consultation →</button>
+          <button class="btn-primary-standard" onclick="showPage('pricing')">Book a Consultation →</button>
         </div>
 
         <div style="font-family:'DM Sans',sans-serif; font-size:0.78rem; color:#9ca3af; line-height:1.6; margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid #f3f4f6;">
@@ -9644,7 +9483,7 @@
     <div style="background:linear-gradient(135deg,#1a3a25 0%,#2d5a3d 100%); border-radius:16px; padding:2rem; margin:2.5rem 0; text-align:center;">
       <div style="font-family:'Playfair Display',serif; font-size:1.25rem; color:#fff; margin-bottom:0.6rem;">Preparing for a Tummy Tuck?</div>
       <p style="font-family:'DM Sans',sans-serif; color:rgba(255,255,255,0.8); font-size:0.9rem; margin:0 0 1.25rem;">OpWell's anesthesiologist-led preparation service helps you get ready safely — from medication management to what to expect during recovery. We walk with you before, during, and after.</p>
-      <button class="btn-primary-standard" onclick="showPage('booking')">Book a Consultation →</button>
+      <button class="btn-primary-standard" onclick="showPage('pricing')">Book a Consultation →</button>
     </div>
 
     <div style="font-family:'DM Sans',sans-serif; font-size:0.78rem; color:#9ca3af; line-height:1.6; margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid #f3f4f6;">
@@ -10039,7 +9878,7 @@
     <div style="background:linear-gradient(135deg,#1a1a3e 0%,#3a3a9c 100%); border-radius:16px; padding:2rem; margin:2.5rem 0; text-align:center;">
       <div style="font-family:'Playfair Display',serif; font-size:1.25rem; color:#fff; margin-bottom:0.6rem;">Preparing for a BBL or Body Contouring Procedure?</div>
       <p style="font-family:'DM Sans',sans-serif; color:rgba(255,255,255,0.8); font-size:0.9rem; margin:0 0 1.25rem;">OpWell's anesthesiologist-led preparation service helps you understand the risks, manage your medications, and go into surgery fully prepared — so you can focus on your results, not your worries.</p>
-      <button class="btn-primary-standard" onclick="showPage('booking')">Book a Consultation →</button>
+      <button class="btn-primary-standard" onclick="showPage('pricing')">Book a Consultation →</button>
     </div>
 
     <div style="font-family:'DM Sans',sans-serif; font-size:0.78rem; color:#9ca3af; line-height:1.6; margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid #f3f4f6;">
@@ -10579,7 +10418,7 @@
     <div style="background:linear-gradient(135deg,#3d0a1f 0%,#7c1a3a 100%); border-radius:16px; padding:2rem; margin:2.5rem 0; text-align:center;">
       <div style="font-family:'Playfair Display',serif; font-size:1.25rem; color:#fff; margin-bottom:0.6rem;">Preparing for a Tummy Tuck?</div>
       <p style="font-family:'DM Sans',sans-serif; color:rgba(255,255,255,0.8); font-size:0.9rem; margin:0 0 1.25rem;">OpWell's anesthesiologist-led preparation service helps you understand your risks, stop the right medications at the right time, and go into surgery fully prepared — so your body is ready to heal.</p>
-      <button class="btn-primary-standard" onclick="showPage('booking')">Book a Consultation →</button>
+      <button class="btn-primary-standard" onclick="showPage('pricing')">Book a Consultation →</button>
     </div>
 
     <div style="font-family:'DM Sans',sans-serif; font-size:0.78rem; color:#9ca3af; line-height:1.6; margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid #f3f4f6;">
@@ -11017,7 +10856,7 @@
     <div style="background:linear-gradient(135deg,#0c1a3a 0%,#2a5aaa 100%); border-radius:16px; padding:2rem; margin:2.5rem 0; text-align:center;">
       <div style="font-family:'Playfair Display',serif; font-size:1.25rem; color:#fff; margin-bottom:0.6rem;">Preparing for Rhinoplasty?</div>
       <p style="font-family:'DM Sans',sans-serif; color:rgba(255,255,255,0.8); font-size:0.9rem; margin:0 0 1.25rem;">OpWell's anesthesiologist-led preparation service helps you understand your medications, manage your risk, and go into surgery fully prepared.</p>
-      <button class="btn-primary-standard" onclick="showPage('booking')">Book a Consultation →</button>
+      <button class="btn-primary-standard" onclick="showPage('pricing')">Book a Consultation →</button>
     </div>
 
     <div style="font-family:'DM Sans',sans-serif; font-size:0.78rem; color:#9ca3af; line-height:1.6; margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid #f3f4f6;">
@@ -11366,7 +11205,7 @@
     <div style="background:linear-gradient(135deg,#0d1f0d 0%,#2a7a3a 100%); border-radius:16px; padding:2rem; margin:2.5rem 0; text-align:center;">
       <div style="font-family:'Playfair Display',serif; font-size:1.25rem; color:#fff; margin-bottom:0.6rem;">Preparing for Liposuction?</div>
       <p style="font-family:'DM Sans',sans-serif; color:rgba(255,255,255,0.8); font-size:0.9rem; margin:0 0 1.25rem;">OpWell's anesthesiologist-led preparation service helps you safely stop the right medications, understand your risks, and be fully ready on surgery day.</p>
-      <button class="btn-primary-standard" onclick="showPage('booking')">Book a Consultation →</button>
+      <button class="btn-primary-standard" onclick="showPage('pricing')">Book a Consultation →</button>
     </div>
 
     <div style="font-family:'DM Sans',sans-serif; font-size:0.78rem; color:#9ca3af; line-height:1.6; margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid #f3f4f6;">
@@ -11729,7 +11568,7 @@
     <div style="background:linear-gradient(135deg,#2d0a1f 0%,#9b4a8a 100%); border-radius:16px; padding:2rem; margin:2.5rem 0; text-align:center;">
       <div style="font-family:'Playfair Display',serif; font-size:1.25rem; color:#fff; margin-bottom:0.6rem;">Preparing for Breast Augmentation?</div>
       <p style="font-family:'DM Sans',sans-serif; color:rgba(255,255,255,0.8); font-size:0.9rem; margin:0 0 1.25rem;">OpWell's anesthesiologist-led preparation service makes sure your medications are managed safely, your risks are clearly explained, and your body is ready for the best possible recovery.</p>
-      <button class="btn-primary-standard" onclick="showPage('booking')">Book a Consultation</button>
+      <button class="btn-primary-standard" onclick="showPage('pricing')">Book a Consultation</button>
     </div>
 
     <div style="font-family:'DM Sans',sans-serif; font-size:0.78rem; color:#9ca3af; line-height:1.6; margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid #f3f4f6;">
@@ -12010,7 +11849,7 @@
     <div style="background:linear-gradient(135deg,#1a1a2e 0%,#3a2a5a 100%); border-radius:16px; padding:2rem; margin:2.5rem 0; text-align:center;">
       <div style="font-family:'Playfair Display',serif; font-size:1.25rem; color:#fff; margin-bottom:0.6rem;">Considering Cosmetic Surgery?</div>
       <p style="font-family:'DM Sans',sans-serif; color:rgba(255,255,255,0.8); font-size:0.9rem; margin:0 0 1.25rem;">OpWell's anesthesiologist-led preparation service helps you safely stop the right medications, understand your specific risks, and walk into surgery fully prepared — for any of these procedures.</p>
-      <button class="btn-primary-standard" onclick="showPage('booking')">Book a Consultation →</button>
+      <button class="btn-primary-standard" onclick="showPage('pricing')">Book a Consultation →</button>
     </div>
 
   </div>
@@ -12238,7 +12077,7 @@
   <div class="ld-cta">
     <h3>Ready for a Prenatal Anesthesia Consultation?</h3>
     <p>I am a board-certified anesthesiologist who built OpWell because this conversation should happen before labor day — not on it. We serve patients in Georgia, Ohio, and Virginia via telehealth.</p>
-    <button class="btn-primary-standard" onclick="showPage('booking')">Book a Labor &amp; Delivery Consult →</button>
+    <button class="btn-primary-standard" onclick="showPage('pricing')">Book a Labor &amp; Delivery Consult →</button>
   </div>
   <div style="border-top:1px solid #e5e7eb;margin-top:2.5rem;padding-top:1.5rem;">
     <p style="font-family:'DM Sans',sans-serif;font-size:.8rem;color:#9ca3af;line-height:1.6;font-style:italic;">References: CDC Maternal Mortality Data (2023), Howell et al. BMJ (2001), Anim-Somuah et al. Cochrane Review (2018), ACOG Practice Bulletins, Hoffman et al. PNAS (2016). Verify all citations at OpenEvidence.com.</p>
@@ -12427,7 +12266,7 @@
   <div class="mt-cta">
     <h3>Pre-Travel Surgical Clearance — Available by Telehealth</h3>
     <p>Before you book that flight, book this consultation. I will review your health history, identify your specific risk factors, give you a customized checklist for the facility, and help you create a safety plan for your return. No other US anesthesiologist is offering this service.</p>
-    <button class="btn-primary-standard" onclick="showPage('booking')">Book Pre-Travel Clearance →</button>
+    <button class="btn-primary-standard" onclick="showPage('pricing')">Book Pre-Travel Clearance →</button>
   </div>
   <div style="border-top:1px solid #e5e7eb;margin-top:2.5rem;padding-top:1.5rem;">
     <p style="font-family:'DM Sans',sans-serif;font-size:.8rem;color:#9ca3af;line-height:1.6;font-style:italic;">References: CDC Health Advisories (2023), CDC MMWR Medical Tourism reports, NICE DVT guidelines, Patients Beyond Borders survey data (2023). Verify all citations at OpenEvidence.com.</p>
@@ -12629,7 +12468,7 @@
   <div class="ca-cta">
     <h3>Get a Pre-Cosmetic Surgery Anesthesia Consultation</h3>
     <p>Before your procedure, you deserve a conversation with a board-certified anesthesiologist who will review your specific risks, evaluate your planned facility, and give you honest answers — not reassurances. We serve patients in Georgia, Ohio, and Virginia via telehealth.</p>
-    <button class="btn-primary-standard" onclick="showPage('booking')">Book Your Anesthesia Consult →</button>
+    <button class="btn-primary-standard" onclick="showPage('pricing')">Book Your Anesthesia Consult →</button>
   </div>
   <div style="border-top:1px solid #e5e7eb;margin-top:2.5rem;padding-top:1.5rem;">
     <p style="font-family:'DM Sans',sans-serif;font-size:.8rem;color:#9ca3af;line-height:1.6;font-style:italic;">References: Mofid et al. (2012), ISAPS Task Force (2019), Myles et al. Lancet (2004), Sebel et al. Anesth Analg (2004), Vila et al. Arch Surg (2003), Grazer &amp; de Jong Plast Reconstr Surg (2000). Verify all citations at OpenEvidence.com.</p>
@@ -12797,7 +12636,7 @@
   <div class="gl-cta">
     <h3>Surgery Preparation for Patients on GLP-1 Medications</h3>
     <p>The connection between GLP-1 medications and surgery safety is one of the least talked-about topics in patient education. I offer personalized Pre-Surgical Consultations for patients on Ozempic, Wegovy, Mounjaro, and similar medications — available by telehealth in Georgia, Ohio, and Virginia.</p>
-    <button class="btn-primary-standard" onclick="showPage('booking')">Book a Surgical Prep Consult →</button>
+    <button class="btn-primary-standard" onclick="showPage('pricing')">Book a Surgical Prep Consult →</button>
   </div>
   <div style="border-top:1px solid #e5e7eb;margin-top:2.5rem;padding-top:1.5rem;">
     <p style="font-family:'DM Sans',sans-serif;font-size:.8rem;color:#9ca3af;line-height:1.6;font-style:italic;">References: American Society of Anesthesiologists Consensus Statement (2023), IQVIA National Prescription Audit (2024), ASMBS Annual Report (2024), Sherif et al. Anesthesiology (2024). Verify all citations at OpenEvidence.com.</p>
@@ -13149,7 +12988,7 @@
   <div class="nw-cta">
     <h3>Surgery Preparation &amp; Post-Op Recovery Support</h3>
     <p>Nutrition is one piece of a larger recovery picture. My Surgery Preparation and Post-Op Recovery consultations are designed to give you an individualized plan — covering nutrition, activity, medications, wound monitoring, and warning signs — specific to your procedure and health history. Available by telehealth in Georgia, Ohio, and Virginia.</p>
-    <button class="btn-primary-standard" onclick="showPage('booking')">Book a Post-Op Consult →</button>
+    <button class="btn-primary-standard" onclick="showPage('pricing')">Book a Post-Op Consult →</button>
   </div>
   <div style="border-top:1px solid #e5e7eb;margin-top:2.5rem;padding-top:1.5rem;">
     <p style="font-family:'DM Sans',sans-serif;font-size:.8rem;color:#9ca3af;line-height:1.6;font-style:italic;">References: Stechmiller JK. Understanding the role of nutrition and wound healing. <em>Nutrition in Clinical Practice.</em> 2010;25(1):61–68. Guo S, DiPietro LA. Factors affecting wound healing. <em>Journal of Dental Research.</em> 2010;89(3):219–229. Wild T, et al. Basics in nutrition and wound healing. <em>Nutrition.</em> 2010;26(9):862–866. Barchitta M, et al. Nutrition and wound healing. <em>International Journal of Molecular Sciences.</em> 2019;20(11):2792. American Society of Anesthesiologists Fasting Guidelines. Verify all citations at OpenEvidence.com.</p>
@@ -13411,7 +13250,7 @@
     <h3>Want the Full Clinical Guide?</h3>
     <p>This quick reference covers the essentials. The complete premium guide includes detailed protein targets by weight, full vitamin and mineral breakdowns, a complete sample meal plan, special guidance for diabetes, weight-loss surgery history, plant-based diets, and more.</p>
     <button onclick="openBlogPost('blog-24')" style="background:#c49d57;color:#fff;border:none;border-radius:50px;padding:.7rem 1.75rem;font-family:'DM Sans',sans-serif;font-weight:700;font-size:.88rem;cursor:pointer;letter-spacing:.03em;margin-right:.5rem;">Read the Full Guide 🔒</button>
-    <button onclick="showPage('booking')" style="background:transparent;color:#fff;border:2px solid rgba(255,255,255,.5);border-radius:50px;padding:.7rem 1.75rem;font-family:'DM Sans',sans-serif;font-weight:700;font-size:.88rem;cursor:pointer;letter-spacing:.03em;">Book a Consult →</button>
+    <button onclick="showPage('pricing')" style="background:transparent;color:#fff;border:2px solid rgba(255,255,255,.5);border-radius:50px;padding:.7rem 1.75rem;font-family:'DM Sans',sans-serif;font-weight:700;font-size:.88rem;cursor:pointer;letter-spacing:.03em;">Book a Consult →</button>
   </div>
 
   <div style="background:#f9fafb;border-radius:14px;padding:1.25rem 1.5rem;margin:2rem 0 0;">
@@ -13746,7 +13585,7 @@
   <div class="bb-cta">
     <h3>Planning Cosmetic Surgery? Get Prepared the Right Way.</h3>
     <p>OpWell offers pre-operative consultations for cosmetic surgery patients — including BBL — covering anesthesia risks, what questions to ask your surgeon, how to prepare your body for surgery, and what to expect in recovery. Available by telehealth in Georgia, Ohio, and Virginia.</p>
-    <button class="btn-primary-standard" onclick="showPage('booking')">Book a Pre-Op Consult →</button>
+    <button class="btn-primary-standard" onclick="showPage('pricing')">Book a Pre-Op Consult →</button>
   </div>
 
   <div style="border-top:1px solid #e5e7eb;margin-top:2.5rem;padding-top:1.5rem;">
@@ -13988,7 +13827,7 @@
   <div class="rf-cta">
     <h3>Get Prepared Before Any Cosmetic Procedure</h3>
     <p>OpWell offers pre-operative consultations for cosmetic surgery patients — helping you understand your anesthesia risks, ask the right questions, and prepare your body and mind for surgery. Available by telehealth in Georgia, Ohio, and Virginia.</p>
-    <button class="btn-primary-standard" onclick="showPage('booking')" style="margin-right:.5rem;">Book a Pre-Op Consult →</button>
+    <button class="btn-primary-standard" onclick="showPage('pricing')" style="margin-right:.5rem;">Book a Pre-Op Consult →</button>
     <button onclick="openBlogPost('blog-26')" style="background:transparent;color:#fff;border:2px solid rgba(255,255,255,.5);border-radius:50px;padding:.7rem 1.75rem;font-family:'DM Sans',sans-serif;font-weight:700;font-size:.88rem;cursor:pointer;letter-spacing:.03em;">Full BBL Risk Guide →</button>
   </div>
 
@@ -14219,7 +14058,7 @@
   <div class="br-cta">
     <h3>Get an Individualized Pre-Op Risk Assessment</h3>
     <p>Understanding your personal risk before any cosmetic procedure — including BBL — requires a one-on-one conversation with someone who knows both the research and your health history. OpWell offers telehealth pre-operative consultations specifically for cosmetic surgery patients, available in Georgia, Ohio, and Virginia.</p>
-    <button class="btn-primary-standard" onclick="showPage('booking')">Book a Pre-Op Consult →</button>
+    <button class="btn-primary-standard" onclick="showPage('pricing')">Book a Pre-Op Consult →</button>
   </div>
 
   <div style="border-top:1px solid #e5e7eb;margin-top:2.5rem;padding-top:1.5rem;">
@@ -14433,7 +14272,7 @@
   <div class="mm-cta">
     <h3>Labor &amp; Delivery Consultation — Available Now by Telehealth</h3>
     <p>If you are pregnant and want a physician-level review of your health history before your due date — one that covers your anesthesia risk, your delivery options, and your full picture — this is what OpWell was built for. Available in Georgia, Ohio, and Virginia.</p>
-    <button class="btn-primary-standard" onclick="showPage('booking')">Book a Labor &amp; Delivery Consult →</button>
+    <button class="btn-primary-standard" onclick="showPage('pricing')">Book a Labor &amp; Delivery Consult →</button>
   </div>
 
   <div style="border-top:1px solid #e5e7eb;margin-top:2.5rem;padding-top:1.5rem;">
@@ -14698,7 +14537,7 @@
   <div class="bs-cta">
     <h3>Surgery Preparation for Weight-Loss Surgery Patients</h3>
     <p>Most weight-loss surgery patients meet their anesthesiologist for the first time on the morning of surgery. OpWell gives you that conversation weeks earlier — a full review of your sleep apnea history, medications, airway anatomy, and health conditions, with a plan built specifically for you. Available by telehealth in Georgia, Ohio, and Virginia.</p>
-    <button class="btn-primary-standard" onclick="showPage('booking')">Book a Surgery Prep Consult →</button>
+    <button class="btn-primary-standard" onclick="showPage('pricing')">Book a Surgery Prep Consult →</button>
   </div>
 
   <div style="border-top:1px solid #e5e7eb;margin-top:2.5rem;padding-top:1.5rem;">
@@ -15044,7 +14883,7 @@
             Add Mental Wellness Consultation (+$150) to create The Integrated Mind-Body Care Pathway: $1,000 total
           </div>
         </div>
-        <a onclick="showPage('booking')" class="btn-primary" style="cursor:pointer; display:inline-block; margin-top: auto;">Book Now →</a>
+        <a onclick="showPage('pricing')" class="btn-primary" style="cursor:pointer; display:inline-block; margin-top: auto;">Book Now →</a>
       </div>
 
       <!-- TIER 3: ELITE PARTNERSHIP -->
@@ -15132,7 +14971,7 @@
           <li><div class="service-check">✓</div>Pre-delivery Optimization Recommendations</li>
           <li><div class="service-check">✓</div>HSA &amp; FSA accepted</li>
         </ul>
-        <br><a onclick="showPage('booking')" class="btn-secondary" style="cursor:pointer; display:inline-block;">Book Consultation →</a>
+        <br><a onclick="showPage('pricing')" class="btn-secondary" style="cursor:pointer; display:inline-block;">Book Consultation →</a>
       </div>
       <div class="package-card">
         <div class="package-name">L&D Consultation — Return Patient</div>
@@ -15149,7 +14988,7 @@
           <li><div class="service-check">✓</div>Updated Anesthesia Risk Assessment</li>
           <li><div class="service-check">✓</div>HSA &amp; FSA accepted</li>
         </ul>
-        <br><a onclick="showPage('booking')" class="btn-secondary" style="cursor:pointer; display:inline-block;">Book Consultation →</a>
+        <br><a onclick="showPage('pricing')" class="btn-secondary" style="cursor:pointer; display:inline-block;">Book Consultation →</a>
       </div>
     </div>
   </div>
@@ -15173,7 +15012,7 @@
           <li><div class="service-check">✓</div>Coordinated with Dr. Oluwole's medical team</li>
           <li><div class="service-check">✓</div>HSA &amp; FSA accepted</li>
         </ul>
-        <br><a onclick="showPage('booking')" class="btn-secondary" style="cursor:pointer; display:inline-block;">Book Session →</a>
+        <br><a onclick="showPage('pricing')" class="btn-secondary" style="cursor:pointer; display:inline-block;">Book Session →</a>
       </div>
       <div class="package-card featured">
         <div class="package-badge">Save $35</div>
@@ -15194,7 +15033,7 @@
           <li><div class="service-check">✓</div>Labor &amp; Delivery — New Patient ($400)</li>
           <li><div class="service-check">✓</div>Labor &amp; Delivery — Return Patient ($250)</li>
         </ul>
-        <br><a onclick="showPage('booking')" class="btn-primary" style="cursor:pointer; display:inline-block;">Book with Any Service →</a>
+        <br><a onclick="showPage('pricing')" class="btn-primary" style="cursor:pointer; display:inline-block;">Book with Any Service →</a>
       </div>
       <div class="package-card">
         <div class="package-name">3-Session Package</div>
@@ -15210,7 +15049,7 @@
           <li><div class="service-check">✓</div>Coordinated with Dr. Oluwole's medical team</li>
           <li><div class="service-check">✓</div>HSA &amp; FSA accepted</li>
         </ul>
-        <br><a onclick="showPage('booking')" class="btn-secondary" style="cursor:pointer; display:inline-block;">Book Package →</a>
+        <br><a onclick="showPage('pricing')" class="btn-secondary" style="cursor:pointer; display:inline-block;">Book Package →</a>
       </div>
     </div>
   </div>
@@ -15234,7 +15073,7 @@
           <li><div class="service-check">✓</div>HSA &amp; FSA accepted</li>
         </ul>
         <div class="package-desc" style="font-size:0.78rem; margin-top:0.5rem;">Included free with Complete Surgical Care Package ($850). Also available standalone for $250.</div>
-        <br><a onclick="showPage('booking')" class="btn-secondary" style="cursor:pointer; display:inline-block;">Book Consultation →</a>
+        <br><a onclick="showPage('pricing')" class="btn-secondary" style="cursor:pointer; display:inline-block;">Book Consultation →</a>
       </div>
       <div class="package-card">
         <div class="package-name">Follow-Up Reevaluation</div>
@@ -15248,7 +15087,7 @@
           <li><div class="service-check">✓</div>HSA &amp; FSA accepted</li>
         </ul>
         <div class="package-desc" style="font-size:0.78rem; margin-top:0.5rem;">Recommended quarterly for Year 1, then biannually. Supplement costs vary — shipped directly to your door.</div>
-        <br><a onclick="showPage('booking')" class="btn-secondary" style="cursor:pointer; display:inline-block;">Book Follow-Up →</a>
+        <br><a onclick="showPage('pricing')" class="btn-secondary" style="cursor:pointer; display:inline-block;">Book Follow-Up →</a>
       </div>
     </div>
     <p style="text-align:center; font-family:'DM Sans',sans-serif; font-size:0.78rem; color:var(--slate); margin-top:1rem; max-width:600px; margin-left:auto; margin-right:auto;">Initial vitamin consultation is included at no additional cost when booked with any Pre-Surgical or Post-Operative bariatric service. Supplement costs vary based on formulation — shipped directly to your door.</p>
@@ -15356,7 +15195,7 @@
   <section class="final-cta">
     <h2 class="section-title">Not sure which plan is right for you?</h2>
     <p class="section-subtitle">Book any consultation and Dr. Oluwole will help you determine the best level of support for your procedure and needs.</p>
-    <a onclick="showPage('booking')" class="btn-gold" style="cursor:pointer;">Book Your Consultation →</a>
+    <a onclick="showPage('pricing')" class="btn-gold" style="cursor:pointer;">Book Your Consultation →</a>
   </section>
   <footer>
     <div class="footer-watermark"><div class="footer-watermark-circle"></div></div>
@@ -15377,7 +15216,7 @@
         <ul class="footer-links">
           <li><a href="/about" onclick="event.preventDefault(); showPage('about')">Our Story</a></li>
           <li><a href="/blog" onclick="event.preventDefault(); showPage('blog')" style="cursor:pointer;">Blog</a></li>
-          <li><a href="/schedule" onclick="event.preventDefault(); showPage('booking')">Get Started</a></li>
+          <li><a href="/schedule" onclick="event.preventDefault(); showPage('pricing')">Get Started</a></li>
           <li><a href="/privacy" onclick="event.preventDefault(); showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
           <li><a href="/terms" onclick="event.preventDefault(); showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
           <li><a href="/admin" style="font-size: 0.9rem; opacity: 0.8;">Admin</a></li>
@@ -17373,7 +17212,7 @@
         <ul class="footer-links">
           <li><a href="/about" onclick="event.preventDefault(); showPage('about')">Our Story</a></li>
           <li><a href="/blog" onclick="event.preventDefault(); showPage('blog')" style="cursor:pointer;">Blog</a></li>
-          <li><a href="/schedule" onclick="event.preventDefault(); showPage('booking')">Get Started</a></li>
+          <li><a href="/schedule" onclick="event.preventDefault(); showPage('pricing')">Get Started</a></li>
           <li><a href="/privacy" onclick="event.preventDefault(); showPage('privacy')" style="cursor:pointer;">Privacy Policy</a></li>
           <li><a href="/terms" onclick="event.preventDefault(); showPage('terms')" style="cursor:pointer;">Terms of Service</a></li>
           <li><a href="/admin" style="font-size: 0.9rem; opacity: 0.8;">Admin</a></li>
@@ -17768,71 +17607,6 @@
       errorDiv.textContent = err.message || 'Failed to submit request. Please try again or call (678) 235-5822.';
       errorDiv.style.display = 'block';
     });
-  }
-
-  // ── PUBLIC BOOKING FLOW (Schedule before pricing) ──
-  function bookingGoBack() {
-    document.getElementById('booking-step-1').style.display = 'block';
-    document.getElementById('booking-step-2').style.display = 'none';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  function bookingShowConfirmation() {
-    document.getElementById('booking-step-1').style.display = 'none';
-    document.getElementById('booking-step-2').style.display = 'block';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  function submitAppointmentConfirmation(event) {
-    event.preventDefault();
-    var form = event.target;
-    var errorDiv = document.getElementById('appointment-confirm-error');
-    errorDiv.style.display = 'none';
-
-    var appointmentData = {
-      name: form.name.value,
-      email: form.email.value,
-      phone: form.phone.value,
-      procedure: form.procedure.value || 'Not specified',
-      appointmentTime: form.appointmentTime.value
-    };
-
-    // Store appointment in sessionStorage
-    sessionStorage.setItem('opwell_appointment', JSON.stringify(appointmentData));
-
-    // Go to pricing page to select service
-    showPage('pricing');
-  }
-
-  // ── QUICK BOOKING INFO FORM (Book → Quick Info → Checkout) ──
-  function showBookingInfoForm() {
-    document.getElementById('booking-quick-form').style.display = 'block';
-    window.scrollTo({ top: document.getElementById('booking-quick-form').offsetTop - 100, behavior: 'smooth' });
-  }
-
-  function hideBookingInfoForm() {
-    document.getElementById('booking-quick-form').style.display = 'none';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  function submitBookingInfo(event) {
-    event.preventDefault();
-    var form = event.target;
-    var errorDiv = document.getElementById('booking-info-error');
-    errorDiv.style.display = 'none';
-
-    var appointmentData = {
-      name: form.name.value,
-      email: form.email.value,
-      phone: form.phone.value,
-      appointmentTime: form.appointmentTime.value
-    };
-
-    // Store appointment in sessionStorage
-    sessionStorage.setItem('opwell_appointment', JSON.stringify(appointmentData));
-
-    // Go to pricing page to select service
-    showPage('pricing');
   }
 
   // Detect return from Stripe payment
@@ -18652,9 +18426,9 @@
       <li><a href="/products" onclick="event.preventDefault(); showPage('products')">Products</a></li>
       <li><a href="/about" onclick="event.preventDefault(); showPage('about')">Our Story</a></li>
       <li><a onclick="showPage('blog')">Blog</a></li>
-      <li><a href="/schedule" onclick="event.preventDefault(); showPage('booking')">Get Started</a></li>
+      <li><a href="/schedule" onclick="event.preventDefault(); showPage('pricing')">Get Started</a></li>
     </ul>
-    <a onclick="showPage('booking')" style="cursor:pointer;" class="nav-cta">Book Now</a>
+    <a onclick="showPage('pricing')" style="cursor:pointer;" class="nav-cta">Book Now</a>
   </nav>
 
   <div style="max-width:820px; margin:0 auto; padding:8rem 2rem 5rem;">
@@ -18787,7 +18561,7 @@
 
       <div style="display:flex; gap:1rem; flex-wrap:wrap; align-items:center; margin-top:2rem;">
         <button onclick="showPage('home')" style="background:var(--sage); border:none; color:#fff; font-family:'DM Sans',sans-serif; font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase; padding:0.7rem 1.5rem; border-radius:4px; cursor:pointer; transition:background 0.2s;" onmouseover="this.style.background='#1A2E22';" onmouseout="this.style.background='var(--sage)';">← Back to Home</button>
-        <button onclick="showPage('booking')" style="background:var(--terracotta); border:none; color:#fff; font-family:'DM Sans',sans-serif; font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase; padding:0.7rem 1.5rem; border-radius:4px; cursor:pointer; transition:background 0.2s;" onmouseover="this.style.background='#a06040';" onmouseout="this.style.background='var(--terracotta)';">Book a Consultation →</button>
+        <button onclick="showPage('pricing')" style="background:var(--terracotta); border:none; color:#fff; font-family:'DM Sans',sans-serif; font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase; padding:0.7rem 1.5rem; border-radius:4px; cursor:pointer; transition:background 0.2s;" onmouseover="this.style.background='#a06040';" onmouseout="this.style.background='var(--terracotta)';">Book a Consultation →</button>
       </div>
 
     </div>
@@ -19413,9 +19187,9 @@ if (window.location.href.includes('/admin')) {
       <li><a href="/products" onclick="event.preventDefault(); showPage('products')">Products</a></li>
       <li><a href="/about" onclick="event.preventDefault(); showPage('about')">Our Story</a></li>
       <li><a onclick="showPage('blog')">Blog</a></li>
-      <li><a href="/schedule" onclick="event.preventDefault(); showPage('booking')">Get Started</a></li>
+      <li><a href="/schedule" onclick="event.preventDefault(); showPage('pricing')">Get Started</a></li>
     </ul>
-    <a onclick="showPage('booking')" style="cursor:pointer;" class="nav-cta">Book Now</a>
+    <a onclick="showPage('pricing')" style="cursor:pointer;" class="nav-cta">Book Now</a>
   </nav>
 
   <div style="max-width:820px; margin:0 auto; padding:8rem 2rem 5rem;">
@@ -19564,7 +19338,7 @@ if (window.location.href.includes('/admin')) {
       <div style="display:flex; gap:1rem; flex-wrap:wrap; align-items:center; margin-top:2rem;">
         <button onclick="showPage('home')" style="background:var(--sage); border:none; color:#fff; font-family:'DM Sans',sans-serif; font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase; padding:0.7rem 1.5rem; border-radius:4px; cursor:pointer; transition:background 0.2s;" onmouseover="this.style.background='#1A2E22';" onmouseout="this.style.background='var(--sage)';">← Back to Home</button>
         <button onclick="showPage('privacy')" style="background:none; border:1px solid rgba(45,90,61,0.25); color:var(--sage); font-family:'DM Sans',sans-serif; font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase; padding:0.7rem 1.5rem; border-radius:4px; cursor:pointer; transition:all 0.2s;" onmouseover="this.style.background='var(--sage)';this.style.color='#fff';" onmouseout="this.style.background='none';this.style.color='var(--sage)';">Privacy Policy →</button>
-        <button onclick="showPage('booking')" style="background:var(--terracotta); border:none; color:#fff; font-family:'DM Sans',sans-serif; font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase; padding:0.7rem 1.5rem; border-radius:4px; cursor:pointer; transition:background 0.2s;" onmouseover="this.style.background='#a06040';" onmouseout="this.style.background='var(--terracotta)';">Book a Consultation →</button>
+        <button onclick="showPage('pricing')" style="background:var(--terracotta); border:none; color:#fff; font-family:'DM Sans',sans-serif; font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase; padding:0.7rem 1.5rem; border-radius:4px; cursor:pointer; transition:background 0.2s;" onmouseover="this.style.background='#a06040';" onmouseout="this.style.background='var(--terracotta)';">Book a Consultation →</button>
       </div>
 
     </div>
@@ -19600,9 +19374,9 @@ if (window.location.href.includes('/admin')) {
       <li><a href="/products" onclick="event.preventDefault(); showPage('products')">Products</a></li>
       <li><a onclick="showPage('blog')">Blog</a></li>
       <li><a onclick="showPage('contact')" class="active">Contact</a></li>
-      <li><a href="/schedule" onclick="event.preventDefault(); showPage('booking')">Get Started</a></li>
+      <li><a href="/schedule" onclick="event.preventDefault(); showPage('pricing')">Get Started</a></li>
     </ul>
-    <a onclick="showPage('booking')" style="cursor:pointer;" class="nav-cta">Book Now</a>
+    <a onclick="showPage('pricing')" style="cursor:pointer;" class="nav-cta">Book Now</a>
   </nav>
 
   <div class="sched-wrap" style="padding-top:7rem;">
@@ -19719,7 +19493,7 @@ if (window.location.href.includes('/admin')) {
         <p style="font-size:0.95rem; color:var(--slate); line-height:1.7; max-width:420px; margin:0 auto 2rem; font-weight:300;">Thank you for reaching out. We have received your message and will get back to you within 1-2 business days.</p>
         <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
           <button onclick="showPage('home')" class="sched-btn-next" style="background:var(--sage);">Back to Home</button>
-          <button onclick="showPage('booking')" class="sched-btn-next" style="background:var(--terracotta);">Book a Consultation</button>
+          <button onclick="showPage('pricing')" class="sched-btn-next" style="background:var(--terracotta);">Book a Consultation</button>
         </div>
       </div>
     </div>
@@ -19848,7 +19622,7 @@ function dismissExitPopup() {
 <!-- Sticky Mobile CTA -->
 <div class="sticky-cta-bar">
   <span>Ready to prepare for surgery?</span>
-  <button onclick="showPage('booking')">Book Now →</button>
+  <button onclick="showPage('pricing')">Book Now →</button>
 </div>
 
 
