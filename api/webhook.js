@@ -281,8 +281,8 @@ module.exports = async function handler(req, res) {
         });
       }
 
-      // Always send doctor notification
-      await resend.emails.send({
+    // Always send doctor notification
+    await resend.emails.send({
         from: 'OpWell Bookings <info@opwellconcierge.com>',
         to: 'dr.oluwole@opwellconcierge.com',
         subject: `New Payment: ${esc(patientName)} \u2014 $${amountPaid} \u2014 ${esc(services)}`,
@@ -308,7 +308,6 @@ module.exports = async function handler(req, res) {
           </div>
         `,
       });
-    }
 
       // Send patient receipt/invoice
       if (email) {
