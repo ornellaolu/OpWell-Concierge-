@@ -108,7 +108,7 @@ async function handler(req, res) {
             const pdfPassword = pdfResult.password;
             console.log('\ud83d\udd10 Generated PDF password for', email, '(first 5 chars):', pdfPassword.substring(0, 5) + '...');
 
-            const htmlContent = tier1CourseAccessEmail(email, amountPaid, accessCode, pdfPassword);
+            const htmlContent = tier1CourseAccessEmail(email, amountPaid, accessCode, pdfPassword, patientName);
             console.log('\ud83d\udd17 Email contains token:', htmlContent.includes(accessCode) ? '\u2705 YES' : '\u274c NO');
 
             // Build email config with optional PDF attachment

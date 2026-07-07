@@ -449,7 +449,7 @@ function masterclassConfirmationEmail(patientEmail, accessCode) {
 </html>`;
 }
 
-function tier1CourseAccessEmail(patientEmail, amountPaid, accessToken, pdfPassword) {
+function tier1CourseAccessEmail(patientEmail, amountPaid, accessToken, pdfPassword, patientName) {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -506,6 +506,7 @@ function tier1CourseAccessEmail(patientEmail, amountPaid, accessToken, pdfPasswo
       <h2 style="font-size: 24px; margin-top: 0; color: #2d5a3d; line-height: 1.3;">Your Access is Confirmed</h2>
 
       <div class="greeting">
+        Dear <strong>${escapeHtml(patientName || 'there')}</strong>,<br><br>
         Thank you for purchasing <strong>The Interactive Surgical Prep Blueprint</strong>. Your payment has been successfully processed, and your lifetime digital access to the course portal is officially active.
       </div>
 
