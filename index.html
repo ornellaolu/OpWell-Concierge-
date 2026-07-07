@@ -14812,6 +14812,62 @@
     <p class="lp-sub" style="color:rgba(250,240,232,0.85);">Transparent pricing. No hidden fees. HSA & FSA accepted. No referral required.</p>
   </div>
 
+  <!-- HOW IT WORKS: 3-STEP TIMELINE -->
+  <div style="background: linear-gradient(135deg, rgba(45,90,61,0.04), rgba(200,132,90,0.02)); padding: 4rem 2rem; margin: 0;">
+    <div style="max-width: 1200px; margin: 0 auto;">
+      <h3 style="text-align: center; color: #3b2a1a; font-size: 1.5rem; margin-bottom: 3rem; font-family: 'Playfair Display', serif; font-weight: 400;">How It Works</h3>
+
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; align-items: stretch;">
+        <!-- STEP 1 -->
+        <div style="position: relative;">
+          <div style="text-align: center;">
+            <div style="width: 60px; height: 60px; background: var(--sage); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; font-weight: 700; margin: 0 auto 1.5rem;">1</div>
+            <h4 style="color: #3b2a1a; font-size: 1.1rem; margin: 0 0 0.75rem; font-weight: 600;">Select & Secure</h4>
+            <p style="color: var(--slate); font-size: 0.9rem; line-height: 1.6; margin: 0;">Choose your care tier and complete your secure payment via Stripe.</p>
+          </div>
+          <!-- Connector line to next step -->
+          <div style="position: absolute; top: 30px; right: -1rem; width: calc(100% + 2rem); height: 2px; background: linear-gradient(90deg, var(--sage), transparent); display: none;"></div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div style="position: relative;">
+          <div style="text-align: center;">
+            <div style="width: 60px; height: 60px; background: var(--sage); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; font-weight: 700; margin: 0 auto 1.5rem;">2</div>
+            <h4 style="color: #3b2a1a; font-size: 1.1rem; margin: 0 0 0.75rem; font-weight: 600;">Reserve Your Time</h4>
+            <p style="color: var(--slate); font-size: 0.9rem; line-height: 1.6; margin: 0;">Instantly receive your private Google Calendar link to pick your ideal appointment slot.</p>
+          </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div style="position: relative;">
+          <div style="text-align: center;">
+            <div style="width: 60px; height: 60px; background: var(--sage); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; font-weight: 700; margin: 0 auto 1.5rem;">3</div>
+            <h4 style="color: #3b2a1a; font-size: 1.1rem; margin: 0 0 0.75rem; font-weight: 600;">Prep for Care</h4>
+            <p style="color: var(--slate); font-size: 0.9rem; line-height: 1.6; margin: 0;">Access your pre-appointment intake documents and digital downloads right from your inbox.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Connectors for desktop -->
+      <style>
+        @media (min-width: 768px) {
+          .how-it-works-step::after {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--sage), var(--sage) 50%, transparent 50%);
+          }
+          .how-it-works-step:last-child::after {
+            display: none;
+          }
+        }
+      </style>
+    </div>
+  </div>
+
   <div class="tabs-nav" id="pricing-tabs">
     <button class="tab-btn active" onclick="showPricingTab('medical')">Complete Care Package</button>
     <button class="tab-btn" onclick="showPricingTab('ld')">Labor & Delivery</button>
@@ -14884,6 +14940,7 @@
           </div>
         </div>
         <a onclick="showPage('pricing')" class="btn-primary" style="cursor:pointer; display:inline-block; margin-top: auto;">Book Now →</a>
+        <p style="font-size: 0.75rem; color: rgba(45,90,61,0.6); margin-top: 0.75rem; margin-bottom: 0; text-align: center;">ⓘ Calendar booking link and intake documents will be emailed immediately after checkout.</p>
       </div>
 
       <!-- TIER 3: ELITE PARTNERSHIP -->
