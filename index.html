@@ -3072,7 +3072,7 @@
     <li><a href="/schedule" onclick="event.preventDefault(); showPage('schedule')">Get Started</a></li>
   </ul>
 
-  <a href="/schedule" onclick="event.preventDefault(); showPage('schedule')" style="cursor:pointer;" class="nav-cta">Book Now</a>
+  <a href="/booking" onclick="event.preventDefault(); showPage('booking')" style="cursor:pointer;" class="nav-cta">Book Now</a>
 
   <button class="hamburger" onclick="toggleMobileNav()" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -3474,6 +3474,131 @@
   </div>
 
 </div><!-- end home -->
+
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- SCHEDULE APPOINTMENT PAGE -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div id="page-booking" class="page">
+  <div class="lp-hero" style="min-height:50vh; background: linear-gradient(135deg, #2D5A3D 0%, #1A3D28 100%);">
+    <div class="lp-breadcrumb" onclick="showPage('home')" style="color:rgba(255,255,255,0.7);">← OpWell Home</div>
+    <h1 class="lp-headline" style="color:#FAF0E8; margin-bottom: 1rem;">Schedule Your Consultation</h1>
+    <p class="lp-sub" style="color:rgba(250,240,232,0.85); max-width: 700px; margin: 0 auto; font-size: 1.1rem; line-height: 1.7;">
+      Book your appointment time first. Choose a time that works best for you, then select your service and complete payment. It's that simple.
+    </p>
+  </div>
+
+  <div style="max-width: 900px; margin: 0 auto; padding: 4rem 2rem;">
+
+    <!-- STEP 1: CALENDAR BOOKING -->
+    <div id="booking-step-1" style="margin-bottom: 3rem;">
+      <div style="background: white; border-radius: 12px; padding: 3rem 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+        <div style="text-align: center; margin-bottom: 2rem;">
+          <div style="display: inline-block; background: rgba(45,90,61,0.1); padding: 0.5rem 1.5rem; border-radius: 20px; margin-bottom: 1rem;">
+            <span style="font-size: 0.85rem; font-weight: 600; color: var(--sage); text-transform: uppercase; letter-spacing: 0.1em;">Step 1 of 2</span>
+          </div>
+          <h2 style="color: #3b2a1a; font-size: 1.8rem; margin: 0 0 1rem; font-family: 'Playfair Display', serif; font-weight: 400;">Select Your Time</h2>
+          <p style="color: var(--slate); font-size: 0.95rem; line-height: 1.7; max-width: 600px; margin: 0 auto;">
+            Click the button below to open our scheduling calendar. Select your preferred appointment time.
+          </p>
+        </div>
+
+        <div style="text-align: center; padding: 2rem; background: rgba(45,90,61,0.04); border-radius: 8px; margin: 2rem 0;">
+          <a href="https://calendar.app.google/1QHgQh3mSWwbsW8v8" target="_blank" style="display: inline-block; background: var(--sage); color: white; padding: 1.2rem 3rem; border-radius: 8px; font-weight: 600; font-family: 'DM Sans', sans-serif; text-decoration: none; font-size: 1rem; cursor: pointer; transition: background 0.2s; box-shadow: 0 2px 8px rgba(45,90,61,0.2);" onmouseover="this.style.background='#1A3D28'" onmouseout="this.style.background='var(--sage)'">📅 Open Booking Calendar →</a>
+          <p style="font-size: 0.9rem; color: var(--slate); margin-top: 1.5rem;">A new window will open with available times. Select your preferred slot, then return here to confirm.</p>
+        </div>
+
+        <div style="background: #f0f7f2; border-left: 4px solid var(--sage); border-radius: 0 8px 8px 0; padding: 16px 20px; margin-top: 2rem;">
+          <p style="margin: 0; color: #2d5a3d; font-size: 0.9rem; line-height: 1.6;">
+            <strong>✓ Your appointment is locked:</strong> Once you book a time slot in the calendar, it's reserved for you. After confirming below and completing payment, you'll receive a confirmation email with all details.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2: APPOINTMENT CONFIRMATION -->
+    <div id="booking-step-2" style="display: none;">
+      <div style="background: white; border-radius: 12px; padding: 3rem 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+        <div style="text-align: center; margin-bottom: 2rem;">
+          <div style="display: inline-block; background: rgba(45,90,61,0.1); padding: 0.5rem 1.5rem; border-radius: 20px; margin-bottom: 1rem;">
+            <span style="font-size: 0.85rem; font-weight: 600; color: var(--sage); text-transform: uppercase; letter-spacing: 0.1em;">Step 2 of 2</span>
+          </div>
+          <h2 style="color: #3b2a1a; font-size: 1.8rem; margin: 0 0 1rem; font-family: 'Playfair Display', serif; font-weight: 400;">Confirm Your Details</h2>
+          <p style="color: var(--slate); font-size: 0.95rem; line-height: 1.7; max-width: 600px; margin: 0 auto;">
+            Enter your appointment details so we have them on file. We'll send a confirmation email with your booking details.
+          </p>
+        </div>
+
+        <form id="appointment-confirmation-form" onsubmit="submitAppointmentConfirmation(event)" style="margin: 2rem 0;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+            <div>
+              <label style="display: block; font-weight: 600; color: var(--charcoal); margin-bottom: 0.5rem; font-size: 0.9rem;">Full Name *</label>
+              <input type="text" name="name" required style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--border); border-radius: 6px; font-family: 'DM Sans', sans-serif; font-size: 0.95rem;">
+            </div>
+            <div>
+              <label style="display: block; font-weight: 600; color: var(--charcoal); margin-bottom: 0.5rem; font-size: 0.9rem;">Email *</label>
+              <input type="email" name="email" required style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--border); border-radius: 6px; font-family: 'DM Sans', sans-serif; font-size: 0.95rem;">
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+            <div>
+              <label style="display: block; font-weight: 600; color: var(--charcoal); margin-bottom: 0.5rem; font-size: 0.9rem;">Phone *</label>
+              <input type="tel" name="phone" required style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--border); border-radius: 6px; font-family: 'DM Sans', sans-serif; font-size: 0.95rem;">
+            </div>
+            <div>
+              <label style="display: block; font-weight: 600; color: var(--charcoal); margin-bottom: 0.5rem; font-size: 0.9rem;">Surgery Type / Procedure</label>
+              <input type="text" name="procedure" placeholder="e.g., Breast Augmentation, Hernia Repair" style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--border); border-radius: 6px; font-family: 'DM Sans', sans-serif; font-size: 0.95rem;">
+            </div>
+          </div>
+
+          <div style="margin-bottom: 1.5rem;">
+            <label style="display: block; font-weight: 600; color: var(--charcoal); margin-bottom: 0.5rem; font-size: 0.9rem;">Appointment Date & Time *</label>
+            <input type="text" name="appointmentTime" placeholder="e.g., Tuesday, July 16 at 2:00 PM EST" required style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--border); border-radius: 6px; font-family: 'DM Sans', sans-serif; font-size: 0.95rem;">
+            <p style="font-size: 0.8rem; color: var(--slate); margin-top: 0.5rem;">Enter the date and time you selected in the calendar above.</p>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem;">
+            <button type="button" onclick="bookingGoBack()" style="background: white; color: var(--sage); border: 2px solid var(--sage); padding: 0.85rem 1.5rem; border-radius: 6px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 0.9rem;">← Back</button>
+            <button type="submit" style="background: var(--sage); color: white; padding: 0.85rem 1.5rem; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 0.9rem;">Next: Choose Service →</button>
+          </div>
+
+          <div id="appointment-confirm-error" style="background: #fff3f0; border-left: 3px solid var(--terracotta); color: var(--terracotta); padding: 1rem; border-radius: 0 6px 6px 0; margin-top: 1rem; font-size: 0.9rem; display: none;"></div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-watermark"><div class="footer-watermark-circle"></div></div>
+    <div>
+      <div class="footer-col-title">Programs</div>
+      <ul class="footer-links">
+        <li><a href="/surgery-prep" onclick="event.preventDefault(); showPage('surgery-prep')">Pre-Surgical Consultation</a></li>
+        <li><a href="/recovery" onclick="event.preventDefault(); showPage('recovery')">Post-Operative Care</a></li>
+        <li><a href="/mental-health" onclick="event.preventDefault(); showPage('mental-health')">Mental Wellness</a></li>
+      </ul>
+    </div>
+    <div class="footer-nav-cols">
+      <div>
+        <div class="footer-col-title">OpWell</div>
+        <ul class="footer-links">
+          <li><a href="/about" onclick="event.preventDefault(); showPage('about')">Our Story</a></li>
+          <li><a href="/blog" onclick="event.preventDefault(); showPage('blog')">Blog</a></li>
+          <li><a href="/contact" onclick="event.preventDefault(); showPage('contact')">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div style="display:flex; flex-direction:column; align-items:flex-end; justify-content:flex-start;">
+      <div class="footer-col-title">Get Started</div>
+      <p style="font-size:0.78rem; color:rgba(253,251,248,0.4); margin-bottom:1rem; text-align:right;">Ready to optimize your surgical outcome?</p>
+      <a onclick="showPage('booking')" style="display:inline-block; background:var(--terracotta); color:#fff; font-family:'DM Sans',sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; padding:0.65rem 1.5rem; border-radius:6px; cursor:pointer; text-decoration:none; transition:background 0.2s;" onmouseover="this.style.background='#a06040';" onmouseout="this.style.background='var(--terracotta)';">Schedule Now →</a>
+    </div>
+  </footer>
+  <div class="footer-bottom"><span class="footer-legal">© 2025–2026 OpWell Concierge. All rights reserved. Registered trade name in Ohio & Georgia.</span><span class="footer-legal">Not a substitute for emergency medical care · No physician-patient relationship until a formal consultation is completed.</span></div>
+
+</div><!-- end booking -->
 
 
 <!-- ══════════════════════════════════════════════════════ -->
@@ -17555,6 +17680,40 @@
       errorDiv.textContent = err.message || 'Failed to submit request. Please try again or call (678) 235-5822.';
       errorDiv.style.display = 'block';
     });
+  }
+
+  // ── PUBLIC BOOKING FLOW (Schedule before pricing) ──
+  function bookingGoBack() {
+    document.getElementById('booking-step-1').style.display = 'block';
+    document.getElementById('booking-step-2').style.display = 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function bookingShowConfirmation() {
+    document.getElementById('booking-step-1').style.display = 'none';
+    document.getElementById('booking-step-2').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function submitAppointmentConfirmation(event) {
+    event.preventDefault();
+    var form = event.target;
+    var errorDiv = document.getElementById('appointment-confirm-error');
+    errorDiv.style.display = 'none';
+
+    var appointmentData = {
+      name: form.name.value,
+      email: form.email.value,
+      phone: form.phone.value,
+      procedure: form.procedure.value || 'Not specified',
+      appointmentTime: form.appointmentTime.value
+    };
+
+    // Store appointment in sessionStorage
+    sessionStorage.setItem('opwell_appointment', JSON.stringify(appointmentData));
+
+    // Go to pricing page to select service
+    showPage('pricing');
   }
 
   // Detect return from Stripe payment
