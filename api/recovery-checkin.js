@@ -177,8 +177,12 @@ module.exports = async function handler(req, res) {
               <p style="color: #555; line-height: 1.8; font-size: 0.95rem;">Hi ${esc(patientName)},</p>
               <p style="color: #555; line-height: 1.8; font-size: 0.95rem;">${reminderText || 'Time for your recovery check-in! Your feedback helps Dr. Oluwole monitor your healing and catch any issues early.'}</p>
 
+              <div style="text-align: center; margin: 24px 0;">
+                <a href="https://www.opwellconcierge.com/patient-recovery-checkin.html" style="display: inline-block; background: #2d5a3d; color: #fff; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 16px;">📋 Submit Your Check-In Now</a>
+              </div>
+
               <div style="background: rgba(45,90,61,0.06); border-left: 4px solid #2d5a3d; padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 24px 0;">
-                <p style="margin: 0; font-size: 0.9rem; color: #555;"><strong>Please reply to this email with:</strong></p>
+                <p style="margin: 0; font-size: 0.9rem; color: #555;"><strong>Or reply to this email with:</strong></p>
                 <ul style="margin: 8px 0 0; padding-left: 20px; color: #555; font-size: 0.9rem;">
                   <li>Pain level (1-10)</li>
                   <li>Wound condition (any drainage, redness, opening)</li>
