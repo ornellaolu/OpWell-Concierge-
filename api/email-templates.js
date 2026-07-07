@@ -449,7 +449,7 @@ function masterclassConfirmationEmail(patientEmail, accessCode) {
 </html>`;
 }
 
-function tier1CourseAccessEmail(patientEmail, amountPaid) {
+function tier1CourseAccessEmail(patientEmail, amountPaid, accessToken) {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -525,7 +525,7 @@ function tier1CourseAccessEmail(patientEmail, amountPaid) {
         <div class="section-title">🚀 Step 1: Launch Your Course Portal</div>
         <div class="section-content">
           <p style="margin: 0 0 12px; font-size: 15px; color: #555;">Your course features a 22-module, evidence-based guide tailored to prepare your mind and body for surgery, complete with interactive progress tracking and clinical quizzes to monitor your milestones.</p>
-          <a href="https://www.opwellconcierge.com/masterclass" class="cta-button" style="display: inline-block;">💻 Launch Your Course Portal</a>
+          <a href="https://www.opwellconcierge.com/surgery-prep-masterclass.html?token=${escapeHtml(accessToken)}" class="cta-button" style="display: inline-block;">💻 Launch Your Course Portal</a>
         </div>
       </div>
 

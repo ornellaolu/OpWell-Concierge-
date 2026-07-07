@@ -104,7 +104,7 @@ async function handler(req, res) {
               from: 'OpWell Concierge <info@opwellconcierge.com>',
               to: email,
               subject: 'Access Granted: Your Interactive Surgical Prep Blueprint is Ready!',
-              html: tier1CourseAccessEmail(email, amountPaid),
+              html: tier1CourseAccessEmail(email, amountPaid, accessCode),
             });
             console.log('\u2705 Tier 1 course access email sent successfully');
           } catch (emailErr) {

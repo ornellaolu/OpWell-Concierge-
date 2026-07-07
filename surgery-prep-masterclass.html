@@ -5585,8 +5585,35 @@ function validateAccess() {
   }
 }
 
-// Auto-unlock if they've previously entered a valid code
+// Auto-unlock if they have a valid token in URL or localStorage
 (function() {
+  // Check URL for magic link token
+  var params = new URLSearchParams(window.location.search);
+  var token = params.get('token');
+
+  if (token) {
+    // Validate magic link token
+    try {
+      var decoded = JSON.parse(atob(token.replace(/-/g,'+').replace(/_/g,'/')));
+      var expiry = decoded.x;
+      var email = decoded.e;
+      var now = Date.now();
+
+      if (now <= expiry && email) {
+        // Valid token! Unlock and save session
+        document.getElementById('access-gate').style.display = 'none';
+        document.getElementById('masterclass-content').style.display = 'block';
+        localStorage.setItem('mc_access', token);
+        // Clean up URL (remove token)
+        window.history.replaceState({}, document.title, window.location.pathname);
+        return;
+      }
+    } catch(e) {
+      console.error('Invalid token:', e);
+    }
+  }
+
+  // Fall back to localStorage if no valid URL token
   var saved = localStorage.getItem('mc_access');
   if (saved) {
     document.getElementById('access-code-input').value = saved;
