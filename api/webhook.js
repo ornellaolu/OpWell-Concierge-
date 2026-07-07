@@ -206,6 +206,26 @@ module.exports = async function handler(req, res) {
                   <p style="margin: 0 0 12px; font-size: 1.4rem; font-weight: 700; color: #2d5a3d;">$49</p>
                   <p style="margin: 0 0 4px; font-size: 0.75rem; font-weight: 700; color: #2d5a3d;">Use code: MASTERCLASS50</p>
                   <a href="https://www.opwellconcierge.com/#products" style="display: inline-block; margin-top: 12px; background: #2d5a3d; color: #fff; padding: 10px 24px; border-radius: 8px; font-weight: 600; font-size: 0.9rem; text-decoration: none;">Get the Masterclass \u2192</a>
+                </div>
+
+                <div style="background: #f0f7f2; border: 2px solid #b8d9c4; border-radius: 12px; padding: 24px; margin: 24px 0;">
+                  <h3 style="margin-top: 0; color: #2d5a3d; font-size: 1.05rem; text-align: center;">Schedule Your Appointment</h3>
+                  <p style="margin: 0 0 12px; color: #555; text-align: center; line-height: 1.6;">Click the link below to book your consultation appointment at a time that works for you:</p>
+                  <div style="text-align: center; margin: 16px 0;">
+                    <a href="https://calendar.app.google/1QHgQh3mSWwbsW8v8" style="display: inline-block; background: #2d5a3d; color: #fff; padding: 12px 28px; border-radius: 8px; font-weight: 600; font-size: 0.95rem; text-decoration: none;">\ud83d\udcc5 Schedule Your Consultation \u2192</a>
+                  </div>
+                </div>
+
+                <div style="background: #fff9f0; border-left: 4px solid #c8845a; border-radius: 0 8px 8px 0; padding: 20px;">
+                  <h4 style="margin-top: 0; color: #3b2a1a; font-size: 0.95rem;">Pre-Appointment Documents</h4>
+                  <p style="margin: 0 0 12px; font-size: 0.88rem; color: #555; line-height: 1.5;">Please download and complete these forms before your appointment. They help us prepare for your consultation:</p>
+                  <ul style="margin: 0; padding-left: 20px; color: #555; font-size: 0.9rem; line-height: 1.8;">
+                    <li><strong>Medical History Form</strong> - Complete medical background and current medications</li>
+                    <li><strong>Pre-Op Checklist</strong> - Pre-operative instructions and preparation guidelines</li>
+                    <li><strong>Medication Review</strong> - List all current medications and supplements</li>
+                    <li><strong>Surgical Consent</strong> - Surgical consent and acknowledgment forms</li>
+                  </ul>
+                  <p style="margin: 12px 0 0; font-size: 0.85rem; color: #888;">\ud83d\udcbe Links to these documents will be emailed separately within 24 hours. If you have questions, call us at <strong>(678) 235-5822</strong>.</p>
                 </div>`;
       }
 
