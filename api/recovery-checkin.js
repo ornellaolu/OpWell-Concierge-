@@ -128,6 +128,10 @@ module.exports = async function handler(req, res) {
                   </ul>
                 </div>
 
+                <div style="text-align: center; margin: 24px 0;">
+                  <a href="https://www.opwellconcierge.com/patient-recovery-checkin.html" style="display: inline-block; background: #2d5a3d; color: #fff; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 16px;">📋 Submit Your First Check-In</a>
+                </div>
+
                 <div style="background: #fff; border: 1px solid #e8d9c8; border-radius: 8px; padding: 16px 20px; margin: 24px 0;">
                   <p style="margin: 0; font-size: 0.85rem; color: #888;"><strong>Questions?</strong><br>Reply to this email or call (678) 235-5822 anytime.</p>
                 </div>
