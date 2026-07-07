@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpWell BHC Booth Poster</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* 24" x 36" Poster (standard booth size) */
+    .poster {
+      width: 24in;
+      height: 36in;
+      background: linear-gradient(135deg, #FAF0E8 0%, #FFF5F0 100%);
+      padding: 1.5in;
+      font-family: 'DM Sans', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .poster::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 0.25in;
+      background: linear-gradient(90deg, #2D5A3D, #C8845A, #2D5A3D);
+    }
+
+    .poster::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 0.25in;
+      background: linear-gradient(90deg, #2D5A3D, #C8845A, #2D5A3D);
+    }
+
+    .header {
+      z-index: 2;
+    }
+
+    .logo-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: #2D5A3D;
+      margin-bottom: 0.25in;
+      letter-spacing: -0.05em;
+    }
+
+    .tagline {
+      font-size: 1.2rem;
+      color: #C8845A;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.5in;
+    }
+
+    .main-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: #1C2B22;
+      line-height: 1.2;
+      margin-bottom: 0.5in;
+      max-width: 20in;
+    }
+
+    .subheadline {
+      font-size: 1.1rem;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 1in;
+      max-width: 18in;
+    }
+
+    .qr-section {
+      background: #fff;
+      border-radius: 1in;
+      padding: 0.75in;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      z-index: 2;
+    }
+
+    .qr-code {
+      width: 5in;
+      height: 5in;
+      background: #fff;
+      padding: 0.2in;
+      border-radius: 0.5in;
+      margin-bottom: 0.5in;
+    }
+
+    .scan-text {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #2D5A3D;
+      margin-bottom: 0.25in;
+    }
+
+    .cta-text {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 0.5in;
+    }
+
+    .features {
+      display: flex;
+      justify-content: center;
+      gap: 1.5in;
+      margin: 0.75in 0;
+      flex-wrap: wrap;
+      z-index: 2;
+    }
+
+    .feature {
+      font-size: 1rem;
+      color: #2D5A3D;
+      font-weight: 600;
+    }
+
+    .feature-icon {
+      font-size: 1.5rem;
+      margin-right: 0.25in;
+    }
+
+    .footer-text {
+      font-size: 0.85rem;
+      color: #888;
+      z-index: 2;
+    }
+
+    .url-display {
+      background: #2D5A3D;
+      color: #FAF0E8;
+      padding: 0.4in 0.6in;
+      border-radius: 0.3in;
+      font-size: 0.9rem;
+      font-family: 'Courier New', monospace;
+      font-weight: 600;
+      margin-bottom: 0.5in;
+      z-index: 2;
+    }
+
+    @media print {
+      body { margin: 0; padding: 0; }
+      .poster { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="poster">
+    <!-- Header -->
+    <div class="header">
+      <div class="logo-text">OpWell Concierge™</div>
+      <div class="tagline">Evidence-Based Surgical Preparation</div>
+    </div>
+
+    <!-- Main Message -->
+    <div>
+      <h1 class="main-headline">Try Our Interactive Course<br>Right Now — On Your Phone</h1>
+      <p class="subheadline">Experience the 22-module, evidence-based surgical prep blueprint trusted by physicians across GA, OH & VA</p>
+    </div>
+
+    <!-- QR Code Section -->
+    <div class="qr-section">
+      <div class="scan-text">📱 Scan Here to Begin</div>
+      <img src="https://qrco.de/bguZKr" alt="Demo QR Code" class="qr-code">
+      <div class="cta-text">Full access • No purchase required • Instant unlock</div>
+      <div class="url-display">opwellconcierge.com/surgery-prep-masterclass?demo=true</div>
+    </div>
+
+    <!-- Features -->
+    <div class="features">
+      <div class="feature"><span class="feature-icon">✓</span>22 Modules</div>
+      <div class="feature"><span class="feature-icon">✓</span>Progress Tracking</div>
+      <div class="feature"><span class="feature-icon">✓</span>Free Certificate</div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-text">
+      <strong>For Patients:</strong> Pre-operative education & personalized surgical guidance<br>
+      <strong>For Providers:</strong> Strategic partnerships for institutional integration<br>
+      <strong>Questions?</strong> (678) 235-5822 | dr.oluwole@opwellconcierge.com
+    </div>
+  </div>
+</body>
+</html>
