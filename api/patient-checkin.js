@@ -128,7 +128,7 @@ module.exports = async function handler(req, res) {
     try {
       await resend.emails.send({
         from: 'OpWell Concierge <dr.oluwole@opwellconcierge.com>',
-        to: 'ornellaolu@gmail.com',
+        to: 'dr.oluwole@opwellconcierge.com',
         subject: `Patient Check-In: ${patient.name} — ${patient.surgeryType}`,
         html: emailHtml
       });
