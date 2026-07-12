@@ -14779,7 +14779,6 @@
           <div style="margin-bottom: 1.5rem;">
             <label style="display: block; font-weight: 600; color: var(--charcoal); margin-bottom: 0.5rem; font-size: 0.9rem;">Specialty & Areas of Interest *</label>
             <textarea name="specialty" placeholder="e.g., Cosmetic Surgery, Bariatric Surgery, Orthopedics, etc." required style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--border); border-radius: 6px; font-family: 'DM Sans', -apple-system, sans-serif; font-size: 0.95rem; resize: vertical; min-height: 120px;"></textarea>
-            <input type="hidden" name="message" value="">
           </div>
           <button type="submit" style="width: 100%; background: var(--sage); color: white; padding: 1rem; margin-top: 1.5rem; font-weight: 600; border: none; border-radius: 6px; cursor: pointer; font-family: 'DM Sans', sans-serif; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.9rem;">Schedule Presentation →</button>
           <div id="provider-partnership-error" style="background: #fff3f0; border-left: 3px solid var(--terracotta); color: var(--terracotta); padding: 1rem; border-radius: 0 6px 6px 0; margin-top: 1rem; font-size: 0.9rem; display: none;"></div>
@@ -15455,8 +15454,8 @@
             state: formData.get('state'),
             providerEmail: formData.get('providerEmail'),
             providerPhone: formData.get('providerPhone'),
-            specialty: specialty,
-            message: specialty
+            specialty: specialty || '',
+            message: specialty || ''
           };
         }
 
