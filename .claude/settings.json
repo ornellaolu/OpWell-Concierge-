@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cp /Users/ornellaoluwole/Desktop/OpWell_Clinical_Brief_Premium.html /Users/ornellaoluwole/OpWell-Concierge--1/OpWell_Clinical_Brief_Premium.html && ls -lah /Users/ornellaoluwole/OpWell-Concierge--1/OpWell_Clinical_Brief_Premium.html)"
+    ],
+    "additionalDirectories": [
+      "/Users/ornellaoluwole/Desktop"
+    ]
+  }
+}
