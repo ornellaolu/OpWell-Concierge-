@@ -19226,35 +19226,45 @@
 
     window.loadAdminDashboard = function() {
       try {
+        console.log('📊 Loading admin dashboard...');
         fetch('/api/admin-patients?action=list-all', {
           headers: { 'x-admin-key': 'opwell' }
         })
-          .then(r => r.json())
+          .then(r => {
+            console.log('API response status:', r.status);
+            return r.json();
+          })
           .then(data => {
+            console.log('API response data:', data);
             if (data.success) {
               allPatients = data.patients || [];
+              console.log('✅ Loaded ' + allPatients.length + ' patients');
               window.renderAnalytics();
               window.renderPatientsList();
               window.renderFlaggedList();
             } else {
-              console.error('API error:', data);
-              showLoadingState();
+              console.error('❌ API error:', data);
+              showLoadingState('API Error: ' + (data.error || 'Unknown error'));
             }
           })
           .catch(e => {
-            console.error('Error loading patients:', e);
-            showLoadingState();
+            console.error('❌ Error loading patients:', e);
+            showLoadingState('Connection Error: ' + e.message);
           });
       } catch (err) {
-        console.error('Admin dashboard error:', err);
-        showLoadingState();
+        console.error('❌ Admin dashboard error:', err);
+        showLoadingState('Error: ' + err.message);
       }
     };
 
-    function showLoadingState() {
+    function showLoadingState(errorMsg) {
       const container = document.getElementById('patients-list');
       if (container) {
-        container.innerHTML = '<div style="text-align:center; padding:3rem; color:#999;">Loading patients...</div>';
+        if (errorMsg) {
+          container.innerHTML = '<div style="text-align:center; padding:2rem; background:#fee2e2; border:2px solid #991b1b; border-radius:8px; color:#991b1b;"><strong>⚠️ Error:</strong> ' + errorMsg + '<br><br><small style="color:#999;">Open browser console (F12) for more details</small></div>';
+        } else {
+          container.innerHTML = '<div style="text-align:center; padding:3rem; color:#999;">Loading patients...</div>';
+        }
       }
     }
 
