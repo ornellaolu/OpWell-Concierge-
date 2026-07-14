@@ -40,15 +40,24 @@ module.exports = async function handler(req, res) {
         { dayOffset: 30, label: 'Day 30 Post-Op (1 Month)', textMessage: `${name}, one month post-op from your ${procedure}. Ready for recovery phase 2?` },
       ];
 
-      // Add formatted dates
+      // Add formatted dates and generate keys
       const surgDate = new Date(surgeryDate);
       const scheduleWithDates = schedule.map(item => {
         const checkDate = new Date(surgDate);
         checkDate.setDate(checkDate.getDate() + item.dayOffset);
+        const intervalKey = item.dayOffset === 1 ? 'day-1' :
+                           item.dayOffset === 3 ? 'day-3' :
+                           item.dayOffset === 5 ? 'week-0-5' :
+                           item.dayOffset === 7 ? 'week-1' :
+                           item.dayOffset === 14 ? 'week-2' :
+                           item.dayOffset === 21 ? 'week-3' :
+                           item.dayOffset === 30 ? 'week-4' : `day-${item.dayOffset}`;
         return {
           ...item,
+          key: intervalKey,
           sendDate: checkDate.toISOString().split('T')[0],
-          sendDateFormatted: checkDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })
+          sendDateFormatted: checkDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }),
+          checkinUrl: `https://www.opwellconcierge.com/recovery-checkin?interval=${intervalKey}`
         };
       });
 
@@ -182,51 +191,90 @@ module.exports = async function handler(req, res) {
 
     } else if (action === 'send-single') {
       // Send a single check-in reminder
-      const { email, patientName, procedure, dayOffset, reminderText } = req.body;
+      const { email, phone, patientName, procedure, interval } = req.body;
 
       if (!email || !patientName) {
         return res.status(400).json({ error: 'Missing required fields' });
       }
 
+      // Map interval to day offset and label
+      const intervalMap = {
+        'day-1': { day: 1, label: 'Day 1 Post-Op' },
+        'day-3': { day: 3, label: 'Day 3 Post-Op' },
+        'week-0-5': { day: 5, label: 'Day 5 Post-Op' },
+        'week-1': { day: 7, label: 'Day 7 Post-Op (1 Week)' },
+        'week-2': { day: 14, label: 'Day 14 Post-Op (2 Weeks)' },
+        'week-3': { day: 21, label: 'Day 21 Post-Op (3 Weeks)' },
+        'week-4': { day: 30, label: 'Day 30 Post-Op (1 Month)' }
+      };
+
+      const intervalData = intervalMap[interval] || { day: 1, label: 'Recovery Check-In' };
+      const dayOffset = intervalData.day;
+
       const resend = new Resend(process.env.RESEND_API_KEY);
 
-      await resend.emails.send({
-        from: 'OpWell Concierge <info@opwellconcierge.com>',
-        to: email,
-        subject: `Recovery Check-In Reminder — Day ${dayOffset || '?'} Post-Op`,
-        html: `
-          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #2c2c2c;">
-            <div style="background: linear-gradient(135deg, #2d5a3d 0%, #3a6b4a 100%); padding: 32px 40px; text-align: center;">
-              <h1 style="color: #fff; font-size: 1.4rem; margin: 0;">OpWell Concierge™</h1>
-            </div>
-            <div style="padding: 40px; background: #fdf8f4;">
-              <h2 style="color: #2d5a3d; font-size: 1.3rem; margin-top: 0;">Recovery Check-In Reminder</h2>
-              <p style="color: #555; line-height: 1.8; font-size: 0.95rem;">Hi ${esc(patientName)},</p>
-              <p style="color: #555; line-height: 1.8; font-size: 0.95rem;">${reminderText || 'Time for your recovery check-in! Your feedback helps Dr. Oluwole monitor your healing and catch any issues early.'}</p>
+      // Generate default text message for SMS
+      let textMessage = '';
+      if (interval === 'day-1') {
+        textMessage = `Hi ${patientName}, quick check: How are you feeling after your ${procedure}? Reply with pain level 1-10.`;
+      } else if (interval === 'day-3') {
+        textMessage = `Hi ${patientName}, checking in on your recovery from your ${procedure}. Any concerns today?`;
+      } else if (interval === 'week-0-5') {
+        textMessage = `${patientName}, how's your ${procedure} recovery going? Any drainage, redness, or fever?`;
+      } else if (interval === 'week-1') {
+        textMessage = `One week post-op! ${patientName}, please share how you're feeling with your ${procedure} recovery.`;
+      } else if (interval === 'week-2') {
+        textMessage = `${patientName}, mid-recovery check: How's your ${procedure} healing? Any issues to report?`;
+      } else if (interval === 'week-3') {
+        textMessage = `${patientName}, three weeks out from your ${procedure}. How's your energy and pain level?`;
+      } else if (interval === 'week-4') {
+        textMessage = `${patientName}, one month post-op from your ${procedure}. Ready for recovery phase 2?`;
+      }
 
-              <div style="text-align: center; margin: 24px 0;">
-                <a href="https://www.opwellconcierge.com/patient-recovery-checkin.html" style="display: inline-block; background: #2d5a3d; color: #fff; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 16px;">📋 Submit Your Check-In Now</a>
+      try {
+        await resend.emails.send({
+          from: 'OpWell Concierge <info@opwellconcierge.com>',
+          to: email,
+          subject: `Recovery Check-In Reminder — ${intervalData.label}`,
+          html: `
+            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #2c2c2c;">
+              <div style="background: linear-gradient(135deg, #2d5a3d 0%, #3a6b4a 100%); padding: 32px 40px; text-align: center;">
+                <h1 style="color: #fff; font-size: 1.4rem; margin: 0;">OpWell Concierge™</h1>
               </div>
+              <div style="padding: 40px; background: #fdf8f4;">
+                <h2 style="color: #2d5a3d; font-size: 1.3rem; margin-top: 0;">${intervalData.label} — Recovery Check-In</h2>
+                <p style="color: #555; line-height: 1.8; font-size: 0.95rem;">Hi ${esc(patientName)},</p>
+                <p style="color: #555; line-height: 1.8; font-size: 0.95rem;">Time for your recovery check-in! Your feedback helps Dr. Oluwole monitor your healing and catch any issues early.</p>
 
-              <div style="background: rgba(45,90,61,0.06); border-left: 4px solid #2d5a3d; padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 24px 0;">
-                <p style="margin: 0; font-size: 0.9rem; color: #555;"><strong>Or reply to this email with:</strong></p>
-                <ul style="margin: 8px 0 0; padding-left: 20px; color: #555; font-size: 0.9rem;">
-                  <li>Pain level (1-10)</li>
-                  <li>Wound condition (any drainage, redness, opening)</li>
-                  <li>Any concerning symptoms or questions</li>
-                  <li>Your energy level and overall mood</li>
-                </ul>
+                <div style="text-align: center; margin: 24px 0;">
+                  <a href="https://www.opwellconcierge.com/recovery-checkin?interval=${interval}" style="display: inline-block; background: #2d5a3d; color: #fff; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 16px;">📋 Submit Your Check-In Now</a>
+                </div>
+
+                <div style="background: rgba(45,90,61,0.06); border-left: 4px solid #2d5a3d; padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 24px 0;">
+                  <p style="margin: 0; font-size: 0.9rem; color: #555;"><strong>Or reply to this email with:</strong></p>
+                  <ul style="margin: 8px 0 0; padding-left: 20px; color: #555; font-size: 0.9rem;">
+                    <li>Pain level (1-10)</li>
+                    <li>Wound condition (any drainage, redness, opening)</li>
+                    <li>Any concerning symptoms or questions</li>
+                    <li>Your energy level and overall mood</li>
+                  </ul>
+                </div>
+
+                <p style="color: #555; line-height: 1.8; font-size: 0.95rem;"><strong>Your feedback matters.</strong> Reply today to stay on track with your recovery.<br><br>Warmly,<br><strong style="color: #2d5a3d;">Dr. Ornella Oluwole & Team</strong></p>
               </div>
-
-              <p style="color: #555; line-height: 1.8; font-size: 0.95rem;"><strong>Your feedback matters.</strong> Reply today to stay on track with your recovery.<br><br>Warmly,<br><strong style="color: #2d5a3d;">Dr. Ornella Oluwole & Team</strong></p>
             </div>
-          </div>
-        `
-      });
+          `
+        });
+      } catch (emailErr) {
+        console.error('Failed to send check-in email:', emailErr.message);
+        return res.status(500).json({ error: 'Failed to send email', details: emailErr.message });
+      }
 
       return res.status(200).json({
         success: true,
-        message: 'Check-in reminder sent successfully'
+        message: 'Check-in reminder sent successfully',
+        textMessage: textMessage,
+        checkinUrl: `https://www.opwellconcierge.com/recovery-checkin?interval=${interval}`
       });
 
     } else {
