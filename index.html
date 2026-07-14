@@ -19047,6 +19047,18 @@
         </div>
 
         <div class="detail-section">
+          <div class="detail-section-title">Access Code for Demo</div>
+          <div style="background: rgba(45,90,61,0.06); border: 1px solid #2d5a3d; border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+            <p style="margin: 0 0 0.5rem; font-size: 0.85rem; color: #666;">Share this access code with healthcare providers for recovery check-in demo:</p>
+            <div style="display: flex; gap: 0.5rem;">
+              <input type="text" id="detail-accesscode" readonly style="flex: 1; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px; font-family: monospace; font-size: 0.9rem;" value="Loading...">
+              <button onclick="copyAccessCode()" style="padding: 0.75rem 1rem; background: #2d5a3d; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600;">📋 Copy</button>
+            </div>
+            <p style="margin: 0.5rem 0 0; font-size: 0.8rem; color: #999;">Demo link: https://www.opwellconcierge.com/recovery-checkin</p>
+          </div>
+        </div>
+
+        <div class="detail-section">
           <div class="detail-section-title">Check-In History</div>
           <div style="overflow-x: auto;">
             <table class="checkin-table">
@@ -19078,9 +19090,18 @@
     let allPatients = [];
     let currentPatientDetail = null;
 
+    window.copyAccessCode = function() {
+      const input = document.getElementById('detail-accesscode');
+      input.select();
+      document.execCommand('copy');
+      alert('✓ Access code copied to clipboard!');
+    };
+
     window.loadAdminDashboard = function() {
       try {
-        fetch('/api/admin-patients')
+        fetch('/api/admin-patients?action=list-all', {
+          headers: { 'x-admin-key': 'opwell' }
+        })
           .then(r => r.json())
           .then(data => {
             if (data.success) {
@@ -19186,13 +19207,15 @@
 
     window.viewPatientDetail = function(patientId) {
       currentPatientDetail = patientId;
-      fetch('/api/admin-patient-detail?patientId=' + patientId)
+      fetch('/api/admin-patient-detail?patientId=' + patientId, {
+        headers: { 'x-admin-key': 'opwell' }
+      })
         .then(r => r.json())
         .then(data => {
           if (data.success) {
             renderPatientDetailModal(data);
           } else {
-            alert('Error loading patient details');
+            alert('Error loading patient details: ' + (data.error || 'Unknown error'));
           }
         })
         .catch(e => console.error('Error:', e));
@@ -19208,6 +19231,10 @@
       document.getElementById('detail-pod').textContent = m.daysPostOp;
       document.getElementById('detail-checkins').textContent = m.totalCheckIns;
       document.getElementById('detail-avgqor').textContent = m.averageQor15 ? m.averageQor15 : '—';
+
+      // Set access code (token or patient ID for demo)
+      const accessCode = p.id || 'unknown';
+      document.getElementById('detail-accesscode').value = accessCode;
 
       // Render check-in table
       const tbody = document.getElementById('checkin-tbody');
@@ -19263,7 +19290,9 @@
 
     window.exportPatientCSV = function() {
       if (!currentPatientDetail) return;
-      fetch('/api/admin-patient-detail?patientId=' + currentPatientDetail)
+      fetch('/api/admin-patient-detail?patientId=' + currentPatientDetail, {
+        headers: { 'x-admin-key': 'opwell' }
+      })
         .then(r => r.json())
         .then(data => {
           if (data.success) {
