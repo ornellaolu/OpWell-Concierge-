@@ -49,7 +49,8 @@ module.exports = async function handler(req, res) {
         surgeryType: patient.surgery_type,
         surgeryDate: patient.surgery_date,
         createdAt: patient.created_at,
-        lastCheckIn: patient.last_checkin
+        lastCheckIn: patient.last_checkin,
+        token: patient.token
       },
       metrics: {
         daysPostOp: pod,

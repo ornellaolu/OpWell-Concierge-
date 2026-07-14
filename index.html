@@ -19359,8 +19359,8 @@
       document.getElementById('detail-checkins').textContent = m.totalCheckIns;
       document.getElementById('detail-avgqor').textContent = m.averageQor15 ? m.averageQor15 : '—';
 
-      // Set access code (token or patient ID for demo)
-      const accessCode = p.id || 'unknown';
+      // Set access code (patient's token)
+      const accessCode = p.token || p.id || 'unknown';
       document.getElementById('detail-accesscode').value = accessCode;
 
       // Render check-in table
