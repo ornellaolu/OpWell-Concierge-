@@ -18863,11 +18863,10 @@
     </ul>
   </nav>
 
-  <div class="admin-container" style="padding-top: 100px; border: 5px solid red;">
-    <h1 style="text-align: center !important; color: red !important; font-size: 48px !important; margin: 40px 0 !important; display: block !important; border: 3px solid blue;">✅ ADMIN PAGE WORKS</h1>
-    <p style="text-align: center !important; font-size: 24px !important; color: red !important; display: block !important; border: 2px solid green;">This is the admin dashboard</p>
-    <div style="background: #fee2e2; border: 3px solid #991b1b; padding: 1rem; margin-bottom: 2rem; border-radius: 8px; text-align: center; color: #991b1b; font-weight: 700; font-size: 16px;">
-      ✅ ADMIN PAGE LOADED - If you see this, the page is working!
+  <div class="admin-container" style="padding-top: 100px;">
+    <div style="background: #f0f7f2; border: 1px solid #2d5a3d; padding: 1rem; margin-bottom: 2rem; border-radius: 8px;">
+      <button onclick="checkDatabaseHealth()" style="background: #2d5a3d; color: #fff; padding: 0.5rem 1rem; border: none; border-radius: 4px; cursor: pointer; font-weight: 600;">🔍 Check Database Connection</button>
+      <div id="health-check-result" style="margin-top: 1rem; display: none;"></div>
     </div>
     <div class="admin-header">
       <h1 class="admin-title">Partner Dashboard</h1>
@@ -19223,6 +19222,47 @@
         `;
       }
     }
+
+    window.checkDatabaseHealth = function() {
+      const resultDiv = document.getElementById('health-check-result');
+      resultDiv.style.display = 'block';
+      resultDiv.innerHTML = '<p style="color: #666;">Checking database connection...</p>';
+
+      fetch('/api/health-check')
+        .then(r => r.json())
+        .then(data => {
+          console.log('Health check response:', data);
+          if (data.success) {
+            resultDiv.innerHTML = `
+              <div style="background: #dcfce7; border: 1px solid #166534; border-radius: 6px; padding: 1rem; color: #166534;">
+                <strong>✅ Database Connected</strong><br>
+                • Patients in database: <strong>${data.patientsInDatabase}</strong><br>
+                • Supabase configured: ${data.environment.supabaseConfigured ? '✓' : '✗'}<br>
+                • Resend email configured: ${data.environment.resendConfigured ? '✓' : '✗'}<br>
+                • Admin key configured: ${data.environment.adminKeySet ? '✓' : '✗'}<br>
+              </div>
+            `;
+          } else {
+            resultDiv.innerHTML = `
+              <div style="background: #fee2e2; border: 1px solid #991b1b; border-radius: 6px; padding: 1rem; color: #991b1b;">
+                <strong>❌ Database Connection Failed</strong><br>
+                Error: ${data.error}<br>
+                <small style="color: #666;">Check browser console (F12) for details</small>
+              </div>
+            `;
+          }
+        })
+        .catch(e => {
+          console.error('Health check error:', e);
+          resultDiv.innerHTML = `
+            <div style="background: #fee2e2; border: 1px solid #991b1b; border-radius: 6px; padding: 1rem; color: #991b1b;">
+              <strong>❌ Health Check Failed</strong><br>
+              ${e.message}<br>
+              <small style="color: #666;">Check browser console (F12) for details</small>
+            </div>
+          `;
+        });
+    };
 
     window.loadAdminDashboard = function() {
       try {
