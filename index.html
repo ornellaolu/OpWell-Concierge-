@@ -19042,6 +19042,21 @@
         </div>
 
         <div class="detail-section">
+          <div class="detail-section-title">Recovery Trend & Metrics</div>
+          <div id="detail-trend">Loading...</div>
+        </div>
+
+        <div class="detail-section">
+          <div class="detail-section-title">🚨 Clinical Alerts</div>
+          <div id="detail-alerts">Loading...</div>
+        </div>
+
+        <div class="detail-section">
+          <div class="detail-section-title">QoR-15 Domain Scores (Latest Check-In)</div>
+          <div id="detail-domain-scores">Loading...</div>
+        </div>
+
+        <div class="detail-section">
           <div class="detail-section-title">QoR-15 Score Trend</div>
           <canvas id="qor15-chart" height="80"></canvas>
         </div>
@@ -19078,7 +19093,7 @@
         </div>
 
         <div class="export-buttons">
-          <button class="export-btn" onclick="exportPatientPDF()">📄 Export as PDF</button>
+          <button class="export-btn" style="background: #2d5a3d;" onclick="generateSurgeonReport()">📋 Generate Surgeon Report</button>
           <button class="export-btn secondary" onclick="exportPatientCSV()">📊 Export as CSV</button>
           <button class="export-btn" style="background: #666; margin-left: auto;" onclick="closePatientDetail()">Close</button>
         </div>
@@ -19096,6 +19111,118 @@
       document.execCommand('copy');
       alert('✓ Access code copied to clipboard!');
     };
+
+    window.generateSurgeonReport = function() {
+      if (!currentPatientDetail) {
+        alert('No patient selected');
+        return;
+      }
+
+      const link = document.createElement('a');
+      link.href = '/api/patient-recovery-report?patientId=' + currentPatientDetail + '&action=generate-pdf';
+      link.download = 'Recovery_Report_' + currentPatientDetail + '.pdf';
+      link.click();
+
+      alert('✓ Surgeon report downloaded');
+    };
+
+    window.loadAdvancedMetrics = function(patientId) {
+      fetch('/api/patient-recovery-report?patientId=' + patientId, {
+        headers: { 'x-admin-key': 'opwell' }
+      })
+      .then(r => r.json())
+      .then(data => {
+        if (data.success && data.metrics) {
+          displayAdvancedMetrics(data.metrics);
+          displayClinicalAlerts(data.metrics.clinicalAlerts);
+          displayDomainScores(data.metrics.qorScores);
+        }
+      })
+      .catch(e => console.error('Error loading advanced metrics:', e));
+    };
+
+    function displayDomainScores(qorScores) {
+      if (!qorScores || qorScores.length === 0) return;
+
+      const latestScore = qorScores[qorScores.length - 1];
+      if (!latestScore.domains) return;
+
+      const container = document.getElementById('detail-domain-scores');
+      if (!container) return;
+
+      let html = '<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">';
+
+      Object.entries(latestScore.domains).forEach(([domain, data]) => {
+        const percentage = Math.round((data.score / data.maxScore) * 100);
+        const color = percentage > 70 ? '#2d5a3d' : percentage > 50 ? '#d4af88' : '#d32f2f';
+
+        html += `
+          <div style="background: #f5f5f5; padding: 1rem; border-radius: 6px; border-left: 4px solid ${color};">
+            <div style="font-weight: 600; font-size: 0.9rem; margin-bottom: 0.5rem;">${domain}</div>
+            <div style="font-size: 1.4rem; color: ${color}; font-weight: 700;">${data.score}/${data.maxScore}</div>
+            <div style="font-size: 0.8rem; color: #666;">${percentage}%</div>
+          </div>
+        `;
+      });
+
+      html += '</div>';
+      container.innerHTML = html;
+    }
+
+    function displayClinicalAlerts(alerts) {
+      const container = document.getElementById('detail-alerts');
+      if (!container) return;
+
+      if (!alerts || alerts.length === 0) {
+        container.innerHTML = '<p style="color: #2d5a3d; font-weight: 600;">✓ No clinical alerts</p>';
+        return;
+      }
+
+      let html = '';
+      alerts.forEach(alert => {
+        const bgColor = alert.severity === 'HIGH' ? '#fee2e2' : '#fff3cd';
+        const borderColor = alert.severity === 'HIGH' ? '#fecaca' : '#ffc107';
+        const textColor = alert.severity === 'HIGH' ? '#991b1b' : '#856404';
+
+        html += `
+          <div style="background: ${bgColor}; border: 2px solid ${borderColor}; border-radius: 6px; padding: 1rem; margin-bottom: 0.75rem;">
+            <div style="font-weight: 700; color: ${textColor};">⚠️ ${alert.type}</div>
+            <div style="color: ${textColor}; font-size: 0.9rem; margin-top: 0.5rem;">${alert.message}</div>
+            <div style="color: ${textColor}; font-size: 0.8rem; margin-top: 0.25rem; opacity: 0.8;">Action: ${alert.action}</div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    function displayAdvancedMetrics(metrics) {
+      if (!metrics) return;
+
+      const trendText = metrics.trend === 'IMPROVING' ? '📈 Improving' :
+                       metrics.trend === 'DECLINING' ? '📉 Declining' :
+                       '➡️ Stable';
+
+      const trendColor = metrics.trend === 'IMPROVING' ? '#2d5a3d' :
+                        metrics.trend === 'DECLINING' ? '#d32f2f' :
+                        '#d4af88';
+
+      const container = document.getElementById('detail-trend');
+      if (container) {
+        container.innerHTML = `
+          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
+            <div style="background: #f5f5f5; padding: 1rem; border-radius: 6px; text-align: center;">
+              <div style="color: #666; font-size: 0.85rem; margin-bottom: 0.5rem;">Recovery Trend</div>
+              <div style="font-size: 1.3rem; color: ${trendColor}; font-weight: 700;">${trendText}</div>
+            </div>
+            <div style="background: #f5f5f5; padding: 1rem; border-radius: 6px; text-align: center;">
+              <div style="color: #666; font-size: 0.85rem; margin-bottom: 0.5rem;">Avg QoR-15</div>
+              <div style="font-size: 1.3rem; color: #2d5a3d; font-weight: 700;">${metrics.averageQoR15}</div>
+            </div>
+          </div>
+        `;
+      }
+    }
 
     window.loadAdminDashboard = function() {
       try {
@@ -19275,6 +19402,9 @@
           }
         });
       }
+
+      // Load advanced metrics with domain scores and alerts
+      loadAdvancedMetrics(p.id);
 
       document.getElementById('patient-detail-modal').classList.add('active');
     };
