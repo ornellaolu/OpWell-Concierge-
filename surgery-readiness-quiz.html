@@ -370,19 +370,27 @@ document.addEventListener('DOMContentLoaded', function(){
           })
         });
 
+        console.log('Response status:', response.status);
+        console.log('Response ok:', response.ok);
+
         var result = await response.json();
-        console.log('Backend response:', result);
+        console.log('Backend response (full):', JSON.stringify(result, null, 2));
+        console.log('Success field:', result.success);
+        console.log('Message:', result.message);
 
         if(result.success){
+          console.log('✅ SUCCESS - Report submitted');
           statusEl.textContent = '✅ Report sent to your email! Check your inbox in a moment.';
           statusEl.style.color = '#2e7d32';
           form.style.display = 'none';
           submitBtn.disabled = false;
         } else {
+          console.error('❌ Backend returned success=false:', result);
           throw new Error(result.error || 'Failed to send report');
         }
       } catch(err) {
         console.error('❌ Error submitting quiz:', err.message);
+        console.error('Full error:', err);
         statusEl.textContent = 'Error sending report. Please try again or contact support.';
         statusEl.style.color = '#d32f2f';
         submitBtn.disabled = false;
