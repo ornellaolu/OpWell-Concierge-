@@ -126,16 +126,26 @@ module.exports = async function handler(req, res) {
 
     // Send check-in result email to Dr. Oluwole
     try {
-      await resend.emails.send({
+      console.log('📧 Attempting to send check-in email...');
+      console.log('API Key configured:', !!process.env.RESEND_API_KEY);
+      console.log('To:', 'dr.oluwole@opwellconcierge.com');
+      console.log('From:', 'info@opwellconcierge.com');
+
+      const emailResult = await resend.emails.send({
         from: 'OpWell Concierge <info@opwellconcierge.com>',
         to: 'dr.oluwole@opwellconcierge.com',
         replyTo: patient.email,
         subject: `🚨 Patient Check-In Received: ${patient.name} — ${patient.surgeryType} (POD ${Math.floor((new Date() - new Date(patient.surgeryDate)) / (1000 * 60 * 60 * 24))})`,
         html: emailHtml
       });
-      console.log('✅ Check-in email sent to dr.oluwole@opwellconcierge.com');
+      console.log('✅ Check-in email sent successfully:', emailResult);
     } catch (emailErr) {
-      console.error('⚠️ Failed to send check-in email:', emailErr.message);
+      console.error('❌ FAILED to send check-in email:', {
+        error: emailErr.message,
+        code: emailErr.code,
+        status: emailErr.status,
+        details: emailErr.toString()
+      });
       // Don't fail the request if email fails - check-in was still saved
     }
 
