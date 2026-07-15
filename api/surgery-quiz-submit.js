@@ -253,17 +253,27 @@ module.exports = async function handler(req, res) {
       </div>
     `;
 
-    const patientEmailResult = await resend.emails.send({
-      from: 'Dr. Ornella Oluwole <dr.oluwole@opwellconcierge.com>',
-      to: email,
-      subject: 'Your Surgery Readiness Report - Score: ' + quizData.score + '/100',
-      html: patientEmailHtml
-    });
+    try {
+      const patientEmailResult = await resend.emails.send({
+        from: 'OpWell Reports <onboarding@resend.dev>',
+        to: email,
+        subject: 'Your Surgery Readiness Report - Score: ' + quizData.score + '/100',
+        html: patientEmailHtml
+      });
 
-    console.log('✅ Personalized report sent to patient:', {
-      messageId: patientEmailResult.id,
-      to: email
-    });
+      console.log('✅ Personalized report sent to patient:', {
+        messageId: patientEmailResult.id,
+        to: email,
+        status: 'success'
+      });
+    } catch (patientEmailErr) {
+      console.error('⚠️ Failed to send patient email:', {
+        message: patientEmailErr.message,
+        to: email
+      });
+      // Don't fail the entire request if patient email fails
+      // Dr. Oluwole still got notified
+    }
 
     return res.status(200).json({
       success: true,
