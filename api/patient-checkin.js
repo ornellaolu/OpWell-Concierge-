@@ -127,9 +127,10 @@ module.exports = async function handler(req, res) {
     // Send check-in result email to Dr. Oluwole
     try {
       await resend.emails.send({
-        from: 'OpWell Concierge <dr.oluwole@opwellconcierge.com>',
+        from: 'OpWell Concierge <info@opwellconcierge.com>',
         to: 'dr.oluwole@opwellconcierge.com',
-        subject: `Patient Check-In: ${patient.name} — ${patient.surgeryType}`,
+        replyTo: patient.email,
+        subject: `🚨 Patient Check-In Received: ${patient.name} — ${patient.surgeryType} (POD ${Math.floor((new Date() - new Date(patient.surgeryDate)) / (1000 * 60 * 60 * 24))})`,
         html: emailHtml
       });
       console.log('✅ Check-in email sent to dr.oluwole@opwellconcierge.com');
