@@ -38,23 +38,42 @@ module.exports = async function handler(req, res) {
 
     // Save check-in to database
     console.log('Saving check-in to database...');
+    console.log('Patient ID:', patient.id);
+    console.log('Patient Name:', patient.name);
+    console.log('Check-in Data:', {
+      qor15: checkInData.qor15,
+      painRest: checkInData.responses?.painRest,
+      drainage: checkInData.responses?.drainage,
+      notes: checkInData.notes ? 'Yes' : 'No'
+    });
+
     let checkIn;
     try {
-      checkIn = await db.saveCheckIn(patient.id, {
+      const savePayload = {
         firstName: patient.name.split(' ')[0],
         lastName: patient.name.split(' ').slice(1).join(' ') || '',
         phone: patient.phone,
         surgeryType: patient.surgeryType,
         surgeryDate: patient.surgeryDate,
         ...checkInData
+      };
+
+      console.log('Save payload:', JSON.stringify(savePayload, null, 2));
+
+      checkIn = await db.saveCheckIn(patient.id, savePayload);
+      console.log('✅ Check-in saved successfully:', {
+        checkInId: checkIn.id,
+        patientId: patient.id,
+        date: checkIn.date,
+        timestamp: checkIn.timestamp
       });
-      console.log('✅ Check-in saved:', checkIn.id);
     } catch (dbErr) {
-      console.error('❌ Database save failed:', {
+      console.error('❌ Database save FAILED:', {
         message: dbErr.message,
         details: dbErr.details,
         hint: dbErr.hint,
-        code: dbErr.code
+        code: dbErr.code,
+        stack: dbErr.stack
       });
       throw new Error(`Database error: ${dbErr.message}`);
     }
