@@ -2002,7 +2002,7 @@ async function submitCheckin() {
   const pod = computePOD();
   const hasRedFlags = state.flags.some(Boolean) || Object.values(state.surgeryFlags).some(arr => arr.some(Boolean));
 
-  const payload = {
+  const checkInData = {
     firstName: state.firstName,
     lastName: state.lastName,
     phone: state.phone,
@@ -2032,8 +2032,13 @@ async function submitCheckin() {
     timestamp: new Date().toISOString()
   };
 
+  const payload = {
+    token: state.token || localStorage.getItem('opwell_patient_token'),
+    checkInData
+  };
+
   try {
-    const res = await fetch('/api/patient-checkin-submit', {
+    const res = await fetch('/api/patient-checkin', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
