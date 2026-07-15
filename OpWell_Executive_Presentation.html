@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpWell Concierge Executive Presentation</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: #1a1a1a;
+      color: #333;
+    }
+
+    .slide {
+      width: 10in;
+      height: 7.5in;
+      margin: 20px auto;
+      background: white;
+      page-break-after: always;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .slide-header {
+      background: linear-gradient(135deg, #2d5a3d 0%, #1a3a25 100%);
+      color: white;
+      padding: 20px 40px;
+      border-bottom: 3px solid #e8c97a;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .slide-header-left {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #e8c97a;
+    }
+
+    .slide-header-right {
+      font-size: 9px;
+      color: rgba(255,255,255,0.8);
+      text-align: right;
+    }
+
+    .slide-content {
+      flex: 1;
+      padding: 40px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-footer {
+      background: #f5f5f5;
+      padding: 12px 40px;
+      border-top: 1px solid #ddd;
+      font-size: 10px;
+      color: #666;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* SLIDE 1 STYLES */
+    .slide-1 .slide-content {
+      background: linear-gradient(135deg, #2d5a3d 0%, #1a3a25 100%);
+      color: white;
+      text-align: center;
+      justify-content: center;
+    }
+
+    .slide-1 h1 {
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    .slide-1 .tagline {
+      font-size: 18px;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 40px;
+      line-height: 1.6;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .pillar {
+      border: 2px solid rgba(232,201,122,0.3);
+      border-radius: 8px;
+      padding: 20px;
+      background: rgba(255,255,255,0.05);
+      text-align: left;
+    }
+
+    .pillar-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #e8c97a;
+      margin-bottom: 10px;
+      letter-spacing: 0.5px;
+    }
+
+    .pillar-desc {
+      font-size: 12px;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.5;
+    }
+
+    /* SLIDE 2 STYLES */
+    .slide-2 .slide-content {
+      flex-direction: column;
+    }
+
+    .slide-2 h2 {
+      font-size: 32px;
+      color: #2d5a3d;
+      margin-bottom: 8px;
+    }
+
+    .slide-2 .subtitle {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .evidence-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .evidence-table {
+      font-size: 11px;
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid #ddd;
+    }
+
+    .evidence-table thead {
+      background: #3b4a5e;
+      color: white;
+    }
+
+    .evidence-table th {
+      padding: 10px;
+      text-align: left;
+      font-weight: 600;
+      border-right: 1px solid #555;
+    }
+
+    .evidence-table td {
+      padding: 8px 10px;
+      border-bottom: 1px solid #ddd;
+      border-right: 1px solid #ddd;
+    }
+
+    .evidence-table tbody tr:nth-child(even) {
+      background: #f9f9f9;
+    }
+
+    .forest-plot {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .forest-plot-title {
+      font-weight: 600;
+      color: #2d5a3d;
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    .forest-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+    }
+
+    .forest-label {
+      min-width: 120px;
+      text-align: right;
+      font-weight: 500;
+    }
+
+    .forest-bar {
+      flex: 1;
+      height: 4px;
+      background: #ddd;
+      border-radius: 2px;
+      position: relative;
+    }
+
+    .forest-marker {
+      width: 8px;
+      height: 8px;
+      background: #8b3a3a;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .forest-ci {
+      min-width: 80px;
+      text-align: left;
+      color: #666;
+    }
+
+    .forest-axis {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      color: #999;
+      margin-top: 8px;
+      padding: 0 10px;
+    }
+
+    .footnote {
+      font-size: 10px;
+      color: #666;
+      margin-top: 12px;
+      line-height: 1.4;
+      border-top: 1px solid #ddd;
+      padding-top: 8px;
+    }
+
+    /* SLIDE 3 STYLES */
+    .slide-3 .slide-content {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 30px;
+      overflow: hidden;
+    }
+
+    .slide-3 h2 {
+      font-size: 28px;
+      color: #2d5a3d;
+      grid-column: 1 / -1;
+      margin-bottom: 0;
+    }
+
+    .slide-3 .subtitle {
+      font-size: 13px;
+      color: #666;
+      grid-column: 1 / -1;
+      margin-bottom: 10px;
+    }
+
+    .left-column {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      font-size: 11px;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid #ddd;
+    }
+
+    .data-table thead {
+      background: #3b4a5e;
+      color: white;
+    }
+
+    .data-table th {
+      padding: 8px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 10px;
+    }
+
+    .data-table td {
+      padding: 7px 8px;
+      border-bottom: 1px solid #ddd;
+      border-right: 1px solid #ddd;
+    }
+
+    .data-table tbody tr:nth-child(even) {
+      background: #f9f9f9;
+    }
+
+    .clinical-counterpoint {
+      background: #f0f7f2;
+      border-left: 4px solid #2d5a3d;
+      padding: 12px;
+      font-size: 10px;
+      line-height: 1.4;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .counterpoint-addendum {
+      background: #f5f5f5;
+      padding: 10px;
+      margin-top: 8px;
+      font-size: 10px;
+      line-height: 1.4;
+      color: #333;
+      border-radius: 4px;
+    }
+
+    .right-column {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .section-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #2d5a3d;
+      margin-bottom: 12px;
+    }
+
+    .close-loop {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .loop-item {
+      display: flex;
+      gap: 10px;
+    }
+
+    .loop-number {
+      background: #2d5a3d;
+      color: white;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+
+    .loop-content {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .loop-title {
+      font-weight: 600;
+      font-size: 11px;
+      color: #2d5a3d;
+    }
+
+    .loop-desc {
+      font-size: 10px;
+      color: #666;
+      line-height: 1.3;
+    }
+
+    .economic-value {
+      background: #e8f5e9;
+      border-left: 4px solid #2d5a3d;
+      padding: 12px;
+      border-radius: 4px;
+    }
+
+    .economic-value-item {
+      font-size: 10px;
+      color: #333;
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+
+    .economic-value-item:last-child {
+      margin-bottom: 0;
+    }
+
+    @media print {
+      body {
+        background: white;
+      }
+      .slide {
+        margin: 0;
+        box-shadow: none;
+        page-break-after: always;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- SLIDE 1 -->
+<div class="slide slide-1">
+  <div class="slide-header">
+    <div class="slide-header-left">OPWELL CONCIERGE™</div>
+    <div class="slide-header-right">SLIDE 01</div>
+  </div>
+
+  <div class="slide-content">
+    <h1>Protect Your OR Timeline.<br>Secure Your 30-Day Recovery Window.</h1>
+
+    <p class="tagline">
+      Anesthesiologist-led perioperative risk stratification, POQI-aligned prehabilitation,<br>
+      and remote 30-day post-discharge monitoring. An elite, frictionless B2B clinical<br>
+      asset for Atlanta's top surgical programs.
+    </p>
+
+    <div class="pillars">
+      <div class="pillar">
+        <div class="pillar-title">Pillar 1: ERAS & PSH Care</div>
+        <div class="pillar-desc">Execution of standardized, evidence-based pathways reducing clinical surgical risk and patient anxiety prior to incision.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-title">Pillar 2: Guided Prehab</div>
+        <div class="pillar-desc">23-module, POQI-aligned digital Surgery School combined with physician consultations to optimize nutrition, exercise, and safety.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-title">Pillar 3: Active Monitoring</div>
+        <div class="pillar-desc">Comprehensive post-operative check-ins at Day 3, 7, 14, 21, and 30 using the validated, multicountry QoR-15 index.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-footer">
+    <div>Dr. Ornella Oluwole, MD, D.ABA • Board-Certified Anesthesiologist</div>
+    <div>opwellconcierge.com • HIPAA Compliant • GA, OH, VA</div>
+  </div>
+</div>
+
+<!-- SLIDE 2 -->
+<div class="slide slide-2">
+  <div class="slide-header">
+    <div class="slide-header-left">OPWELL CONCIERGE™</div>
+    <div class="slide-header-right">SLIDE 02</div>
+  </div>
+
+  <div class="slide-content">
+    <h2>Peer-Reviewed Evidence Base</h2>
+    <p class="subtitle">A high-yield data synthesis from major meta-analyses validating perioperative home and prehab outcomes.</p>
+
+    <div class="evidence-grid">
+      <table class="evidence-table">
+        <thead>
+          <tr>
+            <th>CLINICAL PATHWAY</th>
+            <th>COMPLICATIONS</th>
+            <th>LOS</th>
+            <th>SOURCE / META-ANALYSIS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>ERAS Guided Surgery</strong></td>
+            <td>RR 0.71 (29% Drop)</td>
+            <td>MD −1.88 Days (p < 0.001)</td>
+            <td>Sauro et al. (2024), JAMA Netw Open</td>
+          </tr>
+          <tr>
+            <td><strong>Prehab (Exercise Alone)</strong></td>
+            <td>OR 0.50 (50% Drop)</td>
+            <td>MD −0.93 Days</td>
+            <td>McIsaac et al. (2025), BMJ</td>
+          </tr>
+          <tr>
+            <td><strong>Prehab (Exercise + Nutrition)</strong></td>
+            <td>OR 0.62 (38% Drop)</td>
+            <td>MD −0.99 Days</td>
+            <td>McIsaac et al. (2025), BMJ</td>
+          </tr>
+          <tr>
+            <td><strong>Prehab (Exercise + Psych)</strong></td>
+            <td>—</td>
+            <td>MD −2.44 Days</td>
+            <td>McIsaac et al. (2025), BMJ</td>
+          </tr>
+          <tr>
+            <td><strong>Major Abdominal Prehab</strong></td>
+            <td>RR 0.88 (12% Drop)</td>
+            <td>6MWT Improvement (+33m)</td>
+            <td>Jain et al. (2023), World J Surg</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div>
+        <div class="forest-plot-title">Stylized Forest Plot: Complication Risk (OR)</div>
+        <div class="forest-plot">
+          <div class="forest-item">
+            <div class="forest-label">ERAS (Sauro)</div>
+            <div class="forest-bar"><div class="forest-marker" style="left: 30%;"></div></div>
+            <div class="forest-ci">0.71 [0.59–0.87]</div>
+          </div>
+          <div class="forest-item">
+            <div class="forest-label">Prehab Exercise</div>
+            <div class="forest-bar"><div class="forest-marker" style="left: 20%;"></div></div>
+            <div class="forest-ci">0.50 [0.39–0.64]</div>
+          </div>
+          <div class="forest-item">
+            <div class="forest-label">Prehab Nutrition</div>
+            <div class="forest-bar"><div class="forest-marker" style="left: 25%;"></div></div>
+            <div class="forest-ci">0.62 [0.50–0.77]</div>
+          </div>
+          <div class="forest-item">
+            <div class="forest-label">Exercise (Ramic)</div>
+            <div class="forest-bar"><div class="forest-marker" style="left: 22%;"></div></div>
+            <div class="forest-ci">0.54 [0.44–0.67]</div>
+          </div>
+        </div>
+        <div class="forest-axis">
+          <span>Favors Intervention (Effect) ←</span>
+          <span>→ Favors Usual Care (Null)</span>
+        </div>
+
+        <div class="footnote">
+          <strong>Note:</strong> Data synthesized from published meta-analyses of ERAS and prehabilitation pathways broadly, not an independent clinical trial of OpWell. Evidence certainty ranges from low to high across specific surgical cohorts.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-footer">
+    <div>Clinical Evidence Briefing • Anesthesiologist-led Prehabilitation</div>
+    <div>opwellconcierge.com • GA, OH, VA</div>
+  </div>
+</div>
+
+<!-- SLIDE 3 -->
+<div class="slide slide-3">
+  <div class="slide-header">
+    <div class="slide-header-left">OPWELL CONCIERGE™</div>
+    <div class="slide-header-right">SLIDE 03</div>
+  </div>
+
+  <div class="slide-content">
+    <h2>Structured 30-Day Recovery Tracking</h2>
+    <p class="subtitle">Replacing passive phone check-ins with technology-enabled, active symptom monitoring.</p>
+
+    <div class="left-column">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>POST-DISCHARGE PATHWAY</th>
+            <th>ED VISITS</th>
+            <th>READMISSIONS</th>
+            <th>SOURCE / STUDY</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>mHealth Monitoring</strong></td>
+            <td>OR 0.42 (58% Drop)</td>
+            <td>OR 0.47 (53% Drop)</td>
+            <td>Dawes et al. (2021), BJS</td>
+          </tr>
+          <tr>
+            <td><strong>Digital Health (Abdominal)</strong></td>
+            <td>—</td>
+            <td>RR 0.67 (33% Drop)</td>
+            <td>Grygorian et al. (24), JAMA Netw Open</td>
+          </tr>
+          <tr>
+            <td><strong>Home Telemonitoring</strong></td>
+            <td>RR 0.61 (39% Drop)</td>
+            <td>RR 0.77 (23% Drop)</td>
+            <td>Dawson et al. (2021), JGIM</td>
+          </tr>
+          <tr>
+            <td><strong>Colorectal Surveillance</strong></td>
+            <td>OR 0.36 (64% Drop)</td>
+            <td>OR 0.34 (66% Drop)</td>
+            <td>Borsuk et al. (2019), Surg Endosc</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="clinical-counterpoint">
+        <strong>Clinical Counterpoint (Boggan et al., 24 Annals of Int Med):</strong> Passive, single-contact follow-up phone calls show zero reduction in 30-day readmissions. Multidisciplinary, structured, technology-enabled, multi-contact monitoring is the critical operational differentiator.
+      </div>
+
+      <div class="counterpoint-addendum">
+        While mHealth impact varies by surgical specialty, structured multi-contact remote monitoring consistently outperforms passive telephone follow-ups for high-risk patient pathways.
+      </div>
+    </div>
+
+    <div class="right-column">
+      <div>
+        <div class="section-title">How We Close the Loop</div>
+        <div class="close-loop">
+          <div class="loop-item">
+            <div class="loop-number">1</div>
+            <div class="loop-content">
+              <div class="loop-title">Fast Referral</div>
+              <div class="loop-desc">Submit patients securely in under two minutes via the portal. Zero administrative friction.</div>
+            </div>
+          </div>
+          <div class="loop-item">
+            <div class="loop-number">2</div>
+            <div class="loop-content">
+              <div class="loop-title">Physician Optimization</div>
+              <div class="loop-desc">Comprehensive telehealth risk review, meds audit, and POQI-aligned prehab protocol deploy.</div>
+            </div>
+          </div>
+          <div class="loop-item">
+            <div class="loop-number">3</div>
+            <div class="loop-content">
+              <div class="loop-title">Pre-Surgical Deliverables</div>
+              <div class="loop-desc">Receive your customized Anesthesia safety brief, clearance timeline, and med reconciliation list.</div>
+            </div>
+          </div>
+          <div class="loop-item">
+            <div class="loop-number">4</div>
+            <div class="loop-content">
+              <div class="loop-title">30-Day Proactive Safety Net</div>
+              <div class="loop-desc">Continuous home recovery tracking utilizing QoR-15 index, preventing ER bounce-backs.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="economic-value">
+        <div class="section-title" style="margin-bottom: 8px; margin-top: 0;">Economic Value</div>
+        <div class="economic-value-item">
+          <strong>ERAS Pathways:</strong> Associated with average savings of ~$5,100 per case in major abdominal programs.
+        </div>
+        <div class="economic-value-item">
+          <strong>PSH Implementation:</strong> Drives a $432 to $601 reduction in direct non-surgical costs per case.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-footer">
+    <div>Atlanta Provider Partnerships • Direct Patient Referrals</div>
+    <div>opwellconcierge.com • GA, OH, VA</div>
+  </div>
+</div>
+
+</body>
+</html>
