@@ -1431,6 +1431,12 @@ const TOTAL_STEPS = 8; // 0-7 are input steps (0=welcome, 1=pain, 2=wound, 3=GI,
 const urlParams = new URLSearchParams(window.location.search);
 const patientToken = urlParams.get('token') || localStorage.getItem('opwell_patient_token') || '';
 
+console.log('🚀 PAGE INIT: Token extraction');
+console.log('URL:', window.location.href);
+console.log('URL token param:', urlParams.get('token'));
+console.log('Stored token in localStorage:', localStorage.getItem('opwell_patient_token') ? 'Yes' : 'No');
+console.log('Final patientToken:', patientToken ? patientToken.substring(0, 15) + '...' : 'EMPTY');
+
 const state = {
   token: patientToken,
   firstName: '', lastName: '', phone: '', surgeryType: '', surgeryDate: '',
