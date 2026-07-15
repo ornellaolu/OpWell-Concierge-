@@ -91,6 +91,17 @@
       <h3>What We Found</h3>
       <div id="risk-list"></div>
     </div>
+
+    <!-- Email Capture for Quiz Results -->
+    <form id="quizEmailForm" style="background:#fff; border-radius:12px; padding:1.5rem; margin:1.5rem 0; border:1px solid rgba(0,0,0,0.08); text-align:center;">
+      <p style="font-family:'Playfair Display',serif; font-size:1.05rem; color:var(--charcoal); margin-bottom:0.25rem;">Get Your Full Report</p>
+      <p style="font-size:0.82rem; color:#888; margin-bottom:1rem;">Enter your email to receive your personalized surgery readiness report.</p>
+      <input type="email" id="quizEmail" placeholder="Enter your email address" required autocomplete="email" style="width:100%; padding:0.75rem 1rem; border:1.5px solid rgba(45,90,61,0.2); border-radius:8px; font-size:0.95rem; margin-bottom:0.75rem; font-family:'DM Sans',sans-serif;">
+      <button type="submit" id="quizSubmitBtn" style="width:100%; padding:0.8rem; background:var(--sage); color:#fff; border:none; border-radius:8px; font-size:0.9rem; font-weight:600; cursor:pointer; transition:background 0.2s;">Send Me My Report →</button>
+      <p id="quiz-email-status" style="font-size:0.8rem; margin-top:0.5rem; color:#555;"></p>
+      <p style="font-size:0.7rem; color:#aaa; margin-top:0.5rem;">Your email will only be used to send your report. We never share or sell your information.</p>
+    </form>
+
     <div class="cta-card" id="cta-card"></div>
   </div>
 
@@ -192,6 +203,7 @@ var QS = [
 var answers = [];
 var current = 0;
 var N = QS.length;
+var quizData = {}; // Store quiz results for submission
 
 function render() {
   var c = document.getElementById('quiz-container');
@@ -247,6 +259,19 @@ function showResults(){
     if(o.mt) isMedTourism=true;
     if(o.flag) flags.push({text:o.flag, severity: (o.ds>=3||o.ss>=3||o.as>=3)?'red':(o.ds>=2||o.ss>=2||o.as>=2)?'orange':'green'});
   });
+
+  // Store quiz data for submission
+  var rawScore = (3-disease)+(3-surgery)+(3-anxiety);
+  var pct = Math.round(rawScore/6*100);
+  quizData = {
+    answers: answers,
+    disease: disease,
+    surgery: surgery,
+    anxiety: anxiety,
+    flags: flags,
+    score: pct,
+    isMedTourism: isMedTourism
+  };
 
   // Decision algorithm
   var level = 'green';
@@ -339,6 +364,62 @@ function captureEmail(){
   .then(function(){status.textContent='Sent! Check your inbox.';status.style.color='#2e7d32';})
   .catch(function(){status.textContent='Sent! Check your inbox.';status.style.color='#2e7d32';});
 }
+
+// Quiz Results Email Submission Handler
+document.addEventListener('DOMContentLoaded', function(){
+  var form = document.getElementById('quizEmailForm');
+  if(form){
+    form.addEventListener('submit', async function(e){
+      e.preventDefault();
+      console.log('📧 Quiz results form submitted');
+
+      var email = document.getElementById('quizEmail').value.trim();
+      var statusEl = document.getElementById('quiz-email-status');
+      var submitBtn = document.getElementById('quizSubmitBtn');
+
+      if(!email){
+        statusEl.textContent = 'Please enter a valid email address.';
+        statusEl.style.color = '#d32f2f';
+        return;
+      }
+
+      // Disable button and show loading state
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+      statusEl.textContent = '';
+
+      try {
+        console.log('Sending quiz data to backend:', quizData);
+        var response = await fetch('/api/surgery-quiz-submit', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            email: email,
+            quizData: quizData
+          })
+        });
+
+        var result = await response.json();
+        console.log('Backend response:', result);
+
+        if(result.success){
+          statusEl.textContent = '✅ Report sent to your email! Check your inbox in a moment.';
+          statusEl.style.color = '#2e7d32';
+          form.style.display = 'none';
+          submitBtn.disabled = false;
+        } else {
+          throw new Error(result.error || 'Failed to send report');
+        }
+      } catch(err) {
+        console.error('❌ Error submitting quiz:', err.message);
+        statusEl.textContent = 'Error sending report. Please try again or contact support.';
+        statusEl.style.color = '#d32f2f';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Me My Report →';
+      }
+    });
+  }
+});
 
 render();
 </script>
