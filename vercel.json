@@ -35,7 +35,7 @@
     { "source": "/provider", "destination": "/index.html" },
     { "source": "/provider.html", "destination": "/index.html" },
     { "source": "/admin", "destination": "/admin-checkins.html" },
-    { "source": "/recovery-checkin", "destination": "/index.html" },
+    { "source": "/recovery-checkin", "destination": "/patient-recovery-checkin.html" },
     { "source": "/:file*.png", "destination": "/:file*.png" },
     { "source": "/:file*.jpg", "destination": "/:file*.jpg" },
     { "source": "/:file*.pdf", "destination": "/:file*.pdf" },
