@@ -1559,9 +1559,9 @@ function goToStep(n, skipSave) {
   if (n === 5) autoDetectFlags();
 }
 
-function nextStep() {
+async function nextStep() {
   if (!validateStep(state.currentStep)) return;
-  if (state.currentStep === 6) { submitCheckin(); return; }
+  if (state.currentStep === 6) { await submitCheckin(); return; }
   goToStep(state.currentStep + 1);
 }
 
