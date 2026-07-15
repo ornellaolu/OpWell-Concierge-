@@ -128,7 +128,7 @@ module.exports = async function handler(req, res) {
     // Send email to Dr. Oluwole
     console.log('📧 Sending quiz results email to Dr. Oluwole...');
     const emailResult = await resend.emails.send({
-      from: 'OpWell Quizzes <onboarding@resend.dev>',
+      from: 'OpWell <noreply@mail.opwellconcierge.com>',
       to: 'dr.oluwole@opwellconcierge.com',
       replyTo: email,
       subject: '🚨 New Lead: Surgery Readiness Quiz Completed',
@@ -258,7 +258,7 @@ module.exports = async function handler(req, res) {
     try {
       console.log('Attempting to send to:', email);
       const patientEmailResult = await resend.emails.send({
-        from: 'Dr. Ornella Oluwole <dr.oluwole@opwellconcierge.com>',
+        from: 'Dr. Ornella Oluwole <dr.oluwole@mail.opwellconcierge.com>',
         to: email,
         subject: 'Your Surgery Readiness Report - Score: ' + quizData.score + '/100',
         html: patientEmailHtml
