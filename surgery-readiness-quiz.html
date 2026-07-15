@@ -288,51 +288,21 @@ function showResults(){
 
   var circle=document.getElementById('score-circle');
   var scoreTxt=document.getElementById('score-txt');
-  var titleEl=document.getElementById('result-title');
-  var descEl=document.getElementById('result-desc');
-  var ctaEl=document.getElementById('cta-card');
 
+  // Set circle color based on risk level
   if(level==='red'){
     circle.className='score-circle score-red';
     scoreTxt.textContent='HIGHER RISK';
-    titleEl.textContent='We Strongly Recommend a Pre-Surgery Consultation';
-    descEl.textContent='Your answers indicate factors that should be reviewed by a physician before your procedure. A 50-minute telehealth consultation with a board-certified anesthesiologist can help you go into surgery safer and more confident.';
-    ctaEl.innerHTML='<h3>Don\'t go into surgery without preparation.</h3><p>Dr. Oluwole reviews your complete health picture — medications, risk factors, and mental readiness — and builds a plan specifically for you.</p><a class="cta-btn" href="https://www.opwellconcierge.com/schedule">Book Your Consultation →</a>';
   } else if(level==='yellow'){
     circle.className='score-circle score-yellow';
     scoreTxt.textContent='MODERATE RISK';
-    titleEl.textContent='Some Areas Need Attention Before Surgery';
-    descEl.textContent='You have a few factors that could benefit from professional review. Addressing them before your procedure can make a real difference in your outcome and peace of mind.';
-    ctaEl.innerHTML='<h3>A consultation could make a real difference.</h3><p>50 minutes with a board-certified anesthesiologist who reviews your medications, addresses your concerns, and helps you feel genuinely ready.</p><a class="cta-btn" href="https://www.opwellconcierge.com/schedule">Book Your Consultation →</a>';
   } else {
     circle.className='score-circle score-green';
     scoreTxt.textContent='LOOKING GOOD';
-    titleEl.textContent='You\'re Medically Ready — But Surgery Is Only Half the Journey';
-    descEl.textContent='Your pre-surgery readiness looks solid. But most patients say recovery is the hardest part — and that\'s where having a physician in your corner matters most.';
-    if(isMedTourism){
-      ctaEl.innerHTML='<h3>Traveling abroad for surgery?</h3><p>Your health looks good, but surgery abroad comes with unique risks — blood clots on flights, medication timing, and having no doctor to call when you\'re home. OpWell is your safety net.</p><a class="cta-btn" href="https://www.opwellconcierge.com/medical-tourism">Medical Tourism Program →</a>';
-    } else {
-      ctaEl.innerHTML='<h3>Make sure nothing is missed.</h3><p>Even when your readiness looks good, many patients have questions about medications, anesthesia, or recovery that never get answered. OpWell is here for every part of your journey.</p><a class="cta-btn" href="https://www.opwellconcierge.com/schedule">Book a Pre-Surgery Consultation →</a><br><a class="cta-btn secondary" href="https://www.opwellconcierge.com/recovery">Explore Post-Op Recovery →</a><br><a class="cta-btn secondary" href="https://www.opwellconcierge.com/mental-health">Mental Wellness Support →</a>';
-    }
   }
-
-  // Render risk factors
-  var rl=document.getElementById('risk-list');
-  rl.innerHTML='';
-  if(flags.length===0){
-    rl.innerHTML='<div class="risk-item"><div class="risk-dot green"></div>No significant risk factors identified</div>';
-  } else {
-    flags.forEach(function(f){
-      rl.innerHTML+='<div class="risk-item"><div class="risk-dot '+f.severity+'"></div>'+f.text+'</div>';
-    });
-  }
-
-  // Hide risk factors section if green with no flags
-  if(level==='green' && flags.length<=1) document.getElementById('risk-factors-wrap').style.display='none';
 
   document.getElementById('results').classList.add('active');
-  document.getElementById('promo-welcome').style.display='block';
-  document.getElementById('email-capture').style.display='block';
+  document.getElementById('quizEmailForm').style.display='block';
 
   // Track quiz completion with Google Analytics
   if(typeof gtag !== 'undefined'){
