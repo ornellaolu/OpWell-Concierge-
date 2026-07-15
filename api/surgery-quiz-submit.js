@@ -253,26 +253,40 @@ module.exports = async function handler(req, res) {
       </div>
     `;
 
+    // Send patient email with better error handling
+    let patientEmailSent = false;
     try {
+      console.log('Attempting to send to:', email);
       const patientEmailResult = await resend.emails.send({
-        from: 'OpWell Reports <onboarding@resend.dev>',
+        from: 'OpWell <onboarding@resend.dev>',
         to: email,
         subject: 'Your Surgery Readiness Report - Score: ' + quizData.score + '/100',
         html: patientEmailHtml
       });
 
-      console.log('✅ Personalized report sent to patient:', {
-        messageId: patientEmailResult.id,
-        to: email,
-        status: 'success'
-      });
+      console.log('Patient email result (full):', JSON.stringify(patientEmailResult));
+      console.log('Result ID:', patientEmailResult?.id);
+      console.log('Result error:', patientEmailResult?.error);
+
+      if (patientEmailResult?.error) {
+        console.error('❌ Resend returned error:', patientEmailResult.error);
+        throw new Error('Resend error: ' + patientEmailResult.error);
+      }
+
+      if (patientEmailResult?.id) {
+        console.log('✅ Patient email sent with ID:', patientEmailResult.id);
+        patientEmailSent = true;
+      } else {
+        console.warn('⚠️ Patient email response missing ID:', patientEmailResult);
+        patientEmailSent = true; // Still count as sent if no error
+      }
     } catch (patientEmailErr) {
-      console.error('⚠️ Failed to send patient email:', {
+      console.error('❌ FAILED to send patient email:', {
         message: patientEmailErr.message,
-        to: email
+        to: email,
+        stack: patientEmailErr.stack
       });
-      // Don't fail the entire request if patient email fails
-      // Dr. Oluwole still got notified
+      // Continue anyway - Dr. Oluwole still got the lead
     }
 
     return res.status(200).json({
