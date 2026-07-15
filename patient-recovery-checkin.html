@@ -2003,6 +2003,10 @@ async function submitCheckin() {
   btn.disabled = true;
   btn.textContent = 'Sending...';
 
+  console.log('=== SUBMIT CHECK-IN STARTED ===');
+  console.log('Current state.token:', state.token);
+  console.log('Window location:', window.location.href);
+
   const { composite, scores, risk } = calculateComposite();
   const pod = computePOD();
   const hasRedFlags = state.flags.some(Boolean) || Object.values(state.surgeryFlags).some(arr => arr.some(Boolean));
@@ -2037,8 +2041,11 @@ async function submitCheckin() {
     timestamp: new Date().toISOString()
   };
 
+  console.log('CheckInData keys:', Object.keys(checkInData));
+
   if (!state.token) {
-    showErrorStep('Patient authentication token is missing. Please access this page via your welcome email link.');
+    console.error('❌ NO TOKEN FOUND');
+    showError('Patient authentication token is missing. Please access this page via your welcome email link.');
     btn.disabled = false;
     btn.textContent = 'Send Check-In';
     return;
@@ -2049,14 +2056,24 @@ async function submitCheckin() {
     checkInData
   };
 
+  console.log('Payload structure:', Object.keys(payload));
+  console.log('About to fetch /api/patient-checkin with token:', state.token.substring(0, 10) + '...');
+
   try {
+    console.log('Initiating fetch...');
     const res = await fetch('/api/patient-checkin', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
+
+    console.log('Fetch completed. Status:', res.status, 'OK:', res.ok);
+
     const data = await res.json();
+    console.log('Response data:', data);
+
     if (data.success) {
+      console.log('✅ SUCCESS - Data saved');
       sessionStorage.removeItem('opwell_patient_checkin');
       saveQoRBaseline(); // Save first QoR-15 as baseline for future comparison
       // Update thank-you page
@@ -2064,11 +2081,13 @@ async function submitCheckin() {
       if (state.patientEmail) document.getElementById('thankyouEmail').style.display = 'block';
       goToStep(8);
     } else {
+      console.error('❌ API returned success=false:', data);
       showError('Something went wrong. Please try again or call (678) 235-5822.');
       btn.disabled = false;
       btn.textContent = 'Send to Dr. Oluwole';
     }
   } catch (err) {
+    console.error('❌ CATCH ERROR:', err.message, err.stack);
     showError('Connection error. Please check your internet and try again.');
     btn.disabled = false;
     btn.textContent = 'Send to Dr. Oluwole';
