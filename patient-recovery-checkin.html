@@ -1427,7 +1427,12 @@ document.addEventListener('keydown', function(e) {
 
 const TOTAL_STEPS = 8; // 0-7 are input steps (0=welcome, 1=pain, 2=wound, 3=GI, 4=mental, 5=warnings, 6=QoR-15, 7=review), 8 is thank-you
 
+// Extract patient token from URL
+const urlParams = new URLSearchParams(window.location.search);
+const patientToken = urlParams.get('token') || localStorage.getItem('opwell_patient_token') || '';
+
 const state = {
+  token: patientToken,
   firstName: '', lastName: '', phone: '', surgeryType: '', surgeryDate: '',
   qor: [5,5,5,5,5,5,5,5,5,5,5,5,5,5,5], // QoR-15 scores (Q1-Q15, default 5)
   painRest: null, painActivity: null, painRestTouched: false, painActivityTouched: false,
@@ -2032,8 +2037,15 @@ async function submitCheckin() {
     timestamp: new Date().toISOString()
   };
 
+  if (!state.token) {
+    showErrorStep('Patient authentication token is missing. Please access this page via your welcome email link.');
+    btn.disabled = false;
+    btn.textContent = 'Send Check-In';
+    return;
+  }
+
   const payload = {
-    token: state.token || localStorage.getItem('opwell_patient_token'),
+    token: state.token,
     checkInData
   };
 
