@@ -18173,16 +18173,19 @@
   // On page load, check URL path and show correct page
   function initializePageRouting() {
     var path = window.location.pathname.replace(/^\//, '').replace(/\.html$/, '');
-    var hashPath = window.location.hash.replace(/^#\//, '');
+    var hashPath = window.location.hash.replace(/^#\//, '').replace(/^#page-/, '');
 
     // Special handling for admin page - force it immediately
-    if (path === 'admin' || window.location.href.includes('/admin')) {
+    if (path === 'admin' || window.location.href.includes('/admin') || hashPath === 'admin') {
       var adminPage = document.getElementById('page-admin');
       if (adminPage) {
         // Remove active from all pages
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
         // Add active to admin page
         adminPage.classList.add('active');
+        if (typeof loadAdminDashboard === 'function') {
+          try { loadAdminDashboard(); } catch(e) { console.error('loadAdminDashboard error:', e); }
+        }
         return;
       }
     }
