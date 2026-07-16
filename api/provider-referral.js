@@ -27,7 +27,7 @@ module.exports = async function handler(req, res) {
       }
 
       await resend.emails.send({
-        from: 'OpWell Concierge <info@opwellconcierge.com>',
+        from: 'OpWell Concierge <info@mail.opwellconcierge.com>',
         to: 'dr.oluwole@opwellconcierge.com',
         replyTo: providerEmail,
         subject: `New Referral: ${esc(patientName)} — ${esc(service)} (from ${esc(providerName)})`,
@@ -75,7 +75,7 @@ module.exports = async function handler(req, res) {
 
       // Auto-send thank-you to referring provider
       await resend.emails.send({
-        from: 'OpWell Concierge <info@opwellconcierge.com>',
+        from: 'OpWell Concierge <info@mail.opwellconcierge.com>',
         to: providerEmail,
         subject: `Thank You for Your Referral — OpWell Concierge`,
         html: `
@@ -219,7 +219,7 @@ module.exports = async function handler(req, res) {
 
       // Send notification email to Dr. Oluwole
       await resend.emails.send({
-        from: 'OpWell Concierge <info@opwellconcierge.com>',
+        from: 'OpWell Concierge <info@mail.opwellconcierge.com>',
         to: 'dr.oluwole@opwellconcierge.com',
         replyTo: email,
         subject: `Private Retainer Application: ${esc(fullName)}`,
@@ -252,7 +252,7 @@ module.exports = async function handler(req, res) {
 
       // Send confirmation email to applicant
       await resend.emails.send({
-        from: 'OpWell Concierge <info@opwellconcierge.com>',
+        from: 'OpWell Concierge <info@mail.opwellconcierge.com>',
         to: email,
         subject: 'Your Private Retainer Application — Received & Under Review',
         html: `

@@ -131,7 +131,7 @@ module.exports = async function handler(req, res) {
       try {
         console.log('📧 Sending welcome email to patient:', email);
         await resend.emails.send({
-          from: 'OpWell Concierge <info@opwellconcierge.com>',
+          from: 'OpWell Concierge <info@mail.opwellconcierge.com>',
           to: email,
           subject: `Your Recovery Check-In Plan is Ready — ${patientName}`,
           html: `
@@ -244,7 +244,7 @@ module.exports = async function handler(req, res) {
 
       try {
         await resend.emails.send({
-          from: 'OpWell Concierge <info@opwellconcierge.com>',
+          from: 'OpWell Concierge <info@mail.opwellconcierge.com>',
           to: email,
           subject: `Recovery Check-In Reminder — ${intervalData.label}`,
           html: `

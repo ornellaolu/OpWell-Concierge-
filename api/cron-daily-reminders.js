@@ -55,7 +55,7 @@ async function sendDailyReminders() {
 
         // Send reminder email
         await resend.emails.send({
-          from: 'OpWell Concierge <info@opwellconcierge.com>',
+          from: 'OpWell Concierge <info@mail.opwellconcierge.com>',
           to: patient.email,
           subject: `${todayCheckin.label} — How Are You Feeling?`,
           html: `

@@ -113,7 +113,7 @@ async function handler(req, res) {
 
             // Build email config with optional PDF attachment
             const emailConfig = {
-              from: 'OpWell Concierge <info@opwellconcierge.com>',
+              from: 'OpWell Concierge <info@mail.opwellconcierge.com>',
               to: email,
               subject: 'Access Granted: Your Interactive Surgical Prep Blueprint is Ready!',
               html: htmlContent,
@@ -146,7 +146,7 @@ async function handler(req, res) {
 
           // Also notify Dr. Oluwole
           await resend.emails.send({
-            from: 'OpWell Bookings <info@opwellconcierge.com>',
+            from: 'OpWell Bookings <info@mail.opwellconcierge.com>',
             to: 'dr.oluwole@opwellconcierge.com',
             subject: `Masterclass Purchase: ${esc(email)} \u2014 $${amountPaid}`,
             html: `<div style="font-family:Arial,sans-serif;padding:24px;"><h2>New Masterclass Purchase</h2><p>Email: ${esc(email)}</p><p>Amount: $${amountPaid}</p><p>Access Code: ${accessCode}</p></div>`,
@@ -255,7 +255,7 @@ async function handler(req, res) {
         try {
           console.log('📧 Sending patient confirmation email to:', email);
           await resend.emails.send({
-            from: 'OpWell Concierge <info@opwellconcierge.com>',
+            from: 'OpWell Concierge <info@mail.opwellconcierge.com>',
             to: email,
             subject: 'Confirmed: Your OpWell Concierge Booking & Next Steps',
             html: bookingConfirmationEmail(patientName, services, amountPaid, BLOG_ACCESS_CODE, 'https://calendar.app.google/1QHgQh3mSWwbsW8v8'),
@@ -273,7 +273,7 @@ async function handler(req, res) {
     try {
       console.log('📧 Sending doctor notification email to: dr.oluwole@opwellconcierge.com');
       await resend.emails.send({
-        from: 'OpWell Bookings <info@opwellconcierge.com>',
+        from: 'OpWell Bookings <info@mail.opwellconcierge.com>',
         to: 'dr.oluwole@opwellconcierge.com',
         subject: `New Payment: ${esc(patientName)} \u2014 $${amountPaid} \u2014 ${esc(services)}`,
         html: `
@@ -314,7 +314,7 @@ async function handler(req, res) {
           }).join('');
 
           await resend.emails.send({
-          from: 'OpWell Concierge <info@opwellconcierge.com>',
+          from: 'OpWell Concierge <info@mail.opwellconcierge.com>',
           to: email,
           subject: `Your OpWell Receipt \u2014 $${amountPaid}`,
           html: `

@@ -21,7 +21,7 @@ module.exports = async function handler(req, res) {
 
     console.log('📧 Sending test email...');
     const result = await resend.emails.send({
-      from: 'OpWell Concierge <info@opwellconcierge.com>',
+      from: 'OpWell Concierge <info@mail.opwellconcierge.com>',
       to: 'dr.oluwole@opwellconcierge.com',
       subject: '🧪 Resend Email Test - If you see this, email is working!',
       html: '<p>Test email from Resend configuration check.</p>'
