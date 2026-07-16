@@ -16873,7 +16873,14 @@
     }
 
     async function recoverySubmitCheckIn() {
-      if (!recoveryValidateForm()) return;
+      console.log('🚀 recoverySubmitCheckIn STARTED');
+      console.log('Token:', recoveryPatientToken?.substring(0, 10) + '...');
+
+      if (!recoveryValidateForm()) {
+        console.error('❌ Form validation FAILED');
+        return;
+      }
+      console.log('✅ Form validation PASSED');
 
       const btn = document.getElementById('recoveryBtnNext');
       btn.disabled = true;
@@ -16922,23 +16929,33 @@
         }
       };
 
+      console.log('📤 Payload created, about to POST to /api/patient-checkin:', payload);
+
       try {
+        console.log('📡 Sending fetch request...');
         const res = await fetch('/api/patient-checkin', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
         });
+        console.log('✅ Fetch response received. Status:', res.status);
+
         const data = await res.json();
+        console.log('✅ Response parsed:', data);
+
         if (data.success) {
+          console.log('✅ SUCCESS - Check-in accepted by server');
           recoveryCurrentStep = RECOVERY_TOTAL_STEPS;
           recoveryGoToStep(RECOVERY_TOTAL_STEPS);
           setTimeout(() => recoveryShowDashboard(), 2500);
         } else {
+          console.error('❌ Server returned success=false:', data);
           recoveryShowError(data.error || 'Something went wrong. Try again or call (678) 235-5822.');
           btn.disabled = false;
           btn.textContent = 'Send to Dr. Oluwole';
         }
       } catch (err) {
+        console.error('❌ CATCH ERROR in fetch:', err.message, err.stack);
         recoveryShowError('Connection error. Check your internet and try again.');
         btn.disabled = false;
         btn.textContent = 'Send to Dr. Oluwole';

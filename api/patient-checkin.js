@@ -151,7 +151,7 @@ module.exports = async function handler(req, res) {
       console.log('From:', 'info@opwellconcierge.com');
 
       const emailResult = await resend.emails.send({
-        from: 'OpWell Concierge <onboarding@resend.dev>',
+        from: 'OpWell Concierge <info@opwellconcierge.com>',
         to: 'dr.oluwole@opwellconcierge.com',
         replyTo: patient.email,
         subject: `🚨 Patient Check-In Received: ${patient.name} — ${patient.surgeryType} (POD ${Math.floor((new Date() - new Date(patient.surgeryDate)) / (1000 * 60 * 60 * 24))})`,
