@@ -16683,11 +16683,31 @@
           return;
         }
       }
-      document.getElementById('recoveryFirstName').value = recoveryPatientData.name.split(' ')[0] || '';
-      document.getElementById('recoveryLastName').value = recoveryPatientData.name.split(' ').slice(1).join(' ') || '';
-      document.getElementById('recoveryPhoneNumber').value = recoveryPatientData.phone || '';
-      document.getElementById('recoverySurgeryType').value = recoveryPatientData.surgery_type || '';
-      document.getElementById('recoverySurgeryDate').value = recoveryPatientData.surgery_date || '';
+
+      // Populate HTML inputs from patient data
+      const firstName = recoveryPatientData.name.split(' ')[0] || '';
+      const lastName = recoveryPatientData.name.split(' ').slice(1).join(' ') || '';
+      const phone = recoveryPatientData.phone || '';
+      const surgeryType = recoveryPatientData.surgery_type || '';
+      const surgeryDate = recoveryPatientData.surgery_date || '';
+
+      document.getElementById('recoveryFirstName').value = firstName;
+      document.getElementById('recoveryLastName').value = lastName;
+      document.getElementById('recoveryPhoneNumber').value = phone;
+      document.getElementById('recoverySurgeryType').value = surgeryType;
+      document.getElementById('recoverySurgeryDate').value = surgeryDate;
+
+      // CRITICAL: Also populate recoveryState so validation passes
+      recoveryState.firstName = firstName;
+      recoveryState.lastName = lastName;
+      recoveryState.phone = phone;
+      recoveryState.surgeryType = surgeryType;
+      recoveryState.surgeryDate = surgeryDate;
+
+      console.log('✅ recoveryState populated with patient data:', {
+        firstName, lastName, phone, surgeryType, surgeryDate
+      });
+
       recoveryShowWizard();
     }
 
