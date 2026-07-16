@@ -16706,11 +16706,16 @@
     }
 
     function recoveryNextStep() {
-      if (recoveryCurrentStep < RECOVERY_TOTAL_STEPS) {
+      console.log('🔵 recoveryNextStep called. currentStep:', recoveryCurrentStep, 'TOTAL_STEPS:', RECOVERY_TOTAL_STEPS);
+      if (recoveryCurrentStep < RECOVERY_TOTAL_STEPS - 1) {
+        console.log('➡️ Moving to next step');
         recoveryCurrentStep++;
         recoveryGoToStep(recoveryCurrentStep);
-      } else if (recoveryCurrentStep === RECOVERY_TOTAL_STEPS) {
+      } else if (recoveryCurrentStep === RECOVERY_TOTAL_STEPS - 1) {
+        console.log('🔴 On review step (step 7), calling recoverySubmitCheckIn() NOW');
         recoverySubmitCheckIn();
+      } else {
+        console.warn('⚠️ Unexpected state: currentStep > TOTAL_STEPS-1');
       }
     }
 
