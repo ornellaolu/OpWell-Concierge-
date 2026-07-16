@@ -19518,7 +19518,7 @@
       document.getElementById('detail-accesscode').value = accessCode;
 
       // Generate and set recovery checkin link with token
-      const checkinLink = `https://www.opwellconcierge.com/patient-recovery-checkin.html?token=${encodeURIComponent(accessCode)}`;
+      const checkinLink = `https://www.opwellconcierge.com/recovery-checkin?token=${encodeURIComponent(accessCode)}`;
       const linkElement = document.getElementById('detail-checkin-link');
       linkElement.href = checkinLink;
       linkElement.textContent = checkinLink;
