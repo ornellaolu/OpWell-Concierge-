@@ -18156,6 +18156,11 @@
     // Update URL for SEO and shareable links
     if (!skipPush) {
       var path = pageId === 'home' ? '/' : '/' + pageId;
+      // Preserve query parameters when updating history
+      var queryString = window.location.search;
+      if (queryString) {
+        path += queryString;
+      }
       history.pushState({ page: pageId }, '', path);
     }
   }
