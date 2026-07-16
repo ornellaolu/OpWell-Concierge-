@@ -144,6 +144,7 @@ module.exports = async function handler(req, res) {
     `;
 
     // Send check-in result email to Dr. Oluwole
+    let emailError = null;
     try {
       console.log('📧 Attempting to send check-in email...');
       console.log('API Key configured:', !!process.env.RESEND_API_KEY);
@@ -159,12 +160,12 @@ module.exports = async function handler(req, res) {
       });
       console.log('✅ Check-in email sent successfully:', emailResult);
     } catch (emailErr) {
-      console.error('❌ FAILED to send check-in email:', {
-        error: emailErr.message,
+      emailError = {
+        message: emailErr.message,
         code: emailErr.code,
-        status: emailErr.status,
-        details: emailErr.toString()
-      });
+        status: emailErr.status
+      };
+      console.error('❌ FAILED to send check-in email:', emailError);
       // Don't fail the request if email fails - check-in was still saved
     }
 
@@ -172,7 +173,8 @@ module.exports = async function handler(req, res) {
       success: true,
       checkInId: checkIn.id,
       message: 'Check-in submitted successfully and stored in your records.',
-      qor15Score: checkInData.qor15?.total || null
+      qor15Score: checkInData.qor15?.total || null,
+      emailStatus: emailError ? { error: emailError } : { success: true }
     });
 
   } catch (err) {
