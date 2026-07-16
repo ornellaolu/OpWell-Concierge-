@@ -129,7 +129,7 @@ module.exports = async function handler(req, res) {
       try {
         console.log('📧 Sending partnership inquiry to dr.oluwole...');
         await resend.emails.send({
-          from: 'OpWell Concierge <dr.oluwole@opwellconcierge.com>',
+          from: 'OpWell Concierge <info@mail.opwellconcierge.com>',
           to: 'dr.oluwole@opwellconcierge.com',
           replyTo: providerEmail,
           subject: `Partnership Inquiry: ${esc(providerName)} — ${esc(practice)} (${esc(specialty)})`,
@@ -170,7 +170,7 @@ module.exports = async function handler(req, res) {
       try {
         console.log('📧 Sending confirmation to provider...');
         await resend.emails.send({
-          from: 'OpWell Concierge <dr.oluwole@opwellconcierge.com>',
+          from: 'OpWell Concierge <info@mail.opwellconcierge.com>',
           to: providerEmail,
           subject: 'Partnership Inquiry Received — OpWell Concierge',
           html: `
