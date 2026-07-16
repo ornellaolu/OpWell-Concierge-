@@ -16675,6 +16675,14 @@
     }
 
     function recoveryStartNewCheckin() {
+      console.log('📝 recoveryStartNewCheckin() called');
+      console.log('recoveryPatientData:', recoveryPatientData);
+
+      if (!recoveryPatientData) {
+        console.error('❌ NO PATIENT DATA AVAILABLE');
+        return;
+      }
+
       if (recoveryPatientData.checkins) {
         const today = new Date().toISOString().split('T')[0];
         const todayCheckin = recoveryPatientData.checkins.find(c => c.date === today);
@@ -16690,6 +16698,10 @@
       const phone = recoveryPatientData.phone || '';
       const surgeryType = recoveryPatientData.surgery_type || '';
       const surgeryDate = recoveryPatientData.surgery_date || '';
+
+      console.log('📝 Extracted patient data:', {
+        firstName, lastName, phone, surgeryType, surgeryDate
+      });
 
       document.getElementById('recoveryFirstName').value = firstName;
       document.getElementById('recoveryLastName').value = lastName;
@@ -16867,6 +16879,14 @@
     function recoveryValidateForm() {
       const errors = [];
 
+      console.log('🔍 VALIDATION CHECK - recoveryState:', {
+        firstName: recoveryState.firstName,
+        lastName: recoveryState.lastName,
+        phone: recoveryState.phone,
+        surgeryType: recoveryState.surgeryType,
+        surgeryDate: recoveryState.surgeryDate
+      });
+
       if (!recoveryState.firstName || !recoveryState.firstName.trim()) {
         errors.push('First name is required');
       }
@@ -16890,10 +16910,12 @@
       }
 
       if (errors.length > 0) {
+        console.error('❌ VALIDATION ERRORS:', errors);
         recoveryShowError(errors.join(' • '));
         recoveryGoToStep(0);
         return false;
       }
+      console.log('✅ All validation checks PASSED');
       return true;
     }
 
