@@ -57,7 +57,7 @@ module.exports = async function handler(req, res) {
           key: intervalKey,
           sendDate: checkDate.toISOString().split('T')[0],
           sendDateFormatted: checkDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }),
-          checkinUrl: `https://www.opwellconcierge.com/recovery-checkin?interval=${intervalKey}`
+          checkinUrl: `https://www.opwellconcierge.com/patient-recovery-checkin.html?interval=${intervalKey}`
         };
       });
 
@@ -156,7 +156,7 @@ module.exports = async function handler(req, res) {
                 </div>
 
                 <div style="text-align: center; margin: 24px 0;">
-                  <a href="https://www.opwellconcierge.com/patient-recovery-checkin.html" style="display: inline-block; background: #2d5a3d; color: #fff; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 16px;">📋 Submit Your First Check-In</a>
+                  <a href="https://www.opwellconcierge.com/patient-recovery-checkin.html?token=${patientRecord ? encodeURIComponent(patientRecord.token) : ''}" style="display: inline-block; background: #2d5a3d; color: #fff; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 16px;">📋 Submit Your First Check-In</a>
                 </div>
 
                 <div style="background: rgba(45,90,61,0.06); border-left: 4px solid #2d5a3d; padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 24px 0;">
@@ -213,6 +213,17 @@ module.exports = async function handler(req, res) {
 
       const resend = new Resend(process.env.RESEND_API_KEY);
 
+      // Look up patient by email to get their token
+      let patientToken = '';
+      try {
+        const patient = await db.getPatientByEmail(email);
+        if (patient && patient.token) {
+          patientToken = patient.token;
+        }
+      } catch (err) {
+        console.warn('Could not look up patient token by email:', err.message);
+      }
+
       // Generate default text message for SMS
       let textMessage = '';
       if (interval === 'day-1') {
@@ -247,7 +258,7 @@ module.exports = async function handler(req, res) {
                 <p style="color: #555; line-height: 1.8; font-size: 0.95rem;">Time for your recovery check-in! Your feedback helps Dr. Oluwole monitor your healing and catch any issues early.</p>
 
                 <div style="text-align: center; margin: 24px 0;">
-                  <a href="https://www.opwellconcierge.com/recovery-checkin?interval=${interval}" style="display: inline-block; background: #2d5a3d; color: #fff; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 16px;">📋 Submit Your Check-In Now</a>
+                  <a href="https://www.opwellconcierge.com/patient-recovery-checkin.html?token=${patientToken ? encodeURIComponent(patientToken) : ''}&interval=${interval}" style="display: inline-block; background: #2d5a3d; color: #fff; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 16px;">📋 Submit Your Check-In Now</a>
                 </div>
 
                 <div style="background: rgba(45,90,61,0.06); border-left: 4px solid #2d5a3d; padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 24px 0;">
@@ -274,7 +285,7 @@ module.exports = async function handler(req, res) {
         success: true,
         message: 'Check-in reminder sent successfully',
         textMessage: textMessage,
-        checkinUrl: `https://www.opwellconcierge.com/recovery-checkin?interval=${interval}`
+        checkinUrl: `https://www.opwellconcierge.com/patient-recovery-checkin.html?token=${patientToken ? encodeURIComponent(patientToken) : ''}&interval=${interval}`
       });
 
     } else {
