@@ -16990,6 +16990,12 @@
         const data = await res.json();
         console.log('✅ Response parsed:', data);
 
+        if (data.emailStatus?.error) {
+          console.warn('⚠️ Check-in saved but EMAIL FAILED:', data.emailStatus.error);
+        } else {
+          console.log('✅ EMAIL SENT successfully');
+        }
+
         if (data.success) {
           console.log('✅ SUCCESS - Check-in accepted by server');
           recoveryCurrentStep = RECOVERY_TOTAL_STEPS;
