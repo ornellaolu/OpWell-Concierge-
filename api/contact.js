@@ -21,7 +21,7 @@ module.exports = async function handler(req, res) {
 
     // Send contact email to Dr. Oluwole
     await resend.emails.send({
-      from: 'OpWell Concierge <dr.oluwole@opwellconcierge.com>',
+      from: 'OpWell Concierge <info@mail.opwellconcierge.com>',
       to: 'dr.oluwole@opwellconcierge.com',
       subject: `New Contact Form Submission: ${fname} ${lname}`,
       html: `
@@ -56,7 +56,7 @@ module.exports = async function handler(req, res) {
 
     // Send confirmation email to visitor
     await resend.emails.send({
-      from: 'OpWell Concierge <dr.oluwole@opwellconcierge.com>',
+      from: 'OpWell Concierge <info@mail.opwellconcierge.com>',
       to: email,
       subject: 'We Received Your Message — OpWell Concierge',
       html: `

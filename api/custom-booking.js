@@ -21,7 +21,7 @@ module.exports = async function handler(req, res) {
 
     // Send confirmation email to patient
     await resend.emails.send({
-      from: 'OpWell Concierge <dr.oluwole@opwellconcierge.com>',
+      from: 'OpWell Concierge <info@mail.opwellconcierge.com>',
       to: email,
       subject: 'Your Custom Consultation Request — Pending Confirmation',
       html: `
@@ -70,7 +70,7 @@ module.exports = async function handler(req, res) {
 
     // Send "Pending Confirmation" alert to Dr. Oluwole
     await resend.emails.send({
-      from: 'OpWell Concierge <dr.oluwole@opwellconcierge.com>',
+      from: 'OpWell Concierge <info@mail.opwellconcierge.com>',
       to: 'dr.oluwole@opwellconcierge.com',
       subject: `⏳ PENDING CONFIRMATION: Custom Booking Request from ${name}`,
       html: `
