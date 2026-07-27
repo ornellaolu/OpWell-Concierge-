@@ -16939,8 +16939,9 @@
         recoveryState.qor6, recoveryState.qor7, recoveryState.qor8, recoveryState.qor9, recoveryState.qor10,
         recoveryState.qor11, recoveryState.qor12, recoveryState.qor13, recoveryState.qor14, recoveryState.qor15
       ];
-      const qor15Total = qorValues.filter(v => v !== null).length === 15
-        ? qorValues.reduce((a, b) => parseInt(a) + parseInt(b), 0)
+      const validQorValues = qorValues.filter(v => v !== null && v !== undefined);
+      const qor15Total = validQorValues.length > 0
+        ? validQorValues.reduce((a, b) => parseInt(a) + parseInt(b), 0)
         : null;
 
       const payload = {
